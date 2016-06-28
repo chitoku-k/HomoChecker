@@ -1,0 +1,76 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "c599bbdcc8fbce89c40506748edfe106",
+    "content-hash": "72f89658d7a2567a3ebf17977edce708",
+    "packages": [
+        {
+            "name": "mpyw/co",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mpyw/co.git",
+                "reference": "0770f8052b793866ff07fb0a39158f615339b7c5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mpyw/co/zipball/0770f8052b793866ff07fb0a39158f615339b7c5",
+                "reference": "0770f8052b793866ff07fb0a39158f615339b7c5",
+                "shasum": ""
+            },
+            "require": {
+                "lib-curl": ">=7.2.0",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "codeception/aspect-mock": "^0.5.5",
+                "codeception/codeception": "*",
+                "codeception/specify": "*",
+                "codeception/verify": "*",
+                "lib-curl": ">=7.2.0",
+                "mpyw/privator": "~1.0",
+                "mpyw/twistoauth": "~3.0",
+                "php": ">=7.0.0",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "mpyw\\Co\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "mpyw",
+                    "email": "ryosuke_i_628@yahoo.co.jp"
+                }
+            ],
+            "description": "Asynchronous cURL executor simply based on resource and Generator",
+            "keywords": [
+                "asynchronous",
+                "curl",
+                "generator",
+                "http",
+                "parallel"
+            ],
+            "time": "2016-03-02 13:47:11"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "mpyw/co": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
