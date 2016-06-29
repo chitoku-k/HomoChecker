@@ -35,11 +35,11 @@ class Check {
         return $ch;
     }
 
-    protected function timer() {
+    protected function timer(): float {
         return microtime(true) - $this->time;
     }
 
-    protected function validate(Homo $homo) {
+    protected function validate(Homo $homo): \Generator {
         $ch = $this->initialize($homo->url);
         $body = yield $ch;
 
@@ -56,13 +56,13 @@ class Check {
         return 'WRONG';
     }
 
-    public function execute(string $screen_name = null, callable $callback = null) {
+    public function execute(string $screen_name = null, callable $callback = null): Co {
         $this->time = microtime(true);
         $homos = isset($screen_name) ? Homo::getByScreenName($screen_name) : Homo::getAll();
 
         $requests = [];
         foreach ($homos as $homo) {
-            $requests[] = function () use ($homo, $callback) {
+            $requests[] = function () use ($homo, $callback): \Generator {
                 $status = yield $this->validate($homo);
                 $duration = $this->timer();
                 $icon = yield Icon::get($homo->screen_name);

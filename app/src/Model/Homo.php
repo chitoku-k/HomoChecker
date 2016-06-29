@@ -64,17 +64,17 @@ class Homo {
         // 'junT58' => 'http://homo.junt58.tk',
     ];
 
-    public static function getAll() {
+    public static function getAll(): array {
         return self::create(self::$sites);
     }
 
-    public static function getByScreenName(string $screen_name) {
+    public static function getByScreenName(string $screen_name): array {
         return self::create([
             $screen_name => self::$sites[$screen_name] ?? null,
         ]);
     }
 
-    public static function create(array $homo) {
+    public static function create(array $homo): array {
         $result = [];
         foreach ($homo as $screen_name => $urls) {
             foreach ((array)$urls as $url) {

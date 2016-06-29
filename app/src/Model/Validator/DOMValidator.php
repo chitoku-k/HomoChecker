@@ -12,4 +12,3 @@ class DOMValidator extends ValidatorBase {
         return preg_match(self::TARGET, $url) ? 'OK' : false;
     }
 }
-

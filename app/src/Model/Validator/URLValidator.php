@@ -8,4 +8,3 @@ class URLValidator extends ValidatorBase {
         return preg_match(self::TARGET, $body) ? 'CONTAINS' : false;
     }
 }
-
