@@ -69,7 +69,9 @@ class Homo {
     }
 
     public static function getByScreenName(string $screen_name) {
-        return self::create([self::$sites[$screen_name] ?? null]);
+        return self::create([
+            $screen_name => self::$sites[$screen_name] ?? null,
+        ]);
     }
 
     public static function create(array $homo) {

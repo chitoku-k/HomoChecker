@@ -9,6 +9,6 @@ require __DIR__ . '/../../../vendor/autoload.php';
 $app = new \Slim\App;
 $app->get('/check[/{name}]', function (Request $request, Response $response, array $args) {
     $checker = new Check;
-    $checker->execute([new JsonView, 'render']);
+    $checker->execute($args['name'] ?? null, [new JsonView, 'render']);
 });
 $app->run();

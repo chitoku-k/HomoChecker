@@ -56,10 +56,12 @@ class Check {
         return 'WRONG';
     }
 
-    public function execute(callable $callback = null) {
+    public function execute(string $screen_name = null, callable $callback = null) {
         $this->time = microtime(true);
+        $homos = isset($screen_name) ? Homo::getByScreenName($screen_name) : Homo::getAll();
+
         $requests = [];
-        foreach (Homo::getAll() as $homo) {
+        foreach ($homos as $homo) {
             $requests[] = function () use ($homo, $callback) {
                 $status = yield $this->validate($homo);
                 $duration = $this->timer();
@@ -72,6 +74,6 @@ class Check {
                 return $response;
             };
         }
-        Co::wait($requests, ['throw' => false]);
+        return Co::wait($requests, ['throw' => false]);
     }
 }
