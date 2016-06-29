@@ -1,5 +1,11 @@
 {
     "require": {
-        "mpyw/co": "@dev"
+        "mpyw/co": "@dev",
+        "slim/slim": "^3.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "HomoChecker\\": "app/src/"
+        }
     }
 }
