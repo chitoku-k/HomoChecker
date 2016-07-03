@@ -5,10 +5,12 @@
                 <img src={ homo.icon } width="48" height="48">
             </a>
             <a href={ homo.url } target="_blank">{ homo.display_url }</a>
+            <i class={ fa: true, fa-lock: homo.secure }></i>
         </h2>
     </div>
     <div class="duration">{ duration.toFixed(2) } s</div>
     <i class={
+        status: true,
         fa: true,
         fa-check: status === "OK",
         fa-times: status === "WRONG",
@@ -53,10 +55,17 @@
                     overflow: hidden;
                     text-overflow: ellipsis;
                     line-height: 1.1;
+
+                    .fa-lock {
+                        font-size: 22px;
+                        padding: 0 6px;
+                        margin-right: 4px;
+                        vertical-align: 3px;
+                    }
                 }
             }
 
-            .fa {
+            .status {
                 float: right;
                 margin-top: -45px;
                 font-size: 42px;
