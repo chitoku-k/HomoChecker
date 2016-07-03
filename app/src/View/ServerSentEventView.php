@@ -12,11 +12,11 @@ class ServerSentEventView implements ViewInterface {
     }
 
     public function render($data) {
-        echo "event: {$this->event}\n";
-        echo "data: " . json_encode($data) . "\n\n";
-
         // 2 KiB padding
         echo ":" . str_repeat(" ", 2048) . "\n";
+
+        echo "event: {$this->event}\n";
+        echo "data: " . json_encode($data) . "\n\n";
 
         flush();
     }
