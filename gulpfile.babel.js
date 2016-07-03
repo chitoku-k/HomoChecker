@@ -19,6 +19,16 @@ gulp.task("copy", () =>
         .pipe(gulp.dest("./client/dest/"))
 );
 
+gulp.task("fonts", () =>
+    gulp.src("./node_modules/font-awesome/fonts/*")
+        .pipe(gulp.dest("./client/dest/fonts/"))
+);
+
+gulp.task("styles", () =>
+    gulp.src("./node_modules/font-awesome/css/*.min.css")
+        .pipe(gulp.dest("./client/dest/css/"))
+);
+
 gulp.task("build", () =>
     gulp.src("./client/src/tags/*.tag")
         .pipe($.riot({ type: "babel" }))
@@ -38,5 +48,5 @@ gulp.task("test", (cb) => {
 });
 
 gulp.task("default",
-    gulp.series("clean", "build", gulp.parallel("minify", "copy"))
+    gulp.series("clean", "build", gulp.parallel("minify", "copy", "fonts", "styles"))
 );

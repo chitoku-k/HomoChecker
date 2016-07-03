@@ -8,8 +8,13 @@
         </h2>
     </div>
     <div class="duration">{ duration.toFixed(2) } s</div>
-    <div class="verify-icon">
-    </div>
+    <i class={
+        fa: true,
+        fa-check: status === "OK",
+        fa-times: status === "WRONG",
+        fa-ban: status === "ERROR",
+        fa-exclamation-triangle: status === "CONTAINS"
+    }></i>
     <div class="clearfix">
     </div>
     <style type="text/scss">
@@ -51,9 +56,33 @@
                 }
             }
 
+            .fa {
+                float: right;
+                margin-top: -45px;
+                font-size: 42px;
+                padding: 0 4px;
+                margin-right: 4px;
+
+                &.fa-check {
+                    color: #449d44;
+                }
+                &.fa-times {
+                    color: #c9302c;
+                    margin-right: 10px;
+                }
+                &.fa-ban {
+                    color: #c9302c;
+                    margin-right: 7px;
+                }
+                &.fa-exclamation-triangle {
+                    color: #ec971f;
+                }
+            }
+
             .duration {
                 float: right;
                 margin-top: -35px;
+                margin-right: 80px;
                 font-size: 22px;
                 color: #666;
             }

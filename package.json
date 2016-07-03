@@ -7,8 +7,10 @@
     "build": "gulp build",
     "copy": "gulp copy",
     "clean": "gulp clean",
+    "fonts": "gulp fonts",
     "minify": "gulp minify",
     "start": "gulp",
+    "styles": "gulp styles",
     "test": "gulp test"
   },
   "repository": {
@@ -39,6 +41,7 @@
     "riot": "^2.4.1"
   },
   "devDependencies": {
-    "event-source-polyfill": "0.0.7"
+    "event-source-polyfill": "0.0.7",
+    "font-awesome": "^4.6.3"
   }
 }
