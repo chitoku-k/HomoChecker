@@ -15,5 +15,6 @@ $app->get('/check[/{name}]', function (Request $request, Response $response, arr
     $view = new ServerSentEventView('response');
     $checker = new Check;
     $checker->execute($args['name'] ?? null, [$view, 'render']);
+    $view->close();
 });
 $app->run();

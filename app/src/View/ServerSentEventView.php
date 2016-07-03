@@ -20,4 +20,9 @@ class ServerSentEventView implements ViewInterface {
         echo "data: " . json_encode($data) . "\n\n";
         flush();
     }
+
+    public function close() {
+        echo "event: close\n";
+        echo "data: end\n\n";
+    }
 }

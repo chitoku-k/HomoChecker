@@ -56,7 +56,7 @@ class Check {
         return 'WRONG';
     }
 
-    public function execute(string $screen_name = null, callable $callback = null): Co {
+    public function execute(string $screen_name = null, callable $callback = null): array {
         $this->time = microtime(true);
         $homos = isset($screen_name) ? Homo::getByScreenName($screen_name) : Homo::getAll();
 
