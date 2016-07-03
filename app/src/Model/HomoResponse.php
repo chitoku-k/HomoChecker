@@ -17,10 +17,11 @@ class HomoResponse {
     }
 
     protected function createDisplayURL(string $url): string {
-        if (!preg_match('/(https?:\/\/)(.*)(:\d+)?(\/.*)?/', $url, $matches)) {
+        $domain = parse_url($url, PHP_URL_HOST);
+        $path   = parse_url($url, PHP_URL_PATH);
+        if ($domain === null || $path === null) {
             return '';
         }
-        list(, $protocol, $domain, $port, $path) = $matches;
         return (new Punycode)->decode($domain) . $path;
     }
 
