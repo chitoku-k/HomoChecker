@@ -40,7 +40,7 @@ class Homo {
             'http://homo.kb10uy.org',
             'http://xn--ydko.kb10uy.org',
         ],
-        'kazuki_kaihatu' => 'http://homo.kazukioishi.net',
+        'myskng' => 'http://homo.kazukioishi.net',
         'tk1024_bot' => 'http://homo.tk1024.net',
         // 'nkpoid' => 'http://homo.nkpoid.pw',
         'Petitsurume' => 'https://petitsurume.github.io/homo/',
