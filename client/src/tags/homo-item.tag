@@ -1,7 +1,7 @@
 <homo-item>
     <div class="subdomain">
         <h2>
-            <a href={ `https://twitter.com/${homo.screen_name}` } target="_blank">
+            <a href={ "https://twitter.com/" + homo.screen_name } target="_blank">
                 <img src={ homo.icon } width="48" height="48">
             </a>
             <a href={ homo.url } target="_blank">{ homo.display_url }</a>
