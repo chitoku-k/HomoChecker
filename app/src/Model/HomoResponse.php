@@ -18,7 +18,7 @@ class HomoResponse {
 
     protected function createDisplayURL(string $url): string {
         $domain = parse_url($url, PHP_URL_HOST);
-        if ($domain === null) {
+        if (!$domain) {
             return '';
         }
         $path = (string)parse_url($url, PHP_URL_PATH);
