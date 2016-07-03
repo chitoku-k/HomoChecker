@@ -18,10 +18,10 @@ class HomoResponse {
 
     protected function createDisplayURL(string $url): string {
         $domain = parse_url($url, PHP_URL_HOST);
-        $path   = parse_url($url, PHP_URL_PATH);
-        if ($domain === null || $path === null) {
+        if ($domain === null) {
             return '';
         }
+        $path = (string)parse_url($url, PHP_URL_PATH);
         return (new Punycode)->decode($domain) . $path;
     }
 
