@@ -31,9 +31,14 @@
     "babel-preset-es2015-riot": "^1.1.0",
     "del": "^2.2.1",
     "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-concat": "^2.6.0",
     "gulp-load-plugins": "^1.2.4",
     "gulp-riot": "^0.5.1",
     "gulp-uglify": "^1.5.4",
+    "node-sass": "^3.8.0",
     "riot": "^2.4.1"
+  },
+  "devDependencies": {
+    "event-source-polyfill": "0.0.7"
   }
 }

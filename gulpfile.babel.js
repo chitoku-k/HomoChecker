@@ -3,25 +3,33 @@ import del from "del";
 
 const $ = require("gulp-load-plugins")();
 
-gulp.task("copy", () =>
-    gulp.src("./node_modules/riot/riot.min.js")
-        .pipe(gulp.dest("./client/dest/js/lib/"))
-);
+const scripts = [
+    "./node_modules/riot/riot.js",
+    "./node_modules/event-source-polyfill/eventsource.js",
+    "./client/dev/js/*.js",
+    "!./**/*.min.js",
+];
 
 gulp.task("clean", () =>
     del(["./client/dev/**/*", "./client/dest/**/*"])
 );
 
+gulp.task("copy", () =>
+    gulp.src("./client/src/*.html")
+        .pipe(gulp.dest("./client/dest/"))
+);
+
 gulp.task("build", () =>
     gulp.src("./client/src/tags/*.tag")
-        .pipe($.riot())
+        .pipe($.riot({ type: "babel" }))
         .pipe(gulp.dest("./client/dev/js/"))
 );
 
 gulp.task("minify", () =>
-    gulp.src(["./client/dev/js/*.js", "!./**/*.min.js"])
+    gulp.src(scripts)
         .pipe($.uglify())
-        .pipe(gulp.dest("./client/dest/js/"))
+        .pipe($.concat("main.js"))
+        .pipe(gulp.dest("./client/dest/"))
 );
 
 gulp.task("test", (cb) => {
@@ -30,5 +38,5 @@ gulp.task("test", (cb) => {
 });
 
 gulp.task("default",
-    gulp.series("clean", "build", "minify", "copy")
+    gulp.series("clean", "build", gulp.parallel("minify", "copy"))
 );
