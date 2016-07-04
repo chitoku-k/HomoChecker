@@ -1,12 +1,14 @@
 <?php
 namespace HomoChecker\Model;
 
-abstract class ValidatorBase {
+abstract class ValidatorBase
+{
     const TARGET = '/https?:\/\/twitter\.com\/mpyw\/?/';
 
-    public function __invoke($ch, string $body) {
+    public function __invoke($ch, string $body)
+    {
         return $this->validate($ch, $body);
     }
 
-    protected abstract function validate($ch, string $body);
+    abstract protected function validate($ch, string $body);
 }

@@ -1,6 +1,7 @@
 <?php
 namespace HomoChecker\View;
 
-interface ViewInterface {
+interface ViewInterface
+{
     function render($data);
 }

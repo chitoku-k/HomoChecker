@@ -1,7 +1,8 @@
 <?php
 namespace HomoChecker\Model;
 
-class Homo {
+class Homo
+{
     public $screen_name;
     public $url;
 
@@ -64,17 +65,20 @@ class Homo {
         // 'junT58' => 'http://homo.junt58.tk',
     ];
 
-    public static function getAll(): array {
+    public static function getAll(): array
+    {
         return self::create(self::$sites);
     }
 
-    public static function getByScreenName(string $screen_name): array {
+    public static function getByScreenName(string $screen_name): array
+    {
         return self::create([
             $screen_name => self::$sites[$screen_name] ?? null,
         ]);
     }
 
-    public static function create(array $homo): array {
+    public static function create(array $homo): array
+    {
         $result = [];
         foreach ($homo as $screen_name => $urls) {
             foreach ((array)$urls as $url) {
@@ -84,7 +88,8 @@ class Homo {
         return $result;
     }
 
-    public function __construct($screen_name, $url) {
+    public function __construct($screen_name, $url)
+    {
         $this->screen_name = $screen_name;
         $this->url = $url;
     }

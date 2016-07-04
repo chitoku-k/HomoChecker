@@ -7,10 +7,12 @@ use HomoChecker\Model\Validator\HeaderValidator;
 use HomoChecker\Model\Validator\DOMValidator;
 use HomoChecker\Model\Validator\URLValidator;
 
-class Check {
+class Check
+{
     const TIMEOUT = 5000;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->validators = [
             new HeaderValidator,
             new DOMValidator,
@@ -18,7 +20,8 @@ class Check {
         ];
     }
 
-    public function initialize(string $url) {
+    public function initialize(string $url)
+    {
         $ch = curl_init($url);
         curl_setopt_array($ch, [
             CURLINFO_HEADER_OUT       => true,
@@ -35,11 +38,13 @@ class Check {
         return $ch;
     }
 
-    protected function timer(): float {
+    protected function timer(): float
+    {
         return microtime(true) - $this->time;
     }
 
-    protected function validate(Homo $homo): \Generator {
+    protected function validate(Homo $homo): \Generator
+    {
         $ch = $this->initialize($homo->url);
         $body = yield $ch;
 
@@ -56,7 +61,8 @@ class Check {
         return 'WRONG';
     }
 
-    public function execute(string $screen_name = null, callable $callback = null): array {
+    public function execute(string $screen_name = null, callable $callback = null): array
+    {
         $this->time = microtime(true);
         $homos = isset($screen_name) ? Homo::getByScreenName($screen_name) : Homo::getAll();
 
