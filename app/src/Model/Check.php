@@ -32,6 +32,7 @@ class Check
             CURLOPT_MAXREDIRS         => 5,
             CURLOPT_NOBODY            => !$body,
             CURLOPT_RETURNTRANSFER    => true,
+            CURLOPT_SASL_IR           => true,
             CURLOPT_SSL_VERIFYPEER    => false,
             CURLOPT_TCP_FASTOPEN      => !$ssl,
             CURLOPT_TIMEOUT_MS        => self::TIMEOUT,
