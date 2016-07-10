@@ -4,7 +4,7 @@
             <a href={ "https://twitter.com/" + homo.screen_name } target="_blank">
                 <img src={ homo.icon } width="48" height="48">
             </a>
-            <a href={ homo.url } target="_blank">{ homo.display_url }</a>
+            <a class="url" href={ homo.url } target="_blank">{ homo.display_url }</a>
             <i class={ fa: true, fa-lock: homo.secure }></i>
         </h2>
     </div>
@@ -42,7 +42,7 @@
                     vertical-align: middle;
                 }
 
-                a:hover {
+                .url:hover {
                     text-decoration: underline;
                 }
 
