@@ -53,7 +53,12 @@
         const source = new EventSource("/app/src/Controller/check");
         source.addEventListener("response", event => {
             this.items.push(JSON.parse(event.data));
-            this.items.sort((x, y) => x.duration - y.duration);
+            this.items.sort((x, y) => {
+                if (x.duration === y.duration) {
+                    return x.homo.display_url < y.homo.display_url ? -1 : 1;
+                }
+                return x.duration - y.duration;
+            });
             this.update();
         });
         source.addEventListener("close", event => {
