@@ -75,20 +75,16 @@ class Check
         $this->time = microtime(true);
         $homos = isset($screen_name) ? Homo::getByScreenName($screen_name) : Homo::getAll();
 
-        $requests = [];
-        foreach ($homos as $homo) {
-            $requests[] = function () use ($homo, $callback): \Generator {
-                $status = yield $this->validate($homo);
-                $duration = $this->timer();
-                $icon = yield Icon::get($homo->screen_name);
+        return Co::wait(array_map(function ($homo) use ($callback): \Generator {
+            $status = yield $this->validate($homo);
+            $duration = $this->timer();
+            $icon = yield Icon::get($homo->screen_name);
 
-                $response = new HomoResponse($homo, $icon, $status, $duration);
-                if ($callback) {
-                    $callback($response);
-                }
-                return $response;
-            };
-        }
-        return Co::wait($requests, ['throw' => false]);
+            $response = new HomoResponse($homo, $icon, $status, $duration);
+            if ($callback) {
+                $callback($response);
+            }
+            return $response;
+        }, $homos), ['throw' => false]);
     }
 }
