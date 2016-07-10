@@ -22,7 +22,7 @@ class Check
 
     public function initialize(string $url, bool $body)
     {
-        $ssl = strpos($url, 'https://') === 0;
+        $ssl = parse_url($url, PHP_URL_SCHEME) === 'https';
         $ch = curl_init($url);
         curl_setopt_array($ch, [
             CURLINFO_HEADER_OUT       => true,
