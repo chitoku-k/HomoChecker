@@ -8,7 +8,8 @@ require __DIR__ . '/../../../vendor/autoload.php';
 
 $app = new \Slim\App([
     'settings' => [
-        'outputBuffering' => false,
+        'outputBuffering'        => false,
+        'addContentLengthHeader' => false,
     ],
 ]);
 $app->get('/check[/{name}]', function (Request $request, Response $response, array $args) {
