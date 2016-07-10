@@ -58,6 +58,11 @@
                     .fa-mars-double {
                         width: 20px;
                     }
+
+                    .loading {
+                        -webkit-animation: blink .8s infinite linear;
+                        animation: blink .8s infinite linear;
+                    }
                 }
 
                 &:after {

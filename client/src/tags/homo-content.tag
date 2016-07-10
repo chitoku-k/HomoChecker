@@ -1,11 +1,31 @@
 <homo-content>
     <div class="wrapper">
+        <div class="loading" if={ !items.length }>
+            <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+            ホモを集めています...
+        </div>
         <homo-item each={ items } />
     </div>
     <style type="text/scss">
         homo-content {
             display: block;
             padding: 20px 0;
+            font-family: Helvetica, "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ Pro W3", Meiryo, sans-serif;
+
+            .loading {
+                text-align: center;
+                position: absolute;
+                top: calc(50% - 2em);
+                left: 0;
+                width: 100%;
+                color: #444444;
+                font-size: 18px;
+
+                .fa {
+                    vertical-align: -5px;
+                    margin-right: 3px;
+                }
+            }
 
             .wrapper {
                 margin-left: auto;
