@@ -29,7 +29,6 @@ class Check
             CURLOPT_AUTOREFERER       => true,
             CURLOPT_CONNECTTIMEOUT_MS => self::TIMEOUT,
             CURLOPT_FOLLOWLOCATION    => true,
-            CURLOPT_MAXCONNECTS       => 16,
             CURLOPT_MAXREDIRS         => 5,
             CURLOPT_NOBODY            => !$body,
             CURLOPT_RETURNTRANSFER    => true,
@@ -51,23 +50,21 @@ class Check
         list($header_validator) = $this->validators;
         yield $ch = $this->initialize($homo->url, false);
         if (($status = $header_validator($ch, ''))) {
-            return $status;
+            return [$status, $this->timer()];
         }
 
-        $ch = $this->initialize($homo->url, true);
-        $body = yield $ch;
-
+        $body = yield $ch = $this->initialize($homo->url, true);
         if ($body instanceof CURLException || !curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
-            return 'ERROR';
+            return ['ERROR', $this->timer()];
         }
 
         foreach ($this->validators as $validator) {
             if (($status = $validator($ch, $body))) {
-                return $status;
+                return [$status, $this->timer()];
             }
         }
 
-        return 'WRONG';
+        return ['WRONG', $this->timer()];
     }
 
     public function execute(string $screen_name = null, callable $callback = null): array
@@ -76,15 +73,20 @@ class Check
         $homos = isset($screen_name) ? Homo::getByScreenName($screen_name) : Homo::getAll();
 
         return Co::wait(array_map(function ($homo) use ($callback): \Generator {
-            $status = yield $this->validate($homo);
-            $duration = $this->timer();
-            $icon = yield Icon::get($homo->screen_name);
-
+            list(list($status, $duration), $icon) = yield [
+                $this->validate($homo),
+                Icon::get($homo->screen_name),
+            ];
             $response = new HomoResponse($homo, $icon, $status, $duration);
             if ($callback) {
                 $callback($response);
             }
             return $response;
-        }, $homos), ['throw' => false]);
+        }, $homos), [
+            'concurrency' => 32,
+            'interval'    => 0,
+            'pipeline'    => true,
+            'throw'       => false,
+        ]);
     }
 }
