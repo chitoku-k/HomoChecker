@@ -30,7 +30,7 @@ gulp.task("styles", () =>
 );
 
 gulp.task("build", () =>
-    gulp.src("./client/src/tags/*.tag")
+    gulp.src("./client/src/tags/*.tag", { since: gulp.lastRun("build") })
         .pipe($.riot({ type: "babel" }))
         .pipe(gulp.dest("./client/dev/js/"))
 );
@@ -46,6 +46,10 @@ gulp.task("test", (cb) => {
     console.error("Error: no test specified");
     cb();
 });
+
+gulp.task("watch", (cb) =>
+    gulp.watch("./client/src/tags/*.tag", gulp.series("build", "minify"))
+);
 
 gulp.task("default",
     gulp.series("clean", "build", gulp.parallel("minify", "copy", "fonts", "styles"))
