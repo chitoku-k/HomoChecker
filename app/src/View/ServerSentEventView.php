@@ -10,17 +10,23 @@ class ServerSentEventView implements ViewInterface
         $this->event = $event;
 
         header('Content-Type: text/event-stream');
-        flush();
+
+        // 2 KiB padding
+        echo ":" . str_repeat(" ", 2048) . "\n";
+
+        $this->flush();
     }
 
     public function render($data)
     {
-        // 2 KiB padding
-        echo ":" . str_repeat(" ", 2048) . "\n";
-
         echo "event: {$this->event}\n";
         echo "data: " . json_encode($data) . "\n\n";
+        $this->flush();
+    }
 
+    public function flush()
+    {
+        ob_end_flush();
         flush();
     }
 
