@@ -119,6 +119,7 @@
 
                     h2 {
                         font-size: 18px;
+                        margin-right: 30px;
 
                         .fa-lock {
                             font-size: 18px;
@@ -141,9 +142,9 @@
                 }
 
                 .duration {
-                    font-size: 18px;
-                    margin-top: -26px;
-                    margin-right: 45px;
+                    font-size: 15px;
+                    margin-top: -25px;
+                    margin-right: 40px;
                 }
 
                 & + & {
