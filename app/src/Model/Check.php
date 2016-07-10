@@ -20,7 +20,7 @@ class Check
         ];
     }
 
-    public function initialize(string $url)
+    public function initialize(string $url, bool $body)
     {
         $ch = curl_init($url);
         curl_setopt_array($ch, [
@@ -30,6 +30,7 @@ class Check
             CURLOPT_FOLLOWLOCATION    => true,
             CURLOPT_MAXCONNECTS       => 16,
             CURLOPT_MAXREDIRS         => 5,
+            CURLOPT_NOBODY            => !$body,
             CURLOPT_RETURNTRANSFER    => true,
             CURLOPT_SSL_VERIFYPEER    => false,
             CURLOPT_TIMEOUT_MS        => self::TIMEOUT,
@@ -45,7 +46,13 @@ class Check
 
     protected function validate(Homo $homo): \Generator
     {
-        $ch = $this->initialize($homo->url);
+        list($header_validator) = $this->validators;
+        yield $ch = $this->initialize($homo->url, false);
+        if (($status = $header_validator($ch, ''))) {
+            return $status;
+        }
+
+        $ch = $this->initialize($homo->url, true);
         $body = yield $ch;
 
         if ($body instanceof CURLException || !curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
