@@ -26,7 +26,7 @@ class ServerSentEventView implements ViewInterface
 
     public function flush()
     {
-        ob_end_flush();
+        ob_flush();
         flush();
     }
 
