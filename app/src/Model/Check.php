@@ -22,6 +22,7 @@ class Check
 
     public function initialize(string $url, bool $body)
     {
+        $ssl = strpos($url, 'https://') === 0;
         $ch = curl_init($url);
         curl_setopt_array($ch, [
             CURLINFO_HEADER_OUT       => true,
@@ -33,6 +34,7 @@ class Check
             CURLOPT_NOBODY            => !$body,
             CURLOPT_RETURNTRANSFER    => true,
             CURLOPT_SSL_VERIFYPEER    => false,
+            CURLOPT_TCP_FASTOPEN      => !$ssl,
             CURLOPT_TIMEOUT_MS        => self::TIMEOUT,
             CURLOPT_USERAGENT         => 'Homozilla/5.0 (Checker/1.14.514; homOSeX 8.10)',
         ]);
