@@ -1,7 +1,7 @@
 <homo-header>
     <nav>
         <ul>
-            <li class="active"><a><i class="fa fa-mars-double"></i> HOMO CHECKER</a>
+            <li class="active"><a><i class="icon-mars-double"></i> HOMO CHECKER</a>
             <li>
             <a href="https://twitter.com/intent/tweet?text=%40java_shit+%E4%BF%BA%E3%82%82%E3%83%9B%E3%83%A2%E3%81%A0%EF%BC%81URL%3A+http%3A%2F%2F" target="_blank">REGISTER</a>
         </ul>
@@ -55,7 +55,7 @@
                         background: #54452f;
                     }
 
-                    .fa-mars-double {
+                    .icon-mars-double {
                         width: 20px;
                     }
 

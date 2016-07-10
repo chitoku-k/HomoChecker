@@ -5,17 +5,16 @@
                 <img src={ homo.icon } width="48" height="48">
             </a>
             <a class="url" href={ homo.url } target="_blank">{ homo.display_url }</a>
-            <i class={ fa: true, fa-lock: homo.secure }></i>
+            <i class={ icon-lock: homo.secure }></i>
         </h2>
     </div>
     <div class="duration">{ duration.toFixed(2) } s</div>
     <i class={
         status: true,
-        fa: true,
-        fa-check: status === "OK",
-        fa-times: status === "WRONG",
-        fa-ban: status === "ERROR",
-        fa-exclamation-triangle: status === "CONTAINS"
+        icon-ok: status === "OK",
+        icon-cancel: status === "WRONG",
+        icon-block: status === "ERROR",
+        icon-attention: status === "CONTAINS"
     }></i>
     <div class="clearfix">
     </div>
@@ -56,7 +55,7 @@
                     text-overflow: ellipsis;
                     line-height: 1.1;
 
-                    .fa-lock {
+                    .icon-lock {
                         font-size: 22px;
                         padding: 0 6px;
                         margin-right: 4px;
@@ -72,18 +71,18 @@
                 padding: 0 4px;
                 margin-right: 4px;
 
-                &.fa-check {
+                &.icon-ok {
                     color: #449d44;
                 }
-                &.fa-times {
+                &.icon-cancel {
                     color: #c9302c;
                     margin-right: 10px;
                 }
-                &.fa-ban {
+                &.icon-block {
                     color: #c9302c;
-                    margin-right: 7px;
+                    margin-right: 5px;
                 }
-                &.fa-exclamation-triangle {
+                &.icon-attention {
                     color: #ec971f;
                 }
             }
@@ -121,7 +120,7 @@
                         font-size: 18px;
                         margin-right: 30px;
 
-                        .fa-lock {
+                        .icon-lock {
                             font-size: 18px;
                             vertical-align: 0;
                         }
@@ -129,15 +128,16 @@
                 }
 
                 .status {
-                    margin-right: 2px;
+                    margin-top: -48px;
+                    margin-right: -5px;
                     padding: 18px 2px 0;
                     font-size: 24px;
 
-                    &.fa-times {
-                        margin-right: 6px;
+                    &.icon-cancel {
+                        margin-right: -4px;
                     }
-                    &.fa-ban {
-                        margin-right: 5px;
+                    &.icon-block {
+                        margin-right: -5px;
                     }
                 }
 

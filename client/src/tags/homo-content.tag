@@ -1,7 +1,7 @@
 <homo-content>
     <div class="wrapper">
         <div class="loading" if={ !items.length }>
-            <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+            <i class="icon-arrows-cw animate-spin"></i>
             ホモを集めています...
         </div>
         <homo-item each={ items } />
@@ -21,9 +21,10 @@
                 color: #444444;
                 font-size: 18px;
 
-                .fa {
+                .icon-arrows-cw {
                     vertical-align: -5px;
                     margin-right: 3px;
+                    font-size: 36px;
                 }
             }
 

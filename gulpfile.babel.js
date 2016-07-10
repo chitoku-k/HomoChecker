@@ -20,12 +20,15 @@ gulp.task("copy", () =>
 );
 
 gulp.task("fonts", () =>
-    gulp.src("./node_modules/font-awesome/fonts/*")
-        .pipe(gulp.dest("./client/dest/fonts/"))
+    gulp.src("./config.json")
+        .pipe($.fontello())
+        .pipe($.if("*.css", gulp.dest("./client/dev/"), gulp.dest("./client/dest/")))
 );
 
 gulp.task("styles", () =>
-    gulp.src("./node_modules/font-awesome/css/*.min.css")
+    gulp.src(["./client/dev/css/*.css", "!./**/*ie7*.css"])
+        .pipe($.csso())
+        .pipe($.concat("styles.css"))
         .pipe(gulp.dest("./client/dest/css/"))
 );
 
@@ -52,5 +55,5 @@ gulp.task("watch", (cb) =>
 );
 
 gulp.task("default",
-    gulp.series("clean", "build", gulp.parallel("minify", "copy", "fonts", "styles"))
+    gulp.series("clean", "build", gulp.parallel("minify", "copy"), "fonts", "styles")
 );
