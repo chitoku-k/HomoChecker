@@ -14,12 +14,16 @@
                 @media (min-width: 768px) {
                     width: 750px;
                 }
-                @meida (min-width: 992px) {
+                @media (min-width: 992px) {
                     width: 970px;
                 }
                 @media (min-width: 1200px) {
                     width: 1170px;
                 }
+            }
+
+            @media (max-width: 767px) {
+                padding: 8px;
             }
         }
     </style>

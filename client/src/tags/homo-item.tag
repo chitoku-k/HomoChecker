@@ -50,7 +50,7 @@
                     color: #444;
                     font-size: 36px;
                     font-weight: 700;
-                    margin: 0;
+                    margin: 0 90px 0 0;
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
@@ -105,6 +105,50 @@
 
             & + & {
                 margin-top: 15px;
+            }
+
+            @media (max-width: 767px) {
+                padding: 12px;
+
+                .subdomain {
+                    img {
+                        width: 32px;
+                        height: 32px;
+                        margin-right: 4px;
+                    }
+
+                    h2 {
+                        font-size: 18px;
+
+                        .fa-lock {
+                            font-size: 18px;
+                            vertical-align: 0;
+                        }
+                    }
+                }
+
+                .status {
+                    margin-right: 2px;
+                    padding: 18px 2px 0;
+                    font-size: 24px;
+
+                    &.fa-times {
+                        margin-right: 6px;
+                    }
+                    &.fa-ban {
+                        margin-right: 5px;
+                    }
+                }
+
+                .duration {
+                    font-size: 18px;
+                    margin-top: -26px;
+                    margin-right: 45px;
+                }
+
+                & + & {
+                    margin-top: 8px;
+                }
             }
         }
     </style>
