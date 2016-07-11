@@ -45,14 +45,14 @@ class Check
         list($header_validator) = $this->validators;
 
         yield $ch = $this->initialize($homo->url, false);
-        $time = curl_getinfo($ch, CURLINFO_TOTAL_TIME);
+        $time = curl_getinfo($ch, CURLINFO_REDIRECT_TIME) + curl_getinfo($ch, CURLINFO_TOTAL_TIME);
 
         if (($status = $header_validator($ch, ''))) {
             return [$status, $time];
         }
 
         $body = yield $ch = $this->initialize($homo->url, true);
-        $time = curl_getinfo($ch, CURLINFO_TOTAL_TIME);
+        $time = curl_getinfo($ch, CURLINFO_REDIRECT_TIME) + curl_getinfo($ch, CURLINFO_TOTAL_TIME);
 
         if ($body instanceof CURLException || !curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
             return ['ERROR', $time];
