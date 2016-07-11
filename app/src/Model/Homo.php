@@ -37,6 +37,7 @@ class Homo
             'https://homo.synchthia.net',
         ],
         'myskng' => 'http://homo.kazukioishi.net',
+        'owl_8' => 'http://homo.owl8.net',
         'pakutoma' => 'http://homo.pakutoma.pw',
         'Petitsurume' => 'https://petitsurume.github.io/homo/',
         'printf_moriken' => 'http://moriken.kimamass.com/homo',
