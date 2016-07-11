@@ -32,7 +32,7 @@ class Check
             CURLOPT_MAXREDIRS         => 5,
             CURLOPT_NOBODY            => !$body,
             CURLOPT_RETURNTRANSFER    => true,
-            CURLOPT_SSL_VERIFYPEER    => false,
+            CURLOPT_SSL_VERIFYPEER    => false, // TODO: Insecure ass
             CURLOPT_TCP_FASTOPEN      => !$ssl,
             CURLOPT_TIMEOUT_MS        => self::TIMEOUT,
             CURLOPT_USERAGENT         => 'Homozilla/5.0 (Checker/1.14.514; homOSeX 8.10)',
