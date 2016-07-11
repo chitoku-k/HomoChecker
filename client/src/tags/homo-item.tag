@@ -58,6 +58,7 @@
                     .icon-lock {
                         font-size: 22px;
                         padding: 0 6px;
+                        margin-left: -5px;
                         margin-right: 4px;
                         vertical-align: 3px;
                     }
