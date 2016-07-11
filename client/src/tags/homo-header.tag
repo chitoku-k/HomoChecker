@@ -75,6 +75,10 @@
                     li a {
                         min-height: 0;
                         padding: 12px;
+
+                        &:first-child {
+                            padding: 12px 16px 12px 22px;
+                        }
                     }
                 }
                 @media (min-width: 768px) {
