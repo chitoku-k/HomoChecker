@@ -32,8 +32,7 @@ class Check
             CURLOPT_MAXREDIRS         => 5,
             CURLOPT_NOBODY            => !$body,
             CURLOPT_RETURNTRANSFER    => true,
-            CURLOPT_SASL_IR           => true,
-            CURLOPT_SSL_VERIFYPEER    => false,
+            CURLOPT_SSL_VERIFYPEER    => false, // TODO: Insecure ass
             CURLOPT_TCP_FASTOPEN      => !$ssl,
             CURLOPT_TIMEOUT_MS        => self::TIMEOUT,
             CURLOPT_USERAGENT         => 'Homozilla/5.0 (Checker/1.14.514; homOSeX 8.10)',
@@ -41,36 +40,35 @@ class Check
         return $ch;
     }
 
-    protected function timer(): float
-    {
-        return microtime(true) - $this->time;
-    }
-
     protected function validate(Homo $homo): \Generator
     {
         list($header_validator) = $this->validators;
+
         yield $ch = $this->initialize($homo->url, false);
+        $time = curl_getinfo($ch, CURLINFO_TOTAL_TIME);
+
         if (($status = $header_validator($ch, ''))) {
-            return [$status, $this->timer()];
+            return [$status, $time];
         }
 
         $body = yield $ch = $this->initialize($homo->url, true);
+        $time = curl_getinfo($ch, CURLINFO_TOTAL_TIME);
+
         if ($body instanceof CURLException || !curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
-            return ['ERROR', $this->timer()];
+            return ['ERROR', $time];
         }
 
         foreach ($this->validators as $validator) {
             if (($status = $validator($ch, $body))) {
-                return [$status, $this->timer()];
+                return [$status, $time];
             }
         }
 
-        return ['WRONG', $this->timer()];
+        return ['WRONG', $time];
     }
 
     public function execute(string $screen_name = null, callable $callback = null): array
     {
-        $this->time = microtime(true);
         $homos = isset($screen_name) ? Homo::getByScreenName($screen_name) : Homo::getAll();
 
         return Co::wait(array_map(function ($homo) use ($callback): \Generator {
