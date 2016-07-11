@@ -39,6 +39,7 @@
                 img {
                     margin: 0 8px 0 0;
                     vertical-align: middle;
+                    border: none;
                 }
 
                 .url:hover {
