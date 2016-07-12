@@ -8,7 +8,7 @@ class Homo
 
     private static $sites = [
         'AtiS' => [
-            'http://homo.atis.ml',
+            'https://homo.atis.ml',
             'http://xn--ydko.atis.ml',
         ],
         'azyobuzin' => [
