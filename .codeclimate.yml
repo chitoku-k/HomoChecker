@@ -12,6 +12,13 @@ engines:
     enabled: true
   phpmd:
     enabled: true
+    checks:
+      CleanCode/StaticAccess:
+        enabled: false
+      Naming/ShortVariable:
+        enabled: false
+      Controversial/CamelCaseParameterName:
+        enabled: false
 ratings:
   paths:
   - "**.js"
