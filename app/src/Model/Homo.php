@@ -7,6 +7,10 @@ class Homo
     public $url;
 
     private static $sites = [
+        'AtiS' => [
+            'http://homo.atis.ml',
+            'http://xn--ydko.atis.ml',
+        ],
         'azyobuzin' => [
             'http://homo.azyobuzi.net',
             'http://xn--ydko.azyobuzi.net',
