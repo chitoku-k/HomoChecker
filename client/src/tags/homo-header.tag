@@ -26,15 +26,24 @@
 
             nav {
                 margin: 0 auto;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
 
                 ul {
                     margin: 0;
                     padding: 0;
+
+                    &:after {
+                        display: block;
+                        content: "";
+                        clear: both;
+                    }
                 }
 
                 li {
-                    float: left;
+                    display: table-cell;
                     list-style: none;
+                    white-space: nowrap;
 
                     a {
                         text-decoration: none;
@@ -65,19 +74,20 @@
                     }
                 }
 
-                &:after {
-                    display: block;
-                    content: "";
-                    clear: both;
-                }
-
                 @media (max-width: 767px) {
-                    li a {
-                        min-height: 0;
-                        padding: 12px;
+                    li {
+                        a {
+                            min-height: 0;
+                            padding: 12px 14px;
 
-                        &:first-child {
-                            padding: 12px 16px 12px 22px;
+                            homo-anime {
+                                position: relative;
+                                top: -3px;
+                            }
+                        }
+
+                        &:first-child a {
+                            padding: 12px 14px 12px 22px;
                         }
                     }
                 }
