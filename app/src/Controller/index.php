@@ -12,7 +12,7 @@ $app = new \Slim\App([
         'addContentLengthHeader' => false,
     ],
 ]);
-$app->get('/check[/{name}]', function (Request $request, Response $response, array $args) {
+$app->get('/check/[{name}]', function (Request $request, Response $response, array $args) {
     $view = new ServerSentEventView('response');
     $checker = new Check;
     $checker->execute($args['name'] ?? null, [$view, 'render']);

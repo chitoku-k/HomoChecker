@@ -46,7 +46,7 @@ $ npm install
 下記のフロントエンド・バックエンドの操作を実行して、ブラウザーで次の URL にアクセスします:
 
 ```
-http://localhost:4545/client/dest/index.html
+http://localhost:4545
 ```
 
 ### フロントエンド
@@ -71,5 +71,5 @@ $ npm run watch
 PHP のビルトインサーバーを使用します。ポート番号は任意です。
 ```
 $ cd HomoChecker
-$ php -S 0.0.0.0:4545
+$ php -S 0.0.0.0:4545 router.php
 ```

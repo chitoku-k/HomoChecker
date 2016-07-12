@@ -51,7 +51,7 @@
     <script>
         this.items = [];
 
-        const source = new EventSource("/app/src/Controller/check");
+        const source = new EventSource("/check/");
         source.addEventListener("response", event => {
             this.items.push(JSON.parse(event.data));
             this.items.sort((x, y) => {
