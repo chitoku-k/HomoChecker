@@ -16,6 +16,7 @@ class Homo
             'http://xn--ydko.azyobuzi.net',
         ],
         'CHIKEN_MAN_' => 'http://homo.xn--w8jwb2eudb.com',
+        'DYGV' => 'http://homo.dygv.info',
         'G2U' => 'http://homo.mohyo.net',
         'Hexium310' => [
             'https://hexium310.github.io/homo',
