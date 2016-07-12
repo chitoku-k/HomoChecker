@@ -1,6 +1,10 @@
 HomoChecker
 ===========
 
+[![Build Status](https://travis-ci.org/chitoku-k/HomoChecker.svg?branch=master)](https://travis-ci.org/chitoku-k/HomoChecker)
+[![Dependency Status](https://gemnasium.com/badges/github.com/chitoku-k/HomoChecker.svg)](https://gemnasium.com/github.com/chitoku-k/HomoChecker)
+[![Code Climate](https://codeclimate.com/github/chitoku-k/HomoChecker/badges/gpa.svg)](https://codeclimate.com/github/chitoku-k/HomoChecker)
+
 HomoChecker はホモ（[@mpyw](https://twitter.com/mpyw)）にリダイレクトするホモのためのホモの輪です。
 
 ## ホモへの手引き
