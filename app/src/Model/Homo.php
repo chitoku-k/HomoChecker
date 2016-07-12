@@ -46,6 +46,7 @@ class Homo
         'Petitsurume' => 'https://petitsurume.github.io/homo/',
         'printf_moriken' => 'http://moriken.kimamass.com/homo',
         'shibafu528' => 'http://homo.shibafu528.info',
+        'snowhite0804' => 'http://homo.snowhite.tk',
         'tk1024_bot' => 'http://homo.tk1024.net',
         'u3g3' => 'https://homo.gomasy.jp',
     ];
