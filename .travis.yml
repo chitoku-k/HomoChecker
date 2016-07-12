@@ -1,0 +1,20 @@
+language: node_js
+node_js: "6"
+sudo: false
+cache:
+  directories:
+    - node_modules
+before_install:
+  - openssl aes-256-cbc -K $encrypted_32aa7ee0d8d8_key -iv $encrypted_32aa7ee0d8d8_iv -in ssh.tar.enc -out ssh.tar -d
+  - tar xvf ssh.tar
+  - mv id_rsa config ~/.ssh
+  - chmod 600 ~/.ssh/id_rsa
+install:
+  - npm install
+before_script:
+  - git remote add homo ssh://homo.chitoku.jp
+script:
+  - npm start
+after_success:
+  - '([ "$TRAVIS_BRANCH" != "master" ] || [ "$TRAVIS_PULL_REQUEST" == "true" ]) && exit'
+  - git push homo master
