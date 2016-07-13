@@ -38,6 +38,13 @@ gulp.task("build", () =>
         .pipe(gulp.dest("./client/dev/js/"))
 );
 
+gulp.task("lint", () =>
+    gulp.src("./client/src/tags/*.tag")
+        .pipe($.eslint())
+        .pipe($.eslint.format())
+        .pipe($.eslint.failAfterError())
+);
+
 gulp.task("minify", () =>
     gulp.src(scripts)
         .pipe($.uglify())
@@ -55,5 +62,5 @@ gulp.task("watch", (cb) =>
 );
 
 gulp.task("default",
-    gulp.series("clean", "build", gulp.parallel("minify", "copy"), "fonts", "styles")
+    gulp.series("clean", "build", gulp.parallel("lint", "minify", "copy"), "fonts", "styles")
 );
