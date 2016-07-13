@@ -147,7 +147,7 @@
             }
         }
     </style>
-    <script>
+    <script type="babel">
         window.addEventListener("DOMContentLoaded", event => {
             const animeDOM = document.querySelector("homo-anime");
             const activeDOM = document.querySelector("homo-anime .part-active");
