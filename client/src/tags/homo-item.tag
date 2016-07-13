@@ -42,8 +42,14 @@
                     border: none;
                 }
 
-                .url:hover {
-                    text-decoration: underline;
+                .url {
+                    span {
+                        background: #eae1d3;
+                    }
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
                 }
 
                 h2 {
@@ -155,4 +161,27 @@
             }
         }
     </style>
+    <script type="babel">
+        this.keywords = [ "homo", "ホモ" ];
+
+        this.on("update", () => {
+            const [ elm ] = this.root.getElementsByClassName("url");
+            if (!elm) {
+                return;
+            }
+
+            // Get the index(es) in which contains the keyword
+            for (const target of this.keywords.map(x => [ x, elm.lastChild.textContent.indexOf(x) ])) {
+                const [ match, index ] = target;
+                if (index < 0) {
+                    continue;
+                }
+                // Create range and surround the keyword, then lastChild points another node
+                const range = document.createRange();
+                range.setStart(elm.lastChild, index);
+                range.setEnd(elm.lastChild, index + match.length);
+                range.surroundContents(document.createElement("span"));
+            }
+        });
+    </script>
 </homo-item>
