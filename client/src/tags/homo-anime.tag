@@ -153,7 +153,7 @@
             const animeDOM = document.querySelector("homo-anime");
             const activeDOM = document.querySelector("homo-anime .part-active");
 
-            const classes = ["start", "pako", "finish", "dopyulicated", "end"];
+            const classes = [ "start", "pako", "finish", "dopyulicated", "end" ];
             const classMap = classes.reduce((obj, value, key) => {
                 [ obj[key], obj[value] ] = [ value, key ];
                 return obj;
