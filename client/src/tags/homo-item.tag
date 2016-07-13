@@ -164,7 +164,7 @@
     <script type="babel">
         this.keywords = [ "homo", "ホモ" ];
 
-        this.on("update", () => {
+        this.on("updated", () => {
             const [ elm ] = this.root.getElementsByClassName("url");
             if (!elm) {
                 return;
