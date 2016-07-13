@@ -6,6 +6,7 @@
             display: inline-block;
             margin-right: -15px;
             margin-left: -3px;
+            transform: translate(0px, -3px);
 
             .icon-mars {
                 color: white;
@@ -100,7 +101,7 @@
         .dopyulicated {
             @keyframes active-dopyulicated {
                 0% {
-                    transform: translate(3px, -4px) scale(1, 1);
+                    transform: translate(3px, -4px);
                 }
 
                 100% {
@@ -130,7 +131,7 @@
 
             @keyframes active-end {
                 0% {
-                    transform: translate(3px, -4px) scale(1.05, 1.05);
+                    transform: translate(3px, -4px);
                 }
 
                 100% {
@@ -139,11 +140,11 @@
             }
 
             .part-passive {
-                animation: passive-end 5s;
+                animation: passive-end 5s linear;
             }
 
             .part-active {
-                animation: active-end 5s;
+                animation: active-end 5s linear;
             }
         }
     </style>
@@ -151,23 +152,22 @@
         window.addEventListener("DOMContentLoaded", event => {
             const animeDOM = document.querySelector("homo-anime");
             const activeDOM = document.querySelector("homo-anime .part-active");
+
             const classMap = {
                 start:          0,
                 pako:           1,
                 finish:         2,
                 dopyulicated:   3,
-                end:            4,
-
-                "0": "start",
-                "1": "pako",
-                "2": "finish",
-                "3": "dopyulicated",
-                "4": "end"
+                end:            4
             };
-            
+            for(const key of Object.keys(classMap)) {
+                classMap[ classMap[key] ] = key;
+            }
+
             activeDOM.addEventListener("animationend", event => {
                 const current = animeDOM.className;
                 const next = classMap[(classMap[current] + 1) % 5];
+
                 if(next !== "start") {
                     animeDOM.className = next;
                 } else {
