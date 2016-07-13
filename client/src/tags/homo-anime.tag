@@ -153,20 +153,15 @@
             const animeDOM = document.querySelector("homo-anime");
             const activeDOM = document.querySelector("homo-anime .part-active");
 
-            const classMap = {
-                start:          0,
-                pako:           1,
-                finish:         2,
-                dopyulicated:   3,
-                end:            4,
-            };
-            for (const key of Object.keys(classMap)) {
-                classMap[classMap[key]] = key;
-            }
+            const classes = ["start", "pako", "finish", "dopyulicated", "end"];
+            const classMap = classes.reduce((obj, value, key) => {
+                [ obj[key], obj[value] ] = [ value, key ];
+                return obj;
+            }, {});
 
             activeDOM.addEventListener("animationend", event => {
                 const current = animeDOM.className;
-                const next = classMap[(classMap[current] + 1) % 5];
+                const next = classMap[(classMap[current] + 1) % classes.length];
 
                 if (next !== "start") {
                     animeDOM.className = next;
