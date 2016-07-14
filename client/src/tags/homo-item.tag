@@ -171,8 +171,7 @@
             }
 
             // Get the index(es) in which contains the keyword
-            for (const target of this.keywords.map(x => [ x, elm.lastChild.textContent.indexOf(x) ])) {
-                const [ match, index ] = target;
+            for (const [ match, index ] of this.keywords.map(x => [ x, elm.lastChild.textContent.indexOf(x) ])) {
                 if (index < 0) {
                     continue;
                 }
