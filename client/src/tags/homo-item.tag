@@ -172,7 +172,7 @@
 
             // Get the index(es) in which contains the keyword
             for (const [ match, index ] of this.keywords.map(x => [ x, elm.lastChild.textContent.indexOf(x) ])) {
-                if (index < 0) {
+                if (index < 0 || elm.lastChild.nodeType !== Node.TEXT_NODE) {
                     continue;
                 }
                 // Create range and surround the keyword, then lastChild points another node
