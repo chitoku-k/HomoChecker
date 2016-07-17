@@ -43,7 +43,7 @@ class Homo
         ],
         'myskng' => 'http://homo.kazukioishi.net',
         'owl_8' => 'http://homo.owl8.net',
-        'pakutoma' => 'http://homo.pakutoma.pw',
+        'pakutoma' => 'https://homo.pakutoma.pw',
         'Petitsurume' => 'https://petitsurume.github.io/homo/',
         'printf_moriken' => 'http://moriken.kimamass.com/homo',
         'shibafu528' => 'http://homo.shibafu528.info',
