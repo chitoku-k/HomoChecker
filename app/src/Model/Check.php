@@ -14,7 +14,6 @@ class Check
     public function __construct()
     {
         $this->validators = [
-            new HeaderValidator,
             new DOMValidator,
             new URLValidator,
         ];
@@ -41,12 +40,10 @@ class Check
 
     protected function validate(Homo $homo): \Generator
     {
-        list($header_validator) = $this->validators;
-
         yield $ch = $this->initialize($homo->url, false);
-        $time = curl_getinfo($ch, CURLINFO_REDIRECT_TIME) + curl_getinfo($ch, CURLINFO_TOTAL_TIME);
+        $time = curl_getinfo($ch, CURLINFO_REDIRECT_TIME);
 
-        if (($status = $header_validator($ch, ''))) {
+        if (($status = (new HeaderValidator)($ch, ''))) {
             return [$status, $time];
         }
 
