@@ -41,14 +41,14 @@ class Check
     protected function validate(Homo $homo): \Generator
     {
         yield $ch = $this->initialize($homo->url, false);
-        $time = curl_getinfo($ch, CURLINFO_REDIRECT_TIME);
+        $time = curl_getinfo($ch, CURLINFO_REDIRECT_TIME) - curl_getinfo($ch, CURLINFO_NAMELOOKUP_TIME);
 
         if (($status = (new HeaderValidator)($ch, ''))) {
             return [$status, $time];
         }
 
         $body = yield $ch = $this->initialize($homo->url, true);
-        $time = curl_getinfo($ch, CURLINFO_REDIRECT_TIME) + curl_getinfo($ch, CURLINFO_TOTAL_TIME);
+        $time = curl_getinfo($ch, CURLINFO_REDIRECT_TIME) + curl_getinfo($ch, CURLINFO_TOTAL_TIME) - curl_getinfo($ch, CURLINFO_NAMELOOKUP_TIME);
 
         if ($body instanceof CURLException || !curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
             return ['ERROR', $time];
