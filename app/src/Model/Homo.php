@@ -46,6 +46,11 @@ class Homo
         'pakutoma' => 'https://homo.pakutoma.pw',
         'Petitsurume' => 'https://petitsurume.github.io/homo/',
         'printf_moriken' => 'http://moriken.kimamass.com/homo',
+        'Syenox' => [
+            'http://homo.koutanakayama.org/',
+            'http://homo.nlinx.ne.jp/',
+            'http://homo.ncraft.top/',
+        ],
         'shibafu528' => 'http://homo.shibafu528.info',
         'snowhite0804' => 'https://homo.snowhite.tk',
         'tk1024_bot' => 'http://homo.tk1024.net',
