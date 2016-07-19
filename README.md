@@ -77,3 +77,62 @@ PHP のビルトインサーバーを使用します。ポート番号は任意�
 $ cd HomoChecker
 $ php -S 0.0.0.0:4545 router.php
 ```
+
+## API
+
+```
+/check/[/{username}]
+```
+
+指定したユーザー名のユーザーが登録した URL のリダイレクト状況を取得します。  
+ユーザー名を省略した場合はすべてのユーザーの情報を返します。
+
+レスポンスは [Server-Sent Events](https://www.w3.org/TR/eventsource/) によってイベントストリームとして返されます。
+またブラウザーのバッファリングを無効にするために、コネクションの先頭に `:` に続く空白バイトが送信されます。
+
+以下にストリームの例を示します。
+
+```
+event: response
+data: {"homo":{"screen_name":"java_shit","url":"https:\/\/homo.chitoku.jp","display_url":"homo.chitoku.jp","secure":true},"status":"OK","duration":0.45}
+
+event: close
+data: end
+```
+
+`event` が `response` の場合は `data` は JSON データです。
+
+```javascript
+{
+    // (object) ホモ
+    "homo": {
+        // (string) スクリーンネーム
+        "screen_name": "",
+
+        // (string) URL
+        "url": "",
+
+        // (string) 表示用の URL
+        "display_url": "",
+
+        // (string) アイコンの URL
+        "icon": "",
+
+        // (bool) HTTPS 接続かどうかを示す値
+        "secure": true
+    },
+
+    // (string) リダイレクト状況を示す値
+    // OK: リダイレクト設定済
+    // WRONG: リダイレクト未設定
+    // CONTAINS: ページ内に URL を含む
+    // ERROR: 接続失敗/タイムアウト
+    "status": "",
+
+    // (number) リダイレクトにかかった時間 (s)
+    "duration": 0.0
+}
+```
+
+
+`event` が `close` の場合は `data` は常に `end` です。
