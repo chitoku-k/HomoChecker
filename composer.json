@@ -1,8 +1,8 @@
 {
     "require": {
-        "mpyw/co": "@dev",
         "slim/slim": "^3.4",
-        "true/punycode": "~2.0"
+        "true/punycode": "~2.0",
+        "mpyw/co": "^1.1"
     },
     "autoload": {
         "psr-4": {

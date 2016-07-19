@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1abd29745f0fcbd636b7cbd26ebc7d74",
-    "content-hash": "ae976c1ed50975bebbd7a934c28ff037",
+    "hash": "c2e8d979a565d66b815f7f1e76ce7781",
+    "content-hash": "caea63c5722010412de5121ce3ae56ce",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -36,29 +36,30 @@
         },
         {
             "name": "mpyw/co",
-            "version": "dev-master",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mpyw/co.git",
-                "reference": "0770f8052b793866ff07fb0a39158f615339b7c5"
+                "reference": "fd13219ddcafa3ba330b9940cafe1d07182df806"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mpyw/co/zipball/0770f8052b793866ff07fb0a39158f615339b7c5",
-                "reference": "0770f8052b793866ff07fb0a39158f615339b7c5",
+                "url": "https://api.github.com/repos/mpyw/co/zipball/fd13219ddcafa3ba330b9940cafe1d07182df806",
+                "reference": "fd13219ddcafa3ba330b9940cafe1d07182df806",
                 "shasum": ""
             },
             "require": {
                 "lib-curl": ">=7.2.0",
-                "php": ">=5.3.0"
+                "mpyw/runtime-promise": "^1.0",
+                "php": ">=5.5.0"
             },
             "require-dev": {
-                "codeception/aspect-mock": "^0.5.5",
-                "codeception/codeception": "*",
+                "codeception/aspect-mock": "^2.0",
+                "codeception/codeception": "^2.2",
                 "codeception/specify": "*",
                 "codeception/verify": "*",
                 "lib-curl": ">=7.2.0",
-                "mpyw/privator": "~1.0",
+                "mpyw/privator": "^2.0",
                 "mpyw/twistoauth": "~3.0",
                 "php": ">=7.0.0",
                 "satooshi/php-coveralls": "^1.0"
@@ -87,7 +88,46 @@
                 "http",
                 "parallel"
             ],
-            "time": "2016-03-02 13:47:11"
+            "time": "2016-07-19 15:55:40"
+        },
+        {
+            "name": "mpyw/runtime-promise",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mpyw/runtime-promise.git",
+                "reference": "4241a89d83f1e4fc4bfb7ab7487a0ef0abc5a35f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mpyw/runtime-promise/zipball/4241a89d83f1e4fc4bfb7ab7487a0ef0abc5a35f",
+                "reference": "4241a89d83f1e4fc4bfb7ab7487a0ef0abc5a35f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "mpyw\\RuntimePromise\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "mpyw",
+                    "email": "ryosuke_i_628@yahoo.co.jp"
+                }
+            ],
+            "description": "This is a fork of React/Promise v2.0, that only handles RuntimeException.",
+            "time": "2016-07-18 12:06:58"
         },
         {
             "name": "nikic/fast-route",
@@ -347,9 +387,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "mpyw/co": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
