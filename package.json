@@ -31,7 +31,7 @@
   },
   "homepage": "https://homo.chitoku.jp:4545/",
   "dependencies": {
-    "babel-core": "^6.10.4",
+    "babel-core": "^6.11.4",
     "babel-preset-es2015-riot": "^1.1.0",
     "del": "^2.2.1",
     "eslint-plugin-riot": "^0.1.6",

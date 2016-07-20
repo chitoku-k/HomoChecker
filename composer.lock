@@ -36,16 +36,16 @@
         },
         {
             "name": "mpyw/co",
-            "version": "v1.1.0",
+            "version": "v1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mpyw/co.git",
-                "reference": "fd13219ddcafa3ba330b9940cafe1d07182df806"
+                "reference": "456b84ca7b88727c51debd7c35116934fd784e9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mpyw/co/zipball/fd13219ddcafa3ba330b9940cafe1d07182df806",
-                "reference": "fd13219ddcafa3ba330b9940cafe1d07182df806",
+                "url": "https://api.github.com/repos/mpyw/co/zipball/456b84ca7b88727c51debd7c35116934fd784e9a",
+                "reference": "456b84ca7b88727c51debd7c35116934fd784e9a",
                 "shasum": ""
             },
             "require": {
@@ -88,7 +88,7 @@
                 "http",
                 "parallel"
             ],
-            "time": "2016-07-19 15:55:40"
+            "time": "2016-07-20 12:26:41"
         },
         {
             "name": "mpyw/runtime-promise",
