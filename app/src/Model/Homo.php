@@ -80,7 +80,7 @@ class Homo
         return $result;
     }
 
-    public function __construct($screen_name, $url)
+    public function __construct(string $screen_name, string $url)
     {
         $this->screen_name = $screen_name;
         $this->url = $url;

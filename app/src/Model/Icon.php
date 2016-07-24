@@ -8,7 +8,7 @@ class Icon
     public $screen_name;
     public $url;
 
-    public function __construct($screen_name)
+    public function __construct(string $screen_name)
     {
         $this->screen_name = $screen_name;
     }
@@ -26,7 +26,7 @@ class Icon
         return $this;
     }
 
-    public static function get($screen_name): \Generator
+    public static function get(string $screen_name): \Generator
     {
         $self = new static($screen_name);
         return $self->fetch();
