@@ -81,13 +81,17 @@ $ php -S 0.0.0.0:4545 router.php
 ## API
 
 ```
-/check/[/{username}]
+/check/[{username}/][?format=sse|json]
 ```
 
 指定したユーザー名のユーザーが登録した URL のリダイレクト状況を取得します。  
 ユーザー名を省略した場合はすべてのユーザーの情報を返します。
 
-レスポンスは [Server-Sent Events](https://www.w3.org/TR/eventsource/) によってイベントストリームとして返されます。
+レスポンスは指定された形式で返され、省略した場合は `sse` が指定されます。
+
+### sse
+
+[Server-Sent Events](https://www.w3.org/TR/eventsource/) によってイベントストリームとして返されます。
 またブラウザーのバッファリングを無効にするために、コネクションの先頭に `:` に続く空白バイトが送信されます。
 
 以下にストリームの例を示します。
@@ -100,7 +104,12 @@ event: close
 data: end
 ```
 
-`event` が `response` の場合は `data` は JSON データです。
+`event` が `response` の場合は `data` は以下に示す JSON データです。
+`event` が `close` の場合は `data` は常に `end` です。
+
+### json
+
+[JSON](http://www.json.org/) の `Array` によって返されます。
 
 ```javascript
 {
@@ -133,6 +142,3 @@ data: end
     "duration": 0.0
 }
 ```
-
-
-`event` が `close` の場合は `data` は常に `end` です。
