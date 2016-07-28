@@ -15,7 +15,7 @@ class HomoResponse
             'icon'        => $icon->url,
         ];
         $this->status = $status;
-        $this->duration = round($duration, 2);
+        $this->duration = $duration;
     }
 
     protected function createDisplayURL(string $url): string
@@ -30,6 +30,6 @@ class HomoResponse
 
     protected function isSecure(string $url): bool
     {
-        return strpos($url, 'https://') === 0;
+        return parse_url($url, PHP_URL_SCHEME) === 'https';
     }
 }
