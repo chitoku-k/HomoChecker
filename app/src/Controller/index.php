@@ -21,7 +21,6 @@ $app = new \Slim\App([
             ]);
         };
     },
-], [
     'settings' => [
         'outputBuffering'        => false,
         'addContentLengthHeader' => false,

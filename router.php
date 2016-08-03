@@ -27,4 +27,3 @@ $_SERVER['SCRIPT_NAME'] = 'index.php';
 
 // Then load our controller
 require __DIR__ . '/app/src/Controller/index.php';
-
