@@ -8,7 +8,7 @@
             <i class={ icon-lock: homo.secure }></i>
         </h2>
     </div>
-    <div class="duration">{ duration.toFixed(2) } s</div>
+    <div class="duration">{ Math.round(duration * 1000) } ms</div>
     <i class={
         status: true,
         icon-ok: status === "OK",
