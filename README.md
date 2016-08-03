@@ -80,6 +80,8 @@ $ php -S 0.0.0.0:4545 router.php
 
 ## API
 
+### Check API
+
 ```
 /check/[{username}/][?format=sse|json]
 ```
@@ -89,7 +91,7 @@ $ php -S 0.0.0.0:4545 router.php
 
 レスポンスは指定された形式で返され、省略した場合は `sse` が指定されます。
 
-### sse
+#### sse
 
 [Server-Sent Events](https://www.w3.org/TR/eventsource/) によってイベントストリームとして返されます。
 またブラウザーのバッファリングを無効にするために、コネクションの先頭に `:` に続く空白バイトが送信されます。
@@ -107,41 +109,45 @@ data: end
 `event` が `response` の場合は `data` は以下に示す JSON データです。
 `event` が `close` の場合は `data` は常に `end` です。
 
-### json
+#### json
 
-[JSON](http://www.json.org/) の `Array` によって返されます。
+[JSON](http://www.json.org/) によって返されます。
 
 ```javascript
-{
-    // (object) ホモ
-    "homo": {
-        // (string) スクリーンネーム
-        "screen_name": "",
+[
+    {
+        // (object) ホモ
+        "homo": {
+            // (string) スクリーンネーム
+            "screen_name": "",
 
-        // (string) URL
-        "url": "",
+            // (string) URL
+            "url": "",
 
-        // (string) 表示用の URL
-        "display_url": "",
+            // (string) 表示用の URL
+            "display_url": "",
 
-        // (string) アイコンの URL
-        "icon": "",
+            // (string) アイコンの URL
+            "icon": "",
 
-        // (bool) HTTPS 接続かどうかを示す値
-        "secure": true
-    },
+            // (bool) HTTPS 接続かどうかを示す値
+            "secure": true
+        },
 
-    // (string) リダイレクト状況を示す値
-    // OK: リダイレクト設定済
-    // WRONG: リダイレクト未設定
-    // CONTAINS: ページ内に URL を含む
-    // ERROR: 接続失敗/タイムアウト
-    "status": "",
+        // (string) リダイレクト状況を示す値
+        // OK: リダイレクト設定済
+        // WRONG: リダイレクト未設定
+        // CONTAINS: ページ内に URL を含む
+        // ERROR: 接続失敗/タイムアウト
+        "status": "",
 
-    // (number) リダイレクトにかかった時間 (s)
-    "duration": 0.0
-}
+        // (number) リダイレクトにかかった時間 (s)
+        "duration": 0.0
+    }
+]
 ```
+
+### List API
 
 ```
 /list/[{username}/]
@@ -150,23 +156,25 @@ data: end
 指定したユーザー名のユーザーが登録した URL の一覧を取得します。  
 ユーザー名を省略した場合はすべてのユーザーの情報を返します。
 
-レスポンスは JSON の `Array` によって返されます。
+レスポンスは JSON によって返されます。
 
 ```javascript
-{
-    // (object) ホモ
-    "homo": {
-        // (string) スクリーンネーム
-        "screen_name": "",
+[
+    {
+        // (object) ホモ
+        "homo": {
+            // (string) スクリーンネーム
+            "screen_name": "",
 
-        // (string) URL
-        "url": "",
+            // (string) URL
+            "url": "",
 
-        // (string) 表示用の URL
-        "display_url": "",
+            // (string) 表示用の URL
+            "display_url": "",
 
-        // (bool) HTTPS 接続かどうかを示す値
-        "secure": true
+            // (bool) HTTPS 接続かどうかを示す値
+            "secure": true
+        }
     }
-}
+]
 ```
