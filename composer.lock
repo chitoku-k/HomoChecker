@@ -36,19 +36,20 @@
         },
         {
             "name": "mpyw/co",
-            "version": "v1.1.2",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mpyw/co.git",
-                "reference": "456b84ca7b88727c51debd7c35116934fd784e9a"
+                "reference": "3508d3fa23a3f526ee7beb2ec5ae5efbcd67c54a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mpyw/co/zipball/456b84ca7b88727c51debd7c35116934fd784e9a",
-                "reference": "456b84ca7b88727c51debd7c35116934fd784e9a",
+                "url": "https://api.github.com/repos/mpyw/co/zipball/3508d3fa23a3f526ee7beb2ec5ae5efbcd67c54a",
+                "reference": "3508d3fa23a3f526ee7beb2ec5ae5efbcd67c54a",
                 "shasum": ""
             },
             "require": {
+                "ext-reflection": "*",
                 "lib-curl": ">=7.2.0",
                 "mpyw/runtime-promise": "^1.0",
                 "php": ">=5.5.0"
@@ -88,7 +89,7 @@
                 "http",
                 "parallel"
             ],
-            "time": "2016-07-20 12:26:41"
+            "time": "2016-08-02 14:26:46"
         },
         {
             "name": "mpyw/runtime-promise",
@@ -269,16 +270,16 @@
         },
         {
             "name": "slim/slim",
-            "version": "3.4.2",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim.git",
-                "reference": "a132385f736063d00632b52b3f8a389fe66fe4fa"
+                "reference": "184352bc1913d7ba552ab4131d62f4730ddb0893"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/a132385f736063d00632b52b3f8a389fe66fe4fa",
-                "reference": "a132385f736063d00632b52b3f8a389fe66fe4fa",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/184352bc1913d7ba552ab4131d62f4730ddb0893",
+                "reference": "184352bc1913d7ba552ab4131d62f4730ddb0893",
                 "shasum": ""
             },
             "require": {
@@ -335,7 +336,7 @@
                 "micro",
                 "router"
             ],
-            "time": "2016-05-25 11:23:38"
+            "time": "2016-07-26 15:12:13"
         },
         {
             "name": "true/punycode",
