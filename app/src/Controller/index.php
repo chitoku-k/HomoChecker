@@ -5,7 +5,6 @@ use HomoChecker\Model\Check;
 use HomoChecker\Model\Homo;
 use HomoChecker\Model\HomoResponse;
 use HomoChecker\View\ServerSentEventView;
-use HomoChecker\View\JsonView;
 
 require __DIR__ . '/../../../vendor/autoload.php';
 
@@ -31,9 +30,8 @@ $app->get('/check/[{name}/]', function (Request $request, Response $response, ar
 
     switch ($request->getQueryParams()['format'] ?? 'sse') {
         case 'json':
-            $view = new JsonView;
-            $view->render((new Check)->execute($name));
-            return;
+            $result = (new Check)->execute($name);
+            return $response->withJson($result, !empty($result) ? 200 : 404);
 
         case 'sse':
             $view = new ServerSentEventView('response');
@@ -45,11 +43,10 @@ $app->get('/check/[{name}/]', function (Request $request, Response $response, ar
 });
 $app->get('/list/[{name}/]', function (Request $request, Response $response, array $args) {
     $name = $args['name'] ?? null;
-    $homos = isset($name) ? Homo::getByScreenName($name) : Homo::getAll();
+    $homos = iterator_to_array(isset($name) ? Homo::getByScreenName($name) : Homo::getAll());
 
-    $view = new JsonView;
-    $view->render(array_map(function (Homo $item): array {
+    return $response->withJson(array_map(function (Homo $item): array {
         return (new HomoResponse($item))->homo;
-    }, iterator_to_array($homos)));
+    }, $homos), !empty($homos) ? 200 : 404);
 });
 $app->run();
