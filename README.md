@@ -142,3 +142,31 @@ data: end
     "duration": 0.0
 }
 ```
+
+```
+/list/[{username}/]
+```
+
+指定したユーザー名のユーザーが登録した URL の一覧を取得します。  
+ユーザー名を省略した場合はすべてのユーザーの情報を返します。
+
+レスポンスは JSON の `Array` によって返されます。
+
+```javascript
+{
+    // (object) ホモ
+    "homo": {
+        // (string) スクリーンネーム
+        "screen_name": "",
+
+        // (string) URL
+        "url": "",
+
+        // (string) 表示用の URL
+        "display_url": "",
+
+        // (bool) HTTPS 接続かどうかを示す値
+        "secure": true
+    }
+}
+```

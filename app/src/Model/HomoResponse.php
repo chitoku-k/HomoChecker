@@ -5,17 +5,24 @@ use TrueBV\Punycode;
 
 class HomoResponse
 {
-    public function __construct(Homo $homo, Icon $icon, string $status, float $duration)
+    public function __construct(Homo $homo, Icon $icon = null, string $status = null, float $duration = null)
     {
         $this->homo = [
             'screen_name' => $homo->screen_name,
             'url'         => $homo->url,
             'display_url' => $this->createDisplayURL($homo->url),
             'secure'      => $this->isSecure($homo->url),
-            'icon'        => $icon->url,
         ];
-        $this->status = $status;
-        $this->duration = $duration;
+
+        if (isset($icon)) {
+            $this->homo['icon'] = $icon->url;
+        }
+        if (isset($status)) {
+            $this->status = $status;
+        }
+        if (isset($duration)) {
+            $this->duration = $duration;
+        }
     }
 
     protected function createDisplayURL(string $url): string

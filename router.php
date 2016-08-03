@@ -7,24 +7,24 @@ if (file_exists(__DIR__ . $filename)) {
     return false;
 }
 
-if (strpos($filename, '/check/') === 0) {
-    // Do a little trick to get Slim to work
-    $_SERVER['SCRIPT_NAME'] = 'index.php';
+if (file_exists($target = __DIR__ . "/client/dest{$filename}")) {
+    // Output appropriate header
+    switch (substr($target, strrpos($target, '.') + 1)) {
+        case 'css':
+            header('Content-Type: text/css');
+            break;
 
-    // Then load our controller
-    require __DIR__ . '/app/src/Controller/index.php';
-    return;
+        case 'js':
+            header('Content-Type: text/javascript');
+            break;
+    }
+
+    return require $target;
 }
 
-// Output appropriate header
-switch (substr($filename, strrpos($filename, '.') + 1)) {
-    case 'css':
-        header('Content-Type: text/css');
-        break;
+// Do a little trick to get Slim to work
+$_SERVER['SCRIPT_NAME'] = 'index.php';
 
-    case 'js':
-        header('Content-Type: text/javascript');
-        break;
-}
+// Then load our controller
+require __DIR__ . '/app/src/Controller/index.php';
 
-require __DIR__ . "/client/dest{$filename}";
