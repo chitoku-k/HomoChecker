@@ -58,14 +58,14 @@ class Homo
 
     public static function getAll(): \Generator
     {
-        yield from self::create(self::$sites);
+        return self::create(self::$sites);
     }
 
     public static function getByScreenName(string $screen_name): \Generator
     {
         foreach (self::$sites as $key => $site) {
             if (!strcasecmp($key, $screen_name)) {
-                yield from self::create([
+                return self::create([
                     $key => $site,
                 ]);
             }
