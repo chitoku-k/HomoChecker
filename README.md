@@ -161,20 +161,17 @@ data: end
 ```javascript
 [
     {
-        // (object) ホモ
-        "homo": {
-            // (string) スクリーンネーム
-            "screen_name": "",
+        // (string) スクリーンネーム
+        "screen_name": "",
 
-            // (string) URL
-            "url": "",
+        // (string) URL
+        "url": "",
 
-            // (string) 表示用の URL
-            "display_url": "",
+        // (string) 表示用の URL
+        "display_url": "",
 
-            // (bool) HTTPS 接続かどうかを示す値
-            "secure": true
-        }
+        // (bool) HTTPS 接続かどうかを示す値
+        "secure": true
     }
 ]
 ```

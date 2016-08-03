@@ -48,8 +48,8 @@ $app->get('/list/[{name}/]', function (Request $request, Response $response, arr
     $homos = isset($name) ? Homo::getByScreenName($name) : Homo::getAll();
 
     $view = new JsonView;
-    $view->render(array_map(function (Homo $item): HomoResponse {
-        return new HomoResponse($item);
+    $view->render(array_map(function (Homo $item): array {
+        return (new HomoResponse($item))->homo;
     }, iterator_to_array($homos)));
 });
 $app->run();
