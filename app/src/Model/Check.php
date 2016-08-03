@@ -11,8 +11,9 @@ class Check
 {
     const TIMEOUT = 5000;
 
-    public function __construct()
+    public function __construct(callable $callback = null)
     {
+        $this->callback = $callback;
         $this->validators = [
             new DOMValidator,
             new URLValidator,
@@ -63,21 +64,23 @@ class Check
         return ['WRONG', $time];
     }
 
+    protected function createResponse(Homo $homo): \Generator {
+        list(list($status, $duration), $icon) = yield [
+            $this->validate($homo),
+            Icon::get($homo->screen_name),
+        ];
+        $response = new HomoResponse($homo, $icon, $status, $duration);
+        if ($this->callback) {
+            ($this->callback)($response);
+        }
+        return $response;
+    }
+
     public function execute(string $screen_name = null, callable $callback = null): array
     {
         $homos = isset($screen_name) ? Homo::getByScreenName($screen_name) : Homo::getAll();
 
-        return Co::wait(array_map(function ($homo) use ($callback): \Generator {
-            list(list($status, $duration), $icon) = yield [
-                $this->validate($homo),
-                Icon::get($homo->screen_name),
-            ];
-            $response = new HomoResponse($homo, $icon, $status, $duration);
-            if ($callback) {
-                $callback($response);
-            }
-            return $response;
-        }, $homos), [
+        return Co::wait(array_map([$this, 'createResponse'], iterator_to_array($homos)), [
             'concurrency' => 32,
             'interval'    => 0,
             'pipeline'    => true,

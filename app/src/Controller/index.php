@@ -14,18 +14,18 @@ $app = new \Slim\App([
     ],
 ]);
 $app->get('/check/[{name}/]', function (Request $request, Response $response, array $args) {
-    $checker = new Check;
     $name = $args['name'] ?? null;
 
     switch ($request->getQueryParams()['format'] ?? 'sse') {
         case 'json':
             $view = new JsonView;
-            $view->render($checker->execute($name));
+            $view->render((new Check)->execute($name));
             return;
 
         case 'sse':
             $view = new ServerSentEventView('response');
-            $checker->execute($name, [$view, 'render']);
+            $checker = new Check([$view, 'render']);
+            $checker->execute($name);
             $view->close();
             return;
     }

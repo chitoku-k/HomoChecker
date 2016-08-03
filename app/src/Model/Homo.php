@@ -56,27 +56,29 @@ class Homo
         'u3g3' => 'https://homo.gomasy.jp',
     ];
 
-    public static function getAll(): array
+    public static function getAll(): \Generator
     {
-        return self::create(self::$sites);
+        yield from self::create(self::$sites);
     }
 
-    public static function getByScreenName(string $screen_name): array
+    public static function getByScreenName(string $screen_name): \Generator
     {
-        return self::create([
-            $screen_name => self::$sites[$screen_name] ?? null,
-        ]);
-    }
-
-    public static function create(array $homo): array
-    {
-        $result = [];
-        foreach ($homo as $screen_name => $urls) {
-            foreach ((array)$urls as $url) {
-                $result[] = new self($screen_name, $url);
+        foreach (self::$sites as $key => $site) {
+            if (!strcasecmp($key, $screen_name)) {
+                yield from self::create([
+                    $key => $site,
+                ]);
             }
         }
-        return $result;
+    }
+
+    public static function create(array $homo): \Generator
+    {
+        foreach ($homo as $screen_name => $urls) {
+            foreach ((array)$urls as $url) {
+                yield new self($screen_name, $url);
+            }
+        }
     }
 
     public function __construct(string $screen_name, string $url)
