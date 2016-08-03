@@ -53,7 +53,10 @@ class Homo
         ],
         'shibafu528' => 'http://homo.shibafu528.info',
         'tk1024_bot' => 'http://homo.tk1024.net',
-        'u3g3' => 'https://homo.gomasy.jp',
+        'u3g3' => [
+            'http://homo.gomasy.jp',
+            'https://homo.gomasy.jp',
+        ],
     ];
 
     public static function getAll(): \Generator
