@@ -17,7 +17,7 @@ DNS を適切に設定したあと、お使いの Web サーバーに合わせ�
 
 #### Apache
 
-```
+```apache
 <VirtualHost *:80>
     ServerName homo.example.com
     Redirect permanent / https://twitter.com/mpyw
@@ -26,12 +26,20 @@ DNS を適切に設定したあと、お使いの Web サーバーに合わせ�
 
 #### nginx
 
-```
+```nginx
 server {
     listen 80;
     server_name homo.example.com;
     return 301 https://twitter.com/mpyw;
 }
+```
+
+Web サーバーが静的コンテンツ配信のみの場合は HTML によるリダイレクトを行います。
+
+```html
+<!doctype html>
+<title>homo</title>
+<meta http-equiv="refresh" content="1; url=https://twitter.com/mpyw">
 ```
 
 ## 動作環境
