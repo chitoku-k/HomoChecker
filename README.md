@@ -13,10 +13,25 @@ HomoChecker はホモ（[@mpyw](https://twitter.com/mpyw)）にリダイレク�
 
 ### 設定方法
 
-DNS を適切に設定したあと、お使いの Web サーバーに合わせて設定を行います。Apache なら次のファイルを `.htaccess` として作成することでホモに成りかわります。
+DNS を適切に設定したあと、お使いの Web サーバーに合わせて設定を行います。
+
+#### Apache
 
 ```
-Redirect permanent / https://twitter.com/mpyw
+<VirtualHost *:80>
+    ServerName homo.example.com
+    Redirect permanent / https://twitter.com/mpyw
+</VirtualHost>
+```
+
+#### nginx
+
+```
+server {
+    listen 80;
+    server_name homo.example.com;
+    return 301 https://twitter.com/mpyw;
+}
 ```
 
 ## 動作環境
