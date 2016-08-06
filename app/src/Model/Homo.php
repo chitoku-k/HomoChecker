@@ -48,6 +48,7 @@ class Homo
         'myskng' => 'http://homo.kazukioishi.net',
         'owl_8' => 'http://homo.owl8.net',
         'pakutoma' => 'https://homo.pakutoma.pw',
+        'paralleltree' => 'http://homo.paltee.net',
         'Petitsurume' => 'https://petitsurume.github.io/homo',
         'printf_moriken' => 'http://moriken.kimamass.com/homo',
         'Syenox' => [
