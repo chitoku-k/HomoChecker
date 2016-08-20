@@ -51,10 +51,7 @@ class Check
 
             $body = yield $ch = $this->initialize($homo->url, true);
             $time = curl_getinfo($ch, CURLINFO_REDIRECT_TIME) + curl_getinfo($ch, CURLINFO_TOTAL_TIME) - curl_getinfo($ch, CURLINFO_NAMELOOKUP_TIME);
-            if (!curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
-                throw new \RuntimeException('Invalid HTTP code', 500);
-            }
-        } catch (\RuntimeException $e) {
+        } catch (CURLException $e) {
             $time = curl_getinfo($ch, CURLINFO_TOTAL_TIME);
             return ['ERROR', $time];
         }
