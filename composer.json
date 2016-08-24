@@ -2,7 +2,7 @@
     "require": {
         "slim/slim": "^3.4",
         "true/punycode": "~2.0",
-        "mpyw/co": "1.4.1"
+        "mpyw/co": "^1.0"
     },
     "autoload": {
         "psr-4": {
