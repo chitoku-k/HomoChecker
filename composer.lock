@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c2e8d979a565d66b815f7f1e76ce7781",
-    "content-hash": "caea63c5722010412de5121ce3ae56ce",
+    "hash": "c950bb45774ff2622b3853197d2bf09a",
+    "content-hash": "f3023c470ad29531b5e75bd20d0623e2",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -36,16 +36,16 @@
         },
         {
             "name": "mpyw/co",
-            "version": "v1.5.0",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mpyw/co.git",
-                "reference": "89ca27fd0b1154a2ce6c607179bde276eb44337d"
+                "reference": "c220419a93afe7633de300b028b419e2cdc0d20f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mpyw/co/zipball/89ca27fd0b1154a2ce6c607179bde276eb44337d",
-                "reference": "89ca27fd0b1154a2ce6c607179bde276eb44337d",
+                "url": "https://api.github.com/repos/mpyw/co/zipball/c220419a93afe7633de300b028b419e2cdc0d20f",
+                "reference": "c220419a93afe7633de300b028b419e2cdc0d20f",
                 "shasum": ""
             },
             "require": {
@@ -59,6 +59,7 @@
                 "codeception/codeception": "^2.2",
                 "codeception/specify": "*",
                 "mpyw/privator": "^2.0",
+                "mpyw/twistoauth": "^3.0",
                 "php": ">=7.0.0",
                 "satooshi/php-coveralls": "^1.0"
             },
@@ -86,7 +87,7 @@
                 "http",
                 "parallel"
             ],
-            "time": "2016-08-19 16:12:09"
+            "time": "2016-08-17 16:33:54"
         },
         {
             "name": "mpyw/runtime-promise",
