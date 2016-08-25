@@ -36,23 +36,23 @@
         },
         {
             "name": "mpyw/co",
-            "version": "v1.5.1",
+            "version": "v1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mpyw/co.git",
-                "reference": "9a37710d7eb5e4374b7e15cb3140ef0a0a0e360e"
+                "reference": "dec1f20a0b32937046e70e797cc33da8ccc3e8a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mpyw/co/zipball/9a37710d7eb5e4374b7e15cb3140ef0a0a0e360e",
-                "reference": "9a37710d7eb5e4374b7e15cb3140ef0a0a0e360e",
+                "url": "https://api.github.com/repos/mpyw/co/zipball/dec1f20a0b32937046e70e797cc33da8ccc3e8a0",
+                "reference": "dec1f20a0b32937046e70e797cc33da8ccc3e8a0",
                 "shasum": ""
             },
             "require": {
                 "ext-reflection": "*",
                 "lib-curl": ">=7.20.0",
-                "mpyw/runtime-promise": "^1.0",
-                "php": ">=5.5.0"
+                "php": ">=5.5.0",
+                "react/promise": "^2.4"
             },
             "require-dev": {
                 "codeception/aspect-mock": "^2.0",
@@ -86,46 +86,7 @@
                 "http",
                 "parallel"
             ],
-            "time": "2016-08-24 17:27:56"
-        },
-        {
-            "name": "mpyw/runtime-promise",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mpyw/runtime-promise.git",
-                "reference": "4241a89d83f1e4fc4bfb7ab7487a0ef0abc5a35f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mpyw/runtime-promise/zipball/4241a89d83f1e4fc4bfb7ab7487a0ef0abc5a35f",
-                "reference": "4241a89d83f1e4fc4bfb7ab7487a0ef0abc5a35f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "mpyw\\RuntimePromise\\": "src/"
-                },
-                "files": [
-                    "src/functions_include.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "mpyw",
-                    "email": "ryosuke_i_628@yahoo.co.jp"
-                }
-            ],
-            "description": "This is a fork of React/Promise v2.0, that only handles RuntimeException.",
-            "time": "2016-07-18 12:06:58"
+            "time": "2016-08-24 21:03:10"
         },
         {
             "name": "nikic/fast-route",
@@ -265,6 +226,50 @@
                 "response"
             ],
             "time": "2016-08-06 14:39:51"
+        },
+        {
+            "name": "react/promise",
+            "version": "v2.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/promise.git",
+                "reference": "8025426794f1944de806618671d4fa476dc7626f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/8025426794f1944de806618671d4fa476dc7626f",
+                "reference": "8025426794f1944de806618671d4fa476dc7626f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "React\\Promise\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Sorgalla",
+                    "email": "jsorgalla@gmail.com"
+                }
+            ],
+            "description": "A lightweight implementation of CommonJS Promises/A for PHP",
+            "time": "2016-05-03 17:50:52"
         },
         {
             "name": "slim/slim",
