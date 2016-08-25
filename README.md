@@ -205,6 +205,6 @@ data: end
 [travis-link]:          https://travis-ci.org/chitoku-k/HomoChecker
 [travis-badge]:         https://img.shields.io/travis/chitoku-k/HomoChecker.svg?style=flat-square
 [dependencies-link]:    https://gemnasium.com/github.com/chitoku-k/HomoChecker
-[dependencies-badge]:   https://img.shields.io/gembasium/chitoku-k/HomoChecker.svg?style=flat-square
+[dependencies-badge]:   https://img.shields.io/gemnasium/chitoku-k/HomoChecker.svg?style=flat-square
 [climate-link]:         https://codeclimate.com/github/chitoku-k/HomoChecker
 [climate-badge]:        https://img.shields.io/codeclimate/github/chitoku-k/HomoChecker.svg?style=flat-square
