@@ -1,9 +1,9 @@
 HomoChecker
 ===========
 
-[![Build Status](https://travis-ci.org/chitoku-k/HomoChecker.svg?branch=master)](https://travis-ci.org/chitoku-k/HomoChecker)
-[![Dependency Status](https://gemnasium.com/badges/github.com/chitoku-k/HomoChecker.svg)](https://gemnasium.com/github.com/chitoku-k/HomoChecker)
-[![Code Climate](https://codeclimate.com/github/chitoku-k/HomoChecker/badges/gpa.svg)](https://codeclimate.com/github/chitoku-k/HomoChecker)
+[![][travis-badge]][travis-link]
+[![][dependencies-badge]][dependencies-link]
+[![][climate-badge]][climate-link]
 
 HomoChecker はホモ（[@mpyw](https://twitter.com/mpyw)）にリダイレクトするホモのためのホモの輪です。
 
@@ -200,3 +200,11 @@ data: end
     }
 ]
 ```
+
+
+[travis-link]:          https://travis-ci.org/chitoku-k/HomoChecker
+[travis-badge]:         https://img.shields.io/travis/chitoku-k/HomoChecker.svg?style=flat-square
+[dependencies-link]:    https://gemnasium.com/github.com/chitoku-k/HomoChecker
+[dependencies-badge]:   https://img.shields.io/gembasium/chitoku-k/HomoChecker.svg?style=flat-square
+[climate-link]:         https://codeclimate.com/github/chitoku-k/HomoChecker
+[climate-badge]:        https://img.shields.io/codeclimate/github/chitoku-k/HomoChecker.svg?style=flat-square
