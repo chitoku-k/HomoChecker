@@ -20,7 +20,7 @@ class Check
         ];
     }
 
-    public function initialize(string $url, bool $body)
+    public function initialize(string $url)
     {
         $ssl = parse_url($url, PHP_URL_SCHEME) === 'https';
         $ch = curl_init($url);
@@ -28,9 +28,6 @@ class Check
             CURLINFO_HEADER_OUT       => true,
             CURLOPT_AUTOREFERER       => true,
             CURLOPT_CONNECTTIMEOUT_MS => self::TIMEOUT,
-            CURLOPT_FOLLOWLOCATION    => true,
-            CURLOPT_MAXREDIRS         => 5,
-            CURLOPT_NOBODY            => !$body,
             CURLOPT_RETURNTRANSFER    => true,
             CURLOPT_TCP_FASTOPEN      => !$ssl,
             CURLOPT_TIMEOUT_MS        => self::TIMEOUT,
@@ -41,28 +38,28 @@ class Check
 
     protected function validate(Homo $homo): \Generator
     {
+        $time = 0.0;
+        $url = $homo->url;
         try {
-            yield $ch = $this->initialize($homo->url, false);
-            $time = curl_getinfo($ch, CURLINFO_REDIRECT_TIME) - curl_getinfo($ch, CURLINFO_NAMELOOKUP_TIME);
-
-            if (($status = (new HeaderValidator)($ch, ''))) {
-                return [$status, $time];
+            for ($i = 0; $i < 5; ++$i) {
+                yield $ch = $this->initialize($url);
+                $time += curl_getinfo($ch, CURLINFO_STARTTRANSFER_TIME);
+                if ($status = (new HeaderValidator)($ch)) {
+                    return [$status, $time];
+                }
+                if (false === $url = curl_getinfo($ch, CURLINFO_REDIRECT_URL)) {
+                    break;
+                }
             }
-
-            $body = yield $ch = $this->initialize($homo->url, true);
-            $time = curl_getinfo($ch, CURLINFO_REDIRECT_TIME) + curl_getinfo($ch, CURLINFO_TOTAL_TIME) - curl_getinfo($ch, CURLINFO_NAMELOOKUP_TIME);
+            foreach ([new DOMValidator, new URLValidator] as $validator) {
+                if ($status = $validator($ch)) {
+                    return [$status, $time];
+                }
+            }
+            return ['WRONG', $time];
         } catch (CURLException $e) {
-            $time = curl_getinfo($ch, CURLINFO_TOTAL_TIME);
-            return ['ERROR', $time];
+            return ['ERROR', curl_getinfo($ch, CURLINFO_TOTAL_TIME)];
         }
-
-        foreach ($this->validators as $validator) {
-            if (($status = $validator($ch, $body))) {
-                return [$status, $time];
-            }
-        }
-
-        return ['WRONG', $time];
     }
 
     protected function createResponse(Homo $homo): \Generator {
@@ -80,7 +77,6 @@ class Check
     public function execute(string $screen_name = null, callable $callback = null): array
     {
         $homos = isset($screen_name) ? Homo::getByScreenName($screen_name) : Homo::getAll();
-
         return Co::wait(array_map([$this, 'createResponse'], iterator_to_array($homos)), [
             'concurrency' => 16,
         ]);
