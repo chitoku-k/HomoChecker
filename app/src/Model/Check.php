@@ -14,10 +14,6 @@ class Check
     public function __construct(callable $callback = null)
     {
         $this->callback = $callback;
-        $this->validators = [
-            new DOMValidator,
-            new URLValidator,
-        ];
     }
 
     public function initialize(string $url, bool $body)
@@ -56,9 +52,9 @@ class Check
             return ['ERROR', $time];
         }
 
-        foreach ($this->validators as $validator) {
             if (($status = $validator($ch, $body))) {
                 return [$status, $time];
+            foreach ([new DOMValidator, new URLValidator] as $validator) {
             }
         }
 
