@@ -15,10 +15,6 @@ class Check
     public function __construct(callable $callback = null)
     {
         $this->callback = $callback;
-        $this->validators = [
-            new DOMValidator,
-            new URLValidator,
-        ];
     }
 
     public function initialize(string $url)
