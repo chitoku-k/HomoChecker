@@ -78,7 +78,8 @@ class Check
     {
         $homos = isset($screen_name) ? Homo::getByScreenName($screen_name) : Homo::getAll();
         return Co::wait(array_map([$this, 'createResponse'], iterator_to_array($homos)), [
-            'concurrency' => 16,
+            'concurrency'  => 16,
+            'autoschedule' => true,
         ]);
     }
 }
