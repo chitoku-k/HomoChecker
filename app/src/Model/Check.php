@@ -41,15 +41,15 @@ class Check
             for ($i = 0; $i < self::REDIRECT; ++$i) {
                 yield $ch = $this->initialize($url);
                 $time += curl_getinfo($ch, CURLINFO_STARTTRANSFER_TIME);
-                if ($status = (new HeaderValidator)($ch)) {
+                if (($status = (new HeaderValidator)($ch))) {
                     return [$status, $time];
                 }
-                if (false === $url = curl_getinfo($ch, CURLINFO_REDIRECT_URL)) {
+                if (false === ($url = curl_getinfo($ch, CURLINFO_REDIRECT_URL))) {
                     break;
                 }
             }
             foreach ([new DOMValidator, new URLValidator] as $validator) {
-                if ($status = $validator($ch)) {
+                if (($status = $validator($ch))) {
                     return [$status, $time];
                 }
             }
