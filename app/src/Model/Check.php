@@ -10,6 +10,7 @@ use HomoChecker\Model\Validator\URLValidator;
 class Check
 {
     const TIMEOUT = 5000;
+    const REDIRECT = 5;
 
     public function __construct(callable $callback = null)
     {
@@ -41,7 +42,7 @@ class Check
         $time = 0.0;
         $url = $homo->url;
         try {
-            for ($i = 0; $i < 5; ++$i) {
+            for ($i = 0; $i < self::REDIRECT; ++$i) {
                 yield $ch = $this->initialize($url);
                 $time += curl_getinfo($ch, CURLINFO_STARTTRANSFER_TIME);
                 if ($status = (new HeaderValidator)($ch)) {
@@ -78,7 +79,7 @@ class Check
     {
         $homos = isset($screen_name) ? Homo::getByScreenName($screen_name) : Homo::getAll();
         return Co::wait(array_map([$this, 'createResponse'], iterator_to_array($homos)), [
-            'concurrency'  => 16,
+            'concurrency'  => 32,
             'autoschedule' => true,
         ]);
     }
