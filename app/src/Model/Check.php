@@ -73,11 +73,9 @@ class Check
     public function execute(string $screen_name = null, callable $callback = null): array
     {
         $homos = isset($screen_name) ? Homo::getByScreenName($screen_name) : Homo::getAll();
-
         return Co::wait(array_map([$this, 'createResponse'], iterator_to_array($homos)), [
-            'concurrency' => 32,
-            'interval'    => 0,
-            'pipeline'    => true,
+            'concurrency'  => 16,
+            'autoschedule' => true,
         ]);
     }
 }
