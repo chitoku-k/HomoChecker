@@ -5,9 +5,9 @@ use HomoChecker\Model\ValidatorBase;
 
 class HeaderValidator extends ValidatorBase
 {
-    protected function validate($ch, string $body)
+    protected function validate($ch)
     {
-        $url = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
+        $url = curl_getinfo($ch, CURLINFO_REDIRECT_URL);
         return preg_match(self::TARGET, $url) ? 'OK' : false;
     }
 }

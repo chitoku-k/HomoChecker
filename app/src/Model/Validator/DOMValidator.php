@@ -5,10 +5,10 @@ use HomoChecker\Model\ValidatorBase;
 
 class DOMValidator extends ValidatorBase
 {
-    protected function validate($ch, string $body)
+    protected function validate($ch)
     {
         $doc = new \DOMDocument;
-        @$doc->loadHTML($body);
+        @$doc->loadHTML(curl_multi_getcontent($ch));
         $xpath = new \DOMXPath($doc);
         $url = $xpath->evaluate('string(//meta[@http-equiv="refresh"]/@content)');
         return preg_match(self::TARGET, $url) ? 'OK' : false;
