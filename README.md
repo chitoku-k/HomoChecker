@@ -220,4 +220,4 @@ data: end
 [climate-link]:         https://codeclimate.com/github/chitoku-k/HomoChecker
 [climate-badge]:        https://img.shields.io/codeclimate/github/chitoku-k/HomoChecker.svg?style=flat-square
 [homo-link]:            https://homo.chitoku.jp:4545
-[homo-badge]:           https://homo.chitoku.jp:4545/badge/active/?style=flat-square
+[homo-badge]:           https://homo.chitoku.jp:4545/badge/?style=flat-square
