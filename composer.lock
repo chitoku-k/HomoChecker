@@ -36,16 +36,16 @@
         },
         {
             "name": "mpyw/co",
-            "version": "v1.5.3",
+            "version": "v1.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mpyw/co.git",
-                "reference": "34e8edb547b4ffc6c693686ced2dfeac61c7811b"
+                "reference": "e61114ca578dbe78476cc6768300001a5b9eb0fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mpyw/co/zipball/34e8edb547b4ffc6c693686ced2dfeac61c7811b",
-                "reference": "34e8edb547b4ffc6c693686ced2dfeac61c7811b",
+                "url": "https://api.github.com/repos/mpyw/co/zipball/e61114ca578dbe78476cc6768300001a5b9eb0fb",
+                "reference": "e61114ca578dbe78476cc6768300001a5b9eb0fb",
                 "shasum": ""
             },
             "require": {
@@ -86,7 +86,7 @@
                 "http",
                 "parallel"
             ],
-            "time": "2016-08-26 22:46:46"
+            "time": "2016-08-28 14:02:56"
         },
         {
             "name": "nikic/fast-route",
