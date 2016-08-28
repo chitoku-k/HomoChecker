@@ -4,6 +4,7 @@ HomoChecker
 [![][travis-badge]][travis-link]
 [![][dependencies-badge]][dependencies-link]
 [![][climate-badge]][climate-link]
+[![][homo-badge]][homo-link]
 
 HomoChecker はホモ（[@mpyw](https://twitter.com/mpyw)）にリダイレクトするホモのためのホモの輪です。
 
@@ -201,6 +202,16 @@ data: end
 ]
 ```
 
+### Badge API
+
+```
+/badge/[{status}/]
+```
+
+指定したステータスを持つホストの数を示すバッジを取得します。  
+バッジは [Shields.io](https://shields.io/) によって生成される画像を返します。  
+ステータスを省略した場合は登録されているホストの数を返します。
+
 
 [travis-link]:          https://travis-ci.org/chitoku-k/HomoChecker
 [travis-badge]:         https://img.shields.io/travis/chitoku-k/HomoChecker.svg?style=flat-square
@@ -208,3 +219,5 @@ data: end
 [dependencies-badge]:   https://img.shields.io/gemnasium/chitoku-k/HomoChecker.svg?style=flat-square
 [climate-link]:         https://codeclimate.com/github/chitoku-k/HomoChecker
 [climate-badge]:        https://img.shields.io/codeclimate/github/chitoku-k/HomoChecker.svg?style=flat-square
+[homo-link]:            https://homo.chitoku.jp:4545
+[homo-badge]:           https://homo.chitoku.jp:4545/badge/active/?style=flat-square

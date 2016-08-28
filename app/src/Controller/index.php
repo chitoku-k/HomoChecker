@@ -49,4 +49,18 @@ $app->get('/list/[{name}/]', function (Request $request, Response $response, arr
         return (new HomoResponse($item))->homo;
     }, $homos), !empty($homos) ? 200 : 404);
 });
+$app->get('/badge/[{status}/]', function (Request $request, Response $response, array $args) {
+    if (!isset($args['status'])) {
+        $count = iterator_count(Homo::getAll());
+    } else {
+        $count = count(array_filter((new Check)->execute(), function ($result) use ($args) {
+            return strcasecmp($result->status, $args['status']) === 0;
+        }));
+    }
+
+    $query = http_build_query($request->getParams());
+    $label = "{$count} " . strtolower($args['status'] ?? 'registered');
+    $uri = "https://img.shields.io/badge/homo-{$label}-7a6544.svg" . ($query ? "?{$query}" : '');
+    return $response->withRedirect($uri);
+});
 $app->run();
