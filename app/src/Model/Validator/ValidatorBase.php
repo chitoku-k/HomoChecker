@@ -1,5 +1,5 @@
 <?php
-namespace HomoChecker\Model;
+namespace HomoChecker\Model\Validator;
 
 abstract class ValidatorBase
 {

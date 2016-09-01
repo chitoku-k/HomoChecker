@@ -1,7 +1,7 @@
 <?php
 namespace HomoChecker\Model\Validator;
 
-use HomoChecker\Model\ValidatorBase;
+use HomoChecker\Model\Validator\ValidatorBase;
 
 class URLValidator extends ValidatorBase
 {

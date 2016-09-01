@@ -26,4 +26,4 @@ if (file_exists($target = __DIR__ . "/client/dest{$filename}")) {
 $_SERVER['SCRIPT_NAME'] = 'index.php';
 
 // Then load our controller
-require __DIR__ . '/app/src/Controller/index.php';
+require __DIR__ . '/app/src/index.php';
