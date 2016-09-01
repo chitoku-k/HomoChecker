@@ -16,7 +16,7 @@ class Icon
         $this->screen_name = $screen_name;
     }
 
-    protected function fetch(): \Generator
+    protected function fetchAsync(): \Generator
     {
         $ch = curl_init("https://twitter.com/intent/user?screen_name={$this->screen_name}");
         curl_setopt_array($ch, [
@@ -35,9 +35,9 @@ class Icon
         return $this;
     }
 
-    public static function get(string $screen_name): \Generator
+    public static function getAsync(string $screen_name): \Generator
     {
         $self = new static($screen_name);
-        return $self->fetch();
+        return $self->fetchAsync();
     }
 }

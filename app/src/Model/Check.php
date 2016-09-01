@@ -19,21 +19,21 @@ class Check
 
     public function initialize(string $url)
     {
-        $ssl = parse_url($url, PHP_URL_SCHEME) === 'https';
+        $secure = parse_url($url, PHP_URL_SCHEME) === 'https';
         $ch = curl_init($url);
         curl_setopt_array($ch, [
             CURLINFO_HEADER_OUT       => true,
             CURLOPT_AUTOREFERER       => true,
             CURLOPT_CONNECTTIMEOUT_MS => self::TIMEOUT,
             CURLOPT_RETURNTRANSFER    => true,
-            CURLOPT_TCP_FASTOPEN      => !$ssl,
+            CURLOPT_TCP_FASTOPEN      => !$secure,
             CURLOPT_TIMEOUT_MS        => self::TIMEOUT,
             CURLOPT_USERAGENT         => 'Homozilla/5.0 (Checker/1.14.514; homOSeX 8.10)',
         ]);
         return $ch;
     }
 
-    protected function validate(Homo $homo): \Generator
+    protected function validateAsync(Homo $homo): \Generator
     {
         $time = 0.0;
         $url = $homo->url;
@@ -59,12 +59,12 @@ class Check
         }
     }
 
-    protected function createResponse(Homo $homo): \Generator {
+    protected function createStatusAsync(Homo $homo): \Generator {
         list(list($status, $duration), $icon) = yield [
-            $this->validate($homo),
-            Icon::get($homo->screen_name),
+            $this->validateAsync($homo),
+            Icon::getAsync($homo->screen_name),
         ];
-        $response = new HomoResponse($homo, $icon, $status, $duration);
+        $response = new HomoStatus($homo, $icon, $status, $duration);
         if ($this->callback) {
             ($this->callback)($response);
         }
@@ -74,7 +74,7 @@ class Check
     public function execute(string $screen_name = null, callable $callback = null): array
     {
         $homos = isset($screen_name) ? Homo::getByScreenName($screen_name) : Homo::getAll();
-        return Co::wait(array_map([$this, 'createResponse'], iterator_to_array($homos)), [
+        return Co::wait(array_map([$this, 'createStatusAsync'], iterator_to_array($homos)), [
             'concurrency'  => 32,
             'autoschedule' => true,
         ]);
