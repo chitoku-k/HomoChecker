@@ -28,17 +28,17 @@ class Container extends \Slim\Container
     protected function registerHandlers()
     {
         foreach (self::ERRORS as $type => $code) {
-            $this[$type] = function () use ($type) {
-                return function (...$params) use ($type) {
-                    return $this->onError($type, ...$params);
+            $this[$type] = function () use ($code) {
+                return function (...$params) use ($code) {
+                    return $this->onError($code, ...$params);
                 };
             };
         }
     }
 
-    protected function onError(string $type, Request $request, Response $response)
+    protected function onError(int $code, Request $request, Response $response): Response
     {
-        $response = $response->withStatus(self::ERRORS[$type]);
+        $response = $response->withStatus($code);
         return $response->withJson([
             'errors' => [
                 [

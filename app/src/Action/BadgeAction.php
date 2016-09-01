@@ -23,7 +23,7 @@ class BadgeAction extends ActionBase
         return $response->withRedirect($uri);
     }
 
-    protected function getCount(string $status = null)
+    protected function getCount(string $status = null): int
     {
         if (!$status) {
             return iterator_count(Homo::getAll());
