@@ -71,7 +71,7 @@ class Check
         return $response;
     }
 
-    public function execute(string $screen_name = null, callable $callback = null): array
+    public function execute(string $screen_name = null): array
     {
         $homos = isset($screen_name) ? Homo::getByScreenName($screen_name) : Homo::getAll();
         return Co::wait(array_map([$this, 'createStatusAsync'], iterator_to_array($homos)), [
