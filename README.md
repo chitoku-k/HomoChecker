@@ -8,6 +8,17 @@ HomoChecker
 
 HomoChecker はホモ（[@mpyw](https://twitter.com/mpyw)）にリダイレクトするホモのためのホモの輪です。
 
+## 目次
+
+- [ホモへの手引き](#ホモへの手引き)
+- [動作環境](#動作環境)
+- [ビルド環境](#ビルド環境)
+- [動作確認](#動作確認)
+- [API](#api)
+  - [Check API](#check-api)
+  - [List API](#list-api)
+  - [Badge API](#badge-api)
+
 ## ホモへの手引き
 
 [@java_shit](https://twitter.com/java_shit) にカミングアウトするか、このリポジトリにプルリクエストをお送りください。[@mpyw](https://twitter.com/mpyw) と関係があってもなくても構いません。
