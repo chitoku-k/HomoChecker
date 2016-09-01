@@ -27,7 +27,7 @@ class Container extends \Slim\Container
 
     protected function registerHandlers()
     {
-        foreach (['errorHandler', 'phpErrorHandler', 'notFoundHandler', 'notAllowedHandler'] as $type) {
+        foreach (self::ERRORS as $type as $code) {
             $this[$type] = function () use ($type) {
                 return function (...$params) use ($type) {
                     return $this->onError($type, ...$params);
