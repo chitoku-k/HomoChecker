@@ -42,10 +42,7 @@ class Homo
             'http://homo.kb10uy.org',
             'http://xn--ydko.kb10uy.org',
         ],
-        'LaLN_' => [
-            'https://homo.lunasys.tk',
-            'https://homo.synchthia.net',
-        ],
+        'LaLN_' => 'https://homo.synchthia.net',
         'myskng' => 'http://homo.kazukioishi.net',
         'owl_8' => 'http://homo.owl8.net',
         'pakutoma' => 'https://homo.pakutoma.pw',
