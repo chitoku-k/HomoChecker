@@ -7,7 +7,6 @@ class Homo
     public $url;
 
     private static $sites = [
-        '2vg' => 'http://homo.ni-vg.com',
         '4mcn' => [
             'http://homo.mizua.me',
             'http://xn--ydko.mizua.me',
@@ -43,11 +42,11 @@ class Homo
             'http://xn--ydko.kb10uy.org',
         ],
         'LaLN_' => 'https://homo.synchthia.net',
+        'mfqn' => 'http://homo.ni-vg.com',
         'myskng' => 'http://homo.kazukioishi.net',
         'owl_8' => 'http://homo.owl8.net',
         'pakutoma' => 'https://homo.pakutoma.pw',
         'paralleltree' => 'http://homo.paltee.net',
-        'Petitsurume' => 'https://petitsurume.github.io/homo',
         'printf_moriken' => 'http://moriken.kimamass.com/homo',
         'Syenox' => [
             'http://homo.koutanakayama.org',
