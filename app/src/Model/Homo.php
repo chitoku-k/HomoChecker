@@ -48,6 +48,7 @@ class Homo
         'pakutoma' => 'https://homo.pakutoma.pw',
         'paralleltree' => 'http://homo.paltee.net',
         'printf_moriken' => 'http://moriken.kimamass.com/homo',
+        'Petitsurume' => 'https://homo.surume.tk',
         'Syenox' => [
             'http://homo.koutanakayama.org',
             'http://homo.nlinx.ne.jp',
