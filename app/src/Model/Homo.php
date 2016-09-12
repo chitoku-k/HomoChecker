@@ -47,8 +47,8 @@ class Homo
         'owl_8' => 'http://homo.owl8.net',
         'pakutoma' => 'https://homo.pakutoma.pw',
         'paralleltree' => 'http://homo.paltee.net',
-        'printf_moriken' => 'http://moriken.kimamass.com/homo',
         'Petitsurume' => 'https://homo.surume.tk',
+        'printf_moriken' => 'http://moriken.kimamass.com/homo',
         'Syenox' => [
             'http://homo.koutanakayama.org',
             'http://homo.nlinx.ne.jp',
