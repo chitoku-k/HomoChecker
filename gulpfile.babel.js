@@ -62,5 +62,5 @@ gulp.task("watch", (cb) =>
 );
 
 gulp.task("default",
-    gulp.series("clean", "build", gulp.parallel("lint", "minify", "copy"), "fonts", "styles")
+    gulp.series("clean", "build", gulp.parallel("lint", "minify", "copy", "fonts"), "styles")
 );
