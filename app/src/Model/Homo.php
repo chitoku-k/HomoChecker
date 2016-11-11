@@ -44,16 +44,16 @@ class Homo
         'LaLN_' => 'https://homo.synchthia.net',
         'mfqn' => 'http://homo.ni-vg.com',
         'myskng' => 'http://homo.kazukioishi.net',
+        'neneppy' => [
+            'http://homo.koutanakayama.org',
+            'http://homo.nlinx.ne.jp',
+            'http://homo.ncraft.top',
+        ],
         'owl_8' => 'http://homo.owl8.net',
         'pakutoma' => 'https://homo.pakutoma.pw',
         'paralleltree' => 'http://homo.paltee.net',
         'Petitsurume' => 'https://homo.surume.tk',
         'printf_moriken' => 'http://moriken.kimamass.com/homo',
-        'Syenox' => [
-            'http://homo.koutanakayama.org',
-            'http://homo.nlinx.ne.jp',
-            'http://homo.ncraft.top',
-        ],
         'shibafu528' => 'http://homo.shibafu528.info',
         'tk1024_bot' => 'http://homo.tk1024.net',
         'u3g3' => [
