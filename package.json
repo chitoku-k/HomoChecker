@@ -36,7 +36,7 @@
     "del": "^2.2.2",
     "eslint-plugin-riot": "^0.1.6",
     "gulp": "github:gulpjs/gulp#4.0",
-    "gulp-concat": "^2.6.0",
+    "gulp-concat": "^2.6.1",
     "gulp-csso": "^2.0.0",
     "gulp-eslint": "^3.0.1",
     "gulp-fontello": "^0.4.6",
@@ -44,8 +44,8 @@
     "gulp-load-plugins": "^1.4.0",
     "gulp-riot": "^0.5.9",
     "gulp-uglify": "^2.0.0",
-    "node-sass": "^3.11.2",
-    "riot": "^2.6.7"
+    "node-sass": "^3.14.0-0",
+    "riot": "^3.0.0-rc"
   },
   "devDependencies": {
     "event-source-polyfill": "0.0.7"
