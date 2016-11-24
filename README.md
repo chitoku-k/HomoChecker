@@ -73,7 +73,7 @@ Internet Explorer 10 以上で動くのでたいていのホモは救われま�
 
 初回の環境構築は次のコマンドで行います:
 
-```
+```sh
 $ composer install
 $ npm install
 ```
@@ -92,14 +92,14 @@ http://localhost:4545
 
 npm から gulp タスクを実行します。
 
-```
+```sh
 $ cd HomoChecker
 $ npm start
 ```
 
 ソースコードを変更した際に即座にコンパイルを行う場合は次のコマンドを実行します:
 
-```
+```sh
 $ npm run watch
 ```
 
@@ -108,7 +108,7 @@ $ npm run watch
 ### バックエンド
 
 PHP のビルトインサーバーを使用します。ポート番号は任意です。
-```
+```sh
 $ cd HomoChecker
 $ php -S 0.0.0.0:4545 router.php
 ```
