@@ -48,7 +48,7 @@
             }
         }
     </style>
-    <script type="babel">
+    <script>
         this.items = [];
 
         const source = new EventSource("/check/");

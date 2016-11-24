@@ -161,7 +161,7 @@
             }
         }
     </style>
-    <script type="babel">
+    <script>
         this.keywords = [ "homo", "ホモ" ];
 
         this.on("updated", () => {

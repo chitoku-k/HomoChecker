@@ -34,7 +34,7 @@ gulp.task("styles", () =>
 
 gulp.task("build", () =>
     gulp.src("./client/src/tags/*.tag", { since: gulp.lastRun("build") })
-        .pipe($.riot({ type: "babel" }))
+        .pipe($.riot({ type: "es6" }))
         .pipe(gulp.dest("./client/dev/js/"))
 );
 
