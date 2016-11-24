@@ -42,10 +42,10 @@
     "gulp-fontello": "^0.4.6",
     "gulp-if": "^2.0.2",
     "gulp-load-plugins": "^1.4.0",
-    "gulp-riot": "^0.5.9",
+    "gulp-riot": "^1.0.0",
     "gulp-uglify": "^2.0.0",
     "node-sass": "^3.14.0-0",
-    "riot": "^3.0.0-rc"
+    "riot": "^3.0.0"
   },
   "devDependencies": {
     "event-source-polyfill": "0.0.7"
