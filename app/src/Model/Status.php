@@ -3,7 +3,7 @@ namespace HomoChecker\Model;
 
 use TrueBV\Punycode;
 
-class HomoStatus
+class Status
 {
     public function __construct(Homo $homo, Icon $icon = null, string $status = null, float $duration = null)
     {

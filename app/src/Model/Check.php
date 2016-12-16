@@ -64,7 +64,7 @@ class Check
             $this->validateAsync($homo),
             Icon::getAsync($homo->screen_name),
         ];
-        $response = new HomoStatus($homo, $icon, $status, $duration);
+        $response = new Status($homo, $icon, $status, $duration);
         if ($this->callback) {
             ($this->callback)($response);
         }
