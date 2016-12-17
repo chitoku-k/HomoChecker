@@ -5,7 +5,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use HomoChecker\Model\Check;
 use HomoChecker\Model\Homo;
-use HomoChecker\Model\HomoStatus;
+use HomoChecker\Model\Status;
 
 class BadgeAction extends ActionBase
 {
@@ -29,8 +29,9 @@ class BadgeAction extends ActionBase
             return iterator_count(Homo::getAll());
         }
 
-        $result = (new Check)->execute();
-        return count(array_filter($result, function (HomoStatus $item) use ($status): bool {
+        $checker = new Check($this->container);
+        $result = $checker->executeAsync()->wait();
+        return count(array_filter($result, function (Status $item) use ($status): bool {
             return strcasecmp($item->status, $status) === 0;
         }));
     }
