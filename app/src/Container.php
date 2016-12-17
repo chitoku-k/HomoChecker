@@ -11,7 +11,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 class Container extends \Slim\Container
 {
-    const TIMEOUT = 5000;
+    const TIMEOUT = 5;
     const ERRORS = [
         'notFoundHandler'   => 404,
         'notAllowedHandler' => 405,
