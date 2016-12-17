@@ -27,19 +27,19 @@ class Check
             try {
                 for ($i = 0; $i < self::REDIRECT; ++$i) {
                     $response = yield $this->container->client->getAsync($url, [
-                        'on_stats' => function (TransferStats $stats) use (&$time) {
-                            $time += $stats->getTransferTime();
+                        'on_stats_all' => function (array $stats) use (&$time) {
+                            $time += $stats['starttransfer_time'] ?? 0;
                         },
                     ]);
-                    if (($status = (new HeaderValidator)($response))) {
+                    if ($status = (new HeaderValidator)($response)) {
                         return yield [$status, $time];
                     }
-                    if (!isset($response->getHeaders()['Location'])) {
+                    if (!$url = $response->getHeaderLine('Location')) {
                         break;
                     }
                 }
                 foreach ([new DOMValidator, new URLValidator] as $validator) {
-                    if (($status = $validator($response))) {
+                    if ($status = $validator($response)) {
                         return yield [$status, $time];
                     }
                 }

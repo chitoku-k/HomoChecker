@@ -8,7 +8,7 @@ class HeaderValidator extends ValidatorBase
 {
     protected function validate(Response $response)
     {
-        list($url) = $response->getHeaders()['Location'] ?? [''];
+        $url = $response->getHeaderLine('Location');
         return preg_match(self::TARGET, $url) ? 'OK' : false;
     }
 }

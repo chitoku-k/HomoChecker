@@ -2,6 +2,10 @@
 namespace HomoChecker;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Handler\CurlHandler;
+use GuzzleHttp\Handler\CurlMultiHandler;
+use GuzzleHttp\Handler\Proxy;
+use HomoChecker\Utilities\RawCurlFactory;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -26,6 +30,9 @@ class Container extends \Slim\Container
 
         $this->registerHandlers();
         $this->client = new Client([
+            'handler' => Proxy::wrapSync(new CurlMultiHandler([
+                'handle_factory' => new RawCurlFactory(50),
+            ]), new CurlHandler()),
             'timeout' => self::TIMEOUT,
             'allow_redirects' => false,
             'headers' => [
