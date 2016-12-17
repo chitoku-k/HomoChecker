@@ -23,15 +23,16 @@ class CheckAction extends ActionBase
 
     protected function byJSON(string $name = null): Response
     {
-        $result = (new Check)->execute($name);
+        $checker = new Check($this->container);
+        $result = $checker->executeAsync($name)->wait();
         return $this->container['response']->withJson($result, !empty($result) ? 200 : 404);
     }
 
     protected function bySSE(string $name = null)
     {
         $view = new ServerSentEventView('response');
-        $checker = new Check([$view, 'render']);
-        $checker->execute($name);
+        $checker = new Check($this->container, [$view, 'render']);
+        $checker->executeAsync($name)->wait();
         $view->close();
     }
 }

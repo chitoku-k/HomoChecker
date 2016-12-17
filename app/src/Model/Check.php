@@ -1,82 +1,74 @@
 <?php
 namespace HomoChecker\Model;
 
-use mpyw\Co\Co;
-use mpyw\Co\CURLException;
+use GuzzleHttp\TransferStats;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise;
 use HomoChecker\Model\Validator\HeaderValidator;
 use HomoChecker\Model\Validator\DOMValidator;
 use HomoChecker\Model\Validator\URLValidator;
+use Interop\Container\ContainerInterface as Container;
 
 class Check
 {
-    const TIMEOUT = 5000;
     const REDIRECT = 5;
 
-    public function __construct(callable $callback = null)
+    public function __construct(Container $container, callable $callback = null)
     {
+        $this->container = $container;
         $this->callback = $callback;
     }
 
-    public function initialize(string $url)
+    protected function validateAsync(Homo $homo): Promise\PromiseInterface
     {
-        $secure = parse_url($url, PHP_URL_SCHEME) === 'https';
-        $ch = curl_init($url);
-        curl_setopt_array($ch, [
-            CURLINFO_HEADER_OUT       => true,
-            CURLOPT_AUTOREFERER       => true,
-            CURLOPT_CONNECTTIMEOUT_MS => self::TIMEOUT,
-            CURLOPT_RETURNTRANSFER    => true,
-            CURLOPT_TCP_FASTOPEN      => !$secure,
-            CURLOPT_TIMEOUT_MS        => self::TIMEOUT,
-            CURLOPT_USERAGENT         => 'Homozilla/5.0 (Checker/1.14.514; homOSeX 8.10)',
-        ]);
-        return $ch;
-    }
-
-    protected function validateAsync(Homo $homo): \Generator
-    {
-        $time = 0.0;
-        $url = $homo->url;
-        try {
-            for ($i = 0; $i < self::REDIRECT; ++$i) {
-                yield $ch = $this->initialize($url);
-                $time += curl_getinfo($ch, CURLINFO_STARTTRANSFER_TIME);
-                if (($status = (new HeaderValidator)($ch))) {
-                    return [$status, $time];
+        return Promise\coroutine(function () use ($homo) {
+            $time = 0.0;
+            $url = $homo->url;
+            try {
+                for ($i = 0; $i < self::REDIRECT; ++$i) {
+                    $response = yield $this->container->client->getAsync($url, [
+                        'on_stats' => function (TransferStats $stats) use (&$time) {
+                            $time += $stats->getTransferTime();
+                        },
+                    ]);
+                    if (($status = (new HeaderValidator)($response))) {
+                        return yield [$status, $time];
+                    }
+                    if (!isset($response->getHeaders()['Location'])) {
+                        break;
+                    }
                 }
-                if (false === ($url = curl_getinfo($ch, CURLINFO_REDIRECT_URL))) {
-                    break;
+                foreach ([new DOMValidator, new URLValidator] as $validator) {
+                    if (($status = $validator($response))) {
+                        return yield [$status, $time];
+                    }
                 }
+                return yield ['WRONG', $time];
+            } catch (RequestException $e) {
+                return yield ['ERROR', $time];
             }
-            foreach ([new DOMValidator, new URLValidator] as $validator) {
-                if (($status = $validator($ch))) {
-                    return [$status, $time];
-                }
+        });
+    }
+
+    protected function createStatusAsync(Homo $homo): Promise\PromiseInterface {
+        return Promise\coroutine(function () use ($homo) {
+            list(list($status, $duration), $icon) = yield Promise\all([
+                $this->validateAsync($homo),
+                Icon::getAsync($this->container, $homo->screen_name),
+            ]);
+            $result = new Status($homo, $icon, $status, $duration);
+            if ($this->callback) {
+                ($this->callback)($result);
             }
-            return ['WRONG', $time];
-        } catch (CURLException $e) {
-            return ['ERROR', curl_getinfo($ch, CURLINFO_TOTAL_TIME)];
-        }
+            return yield $result;
+        });
     }
 
-    protected function createStatusAsync(Homo $homo): \Generator {
-        list(list($status, $duration), $icon) = yield [
-            $this->validateAsync($homo),
-            Icon::getAsync($homo->screen_name),
-        ];
-        $response = new Status($homo, $icon, $status, $duration);
-        if ($this->callback) {
-            ($this->callback)($response);
-        }
-        return $response;
-    }
-
-    public function execute(string $screen_name = null): array
+    public function executeAsync(string $screen_name = null): Promise\PromiseInterface
     {
         $homos = isset($screen_name) ? Homo::getByScreenName($screen_name) : Homo::getAll();
-        return Co::wait(array_map([$this, 'createStatusAsync'], iterator_to_array($homos)), [
-            'concurrency'  => 32,
-            'autoschedule' => true,
-        ]);
+        return Promise\all(
+            array_map([$this, 'createStatusAsync'], iterator_to_array($homos))
+        );
     }
 }

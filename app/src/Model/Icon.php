@@ -1,8 +1,9 @@
 <?php
 namespace HomoChecker\Model;
 
-use mpyw\Co\Co;
-use mpyw\Co\CURLException;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise;
+use Interop\Container\ContainerInterface as Container;
 
 class Icon
 {
@@ -11,33 +12,34 @@ class Icon
     public $screen_name;
     public $url;
 
-    public function __construct(string $screen_name)
+    public function __construct(Container $container, string $screen_name)
     {
+        $this->container = $container;
         $this->screen_name = $screen_name;
     }
 
-    protected function fetchAsync(): \Generator
+    protected function fetchAsync(): Promise\PromiseInterface
     {
-        $ch = curl_init("https://twitter.com/intent/user?screen_name={$this->screen_name}");
-        curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_FAILONERROR    => true,
-        ]);
+        return Promise\coroutine(function () {
+            try {
+                $url = "https://twitter.com/intent/user?screen_name={$this->screen_name}";
+                $response = yield $this->container->client->getAsync($url);
+                $body = (string)$response->getBody();
 
-        try {
-            if (preg_match('/src=(?:\"|\')(https:\/\/[ap]bs\.twimg\.com\/[^\"\']+)/', yield $ch, $matches)) {
-                list(, $this->url) = $matches;
+                if (preg_match('/src=(?:\"|\')(https:\/\/[ap]bs\.twimg\.com\/[^\"\']+)/', $body, $matches)) {
+                    list(, $this->url) = $matches;
+                }
+            } catch (RequestException $e) {
+                $this->url = static::$default;
             }
-        } catch (CURLException $e) {
-            $this->url = static::$default;
-        }
 
-        return $this;
+            return yield $this;
+        });
     }
 
-    public static function getAsync(string $screen_name): \Generator
+    public static function getAsync(Container $container, string $screen_name): Promise\PromiseInterface
     {
-        $self = new static($screen_name);
+        $self = new static($container, $screen_name);
         return $self->fetchAsync();
     }
 }

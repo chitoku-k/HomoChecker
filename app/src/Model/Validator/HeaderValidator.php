@@ -1,13 +1,14 @@
 <?php
 namespace HomoChecker\Model\Validator;
 
+use Psr\Http\Message\ResponseInterface as Response;
 use HomoChecker\Model\Validator\ValidatorBase;
 
 class HeaderValidator extends ValidatorBase
 {
-    protected function validate($ch)
+    protected function validate(Response $response)
     {
-        $url = curl_getinfo($ch, CURLINFO_REDIRECT_URL);
+        list($url) = $response->getHeaders()['Location'] ?? [''];
         return preg_match(self::TARGET, $url) ? 'OK' : false;
     }
 }
