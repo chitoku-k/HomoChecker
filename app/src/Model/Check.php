@@ -18,12 +18,14 @@ class Check
     {
         return Promise\coroutine(function () use ($homo) {
             $time = 0.0;
+            $total_time = 0.0;
             $url = $homo->url;
             try {
-                for ($i = 0; $i < self::REDIRECT; ++$i) {
+                for ($i = 0; $i < static::REDIRECT; ++$i) {
                     $response = yield $this->container->client->getAsync($url, [
-                        'on_stats_all' => function (array $stats) use (&$time) {
+                        'on_stats_all' => function (array $stats) use (&$time, &$total_time) {
                             $time += $stats['starttransfer_time'] ?? 0;
+                            $total_time += $stats['total_time'] ?? 0;
                         },
                     ]);
                     foreach ($this->container->validators as $validator) {
@@ -42,7 +44,7 @@ class Check
                 }
                 return yield ['WRONG', $time];
             } catch (RequestException $e) {
-                return yield ['ERROR', $time];
+                return yield ['ERROR', $total_time];
             }
         });
     }
