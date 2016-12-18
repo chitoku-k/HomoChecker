@@ -42,15 +42,20 @@ class Container extends \Slim\Container
             new URLValidator,
         ];
         $this->client = new Client([
-            'handler' => Proxy::wrapSync(new CurlMultiHandler([
-                'handle_factory' => new RawCurlFactory(50),
-            ]), new CurlHandler()),
-            'timeout' => self::TIMEOUT,
+            'handler'         => $this->createHandler(),
+            'timeout'         => self::TIMEOUT,
             'allow_redirects' => false,
-            'headers' => [
+            'headers'         => [
                 'User-Agent' => 'Homozilla/5.0 (Checker/1.14.514; homOSeX 8.10)',
             ],
         ]);
+    }
+
+    protected function createHandler(): callable
+    {
+        return Proxy::wrapSync(new CurlMultiHandler([
+            'handle_factory' => new RawCurlFactory(50),
+        ]), new CurlHandler());
     }
 
     protected function registerHandlers()
