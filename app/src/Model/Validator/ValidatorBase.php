@@ -1,11 +1,15 @@
 <?php
 namespace HomoChecker\Model\Validator;
 
+use Interop\Container\ContainerInterface as Container;
 use Psr\Http\Message\ResponseInterface as Response;
 
 abstract class ValidatorBase
 {
-    const TARGET = '/https?:\/\/twitter\.com\/mpyw\/?/';
+    public function __construct(Container $container)
+    {
+        $this->container = $container;
+    }
 
     public function __invoke(Response $response)
     {

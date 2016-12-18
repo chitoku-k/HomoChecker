@@ -36,10 +36,11 @@ class Container extends \Slim\Container
         $this->registerHandlers();
         $this->checker = new Check($this);
         $this->icon = new Icon($this);
+        $this->target = '/https?:\/\/twitter\.com\/mpyw\/?/';
         $this->validators = [
-            new HeaderValidator,
-            new DOMValidator,
-            new URLValidator,
+            new HeaderValidator($this),
+            new DOMValidator($this),
+            new URLValidator($this),
         ];
         $this->client = new Client([
             'handler'         => $this->createHandler(),

@@ -12,6 +12,6 @@ class DOMValidator extends ValidatorBase
         @$doc->loadHTML((string)$response->getBody());
         $xpath = new \DOMXPath($doc);
         $url = $xpath->evaluate('string(//meta[@http-equiv="refresh"]/@content)');
-        return preg_match(self::TARGET, $url) ? 'OK' : false;
+        return preg_match($this->container->target, $url) ? 'OK' : false;
     }
 }
