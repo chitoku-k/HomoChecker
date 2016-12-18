@@ -1,0 +1,15 @@
+<phpunit bootstrap="./vendor/autoload.php">
+    <testsuites>
+        <testsuite>
+            <directory suffix="Test.php">./app/tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory>./app/src</directory>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+    </logging>
+</phpunit>
