@@ -29,6 +29,7 @@ script:
 - composer test
 
 after_success:
+- composer coveralls
 - if [ "$TRAVIS_BRANCH" != "master" ] || [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
     exit 0;
   fi

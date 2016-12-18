@@ -15,6 +15,7 @@
         }
     },
     "scripts": {
-        "test": "php -dzend_extension=xdebug.so $(which phpunit)"
+        "test": "php -dzend_extension=xdebug.so $(which phpunit)",
+        "coveralls": "coveralls"
     }
 }
