@@ -7,7 +7,11 @@
     },
     "autoload": {
         "psr-4": {
-            "HomoChecker\\": "app/src/"
+            "HomoChecker\\": "app/src/",
+            "HomoChecker\\Test\\": "app/tests/"
         }
+    },
+    "scripts": {
+        "test": "phpunit app/tests/"
     }
 }
