@@ -1,5 +1,5 @@
 <?php
-namespace HomoChecker;
+namespace HomoChecker\Utilities;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\CurlHandler;

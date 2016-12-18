@@ -1,10 +1,16 @@
 <?php
 namespace HomoChecker;
 
+use HomoChecker\Utilities\Container;
+use HomoChecker\Action\CheckAction;
+use HomoChecker\Action\ListAction;
+use HomoChecker\Action\BadgeAction;
+use Slim\App;
+
 require __DIR__ . '/../../vendor/autoload.php';
 
-$app = new \Slim\App(new Container);
-$app->get('/check/[{name}/]', 'HomoChecker\Action\CheckAction');
-$app->get('/list/[{name}/]', 'HomoChecker\Action\ListAction');
-$app->get('/badge/[{status}/]', 'HomoChecker\Action\BadgeAction');
+$app = new App(new Container);
+$app->get('/check/[{name}/]', CheckAction::class);
+$app->get('/list/[{name}/]', ListAction::class);
+$app->get('/badge/[{status}/]', BadgeAction::class);
 $app->run();
