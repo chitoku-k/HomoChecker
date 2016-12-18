@@ -50,7 +50,8 @@ class Check
         });
     }
 
-    protected function createStatusAsync(Homo $homo): Promise\PromiseInterface {
+    protected function createStatusAsync(Homo $homo): Promise\PromiseInterface
+    {
         return Promise\coroutine(function () use ($homo) {
             list(list($status, $duration), $icon) = yield Promise\all([
                 $this->validateAsync($homo),
