@@ -1,9 +1,9 @@
-language: node_js
-node_js: '7'
-
-cache:
-  directories:
-  - node_modules
+language: php
+php:
+  - '7.0'
+  - '7.1'
+  - hhvm
+  - nightly
 
 env:
   global:
@@ -20,13 +20,13 @@ before_install:
 - chmod 600 ~/.ssh/id_rsa
 
 install:
-- npm install
+- composer install
 
 before_script:
 - git remote add homo $TARGET
 
 script:
-- npm start
+- composer test
 
 after_success:
 - if [ "$TRAVIS_BRANCH" != "master" ] || [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
