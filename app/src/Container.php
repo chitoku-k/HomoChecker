@@ -5,6 +5,11 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Handler\CurlHandler;
 use GuzzleHttp\Handler\CurlMultiHandler;
 use GuzzleHttp\Handler\Proxy;
+use HomoChecker\Model\Check;
+use HomoChecker\Model\Icon;
+use HomoChecker\Model\Validator\HeaderValidator;
+use HomoChecker\Model\Validator\DOMValidator;
+use HomoChecker\Model\Validator\URLValidator;
 use HomoChecker\Utilities\RawCurlFactory;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -29,6 +34,13 @@ class Container extends \Slim\Container
         ]);
 
         $this->registerHandlers();
+        $this->checker = new Check($this);
+        $this->icon = new Icon($this);
+        $this->validators = [
+            new HeaderValidator,
+            new DOMValidator,
+            new URLValidator,
+        ];
         $this->client = new Client([
             'handler' => Proxy::wrapSync(new CurlMultiHandler([
                 'handle_factory' => new RawCurlFactory(50),

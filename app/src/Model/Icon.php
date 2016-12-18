@@ -9,37 +9,27 @@ class Icon
 {
     public static $default = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_0_200x200.png';
 
-    public $screen_name;
-    public $url;
-
-    public function __construct(Container $container, string $screen_name)
+    public function __construct(Container $container)
     {
         $this->container = $container;
-        $this->screen_name = $screen_name;
     }
 
-    protected function fetchAsync(): Promise\PromiseInterface
+    public function getAsync(string $screen_name): Promise\PromiseInterface
     {
-        return Promise\coroutine(function () {
+        return Promise\coroutine(function () use ($screen_name) {
             try {
-                $url = "https://twitter.com/intent/user?screen_name={$this->screen_name}";
+                $url = "https://twitter.com/intent/user?screen_name={$screen_name}";
                 $response = yield $this->container->client->getAsync($url);
                 $body = (string)$response->getBody();
 
                 if (preg_match('/src=(?:\"|\')(https:\/\/[ap]bs\.twimg\.com\/[^\"\']+)/', $body, $matches)) {
-                    list(, $this->url) = $matches;
+                    list(, $url) = $matches;
                 }
             } catch (RequestException $e) {
-                $this->url = static::$default;
+                $url = static::$default;
             }
 
-            return yield $this;
+            return yield $url;
         });
-    }
-
-    public static function getAsync(Container $container, string $screen_name): Promise\PromiseInterface
-    {
-        $self = new static($container, $screen_name);
-        return $self->fetchAsync();
     }
 }

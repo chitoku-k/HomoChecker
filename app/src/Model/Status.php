@@ -5,9 +5,9 @@ use TrueBV\Punycode;
 
 class Status
 {
-    public function __construct(Homo $homo, Icon $icon = null, string $status = null, float $duration = null)
+    public function __construct(Homo $homo, string $icon = null, string $status = null, float $duration = null)
     {
-        $this->homo = [
+        $this->homo = (object)[
             'screen_name' => $homo->screen_name,
             'url'         => $homo->url,
             'display_url' => $this->createDisplayURL($homo->url),
@@ -15,7 +15,7 @@ class Status
         ];
 
         if (isset($icon)) {
-            $this->homo['icon'] = $icon->url;
+            $this->homo->icon = $icon;
         }
         if (isset($status)) {
             $this->status = $status;

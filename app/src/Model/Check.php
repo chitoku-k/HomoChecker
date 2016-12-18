@@ -1,22 +1,17 @@
 <?php
 namespace HomoChecker\Model;
 
-use GuzzleHttp\TransferStats;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise;
-use HomoChecker\Model\Validator\HeaderValidator;
-use HomoChecker\Model\Validator\DOMValidator;
-use HomoChecker\Model\Validator\URLValidator;
 use Interop\Container\ContainerInterface as Container;
 
 class Check
 {
     const REDIRECT = 5;
 
-    public function __construct(Container $container, callable $callback = null)
+    public function __construct(Container $container)
     {
         $this->container = $container;
-        $this->callback = $callback;
     }
 
     protected function validateAsync(Homo $homo): Promise\PromiseInterface
@@ -31,14 +26,16 @@ class Check
                             $time += $stats['starttransfer_time'] ?? 0;
                         },
                     ]);
-                    if ($status = (new HeaderValidator)($response)) {
-                        return yield [$status, $time];
+                    foreach ($this->container->validators as $validator) {
+                        if ($status = $validator($response)) {
+                            return yield [$status, $time];
+                        }
                     }
                     if (!$url = $response->getHeaderLine('Location')) {
                         break;
                     }
                 }
-                foreach ([new DOMValidator, new URLValidator] as $validator) {
+                foreach ($this->container->validators as $validator) {
                     if ($status = $validator($response)) {
                         return yield [$status, $time];
                     }
@@ -50,26 +47,28 @@ class Check
         });
     }
 
-    protected function createStatusAsync(Homo $homo): Promise\PromiseInterface
+    protected function createStatusAsync(Homo $homo, callable $callback = null): Promise\PromiseInterface
     {
-        return Promise\coroutine(function () use ($homo) {
+        return Promise\coroutine(function () use ($homo, $callback) {
             list(list($status, $duration), $icon) = yield Promise\all([
                 $this->validateAsync($homo),
-                Icon::getAsync($this->container, $homo->screen_name),
+                $this->container->icon->getAsync($homo->screen_name),
             ]);
             $result = new Status($homo, $icon, $status, $duration);
-            if ($this->callback) {
-                ($this->callback)($result);
+            if ($callback) {
+                $callback($result);
             }
             return yield $result;
         });
     }
 
-    public function executeAsync(string $screen_name = null): Promise\PromiseInterface
+    public function executeAsync(string $screen_name = null, callable $callback = null): Promise\PromiseInterface
     {
         $homos = isset($screen_name) ? Homo::getByScreenName($screen_name) : Homo::getAll();
         return Promise\all(
-            array_map([$this, 'createStatusAsync'], iterator_to_array($homos))
+            array_map(function ($item) use ($callback) {
+                return $this->createStatusAsync($item, $callback);
+            }, iterator_to_array($homos))
         );
     }
 }

@@ -3,7 +3,6 @@ namespace HomoChecker\Action;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use HomoChecker\Model\Check;
 use HomoChecker\Model\Homo;
 use HomoChecker\Model\Status;
 
@@ -29,8 +28,7 @@ class BadgeAction extends ActionBase
             return iterator_count(Homo::getAll());
         }
 
-        $checker = new Check($this->container);
-        $result = $checker->executeAsync()->wait();
+        $result = $this->container->checker->executeAsync()->wait();
         return count(array_filter($result, function (Status $item) use ($status): bool {
             return strcasecmp($item->status, $status) === 0;
         }));
