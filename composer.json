@@ -2,7 +2,8 @@
     "require": {
         "slim/slim": "^3.4",
         "true/punycode": "~2.0",
-        "guzzlehttp/guzzle": "^6.2"
+        "guzzlehttp/guzzle": "^6.2",
+        "phpunit/phpunit": "^5.7"
     },
     "autoload": {
         "psr-4": {
