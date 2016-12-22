@@ -1,7 +1,6 @@
 <?php
 namespace HomoChecker\Model;
 
-use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise;
 use Interop\Container\ContainerInterface as Container;
 
@@ -18,18 +17,19 @@ class Icon
     {
         return Promise\coroutine(function () use ($screen_name) {
             try {
-                $url = "https://twitter.com/intent/user?screen_name={$screen_name}";
-                $response = yield $this->container->client->getAsync($url);
+                $target = "https://twitter.com/intent/user?screen_name={$screen_name}";
+                $response = yield $this->container->client->getAsync($target);
                 $body = (string)$response->getBody();
 
-                if (preg_match('/src=(?:\"|\')(https:\/\/[ap]bs\.twimg\.com\/[^\"\']+)/', $body, $matches)) {
-                    list(, $url) = $matches;
+                if (!preg_match('/src=(?:\"|\')(https:\/\/[ap]bs\.twimg\.com\/[^\"\']+)/', $body, $matches)) {
+                    throw new \RuntimeException('No URL found');
                 }
-            } catch (RequestException $e) {
+                list(, $url) = $matches;
+            } catch (\RuntimeException $e) {
                 $url = static::$default;
             }
 
-            return yield $url;
+            return yield $url ?? static::$default;
         });
     }
 }
