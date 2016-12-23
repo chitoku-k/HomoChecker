@@ -7,6 +7,10 @@
     <filter>
         <whitelist>
             <directory>./app/src</directory>
+            <exclude>
+                <file>./app/src/config.php</file>
+                <file>./app/src/config.sample.php</file>
+            </exclude>
         </whitelist>
     </filter>
     <logging>
