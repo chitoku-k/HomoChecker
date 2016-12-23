@@ -22,7 +22,7 @@ HomoChecker はホモ（[@mpyw](https://twitter.com/mpyw)）にリダイレク�
 
 ## ホモへの手引き
 
-[@java_shit](https://twitter.com/java_shit) にカミングアウトするか、このリポジトリにプルリクエストをお送りください。[@mpyw](https://twitter.com/mpyw) と関係があってもなくても構いません。
+[@java_shit](https://twitter.com/java_shit) にカミングアウトしてください。[@mpyw](https://twitter.com/mpyw) と関係があってもなくても構いません。
 
 ### 設定方法
 

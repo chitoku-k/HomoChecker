@@ -66,11 +66,12 @@ class Check
 
     public function executeAsync(string $screen_name = null, callable $callback = null): Promise\PromiseInterface
     {
-        $homos = isset($screen_name) ? Homo::getByScreenName($screen_name) : Homo::getAll();
+        $homo = new Homo($this->container);
+        $users = $screen_name ? $homo->find(compact('screen_name')) : $homo->find();
         return Promise\all(
             array_map(function ($item) use ($callback) {
                 return $this->createStatusAsync($item, $callback);
-            }, iterator_to_array($homos))
+            }, $users)
         );
     }
 }

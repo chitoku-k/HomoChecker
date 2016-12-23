@@ -19,3 +19,7 @@ node_modules
 dest
 dev
 build
+
+
+### Configuration ###
+app/src/config.php

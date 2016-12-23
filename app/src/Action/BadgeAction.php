@@ -17,15 +17,17 @@ class BadgeAction extends ActionBase
 
         $query = http_build_query($request->getParams());
         $label = "{$count} " . strtolower($status ?? 'registered');
-        $uri = self::API_URI . "homo-{$label}-7a6544.svg" . ($query ? "?{$query}" : '');
+        $uri = static::API_URI . "homo-{$label}-7a6544.svg" . ($query ? "?{$query}" : '');
 
         return $response->withRedirect($uri);
     }
 
     protected function getCount(string $status = null): int
     {
+        $homo = new Homo($this->container);
+
         if (!$status) {
-            return iterator_count(Homo::getAll());
+            return count($homo->find());
         }
 
         $result = $this->container->checker->executeAsync()->wait();

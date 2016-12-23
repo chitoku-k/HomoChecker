@@ -8,6 +8,7 @@ use HomoChecker\Action\BadgeAction;
 use Slim\App;
 
 require __DIR__ . '/../../vendor/autoload.php';
+require __DIR__ . '/config.php';
 
 $app = new App(new Container);
 $app->get('/check/[{name}/]', CheckAction::class);

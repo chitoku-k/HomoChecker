@@ -1,95 +1,49 @@
 <?php
 namespace HomoChecker\Model;
 
+use Interop\Container\ContainerInterface as Container;
+
 class Homo
 {
+    protected $pdo;
+    protected $container;
+    protected $table;
+
     public $screen_name;
     public $url;
 
-    private static $sites = [
-        '2vg' => 'http://homo.ni-vg.com',
-        '4mcn' => [
-            'http://homo.mizua.me',
-            'http://xn--ydko.mizua.me',
-        ],
-        'AtiS' => [
-            'https://homo.atis.ml',
-            'http://xn--ydko.atis.ml',
-        ],
-        'azyobuzin' => [
-            'http://homo.azyobuzi.net',
-            'http://xn--ydko.azyobuzi.net',
-        ],
-        'CHIKEN_MAN_' => 'http://homo.xn--w8jwb2eudb.com',
-        'DYGV' => 'http://homo.dygv.info',
-        'G2U' => 'http://homo.mohyo.net',
-        'Hexium310' => [
-            'https://hexium310.github.io/homo',
-            'http://homo.hexium.xyz',
-        ],
-        'hnle0' => [
-            'https://homo.hinaloe.net',
-            'http://homo.hnle.tk',
-            'http://xn--ydko.hinaloe.net',
-            'http://xn--ydko.hnle.tk',
-        ],
-        'homomaid' => 'http://homo.homomaid.com',
-        'java_shit' => [
-            'https://homo.chitoku.jp',
-            'http://xn--ydko.chitoku.jp',
-        ],
-        'kb10uy' => [
-            'http://homo.kb10uy.org',
-            'http://xn--ydko.kb10uy.org',
-        ],
-        'LaLN_' => 'https://homo.synchthia.net',
-        'myskng' => 'http://homo.kazukioishi.net',
-        'neneppy' => [
-            'http://homo.koutanakayama.org',
-            'http://homo.nlinx.ne.jp',
-            'http://homo.ncraft.top',
-        ],
-        'owl_8' => 'http://homo.owl8.net',
-        'pakutoma' => 'https://homo.pakutoma.pw',
-        'paralleltree' => 'http://homo.paltee.net',
-        'Petitsurume' => 'https://homo.surume.tk',
-        'printf_moriken' => 'http://moriken.kimamass.com/homo',
-        'shibafu528' => 'http://homo.shibafu528.info',
-        'tk1024_bot' => 'http://homo.tk1024.net',
-        'u3g3' => [
-            'http://homo.gomasy.jp',
-            'https://homo.gomasy.jp',
-        ],
-    ];
-
-    public static function getAll(): \Generator
+    public function __construct(Container $container, string $table = 'users')
     {
-        return self::create(self::$sites);
+        $this->container = $container;
+        $this->table = $table;
     }
 
-    public static function getByScreenName(string $screen_name): \Generator
+    public function find(array $where = [])
     {
-        foreach (self::$sites as $key => $site) {
-            if (!strcasecmp($key, $screen_name)) {
-                return self::create([
-                    $key => $site,
-                ]);
-            }
+        $sql[] = "SELECT * FROM `{$this->table}`";
+
+        foreach ($where as $field => $value) {
+            $conditions[] = "{$field} = ?";
+            $values[] = $value;
         }
-    }
 
-    public static function create(array $homo): \Generator
-    {
-        foreach ($homo as $screen_name => $urls) {
-            foreach ((array)$urls as $url) {
-                yield new self($screen_name, $url);
-            }
+        if (isset($conditions)) {
+            $sql[] = "WHERE " . implode(' AND ', $conditions);
         }
-    }
 
-    public function __construct(string $screen_name, string $url)
-    {
-        $this->screen_name = $screen_name;
-        $this->url = $url;
+        $stmt = $this->container->database->prepare(implode(' ', $sql));
+        foreach ($values ?? [] as $index => $value) {
+            $stmt->bindValue($index, $value, \PDO::PARAM_STR);
+        }
+
+        $stmt->execute();
+        return $stmt->fetchAll(
+            \PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,
+            static::class,
+            [
+                $this->container,
+                $this->table,
+            ]
+        );
     }
 }

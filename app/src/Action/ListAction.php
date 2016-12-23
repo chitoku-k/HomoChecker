@@ -11,9 +11,10 @@ class ListAction extends ActionBase
     public function route(Request $request, Response $response, array $args)
     {
         $name = $args['name'] ?? null;
-        $homos = iterator_to_array(isset($name) ? Homo::getByScreenName($name) : Homo::getAll());
+        $homo = new Homo($this->container);
+        $users = count($name ? $homo->find(['screen_name' => $name]) : $homo->find());
 
-        return $response->withJson($this->create($homos), !empty($homos) ? 200 : 404);
+        return $response->withJson($this->create($users), !empty($users) ? 200 : 404);
     }
 
     protected function create(array $homos)

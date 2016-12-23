@@ -3,10 +3,16 @@ namespace HomoChecker\Test\Model;
 
 use HomoChecker\Model\Homo;
 use HomoChecker\Model\Status;
+use HomoChecker\Test\Mock\Utilities\MockContainer;
 use PHPUnit\Framework\TestCase;
 
 class StatusTest extends TestCase
 {
+    public function setUp()
+    {
+        $this->container = new MockContainer;
+    }
+
     public function testCorrectDomain()
     {
         $screen_name = 'homo';
@@ -15,7 +21,9 @@ class StatusTest extends TestCase
         $status = 'OK';
         $duration = 1.14514;
 
-        $homo = new Homo($screen_name, $url);
+        $homo = new Homo($this->container);
+        $homo->screen_name = $screen_name;
+        $homo->url = $url;
         $target = new Status($homo, $icon, $status, $duration);
 
         $this->assertEquals($screen_name, $target->homo->screen_name);
@@ -35,7 +43,9 @@ class StatusTest extends TestCase
         $status = 'CONTAINS';
         $duration = 1.14514;
 
-        $homo = new Homo($screen_name, $url);
+        $homo = new Homo($this->container);
+        $homo->screen_name = $screen_name;
+        $homo->url = $url;
         $target = new Status($homo, $icon, $status, $duration);
 
         $this->assertEquals($screen_name, $target->homo->screen_name);
