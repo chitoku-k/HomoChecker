@@ -1,9 +1,7 @@
 <?php
 namespace HomoChecker\Model;
 
-use Interop\Container\ContainerInterface as Container;
-
-class Homo
+class Homo implements HomoInterface
 {
     protected $pdo;
     protected $container;
@@ -12,13 +10,13 @@ class Homo
     public $screen_name;
     public $url;
 
-    public function __construct(Container $container, string $table = 'users')
+    public function __construct(\PDO $database, string $table)
     {
-        $this->container = $container;
+        $this->database = $database;
         $this->table = $table;
     }
 
-    public function find(array $where = [])
+    public function find(array $where = []): array
     {
         $sql[] = "SELECT * FROM `{$this->table}`";
 
@@ -31,9 +29,9 @@ class Homo
             $sql[] = "WHERE " . implode(' AND ', $conditions);
         }
 
-        $stmt = $this->container->database->prepare(implode(' ', $sql));
+        $stmt = $this->database->prepare(implode(' ', $sql));
         foreach ($values ?? [] as $index => $value) {
-            $stmt->bindValue($index, $value, \PDO::PARAM_STR);
+            $stmt->bindValue($index + 1, $value, \PDO::PARAM_STR);
         }
 
         $stmt->execute();
@@ -41,7 +39,7 @@ class Homo
             \PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,
             static::class,
             [
-                $this->container,
+                $this->database,
                 $this->table,
             ]
         );

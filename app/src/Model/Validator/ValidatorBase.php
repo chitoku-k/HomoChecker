@@ -1,14 +1,13 @@
 <?php
 namespace HomoChecker\Model\Validator;
 
-use Interop\Container\ContainerInterface as Container;
 use Psr\Http\Message\ResponseInterface as Response;
 
-abstract class ValidatorBase
+abstract class ValidatorBase implements ValidatorInterface
 {
-    public function __construct(Container $container)
+    public function __construct(string $regex)
     {
-        $this->container = $container;
+        $this->regex = $regex;
     }
 
     public function __invoke(Response $response)

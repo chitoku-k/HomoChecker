@@ -2,15 +2,15 @@
 namespace HomoChecker\Model;
 
 use GuzzleHttp\Promise;
-use Interop\Container\ContainerInterface as Container;
+use GuzzleHttp\ClientInterface;
 
-class Icon
+class Icon implements IconInterface
 {
     public static $default = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_0_200x200.png';
 
-    public function __construct(Container $container)
+    public function __construct(ClientInterface $client)
     {
-        $this->container = $container;
+        $this->client = $client;
     }
 
     public function getAsync(string $screen_name): Promise\PromiseInterface
@@ -18,7 +18,7 @@ class Icon
         return Promise\coroutine(function () use ($screen_name) {
             try {
                 $target = "https://twitter.com/intent/user?screen_name={$screen_name}";
-                $response = yield $this->container->client->getAsync($target);
+                $response = yield $this->client->getAsync($target);
                 $body = (string)$response->getBody();
 
                 if (!preg_match('/src=(?:\"|\')(https:\/\/[ap]bs\.twimg\.com\/[^\"\']+)/', $body, $matches)) {

@@ -24,13 +24,11 @@ class BadgeAction extends ActionBase
 
     protected function getCount(string $status = null): int
     {
-        $homo = new Homo($this->container);
-
         if (!$status) {
-            return count($homo->find());
+            return count($this->container['homo']->find());
         }
 
-        $result = $this->container->checker->executeAsync()->wait();
+        $result = $this->container['checker']->executeAsync()->wait();
         return count(array_filter($result, function (Status $item) use ($status): bool {
             return strcasecmp($item->status, $status) === 0;
         }));

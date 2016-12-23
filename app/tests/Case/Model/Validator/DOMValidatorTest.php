@@ -3,20 +3,13 @@ namespace HomoChecker\Test\Model\Validator;
 
 use GuzzleHttp\Psr7\Response;
 use HomoChecker\Model\Validator\DOMValidator;
-use HomoChecker\Test\Mock\Utilities\MockContainer;
 use PHPUnit\Framework\TestCase;
 
 class DOMValidatorTest extends TestCase
 {
-    public function setUp()
-    {
-        $this->container = new MockContainer;
-    }
-
     public function testValidate()
     {
-        $validator = new DOMValidator($this->container);
-        $this->container->target = '|https?://example\.com/?|';
+        $validator = new DOMValidator('|https?://example\.com/?|');
         $this->assertEquals('OK', $validator(new Response(200, [], '
             <!doctype html>
             <html>

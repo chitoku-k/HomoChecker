@@ -1,22 +1,11 @@
 <?php
 namespace HomoChecker\Utilities;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Handler\CurlHandler;
-use GuzzleHttp\Handler\CurlMultiHandler;
-use GuzzleHttp\Handler\Proxy;
-use HomoChecker\Model\Check;
-use HomoChecker\Model\Icon;
-use HomoChecker\Model\Validator\HeaderValidator;
-use HomoChecker\Model\Validator\DOMValidator;
-use HomoChecker\Model\Validator\URLValidator;
-use HomoChecker\Utilities\RawCurlFactory;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
 class Container extends \Slim\Container
 {
-    const TIMEOUT = 5;
     const ERRORS = [
         'notFoundHandler'   => 404,
         'notAllowedHandler' => 405,
@@ -33,37 +22,6 @@ class Container extends \Slim\Container
             ],
         ]);
 
-        $this->registerHandlers();
-        $this->checker = new Check($this);
-        $this->icon = new Icon($this);
-        $this->target = '/https?:\/\/twitter\.com\/mpyw\/?/';
-        $this->validators = [
-            new HeaderValidator($this),
-            new DOMValidator($this),
-            new URLValidator($this),
-        ];
-        $this->client = new Client([
-            'handler'         => $this->createHandler(),
-            'timeout'         => self::TIMEOUT,
-            'allow_redirects' => false,
-            'headers'         => [
-                'User-Agent' => 'Homozilla/5.0 (Checker/1.14.514; homOSeX 8.10)',
-            ],
-        ]);
-        $this->database = new \PDO('mysql:dbname=' . DB_NAME . ';host=' . DB_HOST . ';charset=utf8', DB_USER, DB_PASS, [
-            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-        ]);
-    }
-
-    protected function createHandler(): callable
-    {
-        return Proxy::wrapSync(new CurlMultiHandler([
-            'handle_factory' => new RawCurlFactory(50),
-        ]), new CurlHandler());
-    }
-
-    protected function registerHandlers()
-    {
         foreach (self::ERRORS as $type => $code) {
             $this[$type] = function () use ($code) {
                 return function (Request $request, Response $response, $e) use ($code) {

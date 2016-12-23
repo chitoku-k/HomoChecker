@@ -8,16 +8,10 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use HomoChecker\Model\Icon;
-use HomoChecker\Test\Mock\Utilities\MockContainer;
 use PHPUnit\Framework\TestCase;
 
 class IconTest extends TestCase
 {
-    public function setUp()
-    {
-        $this->container = new MockContainer;
-    }
-
     public function testGetAsync()
     {
         $url = 'https://pbs.twimg.com/profile_images/114514/example_bigger.jpg';
@@ -46,9 +40,9 @@ class IconTest extends TestCase
             new RequestException('Connection problem occurred', new Request('GET', '')),
         ]));
 
-        $this->container->client = new Client(compact('handler'));
+        $client = new Client(compact('handler'));
 
-        $icon = new Icon($this->container);
+        $icon = new Icon($client);
         $this->assertEquals($url, $icon->getAsync('example')->wait());
         $this->assertEquals($icon::$default, $icon->getAsync('example')->wait());
         $this->assertEquals($icon::$default, $icon->getAsync('example')->wait());
