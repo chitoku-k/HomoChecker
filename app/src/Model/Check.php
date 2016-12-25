@@ -2,6 +2,7 @@
 namespace HomoChecker\Model;
 
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Pool;
 use GuzzleHttp\Promise;
 use GuzzleHttp\ClientInterface;
 use HomoChecker\Model\HomoInterface;
@@ -72,10 +73,17 @@ class Check
     public function executeAsync(string $screen_name = null, callable $callback = null): Promise\PromiseInterface
     {
         $users = $screen_name ? $this->homo->find(compact('screen_name')) : $this->homo->find();
-        return Promise\all(
-            array_map(function ($item) use ($callback) {
-                return $this->createStatusAsync($item, $callback);
-            }, $users)
+        $pool = new Pool(
+            $this->client,
+            array_map(function ($item) use ($callback): callable {
+                return function () use ($item, $callback): Promise\PromiseInterface {
+                    return $this->createStatusAsync($item, $callback);
+                };
+            }, $users),
+            [
+                'concurrency' => 32,
+            ]
         );
+        return $pool->promise();
     }
 }
