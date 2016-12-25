@@ -2,6 +2,7 @@
 namespace HomoChecker;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Handler\CurlHandler;
 use GuzzleHttp\Handler\CurlMultiHandler;
 use GuzzleHttp\Handler\Proxy;
@@ -40,7 +41,7 @@ $container['client'] = function (ContainerInterface $container) {
         'headers' => [
             'User-Agent' => 'Homozilla/5.0 (Checker/1.14.514; homOSeX 8.10)',
         ],
-        'handler' => Proxy::wrapSync(
+        'handler' => HandlerStack::create(Proxy::wrapSync(
             new CurlMultiHandler([
                 'handle_factory' => new RawCurlFactory(50),
             ]),

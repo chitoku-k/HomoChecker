@@ -37,6 +37,17 @@ class IconTest extends TestCase
                     </body>
                 </html>
             '),
+            new Response(404, [], "
+                <!doctype html>
+                <html>
+                    <head>
+                        <title>This returns 404</title>
+                    </head>
+                    <body>
+                        <img src='{$url}'>
+                    </body>
+                </html>
+            "),
             new RequestException('Connection problem occurred', new Request('GET', '')),
         ]));
 
@@ -44,6 +55,7 @@ class IconTest extends TestCase
 
         $icon = new Icon($client);
         $this->assertEquals($url, $icon->getAsync('example')->wait());
+        $this->assertEquals($icon::$default, $icon->getAsync('example')->wait());
         $this->assertEquals($icon::$default, $icon->getAsync('example')->wait());
         $this->assertEquals($icon::$default, $icon->getAsync('example')->wait());
     }
