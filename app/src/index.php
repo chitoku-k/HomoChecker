@@ -46,7 +46,7 @@ $container['client'] = function (ContainerInterface $container) {
                 'handle_factory' => new RawCurlFactory(50),
             ]),
             new CurlHandler()
-        ),
+        )),
     ]);
 };
 $container['homo'] = function (ContainerInterface $container) {
