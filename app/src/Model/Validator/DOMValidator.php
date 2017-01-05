@@ -11,7 +11,9 @@ class DOMValidator extends ValidatorBase
         $doc = new \DOMDocument;
         @$doc->loadHTML((string)$response->getBody());
         $xpath = new \DOMXPath($doc);
-        $url = $xpath->evaluate('string(//meta[@http-equiv="refresh"]/@content)');
+        $xpath->registerNamespace('php', 'http://php.net/xpath');
+        $xpath->registerPhpFunctions();
+        $url = $xpath->evaluate('string(//meta[contains(php:functionString("strtolower", @http-equiv), "refresh")]/@content)');
         return preg_match($this->regex, $url) ? 'OK' : false;
     }
 }

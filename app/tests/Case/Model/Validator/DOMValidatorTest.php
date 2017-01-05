@@ -21,6 +21,17 @@ class DOMValidatorTest extends TestCase
                 </body>
             </html>
         ')));
+        $this->assertEquals('OK', $validator(new Response(200, [], '
+            <!doctype html>
+            <html>
+                <head>
+                    <title>Case-insensitive match</title>
+                    <Meta Http-Equiv="Refresh" Content="0; https://example.com">
+                </head>
+                <body>
+                </body>
+            </html>
+        ')));
         $this->assertFalse($validator(new Response(200, [], '
             <!doctype html>
             <html>
