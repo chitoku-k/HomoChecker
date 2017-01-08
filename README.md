@@ -1,6 +1,7 @@
 HomoChecker
 ===========
 
+[![][php-badge]][php-link]
 [![][travis-badge]][travis-link]
 [![][dependencies-badge]][dependencies-link]
 [![][coveralls-badge]][coveralls-link]
@@ -225,6 +226,8 @@ data: end
 ステータスを省略した場合は登録されているホストの数を返します。
 
 
+[php-link]:             https://secure.php.net
+[php-badge]:            https://img.shields.io/badge/php-%3e%3d%207.0.7-8892bf.svg?style=flat-square
 [travis-link]:          https://travis-ci.org/chitoku-k/HomoChecker
 [travis-badge]:         https://img.shields.io/travis/chitoku-k/HomoChecker.svg?style=flat-square
 [dependencies-link]:    https://gemnasium.com/github.com/chitoku-k/HomoChecker
