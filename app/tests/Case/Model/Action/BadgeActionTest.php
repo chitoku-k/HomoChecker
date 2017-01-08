@@ -54,7 +54,7 @@ class BadgeActionTest extends TestCase
             'REQUEST_URI' => '/badge',
         ]));
 
-        $response = $action->route($request, new Response, []);
+        $response = $action($request, new Response, []);
         $actual = $response->getHeaderLine('Location');
         $this->assertRegExp('|^https?://img\.shields\.io/badge/.*\.svg|', $actual);
         $this->assertRegExp('/3(?: |%20|\+)registered/', $actual);
@@ -67,7 +67,7 @@ class BadgeActionTest extends TestCase
             'REQUEST_URI' => '/badge',
         ]));
 
-        $response = $action->route($request, new Response, ['status' => 'OK']);
+        $response = $action($request, new Response, ['status' => 'OK']);
         $actual = $response->getHeaderLine('Location');
         $this->assertRegExp('|^https?://img\.shields\.io/badge/.*\.svg|', $actual);
         $this->assertRegExp('/2(?: |%20|\+)ok/', $actual);
@@ -81,7 +81,7 @@ class BadgeActionTest extends TestCase
             'QUERY_STRING' => 'style=flat-square',
         ]));
 
-        $response = $action->route($request, new Response, []);
+        $response = $action($request, new Response, []);
         $actual = $response->getHeaderLine('Location');
         $this->assertRegExp('|^https?://img\.shields\.io/badge/.*\.svg|', $actual);
         $this->assertStringEndsWith('?style=flat-square', $actual);
