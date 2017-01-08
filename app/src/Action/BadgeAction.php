@@ -7,18 +7,18 @@ use HomoChecker\Model\Status;
 
 class BadgeAction extends ActionBase
 {
-    const API_URI = 'https://img.shields.io/badge/';
-
     public function route(Request $request, Response $response, array $args)
     {
         $status = $args['status'] ?? null;
         $count = $this->getCount($status);
-
-        $query = http_build_query($request->getParams());
         $label = "{$count} " . strtolower($status ?? 'registered');
-        $uri = static::API_URI . "homo-{$label}-7a6544.svg" . ($query ? "?{$query}" : '');
+        return $response->withRedirect($this->getURL('homo', $label, '7a6544', $request->getParams()));
+    }
 
-        return $response->withRedirect($uri);
+    protected function getURL(string $service, string $label, string $color, array $query = []): string
+    {
+        $uri = "https://img.shields.io/badge/{$service}-{$label}-{$color}.svg";
+        return $query ? $uri . '?' . http_build_query($query) : $uri;
     }
 
     protected function getCount(string $status = null): int
