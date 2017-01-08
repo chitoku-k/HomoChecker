@@ -23,6 +23,12 @@ install:
 
 before_script:
 - git remote add homo $TARGET
+- mysql -uroot -e "CREATE DATABASE `homo_test`"
+- cp ./phpunit.xml.dist ./phpunit.xml
+- sed -i "s/Your database host/localhost/" ./phpunit.xml
+- sed -i "s/Your database name/homo_test/" ./phpunit.xml
+- sed -i "s/Your database user/root/" ./phpunit.xml
+- sed -i "s/Your database password//" ./phpunit.xml
 
 script:
 - composer test
