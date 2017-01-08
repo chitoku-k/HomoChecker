@@ -19,9 +19,12 @@ engines:
         enabled: false
       Controversial/CamelCaseParameterName:
         enabled: false
+      Controversial/CamelCaseVariableName:
+        enabled: false
 ratings:
   paths:
   - "**.js"
   - "**.tag"
   - "**.php"
-exclude_paths: []
+exclude_paths:
+- "app/tests/"
