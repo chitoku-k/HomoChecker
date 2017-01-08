@@ -3,14 +3,13 @@ namespace HomoChecker\Model;
 
 class Homo implements HomoInterface
 {
-    protected $pdo;
-    protected $container;
+    protected $database;
     protected $table;
 
     public $screen_name;
     public $url;
 
-    public function __construct(\PDO $database, string $table)
+    public function __construct(\PDO $database = null, string $table = null)
     {
         $this->database = $database;
         $this->table = $table;
@@ -18,6 +17,10 @@ class Homo implements HomoInterface
 
     public function find(array $where = []): array
     {
+        if (!isset($this->database, $this->table)) {
+            throw new \RuntimeException('No database or table is specified.');
+        }
+
         $sql[] = "SELECT * FROM `{$this->table}`";
 
         foreach ($where as $field => $value) {

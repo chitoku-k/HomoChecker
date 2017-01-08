@@ -3,5 +3,5 @@ namespace HomoChecker\View;
 
 interface ViewInterface
 {
-    function render($data);
+    public function render($data);
 }

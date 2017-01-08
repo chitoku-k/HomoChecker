@@ -3,7 +3,6 @@ namespace HomoChecker\Action;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use HomoChecker\Model\Homo;
 use HomoChecker\Model\Status;
 
 class BadgeAction extends ActionBase

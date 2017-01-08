@@ -17,4 +17,10 @@
         <log type="coverage-clover" target="build/logs/clover.xml"/>
         <log type="coverage-html" target="build/coverage"/>
     </logging>
+    <php>
+        <const name="DB_HOST" value="Your database host" />
+        <const name="DB_NAME" value="Your database name" />
+        <const name="DB_USER" value="Your database user" />
+        <const name="DB_PASS" value="Your database password" />
+    </php>
 </phpunit>
