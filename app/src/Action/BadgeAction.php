@@ -27,7 +27,7 @@ class BadgeAction extends ActionBase
             return count($this->container['homo']->find());
         }
 
-        $result = $this->container['checker']->executeAsync()->wait();
+        $result = $this->container['checker']->execute();
         return count(array_filter($result, function (Status $item) use ($status): bool {
             return strcasecmp($item->status, $status) === 0;
         }));

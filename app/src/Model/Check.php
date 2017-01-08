@@ -70,10 +70,10 @@ class Check
         });
     }
 
-    public function executeAsync(string $screen_name = null, callable $callback = null): Promise\PromiseInterface
+    public function execute(string $screen_name = null, callable $callback = null): array
     {
-        $users = $screen_name ? $this->homo->find(compact('screen_name')) : $this->homo->find();
-        $pool = new Pool(
+        $users = $this->homo->find($screen_name ? compact('screen_name') : []);
+        return Pool::batch(
             $this->client,
             array_map(function ($item) use ($callback): callable {
                 return function () use ($item, $callback): Promise\PromiseInterface {
@@ -84,6 +84,5 @@ class Check
                 'concurrency' => 32,
             ]
         );
-        return $pool->promise();
     }
 }
