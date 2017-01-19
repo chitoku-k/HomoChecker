@@ -17,7 +17,7 @@ class ListAction extends ActionBase
         return $response->withJson($this->create($users), !empty($users) ? 200 : 404);
     }
 
-    protected function create(array $homos)
+    protected function create(array $homos): array
     {
         return array_map(function (HomoInterface $item): \stdClass {
             $status = new Status($item);

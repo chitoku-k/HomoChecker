@@ -57,7 +57,7 @@ class CheckTest extends TestCase
         ];
     }
 
-    public function testExecuteAsync()
+    public function testExecuteAsync(): void
     {
         $this->Client = new Client([
             'allow_redirects' => false,

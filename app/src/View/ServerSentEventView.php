@@ -17,20 +17,20 @@ class ServerSentEventView implements ViewInterface
         $this->flush();
     }
 
-    public function render($data)
+    public function render($data): void
     {
         echo "event: {$this->event}\n";
         echo "data: " . json_encode($data) . "\n\n";
         $this->flush();
     }
 
-    public function flush()
+    public function flush(): void
     {
         ob_flush();
         flush();
     }
 
-    public function close()
+    public function close(): void
     {
         echo "event: close\n";
         echo "data: end\n\n";

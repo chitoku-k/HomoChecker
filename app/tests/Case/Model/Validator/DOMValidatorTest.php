@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class DOMValidatorTest extends TestCase
 {
-    public function testValidate()
+    public function testValidate(): void
     {
         $validator = new DOMValidator('|https?://example\.com/?|');
         $this->assertEquals('OK', $validator(new Response(200, [], '

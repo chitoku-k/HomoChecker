@@ -24,7 +24,7 @@ class Icon implements IconInterface
                 if (!preg_match('/src=(?:\"|\')(https:\/\/[ap]bs\.twimg\.com\/[^\"\']+)/', $body, $matches)) {
                     throw new \RuntimeException('No URL found');
                 }
-                list(, $url) = $matches;
+                [, $url] = $matches;
             } catch (\RuntimeException $e) {
                 $url = static::$default;
             }

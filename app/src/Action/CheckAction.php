@@ -26,7 +26,7 @@ class CheckAction extends ActionBase
         return $this->container['response']->withJson($result, !empty($result) ? 200 : 404);
     }
 
-    protected function bySSE(string $name = null)
+    protected function bySSE(string $name = null): void
     {
         $view = new ServerSentEventView('response');
         $this->container['checker']->execute($name, [$view, 'render']);

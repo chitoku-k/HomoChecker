@@ -24,7 +24,7 @@ class RawCurlFactory extends CurlFactory
         return parent::release($easy);
     }
 
-    public static function invokeStatsAll(EasyHandle $easy)
+    public static function invokeStatsAll(EasyHandle $easy): void
     {
         $stats = curl_getinfo($easy->handle);
         call_user_func($easy->options['on_stats_all'], $stats);

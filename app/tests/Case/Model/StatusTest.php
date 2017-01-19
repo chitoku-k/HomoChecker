@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class StatusTest extends TestCase
 {
-    public function testCorrectDomain()
+    public function testCorrectDomain(): void
     {
         $screen_name = 'homo';
         $url = 'https://xn--ydko.example.com';
@@ -29,7 +29,7 @@ class StatusTest extends TestCase
         $this->assertEquals($duration, $target->duration);
     }
 
-    public function testIncorrectDomain()
+    public function testIncorrectDomain(): void
     {
         $screen_name = 'homo';
         $url = 'not:a:url';

@@ -10,7 +10,7 @@ use HomoChecker\Model\Validator\ValidatorInterface;
 
 class Check
 {
-    const REDIRECT = 5;
+    public const REDIRECT = 5;
 
     public function __construct(ClientInterface $client, HomoInterface $homo, IconInterface $icon, ValidatorInterface ...$validators)
     {
@@ -58,7 +58,7 @@ class Check
     protected function createStatusAsync(HomoInterface $homo, callable $callback = null): Promise\PromiseInterface
     {
         return Promise\coroutine(function () use ($homo, $callback) {
-            list(list($status, $duration), $icon) = yield Promise\all([
+            [[$status, $duration], $icon] = yield Promise\all([
                 $this->validateAsync($homo),
                 $this->icon->getAsync($homo->screen_name),
             ]);

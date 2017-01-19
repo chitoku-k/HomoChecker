@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class HeaderValidatorTest extends TestCase
 {
-    public function testValidate()
+    public function testValidate(): void
     {
         $validator = new HeaderValidator('|https?://example\.com/?|');
         $this->assertEquals('OK', $validator(new Response(301, ['Location' => 'http://example.com'])));

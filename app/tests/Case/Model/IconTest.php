@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 class IconTest extends TestCase
 {
-    public function testGetAsync()
+    public function testGetAsync(): void
     {
         $url = 'https://pbs.twimg.com/profile_images/114514/example_bigger.jpg';
         $handler = HandlerStack::create(new MockHandler([

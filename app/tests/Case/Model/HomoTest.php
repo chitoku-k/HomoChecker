@@ -57,7 +57,7 @@ class HomoTest extends DatabaseTestCase
         $this->Homo = static::$homo ?? static::$homo = new Homo($this->connection->getConnection(), 'users');
     }
 
-    public function testFindAll()
+    public function testFindAll(): void
     {
         $actual = $this->Homo->find();
 
@@ -71,7 +71,7 @@ class HomoTest extends DatabaseTestCase
         }
     }
 
-    public function testFindByScreenName()
+    public function testFindByScreenName(): void
     {
         $actual = $this->Homo->find([
             'screen_name' => 'foo',
@@ -86,7 +86,7 @@ class HomoTest extends DatabaseTestCase
         }
     }
 
-    public function testFindByScreenNameAndUrl()
+    public function testFindByScreenNameAndUrl(): void
     {
         $actual = $this->Homo->find([
             'screen_name' => 'foo',
@@ -104,7 +104,7 @@ class HomoTest extends DatabaseTestCase
     /**
      * @expectedException RuntimeException
      */
-    public function testFindThrows()
+    public function testFindThrows(): void
     {
         $homo = new Homo;
         $homo->find();

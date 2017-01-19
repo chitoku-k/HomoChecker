@@ -47,7 +47,7 @@ class BadgeActionTest extends TestCase
                                    ->will($this->returnValue($statuses));
     }
 
-    public function testAllCount()
+    public function testAllCount(): void
     {
         $action = new BadgeAction($this->Container);
         $request = Request::createFromEnvironment(Environment::mock([
@@ -60,7 +60,7 @@ class BadgeActionTest extends TestCase
         $this->assertRegExp('/3(?: |%20|\+)registered/', $actual);
     }
 
-    public function testStatusCount()
+    public function testStatusCount(): void
     {
         $action = new BadgeAction($this->Container);
         $request = Request::createFromEnvironment(Environment::mock([
@@ -73,7 +73,7 @@ class BadgeActionTest extends TestCase
         $this->assertRegExp('/2(?: |%20|\+)ok/', $actual);
     }
 
-    public function testParams()
+    public function testParams(): void
     {
         $action = new BadgeAction($this->Container);
         $request = Request::createFromEnvironment(Environment::mock([

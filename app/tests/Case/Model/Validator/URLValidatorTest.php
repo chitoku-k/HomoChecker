@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class URLValidatorTest extends TestCase
 {
-    public function testValidate()
+    public function testValidate(): void
     {
         $validator = new URLValidator('|https?://example\.com/?|');
         $this->assertEquals('CONTAINS', $validator(new Response(200, [], '
