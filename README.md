@@ -64,7 +64,7 @@ Internet Explorer 10 以上で動くのでたいていのホモは救われま�
 
 ### バックエンド
 
-- PHP 7.0.7 以上
+- PHP 7.1 以上
 - cURL 7.49.0 以上
 - Node.js 6 以上
 
@@ -227,7 +227,7 @@ data: end
 
 
 [php-link]:             https://secure.php.net
-[php-badge]:            https://img.shields.io/badge/php-%3e%3d%207.0.7-8892bf.svg?style=flat-square
+[php-badge]:            https://img.shields.io/badge/php-%3e%3d%207.1-8892bf.svg?style=flat-square
 [travis-link]:          https://travis-ci.org/chitoku-k/HomoChecker
 [travis-badge]:         https://img.shields.io/travis/chitoku-k/HomoChecker.svg?style=flat-square
 [dependencies-link]:    https://gemnasium.com/github.com/chitoku-k/HomoChecker
