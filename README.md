@@ -67,6 +67,7 @@ Internet Explorer 10 以上で動くのでたいていのホモは救われま�
 - PHP 7.1 以上
 - cURL 7.49.0 以上
 - Node.js 6 以上
+- MySQL
 
 ## ビルド環境
 
@@ -79,6 +80,36 @@ Internet Explorer 10 以上で動くのでたいていのホモは救われま�
 $ composer install
 $ npm install
 ```
+
+続いてデータベースとテーブルを作成します:
+
+```sql
+-- 開発用
+CREATE DATABASE `homo`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `screen_name` varchar(20) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `screen_name` (`screen_name`)
+) DEFAULT CHARSET=utf8;
+
+-- テスト用
+CREATE DATABASE `homo_test`;
+```
+
+作成したデータベースを開発用とテスト用のファイルに設定します:
+
+```sh
+# 開発用
+$ cp app/src/config.sample.php app/src/config.php
+$ vim app/src/config.php
+
+# テスト用
+$ cp phpunit.xml.dist phpunit.xml
+$ vim phpunit.xml
+```
+
 
 ## 動作確認
 
