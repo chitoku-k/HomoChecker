@@ -24,9 +24,9 @@ class Container extends \Slim\Container
 
         foreach (self::ERRORS as $type => $code) {
             $this[$type] = function () use ($code) {
-                return function (Request $request, Response $response, $e) use ($code) {
+                return function (Request $request, Response $response, $e = null) use ($code) {
                     error_log((string)$e);
-                    return $this->onError($code, $request, $response, $e);
+                    return $this->onError($code, $request, $response);
                 };
             };
         }
