@@ -1,0 +1,13 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    background: #efefef;
+}
+body {
+    margin-top: 60px;
+}
+@media (max-width: 767px) {
+    body {
+        margin-top: 44px;
+    }
+}

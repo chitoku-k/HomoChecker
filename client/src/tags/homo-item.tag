@@ -2,10 +2,10 @@
     <div class="subdomain">
         <h2>
             <a href={ "https://twitter.com/" + homo.screen_name } target="_blank">
-                <img src={ homo.icon } width="48" height="48">
+                <img src={ homo.icon } width="64" height="64">
             </a>
-            <a class="url" href={ homo.url } target="_blank">{ homo.display_url }</a>
             <i class={ icon-lock: homo.secure }></i>
+            <a class="url" href={ homo.url } target="_blank">{ homo.display_url }</a>
         </h2>
     </div>
     <div class="duration">{ Math.round(duration * 1000) } ms</div>
@@ -16,20 +16,19 @@
         icon-block: status === "ERROR",
         icon-attention: status === "CONTAINS"
     }></i>
-    <div class="clearfix">
-    </div>
     <style type="text/scss">
         homo-item {
             display: block;
             border: 1px solid #dfdfdf;
             background: #fff;
             color: #111;
-            padding: 20px;
+            padding: 10px;
             font-family: Helvetica, "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ Pro W3", Meiryo, sans-serif;
 
             a {
                 color: #000;
                 text-decoration: none;
+                display: inline-block;
                 -webkit-tap-highlight-color: initial;
             }
 
@@ -37,14 +36,15 @@
                 margin-right: 54px;
 
                 img {
-                    margin: 0 8px 0 0;
+                    margin: 0 4px 0 0;
                     vertical-align: middle;
                     border: none;
                 }
 
                 .url {
                     span {
-                        background: #eae1d3;
+                        border-bottom: 4px solid #af9369;
+                        padding-bottom: 2px;
                     }
 
                     &:hover {
@@ -63,20 +63,25 @@
                     line-height: 1.1;
 
                     .icon-lock {
+                        float: right;
                         font-size: 22px;
-                        padding: 0 6px;
-                        margin-left: -5px;
-                        margin-right: 4px;
-                        vertical-align: 3px;
+                        margin-top: 20px;
+                        margin-right: 20px;
+                    }
+
+                    &:after {
+                        display: block;
+                        content: "";
+                        clear: both;
                     }
                 }
             }
 
             .status {
                 float: right;
-                margin-top: -45px;
                 font-size: 42px;
                 padding: 0 4px;
+                margin-top: -55px;
                 margin-right: 4px;
 
                 &.icon-ok {
@@ -84,11 +89,9 @@
                 }
                 &.icon-cancel {
                     color: #c9302c;
-                    margin-right: 10px;
                 }
                 &.icon-block {
                     color: #c9302c;
-                    margin-right: 5px;
                 }
                 &.icon-attention {
                     color: #ec971f;
@@ -97,17 +100,10 @@
 
             .duration {
                 float: right;
-                margin-top: -35px;
+                margin-top: -45px;
                 margin-right: 80px;
                 font-size: 22px;
                 color: #666;
-            }
-
-            .clearfix {
-                &:before, &:after {
-                    content: " ";
-                    display: table;
-                }
             }
 
             & + & {
@@ -115,43 +111,38 @@
             }
 
             @media (max-width: 767px) {
-                padding: 12px;
+                padding: 8px;
 
                 .subdomain {
                     img {
-                        width: 32px;
-                        height: 32px;
-                        margin-right: 4px;
+                        width: 40px;
+                        height: 40px;
+                        margin-right: 2px;
                     }
 
                     h2 {
                         font-size: 18px;
-                        margin-right: 30px;
+                        margin-right: 0;
+                        width: calc(100% - 45px);
 
                         .icon-lock {
                             font-size: 18px;
-                            vertical-align: 0;
+                            margin-top: 10px;
+                            margin-right: 0;
                         }
                     }
                 }
 
                 .status {
-                    margin-top: -48px;
+                    margin-top: -52px;
                     margin-right: -5px;
                     padding: 18px 2px 0;
                     font-size: 24px;
-
-                    &.icon-cancel {
-                        margin-right: -4px;
-                    }
-                    &.icon-block {
-                        margin-right: -5px;
-                    }
                 }
 
                 .duration {
                     font-size: 15px;
-                    margin-top: -25px;
+                    margin-top: -30px;
                     margin-right: 40px;
                 }
 

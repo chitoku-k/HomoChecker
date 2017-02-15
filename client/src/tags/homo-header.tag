@@ -7,14 +7,6 @@
         </ul>
     </nav>
     <style type="text/scss">
-        body {
-            margin-top: 60px;
-
-            @media (max-width: 767px) {
-                margin-top: 44px;
-            }
-        }
-
         homo-header {
             position: fixed;
             top: 0;
