@@ -6,7 +6,7 @@ use GuzzleHttp\ClientInterface;
 
 class Icon implements IconInterface
 {
-    public static $default = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_0_200x200.png';
+    public static $default = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png';
 
     public function __construct(ClientInterface $client)
     {
