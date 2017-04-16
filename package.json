@@ -31,7 +31,7 @@
   },
   "homepage": "https://homo.chitoku.jp:4545/",
   "dependencies": {
-    "babel-core": "^6.24.0",
+    "babel-core": "^6.24.1",
     "babel-preset-es2015-riot": "^1.1.0",
     "del": "^2.2.2",
     "eslint-plugin-riot": "^0.1.6",
@@ -44,8 +44,8 @@
     "gulp-load-plugins": "^1.5.0",
     "gulp-riot": "^1.1.0",
     "gulp-uglify": "^2.1.2",
-    "node-sass": "^4.5.1",
-    "riot": "^3.3.2"
+    "node-sass": "^4.5.2",
+    "riot": "^3.4.2"
   },
   "devDependencies": {
     "event-source-polyfill": "0.0.9"
