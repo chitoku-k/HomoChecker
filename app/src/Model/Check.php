@@ -43,11 +43,6 @@ class Check
                         break;
                     }
                 }
-                foreach ($this->validators as $validator) {
-                    if ($status = $validator($response)) {
-                        return yield [$status, $time];
-                    }
-                }
                 return yield ['WRONG', $time];
             } catch (RequestException $e) {
                 return yield ['ERROR', $total_time];
