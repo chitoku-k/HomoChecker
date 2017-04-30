@@ -45,7 +45,7 @@
     "gulp-riot": "^1.1.1",
     "gulp-uglify": "^2.1.2",
     "node-sass": "^4.5.2",
-    "riot": "^3.4.2"
+    "riot": "^3.4.3"
   },
   "devDependencies": {
     "event-source-polyfill": "0.0.9"
