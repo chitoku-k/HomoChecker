@@ -48,6 +48,20 @@ server {
 }
 ```
 
+#### h2o
+
+```yaml
+hosts:
+    "homo.example.com:80":
+        listen:
+            port: 80
+        paths:
+            "/":
+                redirect:
+                    url: https://twitter.com/mpyw
+                    status: 301
+```
+
 Web サーバーが静的コンテンツ配信のみの場合は HTML によるリダイレクトを行います。
 
 ```html
