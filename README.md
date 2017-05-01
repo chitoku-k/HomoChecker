@@ -48,7 +48,7 @@ server {
 }
 ```
 
-#### h2o
+#### H2O
 
 ```yaml
 hosts:
