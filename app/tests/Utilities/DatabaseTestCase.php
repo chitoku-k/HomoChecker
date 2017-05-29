@@ -1,7 +1,7 @@
 <?php
 namespace HomoChecker\Test\Utilities;
 
-use PHPUnit_Extensions_Database_TestCase as TestCase;
+use PHPUnit\DbUnit\TestCase as TestCase;
 
 abstract class DatabaseTestCase extends TestCase
 {

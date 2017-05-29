@@ -1,10 +1,10 @@
 <?php
 namespace HomoChecker\Test\Utilities;
 
-use PHPUnit_Extensions_Database_DataSet_AbstractDataSet as AbstractDataSet;
-use PHPUnit_Extensions_Database_DataSet_DefaultTableMetaData as DefaultTableMetaData;
-use PHPUnit_Extensions_Database_DataSet_DefaultTable as DefaultTable;
-use PHPUnit_Extensions_Database_DataSet_DefaultTableIterator as DefaultTableIterator;
+use PHPUnit\DbUnit\DataSet\AbstractDataSet as AbstractDataSet;
+use PHPUnit\DbUnit\DataSet\DefaultTableMetadata as DefaultTableMetadata;
+use PHPUnit\DbUnit\DataSet\DefaultTable as DefaultTable;
+use PHPUnit\DbUnit\DataSet\DefaultTableIterator as DefaultTableIterator;
 
 class ArrayDataSet extends AbstractDataSet
 {
@@ -14,7 +14,7 @@ class ArrayDataSet extends AbstractDataSet
     {
         foreach ($data as $name => $rows) {
             $columns = array_keys($rows[0] ?? []);
-            $metaData = new DefaultTableMetaData($name, $columns);
+            $metaData = new DefaultTableMetadata($name, $columns);
             $table = new DefaultTable($metaData);
 
             foreach ($rows as $row) {
