@@ -156,7 +156,7 @@
             }
         }
     </style>
-    <script>
+    <script type="es6">
         this.keywords = [ "homo", "ホモ" ];
 
         this.on("updated", () => {

@@ -34,7 +34,15 @@ module.exports = {
                 ],
             },
             {
-                test: /\.js$|\.tag$/,
+                test: /\.(js|tag)$/,
+                enforce: "pre",
+                exclude: /node_modules/,
+                use: [
+                    { loader: "eslint-loader" },
+                ],
+            },
+            {
+                test: /\.(js|tag)$/,
                 enforce: "post",
                 exclude: /node_modules/,
                 use: [

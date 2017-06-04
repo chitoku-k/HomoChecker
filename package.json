@@ -26,6 +26,7 @@
     "babel-loader": "^7.0.0",
     "babel-preset-es2015-riot": "^1.1.0",
     "css-loader": "^0.28.4",
+    "eslint-loader": "^1.7.1",
     "eslint-plugin-riot": "^0.1.6",
     "event-source-polyfill": "0.0.9",
     "file-loader": "^0.11.1",
