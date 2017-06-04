@@ -57,9 +57,6 @@ module.exports = {
     },
     plugins: [
         new webpack.optimize.UglifyJsPlugin(),
-        new webpack.ProvidePlugin({
-            riot: "riot",
-        }),
         new HtmlWebpackPlugin({
             title: "まっぴー (@mpyw) 被害者の会",
             filename: "index.html",
