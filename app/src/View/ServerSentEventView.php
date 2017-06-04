@@ -21,6 +21,9 @@ class ServerSentEventView implements ViewInterface
         $this->flush();
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function render($data): void
     {
         echo "event: {$this->event}\n";
