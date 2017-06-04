@@ -6,7 +6,11 @@
             display: inline-block;
             margin-right: -15px;
             margin-left: -3px;
-            transform: translate(0px, -3px);
+            transform: translate(0px, -5px);
+
+            @media (max-width: 767px) {
+                transform: translate(0px, -3px);  
+            }
 
             .fa-mars {
                 color: white;
@@ -16,7 +20,7 @@
             .part-active {
                 position: relative;
                 top: 0.55em;
-                left: -2.2em;
+                left: -1.7em;
             }
 
             &.start {
