@@ -9,9 +9,11 @@ class ServerSentEventView implements ViewInterface
     {
         $this->event = $event;
 
+        // @codeCoverageIgnoreStart
         if (!headers_sent()) {
             header('Content-Type: text/event-stream');
         }
+        // @codeCoverageIgnoreEnd
 
         // 2 KiB padding
         echo ":" . str_repeat(" ", 2048) . "\n";

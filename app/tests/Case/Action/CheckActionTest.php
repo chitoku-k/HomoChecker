@@ -85,12 +85,15 @@ class CheckActionTest extends TestCase
         $this->assertJsonStringEqualsJsonString($actual, $expected);
     }
 
-    public function testRouteToSSE(): void
+    /**
+     * @dataProvider formatProvider
+     */
+    public function testRouteToSSE($format = null): void
     {
         $action = new CheckAction($this->Container);
         $request = Request::createFromEnvironment(Environment::mock([
             'REQUEST_URI' => '/check',
-            'QUERY_STRING' => 'format=sse',
+            'QUERY_STRING' => "format={$format}",
         ]));
 
         ob_start(null, 0, PHP_OUTPUT_HANDLER_CLEANABLE | PHP_OUTPUT_HANDLER_REMOVABLE);
@@ -100,5 +103,17 @@ class CheckActionTest extends TestCase
         foreach (explode("\n", $body) as $actual) {
             $this->assertRegExp('/\A\z|^(event|data)?:/', $actual);
         }
+    }
+
+    public function formatProvider()
+    {
+        return [
+            'default' => [
+                '',
+            ],
+            'sse' => [
+                'sse',
+            ],
+        ];
     }
 }
