@@ -9,7 +9,9 @@ class ServerSentEventView implements ViewInterface
     {
         $this->event = $event;
 
-        header('Content-Type: text/event-stream');
+        if (!headers_sent()) {
+            header('Content-Type: text/event-stream');
+        }
 
         // 2 KiB padding
         echo ":" . str_repeat(" ", 2048) . "\n";
@@ -26,7 +28,7 @@ class ServerSentEventView implements ViewInterface
 
     public function flush(): void
     {
-        ob_flush();
+        @ob_flush();
         flush();
     }
 
