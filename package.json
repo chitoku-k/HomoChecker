@@ -4,7 +4,8 @@
   "description": "A client application for HomoChecker",
   "main": "client/src/app.js",
   "scripts": {
-    "start": "webpack"
+    "start": "webpack",
+    "watch": "webpack --watch"
   },
   "repository": {
     "type": "git",
