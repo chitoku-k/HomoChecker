@@ -6,6 +6,7 @@ php:
 cache:
   directories:
   - vendor
+  - node_modules
 
 env:
   global:
@@ -15,6 +16,8 @@ before_install:
 - if [[ "$TRAVIS_BRANCH" != "master" || "$TRAVIS_PULL_REQUEST" != "false" ]]; then
     return 0;
   fi
+- nvm install node
+- nvm alias default node
 - openssl aes-256-cbc -K $encrypted_32aa7ee0d8d8_key -iv $encrypted_32aa7ee0d8d8_iv
   -in ssh.tar.enc -out ssh.tar -d
 - tar xvf ssh.tar
@@ -23,6 +26,7 @@ before_install:
 
 install:
 - composer install
+- npm install
 
 before_script:
 - git remote add homo $TARGET
@@ -35,6 +39,7 @@ before_script:
 
 script:
 - composer test
+- npm start
 
 after_success:
 - composer coveralls
