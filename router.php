@@ -7,7 +7,7 @@ if (file_exists(__DIR__ . $filename)) {
     return false;
 }
 
-if (file_exists($target = __DIR__ . "/client/dest{$filename}")) {
+if (file_exists($target = __DIR__ . "/client/dist{$filename}")) {
     // Output appropriate header
     switch (substr($target, strrpos($target, '.') + 1)) {
         case 'css':
