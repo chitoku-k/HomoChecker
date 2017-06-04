@@ -1,6 +1,6 @@
 <homo-anime class="start">
-    <i class="icon-mars part-passive"></i>
-    <i class="icon-mars part-active"></i>
+    <i class="fa fa-mars part-passive"></i>
+    <i class="fa fa-mars part-active"></i>
     <style type="text/scss">
         homo-anime {
             display: inline-block;
@@ -8,7 +8,7 @@
             margin-left: -3px;
             transform: translate(0px, -3px);
 
-            .icon-mars {
+            .fa-mars {
                 color: white;
                 display: inline-block;
             }

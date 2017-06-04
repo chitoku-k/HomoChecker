@@ -56,7 +56,7 @@
                         background: #54452f;
                     }
 
-                    .icon-mars-double {
+                    .fa-mars-double {
                         width: 20px;
                     }
 

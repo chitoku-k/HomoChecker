@@ -4,17 +4,18 @@
             <a href={ "https://twitter.com/" + homo.screen_name } target="_blank">
                 <img src={ homo.icon } width="64" height="64">
             </a>
-            <i class={ icon-lock: homo.secure }></i>
+            <i class={ fa: true, fa-lock: homo.secure }></i>
             <a class="url" href={ homo.url } target="_blank">{ homo.display_url }</a>
         </h2>
     </div>
     <div class="duration">{ Math.round(duration * 1000) } ms</div>
     <i class={
         status: true,
-        icon-ok: status === "OK",
-        icon-cancel: status === "WRONG",
-        icon-block: status === "ERROR",
-        icon-attention: status === "CONTAINS"
+        fa: true,
+        fa-check: status === "OK",
+        fa-ban: status === "WRONG",
+        fa-times: status === "ERROR",
+        fa-exclamation-triangle: status === "CONTAINS"
     }></i>
     <style type="text/scss">
         homo-item {
@@ -62,7 +63,7 @@
                     text-overflow: ellipsis;
                     line-height: 1.1;
 
-                    .icon-lock {
+                    .fa-lock {
                         float: right;
                         font-size: 22px;
                         margin-top: 20px;
@@ -82,18 +83,20 @@
                 font-size: 42px;
                 padding: 0 4px;
                 margin-top: -55px;
-                margin-right: 4px;
+                margin-right: 10px;
+                text-align: center;
+                min-width: 40px;
 
-                &.icon-ok {
+                &.fa-check {
                     color: #449d44;
                 }
-                &.icon-cancel {
+                &.fa-times {
                     color: #c9302c;
                 }
-                &.icon-block {
+                &.fa-ban {
                     color: #c9302c;
                 }
-                &.icon-attention {
+                &.fa-exclamation-triangle {
                     color: #ec971f;
                 }
             }
@@ -125,7 +128,7 @@
                         margin-right: 0;
                         width: calc(100% - 45px);
 
-                        .icon-lock {
+                        .fa-lock {
                             font-size: 18px;
                             margin-top: 10px;
                             margin-right: 0;
@@ -137,6 +140,7 @@
                     margin-top: -52px;
                     margin-right: -5px;
                     padding: 18px 2px 0;
+                    min-width: 35px;
                     font-size: 24px;
                 }
 
