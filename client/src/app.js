@@ -1,7 +1,7 @@
 import riot from "riot";
 import "font-awesome/scss/font-awesome.scss";
 import "event-source-polyfill";
-import "./styles.css";
+import "./styles.scss";
 import "./tags/homo-anime";
 import "./tags/homo-app";
 import "./tags/homo-content";

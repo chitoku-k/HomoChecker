@@ -5,9 +5,7 @@ html, body {
 }
 body {
     margin-top: 60px;
-}
-@media (max-width: 767px) {
-    body {
+    @media (max-width: 767px) {
         margin-top: 44px;
     }
 }

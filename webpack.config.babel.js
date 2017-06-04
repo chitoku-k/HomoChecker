@@ -1,5 +1,6 @@
 import webpack from "webpack";
 import path from "path";
+import CleanWebpackPlugin from "clean-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 
 module.exports = {
@@ -10,13 +11,6 @@ module.exports = {
     },
     module: {
         rules: [
-            {
-                test: /\.css$/,
-                use: [
-                    { loader: "style-loader" },
-                    { loader: "css-loader" },
-                ],
-            },
             {
                 test: /\.scss$/,
                 use: [
@@ -52,7 +46,7 @@ module.exports = {
             {
                 test: /\.(woff2?|ttf|eot|svg)(\?v=[\d.]+|\?[\s\S]+)?$/,
                 use: [
-                    { loader: "file-loader" },
+                    { loader: "file-loader?name=[name].[ext]" },
                 ],
             },
         ],
@@ -65,6 +59,9 @@ module.exports = {
     },
     plugins: [
         new webpack.optimize.UglifyJsPlugin(),
+        new CleanWebpackPlugin(
+            path.join(__dirname, "/client/dist"),
+        ),
         new HtmlWebpackPlugin({
             title: "まっぴー (@mpyw) 被害者の会",
             filename: "index.html",
