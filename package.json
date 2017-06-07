@@ -32,15 +32,14 @@
     "eslint-loader": "^1.7.1",
     "eslint-plugin-riot": "^0.1.6",
     "event-source-polyfill": "0.0.9",
-    "file-loader": "^0.11.1",
+    "file-loader": "^0.11.2",
     "font-awesome": "^4.7.0",
-    "fontello-webpack-plugin": "^0.4.1",
     "html-webpack-plugin": "^2.28.0",
     "node-sass": "^4.5.3",
     "riot": "^3.5.1",
     "riot-tag-loader": "^1.0.0",
     "sass-loader": "^6.0.5",
-    "style-loader": "^0.18.1",
+    "style-loader": "^0.18.2",
     "webpack": "^2.6.1"
   }
 }
