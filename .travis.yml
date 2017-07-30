@@ -39,7 +39,7 @@ before_script:
 
 script:
 - composer test
-- npm start
+- npm run build
 
 after_success:
 - composer coveralls

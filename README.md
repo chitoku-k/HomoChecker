@@ -141,7 +141,7 @@ npm から gulp タスクを実行します。
 
 ```sh
 $ cd HomoChecker
-$ npm start
+$ npm run build
 ```
 
 ソースコードを変更した際に即座にコンパイルを行う場合は次のコマンドを実行します:

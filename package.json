@@ -4,7 +4,7 @@
   "description": "A client application for HomoChecker",
   "main": "client/src/app.js",
   "scripts": {
-    "start": "webpack",
+    "build": "webpack",
     "watch": "webpack --watch"
   },
   "repository": {
@@ -24,22 +24,22 @@
   "homepage": "https://homo.chitoku.jp:4545/",
   "devDependencies": {
     "babel-core": "^6.25.0",
-    "babel-loader": "^7.1.0",
+    "babel-loader": "^7.1.1",
     "babel-preset-es2015-riot": "^1.1.0",
     "clean-webpack-plugin": "^0.1.16",
     "css-loader": "^0.28.4",
-    "eslint": "^4.0.0",
-    "eslint-loader": "^1.8.0",
+    "eslint": "^4.3.0",
+    "eslint-loader": "^1.9.0",
     "eslint-plugin-riot": "^0.1.7",
     "event-source-polyfill": "0.0.9",
     "file-loader": "^0.11.2",
     "font-awesome": "^4.7.0",
-    "html-webpack-plugin": "^2.28.0",
+    "html-webpack-plugin": "^2.29.0",
     "node-sass": "^4.5.3",
-    "riot": "^3.6.0",
+    "riot": "^3.6.1",
     "riot-tag-loader": "^1.0.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
-    "webpack": "^3.0.0"
+    "webpack": "^3.4.1"
   }
 }
