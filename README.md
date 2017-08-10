@@ -137,7 +137,7 @@ http://localhost:4545
 
 ### フロントエンド
 
-npm から gulp タスクを実行します。
+npm から webpack を実行します。
 
 ```sh
 $ cd HomoChecker
