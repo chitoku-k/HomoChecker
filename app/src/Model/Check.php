@@ -76,7 +76,7 @@ class Check
                 };
             }, $users),
             [
-                'concurrency' => 32,
+                'concurrency' => 4,
             ]
         );
     }

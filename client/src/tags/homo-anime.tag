@@ -6,6 +6,7 @@
             display: inline-block;
             margin-right: -15px;
             margin-left: -3px;
+            min-width: 30px;
             transform: translate(0px, -5px);
 
             @media (max-width: 767px) {
