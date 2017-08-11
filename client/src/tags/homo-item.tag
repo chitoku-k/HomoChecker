@@ -8,8 +8,8 @@
                 <a class="url" href={ homo.url } target="_blank">{ homo.display_url }</a>
             </h2>
         </div>
+        <i if={ homo.secure } class="fa fa-lock"></i>
         <div class="result">
-            <i class={ fa: true, fa-lock: homo.secure }></i>
             <div if={ status !== "ERROR" } class="duration">{ Math.round(duration * 1000) } ms</div>
             <i class={
                 status: true,
@@ -28,6 +28,7 @@
             width: calc(100% - 10px * 2 - 1px * 2);
 
             .container {
+                position: relative;
                 display: flex;
                 align-items: center;
                 border: 1px solid #dfdfdf;
@@ -50,10 +51,11 @@
             }
 
             .subdomain {
-                overflow: hidden;
+                margin-right: 6px;
 
                 .url {
                     span {
+                        display: inline-block;
                         border-bottom: 4px solid #af9369;
                         padding-bottom: 2px;
                     }
@@ -68,22 +70,27 @@
                     font-size: 32px;
                     font-weight: 700;
                     margin: 0;
-                    line-height: 2;
+                    word-break: break-all;
                     overflow: hidden;
                     text-overflow: ellipsis;
                 }
+            }
+
+            .fa-lock {
+                position: absolute;
+                top: 0;
+                right: 0;
+                background-color: #5c9a4f;
+                color: #fff;
+                font-size: 16px;
+                padding: 3px 10px;
             }
 
             .result {
                 display: flex;
                 align-items: center;
                 margin-left: auto;
-
-                .fa-lock {
-                    color: #444;
-                    font-size: 22px;
-                    margin-right: 16px;
-                }
+                margin-right: 10px;
 
                 .duration {
                     font-size: 22px;
@@ -133,11 +140,15 @@
                     }
                 }
 
+                .fa-lock {
+                    font-size: 10px;
+                    padding: 3px 6px;
+                }
+
                 .result {
-                    .fa-lock {
-                        margin-right: 8px;
-                        font-size: 18px;
-                    }
+                    flex-direction: column-reverse;
+                    min-width: 50px;
+                    margin-right: 0;
 
                     .duration {
                         font-size: 15px;
@@ -147,6 +158,29 @@
                         padding: 0 0 0 5px;
                         min-width: 30px;
                         font-size: 24px;
+                    }
+                }
+            }
+
+            @media (max-width: 450px) {
+                .subdomain {
+                    h2 {
+                        font-size: 16px;
+                    }
+                }
+
+                .fa-lock {
+                    font-size: 10px;
+                }
+
+                .result {
+                    .duration {
+                        font-size: 14px;
+                    }
+
+                    .status {
+                        min-width: 20px;
+                        font-size: 20px;
                     }
                 }
             }
