@@ -79,7 +79,7 @@
             .fa-lock {
                 position: absolute;
                 top: 0;
-                right: 0;
+                left: 0;
                 background-color: #5c9a4f;
                 color: #fff;
                 font-size: 16px;
@@ -90,7 +90,6 @@
                 display: flex;
                 align-items: center;
                 margin-left: auto;
-                margin-right: 10px;
 
                 .duration {
                     font-size: 22px;
@@ -148,7 +147,6 @@
                 .result {
                     flex-direction: column-reverse;
                     min-width: 50px;
-                    margin-right: 0;
 
                     .duration {
                         font-size: 15px;
