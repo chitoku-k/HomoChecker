@@ -4,7 +4,7 @@
             <i class="fa fa-refresh fa-spin"></i>
             ホモを集めています...
         </div>
-        <homo-item each={ items } data-duration={ duration } />
+        <homo-item each={ items } data-duration={ status === "ERROR" ? Infinity : duration } />
     </div>
     <style type="text/scss">
         homo-content {
@@ -44,7 +44,7 @@
             }
 
             @media (max-width: 767px) {
-                padding: 8px;
+                padding: 8px 8px 0;
             }
         }
     </style>

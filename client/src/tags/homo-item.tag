@@ -10,7 +10,7 @@
         </div>
         <div class="result">
             <i class={ fa: true, fa-lock: homo.secure }></i>
-            <div class="duration">{ Math.round(duration * 1000) } ms</div>
+            <div if={ status !== "ERROR" } class="duration">{ Math.round(duration * 1000) } ms</div>
             <i class={
                 status: true,
                 fa: true,
