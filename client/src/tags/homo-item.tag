@@ -187,7 +187,7 @@
     <script type="es6">
         this.keywords = [ "homo", "ホモ" ];
 
-        this.on("updated", () => {
+        this.on("mount", () => {
             const [ elm ] = this.root.getElementsByClassName("url");
             if (!elm) {
                 return;
