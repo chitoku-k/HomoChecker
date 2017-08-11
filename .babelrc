@@ -1,1 +1,13 @@
-{ "presets": ["es2015-riot"] }
+{
+  "presets": [
+    "es2015-riot",
+    [
+      "env", {
+        "modules": false,
+        "targets": {
+          "browsers": ["last 2 versions"]
+        }
+      }
+    ]
+  ]
+}

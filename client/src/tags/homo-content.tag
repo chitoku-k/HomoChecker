@@ -49,6 +49,7 @@
         }
     </style>
     <script type="es6">
+        import "babel-polyfill";
         import Shuffle from "shufflejs";
 
         this.items = [];
