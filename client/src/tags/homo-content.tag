@@ -1,10 +1,10 @@
 <homo-content>
     <div class="wrapper">
-        <div class="loading" if={ !items.length }>
+        <div class="loading" if={ !opts.items.length }>
             <i class="fa fa-refresh fa-spin"></i>
             ホモを集めています...
         </div>
-        <homo-item each={ items } data-duration={ status === "ERROR" ? Infinity : duration } />
+        <homo-item each={ opts.items } data-duration={ status === "ERROR" ? Infinity : duration } />
     </div>
     <style type="text/scss">
         homo-content {
@@ -51,7 +51,6 @@
     <script type="es6">
         import Shuffle from "shufflejs";
 
-        this.items = [];
         this.on("mount", () => {
             this.shuffle = new Shuffle(document.querySelector(".wrapper"), {
                 itemSelector: "homo-item",
@@ -61,6 +60,9 @@
         });
 
         this.on("updated", () => {
+            if (!opts.items.length) {
+                return;
+            }
             this.shuffle.add([ this.root.querySelector("homo-item:last-child") ]);
             this.shuffle.sort({
                 by: elm => +elm.dataset.duration,
@@ -68,9 +70,16 @@
         });
 
         const source = new EventSource("/check/");
+        source.addEventListener("initialize", event => {
+            opts.progress.max = JSON.parse(event.data).count;
+            opts.progress.trigger("update");
+        });
         source.addEventListener("response", event => {
-            this.items.push(JSON.parse(event.data));
+            opts.items.push(JSON.parse(event.data));
             this.update();
+
+            opts.progress.length = opts.items.length;
+            opts.progress.trigger("update");
         });
         source.addEventListener("close", event => {
             source.close();

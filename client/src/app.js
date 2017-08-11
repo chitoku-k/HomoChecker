@@ -10,6 +10,7 @@ import "./tags/homo-app";
 import "./tags/homo-content";
 import "./tags/homo-header";
 import "./tags/homo-item";
+import "./tags/homo-progress";
 
 {
     const meta = document.createElement("meta");
@@ -20,5 +21,11 @@ import "./tags/homo-item";
     const app = document.createElement("homo-app");
     document.body.appendChild(app);
 
-    riot.mount("*");
+    riot.mount("homo-app", {
+        items: [],
+        progress: {
+            max: 0,
+            length: 0,
+        },
+    });
 }
