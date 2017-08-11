@@ -113,6 +113,8 @@
             }
 
             @media (max-width: 767px) {
+                width: calc(100% - 8px * 2 - 1px * 2);
+
                 .container {
                     padding: 8px;
                     margin-bottom: 8px;
