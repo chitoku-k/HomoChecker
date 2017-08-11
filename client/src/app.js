@@ -1,6 +1,9 @@
+// polyfill
+import "babel-polyfill";
+import "event-source-polyfill";
+
 import riot from "riot";
 import "font-awesome/scss/font-awesome.scss";
-import "event-source-polyfill";
 import "./styles.scss";
 import "./tags/homo-anime";
 import "./tags/homo-app";

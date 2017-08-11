@@ -1,13 +1,11 @@
 {
   "presets": [
-    "es2015-riot",
-    [
-      "env", {
-        "modules": false,
-        "targets": {
-          "browsers": ["last 2 versions"]
-        }
-      }
-    ]
+    ["env", {
+      "targets": {
+        "browsers": ["last 2 versions", "not ie <= 10", "not android >= 4.4.3"]
+      },
+      "useBuiltIns": true,
+      "modules": false
+    }]
   ]
 }

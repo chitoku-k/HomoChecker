@@ -27,7 +27,6 @@
     "babel-loader": "^7.1.1",
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.6.0",
-    "babel-preset-es2015-riot": "^1.1.0",
     "clean-webpack-plugin": "^0.1.16",
     "css-loader": "^0.28.4",
     "eslint": "^4.4.1",

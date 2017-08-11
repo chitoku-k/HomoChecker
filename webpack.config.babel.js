@@ -1,7 +1,7 @@
-import webpack from "webpack";
-import path from "path";
-import CleanWebpackPlugin from "clean-webpack-plugin";
-import HtmlWebpackPlugin from "html-webpack-plugin";
+const webpack = require("webpack");
+const path = require("path");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     entry: "./client/src/app.js",
