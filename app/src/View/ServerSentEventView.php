@@ -24,9 +24,10 @@ class ServerSentEventView implements ViewInterface
     /**
      * @codeCoverageIgnore
      */
-    public function render($data): void
+    public function render($data, $event = null): void
     {
-        echo "event: {$this->event}\n";
+        $event = $event ?? $this->event;
+        echo "event: {$event}\n";
         echo "data: " . json_encode($data) . "\n\n";
         $this->flush();
     }

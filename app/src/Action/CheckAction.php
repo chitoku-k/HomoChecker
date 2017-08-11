@@ -28,8 +28,21 @@ class CheckAction extends ActionBase
 
     protected function bySSE(string $name = null): void
     {
+        $users = $this->container['homo']->find($name ? compact('name') : []);
+
+        // Output count
         $view = new ServerSentEventView('response');
+        $view->render(
+            [
+                'count' => count($users),
+            ],
+            'initialize'
+        );
+
+        // Output response
         $this->container['checker']->execute($name, [$view, 'render']);
+
+        // Close
         $view->close();
     }
 }

@@ -24,6 +24,11 @@ class CheckActionTest extends TestCase
     public function setUp()
     {
         parent::setUp();
+        $users = [
+            $this->user('foo', 'https://foo.example.com/1'),
+            $this->user('foo', 'https://foo.example.com/2'),
+            $this->user('bar', 'http://bar.example.com'),
+        ];
         $statuses = [
             new Status($this->user('foo', 'https://foo.example.com/1'), null, 'OK', 10),
             new Status($this->user('foo', 'https://foo.example.com/2'), null, 'NG', 20),
@@ -31,6 +36,11 @@ class CheckActionTest extends TestCase
         ];
 
         $this->Container = new Container;
+        $this->Container['homo'] = $this->createMock(Homo::class);
+        $this->Container['homo']->expects($this->any())
+                                ->method('find')
+                                ->will($this->returnValue($users));
+
         $this->Container['checker'] = $this->createMock(Check::class);
         $this->Container['checker']->expects($this->any())
                                    ->method('execute')

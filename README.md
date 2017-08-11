@@ -180,6 +180,9 @@ $ php -S 0.0.0.0:4545 router.php
 以下にストリームの例を示します。
 
 ```
+event: initialize
+data: {"count":30}
+
 event: response
 data: {"homo":{"screen_name":"java_shit","url":"https:\/\/homo.chitoku.jp","display_url":"homo.chitoku.jp","secure":true},"status":"OK","duration":0.45}
 
@@ -187,7 +190,8 @@ event: close
 data: end
 ```
 
-`event` が `response` の場合は `data` は以下に示す JSON データです。
+`event` が `initialize` の場合は `data` は `count` を持つ JSON データです。  
+`event` が `response` の場合は `data` は以下に示す JSON データです。  
 `event` が `close` の場合は `data` は常に `end` です。
 
 #### json
