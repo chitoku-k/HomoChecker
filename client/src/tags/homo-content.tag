@@ -4,7 +4,7 @@
             <i class="fa fa-refresh fa-spin"></i>
             ホモを集めています...
         </div>
-        <homo-item each={ items } />
+        <homo-item each={ items } data-duration={ duration } />
     </div>
     <style type="text/scss">
         homo-content {
@@ -49,17 +49,27 @@
         }
     </style>
     <script type="es6">
+        import Shuffle from "shufflejs";
+
         this.items = [];
+        this.on("mount", () => {
+            this.shuffle = new Shuffle(document.querySelector(".wrapper"), {
+                itemSelector: "homo-item",
+                spped: 500,
+                easing: "easeOutElastic",
+            });
+        });
+
+        this.on("updated", () => {
+            this.shuffle.add([ this.root.querySelector("homo-item:last-child") ]);
+            this.shuffle.sort({
+                by: elm => +elm.dataset.duration,
+            });
+        });
 
         const source = new EventSource("/check/");
         source.addEventListener("response", event => {
             this.items.push(JSON.parse(event.data));
-            this.items.sort((x, y) => {
-                if (x.duration === y.duration) {
-                    return x.homo.display_url < y.homo.display_url ? -1 : 1;
-                }
-                return x.duration - y.duration;
-            });
             this.update();
         });
         source.addEventListener("close", event => {

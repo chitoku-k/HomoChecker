@@ -1,33 +1,41 @@
 <homo-item>
-    <a href={ "https://twitter.com/" + homo.screen_name } target="_blank">
-        <img src={ homo.icon } width="64" height="64">
-    </a>
-    <div class="subdomain">
-        <h2>
-            <a class="url" href={ homo.url } target="_blank">{ homo.display_url }</a>
-        </h2>
-    </div>
-    <div class="result">
-        <i class={ fa: true, fa-lock: homo.secure }></i>
-        <div class="duration">{ Math.round(duration * 1000) } ms</div>
-        <i class={
-            status: true,
-            fa: true,
-            fa-check: status === "OK",
-            fa-ban: status === "WRONG",
-            fa-times: status === "ERROR",
-            fa-exclamation-triangle: status === "CONTAINS"
-        }></i>
+    <div class="container">
+        <a href={ "https://twitter.com/" + homo.screen_name } target="_blank">
+            <img src={ homo.icon } width="64" height="64">
+        </a>
+        <div class="subdomain">
+            <h2>
+                <a class="url" href={ homo.url } target="_blank">{ homo.display_url }</a>
+            </h2>
+        </div>
+        <div class="result">
+            <i class={ fa: true, fa-lock: homo.secure }></i>
+            <div class="duration">{ Math.round(duration * 1000) } ms</div>
+            <i class={
+                status: true,
+                fa: true,
+                fa-check: status === "OK",
+                fa-ban: status === "WRONG",
+                fa-times: status === "ERROR",
+                fa-exclamation-triangle: status === "CONTAINS"
+            }></i>
+        </div>
     </div>
     <style type="text/scss">
         homo-item {
-            display: flex;
-            align-items: center;
-            border: 1px solid #dfdfdf;
-            background: #fff;
             color: #111;
-            padding: 10px;
             font-family: Helvetica, "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ Pro W3", Meiryo, sans-serif;
+            width: calc(100% - 10px * 2 - 1px * 2);
+
+            .container {
+                display: flex;
+                align-items: center;
+                border: 1px solid #dfdfdf;
+                background: #fff;
+                padding: 10px;
+                margin-bottom: 15px;
+                width: 100%;
+            }
 
             a {
                 color: #000;
@@ -104,12 +112,10 @@
                 }
             }
 
-            & + & {
-                margin-top: 15px;
-            }
-
             @media (max-width: 767px) {
-                padding: 8px;
+                .container {
+                    margin-bottom: 8px;
+                }
 
                 img {
                     width: 40px;
@@ -139,10 +145,6 @@
                         min-width: 30px;
                         font-size: 24px;
                     }
-                }
-
-                & + & {
-                    margin-top: 8px;
                 }
             }
         }

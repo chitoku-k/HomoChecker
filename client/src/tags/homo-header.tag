@@ -15,6 +15,7 @@
             font-family: Helvetica, "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ Pro W3", Meiryo, sans-serif;
             font-size: 14px;
             width: 100%;
+            z-index: 1;
 
             nav {
                 margin: 0 auto;
