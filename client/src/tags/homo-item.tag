@@ -114,6 +114,7 @@
 
             @media (max-width: 767px) {
                 .container {
+                    padding: 8px;
                     margin-bottom: 8px;
                 }
 

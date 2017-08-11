@@ -55,7 +55,7 @@
         this.on("mount", () => {
             this.shuffle = new Shuffle(document.querySelector(".wrapper"), {
                 itemSelector: "homo-item",
-                spped: 500,
+                speed: 150,
                 easing: "easeOutElastic",
             });
         });
