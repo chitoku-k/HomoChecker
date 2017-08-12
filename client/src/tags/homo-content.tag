@@ -1,31 +1,11 @@
 <homo-content>
     <div class="wrapper">
-        <div class="loading" if={ !opts.items.length }>
-            <i class="fa fa-refresh fa-spin"></i>
-            ホモを集めています...
-        </div>
         <homo-item each={ opts.items } data-duration={ status === "ERROR" ? Infinity : duration } />
     </div>
     <style type="text/scss">
         homo-content {
             display: block;
             padding: 20px 0;
-
-            .loading {
-                text-align: center;
-                position: absolute;
-                top: calc(50% - 2em);
-                left: 0;
-                width: 100%;
-                color: #444444;
-                font-size: 18px;
-
-                .fa-spin {
-                    vertical-align: -5px;
-                    margin-right: 3px;
-                    font-size: 36px;
-                }
-            }
 
             .wrapper {
                 margin-left: auto;
@@ -64,7 +44,7 @@
             }
             this.shuffle.add([ this.root.querySelector("homo-item:last-child") ]);
             this.shuffle.sort({
-                by: elm => +elm.dataset.duration,
+                by: elm => +elm.getAttribute("data-duration"),
             });
         });
 

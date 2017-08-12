@@ -2,7 +2,7 @@
   "presets": [
     ["env", {
       "targets": {
-        "browsers": ["last 2 versions", "not ie <= 10", "not android >= 4.4.3"]
+        "browsers": ["last 2 versions", "not android >= 4.4.3"]
       },
       "useBuiltIns": true,
       "modules": false

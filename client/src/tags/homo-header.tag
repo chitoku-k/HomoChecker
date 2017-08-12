@@ -55,14 +55,6 @@
                     &.active > a {
                         background: #54452f;
                     }
-
-                    .fa-mars-double {
-                        width: 20px;
-                    }
-
-                    .loading {
-                        animation: blink .8s infinite linear;
-                    }
                 }
 
                 @media (max-width: 767px) {
@@ -70,11 +62,6 @@
                         a {
                             min-height: 0;
                             padding: 12px 14px;
-
-                            homo-anime {
-                                position: relative;
-                                top: -3px;
-                            }
                         }
 
                         &:first-child a {
