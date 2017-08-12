@@ -38,6 +38,7 @@
             }
 
             a {
+                display: inline-block;
                 color: #000;
                 text-decoration: none;
                 -webkit-tap-highlight-color: initial;
@@ -72,7 +73,6 @@
                     border-bottom: 2px solid transparent;
 
                     span {
-                        display: inline-block;
                         padding-bottom: 2px;
                         border-bottom: 2px solid #af9369;
                     }
