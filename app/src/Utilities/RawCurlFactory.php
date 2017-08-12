@@ -27,6 +27,6 @@ class RawCurlFactory extends CurlFactory
     public static function invokeStatsAll(EasyHandle $easy): void
     {
         $stats = curl_getinfo($easy->handle);
-        call_user_func($easy->options['on_stats_all'], $stats);
+        $easy->options['on_stats_all']($stats);
     }
 }
