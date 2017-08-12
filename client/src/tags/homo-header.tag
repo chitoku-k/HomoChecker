@@ -12,7 +12,6 @@
             top: 0;
             display: block;
             background: #7a6544;
-            font-family: Helvetica, "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ Pro W3", Meiryo, sans-serif;
             font-size: 14px;
             width: 100%;
             z-index: 1;
@@ -62,7 +61,6 @@
                     }
 
                     .loading {
-                        -webkit-animation: blink .8s infinite linear;
                         animation: blink .8s infinite linear;
                     }
                 }

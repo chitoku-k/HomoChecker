@@ -10,7 +10,7 @@
             transform: translate(0px, -5px);
 
             @media (max-width: 767px) {
-                transform: translate(0px, -3px);  
+                transform: translate(0px, -3px);
             }
 
             .fa-mars {
@@ -20,8 +20,8 @@
 
             .part-active {
                 position: relative;
-                top: 0.55em;
-                left: -1.7em;
+                top: 0.6em;
+                left: -1.575em;
             }
 
             &.start {

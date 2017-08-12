@@ -2,10 +2,20 @@ html, body {
     margin: 0;
     padding: 0;
     background: #efefef;
+    font-family: Atlan, Helvetica, "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ Pro W3", Meiryo, sans-serif;
 }
 body {
     margin-top: 60px;
     @media (max-width: 767px) {
         margin-top: 44px;
     }
+}
+
+@font-face {
+    $font-url: 'https://homo.chitoku.jp:4545';
+    font-family: Atlan;
+    font-weight: 600;
+    src: url($font-url + '/atlan.woff') format('woff'),
+         url($font-url + '/atlan.ttf') format('truetype'),
+         url($font-url + '/atlan.svg#svgFontName') format('svg');
 }

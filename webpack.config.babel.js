@@ -60,7 +60,7 @@ module.exports = {
     plugins: [
         new webpack.optimize.UglifyJsPlugin(),
         new CleanWebpackPlugin(
-            path.join(__dirname, "/client/dist"),
+            path.join(__dirname, "/client/dist/*.{html,js}"),
         ),
         new HtmlWebpackPlugin({
             title: "まっぴー (@mpyw) 被害者の会",

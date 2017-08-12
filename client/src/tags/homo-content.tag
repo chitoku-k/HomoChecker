@@ -10,7 +10,6 @@
         homo-content {
             display: block;
             padding: 20px 0;
-            font-family: Helvetica, "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ Pro W3", Meiryo, sans-serif;
 
             .loading {
                 text-align: center;

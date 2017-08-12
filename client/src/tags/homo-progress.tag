@@ -4,6 +4,7 @@
         homo-progress {
             display: block;
             position: fixed;
+            top: 55px;
             left: 0;
             right: 0;
             margin: auto;
@@ -20,13 +21,14 @@
                 }
             }
 
+            @media (max-width: 767px) {
+                top: 39px;
+            }
             @media (min-width: 768px) {
                 width: 700px;
-                top: 39px;
             }
             @media (min-width: 992px) {
                 width: 930px;
-                top: 55px;
             }
             @media (min-width: 1200px) {
                 width: 1130px;

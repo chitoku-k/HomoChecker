@@ -4,11 +4,11 @@
             <img src={ homo.icon } width="64" height="64">
         </a>
         <div class="subdomain">
+            <i class="fa fa-lock secure" if={ homo.secure }>HTTPS</i>
             <h2>
                 <a class="url" href={ homo.url } target="_blank">{ homo.display_url }</a>
             </h2>
         </div>
-        <i if={ homo.secure } class="fa fa-lock"></i>
         <div class="result">
             <div if={ status !== "ERROR" } class="duration">{ Math.round(duration * 1000) } ms</div>
             <i class={
@@ -24,7 +24,6 @@
     <style type="text/scss">
         homo-item {
             color: #111;
-            font-family: Helvetica, "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ Pro W3", Meiryo, sans-serif;
             width: calc(100% - 10px * 2 - 1px * 2);
 
             .container {
@@ -42,48 +41,56 @@
                 color: #000;
                 text-decoration: none;
                 -webkit-tap-highlight-color: initial;
+                margin: 0 12px 0 0;
+                line-height: 1.2;
             }
 
             img {
-                margin: 0 12px 0 0;
                 vertical-align: middle;
                 border: none;
             }
 
             .subdomain {
                 margin-right: 6px;
+                display: flex;
+                flex-direction: column;
+                align-self: stretch;
+                justify-content: space-around;
+
+                .secure {
+                    display: block;
+                    color: #5c9a4f;
+                    font-family: FontAwesome, Atlan;
+                    font-size: 75%;
+
+                    &:before {
+                        padding-right: .3em;
+                    }
+                }
 
                 .url {
+                    border-bottom: 2px solid transparent;
+
                     span {
                         display: inline-block;
-                        border-bottom: 4px solid #af9369;
                         padding-bottom: 2px;
+                        border-bottom: 2px solid #af9369;
                     }
 
                     &:hover {
-                        text-decoration: underline;
+                        border-bottom-color: #666;
                     }
                 }
 
                 h2 {
                     color: #444;
                     font-size: 32px;
-                    font-weight: 700;
+                    font-weight: normal;
                     margin: 0;
                     word-break: break-all;
                     overflow: hidden;
                     text-overflow: ellipsis;
                 }
-            }
-
-            .fa-lock {
-                position: absolute;
-                top: 0;
-                left: 0;
-                background-color: #5c9a4f;
-                color: #fff;
-                font-size: 16px;
-                padding: 3px 10px;
             }
 
             .result {
@@ -126,10 +133,13 @@
                     margin-bottom: 8px;
                 }
 
+                a {
+                    margin-right: 8px;
+                }
+
                 img {
                     width: 40px;
                     height: 40px;
-                    margin-right: 8px;
                 }
 
                 .subdomain {
@@ -137,11 +147,6 @@
                         font-size: 18px;
                         margin-right: 0;
                     }
-                }
-
-                .fa-lock {
-                    font-size: 10px;
-                    padding: 3px 6px;
                 }
 
                 .result {
@@ -161,16 +166,6 @@
             }
 
             @media (max-width: 450px) {
-                .subdomain {
-                    h2 {
-                        font-size: 16px;
-                    }
-                }
-
-                .fa-lock {
-                    font-size: 10px;
-                }
-
                 .result {
                     .duration {
                         font-size: 14px;
