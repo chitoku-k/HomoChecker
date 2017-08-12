@@ -4,7 +4,7 @@
         homo-progress {
             display: block;
             position: fixed;
-            top: 55px;
+            top: 56px;
             left: 0;
             right: 0;
             margin: auto;
@@ -12,8 +12,8 @@
 
             .body {
                 width: 0;
-                height: 5px;
-                background: #514532;
+                height: 3px;
+                background: white;
                 transition: .4s width ease-in, 2s opacity ease-out;
 
                 &.done {
@@ -22,7 +22,7 @@
             }
 
             @media (max-width: 767px) {
-                top: 39px;
+                top: 40px;
             }
             @media (min-width: 768px) {
                 width: 700px;
