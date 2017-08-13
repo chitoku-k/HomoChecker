@@ -73,6 +73,7 @@
                     border-bottom: 2px solid transparent;
 
                     span {
+                        display: inline-block;
                         padding-bottom: 2px;
                         border-bottom: 2px solid #af9369;
                     }
