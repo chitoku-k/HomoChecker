@@ -62,7 +62,7 @@
                     display: block;
                     color: #5c9a4f;
                     font-family: FontAwesome, Atlan;
-                    font-size: 75%;
+                    font-size: 14px;
 
                     &:before {
                         padding-right: .3em;
@@ -74,6 +74,7 @@
 
                     span {
                         display: inline-block;
+                        margin-bottom: -2px;
                         padding-bottom: 2px;
                         border-bottom: 2px solid #af9369;
                     }
