@@ -37,6 +37,6 @@ class Status
 
     protected function isSecure(string $url): bool
     {
-        return parse_url($url, PHP_URL_SCHEME) === 'https';
+        return strtolower(parse_url($url, PHP_URL_SCHEME)) === 'https';
     }
 }
