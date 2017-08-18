@@ -24,6 +24,7 @@
                 ul {
                     margin: 0;
                     padding: 0;
+                    display: flex;
 
                     &:after {
                         display: block;
@@ -33,7 +34,6 @@
                 }
 
                 li {
-                    display: table-cell;
                     list-style: none;
                     white-space: nowrap;
 
@@ -42,8 +42,6 @@
                         display: inline-block;
                         padding: 20px 30px;
                         line-height: 20px;
-                        box-sizing: border-box;
-                        min-height: 60px;
                         color: white;
                         transition: background-color .3s;
 
@@ -60,7 +58,6 @@
                 @media (max-width: 767px) {
                     li {
                         a {
-                            min-height: 0;
                             padding: 12px 14px;
                         }
 
