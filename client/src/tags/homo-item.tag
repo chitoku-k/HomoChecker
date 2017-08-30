@@ -30,8 +30,9 @@
                 position: relative;
                 display: flex;
                 align-items: center;
-                border: 1px solid #dfdfdf;
                 background: #fff;
+                box-shadow: 0px 2px 4px 0px #d2d2d2;
+                border-radius: 3px;
                 padding: 10px;
                 margin-bottom: 15px;
                 width: 100%;
@@ -49,6 +50,7 @@
             img {
                 vertical-align: middle;
                 border: none;
+                border-radius: 3px;
             }
 
             .subdomain {
