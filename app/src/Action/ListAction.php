@@ -14,10 +14,38 @@ class ListAction extends ActionBase
         $homo = $this->container['homo'];
         $users = $name ? $homo->find(['screen_name' => $name]) : $homo->find();
 
-        return $response->withJson($this->create($users), !empty($users) ? 200 : 404);
+        switch ($request->getQueryParams()['format'] ?? 'json') {
+            case 'sql': {
+                return $response->withHeader('Content-Type', 'application/sql')->withBody($this->createSql($response, $users));
+            }
+            default: {
+                return $response->withJson($this->createArray($users), !empty($users) ? 200 : 404);
+            }
+        }
     }
 
-    protected function create(array $homos): array
+    protected function createSql(Response $response, array $users)
+    {
+        $body = $response->getBody();
+        $body->write("INSERT INTO `users` (`screen_name`, `url`) VALUES\n");
+        $body->write(
+            implode(
+                ",\n",
+                array_map(
+                    function ($homo) {
+                        foreach (['screen_name', 'url'] as $prop) {
+                            $$prop = addcslashes($homo->$prop, '\\\'');
+                        }
+                        return "('{$screen_name}', '{$url}')";
+                    },
+                    $this->createArray($users)
+                )
+            )
+        );
+        return $body;
+    }
+
+    protected function createArray(array $homos): array
     {
         return array_map(function (HomoInterface $item): \stdClass {
             $status = new Status($item);

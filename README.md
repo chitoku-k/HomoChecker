@@ -81,7 +81,7 @@ Internet Explorer 10 以上で動くのでたいていのホモは救われま�
 - PHP 7.1 以上
 - cURL 7.49.0 以上
 - Node.js 6 以上
-- MySQL
+- MySQL/SQLite
 
 ## ビルド環境
 
@@ -95,20 +95,13 @@ $ composer install
 $ npm install
 ```
 
-続いてデータベースとテーブルを作成します:
+続いてデータベースを作成します:
 
 ```sql
 -- 開発用
 CREATE DATABASE `homo`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `screen_name` varchar(20) NOT NULL,
-  `url` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `screen_name` (`screen_name`)
-) DEFAULT CHARSET=utf8;
 
--- テスト用
+-- テスト用（任意）
 CREATE DATABASE `homo_test`;
 ```
 
@@ -119,7 +112,7 @@ CREATE DATABASE `homo_test`;
 $ cp app/src/config.sample.php app/src/config.php
 $ vim app/src/config.php
 
-# テスト用
+# テスト用（任意）
 $ cp phpunit.xml.dist phpunit.xml
 $ vim phpunit.xml
 ```
@@ -133,6 +126,12 @@ $ vim phpunit.xml
 
 ```
 http://localhost:4545
+```
+
+データはこの辺から入手できます。
+
+```
+https://homo.chitoku.jp:4545/list/?format=sql
 ```
 
 ### フロントエンド
