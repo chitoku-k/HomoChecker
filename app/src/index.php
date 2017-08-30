@@ -63,7 +63,7 @@ $container['validators'] = function (ContainerInterface $container) {
     ];
 };
 $container['database'] = function (ContainerInterface $container) {
-    return new \PDO('mysql:dbname=' . DB_NAME . ';host=' . DB_HOST . ';charset=utf8', DB_USER, DB_PASS, [
+    return new \PDO(DB_DSN, DB_USER, DB_PASS, [
         \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
     ]);
 };
