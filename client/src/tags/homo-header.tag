@@ -12,7 +12,6 @@
             top: 0;
             display: block;
             background: #7a6544;
-            box-shadow: 0px 1px 5px -1px #424242;
             font-size: 14px;
             width: 100%;
             z-index: 1;

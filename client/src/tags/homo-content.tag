@@ -23,7 +23,7 @@
             }
 
             @media (max-width: 767px) {
-                padding: 8px 8px 0;
+                padding: 12px 12px 0;
             }
         }
     </style>

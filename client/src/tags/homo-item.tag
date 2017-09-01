@@ -34,7 +34,7 @@
                 box-shadow: 0px 2px 4px 0px #d2d2d2;
                 border-radius: 3px;
                 padding: 10px;
-                margin-bottom: 15px;
+                margin-bottom: 20px;
                 width: 100%;
             }
 
@@ -134,7 +134,7 @@
 
                 .container {
                     padding: 8px;
-                    margin-bottom: 8px;
+                    margin-bottom: 12px;
                 }
 
                 a {
