@@ -184,7 +184,7 @@
         }
     </style>
     <script type="es6">
-        this.keywords = [ "homo", "ホモ" ];
+        this.regex = /homo|ホモ/;
 
         this.on("mount", () => {
             const [ elm ] = this.root.getElementsByClassName("url");
@@ -192,15 +192,19 @@
                 return;
             }
 
-            // Get the index(es) in which contains the keyword
-            for (const [ match, index ] of this.keywords.map(x => [ x, elm.lastChild.textContent.indexOf(x) ])) {
-                if (index < 0 || elm.lastChild.nodeType !== Node.TEXT_NODE) {
+            let match;
+            while ((match = this.regex.exec(elm.lastChild.textContent))) {
+                if (match.index < 0 || elm.lastChild.nodeType !== Node.TEXT_NODE) {
                     continue;
                 }
+
+                // Get the matched string
+                const [ target ] = match;
+
                 // Create range and surround the keyword, then lastChild points another node
                 const range = document.createRange();
-                range.setStart(elm.lastChild, index);
-                range.setEnd(elm.lastChild, index + match.length);
+                range.setStart(elm.lastChild, match.index);
+                range.setEnd(elm.lastChild, match.index + target.length);
                 range.surroundContents(document.createElement("span"));
             }
         });
