@@ -24,7 +24,7 @@
     <style type="text/scss">
         homo-item {
             color: #111;
-            width: calc(100% - 10px * 2 - 1px * 2);
+            width: 100%;
 
             .container {
                 position: relative;
@@ -35,7 +35,6 @@
                 border-radius: 3px;
                 padding: 10px;
                 margin-bottom: 20px;
-                width: 100%;
             }
 
             a {
@@ -130,8 +129,6 @@
             }
 
             @media (max-width: 767px) {
-                width: calc(100% - 8px * 2 - 1px * 2);
-
                 .container {
                     padding: 8px;
                     margin-bottom: 12px;

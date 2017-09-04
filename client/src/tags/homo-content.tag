@@ -6,6 +6,7 @@
         homo-content {
             display: block;
             padding: 20px 0;
+            overflow: visible !important;
 
             .wrapper {
                 margin-left: auto;
