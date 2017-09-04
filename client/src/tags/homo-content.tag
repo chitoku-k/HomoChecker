@@ -6,11 +6,11 @@
         homo-content {
             display: block;
             padding: 20px 0;
-            overflow: visible !important;
 
             .wrapper {
                 margin-left: auto;
                 margin-right: auto;
+                overflow: visible !important;
 
                 @media (min-width: 768px) {
                     width: 700px;
