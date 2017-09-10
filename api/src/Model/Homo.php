@@ -18,31 +18,15 @@ class Homo implements HomoInterface
 
     protected function initialize()
     {
-        if (!$this->database) {
-            return;
-        }
-        switch ($this->database->getAttribute(\PDO::ATTR_DRIVER_NAME)) {
-            case 'mysql': {
-                return $this->database->exec("
-                    CREATE TABLE IF NOT EXISTS `{$this->table}` (
-                        `id` int(11) NOT NULL AUTO_INCREMENT,
-                        `screen_name` varchar(20) NOT NULL,
-                        `url` varchar(255) NOT NULL,
-                        PRIMARY KEY (`id`),
-                        KEY `screen_name` (`screen_name`)
-                    )
-                ");
-            }
-            default: {
-                return $this->database->exec("
-                    CREATE TABLE IF NOT EXISTS `{$this->table}` (
-                        `id` integer PRIMARY KEY AUTOINCREMENT,
-                        `screen_name` text NOT NULL,
-                        `url` text NOT NULL
-                    )
-                ");
-            }
-        }
+        return $this->database->exec("
+            CREATE TABLE IF NOT EXISTS `{$this->table}` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `screen_name` varchar(20) NOT NULL,
+                `url` varchar(255) NOT NULL,
+                PRIMARY KEY (`id`),
+                KEY `screen_name` (`screen_name`)
+            )
+        ");
     }
 
     public function find(array $where = []): array
