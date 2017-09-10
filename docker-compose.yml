@@ -23,7 +23,7 @@ services:
     ports:
       - "${HOMOCHECKER_PORT-4545}:80"
     volumes:
-      - ./client/dist:/var/www/html/client
+      - ./client/dist:/var/www/html
       - ./client/conf:/etc/nginx/conf.d
 
   database:
