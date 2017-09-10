@@ -9,6 +9,9 @@ class RawCurlFactory extends CurlFactory
 {
     public function create(Request $request, array $options)
     {
+        if (!defined('CURLOPT_TCP_FASTOPEN')) {
+            return parent::create($request, $options);
+        }
         return parent::create($request, $options + [
             'curl' => [
                 CURLOPT_TCP_FASTOPEN => true,

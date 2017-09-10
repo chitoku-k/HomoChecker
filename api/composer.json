@@ -11,9 +11,9 @@
     },
     "autoload": {
         "psr-4": {
-            "HomoChecker\\": "app/src/",
-            "HomoChecker\\Test\\": "app/tests/Case/",
-            "HomoChecker\\Test\\Utilities\\": "app/tests/Utilities/"
+            "HomoChecker\\": "./src/",
+            "HomoChecker\\Test\\": "./tests/Case/",
+            "HomoChecker\\Test\\Utilities\\": "./tests/Utilities/"
         }
     },
     "scripts": {

@@ -1,0 +1,27 @@
+<phpunit bootstrap="./vendor/autoload.php">
+    <testsuites>
+        <testsuite>
+            <directory suffix="Test.php">./tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory>./src</directory>
+            <exclude>
+                <file>./src/config.php</file>
+                <file>./src/config.sample.php</file>
+                <file>./src/index.php</file>
+                <directory>./src/Utilities</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+        <log type="coverage-html" target="build/coverage"/>
+    </logging>
+    <php>
+        <const name="DB_DSN" value="mysql:dbname=homo;host=database;charset=utf8" />
+        <const name="DB_USER" value="homo" />
+        <const name="DB_PASS" value="homo" />
+    </php>
+</phpunit>

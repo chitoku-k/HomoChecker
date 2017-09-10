@@ -1,7 +1,6 @@
 HomoChecker
 ===========
 
-[![][php-badge]][php-link]
 [![][travis-badge]][travis-link]
 [![][dependencies-badge]][dependencies-link]
 [![][coveralls-badge]][coveralls-link]
@@ -14,12 +13,9 @@ HomoChecker はホモ（[@mpyw](https://twitter.com/mpyw)）にリダイレク�
 
 - [ホモへの手引き](#ホモへの手引き)
 - [動作環境](#動作環境)
-- [ビルド環境](#ビルド環境)
-- [動作確認](#動作確認)
-- [API](#api)
-  - [Check API](#check-api)
-  - [List API](#list-api)
-  - [Badge API](#badge-api)
+- [実行するには](#実行するには)
+- [テストするには](#テストするには)
+- [API](/api/README.md)
 
 ## ホモへの手引き
 
@@ -78,202 +74,57 @@ Internet Explorer 10 以上で動くのでたいていのホモは救われま�
 
 ### バックエンド
 
-- PHP 7.1 以上
-- cURL 7.49.0 以上
-- Node.js 6 以上
-- MySQL/SQLite
+Docker Compose のインストールが必要です。  
+nginx + PHP-FPM + MySQL で構成されています。
 
-## ビルド環境
+## 実行するには
 
-動作の確認には ~~ディルド~~ ビルド を行う必要があります。  
-前述のバックエンドの環境に加え Composer と npm がインストールされている必要があります。
-
-初回の環境構築は次のコマンドで行います:
+初回実行時のみコンテナーのビルド作業が必要です。
 
 ```sh
-$ composer install
-$ npm install
+$ bin/init
 ```
 
-続いてデータベースを作成します:
-
-```sql
--- 開発用
-CREATE DATABASE `homo`;
-
--- テスト用（任意）
-CREATE DATABASE `homo_test`;
-```
-
-作成したデータベースを開発用とテスト用のファイルに設定します:
+ポート番号を指定する場合は環境変数を変更します（任意）。
 
 ```sh
-# 開発用
-$ cp app/src/config.sample.php app/src/config.php
-$ vim app/src/config.php
-
-# テスト用（任意）
-$ cp phpunit.xml.dist phpunit.xml
-$ vim phpunit.xml
+$ export HOMOCHECKER_PORT=4545
 ```
 
+次のコマンドでコンテナーを起動します。
 
-## 動作確認
+```sh
+$ docker-compose up -d
+```
 
-### 実行するには
-
-下記のフロントエンド・バックエンドの操作を実行して、ブラウザーで次の URL にアクセスします:
+ブラウザーで次の URL にアクセスします。
 
 ```
 http://localhost:4545
 ```
 
-データはこの辺から入手できます。
-
-```
-https://homo.chitoku.jp:4545/list/?format=sql
-```
-
-### フロントエンド
-
-npm から webpack を実行します。
+コンテナーを終了するには次のコマンドを使用します。
 
 ```sh
-$ cd HomoChecker
-$ npm run build
+$ docker-compose stop
 ```
 
-ソースコードを変更した際に即座にコンパイルを行う場合は次のコマンドを実行します:
+現在の最新データは SQL 形式で[ダウンロード](https://homo.chitoku.jp:4545/list/?format=sql)できます。  
+次のコマンドで MySQL にログインできます。
 
 ```sh
-$ npm run watch
+$ docker-compose exec database mysql -uhomo -phomo -Dhomo
 ```
 
-### バックエンド
+## テストするには
 
-PHP のビルトインサーバーを使用します。ポート番号は任意です。
+次のコマンドでテストを実行します。
+
 ```sh
-$ cd HomoChecker
-$ php -S 0.0.0.0:4545 router.php
+$ bin/test
 ```
 
-## API
 
-### Check API
-
-```
-/check/[{username}/][?format=sse|json]
-```
-
-指定したユーザー名のユーザーが登録した URL のリダイレクト状況を取得します。  
-ユーザー名を省略した場合はすべてのユーザーの情報を返します。  
-ユーザー名が存在しない場合は 404 が返ります。
-
-レスポンスは指定された形式で返され、省略した場合は `sse` が指定されます。
-
-#### sse
-
-[Server-Sent Events](https://www.w3.org/TR/eventsource/) によってイベントストリームとして返されます。
-またブラウザーのバッファリングを無効にするために、コネクションの先頭に `:` に続く空白バイトが送信されます。
-
-以下にストリームの例を示します。
-
-```
-event: initialize
-data: {"count":30}
-
-event: response
-data: {"homo":{"screen_name":"java_shit","url":"https:\/\/homo.chitoku.jp","display_url":"homo.chitoku.jp","secure":true},"status":"OK","duration":0.45}
-
-event: close
-data: end
-```
-
-`event` が `initialize` の場合は `data` は `count` を持つ JSON データです。  
-`event` が `response` の場合は `data` は以下に示す JSON データです。  
-`event` が `close` の場合は `data` は常に `end` です。
-
-#### json
-
-[JSON](http://www.json.org/) によって返されます。
-
-```javascript
-[
-    {
-        // (object) ホモ
-        "homo": {
-            // (string) スクリーンネーム
-            "screen_name": "",
-
-            // (string) URL
-            "url": "",
-
-            // (string) 表示用の URL
-            "display_url": "",
-
-            // (string) アイコンの URL
-            "icon": "",
-
-            // (bool) HTTPS 接続かどうかを示す値
-            "secure": true
-        },
-
-        // (string) リダイレクト状況を示す値
-        // OK: リダイレクト設定済
-        // WRONG: リダイレクト未設定
-        // CONTAINS: ページ内に URL を含む
-        // ERROR: 接続失敗/タイムアウト
-        "status": "",
-
-        // (number) リダイレクトにかかった時間 (s)
-        "duration": 0.0
-    }
-]
-```
-
-### List API
-
-```
-/list/[{username}/]
-```
-
-指定したユーザー名のユーザーが登録した URL の一覧を取得します。  
-ユーザー名を省略した場合はすべてのユーザーの情報を返します。  
-ユーザー名が存在しない場合は 404 が返ります。
-
-レスポンスは JSON によって返されます。
-
-```javascript
-[
-    {
-        // (string) スクリーンネーム
-        "screen_name": "",
-
-        // (string) URL
-        "url": "",
-
-        // (string) 表示用の URL
-        "display_url": "",
-
-        // (bool) HTTPS 接続かどうかを示す値
-        "secure": true
-    }
-]
-```
-
-### Badge API
-
-```
-/badge/[{status}/]
-```
-
-指定したステータスを持つホストの数を示すバッジを取得します。  
-バッジは [Shields.io](https://shields.io/) によって生成される画像を返します。  
-ステータスを省略した場合は登録されているホストの数を返します。
-
-
-[php-link]:             https://secure.php.net
-[php-badge]:            https://img.shields.io/badge/php-%3e%3d%207.1-8892bf.svg?style=flat-square
 [travis-link]:          https://travis-ci.org/chitoku-k/HomoChecker
 [travis-badge]:         https://img.shields.io/travis/chitoku-k/HomoChecker.svg?style=flat-square
 [dependencies-link]:    https://gemnasium.com/github.com/chitoku-k/HomoChecker

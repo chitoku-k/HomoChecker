@@ -27,4 +27,4 @@ ratings:
   - "**.tag"
   - "**.php"
 exclude_paths:
-- "app/tests/"
+- "api/tests/"

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+
+docker-compose build
+docker-compose run --rm api composer install
+docker-compose run --rm build npm install
+docker-compose stop database

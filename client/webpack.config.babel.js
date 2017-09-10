@@ -4,9 +4,9 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    entry: "./client/src/app.js",
+    entry: "./src/app.js",
     output: {
-        path: path.join(__dirname, "/client/dist"),
+        path: path.join(__dirname, "/dist"),
         filename: "bundle.js",
     },
     module: {
@@ -60,7 +60,7 @@ module.exports = {
     plugins: [
         new webpack.optimize.UglifyJsPlugin(),
         new CleanWebpackPlugin(
-            path.join(__dirname, "/client/dist/*.{html,js}"),
+            path.join(__dirname, "/dist/*.{html,js}"),
         ),
         new HtmlWebpackPlugin({
             title: "まっぴー (@mpyw) 被害者の会",

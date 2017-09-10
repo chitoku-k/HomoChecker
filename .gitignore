@@ -1,25 +1,19 @@
 # Created by https://www.gitignore.io/api/composer,node
 
 ### Composer ###
-composer.phar
-/vendor/
+api/vendor
 
 
 ### Node ###
 # Logs
-logs
-*.log
-npm-debug.log*
+client/logs
+client/*.log
+client/npm-debug.log*
 
 # Dependency directories
-node_modules
+client/node_modules
 
 
 ### Project Files ###
-dist
-build
-
-
-### Configuration ###
-app/src/config.php
-phpunit.xml
+api/build
+client/dist

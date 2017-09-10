@@ -1,0 +1,42 @@
+version: "2.1"
+
+services:
+  api:
+    build: ./api
+    links:
+      - database
+    working_dir: /var/www/html/api
+    volumes:
+      - ./api:/var/www/html/api
+
+  build:
+    image: node:8.4
+    working_dir: /usr/src/app
+    command: npm run watch
+    volumes:
+      - ./client:/usr/src/app
+
+  client:
+    image: nginx:1.12
+    links:
+      - api
+    ports:
+      - "${HOMOCHECKER_PORT-4545}:80"
+    volumes:
+      - ./client/dist:/var/www/html/client
+      - ./client/conf:/etc/nginx/conf.d
+
+  database:
+    image: mysql:5.7
+    command: [--character-set-server=utf8]
+    volumes:
+      - database:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: homo
+      MYSQL_USER: homo
+      MYSQL_PASSWORD: homo
+      MYSQL_ROOT_PASSWORD: homo
+
+volumes:
+  database:
+    driver: local
