@@ -13,20 +13,6 @@ class Homo implements HomoInterface
     {
         $this->database = $database;
         $this->table = str_replace(["\0", "`"], ["", "``"], $table);
-        $this->initialize();
-    }
-
-    protected function initialize()
-    {
-        return $this->database->exec("
-            CREATE TABLE IF NOT EXISTS `{$this->table}` (
-                `id` int(11) NOT NULL AUTO_INCREMENT,
-                `screen_name` varchar(20) NOT NULL,
-                `url` varchar(255) NOT NULL,
-                PRIMARY KEY (`id`),
-                KEY `screen_name` (`screen_name`)
-            )
-        ");
     }
 
     public function find(array $where = []): array

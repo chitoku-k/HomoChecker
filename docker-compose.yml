@@ -30,6 +30,7 @@ services:
     image: mysql:5.7
     command: [--character-set-server=utf8]
     volumes:
+      - ./database:/docker-entrypoint-initdb.d
       - database:/var/lib/mysql
     environment:
       MYSQL_DATABASE: homo
