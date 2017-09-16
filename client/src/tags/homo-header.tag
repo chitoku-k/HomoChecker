@@ -25,12 +25,6 @@
                     margin: 0;
                     padding: 0;
                     display: flex;
-
-                    &:after {
-                        display: block;
-                        content: "";
-                        clear: both;
-                    }
                 }
 
                 li {
@@ -55,7 +49,7 @@
                     }
                 }
 
-                @media (max-width: 767px) {
+                @media (max-width: 767px), (max-width: 992px) and (orientation: landscape) {
                     li {
                         a {
                             padding: 12px 14px;

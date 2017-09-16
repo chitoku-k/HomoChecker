@@ -6,7 +6,7 @@ html, body {
 }
 body {
     margin-top: 60px;
-    @media (max-width: 767px) {
+    @media (max-width: 767px), (max-width: 992px) and (orientation: landscape) {
         margin-top: 44px;
     }
 }

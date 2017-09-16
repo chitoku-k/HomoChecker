@@ -15,7 +15,7 @@ import "./tags/homo-progress";
 {
     const meta = document.createElement("meta");
     meta.name = "viewport";
-    meta.content = "initial-scale=1.0";
+    meta.content = "initial-scale=1.0, viewport-fit=cover";
     document.head.appendChild(meta);
 
     const app = document.createElement("homo-app");

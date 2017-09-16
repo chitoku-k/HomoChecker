@@ -21,7 +21,7 @@
                 }
             }
 
-            @media (max-width: 767px) {
+            @media (max-width: 767px), (max-width: 992px) and (orientation: landscape) {
                 top: 40px;
             }
             @media (min-width: 768px) {
