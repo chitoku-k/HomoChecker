@@ -36,6 +36,9 @@
                 itemSelector: "homo-item",
                 speed: 150,
                 easing: "easeOutElastic",
+                initialSort: {
+                    by: elm => +elm.getAttribute("data-duration"),
+                },
             });
         });
 
@@ -44,9 +47,6 @@
                 return;
             }
             this.shuffle.add([ this.root.querySelector("homo-item:last-child") ]);
-            this.shuffle.sort({
-                by: elm => +elm.getAttribute("data-duration"),
-            });
         });
 
         const source = new EventSource("/check/");
