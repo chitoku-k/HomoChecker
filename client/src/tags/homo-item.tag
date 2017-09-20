@@ -192,7 +192,7 @@
             let match;
             while ((match = this.regex.exec(elm.lastChild.textContent))) {
                 if (match.index < 0 || elm.lastChild.nodeType !== Node.TEXT_NODE) {
-                    continue;
+                    break;
                 }
 
                 // Get the matched string
