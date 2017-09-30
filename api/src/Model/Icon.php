@@ -15,6 +15,11 @@ class Icon implements IconInterface
         $this->client = $client;
     }
 
+    /**
+     * Get the URL of profile image of the user.
+     * @param  string                   $screen_name The screen_name of the user.
+     * @return Promise\PromiseInterface The promise.
+     */
     public function getAsync(string $screen_name): Promise\PromiseInterface
     {
         return Promise\coroutine(function () use ($screen_name) {

@@ -17,7 +17,12 @@ class Homo implements HomoInterface
         $this->table = str_replace(["\0", "`"], ["", "``"], $table);
     }
 
-    public function find(array $where = []): array
+    /**
+     * Fetch all the elements filtered by conditions.
+     * @param  string[] $where
+     * @return Homo[]
+     */
+    public function find($where = []): array
     {
         if (!isset($this->database, $this->table)) {
             throw new \RuntimeException('No database or table is specified.');

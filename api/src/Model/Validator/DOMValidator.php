@@ -8,6 +8,9 @@ use HomoChecker\Model\Validator\ValidatorBase;
 
 class DOMValidator extends ValidatorBase
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function validate(Response $response)
     {
         $doc = new \DOMDocument;

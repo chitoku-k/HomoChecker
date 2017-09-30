@@ -17,5 +17,10 @@ abstract class ValidatorBase implements ValidatorInterface
         return $this->validate($response);
     }
 
+    /**
+     * Return the result of validation.
+     * @param  Response $response Response.
+     * @return string|bool The result.
+     */
     abstract protected function validate(Response $response);
 }

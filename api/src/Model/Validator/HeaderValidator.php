@@ -8,6 +8,9 @@ use HomoChecker\Model\Validator\ValidatorBase;
 
 class HeaderValidator extends ValidatorBase
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function validate(Response $response)
     {
         $url = $response->getHeaderLine('Location');

@@ -22,6 +22,11 @@ class Check
         $this->validators = $validators;
     }
 
+    /**
+     * Validate a user.
+     * @param  HomoInterface            $homo The user.
+     * @return Promise\PromiseInterface The Promise.
+     */
     protected function validateAsync(HomoInterface $homo): Promise\PromiseInterface
     {
         return Promise\coroutine(function () use ($homo) {
@@ -52,6 +57,12 @@ class Check
         });
     }
 
+    /**
+     * Create a status object from a user.
+     * @param  HomoInterface            $homo     The user.
+     * @param  callable                 $callback The callback that is called after resolution (optional).
+     * @return Promise\PromiseInterface The Promise.
+     */
     protected function createStatusAsync(HomoInterface $homo, callable $callback = null): Promise\PromiseInterface
     {
         return Promise\coroutine(function () use ($homo, $callback) {
@@ -67,6 +78,12 @@ class Check
         });
     }
 
+    /**
+     * Execute the checker.
+     * @param  string   $screen_name The screen_name to filter by (optional).
+     * @param  callable $callback    The callback that is called after resolution (optional).
+     * @return Status[] The result.
+     */
     public function execute(string $screen_name = null, callable $callback = null): array
     {
         $users = $this->homo->find($screen_name ? compact('screen_name') : []);
