@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace HomoChecker\Test\Model;
 
 use HomoChecker\Test\Utilities\DatabaseTestCase;
