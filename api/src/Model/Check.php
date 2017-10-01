@@ -7,7 +7,6 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Pool;
 use GuzzleHttp\Promise;
 use GuzzleHttp\ClientInterface;
-use HomoChecker\Model\HomoInterface;
 use HomoChecker\Model\Validator\ValidatorInterface;
 
 class Check

@@ -11,9 +11,9 @@ class Status
     {
         $this->homo = (object)[
             'screen_name' => $homo->screen_name,
-            'url'         => $homo->url,
+            'url' => $homo->url,
             'display_url' => $this->createDisplayURL($homo->url),
-            'secure'      => $this->isSecure($homo->url),
+            'secure' => $this->isSecure($homo->url),
         ];
 
         if (isset($icon)) {
@@ -39,7 +39,7 @@ class Status
             return '';
         }
         $path = (string)parse_url($url, PHP_URL_PATH);
-        return (new Punycode)->decode($domain) . $path;
+        return (new Punycode())->decode($domain) . $path;
     }
 
     /**

@@ -14,7 +14,7 @@ class Homo implements HomoInterface
     public function __construct(\PDO $database = null, string $table = null)
     {
         $this->database = $database;
-        $this->table = str_replace(["\0", "`"], ["", "``"], $table);
+        $this->table = str_replace(["\0", '`'], ['', '``'], $table);
     }
 
     /**
@@ -36,7 +36,7 @@ class Homo implements HomoInterface
         }
 
         if (isset($conditions)) {
-            $sql[] = "WHERE " . implode(' AND ', $conditions);
+            $sql[] = 'WHERE ' . implode(' AND ', $conditions);
         }
 
         $stmt = $this->database->prepare(implode(' ', $sql));
