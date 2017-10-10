@@ -7,6 +7,7 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Pool;
 use GuzzleHttp\Promise;
 use GuzzleHttp\ClientInterface;
+use HomoChecker\Model\Profile\Icon;
 use HomoChecker\Model\Validator\ValidatorInterface;
 
 class Check

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace HomoChecker\Model;
+namespace HomoChecker\Model\Profile;
 
 use GuzzleHttp\Promise;
 

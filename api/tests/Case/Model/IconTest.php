@@ -9,7 +9,7 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use HomoChecker\Model\Icon;
+use HomoChecker\Model\Profile\Icon;
 use PHPUnit\Framework\TestCase;
 
 class IconTest extends TestCase

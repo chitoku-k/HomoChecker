@@ -10,7 +10,7 @@ use GuzzleHttp\Handler\CurlMultiHandler;
 use GuzzleHttp\Handler\Proxy;
 use HomoChecker\Model\Check;
 use HomoChecker\Model\Homo;
-use HomoChecker\Model\Icon;
+use HomoChecker\Model\Profile\Icon;
 use HomoChecker\Model\Validator\HeaderValidator;
 use HomoChecker\Model\Validator\DOMValidator;
 use HomoChecker\Model\Validator\URLValidator;
