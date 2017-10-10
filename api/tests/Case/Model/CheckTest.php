@@ -24,7 +24,7 @@ class CheckTest extends TestCase
 {
     protected function user($screen_name, $url): Homo
     {
-        $homo = new Homo;
+        $homo = new Homo();
         $homo->screen_name = $screen_name;
         $homo->url = $url;
         return $homo;

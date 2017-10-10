@@ -17,7 +17,7 @@ class StatusTest extends TestCase
         $status = 'OK';
         $duration = 1.14514;
 
-        $homo = new Homo;
+        $homo = new Homo();
         $homo->screen_name = $screen_name;
         $homo->url = $url;
         $target = new Status($homo, $icon, $status, $duration);
@@ -39,7 +39,7 @@ class StatusTest extends TestCase
         $status = 'CONTAINS';
         $duration = 1.14514;
 
-        $homo = new Homo;
+        $homo = new Homo();
         $homo->screen_name = $screen_name;
         $homo->url = $url;
         $target = new Status($homo, $icon, $status, $duration);

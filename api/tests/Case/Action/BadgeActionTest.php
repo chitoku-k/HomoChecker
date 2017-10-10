@@ -17,7 +17,7 @@ class BadgeActionTest extends TestCase
 {
     protected function user(string $screen_name, string $url): Homo
     {
-        $homo = new Homo;
+        $homo = new Homo();
         $homo->screen_name = $screen_name;
         $homo->url = $url;
         return $homo;
@@ -37,7 +37,7 @@ class BadgeActionTest extends TestCase
             new Status($this->user('bar', 'http://bar.example.com'), null, 'OK'),
         ];
 
-        $this->Container = new Container;
+        $this->Container = new Container();
         $this->Container['homo'] = $this->createMock(Homo::class);
         $this->Container['homo']->expects($this->any())
                                 ->method('find')
@@ -56,7 +56,7 @@ class BadgeActionTest extends TestCase
             'REQUEST_URI' => '/badge',
         ]));
 
-        $response = $action($request, new Response, []);
+        $response = $action($request, new Response(), []);
         $actual = $response->getHeaderLine('Location');
         $this->assertRegExp('|^https?://img\.shields\.io/badge/.*\.svg|', $actual);
         $this->assertRegExp('/3(?: |%20|\+)registered/', $actual);
@@ -69,7 +69,7 @@ class BadgeActionTest extends TestCase
             'REQUEST_URI' => '/badge',
         ]));
 
-        $response = $action($request, new Response, ['status' => 'OK']);
+        $response = $action($request, new Response(), ['status' => 'OK']);
         $actual = $response->getHeaderLine('Location');
         $this->assertRegExp('|^https?://img\.shields\.io/badge/.*\.svg|', $actual);
         $this->assertRegExp('/2(?: |%20|\+)ok/', $actual);
@@ -83,7 +83,7 @@ class BadgeActionTest extends TestCase
             'QUERY_STRING' => 'style=flat-square',
         ]));
 
-        $response = $action($request, new Response, []);
+        $response = $action($request, new Response(), []);
         $actual = $response->getHeaderLine('Location');
         $this->assertRegExp('|^https?://img\.shields\.io/badge/.*\.svg|', $actual);
         $this->assertStringEndsWith('?style=flat-square', $actual);

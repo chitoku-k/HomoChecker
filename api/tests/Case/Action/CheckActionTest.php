@@ -17,7 +17,7 @@ class CheckActionTest extends TestCase
 {
     protected function user(string $screen_name, string $url): Homo
     {
-        $homo = new Homo;
+        $homo = new Homo();
         $homo->screen_name = $screen_name;
         $homo->url = $url;
         return $homo;
@@ -37,7 +37,7 @@ class CheckActionTest extends TestCase
             new Status($this->user('bar', 'http://bar.example.com'), null, 'OK', 30),
         ];
 
-        $this->Container = new Container;
+        $this->Container = new Container();
         $this->Container['homo'] = $this->createMock(Homo::class);
         $this->Container['homo']->expects($this->any())
                                 ->method('find')
@@ -57,7 +57,7 @@ class CheckActionTest extends TestCase
             'QUERY_STRING' => 'format=json',
         ]));
 
-        $response = $action($request, new Response, []);
+        $response = $action($request, new Response(), []);
         $actual = $response->getHeaderLine('Content-Type');
         $this->assertRegExp('|^application/json|', $actual);
 
@@ -109,7 +109,7 @@ class CheckActionTest extends TestCase
         ]));
 
         ob_start(null, 0, PHP_OUTPUT_HANDLER_CLEANABLE | PHP_OUTPUT_HANDLER_REMOVABLE);
-        $action($request, new Response, []);
+        $action($request, new Response(), []);
         $body = ob_get_clean();
 
         foreach (explode("\n", $body) as $actual) {

@@ -108,7 +108,7 @@ class HomoTest extends DatabaseTestCase
      */
     public function testFindThrows(): void
     {
-        $homo = new Homo;
+        $homo = new Homo();
         $homo->find();
     }
 }

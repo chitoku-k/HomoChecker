@@ -25,7 +25,7 @@ use Slim\App;
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/config.php';
 
-$container = new Container;
+$container = new Container();
 $container['timeout'] = 5;
 $container['regex'] = '/https?:\/\/twitter\.com\/mpyw\/?/';
 $container['checker'] = function (ContainerInterface $container) {
