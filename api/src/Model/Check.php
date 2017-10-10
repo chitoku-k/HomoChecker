@@ -13,7 +13,7 @@ class Check
 {
     public const REDIRECT = 5;
 
-    public function __construct(ClientInterface $client, HomoInterface $homo, IconInterface $icon, ValidatorInterface ...$validators)
+    public function __construct(ClientInterface $client, Homo $homo, Icon $icon, ValidatorInterface ...$validators)
     {
         $this->client = $client;
         $this->homo = $homo;
@@ -23,10 +23,10 @@ class Check
 
     /**
      * Validate a user.
-     * @param  HomoInterface            $homo The user.
+     * @param  Homo                     $homo The user.
      * @return Promise\PromiseInterface The Promise.
      */
-    protected function validateAsync(HomoInterface $homo): Promise\PromiseInterface
+    protected function validateAsync(Homo $homo): Promise\PromiseInterface
     {
         return Promise\coroutine(function () use ($homo) {
             $time = 0.0;
@@ -58,11 +58,11 @@ class Check
 
     /**
      * Create a status object from a user.
-     * @param  HomoInterface            $homo     The user.
+     * @param  Homo                     $homo     The user.
      * @param  callable                 $callback The callback that is called after resolution (optional).
      * @return Promise\PromiseInterface The Promise.
      */
-    protected function createStatusAsync(HomoInterface $homo, callable $callback = null): Promise\PromiseInterface
+    protected function createStatusAsync(Homo $homo, callable $callback = null): Promise\PromiseInterface
     {
         return Promise\coroutine(function () use ($homo, $callback) {
             [[$status, $duration], $icon] = yield Promise\all([

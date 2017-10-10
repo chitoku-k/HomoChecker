@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HomoChecker\Model;
 
-interface HomoInterface
+interface Mappable
 {
     public function find($where = []): array;
 }

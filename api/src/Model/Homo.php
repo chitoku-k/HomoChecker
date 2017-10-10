@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace HomoChecker\Model;
 
-class Homo implements HomoInterface
+class Homo implements Mappable
 {
     protected $database;
     protected $table;

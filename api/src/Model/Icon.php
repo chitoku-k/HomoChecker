@@ -6,7 +6,7 @@ namespace HomoChecker\Model;
 use GuzzleHttp\Promise;
 use GuzzleHttp\ClientInterface;
 
-class Icon implements IconInterface
+class Icon implements ProfileInterface
 {
     public static $default = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png';
 

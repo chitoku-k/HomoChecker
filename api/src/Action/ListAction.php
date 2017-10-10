@@ -5,7 +5,7 @@ namespace HomoChecker\Action;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use HomoChecker\Model\HomoInterface;
+use HomoChecker\Model\Homo;
 use HomoChecker\Model\Status;
 
 class ListAction extends ActionBase
@@ -49,7 +49,7 @@ class ListAction extends ActionBase
 
     protected function createArray(array $homos): array
     {
-        return array_map(function (HomoInterface $item): \stdClass {
+        return array_map(function (Homo $item): \stdClass {
             $status = new Status($item);
             return $status->homo;
         }, $homos);
