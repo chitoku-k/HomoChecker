@@ -16,7 +16,7 @@
                     width: 700px;
                 }
                 @media (min-width: 992px) {
-                    width: 930px;
+                    width: 845px;
                 }
                 @media (min-width: 1200px) {
                     width: 1130px;
@@ -34,6 +34,8 @@
         this.on("mount", () => {
             this.shuffle = new Shuffle(document.querySelector(".wrapper"), {
                 itemSelector: "homo-item",
+                columnWidth: 270,
+                gutterWidth: 17,
                 speed: 150,
                 easing: "easeOutElastic",
                 initialSort: {

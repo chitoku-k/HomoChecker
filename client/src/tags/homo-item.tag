@@ -128,6 +128,49 @@
                 }
             }
 
+            @media (min-width: 992px) {
+                width: 270px;
+
+                .container {
+                    flex-direction: column;
+                    justify-content: space-between;
+                    height: 220px;
+                }
+
+                a {
+                    margin: 18px 0 0;
+                }
+
+                .subdomain {
+                    margin: 0 auto;
+                    align-self: center;
+
+                    h2 {
+                        font-size: 24px;
+                    }
+
+                    .secure {
+                        margin: 3px 0 6px;
+                        text-align: center;
+                    }
+
+                    .url {
+                        margin: 0;
+
+                        &:hover {
+                            border-bottom-color: transparent;
+                            color: #888888;
+                        }
+                    }
+                }
+
+                .result {
+                    .status {
+                        padding: 0 4px 4px 12px;
+                    }
+                }
+            }
+
             @media (max-width: 767px), (max-width: 992px) and (orientation: landscape) {
                 .container {
                     padding: 8px;

@@ -64,7 +64,7 @@
                     width: 700px;
                 }
                 @media (min-width: 992px) {
-                    width: 930px;
+                    width: 845px;
                 }
                 @media (min-width: 1200px) {
                     width: 1130px;
