@@ -12,10 +12,10 @@ body {
 }
 
 @font-face {
-    $font-url: 'https://homo.chitoku.jp:4545';
+    $font-path: '';
     font-family: Atlan;
     font-weight: 600;
-    src: url($font-url + '/atlan.woff') format('woff'),
-         url($font-url + '/atlan.ttf') format('truetype'),
-         url($font-url + '/atlan.svg#svgFontName') format('svg');
+    src: url($font-path + '/atlan.woff') format('woff'),
+         url($font-path + '/atlan.ttf') format('truetype'),
+         url($font-path + '/atlan.svg#svgFontName') format('svg');
 }
