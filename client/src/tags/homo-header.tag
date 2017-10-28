@@ -49,7 +49,7 @@
                     }
                 }
 
-                @media (max-width: 767px), (max-width: 992px) and (orientation: landscape) {
+                @media (max-width: 767px), (max-width: 900px) and (orientation: landscape) {
                     li {
                         a {
                             padding: 12px 14px;
@@ -63,7 +63,7 @@
                 @media (min-width: 768px) {
                     width: 700px;
                 }
-                @media (min-width: 992px) {
+                @media (min-width: 900px) {
                     width: 845px;
                 }
                 @media (min-width: 1200px) {

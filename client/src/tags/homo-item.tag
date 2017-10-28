@@ -128,7 +128,7 @@
                 }
             }
 
-            @media (min-width: 992px) {
+            @media (min-width: 900px) {
                 width: 270px;
 
                 .container {
@@ -171,7 +171,7 @@
                 }
             }
 
-            @media (max-width: 767px), (max-width: 992px) and (orientation: landscape) {
+            @media (max-width: 767px), (max-width: 900px) and (orientation: landscape) {
                 .container {
                     padding: 8px;
                     margin-bottom: 12px;
