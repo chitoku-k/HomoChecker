@@ -145,6 +145,9 @@
                     margin: 0 auto;
                     align-self: center;
 
+                    // See: https://github.com/philipwalton/flexbugs#2-column-flex-items-set-to-align-itemscenter-overflow-their-container
+                    max-width: 100%;
+
                     h2 {
                         font-size: 24px;
                     }
