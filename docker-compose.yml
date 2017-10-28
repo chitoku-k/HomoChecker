@@ -10,14 +10,14 @@ services:
       - ./api:/var/www/html/api
 
   build:
-    image: node:8.4
+    image: node:8.8
     working_dir: /usr/src/app
     command: npm run watch
     volumes:
       - ./client:/usr/src/app
 
   client:
-    image: nginx:1.12
+    image: nginx:1.13
     links:
       - api
     ports:
