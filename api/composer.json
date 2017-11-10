@@ -6,12 +6,16 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^6.1",
-        "satooshi/php-coveralls": "^1.0",
-        "phpunit/dbunit": "^3.0"
+        "phpunit/dbunit": "^3.0",
+        "satooshi/php-coveralls": "^1.0"
     },
     "autoload": {
         "psr-4": {
-            "HomoChecker\\": "./src/",
+            "HomoChecker\\": "./src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "HomoChecker\\Test\\": "./tests/Case/",
             "HomoChecker\\Test\\Utilities\\": "./tests/Utilities/"
         }
