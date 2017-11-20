@@ -8,7 +8,10 @@ services:
     working_dir: /var/www/html/api
     command: composer test
     volumes:
-      - ./api:/var/www/html/api
+      - .:/var/www/html
+    environment:
+      - TRAVIS
+      - TRAVIS_JOB_ID
 
   build:
     image: node:8.4

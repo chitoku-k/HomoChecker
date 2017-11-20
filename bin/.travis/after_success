@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+export COMPOSE_PROJECT_NAME=homochecker-test
+export COMPOSE_FILE=docker-compose.test.yml
+
+docker-compose up -d
+docker-compose exec api vendor/bin/coveralls -v
+
+if [[ "$TRAVIS_BRANCH" = "master" ]] && [[ "$TRAVIS_PULL_REQUEST" = "false" ]]; then
+    git push homo master
+fi
