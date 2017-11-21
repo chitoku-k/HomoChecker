@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-echo -en 'travis_fold:start:build.1'
+echo -en 'travis_fold:start:build.1\\r'
 bin/init
-echo -en 'travis_fold:end:build.1'
+echo -en 'travis_fold:end:build.1\\r'
 
 bin/test
