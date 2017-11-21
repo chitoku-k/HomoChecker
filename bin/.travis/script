@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-travis_fold start 'build.1'
-bin/init
-travis_fold end 'build.1'
-
-travis_fold start 'test.1'
-bin/test
-travis_fold end 'test.1'

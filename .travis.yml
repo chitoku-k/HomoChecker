@@ -14,8 +14,8 @@ before_script:
   - bin/.travis/before_script
 
 script:
-  - export -f travis_fold
-  - bin/.travis/script
+  - bin/init
+  - bin/test
 
 after_success:
   - bin/.travis/after_success
