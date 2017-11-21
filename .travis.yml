@@ -11,10 +11,11 @@ env:
     secure: sWDdir8/dR1W7v/7uxRLElSGZKaBVewpg6H0po/WL5RIWqxxsy954QOkzMPYarI40HkG0sKL86Bb+Ug2T5DncthDmYT//6LFX7cMBpnK9uOwIq9jajT7YZnNxEZM09CO0/gj5F672xQMc74I8CsZkvxAEl/ZwRLiga/vzOS5L4gfczxt8drW19qvfs9eE4OzjnOw9FzSgRWrrtxcqEQEcS+oTgeXrq0HpH0ebHBu+ItpR2MgiDyffcAdx3UFu7GISSemMhRC8Ww0HkaiR8lj+RgHh75AscwzdZuhuU7EuUvOX41HpMMb1Rhbh9a4HMHz2q17rTkwlmqe8qQzMmPJnBotcs8+snbnRSBiaJjqekm6oaZ/ieG+J8Z3EYRHnhezEzPZirPbB5QRqpwe+UlLx4LfoFralTiYcuhT9Cu/6drTOB985ejJjN75Phb0NxN6ynvADoXbb+IO7b+jw1IwBGUaH42FXqdsH/uDO4H4Fqc0NfN75/dfxgYO1uCF3XONFuxlEs5dk1ALxsBREKuK9jbRloYakFhmN8Fkuh+8HotQEtY1U7VMBA3b2mY0k1B3T/zRzCzF9kcZmwfX7PJ4Ild/YeBnY2LS0KH6/TOwF8DVmITSVPwsZZC/JP7vCpxHnoGj4OJT9dnG3CkLdb6V698w46ld1ayHB0K/7Bfqoeo=
 
 before_script:
-  bin/.travis/before_script
+  - bin/.travis/before_script
 
 script:
-  bin/.travis/script
+  - export -f travis_fold
+  - bin/.travis/script
 
 after_success:
-  bin/.travis/after_success
+  - bin/.travis/after_success
