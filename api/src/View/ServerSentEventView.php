@@ -44,5 +44,6 @@ class ServerSentEventView implements ViewInterface
     {
         echo "event: close\n";
         echo "data: end\n\n";
+        $this->flush();
     }
 }
