@@ -36,8 +36,8 @@
                 itemSelector: "homo-item",
                 columnWidth: 400,
                 gutterWidth: 17,
-                speed: 150,
-                easing: "easeOutElastic",
+                speed: 200,
+                easing: "cubic-bezier(.89, .08, .62, .94)",
                 initialSort: {
                     by: elm => +elm.getAttribute("data-duration"),
                 },
