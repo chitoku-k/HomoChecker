@@ -1,7 +1,7 @@
 <homo-item>
     <div class="container">
         <a href={ "https://twitter.com/" + homo.screen_name } target="_blank">
-            <img src={ homo.icon } width="64" height="64">
+            <img src={ homo.icon } width="54" height="54">
         </a>
         <div class="subdomain">
             <i class="fa fa-lock secure" if={ homo.secure }>HTTPS</i>
@@ -50,6 +50,7 @@
                 vertical-align: middle;
                 border: none;
                 border-radius: 3px;
+                margin: 5px;
             }
 
             .subdomain {
@@ -87,7 +88,7 @@
 
                 h2 {
                     color: #444;
-                    font-size: 32px;
+                    font-size: 24px;
                     font-weight: normal;
                     margin: 0;
                     word-break: break-all;
@@ -129,7 +130,7 @@
             }
 
             @media (min-width: 900px) {
-                width: 270px;
+                width: 400px;
 
                 .container {
                     flex-direction: column;
@@ -141,6 +142,11 @@
                     margin: 18px 0 0;
                 }
 
+                img {
+                    width: 64px;
+                    height: 64px;
+                }
+
                 .subdomain {
                     margin: 0 auto;
                     align-self: center;
@@ -148,12 +154,8 @@
                     // See: https://github.com/philipwalton/flexbugs#2-column-flex-items-set-to-align-itemscenter-overflow-their-container
                     max-width: 100%;
 
-                    h2 {
-                        font-size: 24px;
-                    }
-
                     .secure {
-                        margin: 3px 0 6px;
+                        margin: 3px 0 10px;
                         text-align: center;
                     }
 
@@ -187,6 +189,7 @@
                 img {
                     width: 40px;
                     height: 40px;
+                    margin: 0;
                 }
 
                 .subdomain {

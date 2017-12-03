@@ -27,11 +27,11 @@
             @media (min-width: 768px) {
                 width: 700px;
             }
-            @media (min-width: 900px) {
-                width: 845px;
+            @media (min-width: 880px) {
+                width: 817px;
             }
-            @media (min-width: 1200px) {
-                width: 1130px;
+            @media (min-width: 1270px) {
+                width: 1234px;
             }
         }
     </style>
