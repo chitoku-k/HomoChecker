@@ -131,7 +131,7 @@ $ bin/test
 [dependencies-badge]:   https://img.shields.io/gemnasium/chitoku-k/HomoChecker.svg?style=flat-square
 [coveralls-link]:       https://coveralls.io/github/chitoku-k/HomoChecker
 [coveralls-badge]:      https://img.shields.io/coveralls/chitoku-k/HomoChecker.svg?style=flat-square
-[climate-link]:         https://codeclimate.com/github/chitoku-k/HomoChecker
-[climate-badge]:        https://img.shields.io/codeclimate/github/chitoku-k/HomoChecker.svg?style=flat-square
+[climate-link]:         https://codeclimate.com/github/chitoku-k/HomoChecker/maintainability
+[climate-badge]:        https://img.shields.io/codeclimate/maintainability/github/chitoku-k/HomoChecker.svg?style=flat-square
 [homo-link]:            https://homo.chitoku.jp:4545
 [homo-badge]:           https://homo.chitoku.jp:4545/badge/?style=flat-square
