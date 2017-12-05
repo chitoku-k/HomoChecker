@@ -116,6 +116,12 @@ $ docker-compose stop
 $ docker-compose exec database mysql -uhomo -phomo -Dhomo
 ```
 
+たとえば最新のデータを入れるには次のようにします。
+
+```sh
+$ curl -s 'https://homo.chitoku.jp:4545/list/?format=sql' | docker exec -i $(docker-compose ps -q database) mysql -uhomo -phomo -Dhomo
+```
+
 ## テストするには
 
 次のコマンドでテストを実行します。
