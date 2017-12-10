@@ -7,5 +7,5 @@ docker-compose up -d
 docker-compose exec api vendor/bin/coveralls --root_dir=/var/www/html
 
 if [[ "$TRAVIS_BRANCH" = "master" ]] && [[ "$TRAVIS_PULL_REQUEST" = "false" ]]; then
-    git push homo master
+    git push deploy master
 fi
