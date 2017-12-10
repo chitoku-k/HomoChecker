@@ -5,5 +5,5 @@ if [[ "$TRAVIS_BRANCH" = "master" ]] && [[ "$TRAVIS_PULL_REQUEST" = "false" ]]; 
     tar xvf ssh.tar
     mv id_rsa config ~/.ssh
     chmod 600 ~/.ssh/id_rsa
-    git remote add homo $TARGET
+    git remote add deploy $TARGET
 fi
