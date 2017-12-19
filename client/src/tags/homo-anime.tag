@@ -156,23 +156,26 @@
     <script type="es6">
         import { Observable } from "rxjs";
         import "rxjs/add/observable/fromEvent";
+        import { map } from "rxjs/operators/map";
+        import { delayWhen } from "rxjs/operators/delayWhen";
+        import "rxjs/add/operator/delay";
 
-        window.addEventListener("DOMContentLoaded", event => {
+        window.addEventListener("DOMContentLoaded", () => {
             const animeElement = document.querySelector("homo-anime");
             const activeElement = document.querySelector("homo-anime .part-active");
 
             const classes = [ "start", "pako", "finish", "dopyulicated", "end" ];
 
-            Observable.fromEvent(activeElement, "animationend").subscribe(event => {
-                const next = classes[(classes.indexOf(animeElement.className) + 1) % classes.length];
-
-                if (next !== "start") {
-                    animeElement.className = next;
-                } else {
-                    setTimeout(() => {
-                        animeElement.className = next;
-                    }, 5000);
-                }
+            Observable.fromEvent(activeElement, "animationend").pipe(
+                map(() => classes[(classes.indexOf(animeElement.className) + 1) % classes.length]),
+                delayWhen(next => {
+                    if (next !== "start") {
+                        return Observable.of(next);
+                    }
+                    return Observable.of(next).delay(5000);
+                }),
+            ).subscribe(next => {
+                animeElement.className = next;
             });
         });
     </script>
