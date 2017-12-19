@@ -154,25 +154,23 @@
         }
     </style>
     <script type="es6">
+        import { Observable } from "rxjs";
+        import "rxjs/add/observable/fromEvent";
+
         window.addEventListener("DOMContentLoaded", event => {
-            const animeDOM = document.querySelector("homo-anime");
-            const activeDOM = document.querySelector("homo-anime .part-active");
+            const animeElement = document.querySelector("homo-anime");
+            const activeElement = document.querySelector("homo-anime .part-active");
 
             const classes = [ "start", "pako", "finish", "dopyulicated", "end" ];
-            const classMap = classes.reduce((obj, value, key) => {
-                [ obj[key], obj[value] ] = [ value, key ];
-                return obj;
-            }, {});
 
-            activeDOM.addEventListener("animationend", event => {
-                const current = animeDOM.className;
-                const next = classMap[(classMap[current] + 1) % classes.length];
+            Observable.fromEvent(activeElement, "animationend").subscribe(event => {
+                const next = classes[(classes.indexOf(animeElement.className) + 1) % classes.length];
 
                 if (next !== "start") {
-                    animeDOM.className = next;
+                    animeElement.className = next;
                 } else {
                     setTimeout(() => {
-                        animeDOM.className = next;
+                        animeElement.className = next;
                     }, 5000);
                 }
             });
