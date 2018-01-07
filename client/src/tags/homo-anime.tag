@@ -1,6 +1,6 @@
-<homo-anime class="start">
+<homo-anime class={ state }>
     <i class="fa fa-mars part-passive"></i>
-    <i class="fa fa-mars part-active"></i>
+    <i class="fa fa-mars part-active" onanimationend={ trigger.bind(this, "animationend") }></i>
     <style type="text/scss">
         homo-anime {
             display: inline-block;
@@ -151,32 +151,40 @@
                     animation: active-end 5s linear;
                 }
             }
+
+            &.void {
+                @keyframes active-void {
+                }
+
+                .part-active {
+                    animation: active-void 5s;
+                }
+            }
         }
     </style>
     <script type="es6">
         import { Observable } from "rxjs";
         import "rxjs/add/observable/fromEvent";
-        import { map } from "rxjs/operators/map";
-        import { delayWhen } from "rxjs/operators/delayWhen";
+        import "rxjs/add/operator/merge";
+        import "rxjs/add/operator/repeat";
         import "rxjs/add/operator/delay";
 
-        window.addEventListener("DOMContentLoaded", () => {
-            const animeElement = document.querySelector("homo-anime");
-            const activeElement = document.querySelector("homo-anime .part-active");
-
-            const classes = [ "start", "pako", "finish", "dopyulicated", "end" ];
-
-            Observable.fromEvent(activeElement, "animationend").pipe(
-                map(() => classes[(classes.indexOf(animeElement.className) + 1) % classes.length]),
-                delayWhen(next => {
-                    if (next !== "start") {
-                        return Observable.of(next);
-                    }
-                    return Observable.of(next).delay(5000);
-                }),
-            ).subscribe(next => {
-                animeElement.className = next;
-            });
+        Observable.zip(
+            Observable.merge(
+                Observable.fromEvent(this, "mount"),
+                Observable.fromEvent(this, "animationend"),
+            ),
+            Observable.from([
+                "start",
+                "pako",
+                "finish",
+                "dopyulicated",
+                "end",
+                "void",
+            ]).repeat(),
+        ).subscribe(([e, state]) => {
+            this.state = state;
+            this.update();
         });
     </script>
 </homo-anime>
