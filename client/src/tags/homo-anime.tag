@@ -178,7 +178,7 @@
                 "end",
                 "void",
             ]).repeat(),
-        ).subscribe(([e, state]) => {
+        ).subscribe(([ e, state ]) => {
             this.state = state;
             this.update();
         });
