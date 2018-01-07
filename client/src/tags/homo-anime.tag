@@ -173,7 +173,7 @@
                         return Observable.of(next);
                     }
                     return Observable.of(next).delay(5000);
-                })
+                }),
             ).subscribe(next => {
                 animeElement.className = next;
             });
