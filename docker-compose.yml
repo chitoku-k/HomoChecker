@@ -10,7 +10,7 @@ services:
       - ./api:/var/www/html/api
 
   build:
-    image: node:8.8
+    image: node:9.3
     working_dir: /usr/src/app
     command: npm run watch
     volumes:
