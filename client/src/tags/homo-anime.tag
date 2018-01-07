@@ -164,10 +164,6 @@
     </style>
     <script type="es6">
         import { Observable } from "rxjs";
-        import "rxjs/add/observable/fromEvent";
-        import "rxjs/add/operator/merge";
-        import "rxjs/add/operator/repeat";
-        import "rxjs/add/operator/delay";
 
         Observable.zip(
             Observable.merge(
