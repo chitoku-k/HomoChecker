@@ -16,12 +16,13 @@
             .fa-mars {
                 color: white;
                 display: inline-block;
+                padding: 0 0.1em;
             }
 
             .part-active {
                 position: relative;
                 top: 0.6em;
-                left: -1.575em;
+                left: -1.775em;
             }
 
             &.start {
