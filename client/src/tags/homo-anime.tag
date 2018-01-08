@@ -154,6 +154,9 @@
 
             &.void {
                 @keyframes active-void {
+                    0% {
+                        opacity: 1;
+                    }
                 }
 
                 .part-active {
@@ -179,8 +182,7 @@
                 "void",
             ]).repeat(),
         ).subscribe(([ e, state ]) => {
-            this.state = state;
-            this.update();
+            this.update({ state });
         });
     </script>
 </homo-anime>
