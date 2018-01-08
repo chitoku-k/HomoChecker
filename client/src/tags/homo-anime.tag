@@ -167,6 +167,7 @@
     </style>
     <script type="es6">
         import { Observable } from "rxjs";
+        import { Scheduler } from "rxjs";
 
         Observable.zip(
             Observable.merge(
@@ -180,7 +181,7 @@
                 "dopyulicated",
                 "end",
                 "void",
-            ]).repeat(),
+            ], Scheduler.async).repeat(),
         ).subscribe(([ e, state ]) => {
             this.update({ state });
         });
