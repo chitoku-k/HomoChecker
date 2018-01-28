@@ -28,7 +28,7 @@ class ServerSentEventView implements ViewInterface
     {
         $this->output(
             'event: ' . ($event ?? $this->event) . "\r\n" .
-            'data: ' . json_encode($data) . "\r\n"
+            'data: ' . json_encode($data)
         );
     }
 
@@ -40,7 +40,7 @@ class ServerSentEventView implements ViewInterface
     public function output(string $chunk): int
     {
         echo sprintf("%x\r\n", $length = strlen($chunk));
-        echo $chunk . "\r\n";
+        echo $chunk . "\r\n\r\n";
 
         @ob_flush();
         flush();

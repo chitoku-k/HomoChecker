@@ -108,12 +108,16 @@ class CheckActionTest extends TestCase
             'QUERY_STRING' => "format={$format}",
         ]));
 
+        // This test does not receive any results because mocked Check::execute
+        // never calls ServerSentEventView::render. This test could be
+        // implemented if the method were replaced using DI.
+        $this->markTestIncomplete('The test for SSE is not yet implemented.');
+
         ob_start(null, 0, PHP_OUTPUT_HANDLER_CLEANABLE | PHP_OUTPUT_HANDLER_REMOVABLE);
         $action($request, new Response(), []);
         $body = ob_get_clean();
 
-        foreach (explode("\n", $body) as $actual) {
-            $this->assertRegExp('/\A\z|^(event|data)?:/', $actual);
+        foreach (preg_split("/\r\n\r\n/", $body) as $actual) {
         }
     }
 
