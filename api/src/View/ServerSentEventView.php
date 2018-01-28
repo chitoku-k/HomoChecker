@@ -18,9 +18,7 @@ class ServerSentEventView implements ViewInterface
         // @codeCoverageIgnoreEnd
 
         // 2 KiB padding
-        echo ":" . str_repeat(" ", 2048) . "\n";
-
-        $this->flush();
+        $this->output(':' . str_repeat(' ', 2048));
     }
 
     /**
@@ -28,22 +26,25 @@ class ServerSentEventView implements ViewInterface
      */
     public function render($data, $event = null): void
     {
-        $event = $event ?? $this->event;
-        echo "event: {$event}\n";
-        echo "data: " . json_encode($data) . "\n\n";
-        $this->flush();
-    }
-
-    public function flush(): void
-    {
-        @ob_flush();
-        flush();
+        $this->output(
+            'event: ' . ($event ?? $this->event) . "\r\n" .
+            'data: ' . json_encode($data) . "\r\n"
+        );
     }
 
     public function close(): void
     {
-        echo "event: close\n";
-        echo "data: end\n\n";
-        $this->flush();
+        $this->output('');
+    }
+
+    public function output(string $chunk): int
+    {
+        echo sprintf("%x\r\n", $length = strlen($chunk));
+        echo $chunk . "\r\n";
+
+        @ob_flush();
+        flush();
+
+        return $length;
     }
 }
