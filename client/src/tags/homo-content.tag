@@ -63,8 +63,13 @@
             opts.progress.length = opts.items.length;
             opts.progress.trigger("update");
         });
-        source.addEventListener("close", event => {
-            source.close();
+        source.addEventListener("error", event => {
+            if (opts.progress.max === opts.items.length) {
+                source.close();
+                return;
+            }
+            opts.items.length = 0;
+            opts.progress.trigger("update");
         });
     </script>
 </homo-content>

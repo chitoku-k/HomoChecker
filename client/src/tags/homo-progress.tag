@@ -37,9 +37,7 @@
     </style>
     <script type="text/es6">
         opts.progress.on("update", () => {
-            if (opts.progress.length / opts.progress.max === 1) {
-                opts.progress.done = true;
-            }
+            opts.progress.done = opts.progress.length / opts.progress.max === 1;
             this.update();
         });
     </script>
