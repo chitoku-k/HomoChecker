@@ -3,10 +3,12 @@ declare(strict_types=1);
 
 namespace HomoChecker\Model;
 
-use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Pool;
 use GuzzleHttp\Promise;
-use GuzzleHttp\ClientInterface;
+use GuzzleHttp\RequestOptions;
+use GuzzleHttp\TransferStats;
+use GuzzleHttp\Exception\RequestException;
 use HomoChecker\Model\Profile\Icon;
 use HomoChecker\Model\Validator\ValidatorInterface;
 
@@ -36,9 +38,9 @@ class Check
             try {
                 for ($i = 0; $i < static::REDIRECT; ++$i) {
                     $response = yield $this->client->getAsync($url, [
-                        'on_stats_all' => function (array $stats) use (&$time, &$total_time) {
-                            $time += $stats['starttransfer_time'] ?? 0;
-                            $total_time += $stats['total_time'] ?? 0;
+                        RequestOptions::ON_STATS => function (TransferStats $stats) use (&$time, &$total_time) {
+                            $time += $stats->getHandlerStat('starttransfer_time') ?? 0;
+                            $total_time += $stats->getHandlerStat('total_time') ?? 0;
                         },
                     ]);
                     foreach ($this->validators as $validator) {

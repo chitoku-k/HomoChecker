@@ -5,6 +5,7 @@ namespace HomoChecker;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Handler\CurlFactory;
 use GuzzleHttp\Handler\CurlHandler;
 use GuzzleHttp\Handler\CurlMultiHandler;
 use GuzzleHttp\Handler\Proxy;
@@ -14,7 +15,6 @@ use HomoChecker\Model\Profile\Icon;
 use HomoChecker\Model\Validator\HeaderValidator;
 use HomoChecker\Model\Validator\DOMValidator;
 use HomoChecker\Model\Validator\URLValidator;
-use HomoChecker\Utilities\RawCurlFactory;
 use HomoChecker\Utilities\Container;
 use HomoChecker\Action\CheckAction;
 use HomoChecker\Action\ListAction;
@@ -45,7 +45,11 @@ $container['client'] = function (ContainerInterface $container) {
         ],
         'handler' => HandlerStack::create(Proxy::wrapSync(
             new CurlMultiHandler([
-                'handle_factory' => new RawCurlFactory(50),
+                'handle_factory' => new CurlFactory(50, [
+                    'curl' => [
+                        CURLOPT_TCP_FASTOPEN => true,
+                    ],
+                ]),
             ]),
             new CurlHandler()
         )),
