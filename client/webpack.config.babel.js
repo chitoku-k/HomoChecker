@@ -4,6 +4,7 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
+    mode: process.env.NODE_ENV || "production",
     entry: "./src/app.js",
     output: {
         path: path.join(__dirname, "/dist"),
@@ -58,7 +59,6 @@ module.exports = {
         ],
     },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin(),
         new CleanWebpackPlugin(
             path.join(__dirname, "/dist/*.{html,js}"),
         ),
