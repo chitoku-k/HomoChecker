@@ -167,22 +167,23 @@
         }
     </style>
     <script type="es6">
-        import { Observable } from "rxjs";
+        import { merge, from, fromEvent, zip } from "rxjs";
+        import { repeat } from "rxjs/operators";
         import { Scheduler } from "rxjs";
 
-        Observable.zip(
-            Observable.merge(
-                Observable.fromEvent(this, "mount"),
-                Observable.fromEvent(this, "animationend"),
+        zip(
+            merge(
+                fromEvent(this, "mount"),
+                fromEvent(this, "animationend"),
             ),
-            Observable.from([
+            from([
                 "start",
                 "pako",
                 "finish",
                 "dopyulicated",
                 "end",
                 "void",
-            ], Scheduler.async).repeat(),
+            ], Scheduler.async).pipe(repeat()),
         ).subscribe(([ e, state ]) => {
             this.update({ state });
         });
