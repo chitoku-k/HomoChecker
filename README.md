@@ -2,7 +2,6 @@ HomoChecker
 ===========
 
 [![][travis-badge]][travis-link]
-[![][dependencies-badge]][dependencies-link]
 [![][coveralls-badge]][coveralls-link]
 [![][climate-badge]][climate-link]
 [![][homo-badge]][homo-link]
@@ -133,8 +132,6 @@ $ bin/test
 
 [travis-link]:          https://travis-ci.org/chitoku-k/HomoChecker
 [travis-badge]:         https://img.shields.io/travis/chitoku-k/HomoChecker.svg?style=flat-square
-[dependencies-link]:    https://gemnasium.com/github.com/chitoku-k/HomoChecker
-[dependencies-badge]:   https://img.shields.io/gemnasium/chitoku-k/HomoChecker.svg?style=flat-square
 [coveralls-link]:       https://coveralls.io/github/chitoku-k/HomoChecker
 [coveralls-badge]:      https://img.shields.io/coveralls/chitoku-k/HomoChecker.svg?style=flat-square
 [climate-link]:         https://codeclimate.com/github/chitoku-k/HomoChecker/maintainability
