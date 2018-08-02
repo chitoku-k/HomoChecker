@@ -8,6 +8,8 @@ services:
     working_dir: /var/www/html/api
     volumes:
       - ./api:/var/www/html/api
+    networks:
+      - default
 
   build:
     image: node:9.3
@@ -15,6 +17,8 @@ services:
     command: npm run watch
     volumes:
       - ./client:/usr/src/app
+    networks:
+      - default
 
   client:
     image: nginx:1.13
@@ -25,6 +29,8 @@ services:
     volumes:
       - ./client/dist:/var/www/html
       - ./client/conf:/etc/nginx/conf.d
+    networks:
+      - default
 
   database:
     image: mysql:5.7
@@ -37,7 +43,21 @@ services:
       MYSQL_USER: homo
       MYSQL_PASSWORD: homo
       MYSQL_ROOT_PASSWORD: homo
+    networks:
+      - default
 
 volumes:
   database:
     driver: local
+
+networks:
+  default:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+        - subnet: "${HOMOCHECKER_SUBNET6-fd00:4545::/48}"
+          gateway: "${HOMOCHECKER_GATEWAY6-fd00:4545::1}"
+        - subnet: "${HOMOCHECKER_SUBNET4-10.45.45.0/24}"
+          gateway: "${HOMOCHECKER_GATEWAY4-10.45.45.1}"

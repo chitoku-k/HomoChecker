@@ -84,10 +84,17 @@ nginx + PHP-FPM + MySQL で構成されています。
 $ bin/init
 ```
 
-ポート番号を指定する場合は環境変数を変更します（任意）。
+ポート番号、サブネット/ゲートウェイを指定する場合は環境変数を変更します（任意）。
+変更しない場合は適宜 NAT を構成してください。以下はデフォルト値です。
 
 ```sh
 $ export HOMOCHECKER_PORT=4545
+
+$ export HOMOCHECKER_SUBNET4=10.45.45.0/24
+$ export HOMOCHECKER_GATEWAY4=10.45.45.1
+
+$ export HOMOCHECKER_SUBNET6=fd00:4545::/48
+$ export HOMOCHECKER_GATEWAY6=fd00:4545::1
 ```
 
 次のコマンドでコンテナーを起動します。
