@@ -1,10 +1,14 @@
 FROM php:7.2.0-fpm
 
-RUN apt-get -y update
-RUN apt-get -y install git unzip
+# Install dependencies
+RUN apt-get -y update \
+    && apt-get -y install git unzip
 
-RUN curl -sL 'https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer' | php -- --quiet
-RUN mv composer.phar /usr/bin/composer
+# Install PHP extensions
+RUN curl -sL 'https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer' | php -- --quiet \
+    && mv composer.phar /usr/bin/composer \
+    && pecl install xdebug-2.6.0beta1 \
+    && docker-php-ext-install pdo_mysql
 
-RUN pecl install xdebug-2.6.0beta1
-RUN docker-php-ext-install pdo_mysql
+# Prioritise IP version
+RUN echo 'label ::1/128 0' > /etc/gai.conf

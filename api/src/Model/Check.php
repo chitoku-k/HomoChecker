@@ -34,27 +34,29 @@ class Check
         return Promise\coroutine(function () use ($homo) {
             $time = 0.0;
             $total_time = 0.0;
+            $ip = '';
             $url = $homo->url;
             try {
                 for ($i = 0; $i < static::REDIRECT; ++$i) {
                     $response = yield $this->client->getAsync($url, [
-                        RequestOptions::ON_STATS => function (TransferStats $stats) use (&$time, &$total_time) {
+                        RequestOptions::ON_STATS => function (TransferStats $stats) use (&$time, &$total_time, &$ip) {
                             $time += $stats->getHandlerStat('starttransfer_time') ?? 0;
                             $total_time += $stats->getHandlerStat('total_time') ?? 0;
+                            $ip = $stats->getHandlerStat('primary_ip') ?? '';
                         },
                     ]);
                     foreach ($this->validators as $validator) {
                         if ($status = $validator($response)) {
-                            return yield [$status, $time];
+                            return yield [$status, $ip, $time];
                         }
                     }
                     if (!$url = $response->getHeaderLine('Location')) {
                         break;
                     }
                 }
-                return yield ['WRONG', $time];
+                return yield ['WRONG', $ip, $time];
             } catch (RequestException $e) {
-                return yield ['ERROR', $total_time];
+                return yield ['ERROR', $ip, $total_time];
             }
         });
     }
@@ -68,11 +70,11 @@ class Check
     protected function createStatusAsync(Homo $homo, callable $callback = null): Promise\PromiseInterface
     {
         return Promise\coroutine(function () use ($homo, $callback) {
-            [[$status, $duration], $icon] = yield Promise\all([
+            [[$status, $ip, $duration], $icon] = yield Promise\all([
                 $this->validateAsync($homo),
                 $this->icon->getAsync($homo->screen_name),
             ]);
-            $result = new Status($homo, $icon, $status, $duration);
+            $result = new Status($homo, $icon, $status, $ip, $duration);
             if ($callback) {
                 $callback($result);
             }

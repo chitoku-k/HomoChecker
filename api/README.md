@@ -69,6 +69,9 @@ data: {"homo":{"screen_name":"java_shit","url":"https:\/\/homo.chitoku.jp","disp
         // ERROR: 接続失敗/タイムアウト
         "status": "",
 
+        // (string) 直前の接続先の IPv4 または IPv6（サポートしている場合）アドレス
+        "ip": "2001:db8::4545:4545",
+
         // (number) リダイレクトにかかった時間 (s)
         "duration": 0.0
     }

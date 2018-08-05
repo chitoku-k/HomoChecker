@@ -7,7 +7,7 @@ use TrueBV\Punycode;
 
 class Status
 {
-    public function __construct(Homo $homo, string $icon = null, string $status = null, float $duration = null)
+    public function __construct(Homo $homo, string $icon = null, string $status = null, string $ip = null, float $duration = null)
     {
         $this->homo = (object)[
             'screen_name' => $homo->screen_name,
@@ -21,6 +21,9 @@ class Status
         }
         if (isset($status)) {
             $this->status = $status;
+        }
+        if (isset($ip)) {
+            $this->ip = $ip;
         }
         if (isset($duration)) {
             $this->duration = $duration;
