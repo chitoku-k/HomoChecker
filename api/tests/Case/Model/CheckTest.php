@@ -86,10 +86,10 @@ class CheckTest extends TestCase
         $this->Check = new Check($this->Client, $this->Homo, $this->Icon, ...$this->validators);
 
         $expected = [
-            new Status($this->user('foo', 'https://foo.example.com/1'), 'foo', 'OK', 0),
-            new Status($this->user('foo', 'https://foo.example.com/2'), 'foo', 'WRONG', 0),
-            new Status($this->user('bar', 'http://bar.example.com'), 'bar', 'OK', 0),
-            new Status($this->user('baz', 'https://baz.example.com'), 'baz', 'ERROR', 0),
+            new Status($this->user('foo', 'https://foo.example.com/1'), 'foo', 'OK', null, 0),
+            new Status($this->user('foo', 'https://foo.example.com/2'), 'foo', 'WRONG', null, 0),
+            new Status($this->user('bar', 'http://bar.example.com'), 'bar', 'OK', null, 0),
+            new Status($this->user('baz', 'https://baz.example.com'), 'baz', 'ERROR', null, 0),
         ];
 
         $actual = $this->Check->execute(null, function ($status) use ($expected) {

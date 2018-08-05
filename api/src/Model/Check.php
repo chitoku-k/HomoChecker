@@ -56,7 +56,7 @@ class Check
                         RequestOptions::ON_STATS => function (TransferStats $stats) use ($url, &$times, &$total_time, &$ips) {
                             $total_time += $stats->getHandlerStat('total_time') ?? 0;
                             $times[$url] = $stats->getHandlerStat('starttransfer_time') ?? 0;
-                            $ips[$url] = $stats->getHandlerStat('primary_ip') ?? '';
+                            $ips[$url] = $stats->getHandlerStat('primary_ip') ?? null;
                         },
                     ]);
                     foreach ($this->validators as $validator) {

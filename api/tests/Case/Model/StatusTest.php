@@ -15,12 +15,13 @@ class StatusTest extends TestCase
         $url = 'https://xn--ydko.example.com';
         $icon = 'https://img.example.com';
         $status = 'OK';
+        $ip = '2001:db8::4545:1';
         $duration = 1.14514;
 
         $homo = new Homo();
         $homo->screen_name = $screen_name;
         $homo->url = $url;
-        $target = new Status($homo, $icon, $status, $duration);
+        $target = new Status($homo, $icon, $status, $ip, $duration);
 
         $this->assertEquals($screen_name, $target->homo->screen_name);
         $this->assertEquals($url, $target->homo->url);
@@ -28,6 +29,7 @@ class StatusTest extends TestCase
         $this->assertEquals(true, $target->homo->secure);
         $this->assertEquals($icon, $target->homo->icon);
         $this->assertEquals($status, $target->status);
+        $this->assertEquals($ip, $target->ip);
         $this->assertEquals($duration, $target->duration);
     }
 
@@ -37,12 +39,13 @@ class StatusTest extends TestCase
         $url = 'not:a:url';
         $icon = 'https://img.example.com';
         $status = 'CONTAINS';
+        $ip = '2001:db8::4545:1';
         $duration = 1.14514;
 
         $homo = new Homo();
         $homo->screen_name = $screen_name;
         $homo->url = $url;
-        $target = new Status($homo, $icon, $status, $duration);
+        $target = new Status($homo, $icon, $status, $ip, $duration);
 
         $this->assertEquals($screen_name, $target->homo->screen_name);
         $this->assertEquals($url, $target->homo->url);
@@ -50,6 +53,7 @@ class StatusTest extends TestCase
         $this->assertEquals(false, $target->homo->secure);
         $this->assertEquals($icon, $target->homo->icon);
         $this->assertEquals($status, $target->status);
+        $this->assertEquals($ip, $target->ip);
         $this->assertEquals($duration, $target->duration);
     }
 }

@@ -54,8 +54,11 @@ class IconTest extends TestCase
         ]));
 
         $client = new Client(compact('handler'));
+        $redis = $this->getMockBuilder(\Redis::class)
+                      ->disableOriginalConstructor()
+                      ->getMock();
 
-        $icon = new Icon($client);
+        $icon = new Icon($client, $redis);
         $this->assertEquals($url, $icon->getAsync('example')->wait());
         $this->assertEquals($icon::$default, $icon->getAsync('example')->wait());
         $this->assertEquals($icon::$default, $icon->getAsync('example')->wait());

@@ -32,9 +32,9 @@ class CheckActionTest extends TestCase
             $this->user('bar', 'http://bar.example.com'),
         ];
         $statuses = [
-            new Status($this->user('foo', 'https://foo.example.com/1'), null, 'OK', 10),
-            new Status($this->user('foo', 'https://foo.example.com/2'), null, 'NG', 20),
-            new Status($this->user('bar', 'http://bar.example.com'), null, 'OK', 30),
+            new Status($this->user('foo', 'https://foo.example.com/1'), null, 'OK', '2001:db8::4545:1', 10),
+            new Status($this->user('foo', 'https://foo.example.com/2'), null, 'NG', '2001:db8::4545:2', 20),
+            new Status($this->user('bar', 'http://bar.example.com'), null, 'OK', '2001:db8::4545:3', 30),
         ];
 
         $this->Container = new Container();
@@ -71,6 +71,7 @@ class CheckActionTest extends TestCase
                     'secure' => true,
                 ],
                 'status' => 'OK',
+                'ip' => '2001:db8::4545:1',
                 'duration' => 10,
             ],
             [
@@ -81,6 +82,7 @@ class CheckActionTest extends TestCase
                     'secure' => true,
                 ],
                 'status' => 'NG',
+                'ip' => '2001:db8::4545:2',
                 'duration' => 20,
             ],
             [
@@ -91,6 +93,7 @@ class CheckActionTest extends TestCase
                     'secure' => false,
                 ],
                 'status' => 'OK',
+                'ip' => '2001:db8::4545:3',
                 'duration' => 30,
             ],
         ]);
