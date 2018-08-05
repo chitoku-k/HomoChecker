@@ -1,24 +1,42 @@
 <homo-item>
     <div class="container">
         <a href={ "https://twitter.com/" + homo.screen_name } target="_blank">
-            <img src={ homo.icon } width="54" height="54">
+            <img src={ homo.icon } width="60" height="60">
         </a>
-        <div class="subdomain">
-            <i class="fa fa-lock secure" if={ homo.secure }>HTTPS</i>
-            <h2>
-                <a class="url" href={ homo.url } target="_blank">{ homo.display_url }</a>
-            </h2>
-        </div>
-        <div class="result">
-            <div if={ status !== "ERROR" } class="duration">{ Math.round(duration * 1000) } ms</div>
-            <i class={
-                status: true,
-                fa: true,
-                fa-check: status === "OK",
-                fa-ban: status === "WRONG",
-                fa-times: status === "ERROR",
-                fa-exclamation-triangle: status === "CONTAINS"
-            }></i>
+        <div class="information">
+            <div class="subdomain">
+                <h2>
+                    <a class="url" href={ homo.url } target="_blank">{ homo.display_url }</a>
+                </h2>
+            </div>
+            <div class="result">
+                <div class="attributes-container">
+                    <span class={
+                        connection: true,
+                        status: true,
+                        ok: status === "OK",
+                        wrong: status === "WRONG",
+                        error: status === "ERROR",
+                        contains: status === "CONTAINS"
+                    }>
+                        <i class={
+                            fa: true,
+                            fa-check: status === "OK",
+                            fa-ban: status === "WRONG",
+                            fa-times: status === "ERROR",
+                            fa-exclamation-triangle: status === "CONTAINS"
+                        }></i>
+                        { status }
+                    </span>
+                    <span if={ homo.secure } class="connection secure"><i class="fa fa-lock"></i>HTTPS</span>
+                    <span if={ !homo.secure } class="connection insecure"><i class="fa fa-unlock-alt"></i>HTTP</span>
+                    <span if={ ip.includes(".") } class="connection ipv4" title={ ip }><i class="fa fa-globe"></i>IPv4</span>
+                    <span if={ ip.includes(":") } class="connection ipv6" title={ ip }><i class="fa fa-globe"></i>IPv6</span>
+                </div>
+                <div class="performance-container">
+                    <div if={ status !== "ERROR" } class="duration">{ Math.round(duration * 1000) } ms</div>
+                </div>
+            </div>
         </div>
     </div>
     <style type="text/scss">
@@ -42,7 +60,7 @@
                 color: #000;
                 text-decoration: none;
                 -webkit-tap-highlight-color: initial;
-                margin: 0 12px 0 0;
+                margin: 0 10px 0 0;
                 line-height: 1.2;
             }
 
@@ -53,78 +71,98 @@
                 margin: 5px;
             }
 
-            .subdomain {
-                margin-right: 6px;
-                display: flex;
-                flex-direction: column;
-                align-self: stretch;
-                justify-content: space-around;
+            .information {
+                width: 100%;
 
-                .secure {
-                    display: block;
-                    color: #5c9a4f;
-                    font-family: FontAwesome, Atlan;
-                    font-size: 14px;
+                .subdomain {
+                    margin-right: 6px;
 
-                    &:before {
-                        padding-right: .3em;
+                    .url {
+                        border-bottom: 2px solid transparent;
+
+                        span {
+                            display: inline-block;
+                            margin-bottom: -2px;
+                            padding-bottom: 2px;
+                            border-bottom: 2px solid #af9369;
+                        }
+
+                        &:hover {
+                            border-bottom-color: #666;
+                        }
+                    }
+
+                    h2 {
+                        color: #444;
+                        font-size: 22px;
+                        font-weight: normal;
+                        margin: 0;
+                        word-break: break-all;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                     }
                 }
 
-                .url {
-                    border-bottom: 2px solid transparent;
+                .result {
+                    display: flex;
+                    width: 100%;
+                    margin-top: 8px;
+                    justify-content: space-between;
 
-                    span {
-                        display: inline-block;
-                        margin-bottom: -2px;
-                        padding-bottom: 2px;
-                        border-bottom: 2px solid #af9369;
+                    .attributes-container {
+                        display: flex;
+                        align-items: center;
+                        font-size: 12px;
+                        user-select: none;
+
+                        .fa {
+                            font-family: FontAwesome, Atlan;
+                            font-size: 14px;
+
+                            &:before {
+                                padding-right: .4em;
+                            }
+                        }
+
+                        .connection {
+                            display: inline-block;
+                            white-space: nowrap;
+                            border: 1px solid;
+                            border-radius: 3px;
+                            margin: 0 4px;
+                            padding: 4px 8px;
+
+                            &:first-child {
+                                margin-left: 0;
+                            }
+                        }
+
+                        .insecure, .ipv4, .contains {
+                            color: #ec971f;
+                            border-color: #ec971f;
+                        }
+
+                        .secure, .ipv6, .ok {
+                            color: #449d44;
+                            border-color: #449d44;
+                        }
+
+                        .wrong, .error {
+                            color: #c9302c;
+                            border-color: #c9302c;
+                        }
                     }
 
-                    &:hover {
-                        border-bottom-color: #666;
-                    }
-                }
+                    .performance-container {
+                        display: flex;
+                        align-items: center;
+                        margin-left: auto;
 
-                h2 {
-                    color: #444;
-                    font-size: 24px;
-                    font-weight: normal;
-                    margin: 0;
-                    word-break: break-all;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                }
-            }
-
-            .result {
-                display: flex;
-                align-items: center;
-                margin-left: auto;
-
-                .duration {
-                    font-size: 22px;
-                    color: #666;
-                    white-space: nowrap;
-                }
-
-                .status {
-                    font-size: 42px;
-                    padding: 0 16px;
-                    min-width: 40px;
-                    text-align: center;
-
-                    &.fa-check {
-                        color: #449d44;
-                    }
-                    &.fa-times {
-                        color: #c9302c;
-                    }
-                    &.fa-ban {
-                        color: #c9302c;
-                    }
-                    &.fa-exclamation-triangle {
-                        color: #ec971f;
+                        .duration {
+                            margin-right: 3px;
+                            color: #666;
+                            white-space: nowrap;
+                        }
                     }
                 }
             }
@@ -135,7 +173,7 @@
                 .container {
                     flex-direction: column;
                     justify-content: space-between;
-                    height: 220px;
+                    height: 200px;
                 }
 
                 a {
@@ -147,31 +185,28 @@
                     height: 64px;
                 }
 
-                .subdomain {
-                    margin: 0 auto;
-                    align-self: center;
-
-                    // See: https://github.com/philipwalton/flexbugs#2-column-flex-items-set-to-align-itemscenter-overflow-their-container
-                    max-width: 100%;
-
-                    .secure {
-                        margin: 3px 0 10px;
+                .information {
+                    .subdomain {
                         text-align: center;
-                    }
+                        margin: 0 auto 30px;
 
-                    .url {
-                        margin: 0;
-
-                        &:hover {
-                            border-bottom-color: transparent;
-                            color: #888888;
+                        h2 {
+                            font-size: 24px;
                         }
-                    }
-                }
 
-                .result {
-                    .status {
-                        padding: 0 4px 4px 12px;
+                        .secure {
+                            margin: 3px 0 0;
+                            text-align: center;
+                        }
+
+                        .url {
+                            margin: 0;
+
+                            &:hover {
+                                border-bottom-color: transparent;
+                                color: #888888;
+                            }
+                        }
                     }
                 }
             }
@@ -187,30 +222,38 @@
                 }
 
                 img {
-                    width: 40px;
-                    height: 40px;
+                    width: 46px;
+                    height: 46px;
                     margin: 0;
                 }
 
-                .subdomain {
-                    h2 {
-                        font-size: 18px;
-                        margin-right: 0;
-                    }
-                }
-
-                .result {
-                    flex-direction: column-reverse;
-                    min-width: 50px;
-
-                    .duration {
-                        font-size: 15px;
+                .information {
+                    .subdomain {
+                        h2 {
+                            font-size: 16px;
+                            margin-right: 0;
+                        }
                     }
 
-                    .status {
-                        padding: 0 0 0 5px;
-                        min-width: 30px;
-                        font-size: 24px;
+                    .result {
+                        margin-top: 5px;
+
+                        .attributes-container {
+                            font-size: 10px;
+
+                            .fa {
+                                font-size: 10px;
+                            }
+
+                            .connection {
+                                margin: 0 2px;
+                                padding: 2px 6px;
+                            }
+                        }
+
+                        .duration {
+                            font-size: 15px;
+                        }
                     }
                 }
             }
@@ -219,11 +262,6 @@
                 .result {
                     .duration {
                         font-size: 14px;
-                    }
-
-                    .status {
-                        min-width: 20px;
-                        font-size: 20px;
                     }
                 }
             }
