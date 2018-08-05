@@ -15,10 +15,10 @@ services:
     image: node:9.3
     working_dir: /usr/src/app
     command: npm run watch
+    environment:
+      NODE_ENV: "${HOMOCHECKER_ENV-production}"
     volumes:
       - ./client:/usr/src/app
-    networks:
-      - default
 
   client:
     image: nginx:1.13

@@ -84,10 +84,11 @@ nginx + PHP-FPM + MySQL で構成されています。
 $ bin/init
 ```
 
-ポート番号、サブネット/ゲートウェイを指定する場合は環境変数を変更します（任意）。
+webpack のモード、ポート番号、サブネット/ゲートウェイを指定する場合は環境変数を変更します（任意）。
 変更しない場合は適宜 NAT を構成してください。以下はデフォルト値です。
 
 ```sh
+$ export HOMOCHECKER_ENV=production
 $ export HOMOCHECKER_PORT=4545
 
 $ export HOMOCHECKER_SUBNET4=10.45.45.0/24
