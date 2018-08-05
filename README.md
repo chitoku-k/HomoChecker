@@ -38,6 +38,7 @@ DNS を適切に設定したあと、お使いの Web サーバーに合わせ�
 ```nginx
 server {
     listen 80;
+    listen [::]:80;
     server_name homo.example.com;
     return 301 https://twitter.com/mpyw;
 }
