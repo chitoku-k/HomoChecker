@@ -59,7 +59,12 @@ $container['homo'] = function (ContainerInterface $container) {
     return new Homo($container['database'], 'users');
 };
 $container['icon'] = function (ContainerInterface $container) {
-    return new Icon($container['client']);
+    return new Icon($container['client'], $container['redis']);
+};
+$container['redis'] = function (ContainerInterface $container) {
+    $redis = new \Redis();
+    $redis->connect(REDIS_HOST, REDIS_PORT);
+    return $redis;
 };
 $container['validators'] = function (ContainerInterface $container) {
     return [

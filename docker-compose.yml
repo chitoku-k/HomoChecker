@@ -5,6 +5,7 @@ services:
     build: ./api
     links:
       - database
+      - redis
     working_dir: /var/www/html/api
     volumes:
       - ./api:/var/www/html/api
@@ -43,6 +44,11 @@ services:
       MYSQL_USER: homo
       MYSQL_PASSWORD: homo
       MYSQL_ROOT_PASSWORD: homo
+    networks:
+      - default
+
+  redis:
+    image: redis:4.0
     networks:
       - default
 
