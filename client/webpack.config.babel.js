@@ -4,7 +4,7 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    mode: process.env.NODE_ENV || "production",
+    mode: process.env.HOMOCHECKER_ENV || "production",
     entry: "./src/app.js",
     output: {
         path: path.join(__dirname, "/dist"),
