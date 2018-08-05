@@ -18,6 +18,6 @@ class DOMValidator extends ValidatorBase
         $xpath->registerNamespace('php', 'http://php.net/xpath');
         $xpath->registerPhpFunctions();
         $url = $xpath->evaluate('string(//meta[contains(php:functionString("strtolower", @http-equiv), "refresh")]/@content)');
-        return preg_match($this->regex, $url) ? 'OK' : false;
+        return preg_match($this->regex, $url) ? ValidatorResult::OK : false;
     }
 }

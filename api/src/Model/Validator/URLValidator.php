@@ -12,6 +12,6 @@ class URLValidator extends ValidatorBase
      */
     protected function validate(Response $response)
     {
-        return preg_match($this->regex, (string)$response->getBody()) ? 'CONTAINS' : false;
+        return preg_match($this->regex, (string)$response->getBody()) ? ValidatorResult::CONTAINS : false;
     }
 }

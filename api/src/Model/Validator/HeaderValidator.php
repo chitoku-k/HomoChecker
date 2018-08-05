@@ -13,6 +13,6 @@ class HeaderValidator extends ValidatorBase
     protected function validate(Response $response)
     {
         $url = $response->getHeaderLine('Location');
-        return preg_match($this->regex, $url) ? 'OK' : false;
+        return preg_match($this->regex, $url) ? ValidatorResult::OK : false;
     }
 }

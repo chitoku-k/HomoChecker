@@ -11,6 +11,7 @@ use GuzzleHttp\TransferStats;
 use GuzzleHttp\Exception\RequestException;
 use HomoChecker\Model\Profile\Icon;
 use HomoChecker\Model\Validator\ValidatorInterface;
+use HomoChecker\Model\Validator\ValidatorResult;
 
 class Check
 {
@@ -24,6 +25,19 @@ class Check
         $this->validators = $validators;
     }
 
+    private function getValidateStatus(Homo $homo, string $status, array $ips, $times): array
+    {
+        if (!is_array($times)) {
+            return [$status, $ips[$homo->url], $times];
+        }
+
+        $offset = array_search($homo->url, array_keys($ips)) + 1;
+        array_splice($ips, $offset);
+        array_splice($times, $offset);
+
+        return [$status, array_pop($ips), array_sum($times)];
+    }
+
     /**
      * Validate a user.
      * @param  Homo                     $homo The user.
@@ -32,31 +46,33 @@ class Check
     protected function validateAsync(Homo $homo): Promise\PromiseInterface
     {
         return Promise\coroutine(function () use ($homo) {
-            $time = 0.0;
             $total_time = 0.0;
-            $ip = '';
+            $times = [];
+            $ips = [];
             $url = $homo->url;
             try {
                 for ($i = 0; $i < static::REDIRECT; ++$i) {
                     $response = yield $this->client->getAsync($url, [
-                        RequestOptions::ON_STATS => function (TransferStats $stats) use (&$time, &$total_time, &$ip) {
-                            $time += $stats->getHandlerStat('starttransfer_time') ?? 0;
+                        RequestOptions::ON_STATS => function (TransferStats $stats) use ($url, &$times, &$total_time, &$ips) {
                             $total_time += $stats->getHandlerStat('total_time') ?? 0;
-                            $ip = $stats->getHandlerStat('primary_ip') ?? '';
+                            $times[$url] = $stats->getHandlerStat('starttransfer_time') ?? 0;
+                            $ips[$url] = $stats->getHandlerStat('primary_ip') ?? '';
                         },
                     ]);
                     foreach ($this->validators as $validator) {
-                        if ($status = $validator($response)) {
-                            return yield [$status, $ip, $time];
+                        if (!$status = $validator($response)) {
+                            continue;
                         }
+                        return yield $this->getValidateStatus($homo, $status, $ips, $times);
                     }
                     if (!$url = $response->getHeaderLine('Location')) {
                         break;
                     }
                 }
-                return yield ['WRONG', $ip, $time];
+
+                return yield $this->getValidateStatus($homo, ValidatorResult::WRONG, $ips, $times);
             } catch (RequestException $e) {
-                return yield ['ERROR', $ip, $total_time];
+                return yield $this->getValidateStatus($homo, ValidatorResult::ERROR, $ips, $total_time);
             }
         });
     }
