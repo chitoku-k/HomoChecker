@@ -28,10 +28,26 @@
                         }></i>
                         { status }
                     </span>
-                    <span if={ homo.secure } class="connection secure"><i class="fa fa-lock"></i>HTTPS</span>
-                    <span if={ !homo.secure } class="connection insecure"><i class="fa fa-unlock-alt"></i>HTTP</span>
-                    <span if={ ip.includes(".") } class="connection ipv4" title={ ip }><i class="fa fa-globe"></i>IPv4</span>
-                    <span if={ ip.includes(":") } class="connection ipv6" title={ ip }><i class="fa fa-globe"></i>IPv6</span>
+                    <span class={
+                        connection: true,
+                        secure: homo.secure,
+                        insecure: !homo.secure,
+                    }>
+                        <i class={
+                            fa: true,
+                            fa-lock: homo.secure,
+                            fa-unlock-alt: !homo.secure,
+                        }></i>
+                        { homo.secure ? "HTTPS" : "HTTP" }
+                    </span>
+                    <span class={
+                        connection: true,
+                        ipv4: ip.includes("."),
+                        ipv6: ip.includes(":"),
+                    } title={ ip }>
+                        <i class="fa fa-globe"></i>
+                        { ip.includes(":") ? "IPv6" : "IPv4" }
+                    </span>
                 </div>
                 <div class="performance-container">
                     <div if={ status !== "ERROR" } class="duration">{ Math.round(duration * 1000) } ms</div>
@@ -125,7 +141,6 @@
                         }
 
                         .connection {
-                            display: inline-block;
                             white-space: nowrap;
                             border: 1px solid;
                             border-radius: 3px;
