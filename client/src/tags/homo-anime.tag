@@ -167,9 +167,8 @@
         }
     </style>
     <script type="es6">
-        import { merge, from, fromEvent, zip } from "rxjs";
+        import { asyncScheduler, merge, from, fromEvent, zip } from "rxjs";
         import { repeat } from "rxjs/operators";
-        import { Scheduler } from "rxjs";
 
         zip(
             merge(
@@ -183,7 +182,7 @@
                 "dopyulicated",
                 "end",
                 "void",
-            ], Scheduler.async).pipe(repeat()),
+            ], asyncScheduler).pipe(repeat()),
         ).subscribe(([ e, state ]) => {
             this.update({ state });
         });
