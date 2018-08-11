@@ -1,4 +1,5 @@
 // polyfill
+import "@babel/polyfill";
 import "event-source-polyfill";
 
 import riot from "riot";
