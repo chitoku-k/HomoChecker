@@ -4,11 +4,6 @@ declare(strict_types=1);
 namespace HomoChecker;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Handler\CurlFactory;
-use GuzzleHttp\Handler\CurlHandler;
-use GuzzleHttp\Handler\CurlMultiHandler;
-use GuzzleHttp\Handler\Proxy;
 use HomoChecker\Model\Check;
 use HomoChecker\Model\Homo;
 use HomoChecker\Model\Profile\Icon;
@@ -43,16 +38,6 @@ $container['client'] = function (ContainerInterface $container) {
         'headers' => [
             'User-Agent' => 'Homozilla/5.0 (Checker/1.14.514; homOSeX 8.10)',
         ],
-        'handler' => HandlerStack::create(Proxy::wrapSync(
-            new CurlMultiHandler([
-                'handle_factory' => new CurlFactory(50, [
-                    'curl' => [
-                        CURLOPT_TCP_FASTOPEN => true,
-                    ],
-                ]),
-            ]),
-            new CurlHandler()
-        )),
     ]);
 };
 $container['homo'] = function (ContainerInterface $container) {
