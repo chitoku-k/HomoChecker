@@ -40,7 +40,7 @@
                         }></i>
                         { homo.secure ? "HTTPS" : "HTTP" }
                     </span>
-                    <span class={
+                    <span if={ ip } class={
                         connection: true,
                         ipv4: ip.includes("."),
                         ipv6: ip.includes(":"),
