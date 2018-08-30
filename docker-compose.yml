@@ -13,7 +13,7 @@ services:
       - default
 
   build:
-    image: node:10.8
+    image: node:10.9
     working_dir: /usr/src/app
     command: npm run watch
     environment:
@@ -22,7 +22,7 @@ services:
       - ./client:/usr/src/app
 
   client:
-    image: nginx:1.14
+    image: nginx:1.15
     links:
       - api
     ports:
