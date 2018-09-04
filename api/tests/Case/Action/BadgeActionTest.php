@@ -15,10 +15,11 @@ use PHPUnit\Framework\TestCase;
 
 class BadgeActionTest extends TestCase
 {
-    protected function user(string $screen_name, string $url): Homo
+    protected function user(string $screen_name, string $service, string $url): Homo
     {
         $homo = new Homo();
         $homo->screen_name = $screen_name;
+        $homo->service = $service;
         $homo->url = $url;
         return $homo;
     }
@@ -27,14 +28,14 @@ class BadgeActionTest extends TestCase
     {
         parent::setUp();
         $users = [
-            $this->user('foo', 'https://foo.example.com/1'),
-            $this->user('foo', 'https://foo.example.com/2'),
-            $this->user('bar', 'http://bar.example.com'),
+            $this->user('foo', 'twitter', 'https://foo.example.com/1'),
+            $this->user('foo', 'twitter', 'https://foo.example.com/2'),
+            $this->user('bar', 'mastodon', 'http://bar.example.com'),
         ];
         $statuses = [
-            new Status($this->user('foo', 'https://foo.example.com/1'), null, 'OK'),
-            new Status($this->user('foo', 'https://foo.example.com/2'), null, 'NG'),
-            new Status($this->user('bar', 'http://bar.example.com'), null, 'OK'),
+            new Status($this->user('foo', 'twitter', 'https://foo.example.com/1'), null, 'OK'),
+            new Status($this->user('foo', 'twitter', 'https://foo.example.com/2'), null, 'NG'),
+            new Status($this->user('bar', 'mastodon', 'http://bar.example.com'), null, 'OK'),
         ];
 
         $this->Container = new Container();

@@ -294,6 +294,9 @@
                     const [ , username, instance ] = /@?([^@]*)@(.*)\/*/.exec(homo.screen_name) || [];
                     return `https://${instance}/@${username}`;
                 }
+                default: {
+                    return null;
+                }
             }
         };
 

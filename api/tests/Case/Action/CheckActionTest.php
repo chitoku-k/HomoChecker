@@ -15,10 +15,11 @@ use PHPUnit\Framework\TestCase;
 
 class CheckActionTest extends TestCase
 {
-    protected function user(string $screen_name, string $url): Homo
+    protected function user(string $screen_name, string $service, string $url): Homo
     {
         $homo = new Homo();
         $homo->screen_name = $screen_name;
+        $homo->service = $service;
         $homo->url = $url;
         return $homo;
     }
@@ -27,14 +28,14 @@ class CheckActionTest extends TestCase
     {
         parent::setUp();
         $users = [
-            $this->user('foo', 'https://foo.example.com/1'),
-            $this->user('foo', 'https://foo.example.com/2'),
-            $this->user('bar', 'http://bar.example.com'),
+            $this->user('foo', 'twitter', 'https://foo.example.com/1'),
+            $this->user('foo', 'twitter', 'https://foo.example.com/2'),
+            $this->user('bar', 'mastodon', 'http://bar.example.com'),
         ];
         $statuses = [
-            new Status($this->user('foo', 'https://foo.example.com/1'), null, 'OK', '2001:db8::4545:1', 10),
-            new Status($this->user('foo', 'https://foo.example.com/2'), null, 'NG', '2001:db8::4545:2', 20),
-            new Status($this->user('bar', 'http://bar.example.com'), null, 'OK', '2001:db8::4545:3', 30),
+            new Status($this->user('foo', 'twitter', 'https://foo.example.com/1'), null, 'OK', '2001:db8::4545:1', 10),
+            new Status($this->user('foo', 'twitter', 'https://foo.example.com/2'), null, 'NG', '2001:db8::4545:2', 20),
+            new Status($this->user('bar', 'mastodon', 'http://bar.example.com'), null, 'OK', '2001:db8::4545:3', 30),
         ];
 
         $this->Container = new Container();
@@ -66,6 +67,7 @@ class CheckActionTest extends TestCase
             [
                 'homo' => [
                     'screen_name' => 'foo',
+                    'service' => 'twitter',
                     'url' => 'https://foo.example.com/1',
                     'display_url' => 'foo.example.com/1',
                     'secure' => true,
@@ -77,6 +79,7 @@ class CheckActionTest extends TestCase
             [
                 'homo' => [
                     'screen_name' => 'foo',
+                    'service' => 'twitter',
                     'url' => 'https://foo.example.com/2',
                     'display_url' => 'foo.example.com/2',
                     'secure' => true,
@@ -88,6 +91,7 @@ class CheckActionTest extends TestCase
             [
                 'homo' => [
                     'screen_name' => 'bar',
+                    'service' => 'mastodon',
                     'url' => 'http://bar.example.com',
                     'display_url' => 'bar.example.com',
                     'secure' => false,

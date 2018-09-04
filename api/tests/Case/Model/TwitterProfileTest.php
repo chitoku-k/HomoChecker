@@ -9,12 +9,13 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use HomoChecker\Model\Profile\Icon;
+use HomoChecker\Model\Cache;
+use HomoChecker\Model\Profile\TwitterProfile;
 use PHPUnit\Framework\TestCase;
 
-class IconTest extends TestCase
+class TwitterProfileTest extends TestCase
 {
-    public function testGetAsync(): void
+    public function testGetIconAsync(): void
     {
         $url = 'https://pbs.twimg.com/profile_images/114514/example_bigger.jpg';
         $handler = HandlerStack::create(new MockHandler([
@@ -57,11 +58,25 @@ class IconTest extends TestCase
         $redis = $this->getMockBuilder(\Redis::class)
                       ->disableOriginalConstructor()
                       ->getMock();
+        $cache = new Cache($redis);
 
-        $icon = new Icon($client, $redis);
-        $this->assertEquals($url, $icon->getAsync('example')->wait());
-        $this->assertEquals($icon::$default, $icon->getAsync('example')->wait());
-        $this->assertEquals($icon::$default, $icon->getAsync('example')->wait());
-        $this->assertEquals($icon::$default, $icon->getAsync('example')->wait());
+        $profile = new TwitterProfile($client, $cache);
+        $this->assertEquals($url, $profile->getIconAsync('example')->wait());
+        $this->assertEquals($profile->getDefaultUrl(), $profile->getIconAsync('example')->wait());
+        $this->assertEquals($profile->getDefaultUrl(), $profile->getIconAsync('example')->wait());
+        $this->assertEquals($profile->getDefaultUrl(), $profile->getIconAsync('example')->wait());
+    }
+
+    public function testGetServiceName(): void
+    {
+        $handler = HandlerStack::create(new MockHandler([]));
+        $client = new Client(compact('handler'));
+        $redis = $this->getMockBuilder(\Redis::class)
+                      ->disableOriginalConstructor()
+                      ->getMock();
+        $cache = new Cache($redis);
+
+        $profile = new TwitterProfile($client, $cache);
+        $this->assertEquals('twitter', $profile->getServiceName());
     }
 }

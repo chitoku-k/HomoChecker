@@ -11,10 +11,13 @@ use GuzzleHttp\Promise;
 use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use HomoChecker\Model\Cache;
 use HomoChecker\Model\Check;
 use HomoChecker\Model\Homo;
 use HomoChecker\Model\Status;
-use HomoChecker\Model\Profile\Icon;
+use HomoChecker\Model\Profile\ProfileProvider;
+use HomoChecker\Model\Profile\MastodonProfile;
+use HomoChecker\Model\Profile\TwitterProfile;
 use HomoChecker\Model\Validator\HeaderValidator;
 use HomoChecker\Model\Validator\DOMValidator;
 use HomoChecker\Model\Validator\URLValidator;
@@ -22,10 +25,11 @@ use PHPUnit\Framework\TestCase;
 
 class CheckTest extends TestCase
 {
-    protected function user($screen_name, $url): Homo
+    protected function user(string $screen_name, string $service, string $url): Homo
     {
         $homo = new Homo();
         $homo->screen_name = $screen_name;
+        $homo->service = $service;
         $homo->url = $url;
         return $homo;
     }
@@ -33,18 +37,33 @@ class CheckTest extends TestCase
     public function setUp()
     {
         $users = [
-            $this->user('foo', 'https://foo.example.com/1'),
-            $this->user('foo', 'https://foo.example.com/2'),
-            $this->user('bar', 'http://bar.example.com'),
-            $this->user('baz', 'https://baz.example.com'),
+            $this->user('foo', 'twitter', 'https://foo.example.com/1'),
+            $this->user('foo', 'twitter', 'https://foo.example.com/2'),
+            $this->user('bar', 'mastodon', 'http://bar.example.com'),
+            $this->user('baz', 'mastodon', 'https://baz.example.com'),
         ];
 
-        $this->Icon = $this->getMockBuilder(Icon::class)
-                           ->disableOriginalConstructor()
-                           ->getMock();
-        $this->Icon->expects($this->any())
-                   ->method('getAsync')
-                   ->will($this->returnCallback(function ($sn) { return new FulfilledPromise($sn); }));
+        $twitter = $this->getMockBuilder(TwitterProfile::class)
+                        ->disableOriginalConstructor()
+                        ->getMock();
+        $twitter->expects($this->any())
+                 ->method('getServiceName')
+                 ->will($this->returnValue('twitter'));
+        $twitter->expects($this->any())
+                ->method('getIconAsync')
+                ->will($this->returnCallback(function ($sn) { return new FulfilledPromise($sn); }));
+
+        $mastodon = $this->getMockBuilder(MastodonProfile::class)
+                         ->disableOriginalConstructor()
+                         ->getMock();
+        $mastodon->expects($this->any())
+                 ->method('getServiceName')
+                 ->will($this->returnValue('mastodon'));
+        $mastodon->expects($this->any())
+                 ->method('getIconAsync')
+                 ->will($this->returnCallback(function ($sn) { return new FulfilledPromise($sn); }));
+
+        $this->ProfileProvider = new ProfileProvider($twitter, $mastodon);
 
         $this->Homo = $this->createMock(Homo::class);
         $this->Homo->expects($this->any())
@@ -83,20 +102,16 @@ class CheckTest extends TestCase
                 '),
             ])),
         ]);
-        $this->Check = new Check($this->Client, $this->Homo, $this->Icon, ...$this->validators);
+        $this->Check = new Check($this->Client, $this->Homo, $this->ProfileProvider, ...$this->validators);
 
         $expected = [
-            new Status($this->user('foo', 'https://foo.example.com/1'), 'foo', 'OK', null, 0),
-            new Status($this->user('foo', 'https://foo.example.com/2'), 'foo', 'WRONG', null, 0),
-            new Status($this->user('bar', 'http://bar.example.com'), 'bar', 'OK', null, 0),
-            new Status($this->user('baz', 'https://baz.example.com'), 'baz', 'ERROR', null, 0),
+            new Status($this->user('foo', 'twitter', 'https://foo.example.com/1'), 'foo', 'OK', null, 0),
+            new Status($this->user('foo', 'twitter', 'https://foo.example.com/2'), 'foo', 'WRONG', null, 0),
+            new Status($this->user('bar', 'mastodon', 'http://bar.example.com'), 'bar', 'OK', null, 0),
+            new Status($this->user('baz', 'mastodon', 'https://baz.example.com'), 'baz', 'ERROR', null, 0),
         ];
 
-        $actual = $this->Check->execute(null, function ($status) use ($expected) {
-            $this->assertInstanceOf(Status::class, $status);
-            $this->assertContains($status, $expected, false, false, false);
-        });
-
+        $actual = $this->Check->execute(null, function (Status $status) {});
         $this->assertContainsOnlyInstancesOf(Status::class, $actual);
         $this->assertArraySubset($expected, $actual);
     }

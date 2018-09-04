@@ -44,6 +44,9 @@ class MastodonProfile extends Profile
                 $xpath = new \DOMXPath($doc);
                 $xpath->registerNamespace('ns', $doc->documentElement->namespaceURI);
                 $url = $xpath->evaluate('string(/ns:feed/ns:author/ns:link[@rel="avatar"]/@href)');
+                if (!$url) {
+                    throw new \RuntimeException('Avatar not found');
+                }
 
                 $this->cache->saveIconMastodon($screen_name, $url, static::CACHE_EXPIRE);
                 return yield $url;
