@@ -19,29 +19,22 @@ class MastodonProfileTest extends TestCase
     {
         $url = 'https://files.mastodon.social/accounts/avatars/000/000/001/original/114514.png';
         $handler = HandlerStack::create(new MockHandler([
-            new Response(200, [], "<?xml version=\"1.0\"?>
-                <feed xmlns=\"http://www.w3.org/2005/Atom\" xmlns:media=\"http://purl.org/syndication/atommedia\">
-                    <title>This contains icon URL</title>
-                    <author>
-                        <link rel=\"avatar\" type=\"image/png\" media:width=\"120\" media:height=\"120\" href=\"{$url}\"/>
-                    </author>
-                </feed>
+            new Response(200, [], "
+                {
+                    \"name\": \"This contains icon URL\",
+                    \"icon\": {
+                        \"type\": \"Image\",
+                        \"mediaType\": \"image/png\",
+                        \"url\": \"{$url}\"
+                    }
+                }
             "),
-            new Response(200, [], "<?xml version=\"1.0\"?>
-                <feed xmlns=\"http://www.w3.org/2005/Atom\" xmlns:media=\"http://purl.org/syndication/atommedia\">
-                    <title>This does not contain icon URL</title>
-                    <author>
-                    </author>
-                </feed>
+            new Response(200, [], "
+                {
+                    \"name\": \"This does not contain icon URL\",
+                }
             "),
-            new Response(404, [], "<?xml version=\"1.0\"?>
-                <feed xmlns=\"http://www.w3.org/2005/Atom\" xmlns:media=\"http://purl.org/syndication/atommedia\">
-                    <title>This returns 404</title>
-                    <author>
-                        <link rel=\"avatar\" type=\"image/png\" media:width=\"120\" media:height=\"120\" href=\"{$url}\"/>
-                    </author>
-                </feed>
-            "),
+            new Response(404, [], ""),
             new RequestException('Connection problem occurred', new Request('GET', '')),
         ]));
 

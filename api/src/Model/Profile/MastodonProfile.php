@@ -34,16 +34,10 @@ class MastodonProfile extends Profile
 
             try {
                 [ $username, $instance ] = $this->parseScreenName($screen_name);
-                $target = "https://{$instance}/users/{$username}.atom";
+                $target = "https://{$instance}/users/{$username}.json";
                 $response = yield $this->client->getAsync($target);
-                $body = (string)$response->getBody();
-
-                $doc = new \DOMDocument();
-                @$doc->loadXML($body);
-
-                $xpath = new \DOMXPath($doc);
-                $xpath->registerNamespace('ns', $doc->documentElement->namespaceURI);
-                $url = $xpath->evaluate('string(/ns:feed/ns:author/ns:link[@rel="avatar"]/@href)');
+                $body = json_decode((string)$response->getBody());
+                $url = $body->icon->url;
                 if (!$url) {
                     throw new \RuntimeException('Avatar not found');
                 }
