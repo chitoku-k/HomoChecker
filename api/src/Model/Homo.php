@@ -9,6 +9,7 @@ class Homo implements Mappable
     protected $table;
 
     public $screen_name;
+    public $service;
     public $url;
 
     public function __construct(\PDO $database = null, string $table = null)

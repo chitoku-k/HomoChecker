@@ -6,26 +6,17 @@ namespace HomoChecker\Model\Profile;
 use GuzzleHttp\Promise;
 use GuzzleHttp\ClientInterface;
 
-class Icon implements ProfileInterface
+class TwitterProfile extends Profile
 {
-    public const CACHE_EXPIRE = 300;
-    public static $default = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png';
-
-    public function __construct(ClientInterface $client, \Redis $redis)
-    {
-        $this->client = $client;
-        $this->redis = $redis;
-    }
-
     /**
      * Get the URL of profile image of the user.
      * @param  string                   $screen_name The screen_name of the user.
      * @return Promise\PromiseInterface The promise.
      */
-    public function getAsync(string $screen_name): Promise\PromiseInterface
+    public function getIconAsync(string $screen_name): Promise\PromiseInterface
     {
         return Promise\coroutine(function () use ($screen_name) {
-            if ($url = $this->redis->get("icon:twitter:{$screen_name}")) {
+            if ($url = $this->cache->loadIconTwitter($screen_name)) {
                 return yield $url;
             }
 
@@ -39,17 +30,21 @@ class Icon implements ProfileInterface
                 }
                 [, $url] = $matches;
 
-                $this->save($screen_name, $url);
+                $this->cache->saveIconTwitter($screen_name, $url, static::CACHE_EXPIRE);
+                return yield $url;
             } catch (\RuntimeException $e) {
-                $url = static::$default;
+                return yield $this->getDefaultUrl();
             }
-
-            return yield $url ?? static::$default;
         });
     }
 
-    protected function save(string $screen_name, string $url)
+    public function getDefaultUrl(): string
     {
-        return $this->redis->set("icon:twitter:{$screen_name}", $url, static::CACHE_EXPIRE);
+        return 'https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png';
+    }
+
+    public function getServiceName(): string
+    {
+        return 'twitter';
     }
 }

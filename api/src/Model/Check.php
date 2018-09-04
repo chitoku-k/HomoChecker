@@ -9,7 +9,7 @@ use GuzzleHttp\Promise;
 use GuzzleHttp\RequestOptions;
 use GuzzleHttp\TransferStats;
 use GuzzleHttp\Exception\RequestException;
-use HomoChecker\Model\Profile\Icon;
+use HomoChecker\Model\Profile\ProfileProvider;
 use HomoChecker\Model\Validator\ValidatorInterface;
 use HomoChecker\Model\Validator\ValidatorResult;
 
@@ -17,11 +17,11 @@ class Check
 {
     public const REDIRECT = 5;
 
-    public function __construct(ClientInterface $client, Homo $homo, Icon $icon, ValidatorInterface ...$validators)
+    public function __construct(ClientInterface $client, Homo $homo, ProfileProvider $profile, ValidatorInterface ...$validators)
     {
         $this->client = $client;
         $this->homo = $homo;
-        $this->icon = $icon;
+        $this->profile = $profile;
         $this->validators = $validators;
     }
 
@@ -88,7 +88,7 @@ class Check
         return Promise\coroutine(function () use ($homo, $callback) {
             [[$status, $ip, $duration], $icon] = yield Promise\all([
                 $this->validateAsync($homo),
-                $this->icon->getAsync($homo->screen_name),
+                $this->profile->{$homo->service}->getIconAsync($homo->screen_name),
             ]);
             $result = new Status($homo, $icon, $status, $ip, $duration);
             if ($callback) {

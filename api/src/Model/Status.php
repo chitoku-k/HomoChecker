@@ -11,6 +11,7 @@ class Status
     {
         $this->homo = (object)[
             'screen_name' => $homo->screen_name,
+            'service' => $homo->service,
             'url' => $homo->url,
             'display_url' => $this->createDisplayURL($homo->url),
             'secure' => $this->isSecure($homo->url),

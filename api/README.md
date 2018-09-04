@@ -31,7 +31,7 @@ event: initialize
 data: {"count":30}
 
 event: response
-data: {"homo":{"screen_name":"java_shit","url":"https:\/\/homo.chitoku.jp","display_url":"homo.chitoku.jp","secure":true},"status":"OK","duration":0.45}
+data: {"homo":{"screen_name":"@chitoku@mstdn.jp","service":"mastodon","url":"https:\/\/homo.chitoku.jp","display_url":"homo.chitoku.jp","secure":true},"status":"OK","duration":0.45}
 ```
 
 `event` が `initialize` の場合は `data` は `count` を持つ JSON データです。  
@@ -47,7 +47,13 @@ data: {"homo":{"screen_name":"java_shit","url":"https:\/\/homo.chitoku.jp","disp
         // (object) ホモ
         "homo": {
             // (string) スクリーンネーム
+            // Twitter の場合は @ を除くユーザー名
+            // Mastodon の場合は @example@mastodon.social 表記のユーザー名
             "screen_name": "",
+
+            // (string) サービス
+            // twitter または mastodon
+            "service": "",
 
             // (string) URL
             "url": "",
@@ -94,7 +100,13 @@ data: {"homo":{"screen_name":"java_shit","url":"https:\/\/homo.chitoku.jp","disp
 [
     {
         // (string) スクリーンネーム
+        // Twitter の場合は @ を除くユーザー名
+        // Mastodon の場合は @example@mastodon.social 表記のユーザー名
         "screen_name": "",
+
+        // (string) サービス
+        // twitter または mastodon
+        "service": "",
 
         // (string) URL
         "url": "",

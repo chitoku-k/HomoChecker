@@ -7,5 +7,7 @@ use GuzzleHttp\Promise;
 
 interface ProfileInterface
 {
-    public function getAsync(string $screen_name): Promise\PromiseInterface;
+    public function getIconAsync(string $screen_name): Promise\PromiseInterface;
+    public function getDefaultUrl(): string;
+    public function getServiceName(): string;
 }

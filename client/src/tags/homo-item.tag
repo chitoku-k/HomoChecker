@@ -1,6 +1,6 @@
 <homo-item>
     <div class="container">
-        <a href={ "https://twitter.com/" + homo.screen_name } target="_blank">
+        <a href={ this.getUserUrl(homo) } target="_blank">
             <img src={ homo.icon } width="60" height="60">
         </a>
         <div class="information">
@@ -284,6 +284,18 @@
     </style>
     <script type="es6">
         this.regex = /homo|ホモ/;
+
+        this.getUserUrl = homo => {
+            switch (homo.service) {
+                case "twitter": {
+                    return `https://twitter.com/${homo.screen_name}`;
+                }
+                case "mastodon": {
+                    const [ , username, instance ] = /@?([^@]*)@(.*)\/*/.exec(homo.screen_name) || [];
+                    return `https://${instance}/@${username}`;
+                }
+            }
+        };
 
         this.on("mount", () => {
             const [ elm ] = this.root.getElementsByClassName("url");

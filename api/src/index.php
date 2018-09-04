@@ -4,9 +4,12 @@ declare(strict_types=1);
 namespace HomoChecker;
 
 use GuzzleHttp\Client;
+use HomoChecker\Model\Cache;
 use HomoChecker\Model\Check;
 use HomoChecker\Model\Homo;
-use HomoChecker\Model\Profile\Icon;
+use HomoChecker\Model\Profile\ProfileProvider;
+use HomoChecker\Model\Profile\MastodonProfile;
+use HomoChecker\Model\Profile\TwitterProfile;
 use HomoChecker\Model\Validator\HeaderValidator;
 use HomoChecker\Model\Validator\DOMValidator;
 use HomoChecker\Model\Validator\URLValidator;
@@ -27,7 +30,7 @@ $container['checker'] = function (ContainerInterface $container) {
     return new Check(
         $container['client'],
         $container['homo'],
-        $container['icon'],
+        $container['profile'],
         ...$container['validators']
     );
 };
@@ -43,8 +46,14 @@ $container['client'] = function (ContainerInterface $container) {
 $container['homo'] = function (ContainerInterface $container) {
     return new Homo($container['database'], 'users');
 };
-$container['icon'] = function (ContainerInterface $container) {
-    return new Icon($container['client'], $container['redis']);
+$container['profile'] = function (ContainerInterface $container) {
+    return new ProfileProvider(
+        new MastodonProfile($container['client'], $container['cache']),
+        new TwitterProfile($container['client'], $container['cache'])
+    );
+};
+$container['cache'] = function (ContainerInterface $container) {
+    return new Cache($container['redis']);
 };
 $container['redis'] = function (ContainerInterface $container) {
     $redis = new \Redis();
