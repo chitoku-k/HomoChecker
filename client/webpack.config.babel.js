@@ -1,6 +1,7 @@
 const webpack = require("webpack");
 const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
@@ -60,8 +61,14 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(
-            path.join(__dirname, "/dist/*.{html,js}"),
+            path.join(__dirname, "/dist/*.{html,js,ico}"),
         ),
+        new CopyWebpackPlugin([
+            {
+                from: path.join(__dirname, "/src/resources/favicon.ico"),
+                to: path.join(__dirname, "/dist"),
+            },
+        ]),
         new HtmlWebpackPlugin({
             title: "まっぴー (@mpyw) 被害者の会",
             filename: "index.html",
