@@ -28,7 +28,7 @@ class MastodonProfile extends Profile
     public function getIconAsync(string $screen_name): Promise\PromiseInterface
     {
         return Promise\coroutine(function () use ($screen_name) {
-            if ($url = $this->cache->loadMastodonTwitter($screen_name)) {
+            if ($url = $this->cache->loadIconMastodon($screen_name)) {
                 return yield $url;
             }
 
