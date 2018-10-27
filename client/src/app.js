@@ -1,6 +1,5 @@
 // polyfill
 import "@babel/polyfill";
-import "event-source-polyfill";
 
 import riot from "riot";
 import "font-awesome/scss/font-awesome.scss";

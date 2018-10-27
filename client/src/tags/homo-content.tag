@@ -30,6 +30,9 @@
     </style>
     <script type="es6">
         import Shuffle from "shufflejs";
+        import { EventSourcePolyfill } from "event-source-polyfill";
+
+        const EventSource = global.EventSource || EventSourcePolyfill;
 
         this.on("mount", () => {
             this.shuffle = new Shuffle(document.querySelector(".wrapper"), {
