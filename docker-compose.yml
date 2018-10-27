@@ -13,7 +13,7 @@ services:
       - default
 
   build:
-    image: node:10.9
+    image: node:10.12
     working_dir: /usr/src/app
     command: npm run watch
     environment:
@@ -48,7 +48,7 @@ services:
       - default
 
   redis:
-    image: redis:4.0
+    image: redis:5.0
     networks:
       - default
 
