@@ -16,9 +16,6 @@ class ServerSentEventView implements ViewInterface
             header('Content-Type: text/event-stream');
         }
         // @codeCoverageIgnoreEnd
-
-        // 2 KiB padding
-        $this->output(':' . str_repeat(' ', 2048));
     }
 
     /**

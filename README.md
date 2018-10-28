@@ -70,12 +70,12 @@ Web サーバーが静的コンテンツ配信のみの場合は HTML による�
 
 ### フロントエンド
 
-Internet Explorer 10 以上で動くのでたいていのホモは救われます。
+Chrome、Firefox、Internet Explorer の最新版で動くのでたいていのホモは救われます。
 
 ### バックエンド
 
 Docker Compose のインストールが必要です。  
-nginx + PHP-FPM + MySQL で構成されています。
+nginx + PHP-FPM + MySQL + Redis で構成されています。
 
 ## 実行するには
 

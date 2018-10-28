@@ -42,7 +42,7 @@
                 speed: 200,
                 easing: "cubic-bezier(.89, .08, .62, .94)",
                 initialSort: {
-                    by: elm => +elm.getAttribute("data-duration"),
+                    by: elm => +elm.dataset.duration,
                 },
             });
         });
