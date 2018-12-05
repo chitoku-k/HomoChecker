@@ -11,10 +11,15 @@ import "./tags/homo-header";
 import "./tags/homo-item";
 import "./tags/homo-progress";
 
-const meta = document.createElement("meta");
-meta.name = "viewport";
-meta.content = "initial-scale=1.0, viewport-fit=cover";
-document.head.appendChild(meta);
+const viweport = document.createElement("meta");
+viweport.name = "viewport";
+viweport.content = "initial-scale=1.0, viewport-fit=cover";
+document.head.appendChild(viweport);
+
+const color = document.createElement("meta");
+color.name = "theme-color";
+color.content = "#7a6544";
+document.head.appendChild(color);
 
 const app = document.createElement("homo-app");
 document.body.appendChild(app);
