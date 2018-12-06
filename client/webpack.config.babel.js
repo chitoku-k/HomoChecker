@@ -73,7 +73,7 @@ module.exports = {
             title: "まっぴー (@mpyw) 被害者の会",
             filename: "index.html",
             meta: {
-                "viweport": "initial-scale=1.0, viewport-fit=cover",
+                "viewport": "initial-scale=1.0, viewport-fit=cover",
                 "theme-color": "#7a6544",
             },
         }),
