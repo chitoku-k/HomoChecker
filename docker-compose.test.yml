@@ -3,8 +3,6 @@ version: "2.1"
 services:
   api:
     build: ./api
-    links:
-      - database
     working_dir: /var/www/html/api
     command: composer test
     volumes:

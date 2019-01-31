@@ -3,9 +3,6 @@ version: "2.1"
 services:
   api:
     build: ./api
-    links:
-      - database
-      - redis
     working_dir: /var/www/html/api
     volumes:
       - ./api:/var/www/html/api
@@ -23,8 +20,6 @@ services:
 
   client:
     image: nginx:1.15
-    links:
-      - api
     ports:
       - "${HOMOCHECKER_PORT-4545}:80"
     volumes:
