@@ -12,7 +12,7 @@ services:
       - TRAVIS_JOB_ID
 
   build:
-    image: node:11.6
+    image: node:11.10
     working_dir: /usr/src/app
     command: npm run build
     volumes:
