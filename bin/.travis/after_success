@@ -12,6 +12,6 @@ if [[ "$TRAVIS_BRANCH" = "master" ]] && [[ "$TRAVIS_PULL_REQUEST" = "false" ]]; 
     echo 'Cleaned!'
 
     echo 'Uploading...'
-    rsync -rz ./ deploy:/srv/http/vhosts/homo.chitoku.jp/httpdocs
+    rsync -rz --exclude '.git' --exclude 'ssh.tar' ./ deploy:/srv/http/vhosts/homo.chitoku.jp/httpdocs 2> /dev/null
     echo 'Uploaded!'
 fi
