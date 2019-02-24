@@ -8,10 +8,10 @@ docker-compose exec api vendor/bin/coveralls --root_dir=/var/www/html
 
 if [[ "$TRAVIS_BRANCH" = "master" ]] && [[ "$TRAVIS_PULL_REQUEST" = "false" ]]; then
     echo 'Cleaning...'
-    ssh deploy rm -rf /srv/http/vhosts/homo.chitoku.jp/httpdocs/*
+    ssh deploy rm -rf /srv/http/vhosts/homo.chitoku.jp/httpdocs/* 2> /dev/null
     echo 'Cleaned!'
 
     echo 'Uploading...'
-    rsync -rz ./ deploy:/srv/http/vhosts/homo.chitoku.jp
+    rsync -rz ./ deploy:/srv/http/vhosts/homo.chitoku.jp/httpdocs
     echo 'Uploaded!'
 fi
