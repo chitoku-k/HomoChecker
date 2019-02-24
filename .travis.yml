@@ -1,14 +1,7 @@
-language: php
-
-php:
-  - 7.1
+language: bash
 
 services:
   - docker
-
-env:
-  global:
-    secure: lZoB0RF2pleKlyPJX/FzPhCt/kl3lY5RhafPqOq72v69MsNINm6fbX5zl0Jhwm8pnH0TK0KknrQSRFQsaa0Coskz2l05LBkkpdOKbCuz8m9yr6S2z8UBcEElENnKvV+E5lODav0DtOGiGTzWoCbCU0MM8a54tCe8oqf79Vqe9pvECzCcK6MF1sSWjbfKhv4XGiYacGuE6HhAtSPwGJbb7UFYcT6KbxQpoYAmXiw1AN+zmpji3V+tZQhFwfxkp2l/0Yz7iien5ATdfcRt0kIJQ06dZiBgbEdxfqqDoaMW9ZcKx1yj92yf+BZ7yKNm73FFLqcJbyWpjW9zVY5xf/gsPSNjzhku/qjYhCV2Xr46A9xAo7m9c29n/sV5qwDGKXqM8Icu+oUYYgp6qG1byroOPZJ/AzxWMOJKoANduzqS+0V0kHPHR1KoV20dQphD30wM7oAFJPTBdYAw0zVA/3b6VO3Ib9VGl71MGmmxKgo8A5h+Harn5b7109vXjaU6W6Y4FDvZD658izKdJOaDXsrmj228d8efdj5HFlHvlhg5qfl1RUQTD1P5UXl3Z4SYbvZ9MI/XE5Oj+KPZ6ftJSuCQ88/s/WWJvLAgQggURPOqhSVrXh/Aq4QD4id2UXU3r2psG8D9w4NVj/5O88Urz8JbSfXh+qTn62dAAWFV9C/53aI=
 
 before_script:
   - bin/.travis/before_script
