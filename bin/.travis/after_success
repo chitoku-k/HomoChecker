@@ -3,15 +3,22 @@
 export COMPOSE_PROJECT_NAME=homochecker-test
 export COMPOSE_FILE=docker-compose.test.yml
 
+DEPLOY_DIR=/srv/http/vhosts/homo.chitoku.jp/httpdocs
+
 docker-compose up -d
 docker-compose exec api vendor/bin/coveralls --root_dir=/var/www/html
 
 if [[ "$TRAVIS_BRANCH" = "master" ]] && [[ "$TRAVIS_PULL_REQUEST" = "false" ]]; then
+    echo 'Downloading...'
+    rsync -z deploy:$DEPLOY_DIR/client/dist/atlan.* client/dist
+    echo 'Downloaded!'
+
     echo 'Cleaning...'
-    ssh deploy rm -rf /srv/http/vhosts/homo.chitoku.jp/httpdocs/* 2> /dev/null
+    ssh deploy rm -rf $DEPLOY_DIR/* 2> /dev/null
+    rm ssh.tar
     echo 'Cleaned!'
 
     echo 'Uploading...'
-    rsync -rz --exclude '.git' --exclude 'ssh.tar' ./ deploy:/srv/http/vhosts/homo.chitoku.jp/httpdocs 2> /dev/null
+    rsync -rz --exclude '.git' ./ deploy:$DEPLOY_DIR 2> /dev/null
     echo 'Uploaded!'
 fi
