@@ -45,7 +45,7 @@
     "sass-loader": "^7.1.0",
     "shufflejs": "^5.2.1",
     "style-loader": "^0.23.1",
-    "webpack": "^4.29.5",
+    "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3"
   }
 }
