@@ -13,12 +13,7 @@ if [[ "$TRAVIS_BRANCH" = "master" ]] && [[ "$TRAVIS_PULL_REQUEST" = "false" ]]; 
     rsync -z deploy:$DEPLOY_DIR/client/dist/atlan.* client/dist
     echo 'Downloaded!'
 
-    echo 'Cleaning...'
-    ssh deploy rm -rf $DEPLOY_DIR/* 2> /dev/null
-    rm ssh.tar
-    echo 'Cleaned!'
-
     echo 'Uploading...'
-    rsync -rz --exclude '.git' ./ deploy:$DEPLOY_DIR 2> /dev/null
+    rsync -rz --delete --exclude 'ssh.tar' --exclude '.git' ./ deploy:$DEPLOY_DIR 2> /dev/null
     echo 'Uploaded!'
 fi
