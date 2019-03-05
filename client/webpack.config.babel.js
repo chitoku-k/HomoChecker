@@ -60,9 +60,11 @@ module.exports = {
         ],
     },
     plugins: [
-        new CleanWebpackPlugin(
-            path.join(__dirname, "/dist/*.{html,js,ico}"),
-        ),
+        new CleanWebpackPlugin({
+            cleanOnceBeforeBuildPatterns: [
+                "**/*.{html,js,ico}",
+            ],
+        }),
         new CopyWebpackPlugin([
             {
                 from: path.join(__dirname, "/src/resources/favicon.ico"),
