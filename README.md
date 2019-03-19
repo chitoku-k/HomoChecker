@@ -140,10 +140,10 @@ $ bin/test
 
 
 [travis-link]:          https://travis-ci.org/chitoku-k/HomoChecker
-[travis-badge]:         https://img.shields.io/travis/chitoku-k/HomoChecker.svg?style=flat-square
+[travis-badge]:         https://img.shields.io/travis/chitoku-k/HomoChecker/master.svg?style=flat-square
 [coveralls-link]:       https://coveralls.io/github/chitoku-k/HomoChecker
-[coveralls-badge]:      https://img.shields.io/coveralls/chitoku-k/HomoChecker.svg?style=flat-square
+[coveralls-badge]:      https://img.shields.io/coveralls/chitoku-k/HomoChecker/master.svg?style=flat-square
 [climate-link]:         https://codeclimate.com/github/chitoku-k/HomoChecker/maintainability
-[climate-badge]:        https://img.shields.io/codeclimate/maintainability/chitoku-k/HomoChecker.svg?style=flat-square
+[climate-badge]:        https://img.shields.io/codeclimate/maintainability/chitoku-k/HomoChecker/master.svg?style=flat-square
 [homo-link]:            https://homo.chitoku.jp:4545
 [homo-badge]:           https://homo.chitoku.jp:4545/badge/?style=flat-square
