@@ -30,7 +30,7 @@
     "clean-webpack-plugin": "^2.0.1",
     "copy-webpack-plugin": "^5.0.1",
     "css-loader": "^2.1.1",
-    "eslint": "^5.15.2",
+    "eslint": "^5.15.3",
     "eslint-loader": "^2.1.2",
     "eslint-plugin-riot": "^0.1.8",
     "event-source-polyfill": "1.0.5",
