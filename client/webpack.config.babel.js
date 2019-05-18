@@ -76,6 +76,10 @@ module.exports = {
             filename: "index.html",
             meta: {
                 "viewport": "initial-scale=1.0, viewport-fit=cover",
+                "description":
+                    "HomoChecker はホモ（@mpyw）にリダイレクトするホモのためのホモの輪です。" +
+                    "まっぴーの Twitter へのリダイレクトにかかる時間を競うエクストリーム・スポーツを主催しています。",
+                "keywords": "HomoChecker, Homo Checker, まっぴー, mpyw",
                 "theme-color": "#7a6544",
             },
         }),
