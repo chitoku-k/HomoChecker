@@ -4,7 +4,8 @@
       "targets": {
         "browsers": ["last 2 versions", "not ie <= 10", "not android <= 4.4.4"]
       },
-      "useBuiltIns": "entry",
+      "useBuiltIns": "usage",
+      "corejs": 3,
       "modules": false
     }]
   ]
