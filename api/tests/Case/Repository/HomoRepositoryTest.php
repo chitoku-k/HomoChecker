@@ -82,11 +82,7 @@ class HomoRepositoryTest extends TestCase
         $screen_name = 'foo';
 
         $builder = m::mock(Builder::class);
-        $builder->shouldReceive('where')
-                ->with('screen_name', $screen_name)
-                ->andReturn($builder);
-
-        $builder->shouldReceive('count')
+        $builder->shouldReceive('where->count')
                 ->andReturn(2);
 
         DB::shouldReceive('table')
@@ -103,10 +99,7 @@ class HomoRepositoryTest extends TestCase
     public function testFindAll(): void
     {
         $builder = m::mock(Builder::class);
-        $builder->shouldReceive('get')
-                ->andReturn($builder);
-
-        $builder->shouldReceive('all')
+        $builder->shouldReceive('get->all')
                 ->andReturn($this->users);
 
         DB::shouldReceive('table')
@@ -125,14 +118,7 @@ class HomoRepositoryTest extends TestCase
         $screen_name = 'foo';
 
         $builder = m::mock(Builder::class);
-        $builder->shouldReceive('where')
-                ->with('screen_name', $screen_name)
-                ->andReturn($builder);
-
-        $builder->shouldReceive('get')
-                ->andReturn($builder);
-
-        $builder->shouldReceive('all')
+        $builder->shouldReceive('where->get->all')
                 ->andReturn($this->usersFoo);
 
         DB::shouldReceive('table')
