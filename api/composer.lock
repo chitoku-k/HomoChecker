@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c08f91f674fa25ba2f6f235b161aafb9",
+    "content-hash": "930d5c9a0f27981f51dd408265b2f3c5",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -427,16 +427,16 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v5.8.17",
+            "version": "v5.8.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "acd524087bcebcc0979748e84ccc0876395ae497"
+                "reference": "33b4e0ffb89eb2216c764235c9e95fed1f3fab82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/acd524087bcebcc0979748e84ccc0876395ae497",
-                "reference": "acd524087bcebcc0979748e84ccc0876395ae497",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/33b4e0ffb89eb2216c764235c9e95fed1f3fab82",
+                "reference": "33b4e0ffb89eb2216c764235c9e95fed1f3fab82",
                 "shasum": ""
             },
             "require": {
@@ -467,20 +467,20 @@
             ],
             "description": "The Illuminate Contracts package.",
             "homepage": "https://laravel.com",
-            "time": "2019-05-14T10:54:47+00:00"
+            "time": "2019-06-11T14:00:26+00:00"
         },
         {
             "name": "illuminate/database",
-            "version": "v5.8.19",
+            "version": "v5.8.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "44740cedfbd90c5fc9710ab572adf40ab0b4c11c"
+                "reference": "12d54c516df34c668c55a4636f7a3c921ada9c4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/44740cedfbd90c5fc9710ab572adf40ab0b4c11c",
-                "reference": "44740cedfbd90c5fc9710ab572adf40ab0b4c11c",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/12d54c516df34c668c55a4636f7a3c921ada9c4d",
+                "reference": "12d54c516df34c668c55a4636f7a3c921ada9c4d",
                 "shasum": ""
             },
             "require": {
@@ -527,7 +527,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2019-05-27T13:28:29+00:00"
+            "time": "2019-06-16T20:03:32+00:00"
         },
         {
             "name": "illuminate/redis",
