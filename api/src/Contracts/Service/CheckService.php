@@ -12,13 +12,13 @@ interface CheckService
 {
     /**
      * Set the profiles.
-     * @param Collection<ProfileContract> $profiles The Profiles.
+     * @param Collection<ProfileService> $profiles The Profiles.
      */
     public function setProfiles(Collection $profiles): void;
 
     /**
      * Set the validators.
-     * @param Collection<ValidatorContract> $validators The Validators.
+     * @param Collection<ValidatorService> $validators The Validators.
      */
     public function setValidators(Collection $validators): void;
 
