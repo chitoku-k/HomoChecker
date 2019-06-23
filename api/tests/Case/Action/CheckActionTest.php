@@ -3,61 +3,98 @@ declare(strict_types=1);
 
 namespace HomoChecker\Test\Action;
 
+use HomoChecker\Action\CheckAction;
+use HomoChecker\Contracts\Service\CheckService;
+use HomoChecker\Contracts\Service\HomoService;
+use HomoChecker\Contracts\View\ServerSentEventView;
+use HomoChecker\Domain\Homo;
+use HomoChecker\Domain\Status;
+use Mockery as m;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\TestCase;
 use Slim\Http\Environment;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use HomoChecker\Action\CheckAction;
-use HomoChecker\Model\Check;
-use HomoChecker\Model\Homo;
-use HomoChecker\Model\Status;
-use HomoChecker\Utilities\Container;
-use PHPUnit\Framework\TestCase;
 
 class CheckActionTest extends TestCase
 {
-    protected function user(string $screen_name, string $service, string $url): Homo
-    {
-        $homo = new Homo();
-        $homo->screen_name = $screen_name;
-        $homo->service = $service;
-        $homo->url = $url;
-        return $homo;
-    }
+    use MockeryPHPUnitIntegration;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
-        $users = [
-            $this->user('foo', 'twitter', 'https://foo.example.com/1'),
-            $this->user('foo', 'twitter', 'https://foo.example.com/2'),
-            $this->user('bar', 'mastodon', 'http://bar.example.com'),
-        ];
-        $statuses = [
-            new Status($this->user('foo', 'twitter', 'https://foo.example.com/1'), null, 'OK', '2001:db8::4545:1', 10),
-            new Status($this->user('foo', 'twitter', 'https://foo.example.com/2'), null, 'NG', '2001:db8::4545:2', 20),
-            new Status($this->user('bar', 'mastodon', 'http://bar.example.com'), null, 'OK', '2001:db8::4545:3', 30),
+
+        $this->users = [
+            new Homo([
+                'screen_name' => 'foo',
+                'service' => 'twitter',
+                'url' => 'https://foo.example.com/1',
+            ]),
+            new Homo([
+                'screen_name' => 'foo',
+                'service' => 'twitter',
+                'url' => 'https://foo.example.com/2',
+            ]),
+            new Homo([
+                'screen_name' => 'bar',
+                'service' => 'mastodon',
+                'url' => 'http://bar.example.com',
+            ]),
         ];
 
-        $this->Container = new Container();
-        $this->Container['homo'] = $this->createMock(Homo::class);
-        $this->Container['homo']->expects($this->any())
-                                ->method('find')
-                                ->will($this->returnValue($users));
-
-        $this->Container['checker'] = $this->createMock(Check::class);
-        $this->Container['checker']->expects($this->any())
-                                   ->method('execute')
-                                   ->will($this->returnValue($statuses));
+        $this->statuses = [
+            new Status([
+                'homo' => new Homo([
+                    'screen_name' => 'foo',
+                    'service' => 'twitter',
+                    'url' => 'https://foo.example.com/1',
+                ]),
+                'icon' => 'https://icon.example.com/1',
+                'status' => 'OK',
+                'ip' => '2001:db8::4545:1',
+                'duration' => 10,
+            ]),
+            new Status([
+                'homo' => new Homo([
+                    'screen_name' => 'foo',
+                    'service' => 'twitter',
+                    'url' => 'https://foo.example.com/2',
+                ]),
+                'icon' => 'https://icon.example.com/2',
+                'status' => 'NG',
+                'ip' => '2001:db8::4545:2',
+                'duration' => 20,
+            ]),
+            new Status([
+                'homo' => new Homo([
+                    'screen_name' => 'bar',
+                    'service' => 'mastodon',
+                    'url' => 'http://bar.example.com',
+                ]),
+                'icon' => 'https://icon.example.com/3',
+                'status' => 'OK',
+                'ip' => '2001:db8::4545:3',
+                'duration' => 30,
+            ]),
+        ];
     }
 
     public function testRouteToJSON(): void
     {
-        $action = new CheckAction($this->Container);
         $request = Request::createFromEnvironment(Environment::mock([
             'REQUEST_URI' => '/check',
             'QUERY_STRING' => 'format=json',
         ]));
 
+        $check = m::mock(CheckService::class);
+        $check->shouldReceive('execute')
+              ->with(null)
+              ->andReturn($this->statuses);
+
+        $homo = m::mock(HomoService::class);
+        $sse = m::mock(ServerSentEventView::class);
+
+        $action = new CheckAction($check, $homo, $sse);
         $response = $action($request, new Response(), []);
         $actual = $response->getHeaderLine('Content-Type');
         $this->assertRegExp('|^application/json|', $actual);
@@ -71,6 +108,7 @@ class CheckActionTest extends TestCase
                     'url' => 'https://foo.example.com/1',
                     'display_url' => 'foo.example.com/1',
                     'secure' => true,
+                    'icon' => 'https://icon.example.com/1',
                 ],
                 'status' => 'OK',
                 'ip' => '2001:db8::4545:1',
@@ -83,6 +121,7 @@ class CheckActionTest extends TestCase
                     'url' => 'https://foo.example.com/2',
                     'display_url' => 'foo.example.com/2',
                     'secure' => true,
+                    'icon' => 'https://icon.example.com/2',
                 ],
                 'status' => 'NG',
                 'ip' => '2001:db8::4545:2',
@@ -95,6 +134,7 @@ class CheckActionTest extends TestCase
                     'url' => 'http://bar.example.com',
                     'display_url' => 'bar.example.com',
                     'secure' => false,
+                    'icon' => 'https://icon.example.com/3',
                 ],
                 'status' => 'OK',
                 'ip' => '2001:db8::4545:3',
@@ -109,23 +149,27 @@ class CheckActionTest extends TestCase
      */
     public function testRouteToSSE($format = null): void
     {
-        $action = new CheckAction($this->Container);
         $request = Request::createFromEnvironment(Environment::mock([
             'REQUEST_URI' => '/check',
             'QUERY_STRING' => "format={$format}",
         ]));
 
-        // This test does not receive any results because mocked Check::execute
-        // never calls ServerSentEventView::render. This test could be
-        // implemented if the method were replaced using DI.
-        $this->markTestIncomplete('The test for SSE is not yet implemented.');
+        $sse = m::mock(ServerSentEventView::class);
+        $sse->shouldReceive('render')
+            ->with(['count' => 3], 'initialize');
+        $sse->shouldReceive('close');
 
-        ob_start(null, 0, PHP_OUTPUT_HANDLER_CLEANABLE | PHP_OUTPUT_HANDLER_REMOVABLE);
+        $check = m::mock(CheckService::class);
+        $check->shouldReceive('execute')
+              ->with(null, [$sse, 'render']);
+
+        $homo = m::mock(HomoService::class);
+        $homo->shouldReceive('count')
+             ->with(null)
+             ->andReturn(3);
+
+        $action = new CheckAction($check, $homo, $sse);
         $action($request, new Response(), []);
-        $body = ob_get_clean();
-
-        foreach (preg_split("/\r\n\r\n/", $body) as $actual) {
-        }
     }
 
     public function formatProvider()

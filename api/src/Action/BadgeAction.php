@@ -3,13 +3,31 @@ declare(strict_types=1);
 
 namespace HomoChecker\Action;
 
+use HomoChecker\Contracts\Service\CheckService;
+use HomoChecker\Contracts\Service\HomoService;
+use HomoChecker\Domain\Status;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use HomoChecker\Model\Status;
 
-class BadgeAction extends ActionBase
+class BadgeAction
 {
-    public function route(Request $request, Response $response, array $args)
+    /**
+     * @var CheckService
+     */
+    protected $check;
+
+    /**
+     * @var HomoService
+     */
+    protected $homo;
+
+    public function __construct(CheckService $check, HomoService $homo)
+    {
+        $this->check = $check;
+        $this->homo = $homo;
+    }
+
+    public function __invoke(Request $request, Response $response, array $args)
     {
         $status = $args['status'] ?? null;
         $count = $this->getCount($status);
@@ -26,12 +44,12 @@ class BadgeAction extends ActionBase
     protected function getCount(string $status = null): int
     {
         if (!$status) {
-            return count($this->container['homo']->find());
+            return $this->homo->count();
         }
 
-        $result = $this->container['checker']->execute();
+        $result = $this->check->execute();
         return count(array_filter($result, function (Status $item) use ($status): bool {
-            return strcasecmp($item->status, $status) === 0;
+            return strcasecmp($item->getStatus(), $status) === 0;
         }));
     }
 }

@@ -3,48 +3,68 @@ declare(strict_types=1);
 
 namespace HomoChecker\Action;
 
+use HomoChecker\Contracts\Service\CheckService;
+use HomoChecker\Contracts\Service\HomoService;
+use HomoChecker\Contracts\View\ServerSentEventView;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use HomoChecker\View\ServerSentEventView;
 
-class CheckAction extends ActionBase
+class CheckAction
 {
-    public function route(Request $request, Response $response, array $args)
+    /**
+     * @var CheckService
+     */
+    protected $check;
+
+    /**
+     * @var HomoService
+     */
+    protected $homo;
+
+    /**
+     * @var ServerSentEventView
+     */
+    protected $sse;
+
+    public function __construct(CheckService $check, HomoService $homo, ServerSentEventView $sse)
     {
-        $name = $args['name'] ?? null;
+        $this->check = $check;
+        $this->homo = $homo;
+        $this->sse = $sse;
+    }
+
+    public function __invoke(Request $request, Response $response, array $args)
+    {
+        $screen_name = $args['name'] ?? null;
 
         switch ($request->getQueryParams()['format'] ?? 'sse') {
-            case 'json':
-                return $this->byJSON($name);
-
-            case 'sse':
-                return $this->bySSE($name);
+            case 'json': {
+                return $this->byJSON($response, $screen_name);
+            }
+            case 'sse': {
+                return $this->bySSE($response, $screen_name);
+            }
         }
     }
 
-    protected function byJSON(string $name = null): Response
+    protected function byJSON(Response $response, string $screen_name = null): Response
     {
-        $result = $this->container['checker']->execute($name);
-        return $this->container['response']->withJson($result, !empty($result) ? 200 : 404);
+        $result = $this->check->execute($screen_name);
+        return $response->withJson($result, !empty($result) ? 200 : 404);
     }
 
-    protected function bySSE(string $name = null): void
+    protected function bySSE(Response $response, string $screen_name = null): void
     {
-        $users = $this->container['homo']->find($name ? compact('name') : []);
-
         // Output count
-        $view = new ServerSentEventView('response');
-        $view->render(
-            [
-                'count' => count($users),
-            ],
-            'initialize'
+        $this->sse->render(
+            ['count' => $this->homo->count($screen_name)],
+            'initialize',
         );
 
         // Output response
-        $this->container['checker']->execute($name, [$view, 'render']);
+        $this->check->execute($screen_name, [$this->sse, 'render']);
 
         // Close
-        $view->close();
+        $this->sse->close();
     }
 }
