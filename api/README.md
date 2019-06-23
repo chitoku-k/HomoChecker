@@ -93,7 +93,9 @@ data: {"homo":{"screen_name":"@chitoku@mstdn.jp","service":"mastodon","url":"htt
 ユーザー名を省略した場合はすべてのユーザーの情報を返します。  
 ユーザー名が存在しない場合は 404 が返ります。
 
-レスポンスは JSON によって返されます。
+レスポンスは指定された形式で返され、省略した場合は `json` が指定されます。
+
+### json
 
 ```javascript
 [
@@ -117,6 +119,13 @@ data: {"homo":{"screen_name":"@chitoku@mstdn.jp","service":"mastodon","url":"htt
         "secure": true
     }
 ]
+```
+
+### sql
+
+```sql
+-- 各カラムの値は JSON と同様
+insert into "users" ("screen_name", "service", "url") values ('', '', '');
 ```
 
 ## Badge API
