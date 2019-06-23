@@ -3,43 +3,47 @@ declare(strict_types=1);
 
 namespace HomoChecker\Test\Action;
 
+use HomoChecker\Action\ListAction;
+use HomoChecker\Contracts\Service\HomoService;
+use Mockery as m;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\TestCase;
 use Slim\Http\Environment;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use HomoChecker\Action\ListAction;
-use HomoChecker\Model\Homo;
-use HomoChecker\Utilities\Container;
-use PHPUnit\Framework\TestCase;
 
 class ListActionTest extends TestCase
 {
-    protected function user(string $screen_name, string $service, string $url): Homo
-    {
-        $homo = new Homo();
-        $homo->screen_name = $screen_name;
-        $homo->service = $service;
-        $homo->url = $url;
-        return $homo;
-    }
+    use MockeryPHPUnitIntegration;
 
-    public function setUp()
+    public function setUp(): void
     {
-        $users = [
-            $this->user('foo', 'twitter', 'https://foo.example.com/1'),
-            $this->user('foo', 'twitter', 'https://foo.example.com/2'),
-            $this->user('bar', 'mastodon', 'http://bar.example.com'),
+        $this->users = [
+            (object) [
+                'screen_name' => 'foo',
+                'service' => 'twitter',
+                'url' => 'https://foo.example.com/1',
+            ],
+            (object) [
+                'screen_name' => 'foo',
+                'service' => 'twitter',
+                'url' => 'https://foo.example.com/2',
+            ],
+            (object) [
+                'screen_name' => 'bar',
+                'service' => 'mastodon',
+                'url' => 'http://bar.example.com',
+            ],
         ];
-
-        $this->Container = new Container();
-        $this->Container['homo'] = $this->createMock(Homo::class);
-        $this->Container['homo']->expects($this->any())
-                                ->method('find')
-                                ->will($this->returnValue($users));
     }
 
-    public function testList()
+    public function testListByJSON(): void
     {
-        $action = new ListAction($this->Container);
+        $homo = m::mock(HomoService::class);
+        $homo->shouldReceive('find')
+             ->andReturn($this->users);
+
+        $action = new ListAction($homo);
         $request = Request::createFromEnvironment(Environment::mock([
             'REQUEST_URI' => '/list',
         ]));
@@ -75,5 +79,31 @@ class ListActionTest extends TestCase
 
         $expected = json_encode($users);
         $this->assertJsonStringEqualsJsonString($actual, $expected);
+    }
+
+    public function testListBySQL(): void
+    {
+        $sql = <<<SQL
+        insert into "users" ("screen_name", "service", "url") values ('foo', 'twitter', 'https://foo.example.com/1');
+        insert into "users" ("screen_name", "service", "url") values ('foo', 'twitter', 'https://foo.example.com/2');
+        insert into "users" ("screen_name", "service", "url") values ('bar', 'twitter', 'https://bar.example.com');
+        SQL;
+
+        $homo = m::mock(HomoService::class);
+        $homo->shouldReceive('export')
+             ->andReturn($sql);
+
+        $action = new ListAction($homo);
+        $request = Request::createFromEnvironment(Environment::mock([
+            'REQUEST_URI' => '/list',
+            'QUERY_STRING' => 'format=sql',
+        ]));
+
+        $response = $action($request, new Response(), []);
+        $actual = $response->getHeaderLine('Content-Type');
+        $this->assertRegExp('|^application/sql|', $actual);
+
+        $actual = (string)$response->getBody();
+        $this->assertEquals($sql, $actual);
     }
 }

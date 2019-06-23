@@ -3,56 +3,81 @@ declare(strict_types=1);
 
 namespace HomoChecker\Test\Action;
 
+use HomoChecker\Action\BadgeAction;
+use HomoChecker\Contracts\Service\CheckService;
+use HomoChecker\Contracts\Service\HomoService;
+use HomoChecker\Domain\Homo;
+use HomoChecker\Domain\Status;
+use Mockery as m;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\TestCase;
 use Slim\Http\Environment;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use HomoChecker\Action\BadgeAction;
-use HomoChecker\Model\Check;
-use HomoChecker\Model\Homo;
-use HomoChecker\Model\Status;
-use HomoChecker\Utilities\Container;
-use PHPUnit\Framework\TestCase;
 
 class BadgeActionTest extends TestCase
 {
-    protected function user(string $screen_name, string $service, string $url): Homo
-    {
-        $homo = new Homo();
-        $homo->screen_name = $screen_name;
-        $homo->service = $service;
-        $homo->url = $url;
-        return $homo;
-    }
+    use MockeryPHPUnitIntegration;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
-        $users = [
-            $this->user('foo', 'twitter', 'https://foo.example.com/1'),
-            $this->user('foo', 'twitter', 'https://foo.example.com/2'),
-            $this->user('bar', 'mastodon', 'http://bar.example.com'),
-        ];
-        $statuses = [
-            new Status($this->user('foo', 'twitter', 'https://foo.example.com/1'), null, 'OK'),
-            new Status($this->user('foo', 'twitter', 'https://foo.example.com/2'), null, 'NG'),
-            new Status($this->user('bar', 'mastodon', 'http://bar.example.com'), null, 'OK'),
+
+        $this->users = [
+            new Homo([
+                'screen_name' => 'foo',
+                'service' => 'twitter',
+                'url' => 'https://foo.example.com/1',
+            ]),
+            new Homo([
+                'screen_name' => 'foo',
+                'service' => 'twitter',
+                'url' => 'https://foo.example.com/2',
+            ]),
+            new Homo([
+                'screen_name' => 'bar',
+                'service' => 'mastodon',
+                'url' => 'http://bar.example.com',
+            ]),
         ];
 
-        $this->Container = new Container();
-        $this->Container['homo'] = $this->createMock(Homo::class);
-        $this->Container['homo']->expects($this->any())
-                                ->method('find')
-                                ->will($this->returnValue($users));
-
-        $this->Container['checker'] = $this->createMock(Check::class);
-        $this->Container['checker']->expects($this->any())
-                                   ->method('execute')
-                                   ->will($this->returnValue($statuses));
+        $this->statuses = [
+            new Status([
+                'homo' => new Homo([
+                    'screen_name' => 'foo',
+                    'service' => 'twitter',
+                    'url' => 'https://foo.example.com/1',
+                ]),
+                'status' => 'OK',
+            ]),
+            new Status([
+                'homo' => new Homo([
+                    'screen_name' => 'foo',
+                    'service' => 'twitter',
+                    'url' => 'https://foo.example.com/2',
+                ]),
+                'status' => 'NG',
+            ]),
+            new Status([
+                'homo' => new Homo([
+                    'screen_name' => 'bar',
+                    'service' => 'mastodon',
+                    'url' => 'http://bar.example.com',
+                ]),
+                'status' => 'OK',
+            ]),
+        ];
     }
 
     public function testAllCount(): void
     {
-        $action = new BadgeAction($this->Container);
+        $check = m::mock(CheckService::class);
+
+        $homo = m::mock(HomoService::class);
+        $homo->shouldReceive('count')
+             ->andReturn(3);
+
+        $action = new BadgeAction($check, $homo);
         $request = Request::createFromEnvironment(Environment::mock([
             'REQUEST_URI' => '/badge',
         ]));
@@ -65,7 +90,13 @@ class BadgeActionTest extends TestCase
 
     public function testStatusCount(): void
     {
-        $action = new BadgeAction($this->Container);
+        $check = m::mock(CheckService::class);
+        $check->shouldReceive('execute')
+              ->andReturn($this->statuses);
+
+        $homo = m::mock(HomoService::class);
+
+        $action = new BadgeAction($check, $homo);
         $request = Request::createFromEnvironment(Environment::mock([
             'REQUEST_URI' => '/badge',
         ]));
@@ -78,7 +109,13 @@ class BadgeActionTest extends TestCase
 
     public function testParams(): void
     {
-        $action = new BadgeAction($this->Container);
+        $check = m::mock(CheckService::class);
+
+        $homo = m::mock(HomoService::class);
+        $homo->shouldReceive('count')
+             ->andReturn(3);
+
+        $action = new BadgeAction($check, $homo);
         $request = Request::createFromEnvironment(Environment::mock([
             'REQUEST_URI' => '/badge',
             'QUERY_STRING' => 'style=flat-square',

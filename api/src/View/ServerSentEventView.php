@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace HomoChecker\View;
 
-class ServerSentEventView implements ViewInterface
+use HomoChecker\Contracts\View\ServerSentEventView as ServerSentEventViewContract;
+
+class ServerSentEventView implements ServerSentEventViewContract
 {
     public $event;
 

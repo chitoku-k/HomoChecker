@@ -1,6 +1,6 @@
 <phpunit bootstrap="./vendor/autoload.php">
     <testsuites>
-        <testsuite>
+        <testsuite name="all">
             <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
@@ -10,7 +10,7 @@
             <exclude>
                 <file>./src/config.php</file>
                 <file>./src/index.php</file>
-                <directory>./src/Utilities</directory>
+                <directory>./src/Providers</directory>
             </exclude>
         </whitelist>
     </filter>
