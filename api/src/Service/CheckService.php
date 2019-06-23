@@ -33,12 +33,12 @@ class CheckService implements CheckServiceContract
     protected $homo;
 
     /**
-     * @var Collection<Profile>
+     * @var Collection<ProfileServiceContract>
      */
     protected $profile;
 
     /**
-     * @var Collection<Validator>
+     * @var Collection<ValidatorServiceContract>
      */
     protected $validators;
 
