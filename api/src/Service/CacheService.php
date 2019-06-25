@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace HomoChecker\Service;
 
 use HomoChecker\Contracts\Service\CacheService as CacheServiceContract;
-use Illuminate\Support\Facades\Cache as CacheRepository;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * @method string loadIconMastodon(string $screen_name)
@@ -35,7 +35,7 @@ class CacheService implements CacheServiceContract
                         array_slice(preg_split('/(?=[A-Z])/', $identifier), 1),
                     ),
                     array_splice($arguments, 0, 1),
-                )
+                ),
             ),
             $arguments,
         );
@@ -43,11 +43,11 @@ class CacheService implements CacheServiceContract
 
     public function load(string $key, array $arguments = [])
     {
-        return CacheRepository::get($key, ...$arguments);
+        return Cache::get($key, ...$arguments);
     }
 
     public function save(string $key, array $arguments = [])
     {
-        CacheRepository::put($key, ...$arguments);
+        Cache::put($key, ...$arguments);
     }
 }

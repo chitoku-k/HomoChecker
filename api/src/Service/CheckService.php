@@ -28,7 +28,7 @@ class CheckService implements CheckServiceContract
     protected $client;
 
     /**
-     * @var HomoService
+     * @var HomoServiceContract
      */
     protected $homo;
 
@@ -82,7 +82,7 @@ class CheckService implements CheckServiceContract
     /**
      * Validate a user.
      * @param  Homo                     $homo The user.
-     * @return Promise\PromiseInterface The Promise.
+     * @return Promise\PromiseInterface       The Promise.
      */
     protected function validateAsync(Homo $homo): Promise\PromiseInterface
     {
@@ -122,7 +122,7 @@ class CheckService implements CheckServiceContract
      * Create a status object from a user.
      * @param  Homo                     $homo     The user.
      * @param  callable                 $callback The callback that is called after resolution (optional).
-     * @return Promise\PromiseInterface The Promise.
+     * @return Promise\PromiseInterface           The Promise.
      */
     protected function createStatusAsync(Homo $homo, callable $callback = null): Promise\PromiseInterface
     {

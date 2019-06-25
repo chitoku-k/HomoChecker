@@ -58,7 +58,7 @@ class Homo
 
     /**
      * Get the screen name.
-     * @return string the screen name.
+     * @return string The screen name.
      */
     public function getScreenName(): string
     {

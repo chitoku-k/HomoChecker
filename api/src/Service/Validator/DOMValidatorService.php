@@ -25,7 +25,7 @@ class DOMValidatorService implements ValidatorServiceContract
     public function validate(Response $response)
     {
         $doc = new \DOMDocument();
-        @$doc->loadHTML((string)$response->getBody());
+        @$doc->loadHTML((string) $response->getBody());
         $xpath = new \DOMXPath($doc);
         $xpath->registerNamespace('php', 'http://php.net/xpath');
         $xpath->registerPhpFunctions();

@@ -43,7 +43,7 @@ class MastodonProfileService implements ProfileServiceContract
     /**
      * Get the URL of profile image of the user.
      * @param  string                   $screen_name The screen_name of the user, e.g., @example@mastodon.social
-     * @return Promise\PromiseInterface The promise.
+     * @return Promise\PromiseInterface              The promise.
      */
     public function getIconAsync(string $screen_name): Promise\PromiseInterface
     {
@@ -56,7 +56,7 @@ class MastodonProfileService implements ProfileServiceContract
                 [ $username, $instance ] = $this->parseScreenName($screen_name);
                 $target = "https://{$instance}/users/{$username}.json";
                 $response = yield $this->client->getAsync($target);
-                $body = json_decode((string)$response->getBody());
+                $body = json_decode((string) $response->getBody());
                 $url = $body->icon->url ?? null;
                 if (!$url) {
                     throw new \RuntimeException('Avatar not found');
