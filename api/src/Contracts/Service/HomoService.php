@@ -3,19 +3,19 @@ declare(strict_types=1);
 
 namespace HomoChecker\Contracts\Service;
 
-use HomoChecker\Domain\Homo;
-
 interface HomoService
 {
     /**
      * Get the number of the entries.
-     * @return int The number of the entries.
+     * @param  string $screenName The screen name.
+     * @return int                The number of the entries.
      */
     public function count(string $screenName = null): int;
 
     /**
      * Retrieve all entries or matched entries if the screen name is given.
-     * @return Homo[] The entries.
+     * @param  string      $screenName The screen name.
+     * @return \stdClass[]             The entries.
      */
     public function find(string $screenName = null): array;
 

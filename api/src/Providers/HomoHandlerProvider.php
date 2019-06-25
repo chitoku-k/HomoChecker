@@ -21,7 +21,7 @@ class HomoHandlerProvider extends ServiceProvider
     {
         return function () use ($code): callable {
             return function (Request $request, Response $response, $e = null) use ($code): Response {
-                error_log((string)$e);
+                error_log((string) $e);
                 $response = $response->withStatus($code);
                 return $response->withJson([
                     'errors' => [

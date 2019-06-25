@@ -31,7 +31,7 @@ class TwitterProfileService implements ProfileServiceContract
     /**
      * Get the URL of profile image of the user.
      * @param  string                   $screen_name The screen_name of the user.
-     * @return Promise\PromiseInterface The promise.
+     * @return Promise\PromiseInterface              The promise.
      */
     public function getIconAsync(string $screen_name): Promise\PromiseInterface
     {
@@ -43,7 +43,7 @@ class TwitterProfileService implements ProfileServiceContract
             try {
                 $target = "https://twitter.com/intent/user?screen_name={$screen_name}";
                 $response = yield $this->client->getAsync($target);
-                $body = (string)$response->getBody();
+                $body = (string) $response->getBody();
 
                 if (!preg_match('/src=(?:\"|\')(https:\/\/[ap]bs\.twimg\.com\/[^\"\']+)/', $body, $matches)) {
                     throw new \RuntimeException('No URL found');

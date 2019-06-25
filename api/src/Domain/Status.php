@@ -139,7 +139,7 @@ class Status implements \JsonSerializable
     /**
      * Create a display URL from an absolute URL.
      * @param  string $url Absolute URL.
-     * @return string Display URL.
+     * @return string      Display URL.
      */
     protected function createDisplayURL(string $url): string
     {
@@ -147,14 +147,14 @@ class Status implements \JsonSerializable
         if (!is_string($domain)) {
             return '';
         }
-        $path = (string)parse_url($url, PHP_URL_PATH);
+        $path = (string) parse_url($url, PHP_URL_PATH);
         return (new Punycode())->decode($domain) . $path;
     }
 
     /**
      * Get whether the scheme of the URL supports secure transfer.
      * @param  string $url The URL.
-     * @return bool   true if supported; otherwise false.
+     * @return bool        true if supported; otherwise false.
      */
     protected function isSecure(string $url): bool
     {

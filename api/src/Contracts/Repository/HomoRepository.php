@@ -15,19 +15,21 @@ interface HomoRepository
 
     /**
      * Get the number of the entries whose screen name matches the given one.
+     * @param  string $screenName The screen name.
+     * @return int                The number of the entries.
      */
     public function countByScreenName(string $screenName): int;
 
     /**
      * Retrieve all entries.
-     * @return Homo[] The entries.
+     * @return \stdClass[] The entries.
      */
     public function findAll(): array;
 
     /**
      * Retrieve the entries that matches the given screen name.
-     * @param  string $screenName The screen name.
-     * @return Homo[]             The entries.
+     * @param  string      $screenName The screen name.
+     * @return \stdClass[]             The entries.
      */
     public function findByScreenName(string $screenName): array;
 

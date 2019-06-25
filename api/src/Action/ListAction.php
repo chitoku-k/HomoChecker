@@ -6,7 +6,6 @@ namespace HomoChecker\Action;
 use HomoChecker\Contracts\Service\HomoService;
 use HomoChecker\Domain\Homo;
 use HomoChecker\Domain\Status;
-use Illuminate\Support\Collection;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
