@@ -4,18 +4,18 @@ declare(strict_types=1);
 namespace HomoChecker\Service;
 
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Pool;
 use GuzzleHttp\Promise;
 use GuzzleHttp\RequestOptions;
 use GuzzleHttp\TransferStats;
-use GuzzleHttp\Exception\RequestException;
 use HomoChecker\Contracts\Service\CheckService as CheckServiceContract;
 use HomoChecker\Contracts\Service\HomoService as HomoServiceContract;
 use HomoChecker\Contracts\Service\ProfileService as ProfileServiceContract;
 use HomoChecker\Contracts\Service\ValidatorService as ValidatorServiceContract;
-use HomoChecker\Domain\Validator\ValidationResult;
 use HomoChecker\Domain\Homo;
 use HomoChecker\Domain\Status;
+use HomoChecker\Domain\Validator\ValidationResult;
 use Illuminate\Support\Collection;
 
 class CheckService implements CheckServiceContract
@@ -82,7 +82,7 @@ class CheckService implements CheckServiceContract
     /**
      * Validate a user.
      * @param  Homo                     $homo The user.
-     * @return Promise\PromiseInterface       The Promise.
+     * @return Promise\PromiseInterface The Promise.
      */
     protected function validateAsync(Homo $homo): Promise\PromiseInterface
     {
@@ -122,7 +122,7 @@ class CheckService implements CheckServiceContract
      * Create a status object from a user.
      * @param  Homo                     $homo     The user.
      * @param  callable                 $callback The callback that is called after resolution (optional).
-     * @return Promise\PromiseInterface           The Promise.
+     * @return Promise\PromiseInterface The Promise.
      */
     protected function createStatusAsync(Homo $homo, callable $callback = null): Promise\PromiseInterface
     {

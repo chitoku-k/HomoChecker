@@ -9,8 +9,8 @@ use HomoChecker\Contracts\Service\HomoService;
 use HomoChecker\Contracts\View\ServerSentEventView;
 use HomoChecker\Domain\Homo;
 use HomoChecker\Domain\Status;
-use Mockery as m;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use Mockery as m;
 use PHPUnit\Framework\TestCase;
 use Slim\Http\Environment;
 use Slim\Http\Request;
@@ -99,7 +99,7 @@ class CheckActionTest extends TestCase
         $actual = $response->getHeaderLine('Content-Type');
         $this->assertRegExp('|^application/json|', $actual);
 
-        $actual = (string)$response->getBody();
+        $actual = (string) $response->getBody();
         $expected = json_encode([
             [
                 'homo' => [
@@ -146,6 +146,7 @@ class CheckActionTest extends TestCase
 
     /**
      * @dataProvider formatProvider
+     * @param null|mixed $format
      */
     public function testRouteToSSE($format = null): void
     {

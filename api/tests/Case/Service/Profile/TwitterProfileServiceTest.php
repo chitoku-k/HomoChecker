@@ -12,8 +12,8 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use HomoChecker\Contracts\Service\CacheService;
 use HomoChecker\Service\Profile\TwitterProfileService;
-use Mockery as m;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use Mockery as m;
 use PHPUnit\Framework\TestCase;
 
 class TwitterProfileServiceTest extends TestCase

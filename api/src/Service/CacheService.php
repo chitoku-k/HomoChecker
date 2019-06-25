@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Cache;
 /**
  * @method string loadIconMastodon(string $screen_name)
  * @method string loadIconTwitter(string $screen_name)
- * @method void saveIconMastodon(string $screen_name, string $url, int $expire)
- * @method void saveIconTwitter(string $screen_name, string $url, int $expire)
+ * @method void   saveIconMastodon(string $screen_name, string $url, int $expire)
+ * @method void   saveIconTwitter(string $screen_name, string $url, int $expire)
  */
 class CacheService implements CacheServiceContract
 {
@@ -26,7 +26,7 @@ class CacheService implements CacheServiceContract
          */
         [ , $feature, $identifier ] = $matches;
 
-        return $this->$feature(
+        return $this->{$feature}(
             implode(
                 ':',
                 array_merge(

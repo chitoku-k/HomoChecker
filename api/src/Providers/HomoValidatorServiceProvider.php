@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace HomoChecker\Providers;
 
-use HomoChecker\Service\Validator\HeaderValidatorService;
 use HomoChecker\Service\Validator\DOMValidatorService;
+use HomoChecker\Service\Validator\HeaderValidatorService;
 use HomoChecker\Service\Validator\URLValidatorService;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;

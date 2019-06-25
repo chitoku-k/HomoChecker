@@ -10,7 +10,7 @@ interface ProfileService
     /**
      * Get the profile icon of the account by the given screen name.
      * @param  string                   $screen_name The screen name.
-     * @return Promise\PromiseInterface              The promise that resolves with the URL string of the icon.
+     * @return Promise\PromiseInterface The promise that resolves with the URL string of the icon.
      */
     public function getIconAsync(string $screen_name): Promise\PromiseInterface;
 

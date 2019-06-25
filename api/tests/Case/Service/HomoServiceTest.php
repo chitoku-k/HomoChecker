@@ -6,8 +6,8 @@ namespace HomoChecker\Test\Service;
 use HomoChecker\Contracts\Repository\HomoRepository;
 use HomoChecker\Domain\Homo;
 use HomoChecker\Service\HomoService;
-use Mockery as m;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use Mockery as m;
 use PHPUnit\Framework\TestCase;
 
 class HomoServiceTest extends TestCase
@@ -89,7 +89,7 @@ class HomoServiceTest extends TestCase
 
     public function testExport(): void
     {
-        $sql = <<<SQL
+        $sql = <<<'SQL'
         insert into "users" ("screen_name", "service", "url") values ('foo', 'twitter', 'https://foo.example.com/1');
         insert into "users" ("screen_name", "service", "url") values ('foo', 'twitter', 'https://foo.example.com/2');
         insert into "users" ("screen_name", "service", "url") values ('bar', 'twitter', 'https://bar.example.com');

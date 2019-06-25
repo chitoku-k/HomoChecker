@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace HomoChecker\Providers;
 
+use HomoChecker\Action\BadgeAction;
 use HomoChecker\Action\CheckAction;
 use HomoChecker\Action\ListAction;
-use HomoChecker\Action\BadgeAction;
 use HomoChecker\Contracts\Repository\HomoRepository as HomoRepositoryContract;
 use HomoChecker\Repository\HomoRepository;
 use Illuminate\Config\Repository;

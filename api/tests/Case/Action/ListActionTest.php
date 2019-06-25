@@ -5,8 +5,8 @@ namespace HomoChecker\Test\Action;
 
 use HomoChecker\Action\ListAction;
 use HomoChecker\Contracts\Service\HomoService;
-use Mockery as m;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use Mockery as m;
 use PHPUnit\Framework\TestCase;
 use Slim\Http\Environment;
 use Slim\Http\Request;
@@ -52,7 +52,7 @@ class ListActionTest extends TestCase
         $actual = $response->getHeaderLine('Content-Type');
         $this->assertRegExp('|^application/json|', $actual);
 
-        $actual = (string)$response->getBody();
+        $actual = (string) $response->getBody();
         $users = [
             [
                 'screen_name' => 'foo',
@@ -83,7 +83,7 @@ class ListActionTest extends TestCase
 
     public function testListBySQL(): void
     {
-        $sql = <<<SQL
+        $sql = <<<'SQL'
         insert into "users" ("screen_name", "service", "url") values ('foo', 'twitter', 'https://foo.example.com/1');
         insert into "users" ("screen_name", "service", "url") values ('foo', 'twitter', 'https://foo.example.com/2');
         insert into "users" ("screen_name", "service", "url") values ('bar', 'twitter', 'https://bar.example.com');
@@ -103,7 +103,7 @@ class ListActionTest extends TestCase
         $actual = $response->getHeaderLine('Content-Type');
         $this->assertRegExp('|^application/sql|', $actual);
 
-        $actual = (string)$response->getBody();
+        $actual = (string) $response->getBody();
         $this->assertEquals($sql, $actual);
     }
 }

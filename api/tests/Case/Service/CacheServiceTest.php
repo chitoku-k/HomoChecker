@@ -3,10 +3,9 @@ declare(strict_types=1);
 
 namespace HomoChecker\Test\Service;
 
-use Mockery as m;
-use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use HomoChecker\Service\CacheService;
 use Illuminate\Support\Facades\Cache;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
 
 class CacheServiceTest extends TestCase

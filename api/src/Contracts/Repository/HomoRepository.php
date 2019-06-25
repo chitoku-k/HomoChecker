@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace HomoChecker\Contracts\Repository;
 
-use HomoChecker\Domain\Homo;
-
 interface HomoRepository
 {
     /**
@@ -16,7 +14,7 @@ interface HomoRepository
     /**
      * Get the number of the entries whose screen name matches the given one.
      * @param  string $screenName The screen name.
-     * @return int                The number of the entries.
+     * @return int    The number of the entries.
      */
     public function countByScreenName(string $screenName): int;
 
@@ -29,7 +27,7 @@ interface HomoRepository
     /**
      * Retrieve the entries that matches the given screen name.
      * @param  string      $screenName The screen name.
-     * @return \stdClass[]             The entries.
+     * @return \stdClass[] The entries.
      */
     public function findByScreenName(string $screenName): array;
 
