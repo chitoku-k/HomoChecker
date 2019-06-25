@@ -11,6 +11,8 @@
         "true/punycode": "~2.0"
     },
     "require-dev": {
+        "brainmaestro/composer-git-hooks": "^2.6",
+        "friendsofphp/php-cs-fixer": "^2.14",
         "mockery/mockery": "^1.2",
         "php-coveralls/php-coveralls": "^2.1",
         "phpunit/phpunit": "^8"
@@ -27,6 +29,17 @@
     },
     "scripts": {
         "test": "php -dzend_extension=xdebug.so $(which phpunit)",
-        "coveralls": "coveralls"
+        "coveralls": "coveralls",
+        "fix": "php-cs-fixer fix",
+        "post-install-cmd": "[ \"$COMPOSER_DEV_MODE\" = 1 ] && cghooks add --ignore-lock",
+        "post-update-cmd": "[ \"$COMPOSER_DEV_MODE\" = 1 ] && cghooks update"
+    },
+    "extra": {
+        "hooks": {
+            "pre-commit": [
+                "git diff-index --cached --name-only HEAD | api/vendor/bin/php-cs-fixer fix",
+                "git update-index --again"
+            ]
+        }
     }
 }

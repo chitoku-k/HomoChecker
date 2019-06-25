@@ -22,6 +22,7 @@ class ServerSentEventView implements ServerSentEventViewContract
 
     /**
      * @codeCoverageIgnore
+     * @param null|mixed $event
      */
     public function render($data, $event = null): void
     {

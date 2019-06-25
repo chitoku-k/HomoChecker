@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace HomoChecker;
 
 use HomoChecker\Providers\HomoProvider;
-use Illuminate\Support\Facades\Facade;
 use Illuminate\Container\Container;
+use Illuminate\Support\Facades\Facade;
 
 require __DIR__ . '/../vendor/autoload.php';
 

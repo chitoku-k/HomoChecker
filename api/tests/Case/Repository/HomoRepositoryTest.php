@@ -3,12 +3,11 @@ declare(strict_types=1);
 
 namespace HomoChecker\Test\Repository;
 
-use Faker\Generator as Faker;
+use HomoChecker\Repository\HomoRepository;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
-use HomoChecker\Repository\HomoRepository;
-use Mockery as m;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use Mockery as m;
 use PHPUnit\Framework\TestCase;
 
 class HomoRepositoryTest extends TestCase
@@ -144,7 +143,7 @@ class HomoRepositoryTest extends TestCase
           ->with('users')
           ->andReturn($builder);
 
-        $sql = <<<SQL
+        $sql = <<<'SQL'
         insert into "users" ("screen_name", "service", "url") values ('foo', 'twitter', 'https://foo.example.com/1');
         insert into "users" ("screen_name", "service", "url") values ('foo', 'twitter', 'https://foo.example.com/2');
         insert into "users" ("screen_name", "service", "url") values ('bar', 'mastodon', 'http://bar.example.com');

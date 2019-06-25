@@ -12,8 +12,8 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use HomoChecker\Contracts\Service\CacheService;
 use HomoChecker\Service\Profile\MastodonProfileService;
-use Mockery as m;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use Mockery as m;
 use PHPUnit\Framework\TestCase;
 
 class MastodonProfileServiceTest extends TestCase
@@ -35,12 +35,12 @@ class MastodonProfileServiceTest extends TestCase
                     }
                 }
             "),
-            new Response(200, [], "
+            new Response(200, [], '
                 {
-                    \"name\": \"This does not contain icon URL\"
+                    "name": "This does not contain icon URL"
                 }
-            "),
-            new Response(404, [], ""),
+            '),
+            new Response(404, [], ''),
             new RequestException('Connection problem occurred', new Request('GET', '')),
         ]));
 

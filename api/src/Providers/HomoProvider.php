@@ -9,7 +9,6 @@ use HomoChecker\Contracts\Service\CacheService as CacheServiceContract;
 use HomoChecker\Contracts\Service\CheckService as CheckServiceContract;
 use HomoChecker\Contracts\Service\HomoService as HomoServiceContract;
 use HomoChecker\Contracts\View\ServerSentEventView as ServerSentEventViewContract;
-use HomoChecker\Domain\Homo;
 use HomoChecker\Service\CacheService;
 use HomoChecker\Service\CheckService;
 use HomoChecker\Service\HomoService;

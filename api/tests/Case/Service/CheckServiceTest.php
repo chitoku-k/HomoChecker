@@ -13,12 +13,12 @@ use GuzzleHttp\Psr7\Response;
 use HomoChecker\Contracts\Service\HomoService;
 use HomoChecker\Contracts\Service\ProfileService;
 use HomoChecker\Contracts\Service\ValidatorService;
-use HomoChecker\Service\CheckService;
 use HomoChecker\Domain\Homo;
 use HomoChecker\Domain\Status;
 use HomoChecker\Domain\Validator\ValidationResult;
-use Mockery as m;
+use HomoChecker\Service\CheckService;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use Mockery as m;
 use PHPUnit\Framework\TestCase;
 
 class CheckServiceTest extends TestCase
