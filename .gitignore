@@ -2,6 +2,7 @@
 
 ### Composer ###
 api/vendor
+api/.php_cs.cache
 
 
 ### Node ###
