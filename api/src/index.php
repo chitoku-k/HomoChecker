@@ -15,7 +15,6 @@ $container->singleton('settings', function () {
 });
 
 (new HomoProvider($container))->register();
-(new HomoProvider($container))->boot();
 
 Facade::clearResolvedInstances();
 Facade::setFacadeApplication($container);

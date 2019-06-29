@@ -16,18 +16,12 @@ use HomoChecker\View\ServerSentEventView;
 use Illuminate\Cache\CacheServiceProvider;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\DatabaseServiceProvider;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Redis\RedisServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Slim\DefaultServicesProvider;
 
 class HomoProvider extends ServiceProvider
 {
-    public function boot()
-    {
-        Model::setConnectionResolver($this->app->get('db'));
-    }
-
     public function register()
     {
         $this->app->singleton(ClientInterface::class, function (Container $app) {
