@@ -10,7 +10,7 @@ use HomoChecker\Contracts\Service\ProfileService as ProfileServiceContract;
 
 class TwitterProfileService implements ProfileServiceContract
 {
-    public const CACHE_EXPIRE = 300;
+    public const CACHE_EXPIRE = 3;
 
     /**
      * @var ClientInterface
