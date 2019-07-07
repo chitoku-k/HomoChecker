@@ -35,7 +35,7 @@ class CheckService implements CheckServiceContract
     /**
      * @var Collection<ProfileServiceContract>
      */
-    protected $profile;
+    protected $profiles;
 
     /**
      * @var Collection<ValidatorServiceContract>
