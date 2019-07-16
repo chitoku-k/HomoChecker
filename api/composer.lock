@@ -427,7 +427,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v5.8.28",
+            "version": "v5.8.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -531,7 +531,7 @@
         },
         {
             "name": "illuminate/redis",
-            "version": "v5.8.28",
+            "version": "v5.8.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/redis.git",
