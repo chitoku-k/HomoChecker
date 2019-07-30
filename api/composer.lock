@@ -471,16 +471,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v5.8.29",
+            "version": "v5.8.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "bd3c54536c237de5eb53fcbdf35f904403353f4b"
+                "reference": "760ef316055ab69f711746e0455442d9b6b6db93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/bd3c54536c237de5eb53fcbdf35f904403353f4b",
-                "reference": "bd3c54536c237de5eb53fcbdf35f904403353f4b",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/760ef316055ab69f711746e0455442d9b6b6db93",
+                "reference": "760ef316055ab69f711746e0455442d9b6b6db93",
                 "shasum": ""
             },
             "require": {
@@ -527,7 +527,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2019-07-15T14:10:50+00:00"
+            "time": "2019-07-29T14:26:41+00:00"
         },
         {
             "name": "illuminate/redis",
