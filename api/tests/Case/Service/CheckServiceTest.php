@@ -80,6 +80,7 @@ class CheckServiceTest extends TestCase
             ])),
         ]);
 
+        /** @var HomoService $homo */
         $homo = m::mock(HomoService::class);
         $homo->shouldReceive('find')
              ->with(null)

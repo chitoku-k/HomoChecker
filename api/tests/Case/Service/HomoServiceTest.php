@@ -39,6 +39,7 @@ class HomoServiceTest extends TestCase
 
     public function testCountAll(): void
     {
+        /** @var HomoRepository $repository */
         $repository = m::mock(HomoRepository::class);
         $repository->shouldReceive('count')
                    ->andReturn(3);
@@ -52,6 +53,7 @@ class HomoServiceTest extends TestCase
     {
         $screen_name = 'foo';
 
+        /** @var HomoRepository $repository */
         $repository = m::mock(HomoRepository::class);
         $repository->shouldReceive('countByScreenName')
                    ->with($screen_name)
@@ -64,6 +66,7 @@ class HomoServiceTest extends TestCase
 
     public function testFindAll(): void
     {
+        /** @var HomoRepository $repository */
         $repository = m::mock(HomoRepository::class);
         $repository->shouldReceive('findAll')
                    ->andReturn($this->users);
@@ -77,6 +80,7 @@ class HomoServiceTest extends TestCase
     {
         $screen_name = 'foo';
 
+        /** @var HomoRepository $repository */
         $repository = m::mock(HomoRepository::class);
         $repository->shouldReceive('findByScreenName')
                    ->with($screen_name)
@@ -95,6 +99,7 @@ class HomoServiceTest extends TestCase
         insert into "users" ("screen_name", "service", "url") values ('bar', 'twitter', 'https://bar.example.com');
         SQL;
 
+        /** @var HomoRepository $repository */
         $repository = m::mock(HomoRepository::class);
         $repository->shouldReceive('export')
                    ->andReturn($sql);

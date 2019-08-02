@@ -86,12 +86,16 @@ class CheckActionTest extends TestCase
             'QUERY_STRING' => 'format=json',
         ]));
 
+        /** @var CheckService $check */
         $check = m::mock(CheckService::class);
         $check->shouldReceive('execute')
               ->with(null)
               ->andReturn($this->statuses);
 
+        /** @var HomoService $homo */
         $homo = m::mock(HomoService::class);
+
+        /** @var ServerSentEventView $sse */
         $sse = m::mock(ServerSentEventView::class);
 
         $action = new CheckAction($check, $homo, $sse);
@@ -155,15 +159,18 @@ class CheckActionTest extends TestCase
             'QUERY_STRING' => "format={$format}",
         ]));
 
+        /** @var ServerSentEventView $sse */
         $sse = m::mock(ServerSentEventView::class);
         $sse->shouldReceive('render')
             ->with(['count' => 3], 'initialize');
         $sse->shouldReceive('close');
 
+        /** @var CheckService $check */
         $check = m::mock(CheckService::class);
         $check->shouldReceive('execute')
               ->with(null, [$sse, 'render']);
 
+        /** @var HomoService $homo */
         $homo = m::mock(HomoService::class);
         $homo->shouldReceive('count')
              ->with(null)
