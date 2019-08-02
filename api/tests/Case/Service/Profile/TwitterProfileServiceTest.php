@@ -60,8 +60,10 @@ class TwitterProfileServiceTest extends TestCase
             new RequestException('Connection problem occurred', new Request('GET', '')),
         ]));
 
+        /** @var ClientInterface $client */
         $client = new Client(compact('handler'));
 
+        /** @var CacheService $cache */
         $cache = m::mock(CacheService::class);
         $cache->shouldReceive('loadIconTwitter')
               ->andReturn(null);
@@ -82,8 +84,10 @@ class TwitterProfileServiceTest extends TestCase
         $url = 'https://pbs.twimg.com/profile_images/114514/example_bigger.jpg';
         $screen_name = 'example';
 
+        /** @var ClientInterface $client */
         $client = m::mock(ClientInterface::class);
 
+        /** @var CacheService $cache */
         $cache = m::mock(CacheService::class);
         $cache->shouldReceive('loadIconTwitter')
               ->andReturn($url);

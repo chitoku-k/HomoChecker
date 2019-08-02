@@ -46,6 +46,7 @@ class MastodonProfileServiceTest extends TestCase
 
         $client = new Client(compact('handler'));
 
+        /** @var CacheService $cache */
         $cache = m::mock(CacheService::class);
         $cache->shouldReceive('loadIconMastodon')
               ->andReturn(null);
@@ -66,8 +67,10 @@ class MastodonProfileServiceTest extends TestCase
         $url = 'https://files.mastodon.social/accounts/avatars/000/000/001/original/114514.png';
         $screen_name = '@example@mastodon.social';
 
+        /** @var ClientInterface $client */
         $client = m::mock(ClientInterface::class);
 
+        /** @var CacheService $cache */
         $cache = m::mock(CacheService::class);
         $cache->shouldReceive('loadIconMastodon')
               ->andReturn($url);
@@ -81,7 +84,10 @@ class MastodonProfileServiceTest extends TestCase
      */
     public function testParseScreenName($screen_name, $username, $instance): void
     {
+        /** @var ClientInterface $client */
         $client = m::mock(ClientInterface::class);
+
+        /** @var CacheService $cache */
         $cache = m::mock(CacheService::class);
 
         $profile = new MastodonProfileService($client, $cache);
@@ -97,7 +103,10 @@ class MastodonProfileServiceTest extends TestCase
     {
         $this->expectException(\RuntimeException::class);
 
+        /** @var ClientInterface $client */
         $client = m::mock(ClientInterface::class);
+
+        /** @var CacheService $cache */
         $cache = m::mock(CacheService::class);
 
         $profile = new MastodonProfileService($client, $cache);

@@ -39,6 +39,7 @@ class ListActionTest extends TestCase
 
     public function testListByJSON(): void
     {
+        /** @var HomoService $homo */
         $homo = m::mock(HomoService::class);
         $homo->shouldReceive('find')
              ->andReturn($this->users);
@@ -89,6 +90,7 @@ class ListActionTest extends TestCase
         insert into "users" ("screen_name", "service", "url") values ('bar', 'twitter', 'https://bar.example.com');
         SQL;
 
+        /** @var HomoService $homo */
         $homo = m::mock(HomoService::class);
         $homo->shouldReceive('export')
              ->andReturn($sql);
