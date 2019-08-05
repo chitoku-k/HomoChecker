@@ -32,7 +32,7 @@ class BadgeAction
         $status = $args['status'] ?? null;
         $count = $this->getCount($status);
         $label = "{$count} " . strtolower($status ?? 'registered');
-        return $response->withRedirect($this->getURL('homo', $label, '7a6544', $request->getParams()));
+        return $response->withRedirect($this->getURL('homo', $label, '7a6544', $request->getQueryParams()));
     }
 
     protected function getURL(string $service, string $label, string $color, array $query = []): string

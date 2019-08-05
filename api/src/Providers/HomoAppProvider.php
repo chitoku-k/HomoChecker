@@ -11,7 +11,7 @@ use HomoChecker\Repository\HomoRepository;
 use Illuminate\Config\Repository;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
-use Slim\App;
+use Slim\Factory\AppFactory;
 use Slim\Router;
 
 class HomoAppProvider extends ServiceProvider
@@ -25,7 +25,8 @@ class HomoAppProvider extends ServiceProvider
         $this->app->singleton(HomoRepositoryContract::class, HomoRepository::class);
 
         $this->app->singleton('app', function (Container $app) {
-            $slim = new App($app);
+            AppFactory::setContainer($app);
+            $slim = AppFactory::create();
             $slim->get('/check/[{name}/]', CheckAction::class);
             $slim->get('/list/[{name}/]', ListAction::class);
             $slim->get('/badge/[{status}/]', BadgeAction::class);

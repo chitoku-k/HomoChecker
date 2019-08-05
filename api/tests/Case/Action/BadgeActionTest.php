@@ -11,9 +11,10 @@ use HomoChecker\Domain\Status;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
-use Slim\Http\Environment;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Slim\Http\Response as HttpResponse;
+use Slim\Psr7\Factory\RequestFactory;
+use Slim\Psr7\Factory\StreamFactory;
+use Slim\Psr7\Response;
 
 class BadgeActionTest extends TestCase
 {
@@ -80,11 +81,9 @@ class BadgeActionTest extends TestCase
              ->andReturn(3);
 
         $action = new BadgeAction($check, $homo);
-        $request = Request::createFromEnvironment(Environment::mock([
-            'REQUEST_URI' => '/badge',
-        ]));
+        $request = (new RequestFactory())->createRequest('GET', '/badge');
 
-        $response = $action($request, new Response(), []);
+        $response = $action($request, new HttpResponse(new Response(), new StreamFactory()), []);
         $actual = $response->getHeaderLine('Location');
         $this->assertRegExp('|^https?://img\.shields\.io/badge/.*\.svg|', $actual);
         $this->assertRegExp('/3(?: |%20|\+)registered/', $actual);
@@ -101,11 +100,9 @@ class BadgeActionTest extends TestCase
         $homo = m::mock(HomoService::class);
 
         $action = new BadgeAction($check, $homo);
-        $request = Request::createFromEnvironment(Environment::mock([
-            'REQUEST_URI' => '/badge',
-        ]));
+        $request = (new RequestFactory())->createRequest('GET', '/badge');
 
-        $response = $action($request, new Response(), ['status' => 'OK']);
+        $response = $action($request, new HttpResponse(new Response(), new StreamFactory()), ['status' => 'OK']);
         $actual = $response->getHeaderLine('Location');
         $this->assertRegExp('|^https?://img\.shields\.io/badge/.*\.svg|', $actual);
         $this->assertRegExp('/2(?: |%20|\+)ok/', $actual);
@@ -122,12 +119,9 @@ class BadgeActionTest extends TestCase
              ->andReturn(3);
 
         $action = new BadgeAction($check, $homo);
-        $request = Request::createFromEnvironment(Environment::mock([
-            'REQUEST_URI' => '/badge',
-            'QUERY_STRING' => 'style=flat-square',
-        ]));
+        $request = (new RequestFactory())->createRequest('GET', '/badge?style=flat-square');
 
-        $response = $action($request, new Response(), []);
+        $response = $action($request, new HttpResponse(new Response(), new StreamFactory()), []);
         $actual = $response->getHeaderLine('Location');
         $this->assertRegExp('|^https?://img\.shields\.io/badge/.*\.svg|', $actual);
         $this->assertStringEndsWith('?style=flat-square', $actual);

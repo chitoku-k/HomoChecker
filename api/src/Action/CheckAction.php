@@ -5,9 +5,10 @@ namespace HomoChecker\Action;
 
 use HomoChecker\Contracts\Service\CheckService;
 use HomoChecker\Contracts\Service\HomoService;
-use HomoChecker\Contracts\View\ServerSentEventView;
+use HomoChecker\Domain\Status;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Psr7\NonBufferedBody;
 
 class CheckAction
 {
@@ -21,16 +22,10 @@ class CheckAction
      */
     protected $homo;
 
-    /**
-     * @var ServerSentEventView
-     */
-    protected $sse;
-
-    public function __construct(CheckService $check, HomoService $homo, ServerSentEventView $sse)
+    public function __construct(CheckService $check, HomoService $homo)
     {
         $this->check = $check;
         $this->homo = $homo;
-        $this->sse = $sse;
     }
 
     public function __invoke(Request $request, Response $response, array $args)
@@ -53,18 +48,24 @@ class CheckAction
         return $response->withJson($result, !empty($result) ? 200 : 404);
     }
 
-    protected function bySSE(Response $response, string $screen_name = null): void
+    protected function bySSE(Response $response, string $screen_name = null): Response
     {
+        $response = $response->withBody(new NonBufferedBody())->withHeader('Content-Type', 'text/event-stream');
+
         // Output count
-        $this->sse->render(
-            ['count' => $this->homo->count($screen_name)],
-            'initialize',
-        );
+        $count = [
+            'count' => $this->homo->count($screen_name),
+        ];
+
+        $response->getBody()->write("event: initialize\n");
+        $response->getBody()->write('data: ' . json_encode($count) . "\n\n");
 
         // Output response
-        $this->check->execute($screen_name, [$this->sse, 'render']);
+        $this->check->execute($screen_name, function (Status $status) use ($response) {
+            $response->getBody()->write("event: response\n");
+            $response->getBody()->write('data: ' . json_encode($status) . "\n\n");
+        });
 
-        // Close
-        $this->sse->close();
+        return $response;
     }
 }
