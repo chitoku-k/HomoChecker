@@ -7,7 +7,9 @@
         "illuminate/database": "^5.8",
         "illuminate/redis": "^5.8",
         "illuminate/support": "^5.8",
-        "slim/slim": "^3.4",
+        "slim/http": "^0.7.0",
+        "slim/psr7": "^0.4.0",
+        "slim/slim": "^4.0",
         "true/punycode": "~2.0"
     },
     "require-dev": {

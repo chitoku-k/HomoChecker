@@ -8,9 +8,10 @@ use HomoChecker\Contracts\Service\HomoService;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
-use Slim\Http\Environment;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Slim\Http\Response as HttpResponse;
+use Slim\Psr7\Factory\RequestFactory;
+use Slim\Psr7\Factory\StreamFactory;
+use Slim\Psr7\Response;
 
 class ListActionTest extends TestCase
 {
@@ -45,11 +46,9 @@ class ListActionTest extends TestCase
              ->andReturn($this->users);
 
         $action = new ListAction($homo);
-        $request = Request::createFromEnvironment(Environment::mock([
-            'REQUEST_URI' => '/list',
-        ]));
+        $request = (new RequestFactory())->createRequest('GET', '/list');
 
-        $response = $action($request, new Response(), []);
+        $response = $action($request, new HttpResponse(new Response(), new StreamFactory()), []);
         $actual = $response->getHeaderLine('Content-Type');
         $this->assertRegExp('|^application/json|', $actual);
 
@@ -96,12 +95,9 @@ class ListActionTest extends TestCase
              ->andReturn($sql);
 
         $action = new ListAction($homo);
-        $request = Request::createFromEnvironment(Environment::mock([
-            'REQUEST_URI' => '/list',
-            'QUERY_STRING' => 'format=sql',
-        ]));
+        $request = (new RequestFactory())->createRequest('GET', '/list?format=sql');
 
-        $response = $action($request, new Response(), []);
+        $response = $action($request, new HttpResponse(new Response(), new StreamFactory()), []);
         $actual = $response->getHeaderLine('Content-Type');
         $this->assertRegExp('|^application/sql|', $actual);
 

@@ -8,17 +8,14 @@ use GuzzleHttp\ClientInterface;
 use HomoChecker\Contracts\Service\CacheService as CacheServiceContract;
 use HomoChecker\Contracts\Service\CheckService as CheckServiceContract;
 use HomoChecker\Contracts\Service\HomoService as HomoServiceContract;
-use HomoChecker\Contracts\View\ServerSentEventView as ServerSentEventViewContract;
 use HomoChecker\Service\CacheService;
 use HomoChecker\Service\CheckService;
 use HomoChecker\Service\HomoService;
-use HomoChecker\View\ServerSentEventView;
 use Illuminate\Cache\CacheServiceProvider;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\DatabaseServiceProvider;
 use Illuminate\Redis\RedisServiceProvider;
 use Illuminate\Support\ServiceProvider;
-use Slim\DefaultServicesProvider;
 
 class HomoProvider extends ServiceProvider
 {
@@ -39,11 +36,6 @@ class HomoProvider extends ServiceProvider
 
         $this->app->singleton(HomoServiceContract::class, HomoService::class);
 
-        $this->app->singleton(ServerSentEventViewContract::class, function (Container $app) {
-            return new ServerSentEventView('response');
-        });
-
-        (new DefaultServicesProvider())->register($this->app);
         (new HomoAppProvider($this->app))->register();
         (new HomoHandlerProvider($this->app))->register();
         (new HomoProfileServiceProvider($this->app))->register();
@@ -61,7 +53,6 @@ class HomoProvider extends ServiceProvider
             CheckServiceContract::class,
             HomoServiceContract::class,
             HomoRepositoryContract::class,
-            ServerSentEventViewContract::class,
         ];
     }
 }
