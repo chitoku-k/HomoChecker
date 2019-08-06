@@ -16,11 +16,15 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\DatabaseServiceProvider;
 use Illuminate\Redis\RedisServiceProvider;
 use Illuminate\Support\ServiceProvider;
+use Psr\Http\Message\StreamInterface;
+use Slim\Psr7\NonBufferedBody;
 
 class HomoProvider extends ServiceProvider
 {
     public function register()
     {
+        $this->app->bind(StreamInterface::class, NonBufferedBody::class);
+
         $this->app->singleton(ClientInterface::class, function (Container $app) {
             return new Client($app->make('config')->get('client'));
         });
@@ -48,6 +52,7 @@ class HomoProvider extends ServiceProvider
     public function provides()
     {
         return [
+            StreamInterface::class,
             ClientInterface::class,
             CacheServiceContract::class,
             CheckServiceContract::class,

@@ -7,6 +7,7 @@ use HomoChecker\Action\ListAction;
 use HomoChecker\Contracts\Service\HomoService;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
+use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 use Slim\Http\Response as HttpResponse;
 use Slim\Psr7\Factory\RequestFactory;
@@ -40,7 +41,7 @@ class ListActionTest extends TestCase
 
     public function testListByJSON(): void
     {
-        /** @var HomoService $homo */
+        /** @var HomoService|MockInterface $homo */
         $homo = m::mock(HomoService::class);
         $homo->shouldReceive('find')
              ->andReturn($this->users);
@@ -89,7 +90,7 @@ class ListActionTest extends TestCase
         insert into "users" ("screen_name", "service", "url") values ('bar', 'twitter', 'https://bar.example.com');
         SQL;
 
-        /** @var HomoService $homo */
+        /** @var HomoService|MockInterface $homo */
         $homo = m::mock(HomoService::class);
         $homo->shouldReceive('export')
              ->andReturn($sql);

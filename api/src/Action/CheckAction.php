@@ -8,7 +8,7 @@ use HomoChecker\Contracts\Service\HomoService;
 use HomoChecker\Domain\Status;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Psr7\NonBufferedBody;
+use Psr\Http\Message\StreamInterface;
 
 class CheckAction
 {
@@ -22,10 +22,16 @@ class CheckAction
      */
     protected $homo;
 
-    public function __construct(CheckService $check, HomoService $homo)
+    /**
+     * @var StreamInterface
+     */
+    protected $stream;
+
+    public function __construct(CheckService $check, HomoService $homo, StreamInterface $stream)
     {
         $this->check = $check;
         $this->homo = $homo;
+        $this->stream = $stream;
     }
 
     public function __invoke(Request $request, Response $response, array $args)
@@ -36,6 +42,7 @@ class CheckAction
             case 'json': {
                 return $this->byJSON($response, $screen_name);
             }
+            case '':
             case 'sse': {
                 return $this->bySSE($response, $screen_name);
             }
@@ -50,7 +57,7 @@ class CheckAction
 
     protected function bySSE(Response $response, string $screen_name = null): Response
     {
-        $response = $response->withBody(new NonBufferedBody())->withHeader('Content-Type', 'text/event-stream');
+        $response = $response->withBody($this->stream)->withHeader('Content-Type', 'text/event-stream');
 
         // Output count
         $count = [

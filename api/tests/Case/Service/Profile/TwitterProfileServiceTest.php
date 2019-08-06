@@ -14,6 +14,7 @@ use HomoChecker\Contracts\Service\CacheService;
 use HomoChecker\Service\Profile\TwitterProfileService;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
+use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 
 class TwitterProfileServiceTest extends TestCase
@@ -60,10 +61,10 @@ class TwitterProfileServiceTest extends TestCase
             new RequestException('Connection problem occurred', new Request('GET', '')),
         ]));
 
-        /** @var ClientInterface $client */
+        /** @var ClientInterface|MockInterface $client */
         $client = new Client(compact('handler'));
 
-        /** @var CacheService $cache */
+        /** @var CacheService|MockInterface $cache */
         $cache = m::mock(CacheService::class);
         $cache->shouldReceive('loadIconTwitter')
               ->andReturn(null);
@@ -84,10 +85,10 @@ class TwitterProfileServiceTest extends TestCase
         $url = 'https://pbs.twimg.com/profile_images/114514/example_bigger.jpg';
         $screen_name = 'example';
 
-        /** @var ClientInterface $client */
+        /** @var ClientInterface|MockInterface $client */
         $client = m::mock(ClientInterface::class);
 
-        /** @var CacheService $cache */
+        /** @var CacheService|MockInterface $cache */
         $cache = m::mock(CacheService::class);
         $cache->shouldReceive('loadIconTwitter')
               ->andReturn($url);
