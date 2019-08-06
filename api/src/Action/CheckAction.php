@@ -42,8 +42,8 @@ class CheckAction
             case 'json': {
                 return $this->byJSON($response, $screen_name);
             }
-            case '':
-            case 'sse': {
+            case 'sse':
+            default: {
                 return $this->bySSE($response, $screen_name);
             }
         }
