@@ -19,6 +19,7 @@ use HomoChecker\Domain\Validator\ValidationResult;
 use HomoChecker\Service\CheckService;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
+use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 
 class CheckServiceTest extends TestCase
@@ -80,7 +81,7 @@ class CheckServiceTest extends TestCase
             ])),
         ]);
 
-        /** @var HomoService $homo */
+        /** @var HomoService|MockInterface $homo */
         $homo = m::mock(HomoService::class);
         $homo->shouldReceive('find')
              ->with(null)
