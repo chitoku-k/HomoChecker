@@ -446,7 +446,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v5.8.31",
+            "version": "v5.8.32",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -550,16 +550,16 @@
         },
         {
             "name": "illuminate/redis",
-            "version": "v5.8.31",
+            "version": "v5.8.32",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/redis.git",
-                "reference": "149677c688056cfa74403557db96071831090466"
+                "reference": "341f97bd50e70e289da8990c0e7740ede7afb954"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/redis/zipball/149677c688056cfa74403557db96071831090466",
-                "reference": "149677c688056cfa74403557db96071831090466",
+                "url": "https://api.github.com/repos/illuminate/redis/zipball/341f97bd50e70e289da8990c0e7740ede7afb954",
+                "reference": "341f97bd50e70e289da8990c0e7740ede7afb954",
                 "shasum": ""
             },
             "require": {
@@ -591,7 +591,7 @@
             ],
             "description": "The Illuminate Redis package.",
             "homepage": "https://laravel.com",
-            "time": "2019-08-02T08:46:34+00:00"
+            "time": "2019-08-12T07:08:42+00:00"
         },
         {
             "name": "illuminate/support",
@@ -4636,8 +4636,8 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "email": "arne@blankerts.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "arne@blankerts.de"
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
