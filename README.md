@@ -66,6 +66,14 @@ Web サーバーが静的コンテンツ配信のみの場合は HTML による�
 <meta http-equiv="refresh" content="1; url=https://twitter.com/mpyw">
 ```
 
+または Cloudflare を利用してサーバーレスホモを構築します。
+
+1. DNS で `homo.example.com` を Cloudflare を通すように設定します。
+2. Page Rule を作成します。
+    - `If the URL matches:` に `*homo.example.com/*` を指定します。
+    - `Then the settings are:` に `Forwarding URL`、`301 - Permanent Redirect`、`https://twitter.com/mpyw` を指定します。
+
+
 ## 動作環境
 
 ### フロントエンド
