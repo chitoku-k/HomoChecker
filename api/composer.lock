@@ -308,7 +308,7 @@
         },
         {
             "name": "illuminate/cache",
-            "version": "v5.8.33",
+            "version": "v5.8.34",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/cache.git",
