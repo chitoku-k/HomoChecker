@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2544449871591c224f8befe29bcbf255",
+    "content-hash": "a214f43f8e28bf2fcb40dd5de58729f4",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -1642,16 +1642,16 @@
     "packages-dev": [
         {
             "name": "brainmaestro/composer-git-hooks",
-            "version": "v2.7.1",
+            "version": "v2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BrainMaestro/composer-git-hooks.git",
-                "reference": "daf8ab1ad2d80255a8bd77dc266b481f0ac24334"
+                "reference": "02f95c83bf87a593899789c6ad5bb12bb66f67b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BrainMaestro/composer-git-hooks/zipball/daf8ab1ad2d80255a8bd77dc266b481f0ac24334",
-                "reference": "daf8ab1ad2d80255a8bd77dc266b481f0ac24334",
+                "url": "https://api.github.com/repos/BrainMaestro/composer-git-hooks/zipball/02f95c83bf87a593899789c6ad5bb12bb66f67b2",
+                "reference": "02f95c83bf87a593899789c6ad5bb12bb66f67b2",
                 "shasum": ""
             },
             "require": {
@@ -1659,8 +1659,9 @@
                 "symfony/console": "^3.2 || ^4.0"
             },
             "require-dev": {
+                "ext-json": "*",
                 "friendsofphp/php-cs-fixer": "^2.9",
-                "phpunit/phpunit": "^5.7|^7.0"
+                "phpunit/phpunit": "^5.7 || ^7.0"
             },
             "bin": [
                 "cghooks"
@@ -1671,10 +1672,11 @@
                     "pre-commit": "composer check-style",
                     "pre-push": [
                         "composer test",
-                        "appver=$(grep -o -P '\\d.\\d.\\d' cghooks)",
-                        "tag=$(git tag --sort=-v:refname | head -n 1 | tr -d v)",
-                        "if [ \"$tag\" != \"$appver\" ]; then",
-                        "echo \"The most recent tag v$tag does not match the application version $appver\n\"",
+                        "appver=$(grep -o -E '\\d.\\d.\\d' cghooks)",
+                        "tag=$(git describe --tags --abbrev=0)",
+                        "if [ \"$tag\" != \"v$appver\" ]; then",
+                        "echo \"The most recent tag $tag does not match the application version $appver\\n\"",
+                        "tag=${tag#v}",
                         "sed -i -E \"s/$appver/$tag/\" cghooks",
                         "exit 1",
                         "fi"
@@ -1705,7 +1707,7 @@
                 "composer",
                 "git"
             ],
-            "time": "2019-07-01T07:40:44+00:00"
+            "time": "2019-09-02T15:42:37+00:00"
         },
         {
             "name": "composer/semver",
@@ -2846,8 +2848,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "FilterIterator implementation that filters files based on a list of suffixes.",
@@ -2888,8 +2890,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Simple template engine.",
@@ -2937,8 +2939,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Utility class for timing",
@@ -3067,8 +3069,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "The PHP Unit Testing framework.",
@@ -3691,8 +3693,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Collection of value objects that represent the types of the PHP type system",
@@ -3734,8 +3736,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
