@@ -1,12 +1,12 @@
 {
     "require": {
         "guzzlehttp/guzzle": "^6.2",
-        "illuminate/cache": "^5.8",
-        "illuminate/config": "^5.8",
-        "illuminate/container": "^5.8",
-        "illuminate/database": "^5.8",
-        "illuminate/redis": "^5.8",
-        "illuminate/support": "^5.8",
+        "illuminate/cache": "^6.0",
+        "illuminate/config": "^6.0",
+        "illuminate/container": "^6.0",
+        "illuminate/database": "^6.0",
+        "illuminate/redis": "^6.0",
+        "illuminate/support": "^6.0",
         "slim/http": "^0.7.0",
         "slim/psr7": "^0.4.0",
         "slim/slim": "^4.0",
