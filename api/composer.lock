@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "388a2d0145f74352a31947dd07ad566f",
+    "content-hash": "6f839ad84bed8f150b38526c4ab1379d",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -1123,19 +1123,20 @@
         },
         {
             "name": "slim/http",
-            "version": "0.7",
+            "version": "0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim-Http.git",
-                "reference": "473a81173018e19e18c78e31d221e51973a6d199"
+                "reference": "a614882c341ffbeaa6d4bbca0e9a69295e442d39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim-Http/zipball/473a81173018e19e18c78e31d221e51973a6d199",
-                "reference": "473a81173018e19e18c78e31d221e51973a6d199",
+                "url": "https://api.github.com/repos/slimphp/Slim-Http/zipball/a614882c341ffbeaa6d4bbca0e9a69295e442d39",
+                "reference": "a614882c341ffbeaa6d4bbca0e9a69295e442d39",
                 "shasum": ""
             },
             "require": {
+                "ext-fileinfo": "*",
                 "ext-json": "*",
                 "ext-libxml": "*",
                 "ext-simplexml": "*",
@@ -1166,11 +1167,6 @@
             ],
             "authors": [
                 {
-                    "name": "Rob Allen",
-                    "email": "rob@akrabat.com",
-                    "homepage": "http://akrabat.com"
-                },
-                {
                     "name": "Josh Lockhart",
                     "email": "hello@joshlockhart.com",
                     "homepage": "http://joshlockhart.com"
@@ -1179,6 +1175,11 @@
                     "name": "Andrew Smith",
                     "email": "a.smith@silentworks.co.uk",
                     "homepage": "http://silentworks.co.uk"
+                },
+                {
+                    "name": "Rob Allen",
+                    "email": "rob@akrabat.com",
+                    "homepage": "http://akrabat.com"
                 },
                 {
                     "name": "Pierre Berube",
@@ -1193,7 +1194,7 @@
                 "psr-7",
                 "psr7"
             ],
-            "time": "2019-05-05T19:58:10+00:00"
+            "time": "2019-08-29T21:39:31+00:00"
         },
         {
             "name": "slim/psr7",
@@ -2409,9 +2410,9 @@
             "authors": [
                 {
                     "name": "Kitamura Satoshi",
+                    "role": "Original creator",
                     "email": "with.no.parachute@gmail.com",
-                    "homepage": "https://www.facebook.com/satooshi.jp",
-                    "role": "Original creator"
+                    "homepage": "https://www.facebook.com/satooshi.jp"
                 },
                 {
                     "name": "Takashi Matsuo",
@@ -2756,8 +2757,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Library that provides collection, processing, and rendering functionality for PHP code coverage information.",
@@ -3028,8 +3029,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "The PHP Unit Testing framework.",
@@ -4602,8 +4603,8 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "email": "arne@blankerts.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "arne@blankerts.de"
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
