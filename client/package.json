@@ -46,6 +46,6 @@
     "shufflejs": "^5.2.3",
     "style-loader": "^1.0.0",
     "webpack": "^4.40.2",
-    "webpack-cli": "^3.3.8"
+    "webpack-cli": "^3.3.9"
   }
 }
