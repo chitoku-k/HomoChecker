@@ -452,16 +452,16 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v6.0.2",
+            "version": "v6.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "e5d7a6daa4beab3ec7c2d24679e213883a5fc09d"
+                "reference": "403b24e356346c1cd13ad794d87ec7c57a5363bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/e5d7a6daa4beab3ec7c2d24679e213883a5fc09d",
-                "reference": "e5d7a6daa4beab3ec7c2d24679e213883a5fc09d",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/403b24e356346c1cd13ad794d87ec7c57a5363bb",
+                "reference": "403b24e356346c1cd13ad794d87ec7c57a5363bb",
                 "shasum": ""
             },
             "require": {
@@ -492,7 +492,7 @@
             ],
             "description": "The Illuminate Contracts package.",
             "homepage": "https://laravel.com",
-            "time": "2019-08-24T15:24:36+00:00"
+            "time": "2019-09-18T12:32:21+00:00"
         },
         {
             "name": "illuminate/database",
@@ -556,16 +556,16 @@
         },
         {
             "name": "illuminate/redis",
-            "version": "v6.0.2",
+            "version": "v6.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/redis.git",
-                "reference": "c5e0c8796e107df27190c11f42935f8776d6afa7"
+                "reference": "13409274810e5b06c9806f8a5eef97a4d8e6ff37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/redis/zipball/c5e0c8796e107df27190c11f42935f8776d6afa7",
-                "reference": "c5e0c8796e107df27190c11f42935f8776d6afa7",
+                "url": "https://api.github.com/repos/illuminate/redis/zipball/13409274810e5b06c9806f8a5eef97a4d8e6ff37",
+                "reference": "13409274810e5b06c9806f8a5eef97a4d8e6ff37",
                 "shasum": ""
             },
             "require": {
@@ -600,7 +600,7 @@
             ],
             "description": "The Illuminate Redis package.",
             "homepage": "https://laravel.com",
-            "time": "2019-09-03T11:25:18+00:00"
+            "time": "2019-09-16T12:40:19+00:00"
         },
         {
             "name": "illuminate/support",
@@ -2410,9 +2410,9 @@
             "authors": [
                 {
                     "name": "Kitamura Satoshi",
-                    "role": "Original creator",
                     "email": "with.no.parachute@gmail.com",
-                    "homepage": "https://www.facebook.com/satooshi.jp"
+                    "homepage": "https://www.facebook.com/satooshi.jp",
+                    "role": "Original creator"
                 },
                 {
                     "name": "Takashi Matsuo",
