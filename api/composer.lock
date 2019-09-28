@@ -363,16 +363,16 @@
         },
         {
             "name": "illuminate/config",
-            "version": "v6.0.2",
+            "version": "v6.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/config.git",
-                "reference": "ac59ced5c18df9664dcfe4e33d9040c40386d7da"
+                "reference": "1840731dbc1a3dbf0eeacff755a611ccef2aa2e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/config/zipball/ac59ced5c18df9664dcfe4e33d9040c40386d7da",
-                "reference": "ac59ced5c18df9664dcfe4e33d9040c40386d7da",
+                "url": "https://api.github.com/repos/illuminate/config/zipball/1840731dbc1a3dbf0eeacff755a611ccef2aa2e0",
+                "reference": "1840731dbc1a3dbf0eeacff755a611ccef2aa2e0",
                 "shasum": ""
             },
             "require": {
@@ -403,7 +403,7 @@
             ],
             "description": "The Illuminate Config package.",
             "homepage": "https://laravel.com",
-            "time": "2019-07-25T05:06:48+00:00"
+            "time": "2019-09-10T15:16:05+00:00"
         },
         {
             "name": "illuminate/container",
