@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "52af947eb627e27373801c0e06a7c196",
+    "content-hash": "794296e594e525aa1d251a3703af45a2",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -556,16 +556,16 @@
         },
         {
             "name": "illuminate/redis",
-            "version": "v6.0.4",
+            "version": "v6.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/redis.git",
-                "reference": "13409274810e5b06c9806f8a5eef97a4d8e6ff37"
+                "reference": "17634e615e1bb82e35bffc8c0b5ec51141c9e35a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/redis/zipball/13409274810e5b06c9806f8a5eef97a4d8e6ff37",
-                "reference": "13409274810e5b06c9806f8a5eef97a4d8e6ff37",
+                "url": "https://api.github.com/repos/illuminate/redis/zipball/17634e615e1bb82e35bffc8c0b5ec51141c9e35a",
+                "reference": "17634e615e1bb82e35bffc8c0b5ec51141c9e35a",
                 "shasum": ""
             },
             "require": {
@@ -600,7 +600,7 @@
             ],
             "description": "The Illuminate Redis package.",
             "homepage": "https://laravel.com",
-            "time": "2019-09-16T12:40:19+00:00"
+            "time": "2019-10-01T13:43:35+00:00"
         },
         {
             "name": "illuminate/support",
