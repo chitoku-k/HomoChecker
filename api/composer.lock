@@ -363,7 +363,7 @@
         },
         {
             "name": "illuminate/config",
-            "version": "v6.1.0",
+            "version": "v6.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/config.git",
@@ -452,7 +452,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v6.1.0",
+            "version": "v6.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
