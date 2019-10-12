@@ -5,7 +5,7 @@ services:
     build: ./api
     working_dir: /var/www/html/api
     volumes:
-      - ./api:/var/www/html/api
+      - .:/var/www/html
     networks:
       - default
 
