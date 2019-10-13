@@ -8,6 +8,7 @@ before_script:
 
 script:
   - bin/init
+  - bin/lint
   - bin/test
 
 after_success:
