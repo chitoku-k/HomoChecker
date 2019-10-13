@@ -8,7 +8,7 @@ DEPLOY_DIR=/srv/http/vhosts/homo.chitoku.jp/httpdocs
 docker-compose up -d
 docker-compose exec api vendor/bin/php-coveralls --root_dir=/var/www/html
 
-if [[ "$TRAVIS_BRANCH" = "master" ]] && [[ "$TRAVIS_PULL_REQUEST" = "false" ]]; then
+if [[ "$TRAVIS_BRANCH" = 'master' ]] && [[ "$TRAVIS_PULL_REQUEST" = 'false' ]]; then
     echo 'Downloading...'
     rsync -z deploy:$DEPLOY_DIR/client/dist/atlan.* client/dist
     echo 'Downloaded!'
