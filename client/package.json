@@ -5,6 +5,7 @@
   "main": "client/src/app.js",
   "scripts": {
     "build": "webpack",
+    "lint": "eslint 'src/tags/*.tag'",
     "watch": "webpack --watch"
   },
   "repository": {
