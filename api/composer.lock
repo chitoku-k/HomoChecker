@@ -1602,16 +1602,16 @@
     "packages-dev": [
         {
             "name": "brainmaestro/composer-git-hooks",
-            "version": "v2.8.1",
+            "version": "v2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BrainMaestro/composer-git-hooks.git",
-                "reference": "b2905bcaf9526f939f5086e263d901531c9948c2"
+                "reference": "c4a39fcbd73b8a5da8c02b8e0923b0836cc4fae0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BrainMaestro/composer-git-hooks/zipball/b2905bcaf9526f939f5086e263d901531c9948c2",
-                "reference": "b2905bcaf9526f939f5086e263d901531c9948c2",
+                "url": "https://api.github.com/repos/BrainMaestro/composer-git-hooks/zipball/c4a39fcbd73b8a5da8c02b8e0923b0836cc4fae0",
+                "reference": "c4a39fcbd73b8a5da8c02b8e0923b0836cc4fae0",
                 "shasum": ""
             },
             "require": {
@@ -1667,7 +1667,7 @@
                 "composer",
                 "git"
             ],
-            "time": "2019-09-13T10:32:54+00:00"
+            "time": "2019-10-16T14:14:51+00:00"
         },
         {
             "name": "composer/semver",
