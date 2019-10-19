@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a49b2d00296b45fc0aa2082158ac3559",
+    "content-hash": "c77402a1add3f76dd39e34020ba20ba6",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -556,7 +556,7 @@
         },
         {
             "name": "illuminate/redis",
-            "version": "v6.2.0",
+            "version": "v6.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/redis.git",
