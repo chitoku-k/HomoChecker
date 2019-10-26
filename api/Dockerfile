@@ -1,4 +1,4 @@
-FROM php:7.3.10-fpm
+FROM php:7.3.11-fpm
 
 # Install dependencies
 RUN apt-get -y update \
