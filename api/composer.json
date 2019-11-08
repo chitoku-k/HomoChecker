@@ -4,7 +4,7 @@
         "illuminate/cache": "^6.4",
         "illuminate/config": "^6.4",
         "illuminate/container": "^6.4",
-        "illuminate/database": "^6.4",
+        "illuminate/database": "^6.5",
         "illuminate/redis": "^6.4",
         "illuminate/support": "^6.4",
         "slim/http": "^0.8",
