@@ -453,7 +453,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v6.5.0",
+            "version": "v6.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -497,16 +497,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v6.5.0",
+            "version": "v6.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "468f5046f58b912a7c7b7a984a5a8777f7e147af"
+                "reference": "5351516d3e9b77fe4b0225c0b52883a718c4c0be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/468f5046f58b912a7c7b7a984a5a8777f7e147af",
-                "reference": "468f5046f58b912a7c7b7a984a5a8777f7e147af",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/5351516d3e9b77fe4b0225c0b52883a718c4c0be",
+                "reference": "5351516d3e9b77fe4b0225c0b52883a718c4c0be",
                 "shasum": ""
             },
             "require": {
@@ -553,7 +553,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2019-11-05T14:11:07+00:00"
+            "time": "2019-11-12T14:40:39+00:00"
         },
         {
             "name": "illuminate/redis",
