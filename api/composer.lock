@@ -313,16 +313,16 @@
         },
         {
             "name": "illuminate/cache",
-            "version": "v6.5.0",
+            "version": "v6.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/cache.git",
-                "reference": "573ee1f673fa8a0a5fb56dee2714b440192201f6"
+                "reference": "b7121bc6c2f345beae396bf7081c566b17d335d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/cache/zipball/573ee1f673fa8a0a5fb56dee2714b440192201f6",
-                "reference": "573ee1f673fa8a0a5fb56dee2714b440192201f6",
+                "url": "https://api.github.com/repos/illuminate/cache/zipball/b7121bc6c2f345beae396bf7081c566b17d335d4",
+                "reference": "b7121bc6c2f345beae396bf7081c566b17d335d4",
                 "shasum": ""
             },
             "require": {
@@ -360,7 +360,7 @@
             ],
             "description": "The Illuminate Cache package.",
             "homepage": "https://laravel.com",
-            "time": "2019-10-14T13:10:05+00:00"
+            "time": "2019-11-11T13:48:22+00:00"
         },
         {
             "name": "illuminate/config",
@@ -453,7 +453,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v6.5.0",
+            "version": "v6.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
