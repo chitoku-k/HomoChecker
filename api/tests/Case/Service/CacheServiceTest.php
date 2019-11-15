@@ -5,12 +5,18 @@ namespace HomoChecker\Test\Service;
 
 use HomoChecker\Service\CacheService;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Facade;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
 
 class CacheServiceTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
+
+    public function setUp(): void
+    {
+        Facade::clearResolvedInstances();
+    }
 
     public function testLoadIconMastodon(): void
     {
@@ -53,8 +59,6 @@ class CacheServiceTest extends TestCase
 
         $cache = new CacheService();
         $cache->saveIconMastodon($screen_name, $url);
-
-        $this->assertTrue(true);
     }
 
     public function testSaveIconTwitter(): void
@@ -68,8 +72,6 @@ class CacheServiceTest extends TestCase
 
         $cache = new CacheService();
         $cache->saveIconTwitter($screen_name, $url);
-
-        $this->assertTrue(true);
     }
 
     public function testInvalidCall(): void

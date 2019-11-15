@@ -6,6 +6,7 @@ namespace HomoChecker\Test\Repository;
 use HomoChecker\Repository\HomoRepository;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Facade;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
@@ -16,6 +17,8 @@ class HomoRepositoryTest extends TestCase
 
     public function setUp(): void
     {
+        Facade::clearResolvedInstances();
+
         $this->users = [
             (object) [
                 'id' => 1,
