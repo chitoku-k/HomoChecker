@@ -9,10 +9,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 class HeaderValidatorService implements ValidatorServiceContract
 {
-    /**
-     * @var string
-     */
-    protected $regex;
+    protected string $regex;
 
     public function __construct(string $regex)
     {

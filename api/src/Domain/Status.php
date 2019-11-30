@@ -10,27 +10,27 @@ class Status implements \JsonSerializable
     /**
      * @var ?Homo The homo object.
      */
-    protected $homo;
+    protected ?Homo $homo;
 
     /**
      * @var ?string The URL of the icon.
      */
-    protected $icon;
+    protected ?string $icon;
 
     /**
      * @var ?string The status string that represents the result of the request.
      */
-    protected $status;
+    protected ?string $status;
 
     /**
      * @var ?string The IP address to which the server sent a request.
      */
-    protected $ip;
+    protected ?string $ip;
 
     /**
      * @var ?float The duration of the request.
      */
-    protected $duration;
+    protected ?float $duration;
 
     /**
      * @param array|object $status

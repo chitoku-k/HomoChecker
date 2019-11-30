@@ -12,20 +12,9 @@ use Psr\Http\Message\StreamInterface;
 
 class CheckAction
 {
-    /**
-     * @var CheckService
-     */
-    protected $check;
-
-    /**
-     * @var HomoService
-     */
-    protected $homo;
-
-    /**
-     * @var StreamInterface
-     */
-    protected $stream;
+    protected CheckService $check;
+    protected HomoService $homo;
+    protected StreamInterface $stream;
 
     public function __construct(CheckService $check, HomoService $homo, StreamInterface $stream)
     {

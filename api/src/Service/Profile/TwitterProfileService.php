@@ -12,15 +12,8 @@ class TwitterProfileService implements ProfileServiceContract
 {
     public const CACHE_EXPIRE = 3;
 
-    /**
-     * @var ClientInterface
-     */
-    protected $client;
-
-    /**
-     * @var CacheServiceContract
-     */
-    protected $cache;
+    protected ClientInterface $client;
+    protected CacheServiceContract $cache;
 
     public function __construct(ClientInterface $client, CacheServiceContract $cache)
     {

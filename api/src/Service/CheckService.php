@@ -22,25 +22,18 @@ class CheckService implements CheckServiceContract
 {
     public const REDIRECT = 5;
 
-    /**
-     * @var ClientInterface
-     */
-    protected $client;
-
-    /**
-     * @var HomoServiceContract
-     */
-    protected $homo;
+    protected ClientInterface $client;
+    protected HomoServiceContract $homo;
 
     /**
      * @var Collection<ProfileServiceContract>
      */
-    protected $profiles;
+    protected ?Collection $profiles;
 
     /**
      * @var Collection<ValidatorServiceContract>
      */
-    protected $validators;
+    protected ?Collection $validators;
 
     public function __construct(ClientInterface $client, HomoServiceContract $homo)
     {
@@ -154,11 +147,7 @@ class CheckService implements CheckServiceContract
 
         return Pool::batch(
             $this->client,
-            array_map(function ($item) use ($callback): callable {
-                return function () use ($item, $callback): Promise\PromiseInterface {
-                    return $this->createStatusAsync(new Homo($item), $callback);
-                };
-            }, $users),
+            array_map(fn($item) => fn() => $this->createStatusAsync(new Homo($item), $callback), $users),
             [
                 'concurrency' => 4,
             ],

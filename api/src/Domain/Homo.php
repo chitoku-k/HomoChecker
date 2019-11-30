@@ -6,24 +6,24 @@ namespace HomoChecker\Domain;
 class Homo
 {
     /**
-     * @var int The id.
+     * @var ?int The id.
      */
-    protected $id;
+    protected ?int $id;
 
     /**
-     * @var string The screen name.
+     * @var ?string The screen name.
      */
-    protected $screenName;
+    protected ?string $screenName;
 
     /**
-     * @var string The name of the service.
+     * @var ?string The name of the service.
      */
-    protected $service;
+    protected ?string $service;
 
     /**
-     * @var string The URL.
+     * @var ?string The URL.
      */
-    protected $url;
+    protected ?string $url;
 
     /**
      * @param array|object $homo

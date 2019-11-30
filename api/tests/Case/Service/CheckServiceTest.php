@@ -167,7 +167,7 @@ class CheckServiceTest extends TestCase
             ]),
         ];
 
-        $actual = $check->execute(null, function (Status $status) {});
+        $actual = $check->execute(null, fn(Status $status) => '');
         $this->assertContainsOnlyInstancesOf(Status::class, $actual);
         $this->assertEquals($expected, $actual);
     }
