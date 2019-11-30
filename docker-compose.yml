@@ -10,7 +10,7 @@ services:
       - default
 
   build:
-    image: node:12.6
+    image: node:13.2
     working_dir: /usr/src/app
     command: npm run watch
     environment:
