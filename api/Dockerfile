@@ -9,7 +9,7 @@ RUN curl -sL 'https://raw.githubusercontent.com/composer/getcomposer.org/master/
     && mv composer.phar /usr/bin/composer \
     && pecl install redis \
     && echo 'extension=redis.so' > /usr/local/etc/php/conf.d/redis.ini \
-    && pecl install xdebug-2.7.0beta1 \
+    && pecl install xdebug-2.8.0 \
     && docker-php-ext-install pdo_mysql
 
 # Prioritise IP version
