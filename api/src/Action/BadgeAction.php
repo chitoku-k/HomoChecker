@@ -11,15 +11,8 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class BadgeAction
 {
-    /**
-     * @var CheckService
-     */
-    protected $check;
-
-    /**
-     * @var HomoService
-     */
-    protected $homo;
+    protected CheckService $check;
+    protected HomoService $homo;
 
     public function __construct(CheckService $check, HomoService $homo)
     {
@@ -48,8 +41,6 @@ class BadgeAction
         }
 
         $result = $this->check->execute();
-        return count(array_filter($result, function (Status $item) use ($status): bool {
-            return strcasecmp($item->getStatus(), $status) === 0;
-        }));
+        return count(array_filter($result, fn(Status $item) => strcasecmp($item->getStatus(), $status) === 0));
     }
 }

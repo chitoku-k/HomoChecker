@@ -11,10 +11,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class ListAction
 {
-    /**
-     * @var HomoService
-     */
-    protected $homo;
+    protected HomoService $homo;
 
     public function __construct(HomoService $homo)
     {

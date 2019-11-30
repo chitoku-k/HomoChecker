@@ -95,9 +95,9 @@ class HomoServiceTest extends TestCase
     public function testExport(): void
     {
         $sql = <<<'SQL'
-        insert into "users" ("screen_name", "service", "url") values ('foo', 'twitter', 'https://foo.example.com/1');
-        insert into "users" ("screen_name", "service", "url") values ('foo', 'twitter', 'https://foo.example.com/2');
-        insert into "users" ("screen_name", "service", "url") values ('bar', 'twitter', 'https://bar.example.com');
+        insert into `users` (`screen_name`, `service`, `url`) values ('foo', 'twitter', 'https://foo.example.com/1');
+        insert into `users` (`screen_name`, `service`, `url`) values ('foo', 'twitter', 'https://foo.example.com/2');
+        insert into `users` (`screen_name`, `service`, `url`) values ('bar', 'twitter', 'https://bar.example.com');
         SQL;
 
         /** @var HomoRepository|MockInterface $repository */
