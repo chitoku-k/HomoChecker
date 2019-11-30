@@ -27,16 +27,10 @@ class CacheService implements CacheServiceContract
         [ , $feature, $identifier ] = $matches;
 
         return $this->{$feature}(
-            implode(
-                ':',
-                array_merge(
-                    array_map(
-                        'strtolower',
-                        array_slice(preg_split('/(?=[A-Z])/', $identifier), 1),
-                    ),
-                    array_splice($arguments, 0, 1),
-                ),
-            ),
+            implode(':', [
+                ...array_map('strtolower', array_slice(preg_split('/(?=[A-Z])/', $identifier), 1)),
+                ...array_splice($arguments, 0, 1),
+            ]),
             $arguments,
         );
     }
