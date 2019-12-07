@@ -32,7 +32,7 @@
     "core-js": "^3.4.5",
     "css-loader": "^3.2.0",
     "eslint": "^6.7.1",
-    "eslint-loader": "^3.0.2",
+    "eslint-loader": "^3.0.3",
     "eslint-plugin-riot": "^0.1.8",
     "event-source-polyfill": "1.0.9",
     "file-loader": "^5.0.2",
