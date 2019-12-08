@@ -125,7 +125,7 @@ data: {"homo":{"screen_name":"@chitoku@mstdn.jp","service":"mastodon","url":"htt
 
 ```sql
 -- 各カラムの値は JSON と同様
-insert into "users" ("screen_name", "service", "url") values ('', '', '');
+insert into `users` (`screen_name`, `service`, `url`) values ('', '', '');
 ```
 
 ## Badge API
