@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "959dce054e25582290af9b6af8c1d2b3",
+    "content-hash": "4ea1200cdd022ba89a02e540f7469fa3",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -605,16 +605,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v6.7.0",
+            "version": "v6.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "e720ac31b6baf101ce0da7a58491e1d3ea2a85ce"
+                "reference": "1536bbc476208a022805cb5b95ab72094d6d1b42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/e720ac31b6baf101ce0da7a58491e1d3ea2a85ce",
-                "reference": "e720ac31b6baf101ce0da7a58491e1d3ea2a85ce",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/1536bbc476208a022805cb5b95ab72094d6d1b42",
+                "reference": "1536bbc476208a022805cb5b95ab72094d6d1b42",
                 "shasum": ""
             },
             "require": {
@@ -662,20 +662,20 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2019-12-06T16:38:15+00:00"
+            "time": "2019-12-12T14:16:31+00:00"
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.27.0",
+            "version": "2.28.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "13b8485a8690f103bf19cba64879c218b102b726"
+                "reference": "e2bcbcd43e67ee6101d321d5de916251d2870ca8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/13b8485a8690f103bf19cba64879c218b102b726",
-                "reference": "13b8485a8690f103bf19cba64879c218b102b726",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/e2bcbcd43e67ee6101d321d5de916251d2870ca8",
+                "reference": "e2bcbcd43e67ee6101d321d5de916251d2870ca8",
                 "shasum": ""
             },
             "require": {
@@ -732,7 +732,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2019-11-20T06:59:06+00:00"
+            "time": "2019-12-16T16:30:25+00:00"
         },
         {
             "name": "nikic/fast-route",
@@ -1425,16 +1425,16 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v5.0.1",
+            "version": "v5.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "e86df1b0f1672362ecf96023faf2c42241c41330"
+                "reference": "3ae6fad7a3dc2d99a023f9360184628fc44acbb3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/e86df1b0f1672362ecf96023faf2c42241c41330",
-                "reference": "e86df1b0f1672362ecf96023faf2c42241c41330",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/3ae6fad7a3dc2d99a023f9360184628fc44acbb3",
+                "reference": "3ae6fad7a3dc2d99a023f9360184628fc44acbb3",
                 "shasum": ""
             },
             "require": {
@@ -1498,7 +1498,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2019-11-18T17:27:11+00:00"
+            "time": "2019-12-12T13:03:32+00:00"
         },
         {
             "name": "symfony/translation-contracts",
