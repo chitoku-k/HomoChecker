@@ -93,18 +93,17 @@ nginx + PHP-FPM + MySQL + Redis で構成されています。
 $ bin/init
 ```
 
-webpack のモード、ポート番号、サブネット/ゲートウェイを指定する場合は環境変数を変更します（任意）。
-変更しない場合は適宜 NAT を構成してください。以下はデフォルト値です。
+webpack のモード、ポート番号を指定する場合は環境変数を変更します（任意）。
 
 ```sh
 $ export HOMOCHECKER_ENV=production
 $ export HOMOCHECKER_PORT=4545
+```
 
-$ export HOMOCHECKER_SUBNET4=10.45.45.0/24
-$ export HOMOCHECKER_GATEWAY4=10.45.45.1
+IPv6 接続を有効にするためには、あらかじめサブネットを指定してネットワークを作成しておく必要があります。
 
-$ export HOMOCHECKER_SUBNET6=fd00:4545::/48
-$ export HOMOCHECKER_GATEWAY6=fd00:4545::1
+```sh
+$ docker network create --attachable --ipv6 --subnet=fd00:4545::/48 homochecker_ipv6
 ```
 
 次のコマンドでコンテナーを起動します。
