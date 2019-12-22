@@ -8,6 +8,7 @@ services:
       - .:/var/www/html
     networks:
       - default
+      - ipv6
 
   build:
     image: node:13.3
@@ -52,13 +53,4 @@ volumes:
     driver: local
 
 networks:
-  default:
-    driver: bridge
-    enable_ipv6: true
-    ipam:
-      driver: default
-      config:
-        - subnet: "${HOMOCHECKER_SUBNET6-fd00:4545::/48}"
-          gateway: "${HOMOCHECKER_GATEWAY6-fd00:4545::1}"
-        - subnet: "${HOMOCHECKER_SUBNET4-10.45.45.0/24}"
-          gateway: "${HOMOCHECKER_GATEWAY4-10.45.45.1}"
+  ipv6:
