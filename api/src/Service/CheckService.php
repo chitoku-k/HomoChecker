@@ -147,7 +147,7 @@ class CheckService implements CheckServiceContract
 
         return Pool::batch(
             $this->client,
-            array_map(fn($item) => fn() => $this->createStatusAsync(new Homo($item), $callback), $users),
+            array_map(fn ($item) => fn () => $this->createStatusAsync(new Homo($item), $callback), $users),
             [
                 'concurrency' => 4,
             ],

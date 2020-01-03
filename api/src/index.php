@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Facade;
 require __DIR__ . '/../vendor/autoload.php';
 
 $container = new Container();
-$container->singleton('settings', fn() => require __DIR__ . '/config.php');
+$container->singleton('settings', fn () => require __DIR__ . '/config.php');
 
 (new HomoProvider($container))->register();
 
