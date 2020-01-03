@@ -30,7 +30,7 @@
         }
     },
     "scripts": {
-        "test": "php -dzend_extension=xdebug.so $(which phpunit)",
+        "test": "phpdbg -qrr $(which phpunit)",
         "coveralls": "coveralls",
         "fix": "php-cs-fixer fix",
         "post-install-cmd": "[ \"$COMPOSER_DEV_MODE\" = 1 ] && cghooks add --ignore-lock",
