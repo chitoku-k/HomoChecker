@@ -41,6 +41,6 @@ class BadgeAction
         }
 
         $result = $this->check->execute();
-        return count(array_filter($result, fn(Status $item) => strcasecmp($item->getStatus(), $status) === 0));
+        return count(array_filter($result, fn (Status $item) => strcasecmp($item->getStatus(), $status) === 0));
     }
 }
