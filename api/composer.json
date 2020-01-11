@@ -8,7 +8,7 @@
         "illuminate/redis": "^6.10",
         "illuminate/support": "^6.8",
         "slim/http": "^1.0",
-        "slim/psr7": "^0.5.0 || ^0.6",
+        "slim/psr7": "^1.0.0",
         "slim/slim": "^4.4",
         "true/punycode": "~2.0"
     },
