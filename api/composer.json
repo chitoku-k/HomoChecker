@@ -5,7 +5,7 @@
         "illuminate/config": "^6.10",
         "illuminate/container": "^6.10",
         "illuminate/database": "^6.10",
-        "illuminate/redis": "^6.10",
+        "illuminate/redis": "^6.11",
         "illuminate/support": "^6.10",
         "slim/http": "^1.0",
         "slim/psr7": "^1.0.0",
