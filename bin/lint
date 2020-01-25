@@ -7,6 +7,6 @@ export COMPOSE_FILE=docker-compose.test.yml
 # Install reviewdog
 mkdir -p ~/.bin
 curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | bash -s -- -b ~/.bin
-export PATH="~/.bin:$PATH"
+export PATH=~/.bin:$PATH
 
 docker-compose run --rm build npm run lint --silent -- --no-color | reviewdog -f=eslint -reporter=github-pr-check
