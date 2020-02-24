@@ -30,6 +30,7 @@
                     </span>
                     <span class={
                         connection: true,
+                        success: status !== "ERROR",
                         secure: homo.secure,
                         insecure: !homo.secure,
                     }>
@@ -42,6 +43,7 @@
                     </span>
                     <span if={ ip } class={
                         connection: true,
+                        success: status !== "ERROR",
                         ipv4: ip.includes("."),
                         ipv6: ip.includes(":"),
                     } title={ ip }>
@@ -130,6 +132,8 @@
                         align-items: center;
                         font-size: 12px;
                         user-select: none;
+                        color: #666;
+                        border-color: #666;
 
                         .fa {
                             font-family: FontAwesome, Atlan;
@@ -150,14 +154,26 @@
                             &:first-child {
                                 margin-left: 0;
                             }
+
+                            &.success {
+                                &.insecure, &.ipv4 {
+                                    color: #ec971f;
+                                    border-color: #ec971f;
+                                }
+
+                                &.secure, &.ipv6 {
+                                    color: #449d44;
+                                    border-color: #449d44;
+                                }
+                            }
                         }
 
-                        .insecure, .ipv4, .contains {
+                        .contains {
                             color: #ec971f;
                             border-color: #ec971f;
                         }
 
-                        .secure, .ipv6, .ok {
+                        .ok {
                             color: #449d44;
                             border-color: #449d44;
                         }
