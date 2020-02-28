@@ -6,7 +6,7 @@
         "illuminate/container": "^6.16",
         "illuminate/database": "^6.16",
         "illuminate/redis": "^6.16",
-        "illuminate/support": "^6.16",
+        "illuminate/support": "^6.17",
         "slim/http": "^1.0",
         "slim/psr7": "^1.0.0",
         "slim/slim": "^4.4",
