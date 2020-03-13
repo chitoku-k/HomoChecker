@@ -455,7 +455,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v7.1.0",
+            "version": "v7.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -560,16 +560,16 @@
         },
         {
             "name": "illuminate/redis",
-            "version": "v7.1.0",
+            "version": "v7.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/redis.git",
-                "reference": "360c63b2ae1f72f010a5d288ddb2fca9b894d3e8"
+                "reference": "f60bcc18c2dadaf573f81e4f1bf59f715e555bfa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/redis/zipball/360c63b2ae1f72f010a5d288ddb2fca9b894d3e8",
-                "reference": "360c63b2ae1f72f010a5d288ddb2fca9b894d3e8",
+                "url": "https://api.github.com/repos/illuminate/redis/zipball/f60bcc18c2dadaf573f81e4f1bf59f715e555bfa",
+                "reference": "f60bcc18c2dadaf573f81e4f1bf59f715e555bfa",
                 "shasum": ""
             },
             "require": {
@@ -578,7 +578,7 @@
                 "php": "^7.2.5"
             },
             "suggest": {
-                "ext-redis": "Required to use the phpredis connector (^4.0).",
+                "ext-redis": "Required to use the phpredis connector (^4.0|^5.0).",
                 "predis/predis": "Required to use the predis connector (^1.0)."
             },
             "type": "library",
@@ -604,7 +604,7 @@
             ],
             "description": "The Illuminate Redis package.",
             "homepage": "https://laravel.com",
-            "time": "2020-03-08T16:06:36+00:00"
+            "time": "2020-03-12T19:41:12+00:00"
         },
         {
             "name": "illuminate/support",
