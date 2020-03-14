@@ -20,12 +20,14 @@ class ListAction
 
     public function __invoke(Request $request, Response $response, array $args)
     {
+        $screen_name = $args['name'] ?? null;
+
         switch ($request->getQueryParams()['format'] ?? 'json') {
             case 'sql': {
                 return $response->withHeader('Content-Type', 'application/sql')->withBody($this->createSql($response));
             }
             default: {
-                $users = $this->homo->find();
+                $users = $this->homo->find($screen_name);
                 return $response->withJson($this->createArray($users), !empty($users) ? 200 : 404);
             }
         }

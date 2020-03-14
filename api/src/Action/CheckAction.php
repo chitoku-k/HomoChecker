@@ -9,6 +9,7 @@ use HomoChecker\Domain\Status;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\StreamInterface;
+use Slim\Http\Response as HttpResponse;
 
 class CheckAction
 {
@@ -40,6 +41,7 @@ class CheckAction
 
     protected function byJSON(Response $response, string $screen_name = null): Response
     {
+        /** @var HttpResponse $response */
         $result = $this->check->execute($screen_name);
         return $response->withJson($result, !empty($result) ? 200 : 404);
     }

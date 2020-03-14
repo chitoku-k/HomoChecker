@@ -44,6 +44,7 @@ class ListActionTest extends TestCase
         /** @var HomoService|MockInterface $homo */
         $homo = m::mock(HomoService::class);
         $homo->shouldReceive('find')
+             ->with(null)
              ->andReturn($this->users);
 
         $action = new ListAction($homo);

@@ -12,7 +12,6 @@ use Illuminate\Config\Repository;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
 use Slim\Factory\AppFactory;
-use Slim\Router;
 
 class HomoAppProvider extends ServiceProvider
 {
@@ -27,17 +26,16 @@ class HomoAppProvider extends ServiceProvider
         $this->app->singleton('app', function (Container $app) {
             AppFactory::setContainer($app);
             $slim = AppFactory::create();
-            $slim->get('/check/[{name}/]', CheckAction::class);
-            $slim->get('/list/[{name}/]', ListAction::class);
-            $slim->get('/badge/[{status}/]', BadgeAction::class);
+            $slim->addErrorMiddleware(true, true, true)->setDefaultErrorHandler($app->make('errorHandler'));
+            $slim->get('/check[/[{name}[/]]]', CheckAction::class);
+            $slim->get('/list[/[{name}[/]]]', ListAction::class);
+            $slim->get('/badge[/[{status}[/]]]', BadgeAction::class);
             return $slim;
         });
 
         $this->app->singleton('config', function (Container $app) {
             return new Repository($app->make('settings'));
         });
-
-        $this->app->singleton('router', Router::class);
     }
 
     public function provides()
@@ -48,7 +46,6 @@ class HomoAppProvider extends ServiceProvider
             BadgeAction::class,
             'app',
             'config',
-            'router',
         ];
     }
 }
