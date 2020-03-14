@@ -57,7 +57,6 @@ class HomoProvider extends ServiceProvider
             CacheServiceContract::class,
             CheckServiceContract::class,
             HomoServiceContract::class,
-            HomoRepositoryContract::class,
         ];
     }
 }

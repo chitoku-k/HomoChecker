@@ -26,6 +26,7 @@ class HomoAppProvider extends ServiceProvider
         $this->app->singleton('app', function (Container $app) {
             AppFactory::setContainer($app);
             $slim = AppFactory::create();
+            $slim->addErrorMiddleware(true, true, true)->setDefaultErrorHandler($app->make('errorHandler'));
             $slim->get('/check[/[{name}[/]]]', CheckAction::class);
             $slim->get('/list[/[{name}[/]]]', ListAction::class);
             $slim->get('/badge[/[{status}[/]]]', BadgeAction::class);
