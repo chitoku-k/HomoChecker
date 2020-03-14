@@ -21,9 +21,9 @@ class HomoHandlerProvider extends ServiceProvider
             return function (Request $request, Throwable $exception) use ($app): Response {
                 /** @var App $slim */
                 $slim = $app->make('app');
-                error_log((string) $exception);
 
                 if (!$exception instanceof HttpSpecializedException) {
+                    error_log((string) $exception);
                     $exception = new HttpInternalServerErrorException($request, $exception->getMessage());
                 }
 
