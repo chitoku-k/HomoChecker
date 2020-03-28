@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ebf82a5806e5f571f89f4aa63435dacb",
+    "content-hash": "6ad5bb98c3a0a8d4f80edfa2eaea99f9",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -499,16 +499,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v7.2.2",
+            "version": "v7.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "889c65acf257f7bf8f71d506a2d09e430c8400fb"
+                "reference": "00aa70f49bba961e823c2bc35fddc1a43432a876"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/889c65acf257f7bf8f71d506a2d09e430c8400fb",
-                "reference": "889c65acf257f7bf8f71d506a2d09e430c8400fb",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/00aa70f49bba961e823c2bc35fddc1a43432a876",
+                "reference": "00aa70f49bba961e823c2bc35fddc1a43432a876",
                 "shasum": ""
             },
             "require": {
@@ -521,11 +521,12 @@
             },
             "suggest": {
                 "doctrine/dbal": "Required to rename columns and drop SQLite columns (^2.6).",
-                "fzaninotto/faker": "Required to use the eloquent factory builder (^1.4).",
+                "fzaninotto/faker": "Required to use the eloquent factory builder (^1.9.1).",
                 "illuminate/console": "Required to use the database commands (^7.0).",
                 "illuminate/events": "Required to use the observers with Eloquent (^7.0).",
                 "illuminate/filesystem": "Required to use the migrations (^7.0).",
-                "illuminate/pagination": "Required to paginate the result set (^7.0)."
+                "illuminate/pagination": "Required to paginate the result set (^7.0).",
+                "symfony/finder": "Required to use Eloquent model factories (^5.0)."
             },
             "type": "library",
             "extra": {
@@ -556,7 +557,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2020-03-17T13:23:53+00:00"
+            "time": "2020-03-23T14:29:01+00:00"
         },
         {
             "name": "illuminate/redis",
@@ -1374,16 +1375,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v5.0.5",
+            "version": "v5.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "d29e2d36941de13600c399e393a60b8cfe59ac49"
+                "reference": "0085aec018950e1161bdf6bcb19fcb0828308cfc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/d29e2d36941de13600c399e393a60b8cfe59ac49",
-                "reference": "d29e2d36941de13600c399e393a60b8cfe59ac49",
+                "url": "https://api.github.com/repos/symfony/console/zipball/0085aec018950e1161bdf6bcb19fcb0828308cfc",
+                "reference": "0085aec018950e1161bdf6bcb19fcb0828308cfc",
                 "shasum": ""
             },
             "require": {
@@ -1446,7 +1447,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2020-02-24T15:05:31+00:00"
+            "time": "2020-03-16T13:02:39+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1509,16 +1510,16 @@
         },
         {
             "name": "symfony/polyfill-php73",
-            "version": "v1.14.0",
+            "version": "v1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php73.git",
-                "reference": "5e66a0fa1070bf46bec4bea7962d285108edd675"
+                "reference": "0f27e9f464ea3da33cbe7ca3bdf4eb66def9d0f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/5e66a0fa1070bf46bec4bea7962d285108edd675",
-                "reference": "5e66a0fa1070bf46bec4bea7962d285108edd675",
+                "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/0f27e9f464ea3da33cbe7ca3bdf4eb66def9d0f7",
+                "reference": "0f27e9f464ea3da33cbe7ca3bdf4eb66def9d0f7",
                 "shasum": ""
             },
             "require": {
@@ -1527,7 +1528,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.14-dev"
+                    "dev-master": "1.15-dev"
                 }
             },
             "autoload": {
@@ -1563,7 +1564,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2020-01-13T11:15:53+00:00"
+            "time": "2020-02-27T09:26:54+00:00"
         },
         {
             "name": "symfony/service-contracts",
