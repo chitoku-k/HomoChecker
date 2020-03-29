@@ -18,7 +18,7 @@ HomoChecker はホモ（[@mpyw](https://twitter.com/mpyw)）にリダイレク�
 
 ## ホモへの手引き
 
-[@java_shit](https://twitter.com/java_shit) にカミングアウトしてください。[@mpyw](https://twitter.com/mpyw) と関係があってもなくても構いません。
+[@java\_shit](https://twitter.com/java_shit) にカミングアウトしてください。[@mpyw](https://twitter.com/mpyw) と関係があってもなくても構いません。
 
 ### 設定方法
 
@@ -73,7 +73,6 @@ Web サーバーが静的コンテンツ配信のみの場合は HTML による�
     - `If the URL matches:` に `*homo.example.com/*` を指定します。
     - `Then the settings are:` に `Forwarding URL`、`301 - Permanent Redirect`、`https://twitter.com/mpyw` を指定します。
 
-
 ## 動作環境
 
 ### フロントエンド
@@ -82,10 +81,30 @@ Chrome、Firefox、Internet Explorer の最新版で動くのでたいていの�
 
 ### バックエンド
 
-Docker Compose のインストールが必要です。  
+開発環境の構築には Docker Compose のインストールが必要です。  
 nginx + PHP-FPM + MySQL + Redis で構成されています。
 
-## 実行するには
+本番環境の構築には Docker のインストールが必要です。  
+nginx + PHP-FPM で構成されており、以下の環境変数を使用して設定を行います。
+
+#### nginx
+
+```sh
+$ export HOMOCHECKER_API_HOST=api
+```
+
+#### PHP-FPM
+
+```sh
+$ export HOMOCHECKER_DB_HOST=database
+$ export HOMOCHECKER_DB_PORT=3306
+$ export HOMOCHECKER_DB_USERNAME=homo
+$ export HOMOCHECKER_DB_PASSWORD=homo
+$ export HOMOCHECKER_REDIS_HOST=redis
+$ export HOMOCHECKER_REDIS_PORT=6379
+```
+
+## 開発環境
 
 初回実行時のみコンテナーのビルド作業が必要です。
 
