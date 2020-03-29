@@ -10,18 +10,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Initialize
-        run: bin/init
+        run: |
+          docker-compose build
+          docker-compose run --rm api composer install
+          docker-compose run --rm build npm install
+        env:
+          COMPOSE_PROJECT_NAME: homochecker-test
+          COMPOSE_FILE: docker-compose.test.yml
       - name: Run tests
         run: bin/test
       - name: Run lints
         run: bin/lint
-      - name: Send coverage
-        run: docker-compose run --rm api vendor/bin/php-coveralls --root_dir=/var/www/html --verbose
-        env:
-          COMPOSE_PROJECT_NAME: homochecker-test
-          COMPOSE_FILE: docker-compose.test.yml
-          COVERALLS_RUN_LOCALLY: 1
-          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   build:
     name: Build Images
     runs-on: ubuntu-latest
