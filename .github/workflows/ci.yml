@@ -3,18 +3,6 @@ on:
   - push
 
 jobs:
-  lints:
-    name: Lints
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: Run lints
-        uses: reviewdog/action-eslint@v1
-        working-directory: client
-        with:
-          github_token: ${{ secrets.github_token }}
-          reporter: github-pr-check
   tests:
     name: Tests
     runs-on: ubuntu-latest
@@ -25,6 +13,13 @@ jobs:
         run: |
           bin/init
           bin/test
+      - name: Run lints
+        uses: reviewdog/action-eslint@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-check
+        env:
+          GITHUB_WORKSPACE: ${{ env.GITHUB_WORKSPACE }}/client
       - name: Send coverage
         run: |
           docker-compose run --rm api vendor/bin/php-coveralls --root_dir=/var/www/html
