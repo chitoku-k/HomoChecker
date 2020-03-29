@@ -2,7 +2,7 @@ FROM node:13.10-alpine as build
 ENV HOMOCHECKER_API_HOST homochecker-api
 WORKDIR /usr/src
 COPY . /usr/src
-COPY fonts/* /usr/src/dist
+COPY fonts/* /usr/src/dist/
 
 RUN npm install && \
     npm run build && \
