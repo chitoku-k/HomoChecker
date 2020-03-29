@@ -9,9 +9,6 @@ services:
     command: composer test
     volumes:
       - .:/var/www/html
-    environment:
-      - TRAVIS
-      - TRAVIS_JOB_ID
 
   build:
     image: node:13.3

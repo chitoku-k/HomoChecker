@@ -18,9 +18,4 @@
         <log type="coverage-clover" target="build/logs/clover.xml" />
         <log type="coverage-html" target="build/coverage" />
     </logging>
-    <php>
-        <const name="DB_DSN" value="mysql:dbname=homo;host=database;charset=utf8" />
-        <const name="DB_USER" value="homo" />
-        <const name="DB_PASS" value="homo" />
-    </php>
 </phpunit>

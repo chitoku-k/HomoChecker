@@ -1,0 +1,50 @@
+name: CI Workflow
+on:
+  - push
+
+jobs:
+  api-test:
+    name: API Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Run tests
+        run: |
+          docker-compose build
+          docker-compose run --rm api composer install
+          docker-compose run --rm api
+        env:
+          COMPOSE_PROJECT_NAME: homochecker-test
+          COMPOSE_FILE: docker-compose.test.yml
+  client-test:
+    name: Client Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Run lints
+        run: |
+          docker-compose run --rm build npm install
+          docker-compose run --rm build npm run lint
+        env:
+          COMPOSE_PROJECT_NAME: homochecker-test
+          COMPOSE_FILE: docker-compose.test.yml
+  api-build:
+    name: API Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Build api
+        run: docker build .
+        working-directory: api
+  client-build:
+    name: Client Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Build client
+        run: docker build .
+        working-directory: client
