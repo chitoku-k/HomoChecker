@@ -14,7 +14,6 @@ jobs:
       - name: Unpackage fonts
         run: |
           gpg --quiet --batch --yes --decrypt --passphrase=${{ secrets.FONTS_PASSPHRASE }} --output client/fonts.tar.gz client/fonts.tar.gz.gpg
-          mkdir client/fonts
           cd client/fonts
           tar xf ../fonts.tar.gz
       - name: Build api
