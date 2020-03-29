@@ -166,7 +166,7 @@ $ bin/test
 ```
 
 [workflow-link]:        https://github.com/chitoku-k/HomoChecker/actions?query=branch:master                                           
-[workflow-badge]:       https://img.shields.io/github/workflow/status/chitoku-k/HomoChecker/CI%20Workflow/master.svg?style=flat-square [travis-link]:          https://travis-ci.org/chitoku-k/HomoChecker
+[workflow-badge]:       https://img.shields.io/github/workflow/status/chitoku-k/HomoChecker/CI%20Workflow/master.svg?style=flat-square
 [coveralls-link]:       https://coveralls.io/github/chitoku-k/HomoChecker
 [coveralls-badge]:      https://img.shields.io/coveralls/chitoku-k/HomoChecker/master.svg?style=flat-square
 [climate-link]:         https://codeclimate.com/github/chitoku-k/HomoChecker/maintainability
