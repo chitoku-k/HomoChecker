@@ -2,7 +2,6 @@ HomoChecker
 ===========
 
 [![][workflow-badge]][workflow-link]
-[![][coveralls-badge]][coveralls-link]
 [![][climate-badge]][climate-link]
 [![][homo-badge]][homo-link]
 
@@ -165,11 +164,9 @@ $ curl -s 'https://homo.chitoku.jp:4545/list/?format=sql' |
 $ bin/test
 ```
 
-[workflow-link]:        https://github.com/chitoku-k/HomoChecker/actions?query=branch:master                                           
-[workflow-badge]:       https://img.shields.io/github/workflow/status/chitoku-k/HomoChecker/CI%20Workflow/master.svg?style=flat-square
-[coveralls-link]:       https://coveralls.io/github/chitoku-k/HomoChecker
-[coveralls-badge]:      https://img.shields.io/coveralls/chitoku-k/HomoChecker/master.svg?style=flat-square
-[climate-link]:         https://codeclimate.com/github/chitoku-k/HomoChecker/maintainability
-[climate-badge]:        https://img.shields.io/codeclimate/maintainability/chitoku-k/HomoChecker.svg?style=flat-square
-[homo-link]:            https://homo.chitoku.jp:4545
-[homo-badge]:           https://homo.chitoku.jp:4545/badge/?style=flat-square
+[workflow-link]:    https://github.com/chitoku-k/HomoChecker/actions?query=branch:master                                           
+[workflow-badge]:   https://img.shields.io/github/workflow/status/chitoku-k/HomoChecker/CI%20Workflow/master.svg?style=flat-square
+[climate-link]:     https://codeclimate.com/github/chitoku-k/HomoChecker/maintainability
+[climate-badge]:    https://img.shields.io/codeclimate/maintainability/chitoku-k/HomoChecker.svg?style=flat-square
+[homo-link]:        https://homo.chitoku.jp:4545
+[homo-badge]:       https://homo.chitoku.jp:4545/badge/?style=flat-square
