@@ -16,7 +16,7 @@ jobs:
       - name: Run lints
         run: bin/lint
       - name: Send coverage
-        run: docker-compose run --rm api vendor/bin/php-coveralls --root_dir=/var/www/html
+        run: docker-compose run --rm api vendor/bin/php-coveralls --root_dir=/var/www/html --verbose
         env:
           COMPOSE_PROJECT_NAME: homochecker-test
           COMPOSE_FILE: docker-compose.test.yml
