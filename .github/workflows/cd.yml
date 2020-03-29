@@ -11,6 +11,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Unpackage fonts
+        run: |
+          gpg --quiet --batch --yes --decrypt --passphrase=${{ secrets.FONTS_PASSPHRASE }} --output client/fonts.tar.gz client/fonts.tar.gz.gpg
+          mkdir client/fonts
+          cd client/fonts
+          tar xf ../fonts.tar.gz
       - name: Build api
         run: docker build . -t docker.chitoku.jp/chitoku-k/homochecker/api
         working-directory: api
