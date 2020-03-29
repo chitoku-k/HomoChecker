@@ -7,10 +7,12 @@
         "illuminate/database": "^7.3",
         "illuminate/redis": "^7.3",
         "illuminate/support": "^7.3",
+        "phpoption/phpoption": "^1.7",
         "slim/http": "^1.0",
         "slim/psr7": "^1.0.0",
         "slim/slim": "^4.4",
-        "true/punycode": "~2.0"
+        "true/punycode": "~2.0",
+        "vlucas/phpdotenv": "^4.1"
     },
     "require-dev": {
         "brainmaestro/composer-git-hooks": "^2.8",
@@ -33,8 +35,8 @@
         "test": "phpdbg -qrr $(which phpunit)",
         "coveralls": "coveralls",
         "fix": "php-cs-fixer fix",
-        "post-install-cmd": "[ \"$COMPOSER_DEV_MODE\" = 1 ] && cghooks add --ignore-lock",
-        "post-update-cmd": "[ \"$COMPOSER_DEV_MODE\" = 1 ] && cghooks update"
+        "post-install-cmd": "[ \"$COMPOSER_DEV_MODE\" = 0 ] || cghooks add --ignore-lock",
+        "post-update-cmd": "[ \"$COMPOSER_DEV_MODE\" = 0 ] || cghooks update"
     },
     "extra": {
         "hooks": {

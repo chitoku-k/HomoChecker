@@ -1,15 +1,6 @@
 <?php
 declare(strict_types=1);
 
-const DB_HOST = 'database';
-const DB_PORT = 3306;
-const DB_DATABASE = 'homo';
-const DB_USER = 'homo';
-const DB_PASS = 'homo';
-
-const REDIS_HOST = 'redis';
-const REDIS_PORT = 6379;
-
 return [
     'cache.default' => 'default',
     'cache.stores.default' => [
@@ -19,18 +10,18 @@ return [
     'database.connections' => [
         'default' => [
             'driver' => 'mysql',
-            'host' => DB_HOST,
-            'port' => DB_PORT,
-            'database' => DB_DATABASE,
-            'username' => DB_USER,
-            'password' => DB_PASS,
+            'host' => env('HOMOCHECKER_DB_HOST'),
+            'port' => env('HOMOCHECKER_DB_PORT', 3306),
+            'database' => env('HOMOCHECKER_DB_DATABASE', 'homo'),
+            'username' => env('HOMOCHECKER_DB_USERNAME'),
+            'password' => env('HOMOCHECKER_DB_PASSWORD'),
             'charset' => 'utf8',
         ],
     ],
     'database.redis' => [
         'default' => [
-            'host' => REDIS_HOST,
-            'port' => REDIS_PORT,
+            'host' => env('HOMOCHECKER_REDIS_HOST'),
+            'port' => (int) env('HOMOCHECKER_REDIS_PORT', 6379),
         ],
     ],
     'client' => [

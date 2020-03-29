@@ -2,7 +2,9 @@ version: "2.1"
 
 services:
   api:
-    build: ./api
+    build:
+      context: ./api
+      dockerfile: Dockerfile.development
     working_dir: /var/www/html/api
     command: composer test
     volumes:
@@ -17,12 +19,3 @@ services:
     command: npm run build
     volumes:
       - ./client:/usr/src/app
-
-  database:
-    image: mysql:8.0
-    command: [--character-set-server=utf8, --default-authentication-plugin=mysql_native_password]
-    environment:
-      MYSQL_DATABASE: homo
-      MYSQL_USER: homo
-      MYSQL_PASSWORD: homo
-      MYSQL_ROOT_PASSWORD: homo
