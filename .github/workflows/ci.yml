@@ -3,7 +3,7 @@ on:
   - push
 
 jobs:
-  api:
+  api-test:
     name: API Tests
     runs-on: ubuntu-latest
     steps:
@@ -17,8 +17,8 @@ jobs:
         env:
           COMPOSE_PROJECT_NAME: homochecker-test
           COMPOSE_FILE: docker-compose.test.yml
-  client:
-    name: Client Lints
+  client-test:
+    name: Client Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -30,8 +30,8 @@ jobs:
         env:
           COMPOSE_PROJECT_NAME: homochecker-test
           COMPOSE_FILE: docker-compose.test.yml
-  images:
-    name: Build Images
+  api-build:
+    name: API Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -39,6 +39,12 @@ jobs:
       - name: Build api
         run: docker build .
         working-directory: api
+  client-build:
+    name: Client Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
       - name: Build client
         run: docker build .
         working-directory: client
