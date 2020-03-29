@@ -1,0 +1,52 @@
+name: CD Workflow
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  api-build:
+    name: API Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Build api
+        run: docker build . -t docker.chitoku.jp/chitoku-k/homochecker/api
+        working-directory: api
+  client-build:
+    name: Client Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Build client
+        run: docker build . -t docker.chitoku.jp/chitoku-k/homochecker/web
+        working-directory: client
+  push:
+    name: Push to Docker Registry
+    runs-on: ubuntu-latest
+    needs:
+      - api-build
+      - client-build
+    steps:
+      - name: Log in
+        uses: azure/docker-login@v1
+        with:
+          login-server: docker.chitoku.jp
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Push
+        run: |
+          docker push docker.chitoku.jp/chitoku-k/homochecker/api
+          docker push docker.chitoku.jp/chitoku-k/homochecker/web
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v1
+      - name: Context
+        uses: azure/k8s-set-context@v1
+        with:
+          method: service-account
+          k8s-url: https://k8s.chitoku.jp
+          k8s-secret: ${{ secrets.K8S_SECRET }}
+      - name: Rollout restart
+        run: kubectl rollout restart deployment/homochecker
