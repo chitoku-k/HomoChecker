@@ -18,3 +18,5 @@ client/node_modules
 ### Project Files ###
 api/build
 client/dist
+client/fonts/*
+!client/fonts/.gitkeep
