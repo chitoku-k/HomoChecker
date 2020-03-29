@@ -3,8 +3,8 @@ on:
   - push
 
 jobs:
-  tests:
-    name: Tests
+  api:
+    name: API Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -13,14 +13,23 @@ jobs:
         run: |
           docker-compose build
           docker-compose run --rm api composer install
-          docker-compose run --rm build npm install
+          docker-compose run --rm api
         env:
           COMPOSE_PROJECT_NAME: homochecker-test
           COMPOSE_FILE: docker-compose.test.yml
-      - name: Run tests
-        run: bin/test
-      - name: Run lints
-        run: bin/lint
+  client:
+    name: Client Lints
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Initialize
+        run: |
+          docker-compose run --rm build npm install
+          docker-compose run --rm build npm run lint
+        env:
+          COMPOSE_PROJECT_NAME: homochecker-test
+          COMPOSE_FILE: docker-compose.test.yml
   build:
     name: Build Images
     runs-on: ubuntu-latest

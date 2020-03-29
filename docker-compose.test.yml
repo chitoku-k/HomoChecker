@@ -9,9 +9,6 @@ services:
     command: composer test
     volumes:
       - .:/var/www/html
-    environment:
-      - COVERALLS_RUN_LOCALLY
-      - COVERALLS_REPO_TOKEN
 
   build:
     image: node:13.3
