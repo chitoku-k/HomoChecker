@@ -10,8 +10,7 @@ services:
     volumes:
       - .:/var/www/html
     environment:
-      - TRAVIS
-      - TRAVIS_JOB_ID
+      - COVERALLS_REPO_TOKEN
 
   build:
     image: node:13.3

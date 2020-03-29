@@ -9,23 +9,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Initialize
+        run: bin/init
       - name: Run tests
-        run: |
-          bin/init
-          bin/test
+        run: bin/test
       - name: Run lints
-        uses: reviewdog/action-eslint@v1
-        with:
-          github_token: ${{ secrets.github_token }}
-          reporter: github-pr-check
-        env:
-          GITHUB_WORKSPACE: ${{ env.GITHUB_WORKSPACE }}/client
+        run: bin/lint
       - name: Send coverage
-        run: |
-          docker-compose run --rm api vendor/bin/php-coveralls --root_dir=/var/www/html
+        run: docker-compose run --rm api vendor/bin/php-coveralls --root_dir=/var/www/html
         env:
           COMPOSE_PROJECT_NAME: homochecker-test
           COMPOSE_FILE: docker-compose.test.yml
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   build:
     name: Build Images
     runs-on: ubuntu-latest
