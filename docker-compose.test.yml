@@ -2,7 +2,9 @@ version: "2.1"
 
 services:
   api:
-    build: ./api
+    build:
+      context: ./api
+      dockerfile: Dockerfile.development
     working_dir: /var/www/html/api
     command: composer test
     volumes:

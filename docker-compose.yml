@@ -2,8 +2,15 @@ version: "2.1"
 
 services:
   api:
-    build: ./api
+    build:
+      context: ./api
+      dockerfile: Dockerfile.development
     working_dir: /var/www/html/api
+    environment:
+      HOMOCHECKER_DB_HOST: database
+      HOMOCHECKER_DB_USERNAME: homo
+      HOMOCHECKER_DB_PASSWORD: homo
+      HOMOCHECKER_REDIS_HOST: redis
     volumes:
       - .:/var/www/html
     networks:
