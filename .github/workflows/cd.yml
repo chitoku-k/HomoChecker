@@ -36,4 +36,4 @@ jobs:
           k8s-url: https://k8s.chitoku.jp
           k8s-secret: ${{ secrets.K8S_SECRET }}
       - name: Rollout restart
-        run: kubectl rollout restart deployment/homochecker --insecure-skip-tls-verify=true
+        run: kubectl rollout restart deployment/homochecker-app --insecure-skip-tls-verify=true
