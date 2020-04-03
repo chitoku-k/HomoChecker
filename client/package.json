@@ -37,7 +37,7 @@
     "event-source-polyfill": "1.0.12",
     "file-loader": "^6.0.0",
     "font-awesome": "^4.7.0",
-    "html-webpack-plugin": "^4.0.2",
+    "html-webpack-plugin": "^4.0.4",
     "node-sass": "^4.13.1",
     "riot": "^3.13.2",
     "riot-compiler": "^3.6.0",
