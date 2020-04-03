@@ -1,6 +1,7 @@
 <homo-content>
     <div class="wrapper">
         <homo-item each={ opts.items } data-duration={ status === "ERROR" ? Infinity : duration } />
+        <homo-error if={ error } />
     </div>
     <style type="text/scss">
         homo-content {
@@ -56,6 +57,7 @@
 
         const source = new EventSource("/check/");
         source.addEventListener("initialize", event => {
+            opts.initialized = true;
             opts.progress.max = JSON.parse(event.data).count;
             opts.progress.trigger("update");
         });
@@ -67,6 +69,11 @@
             opts.progress.trigger("update");
         });
         source.addEventListener("error", event => {
+            if (!opts.initialized) {
+                this.error = new Error("Service Unavailable");
+                this.update();
+                return;
+            }
             if (opts.progress.max === opts.items.length) {
                 source.close();
                 return;
