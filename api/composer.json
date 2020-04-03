@@ -3,7 +3,7 @@
         "guzzlehttp/guzzle": "^6.5",
         "illuminate/cache": "^7.3",
         "illuminate/config": "^7.3",
-        "illuminate/container": "^7.3",
+        "illuminate/container": "^7.4",
         "illuminate/database": "^7.3",
         "illuminate/redis": "^7.3",
         "illuminate/support": "^7.3",
