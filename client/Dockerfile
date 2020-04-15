@@ -1,4 +1,4 @@
-FROM node:13.12.0-alpine as build
+FROM node:13.13.0-alpine as build
 ENV HOMOCHECKER_API_HOST homochecker-api
 WORKDIR /usr/src
 COPY . /usr/src
