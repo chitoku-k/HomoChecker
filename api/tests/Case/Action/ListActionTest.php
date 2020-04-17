@@ -52,7 +52,7 @@ class ListActionTest extends TestCase
 
         $response = $action($request, new HttpResponse(new Response(), new StreamFactory()), []);
         $actual = $response->getHeaderLine('Content-Type');
-        $this->assertRegExp('|^application/json|', $actual);
+        $this->assertMatchesRegularExpression('|^application/json|', $actual);
 
         $actual = (string) $response->getBody();
         $users = [
@@ -101,7 +101,7 @@ class ListActionTest extends TestCase
 
         $response = $action($request, new HttpResponse(new Response(), new StreamFactory()), []);
         $actual = $response->getHeaderLine('Content-Type');
-        $this->assertRegExp('|^application/sql|', $actual);
+        $this->assertMatchesRegularExpression('|^application/sql|', $actual);
 
         $actual = (string) $response->getBody();
         $this->assertEquals($sql, $actual);

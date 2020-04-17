@@ -100,7 +100,7 @@ class CheckActionTest extends TestCase
         $action = new CheckAction($check, $homo, $stream);
         $response = $action($request, new HttpResponse(new Response(), new StreamFactory()), []);
         $actual = $response->getHeaderLine('Content-Type');
-        $this->assertRegExp('|^application/json|', $actual);
+        $this->assertMatchesRegularExpression('|^application/json|', $actual);
 
         $actual = (string) $response->getBody();
         $expected = json_encode([

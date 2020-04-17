@@ -86,8 +86,8 @@ class BadgeActionTest extends TestCase
 
         $response = $action($request, new HttpResponse(new Response(), new StreamFactory()), []);
         $actual = $response->getHeaderLine('Location');
-        $this->assertRegExp('|^https?://img\.shields\.io/badge/.*\.svg|', $actual);
-        $this->assertRegExp('/3(?: |%20|\+)registered/', $actual);
+        $this->assertMatchesRegularExpression('|^https?://img\.shields\.io/badge/.*\.svg|', $actual);
+        $this->assertMatchesRegularExpression('/3(?: |%20|\+)registered/', $actual);
     }
 
     public function testStatusCount(): void
@@ -105,8 +105,8 @@ class BadgeActionTest extends TestCase
 
         $response = $action($request, new HttpResponse(new Response(), new StreamFactory()), ['status' => 'OK']);
         $actual = $response->getHeaderLine('Location');
-        $this->assertRegExp('|^https?://img\.shields\.io/badge/.*\.svg|', $actual);
-        $this->assertRegExp('/2(?: |%20|\+)ok/', $actual);
+        $this->assertMatchesRegularExpression('|^https?://img\.shields\.io/badge/.*\.svg|', $actual);
+        $this->assertMatchesRegularExpression('/2(?: |%20|\+)ok/', $actual);
     }
 
     public function testParams(): void
@@ -124,7 +124,7 @@ class BadgeActionTest extends TestCase
 
         $response = $action($request, new HttpResponse(new Response(), new StreamFactory()), []);
         $actual = $response->getHeaderLine('Location');
-        $this->assertRegExp('|^https?://img\.shields\.io/badge/.*\.svg|', $actual);
+        $this->assertMatchesRegularExpression('|^https?://img\.shields\.io/badge/.*\.svg|', $actual);
         $this->assertStringEndsWith('?style=flat-square', $actual);
     }
 }
