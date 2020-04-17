@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "64125dfb5a05f151cb44ba33393cf536",
+    "content-hash": "83faf6c5d5ee6319a117f995aafe8859",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -609,16 +609,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v7.5.2",
+            "version": "v7.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "b8d805437c075a44bf53737763c3b979932445c7"
+                "reference": "b6f64a42377f86b293960e0b7f6920ae59e578d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/b8d805437c075a44bf53737763c3b979932445c7",
-                "reference": "b8d805437c075a44bf53737763c3b979932445c7",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/b6f64a42377f86b293960e0b7f6920ae59e578d2",
+                "reference": "b6f64a42377f86b293960e0b7f6920ae59e578d2",
                 "shasum": ""
             },
             "require": {
@@ -667,7 +667,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2020-04-08T13:18:06+00:00"
+            "time": "2020-04-15T19:48:40+00:00"
         },
         {
             "name": "nesbot/carbon",
