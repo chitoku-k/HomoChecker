@@ -22,7 +22,7 @@
             </li>
         </ul>
     </aside>
-    <style type="text/scss">
+    <style type="text/dart-sass">
         homo-error {
             color: #111;
 

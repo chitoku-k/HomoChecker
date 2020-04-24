@@ -18,16 +18,16 @@ services:
       - ipv6
 
   build:
-    image: node:13.3
+    image: node:14.0
     working_dir: /usr/src/app
     command: npm run watch
     environment:
-      HOMOCHECKER_ENV: "${HOMOCHECKER_ENV-production}"
+      HOMOCHECKER_ENV: "${HOMOCHECKER_ENV-development}"
     volumes:
       - ./client:/usr/src/app
 
   client:
-    image: nginx:1.16
+    image: nginx:1.17
     ports:
       - "${HOMOCHECKER_PORT-4545}:80"
     volumes:

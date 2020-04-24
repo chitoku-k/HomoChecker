@@ -6,7 +6,7 @@
             <li><a href="https://github.com/chitoku-k/HomoChecker" target="_blank">SOURCE CODE</a>
         </ul>
     </nav>
-    <style type="text/scss">
+    <style type="text/dart-sass">
         homo-header {
             position: fixed;
             top: 0;

@@ -6,6 +6,7 @@ import "core-js/features/set";
 import "core-js/features/string/includes";
 
 import riot from "riot";
+import "riot-hot-reload";
 import "font-awesome/scss/font-awesome.scss";
 import "./styles.scss";
 import "./tags/homo-anime";

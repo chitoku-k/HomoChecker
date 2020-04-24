@@ -1,6 +1,6 @@
 <homo-progress>
     <div class={ body: true, done: opts.progress.done } style="width: { opts.progress.length / opts.progress.max * 100 }%"></div>
-    <style type="text/scss">
+    <style type="text/dart-sass">
         homo-progress {
             display: block;
             position: fixed;
