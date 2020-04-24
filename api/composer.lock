@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c7dc0f2ea6cc8424e5deecfe0fb210c3",
+    "content-hash": "f7c3f2d9ed410fb11a659e2b0788b02c",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -455,7 +455,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v7.6.2",
+            "version": "v7.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -561,7 +561,7 @@
         },
         {
             "name": "illuminate/redis",
-            "version": "v7.6.2",
+            "version": "v7.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/redis.git",
