@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "09801fecb1a6f8ca26fd3341888e5e41",
+    "content-hash": "f8719caa759b839cd4e994d37114076e",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -316,7 +316,7 @@
         },
         {
             "name": "illuminate/cache",
-            "version": "v7.7.1",
+            "version": "v7.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/cache.git",
