@@ -40,6 +40,7 @@
     "html-webpack-plugin": "^4.2.0",
     "riot": "^3.13.2",
     "riot-compiler": "^3.6.0",
+    "riot-hot-reload": "^1.0.0",
     "riot-tag-loader": "^2.1.0",
     "rxjs": "^6.5.5",
     "sass": "^1.26.5",
