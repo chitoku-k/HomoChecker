@@ -45,7 +45,7 @@
     "rxjs": "^6.5.5",
     "sass-loader": "^8.0.2",
     "shufflejs": "^5.2.3",
-    "style-loader": "^1.1.4",
+    "style-loader": "^1.2.0",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
   }
