@@ -57,7 +57,7 @@
             </div>
         </div>
     </div>
-    <style type="text/scss">
+    <style type="text/dart-sass">
         homo-item {
             color: #111;
             width: 100%;

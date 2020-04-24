@@ -3,7 +3,7 @@
         <homo-item each={ opts.items } data-duration={ status === "ERROR" ? Infinity : duration } />
         <homo-error if={ error } />
     </div>
-    <style type="text/scss">
+    <style type="text/dart-sass">
         homo-content {
             display: block;
             padding: 20px 0;

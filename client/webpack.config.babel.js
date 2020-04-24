@@ -1,11 +1,15 @@
-const webpack = require("webpack");
+const riot = require("riot-compiler");
+const sass = require("sass");
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+riot.parsers.css["dart-sass"] = (tagName, css) => sass.renderSync({ data: css }).css + "";
+
 module.exports = {
     mode: process.env.HOMOCHECKER_ENV || "production",
+    devtool: process.env.HOMOCHECKER_ENV === "development" ? "eval-cheap-module-source-map" : "",
     entry: "./src/app.js",
     output: {
         path: path.join(__dirname, "/dist"),
@@ -38,7 +42,14 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(js|tag)$/,
+                test: /\.js$/,
+                enforce: "post",
+                use: [
+                    { loader: "babel-loader" },
+                ],
+            },
+            {
+                test: /\.tag$/,
                 enforce: "post",
                 exclude: /node_modules/,
                 use: [
