@@ -1,9 +1,11 @@
 const riot = require("riot-compiler");
 const sass = require("sass");
 const path = require("path");
+const { DefinePlugin } = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const GitRevisionPlugin = require("git-revision-webpack-plugin");
 
 riot.parsers.css["dart-sass"] = (tagName, css) => sass.renderSync({ data: css }).css + "";
 
@@ -72,6 +74,7 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin({
+            cleanStaleWebpackAssets: process.env.HOMOCHECKER_ENV === "production",
             cleanOnceBeforeBuildPatterns: [
                 "**/*.{html,js,ico}",
             ],
@@ -82,6 +85,9 @@ module.exports = {
                 to: path.join(__dirname, "/dist"),
             },
         ]),
+        new DefinePlugin({
+            COMMIT_HASH: JSON.stringify((new GitRevisionPlugin()).commithash()),
+        }),
         new HtmlWebpackPlugin({
             title: "まっぴー (@mpyw) 被害者の会",
             filename: "index.html",

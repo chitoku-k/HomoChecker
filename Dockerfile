@@ -2,13 +2,17 @@ FROM node:14.0.0-alpine as build
 ENV HOMOCHECKER_API_HOST homochecker-api
 WORKDIR /usr/src
 COPY . /usr/src
-COPY fonts/* /usr/src/dist/
+COPY client/fonts/* /usr/src/client/dist/
 
-RUN npm install && \
+RUN apk add --no-cache --virtual build-dependencies \
+        git && \
+    cd client && \
+    npm install && \
     npm run build && \
+    apk del --no-cache build-dependencies && \
     rm -rf node_modules
 
 FROM nginx:1.17.10-alpine
-COPY conf /etc/nginx/conf.d
-COPY --from=build /usr/src/dist /var/www/html
+COPY client/conf /etc/nginx/conf.d
+COPY --from=build /usr/src/client/dist /var/www/html
 CMD ["/bin/ash", "-c", "sed -i s/api:/$HOMOCHECKER_API_HOST:/ /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]

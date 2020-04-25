@@ -3,7 +3,7 @@
         <ul>
             <li class="active"><a><homo-anime></homo-anime> HOMO CHECKER</a>
             <li><a href="https://twitter.com/intent/tweet?text=%40java_shit+%E4%BF%BA%E3%82%82%E3%83%9B%E3%83%A2%E3%81%A0%EF%BC%81URL%3A+http%3A%2F%2F" target="_blank">REGISTER</a>
-            <li><a href="https://github.com/chitoku-k/HomoChecker" target="_blank">SOURCE CODE</a>
+            <li><a href={ "https://github.com/chitoku-k/HomoChecker/tree/" + COMMIT_HASH } target="_blank">SOURCE CODE</a>
         </ul>
     </nav>
     <style type="text/dart-sass">
@@ -72,4 +72,7 @@
             }
         }
     </style>
+    <script type="text/es6">
+        this.COMMIT_HASH = COMMIT_HASH;
+    </script>
 </homo-header>

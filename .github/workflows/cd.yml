@@ -21,7 +21,6 @@ jobs:
         working-directory: api
       - name: Build client
         run: docker build . -t docker.chitoku.jp/chitoku-k/homochecker/web
-        working-directory: client
       - name: Log into Docker Registry
         uses: azure/docker-login@v1
         with:
