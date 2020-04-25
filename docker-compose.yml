@@ -19,12 +19,12 @@ services:
 
   build:
     image: node:14.0
-    working_dir: /usr/src/app
+    working_dir: /usr/src/app/client
     command: npm run watch
     environment:
       HOMOCHECKER_ENV: "${HOMOCHECKER_ENV-development}"
     volumes:
-      - ./client:/usr/src/app
+      - .:/usr/src/app
 
   client:
     image: nginx:1.17

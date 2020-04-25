@@ -12,7 +12,7 @@ services:
 
   build:
     image: node:14.0
-    working_dir: /usr/src/app
+    working_dir: /usr/src/app/client
     command: npm run build
     volumes:
-      - ./client:/usr/src/app
+      - .:/usr/src/app

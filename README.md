@@ -165,8 +165,8 @@ $ bin/test
 ```
 
 [workflow-link]:    https://github.com/chitoku-k/HomoChecker/actions?query=branch:master                                           
-[workflow-badge]:   https://img.shields.io/github/workflow/status/chitoku-k/HomoChecker/CI%20Workflow/master.svg?style=flat-square
+[workflow-badge]:   https://img.shields.io/github/workflow/status/chitoku-k/HomoChecker/CI%20Workflow/master.svg?style=flat-square&logo=github
 [climate-link]:     https://codeclimate.com/github/chitoku-k/HomoChecker/maintainability
-[climate-badge]:    https://img.shields.io/codeclimate/maintainability/chitoku-k/HomoChecker.svg?style=flat-square
+[climate-badge]:    https://img.shields.io/codeclimate/maintainability/chitoku-k/HomoChecker.svg?style=flat-square&logo=code-climate
 [homo-link]:        https://homo.chitoku.jp:4545
 [homo-badge]:       https://homo.chitoku.jp:4545/badge/?style=flat-square
