@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b7a65e39201fbee4afa41a744a7efabf",
+    "content-hash": "e6c73b254d7c21790e905a20d53d746a",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -499,16 +499,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v7.8.1",
+            "version": "v7.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "f6612491482825e39fa21259bb630b1955728697"
+                "reference": "6500fe6053bfa27f5bd0edb646090cc7709588ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/f6612491482825e39fa21259bb630b1955728697",
-                "reference": "f6612491482825e39fa21259bb630b1955728697",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/6500fe6053bfa27f5bd0edb646090cc7709588ee",
+                "reference": "6500fe6053bfa27f5bd0edb646090cc7709588ee",
                 "shasum": ""
             },
             "require": {
@@ -557,7 +557,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2020-04-24T16:48:51+00:00"
+            "time": "2020-04-27T15:34:33+00:00"
         },
         {
             "name": "illuminate/redis",
@@ -1478,7 +1478,7 @@
         },
         {
             "name": "symfony/console",
-            "version": "v5.0.7",
+            "version": "v5.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
