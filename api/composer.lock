@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1494aac7a17504af0a3ebee4af9a3d6f",
+    "content-hash": "7cc440a4a48f3149b9111c9f02a0dd1c",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -1312,16 +1312,16 @@
         },
         {
             "name": "slim/psr7",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim-Psr7.git",
-                "reference": "7ca5b5d96687b7c563238715cc80b12675d8b895"
+                "reference": "3c76899e707910779f13d7af95fde12310b0a5ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim-Psr7/zipball/7ca5b5d96687b7c563238715cc80b12675d8b895",
-                "reference": "7ca5b5d96687b7c563238715cc80b12675d8b895",
+                "url": "https://api.github.com/repos/slimphp/Slim-Psr7/zipball/3c76899e707910779f13d7af95fde12310b0a5ae",
+                "reference": "3c76899e707910779f13d7af95fde12310b0a5ae",
                 "shasum": ""
             },
             "require": {
@@ -1382,7 +1382,7 @@
                 "psr-7",
                 "psr7"
             ],
-            "time": "2020-01-04T23:05:43+00:00"
+            "time": "2020-05-01T14:24:20+00:00"
         },
         {
             "name": "slim/slim",
