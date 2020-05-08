@@ -1,7 +1,7 @@
 {
     "require": {
         "guzzlehttp/guzzle": "^6.5",
-        "illuminate/cache": "^7.9",
+        "illuminate/cache": "^7.10",
         "illuminate/config": "^7.9",
         "illuminate/container": "^7.10",
         "illuminate/database": "^7.10",
