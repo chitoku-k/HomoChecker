@@ -79,12 +79,14 @@ module.exports = {
                 "**/*.{html,js,ico}",
             ],
         }),
-        new CopyWebpackPlugin([
-            {
-                from: path.join(__dirname, "/src/resources/favicon.ico"),
-                to: path.join(__dirname, "/dist"),
-            },
-        ]),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: path.join(__dirname, "/src/resources/favicon.ico"),
+                    to: path.join(__dirname, "/dist"),
+                },
+            ],
+        }),
         new DefinePlugin({
             COMMIT_HASH: JSON.stringify((new GitRevisionPlugin()).commithash()),
         }),
