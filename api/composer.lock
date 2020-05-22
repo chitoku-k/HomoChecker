@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bafdd1aea5c3d4de94cde252784b6ee6",
+    "content-hash": "f16f1728f8ee83f2f14289a9ee37709c",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -421,16 +421,16 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v7.11.0",
+            "version": "v7.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
-                "reference": "78a134ab5bcf6e6e50321dfb0d602b698898698d"
+                "reference": "84ae2fba28994b1f6d0d01c0e646e9484f00d727"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/container/zipball/78a134ab5bcf6e6e50321dfb0d602b698898698d",
-                "reference": "78a134ab5bcf6e6e50321dfb0d602b698898698d",
+                "url": "https://api.github.com/repos/illuminate/container/zipball/84ae2fba28994b1f6d0d01c0e646e9484f00d727",
+                "reference": "84ae2fba28994b1f6d0d01c0e646e9484f00d727",
                 "shasum": ""
             },
             "require": {
@@ -461,7 +461,7 @@
             ],
             "description": "The Illuminate Container package.",
             "homepage": "https://laravel.com",
-            "time": "2020-04-23T13:57:26+00:00"
+            "time": "2020-05-13T14:09:17+00:00"
         },
         {
             "name": "illuminate/contracts",
