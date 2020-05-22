@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5adb6a6100a2bc7bbe41608ba6e84519",
+    "content-hash": "a07512c9ce9fe0fa9f07dd0bc2b6f55d",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -509,16 +509,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v7.11.0",
+            "version": "v7.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "21ed76da138a943b1e3e94decf070699f7f4020c"
+                "reference": "6a13b726fc1680e76546e9c8d8976201f1301f17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/21ed76da138a943b1e3e94decf070699f7f4020c",
-                "reference": "21ed76da138a943b1e3e94decf070699f7f4020c",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/6a13b726fc1680e76546e9c8d8976201f1301f17",
+                "reference": "6a13b726fc1680e76546e9c8d8976201f1301f17",
                 "shasum": ""
             },
             "require": {
@@ -567,7 +567,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2020-05-12T09:27:51+00:00"
+            "time": "2020-05-16T23:24:58+00:00"
         },
         {
             "name": "illuminate/redis",
