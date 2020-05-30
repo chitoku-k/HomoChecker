@@ -27,37 +27,24 @@ class TwitterProfileServiceTest extends TestCase
         $url = 'https://pbs.twimg.com/profile_images/114514/example_bigger.jpg';
         $handler = HandlerStack::create(new MockHandler([
             new Response(200, [], "
-                <!doctype html>
-                <html>
-                    <head>
-                        <title>This contains icon URL</title>
-                    </head>
-                    <body>
-                        <img src='{$url}'>
-                    </body>
-                </html>
+                {
+                    \"id\": 114514,
+                    \"id_str\": \"114514\",
+                    \"name\": \"test\",
+                    \"screen_name\": \"test\",
+                    \"profile_image_url_https\": \"{$url}\"
+                }
             "),
-            new Response(200, [], '
-                <!doctype html>
-                <html>
-                    <head>
-                        <title>This does not contain icon URL</title>
-                    </head>
-                    <body>
-                    </body>
-                </html>
+            new Response(404, [], '
+                {
+                    "errors": [
+                        {
+                            "code": 50,
+                            "message": "User not found."
+                        }
+                    ]
+                }
             '),
-            new Response(404, [], "
-                <!doctype html>
-                <html>
-                    <head>
-                        <title>This returns 404</title>
-                    </head>
-                    <body>
-                        <img src='{$url}'>
-                    </body>
-                </html>
-            "),
             new RequestException('Connection problem occurred', new Request('GET', '')),
         ]));
 
@@ -75,7 +62,6 @@ class TwitterProfileServiceTest extends TestCase
         $profile = new TwitterProfileService($client, $cache);
 
         $this->assertEquals($url, $profile->getIconAsync($screen_name)->wait());
-        $this->assertEquals($profile->getDefaultUrl(), $profile->getIconAsync($screen_name)->wait());
         $this->assertEquals($profile->getDefaultUrl(), $profile->getIconAsync($screen_name)->wait());
         $this->assertEquals($profile->getDefaultUrl(), $profile->getIconAsync($screen_name)->wait());
     }

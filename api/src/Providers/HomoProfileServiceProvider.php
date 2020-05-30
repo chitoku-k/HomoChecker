@@ -3,6 +3,10 @@ declare(strict_types=1);
 
 namespace HomoChecker\Providers;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Subscriber\Oauth\Oauth1;
+use HomoChecker\Contracts\Service\CacheService;
 use HomoChecker\Service\Profile\MastodonProfileService;
 use HomoChecker\Service\Profile\TwitterProfileService;
 use Illuminate\Contracts\Container\Container;
@@ -12,6 +16,27 @@ class HomoProfileServiceProvider extends ServiceProvider
 {
     public function register()
     {
+        $this->app->singleton('twitter.client', function (Container $app) {
+            $handler = HandlerStack::create();
+            $handler->push($app->make('twitter.oauth'));
+
+            $config = $app->make('config')->get('twitter.client');
+            $config['handler'] = $handler;
+
+            return new Client($config);
+        });
+
+        $this->app->singleton('twitter.oauth', function (Container $app) {
+            return new Oauth1($app->make('config')->get('twitter.oauth'));
+        });
+
+        $this->app->singleton(TwitterProfileService::class, function (Container $app) {
+            return new TwitterProfileService(
+                $app->make('twitter.client'),
+                $app->make(CacheService::class),
+            );
+        });
+
         $this->app->singleton('profiles', function (Container $app) {
             return collect([
                 'mastodon' => $app->make(MastodonProfileService::class),
@@ -24,6 +49,8 @@ class HomoProfileServiceProvider extends ServiceProvider
     {
         return [
             'profiles',
+            'twitter.client',
+            'twitter.oauth',
         ];
     }
 }

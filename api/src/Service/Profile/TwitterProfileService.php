@@ -34,14 +34,10 @@ class TwitterProfileService implements ProfileServiceContract
             }
 
             try {
-                $target = "https://twitter.com/intent/user?screen_name={$screen_name}";
+                $target = "users/show.json?screen_name={$screen_name}";
                 $response = yield $this->client->getAsync($target);
-                $body = (string) $response->getBody();
-
-                if (!preg_match('/src=(?:\"|\')(https:\/\/[ap]bs\.twimg\.com\/[^\"\']+)/', $body, $matches)) {
-                    throw new \RuntimeException('No URL found');
-                }
-                [, $url] = $matches;
+                $user = json_decode((string) $response->getBody());
+                $url = str_replace('_normal', '_200x200', $user->profile_image_url_https);
 
                 $this->cache->saveIconTwitter($screen_name, $url, static::CACHE_EXPIRE);
                 return yield $url;
