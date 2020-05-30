@@ -31,6 +31,16 @@ return [
             'User-Agent' => 'Homozilla/5.0 (Checker/1.14.514; homOSeX 8.10)',
         ],
     ],
+    'twitter.client' => [
+        'base_uri' => 'https://api.twitter.com/1.1/',
+        'auth' => 'oauth',
+    ],
+    'twitter.oauth' => [
+        'consumer_key' => env('HOMOCHECKER_TWITTER_CONSUMER_KEY'),
+        'consumer_secret' => env('HOMOCHECKER_TWITTER_CONSUMER_SECRET'),
+        'token' => env('HOMOCHECKER_TWITTER_TOKEN'),
+        'token_secret' => env('HOMOCHECKER_TWITTER_TOKEN_SECRET'),
+    ],
     'httpVersion' => '1.1',
     'responseChunkSize' => 4096,
     'routerCacheFile' => false,
