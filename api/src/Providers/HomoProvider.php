@@ -25,9 +25,10 @@ class HomoProvider extends ServiceProvider
     {
         $this->app->bind(StreamInterface::class, NonBufferedBody::class);
 
-        $this->app->singleton(ClientInterface::class, function (Container $app) {
-            return new Client($app->make('config')->get('client'));
-        });
+        $this->app->singleton(ClientInterface::class, Client::class);
+        $this->app->when(ClientInterface::class)
+            ->needs('$config')
+            ->give(fn (Container $app) => $app->make('config')->get('client'));
 
         $this->app->singleton(CacheServiceContract::class, CacheService::class);
 
