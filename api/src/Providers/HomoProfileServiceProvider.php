@@ -26,20 +26,19 @@ class HomoProfileServiceProvider extends ServiceProvider
             return new Client($config);
         });
 
-        $this->app->singleton('twitter.oauth', function (Container $app) {
-            return new Oauth1($app->make('config')->get('twitter.oauth'));
-        });
+        $this->app->singleton('twitter.oauth', Oauth1::class);
+        $this->app->when(Oauth1::class)
+            ->needs('$config')
+            ->give(fn (Container $app) => $app->make('config')->get('twitter.oauth'));
 
         $this->app->when(TwitterProfileService::class)
             ->needs(ClientInterface::class)
             ->give('twitter.client');
 
-        $this->app->singleton('profiles', function (Container $app) {
-            return collect([
-                'mastodon' => $app->make(MastodonProfileService::class),
-                'twitter' => $app->make(TwitterProfileService::class),
-            ]);
-        });
+        $this->app->singleton('profiles', fn (Container $app) => collect([
+            'mastodon' => $app->make(MastodonProfileService::class),
+            'twitter' => $app->make(TwitterProfileService::class),
+        ]));
     }
 
     public function provides()

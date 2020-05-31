@@ -33,7 +33,10 @@ class HomoAppProvider extends ServiceProvider
             return $slim;
         });
 
-        $this->app->singleton('config', fn (Container $app) => new Repository($app->make('settings')));
+        $this->app->singleton('config', Repository::class);
+        $this->app->when(Repository::class)
+            ->needs('$items')
+            ->give(fn (Container $app) => $app->make('settings'));
     }
 
     public function provides()
