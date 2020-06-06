@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ce165732974f4ba8bdaf0d0c7f1e9e64",
+    "content-hash": "4478288d9c06562e8431bbbe32dcaa22",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -516,7 +516,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v7.13.0",
+            "version": "v7.14.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -622,16 +622,16 @@
         },
         {
             "name": "illuminate/redis",
-            "version": "v7.13.0",
+            "version": "v7.14.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/redis.git",
-                "reference": "c12203f463a1b3e1ff2603092309d52245b6ae87"
+                "reference": "d02f8cc49071c627e5450281f3bc84f346f090dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/redis/zipball/c12203f463a1b3e1ff2603092309d52245b6ae87",
-                "reference": "c12203f463a1b3e1ff2603092309d52245b6ae87",
+                "url": "https://api.github.com/repos/illuminate/redis/zipball/d02f8cc49071c627e5450281f3bc84f346f090dd",
+                "reference": "d02f8cc49071c627e5450281f3bc84f346f090dd",
                 "shasum": ""
             },
             "require": {
@@ -666,7 +666,7 @@
             ],
             "description": "The Illuminate Redis package.",
             "homepage": "https://laravel.com",
-            "time": "2020-05-25T13:05:17+00:00"
+            "time": "2020-05-29T09:44:42+00:00"
         },
         {
             "name": "illuminate/support",
