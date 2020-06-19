@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bc2e730e1712a58cfc2d64e120eaefbf",
+    "content-hash": "407acbd828f7f04345bf66746ba3f8f3",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -577,16 +577,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v7.15.0",
+            "version": "v7.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "e443bd9f70adece48127da707fc9513dd16157d8"
+                "reference": "c5cdd38622c3eb4cd8ba7a33678487bfb653e83c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/e443bd9f70adece48127da707fc9513dd16157d8",
-                "reference": "e443bd9f70adece48127da707fc9513dd16157d8",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/c5cdd38622c3eb4cd8ba7a33678487bfb653e83c",
+                "reference": "c5cdd38622c3eb4cd8ba7a33678487bfb653e83c",
                 "shasum": ""
             },
             "require": {
@@ -635,7 +635,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2020-06-09T14:00:25+00:00"
+            "time": "2020-06-11T15:21:11+00:00"
         },
         {
             "name": "illuminate/redis",
@@ -1588,16 +1588,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v5.1.1",
+            "version": "v5.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "0f0a271bc9b7d02a053d36fcdcb12662e2a8096e"
+                "reference": "34ac555a3627e324b660e318daa07572e1140123"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/0f0a271bc9b7d02a053d36fcdcb12662e2a8096e",
-                "reference": "0f0a271bc9b7d02a053d36fcdcb12662e2a8096e",
+                "url": "https://api.github.com/repos/symfony/console/zipball/34ac555a3627e324b660e318daa07572e1140123",
+                "reference": "34ac555a3627e324b660e318daa07572e1140123",
                 "shasum": ""
             },
             "require": {
@@ -1677,7 +1677,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-06-07T19:47:44+00:00"
+            "time": "2020-06-15T12:59:21+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -2342,7 +2342,7 @@
         },
         {
             "name": "symfony/string",
-            "version": "v5.1.1",
+            "version": "v5.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
