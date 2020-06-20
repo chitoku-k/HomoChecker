@@ -6,8 +6,8 @@ namespace HomoChecker\Action;
 use HomoChecker\Contracts\Service\CheckService;
 use HomoChecker\Contracts\Service\HomoService;
 use HomoChecker\Domain\Status;
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Http\Response;
+use Slim\Http\ServerRequest as Request;
 
 class BadgeAction
 {

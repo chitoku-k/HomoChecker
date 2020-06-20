@@ -10,6 +10,7 @@ use Mockery as m;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 use Slim\Http\Response as HttpResponse;
+use Slim\Http\ServerRequest as HttpRequest;
 use Slim\Psr7\Factory\RequestFactory;
 use Slim\Psr7\Factory\StreamFactory;
 use Slim\Psr7\Response;
@@ -50,7 +51,7 @@ class ListActionTest extends TestCase
         $action = new ListAction($homo);
         $request = (new RequestFactory())->createRequest('GET', '/list');
 
-        $response = $action($request, new HttpResponse(new Response(), new StreamFactory()), []);
+        $response = $action(new HttpRequest($request), new HttpResponse(new Response(), new StreamFactory()), []);
         $actual = $response->getHeaderLine('Content-Type');
         $this->assertMatchesRegularExpression('|^application/json|', $actual);
 
@@ -99,7 +100,7 @@ class ListActionTest extends TestCase
         $action = new ListAction($homo);
         $request = (new RequestFactory())->createRequest('GET', '/list?format=sql');
 
-        $response = $action($request, new HttpResponse(new Response(), new StreamFactory()), []);
+        $response = $action(new HttpRequest($request), new HttpResponse(new Response(), new StreamFactory()), []);
         $actual = $response->getHeaderLine('Content-Type');
         $this->assertMatchesRegularExpression('|^application/sql|', $actual);
 

@@ -13,6 +13,7 @@ use Mockery as m;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 use Slim\Http\Response as HttpResponse;
+use Slim\Http\ServerRequest as HttpRequest;
 use Slim\Psr7\Factory\RequestFactory;
 use Slim\Psr7\Factory\StreamFactory;
 use Slim\Psr7\Response;
@@ -84,7 +85,7 @@ class BadgeActionTest extends TestCase
         $action = new BadgeAction($check, $homo);
         $request = (new RequestFactory())->createRequest('GET', '/badge');
 
-        $response = $action($request, new HttpResponse(new Response(), new StreamFactory()), []);
+        $response = $action(new HttpRequest($request), new HttpResponse(new Response(), new StreamFactory()), []);
         $actual = $response->getHeaderLine('Location');
         $this->assertMatchesRegularExpression('|^https?://img\.shields\.io/badge/.*\.svg|', $actual);
         $this->assertMatchesRegularExpression('/3(?: |%20|\+)registered/', $actual);
@@ -103,7 +104,7 @@ class BadgeActionTest extends TestCase
         $action = new BadgeAction($check, $homo);
         $request = (new RequestFactory())->createRequest('GET', '/badge');
 
-        $response = $action($request, new HttpResponse(new Response(), new StreamFactory()), ['status' => 'OK']);
+        $response = $action(new HttpRequest($request), new HttpResponse(new Response(), new StreamFactory()), ['status' => 'OK']);
         $actual = $response->getHeaderLine('Location');
         $this->assertMatchesRegularExpression('|^https?://img\.shields\.io/badge/.*\.svg|', $actual);
         $this->assertMatchesRegularExpression('/2(?: |%20|\+)ok/', $actual);
@@ -122,7 +123,7 @@ class BadgeActionTest extends TestCase
         $action = new BadgeAction($check, $homo);
         $request = (new RequestFactory())->createRequest('GET', '/badge?style=flat-square');
 
-        $response = $action($request, new HttpResponse(new Response(), new StreamFactory()), []);
+        $response = $action(new HttpRequest($request), new HttpResponse(new Response(), new StreamFactory()), []);
         $actual = $response->getHeaderLine('Location');
         $this->assertMatchesRegularExpression('|^https?://img\.shields\.io/badge/.*\.svg|', $actual);
         $this->assertStringEndsWith('?style=flat-square', $actual);

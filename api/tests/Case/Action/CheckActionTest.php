@@ -14,6 +14,7 @@ use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\StreamInterface;
 use Slim\Http\Response as HttpResponse;
+use Slim\Http\ServerRequest as HttpRequest;
 use Slim\Psr7\Factory\RequestFactory;
 use Slim\Psr7\Factory\StreamFactory;
 use Slim\Psr7\Response;
@@ -98,7 +99,7 @@ class CheckActionTest extends TestCase
         $stream = m::mock(StreamInterface::class);
 
         $action = new CheckAction($check, $homo, $stream);
-        $response = $action($request, new HttpResponse(new Response(), new StreamFactory()), []);
+        $response = $action(new HttpRequest($request), new HttpResponse(new Response(), new StreamFactory()), []);
         $actual = $response->getHeaderLine('Content-Type');
         $this->assertMatchesRegularExpression('|^application/json|', $actual);
 
@@ -206,7 +207,7 @@ class CheckActionTest extends TestCase
               });
 
         $action = new CheckAction($check, $homo, $stream);
-        $action($request, new HttpResponse(new Response(), new StreamFactory()), []);
+        $action(new HttpRequest($request), new HttpResponse(new Response(), new StreamFactory()), []);
     }
 
     public function formatProvider()
