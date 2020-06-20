@@ -5,6 +5,7 @@ namespace HomoChecker\Providers;
 
 use HomoChecker\Action\BadgeAction;
 use HomoChecker\Action\CheckAction;
+use HomoChecker\Action\HealthCheckAction;
 use HomoChecker\Action\ListAction;
 use HomoChecker\Contracts\Repository\HomoRepository as HomoRepositoryContract;
 use HomoChecker\Repository\HomoRepository;
@@ -17,6 +18,7 @@ class HomoAppProvider extends ServiceProvider
 {
     public function register()
     {
+        $this->app->singleton(HealthCheckAction::class);
         $this->app->singleton(CheckAction::class);
         $this->app->singleton(ListAction::class);
         $this->app->singleton(BadgeAction::class);
@@ -27,6 +29,7 @@ class HomoAppProvider extends ServiceProvider
             AppFactory::setContainer($app);
             $slim = AppFactory::create();
             $slim->addErrorMiddleware(true, true, true)->setDefaultErrorHandler($app->make('errorHandler'));
+            $slim->get('/healthz', HealthCheckAction::class);
             $slim->get('/check[/[{name}[/]]]', CheckAction::class);
             $slim->get('/list[/[{name}[/]]]', ListAction::class);
             $slim->get('/badge[/[{status}[/]]]', BadgeAction::class);
@@ -42,6 +45,7 @@ class HomoAppProvider extends ServiceProvider
     public function provides()
     {
         return [
+            HealthCheckAction::class,
             CheckAction::class,
             ListAction::class,
             BadgeAction::class,
