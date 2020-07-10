@@ -1,4 +1,4 @@
-FROM php:7.4.8-fpm-alpine
+FROM php:7.4.8-fpm
 
 RUN apt-get -y update && \
     apt-get -y install git unzip
