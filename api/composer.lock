@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "64d94e5dc4ee5cad2de459add1656bf7",
+    "content-hash": "96be009c3764e5b7a17828506b06c03a",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -577,16 +577,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v7.18.0",
+            "version": "v7.19.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "efdc2c5c7cca19ca57a1aa50b16d543dd0f8f051"
+                "reference": "db056f6bf1cddc0323ab47579abb6f761fc6fac4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/efdc2c5c7cca19ca57a1aa50b16d543dd0f8f051",
-                "reference": "efdc2c5c7cca19ca57a1aa50b16d543dd0f8f051",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/db056f6bf1cddc0323ab47579abb6f761fc6fac4",
+                "reference": "db056f6bf1cddc0323ab47579abb6f761fc6fac4",
                 "shasum": ""
             },
             "require": {
@@ -635,7 +635,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2020-06-30T13:26:08+00:00"
+            "time": "2020-07-10T13:30:22+00:00"
         },
         {
             "name": "illuminate/redis",
@@ -2304,16 +2304,16 @@
         },
         {
             "name": "symfony/service-contracts",
-            "version": "v2.1.2",
+            "version": "v2.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/service-contracts.git",
-                "reference": "66a8f0957a3ca54e4f724e49028ab19d75a8918b"
+                "reference": "58c7475e5457c5492c26cc740cc0ad7464be9442"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/66a8f0957a3ca54e4f724e49028ab19d75a8918b",
-                "reference": "66a8f0957a3ca54e4f724e49028ab19d75a8918b",
+                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/58c7475e5457c5492c26cc740cc0ad7464be9442",
+                "reference": "58c7475e5457c5492c26cc740cc0ad7464be9442",
                 "shasum": ""
             },
             "require": {
@@ -2327,6 +2327,10 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "2.1-dev"
+                },
+                "thanks": {
+                    "name": "symfony/contracts",
+                    "url": "https://github.com/symfony/contracts"
                 }
             },
             "autoload": {
@@ -2372,7 +2376,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-05-20T17:43:50+00:00"
+            "time": "2020-07-06T13:23:11+00:00"
         },
         {
             "name": "symfony/string",
