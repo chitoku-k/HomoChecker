@@ -7,6 +7,7 @@ COPY client/fonts/* /usr/src/client/dist/
 RUN apk add --no-cache --virtual build-dependencies \
         git && \
     cd client && \
+    touch fonts/atlan.{svg,ttf,woff} && \
     npm install && \
     npm run build && \
     apk del --no-cache build-dependencies && \

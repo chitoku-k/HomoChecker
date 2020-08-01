@@ -23,7 +23,7 @@ module.exports = {
                 test: /\.scss$/,
                 use: [
                     { loader: "style-loader" },
-                    { loader: "css-loader?-url" },
+                    { loader: "css-loader" },
                     { loader: "sass-loader" },
                 ],
             },
@@ -56,6 +56,12 @@ module.exports = {
                 exclude: /node_modules/,
                 use: [
                     { loader: "babel-loader" },
+                ],
+            },
+            {
+                test: /\.(woff2?|ttf|eot|svg)(\?v=[\d.]+|\?[\s\S]+)?$/,
+                use: [
+                    { loader: "file-loader?name=[name].[ext]" },
                 ],
             },
         ],

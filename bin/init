@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+touch client/fonts/atlan.{svg,ttf,woff}
+
 docker-compose build
 docker-compose run --rm api composer install
 docker-compose run --rm build npm install
