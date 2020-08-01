@@ -2,12 +2,11 @@ FROM node:14.7.0-alpine as build
 ENV HOMOCHECKER_API_HOST homochecker-api
 WORKDIR /usr/src
 COPY . /usr/src
-COPY client/fonts/* /usr/src/client/dist/
 
 RUN apk add --no-cache --virtual build-dependencies \
         git && \
     cd client && \
-    touch fonts/atlan.{svg,ttf,woff} && \
+    touch fonts/atlan.svg fonts/atlan.ttf fonts/atlan.woff && \
     npm install && \
     npm run build && \
     apk del --no-cache build-dependencies && \
