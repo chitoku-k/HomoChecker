@@ -12,7 +12,7 @@ body {
 }
 
 @font-face {
-    $font-path: '';
+    $font-path: '../fonts';
     font-family: Atlan;
     font-weight: 600;
     src: url($font-path + '/atlan.woff') format('woff'),
