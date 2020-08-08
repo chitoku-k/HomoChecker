@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f5dcac8e0df17f0b7fc8eb71f874ed32",
+    "content-hash": "0eca93a7ffa6115f99b7f35a7b7c2551",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -687,16 +687,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v7.22.4",
+            "version": "v7.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "138d67507a697c3fff06710af2df7452d0fafb09"
+                "reference": "a73fabea211d9b26b76c64a925db4b660d150a88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/138d67507a697c3fff06710af2df7452d0fafb09",
-                "reference": "138d67507a697c3fff06710af2df7452d0fafb09",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/a73fabea211d9b26b76c64a925db4b660d150a88",
+                "reference": "a73fabea211d9b26b76c64a925db4b660d150a88",
                 "shasum": ""
             },
             "require": {
@@ -745,20 +745,20 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2020-07-27T17:48:28+00:00"
+            "time": "2020-08-06T13:54:33+00:00"
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.37.0",
+            "version": "2.38.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "1f61206de973d67f36ce50f041c792ddac663c3e"
+                "reference": "d8f6a6a91d1eb9304527b040500f61923e97674b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/1f61206de973d67f36ce50f041c792ddac663c3e",
-                "reference": "1f61206de973d67f36ce50f041c792ddac663c3e",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/d8f6a6a91d1eb9304527b040500f61923e97674b",
+                "reference": "d8f6a6a91d1eb9304527b040500f61923e97674b",
                 "shasum": ""
             },
             "require": {
@@ -773,7 +773,7 @@
                 "kylekatarnls/multi-tester": "^2.0",
                 "phpmd/phpmd": "^2.8",
                 "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "^0.12.30",
+                "phpstan/phpstan": "^0.12.35",
                 "phpunit/phpunit": "^7.5 || ^8.0",
                 "squizlabs/php_codesniffer": "^3.4"
             },
@@ -834,7 +834,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-07-28T06:04:54+00:00"
+            "time": "2020-08-04T19:12:46+00:00"
         },
         {
             "name": "nikic/fast-route",
