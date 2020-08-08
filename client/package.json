@@ -45,7 +45,7 @@
     "riot-tag-loader": "^2.1.0",
     "rxjs": "^6.6.2",
     "sass": "^1.26.10",
-    "sass-loader": "^9.0.2",
+    "sass-loader": "^9.0.3",
     "shufflejs": "^5.2.3",
     "style-loader": "^1.2.1",
     "webpack": "^4.44.1",
