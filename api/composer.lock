@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "57b4ddc2daf75bc19aa2e397c831ee59",
+    "content-hash": "a1dc5e9358829d023c5bf31f1db3dae6",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -533,7 +533,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v7.24.0",
+            "version": "v7.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -577,16 +577,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v7.24.0",
+            "version": "v7.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "8cbfd89fbda0bf969339a87816660c140473800e"
+                "reference": "899d35f5d00ea02f3eb370a0d764720b08f06cdf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/8cbfd89fbda0bf969339a87816660c140473800e",
-                "reference": "8cbfd89fbda0bf969339a87816660c140473800e",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/899d35f5d00ea02f3eb370a0d764720b08f06cdf",
+                "reference": "899d35f5d00ea02f3eb370a0d764720b08f06cdf",
                 "shasum": ""
             },
             "require": {
@@ -635,7 +635,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2020-08-07T15:06:43+00:00"
+            "time": "2020-08-10T15:08:36+00:00"
         },
         {
             "name": "illuminate/redis",
