@@ -22,7 +22,7 @@ services:
       - ipv6
 
   build:
-    image: node:14.0
+    image: node:14.9
     working_dir: /usr/src/app/client
     command: npm run watch
     environment:
@@ -31,7 +31,7 @@ services:
       - .:/usr/src/app
 
   client:
-    image: nginx:1.17
+    image: nginx:1.19
     ports:
       - "${HOMOCHECKER_PORT-4545}:80"
     volumes:
@@ -55,7 +55,7 @@ services:
       - default
 
   redis:
-    image: redis:5.0
+    image: redis:6.0
     networks:
       - default
 

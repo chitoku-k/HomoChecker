@@ -11,7 +11,7 @@ services:
       - .:/var/www/html
 
   build:
-    image: node:14.0
+    image: node:14.9
     working_dir: /usr/src/app/client
     command: npm run build
     volumes:
