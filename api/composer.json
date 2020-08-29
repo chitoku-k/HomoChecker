@@ -7,7 +7,7 @@
         "illuminate/container": "^7.25",
         "illuminate/database": "^7.25",
         "illuminate/redis": "^7.26",
-        "illuminate/support": "^7.25",
+        "illuminate/support": "^7.26",
         "phpoption/phpoption": "^1.7",
         "slim/http": "^1.0",
         "slim/psr7": "^1.2.0",
