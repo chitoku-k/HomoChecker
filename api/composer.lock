@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "884ba36a40db348ec78946735f9e4fbb",
+    "content-hash": "2fa6ce83340170eb3e69a59a4e0983bc",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -639,16 +639,16 @@
         },
         {
             "name": "illuminate/redis",
-            "version": "v7.25.0",
+            "version": "v7.26.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/redis.git",
-                "reference": "46cb31d7b45e278f6edd1ef96d057c37d86dabd7"
+                "reference": "ac4ad47ac414664ee75385f9bb09df62dd97637c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/redis/zipball/46cb31d7b45e278f6edd1ef96d057c37d86dabd7",
-                "reference": "46cb31d7b45e278f6edd1ef96d057c37d86dabd7",
+                "url": "https://api.github.com/repos/illuminate/redis/zipball/ac4ad47ac414664ee75385f9bb09df62dd97637c",
+                "reference": "ac4ad47ac414664ee75385f9bb09df62dd97637c",
                 "shasum": ""
             },
             "require": {
@@ -658,7 +658,7 @@
             },
             "suggest": {
                 "ext-redis": "Required to use the phpredis connector (^4.0|^5.0).",
-                "predis/predis": "Required to use the predis connector (^1.0)."
+                "predis/predis": "Required to use the predis connector (^1.1.2)."
             },
             "type": "library",
             "extra": {
@@ -683,7 +683,7 @@
             ],
             "description": "The Illuminate Redis package.",
             "homepage": "https://laravel.com",
-            "time": "2020-08-11T13:37:52+00:00"
+            "time": "2020-08-26T13:35:34+00:00"
         },
         {
             "name": "illuminate/support",
