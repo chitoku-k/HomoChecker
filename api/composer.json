@@ -10,7 +10,7 @@
         "illuminate/support": "^7.25",
         "phpoption/phpoption": "^1.7",
         "slim/http": "^1.0",
-        "slim/psr7": "^1.1.0",
+        "slim/psr7": "^1.2.0",
         "slim/slim": "^4.5",
         "true/punycode": "~2.0",
         "vlucas/phpdotenv": "^4.1"
