@@ -5,7 +5,7 @@
         "illuminate/cache": "^7.26",
         "illuminate/config": "^7.25",
         "illuminate/container": "^7.26",
-        "illuminate/database": "^7.25",
+        "illuminate/database": "^7.26",
         "illuminate/redis": "^7.26",
         "illuminate/support": "^7.26",
         "phpoption/phpoption": "^1.7",
