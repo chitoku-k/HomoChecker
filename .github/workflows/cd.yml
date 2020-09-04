@@ -16,17 +16,23 @@ jobs:
           gpg --quiet --batch --yes --decrypt --passphrase=${{ secrets.FONTS_PASSPHRASE }} --output client/fonts.tar.gz client/fonts.tar.gz.gpg
           cd client/fonts
           tar xf ../fonts.tar.gz
-      - name: Build api
-        run: docker build . -t docker.chitoku.jp/chitoku-k/homochecker/api
-        working-directory: api
-      - name: Build client
-        run: docker build . -t docker.chitoku.jp/chitoku-k/homochecker/web
+      - name: Log into Docker Hub
+        uses: azure/docker-login@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        uses: actions/checkout@v2
       - name: Log into Docker Registry
         uses: azure/docker-login@v1
         with:
           login-server: docker.chitoku.jp
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Build api
+        run: docker build . -t docker.chitoku.jp/chitoku-k/homochecker/api
+        working-directory: api
+      - name: Build client
+        run: docker build . -t docker.chitoku.jp/chitoku-k/homochecker/web
       - name: Push to Docker Registry
         run: |
           docker push docker.chitoku.jp/chitoku-k/homochecker/api
