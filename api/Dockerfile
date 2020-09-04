@@ -1,4 +1,4 @@
-FROM php:7.4.9-fpm-alpine
+FROM php:7.4.10-fpm-alpine
 WORKDIR /var/www/html/api
 COPY . /var/www/html/api
 
