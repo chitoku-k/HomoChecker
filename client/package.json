@@ -31,7 +31,7 @@
     "copy-webpack-plugin": "^6.1.0",
     "core-js": "^3.6.5",
     "css-loader": "^4.3.0",
-    "eslint": "^7.8.1",
+    "eslint": "^7.9.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-riot": "^0.1.8",
     "event-source-polyfill": "1.0.20",
