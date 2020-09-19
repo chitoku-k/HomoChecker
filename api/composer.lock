@@ -453,16 +453,16 @@
         },
         {
             "name": "illuminate/cache",
-            "version": "v7.28.1",
+            "version": "v7.28.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/cache.git",
-                "reference": "04e0b4c05de0b23874e953bc323835e493ceb234"
+                "reference": "520dcec6001d6dee19efa5b6edb06f95772d7bbc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/cache/zipball/04e0b4c05de0b23874e953bc323835e493ceb234",
-                "reference": "04e0b4c05de0b23874e953bc323835e493ceb234",
+                "url": "https://api.github.com/repos/illuminate/cache/zipball/520dcec6001d6dee19efa5b6edb06f95772d7bbc",
+                "reference": "520dcec6001d6dee19efa5b6edb06f95772d7bbc",
                 "shasum": ""
             },
             "require": {
@@ -500,7 +500,7 @@
             ],
             "description": "The Illuminate Cache package.",
             "homepage": "https://laravel.com",
-            "time": "2020-08-13T14:33:41+00:00"
+            "time": "2020-09-10T19:33:05+00:00"
         },
         {
             "name": "illuminate/config",
