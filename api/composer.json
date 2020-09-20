@@ -6,8 +6,11 @@
         "illuminate/config": "^7.28",
         "illuminate/container": "^7.28",
         "illuminate/database": "^7.28",
+        "illuminate/events": "^7.28",
+        "illuminate/log": "^7.28",
         "illuminate/redis": "^7.28",
         "illuminate/support": "^7.28",
+        "middlewares/access-log": "^1.2",
         "phpoption/phpoption": "^1.7",
         "slim/http": "^1.0",
         "slim/psr7": "^1.2.0",
@@ -38,6 +41,9 @@
         "fix": "php-cs-fixer fix",
         "post-install-cmd": "[ \"$COMPOSER_DEV_MODE\" = 0 ] || cghooks add --ignore-lock",
         "post-update-cmd": "[ \"$COMPOSER_DEV_MODE\" = 0 ] || cghooks update"
+    },
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "hooks": {

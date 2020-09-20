@@ -14,16 +14,28 @@ use HomoChecker\Service\HomoService;
 use Illuminate\Cache\CacheServiceProvider;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\DatabaseServiceProvider;
+use Illuminate\Events\EventServiceProvider;
+use Illuminate\Log\LogServiceProvider;
 use Illuminate\Redis\RedisServiceProvider;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
+use Middlewares\AccessLog;
 use Psr\Http\Message\StreamInterface;
+use Psr\Log\LoggerInterface;
 use Slim\Psr7\NonBufferedBody;
 
 class HomoProvider extends ServiceProvider
 {
+    protected $format = AccessLog::FORMAT_COMBINED . ' "%{X-Forwarded-For}i"';
+
     public function register()
     {
         $this->app->bind(StreamInterface::class, NonBufferedBody::class);
+
+        $this->app->extend(AccessLog::class, fn (AccessLog $log) => $log->format($this->format));
+        $this->app->when(AccessLog::class)
+            ->needs(LoggerInterface::class)
+            ->give(fn () => Log::channel('router'));
 
         $this->app->singleton(ClientInterface::class, Client::class);
         $this->app->when(Client::class)
@@ -45,6 +57,8 @@ class HomoProvider extends ServiceProvider
         (new HomoHandlerProvider($this->app))->register();
         (new HomoProfileServiceProvider($this->app))->register();
         (new HomoValidatorServiceProvider($this->app))->register();
+        (new EventServiceProvider($this->app))->register();
+        (new LogServiceProvider($this->app))->register();
         (new DatabaseServiceProvider($this->app))->register();
         (new CacheServiceProvider($this->app))->register();
         (new RedisServiceProvider($this->app))->register();

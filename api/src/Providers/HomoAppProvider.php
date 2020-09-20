@@ -12,6 +12,7 @@ use HomoChecker\Repository\HomoRepository;
 use Illuminate\Config\Repository;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
+use Middlewares\AccessLog;
 use Slim\Factory\AppFactory;
 
 class HomoAppProvider extends ServiceProvider
@@ -28,6 +29,7 @@ class HomoAppProvider extends ServiceProvider
         $this->app->singleton('app', function (Container $app) {
             AppFactory::setContainer($app);
             $slim = AppFactory::create();
+            $slim->addMiddleware($app->make(AccessLog::class));
             $slim->addErrorMiddleware(true, true, true)->setDefaultErrorHandler($app->make('errorHandler'));
             $slim->get('/healthz', HealthCheckAction::class);
             $slim->get('/check[/[{name}[/]]]', CheckAction::class);

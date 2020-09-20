@@ -9,4 +9,7 @@ RUN curl -sSfL 'https://raw.githubusercontent.com/composer/getcomposer.org/maste
     docker-php-ext-enable redis && \
     docker-php-ext-install pdo_mysql
 
+RUN echo 'display_errors = 0' > /usr/local/etc/php/conf.d/overrides.ini
+RUN sed -i 's/^access\.log/; \0/' /usr/local/etc/php-fpm.d/docker.conf
+
 RUN echo 'label ::1/128 0' > /etc/gai.conf
