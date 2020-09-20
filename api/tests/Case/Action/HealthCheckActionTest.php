@@ -53,11 +53,11 @@ class HealthCheckActionTest extends TestCase
         /** @var HomoService|MockInterface $homo */
         $homo = m::mock(HomoService::class);
         $homo->shouldReceive('count')
-             ->andThrow(new Exception('Internal Server Error'));
+             ->andThrow($e = new Exception('Internal Server Error'));
 
         Log::shouldReceive('error')
             ->once()
-            ->with('Internal Server Error');
+            ->with($e);
 
         $action = new HealthCheckAction($homo);
         $request = (new RequestFactory())->createRequest('GET', '/healthz');

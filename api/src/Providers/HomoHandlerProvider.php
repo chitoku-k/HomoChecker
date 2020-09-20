@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace HomoChecker\Providers;
 
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -23,7 +24,7 @@ class HomoHandlerProvider extends ServiceProvider
                 $slim = $app->make('app');
 
                 if (!$exception instanceof HttpSpecializedException) {
-                    error_log((string) $exception);
+                    Log::error($exception);
                     $exception = new HttpInternalServerErrorException($request, $exception->getMessage());
                 }
 

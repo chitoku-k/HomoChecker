@@ -23,7 +23,7 @@ class HealthCheckAction
             $this->homo->count();
             return $response->withHeader('Content-Type', 'text/plain')->withStatus(200)->write('OK');
         } catch (\Throwable $e) {
-            Log::error($e->getMessage());
+            Log::error($e);
             return $response->withHeader('Content-Type', 'text/plain')->withStatus(500)->write('Internal Server Error');
         }
     }
