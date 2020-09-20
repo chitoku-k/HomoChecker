@@ -12,4 +12,7 @@ RUN apk add --no-cache --virtual build-dependencies \
     docker-php-ext-install pdo_mysql && \
     apk del build-dependencies
 
+RUN echo 'display_errors = 0' > /usr/local/etc/php/conf.d/overrides.ini
+RUN sed -i 's/^access\.log/; \0/' /usr/local/etc/php-fpm.d/docker.conf
+
 EXPOSE 9000

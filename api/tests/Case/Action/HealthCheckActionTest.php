@@ -6,6 +6,8 @@ namespace HomoChecker\Test\Action;
 use Exception;
 use HomoChecker\Action\HealthCheckAction;
 use HomoChecker\Contracts\Service\HomoService;
+use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\Facades\Log;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
 use Mockery\MockInterface;
@@ -19,6 +21,11 @@ use Slim\Psr7\Response;
 class HealthCheckActionTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
+
+    public function setUp(): void
+    {
+        Facade::clearResolvedInstances();
+    }
 
     public function testOK(): void
     {
@@ -46,7 +53,11 @@ class HealthCheckActionTest extends TestCase
         /** @var HomoService|MockInterface $homo */
         $homo = m::mock(HomoService::class);
         $homo->shouldReceive('count')
-             ->andThrow(new Exception('Internal Server Error'));
+             ->andThrow($e = new Exception('Internal Server Error'));
+
+        Log::shouldReceive('error')
+            ->once()
+            ->with($e);
 
         $action = new HealthCheckAction($homo);
         $request = (new RequestFactory())->createRequest('GET', '/healthz');

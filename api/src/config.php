@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+use HomoChecker\Logging\CustomizeFormatter;
+
 return [
     'cache.default' => 'default',
     'cache.stores.default' => [
@@ -23,6 +25,22 @@ return [
             'host' => env('HOMOCHECKER_REDIS_HOST'),
             'port' => (int) env('HOMOCHECKER_REDIS_PORT', 6379),
         ],
+    ],
+    'logging.default' => 'default',
+    'logging.channels.default' => [
+        'driver' => 'single',
+        'tap' => [CustomizeFormatter::class . ":[%datetime%] %level_name%: %message% %context% %extra%\n"],
+        'path' => 'php://stderr',
+        'level' => 'info',
+    ],
+    'logging.channels.router' => [
+        'driver' => 'single',
+        'tap' => [CustomizeFormatter::class . ":%message% %context% %extra%\n"],
+        'path' => 'php://stderr',
+        'level' => 'info',
+    ],
+    'logging.channels.emergency' => [
+        'path' => 'php://stderr',
     ],
     'client' => [
         'timeout' => 5,
