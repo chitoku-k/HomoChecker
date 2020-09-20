@@ -8,6 +8,7 @@ use GuzzleHttp\ClientInterface;
 use HomoChecker\Contracts\Service\CacheService as CacheServiceContract;
 use HomoChecker\Contracts\Service\CheckService as CheckServiceContract;
 use HomoChecker\Contracts\Service\HomoService as HomoServiceContract;
+use HomoChecker\Http\NonBufferedBody;
 use HomoChecker\Service\CacheService;
 use HomoChecker\Service\CheckService;
 use HomoChecker\Service\HomoService;
@@ -22,7 +23,6 @@ use Illuminate\Support\ServiceProvider;
 use Middlewares\AccessLog;
 use Psr\Http\Message\StreamInterface;
 use Psr\Log\LoggerInterface;
-use Slim\Psr7\NonBufferedBody;
 
 class HomoProvider extends ServiceProvider
 {
