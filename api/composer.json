@@ -22,7 +22,7 @@
         "brainmaestro/composer-git-hooks": "^2.8",
         "friendsofphp/php-cs-fixer": "^2.16",
         "mockery/mockery": "^1.4",
-        "php-coveralls/php-coveralls": "^2.2",
+        "php-coveralls/php-coveralls": "^2.3",
         "phpunit/phpunit": "^9"
     },
     "autoload": {
