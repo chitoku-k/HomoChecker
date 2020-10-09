@@ -12,7 +12,7 @@ RUN apk add --no-cache --virtual build-dependencies \
     apk del --no-cache build-dependencies && \
     rm -rf node_modules
 
-FROM nginx:1.19.2-alpine
+FROM nginx:1.19.3-alpine
 COPY client/conf /etc/nginx/conf.d
 COPY --from=build /usr/src/client/dist /var/www/html
 CMD ["/bin/ash", "-c", "sed -i s/api:/$HOMOCHECKER_API_HOST:/ /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
