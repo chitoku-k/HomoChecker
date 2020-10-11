@@ -564,7 +564,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v7.28.3",
+            "version": "v7.28.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -608,16 +608,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v7.28.3",
+            "version": "v7.28.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "5efe6ca82f7edffbdf8fc488acfd8dfd30d228aa"
+                "reference": "0e685f2243ffe2ee344fc361c840eaaa159b414a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/5efe6ca82f7edffbdf8fc488acfd8dfd30d228aa",
-                "reference": "5efe6ca82f7edffbdf8fc488acfd8dfd30d228aa",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/0e685f2243ffe2ee344fc361c840eaaa159b414a",
+                "reference": "0e685f2243ffe2ee344fc361c840eaaa159b414a",
                 "shasum": ""
             },
             "require": {
@@ -666,7 +666,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2020-09-08T11:21:46+00:00"
+            "time": "2020-09-29T14:36:41+00:00"
         },
         {
             "name": "illuminate/events",
@@ -1908,16 +1908,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v5.1.5",
+            "version": "v5.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "186f395b256065ba9b890c0a4e48a91d598fa2cf"
+                "reference": "ae789a8a2ad189ce7e8216942cdb9b77319f5eb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/186f395b256065ba9b890c0a4e48a91d598fa2cf",
-                "reference": "186f395b256065ba9b890c0a4e48a91d598fa2cf",
+                "url": "https://api.github.com/repos/symfony/console/zipball/ae789a8a2ad189ce7e8216942cdb9b77319f5eb8",
+                "reference": "ae789a8a2ad189ce7e8216942cdb9b77319f5eb8",
                 "shasum": ""
             },
             "require": {
@@ -1997,7 +1997,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-09-02T07:07:40+00:00"
+            "time": "2020-10-07T15:23:00+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -2545,16 +2545,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v5.1.5",
+            "version": "v5.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "0de4cc1e18bb596226c06a82e2e7e9bc6001a63a"
+                "reference": "4a9afe9d07bac506f75bcee8ed3ce76da5a9343e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/0de4cc1e18bb596226c06a82e2e7e9bc6001a63a",
-                "reference": "0de4cc1e18bb596226c06a82e2e7e9bc6001a63a",
+                "url": "https://api.github.com/repos/symfony/string/zipball/4a9afe9d07bac506f75bcee8ed3ce76da5a9343e",
+                "reference": "4a9afe9d07bac506f75bcee8ed3ce76da5a9343e",
                 "shasum": ""
             },
             "require": {
@@ -2626,7 +2626,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-08-17T07:48:54+00:00"
+            "time": "2020-09-15T12:23:47+00:00"
         },
         {
             "name": "symfony/translation",
