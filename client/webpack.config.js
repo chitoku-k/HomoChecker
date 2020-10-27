@@ -11,7 +11,7 @@ riot.parsers.css["dart-sass"] = (tagName, css) => sass.renderSync({ data: css })
 
 module.exports = {
     mode: process.env.HOMOCHECKER_ENV || "production",
-    devtool: process.env.HOMOCHECKER_ENV === "development" ? "eval-cheap-module-source-map" : "",
+    devtool: process.env.HOMOCHECKER_ENV === "development" ? "eval-cheap-module-source-map" : undefined,
     entry: "./src/app.js",
     output: {
         path: path.join(__dirname, "/dist"),
