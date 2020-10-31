@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "17d78f472b9948ff5545ea371236e6a5",
+    "content-hash": "51ac56a0be4a944f863e4569893697df",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -608,16 +608,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v7.28.4",
+            "version": "v7.29.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "0e685f2243ffe2ee344fc361c840eaaa159b414a"
+                "reference": "321bd9819833d19ec873247e44abebd7a56b11dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/0e685f2243ffe2ee344fc361c840eaaa159b414a",
-                "reference": "0e685f2243ffe2ee344fc361c840eaaa159b414a",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/321bd9819833d19ec873247e44abebd7a56b11dc",
+                "reference": "321bd9819833d19ec873247e44abebd7a56b11dc",
                 "shasum": ""
             },
             "require": {
@@ -625,12 +625,12 @@
                 "illuminate/container": "^7.0",
                 "illuminate/contracts": "^7.0",
                 "illuminate/support": "^7.0",
-                "php": "^7.2.5",
+                "php": "^7.2.5|^8.0",
                 "symfony/console": "^5.0"
             },
             "suggest": {
                 "doctrine/dbal": "Required to rename columns and drop SQLite columns (^2.6).",
-                "fzaninotto/faker": "Required to use the eloquent factory builder (^1.9.1).",
+                "fakerphp/faker": "Required to use the eloquent factory builder (^1.9.1).",
                 "illuminate/console": "Required to use the database commands (^7.0).",
                 "illuminate/events": "Required to use the observers with Eloquent (^7.0).",
                 "illuminate/filesystem": "Required to use the migrations (^7.0).",
@@ -666,7 +666,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2020-09-29T14:36:41+00:00"
+            "time": "2020-10-29T15:16:59+00:00"
         },
         {
             "name": "illuminate/events",
