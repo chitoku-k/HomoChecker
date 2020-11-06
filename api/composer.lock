@@ -608,16 +608,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v7.29.2",
+            "version": "v7.29.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "321bd9819833d19ec873247e44abebd7a56b11dc"
+                "reference": "c942d21225bed7bcacd43ac6a6c5c6d46d403f11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/321bd9819833d19ec873247e44abebd7a56b11dc",
-                "reference": "321bd9819833d19ec873247e44abebd7a56b11dc",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/c942d21225bed7bcacd43ac6a6c5c6d46d403f11",
+                "reference": "c942d21225bed7bcacd43ac6a6c5c6d46d403f11",
                 "shasum": ""
             },
             "require": {
@@ -666,7 +666,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2020-10-29T15:16:59+00:00"
+            "time": "2020-10-31T18:37:57+00:00"
         },
         {
             "name": "illuminate/events",
