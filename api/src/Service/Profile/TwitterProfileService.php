@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace HomoChecker\Service\Profile;
 
 use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Promise;
+use GuzzleHttp\Promise\Coroutine;
+use GuzzleHttp\Promise\PromiseInterface;
 use HomoChecker\Contracts\Service\CacheService as CacheServiceContract;
 use HomoChecker\Contracts\Service\ProfileService as ProfileServiceContract;
 
@@ -23,12 +24,12 @@ class TwitterProfileService implements ProfileServiceContract
 
     /**
      * Get the URL of profile image of the user.
-     * @param  string                   $screen_name The screen_name of the user.
-     * @return Promise\PromiseInterface The promise.
+     * @param  string           $screen_name The screen_name of the user.
+     * @return PromiseInterface The promise.
      */
-    public function getIconAsync(string $screen_name): Promise\PromiseInterface
+    public function getIconAsync(string $screen_name): PromiseInterface
     {
-        return Promise\coroutine(function () use ($screen_name) {
+        return Coroutine::of(function () use ($screen_name) {
             if ($url = $this->cache->loadIconTwitter($screen_name)) {
                 return yield $url;
             }
