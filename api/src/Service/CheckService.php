@@ -4,9 +4,11 @@ declare(strict_types=1);
 namespace HomoChecker\Service;
 
 use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Pool;
-use GuzzleHttp\Promise;
+use GuzzleHttp\Promise\Coroutine;
+use GuzzleHttp\Promise\PromiseInterface;
+use GuzzleHttp\Promise\Utils;
 use GuzzleHttp\RequestOptions;
 use GuzzleHttp\TransferStats;
 use HomoChecker\Contracts\Service\CheckService as CheckServiceContract;
@@ -17,6 +19,8 @@ use HomoChecker\Domain\Homo;
 use HomoChecker\Domain\Status;
 use HomoChecker\Domain\Validator\ValidationResult;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class CheckService implements CheckServiceContract
 {
@@ -74,12 +78,12 @@ class CheckService implements CheckServiceContract
 
     /**
      * Validate a user.
-     * @param  Homo                     $homo The user.
-     * @return Promise\PromiseInterface The Promise.
+     * @param  Homo             $homo The user.
+     * @return PromiseInterface The Promise.
      */
-    protected function validateAsync(Homo $homo): Promise\PromiseInterface
+    protected function validateAsync(Homo $homo): PromiseInterface
     {
-        return Promise\coroutine(function () use ($homo) {
+        return Coroutine::of(function () use ($homo) {
             $total_time = 0.0;
             $times = [];
             $ips = [];
@@ -105,22 +109,24 @@ class CheckService implements CheckServiceContract
                 }
 
                 return yield $this->getValidateStatus($homo, ValidationResult::WRONG, $ips, $times);
-            } catch (RequestException $e) {
+            } catch (GuzzleException $e) {
                 return yield $this->getValidateStatus($homo, ValidationResult::ERROR, $ips, $total_time);
+            } catch (Throwable $e) {
+                Log::error($e);
             }
         });
     }
 
     /**
      * Create a status object from a user.
-     * @param  Homo                     $homo     The user.
-     * @param  callable                 $callback The callback that is called after resolution (optional).
-     * @return Promise\PromiseInterface The Promise.
+     * @param  Homo             $homo     The user.
+     * @param  callable         $callback The callback that is called after resolution (optional).
+     * @return PromiseInterface The Promise.
      */
-    protected function createStatusAsync(Homo $homo, callable $callback = null): Promise\PromiseInterface
+    protected function createStatusAsync(Homo $homo, callable $callback = null): PromiseInterface
     {
-        return Promise\coroutine(function () use ($homo, $callback) {
-            [[$status, $ip, $duration], $icon] = yield Promise\all([
+        return Coroutine::of(function () use ($homo, $callback) {
+            [[$status, $ip, $duration], $icon] = yield Utils::all([
                 $this->validateAsync($homo),
                 $this->profiles->get($homo->getService())->getIconAsync($homo->getScreenName()),
             ]);
