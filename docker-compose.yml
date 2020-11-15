@@ -22,7 +22,7 @@ services:
       - ipv6
 
   build:
-    image: node:15.0
+    image: node:15.2
     working_dir: /usr/src/app/client
     command: npm run watch
     environment:
