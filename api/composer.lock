@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "47eccad5dc9d72940b1a0ec92c67a834",
+    "content-hash": "d47097f99a7c19cfa4499296d0e640c1",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -886,16 +886,16 @@
         },
         {
             "name": "illuminate/log",
-            "version": "v8.14.0",
+            "version": "v8.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/log.git",
-                "reference": "926a020e094171fb482f2489515fe23a12a63d00"
+                "reference": "e2f6fe6476b8f09236956582c3f18a330c8b1c17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/log/zipball/926a020e094171fb482f2489515fe23a12a63d00",
-                "reference": "926a020e094171fb482f2489515fe23a12a63d00",
+                "url": "https://api.github.com/repos/illuminate/log/zipball/e2f6fe6476b8f09236956582c3f18a330c8b1c17",
+                "reference": "e2f6fe6476b8f09236956582c3f18a330c8b1c17",
                 "shasum": ""
             },
             "require": {
@@ -927,7 +927,7 @@
             ],
             "description": "The Illuminate Log package.",
             "homepage": "https://laravel.com",
-            "time": "2020-10-27T15:20:30+00:00"
+            "time": "2020-11-16T22:35:48+00:00"
         },
         {
             "name": "illuminate/macroable",
