@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "44a2bc297f403bf3fd2e683b7d848277",
+    "content-hash": "e204b782a0b3ab2d807eb2c4ced6c372",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -680,7 +680,7 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v8.15.0",
+            "version": "v8.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
