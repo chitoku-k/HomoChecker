@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "13c9a26c0d9e92a7858f26ea2e433018",
+    "content-hash": "84dedb64a58079db6074c9b9803bef69",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -586,16 +586,16 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v8.15.0",
+            "version": "v8.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
-                "reference": "e61e796ff98e19eac5e6735ea6abfa66f4a2f6db"
+                "reference": "c7d7d0a458bfcc2a00fd892a4dee3c41197abc0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/collections/zipball/e61e796ff98e19eac5e6735ea6abfa66f4a2f6db",
-                "reference": "e61e796ff98e19eac5e6735ea6abfa66f4a2f6db",
+                "url": "https://api.github.com/repos/illuminate/collections/zipball/c7d7d0a458bfcc2a00fd892a4dee3c41197abc0d",
+                "reference": "c7d7d0a458bfcc2a00fd892a4dee3c41197abc0d",
                 "shasum": ""
             },
             "require": {
@@ -632,7 +632,7 @@
             ],
             "description": "The Illuminate Collections package.",
             "homepage": "https://laravel.com",
-            "time": "2020-10-27T15:20:30+00:00"
+            "time": "2020-11-23T01:20:25+00:00"
         },
         {
             "name": "illuminate/config",
@@ -727,16 +727,16 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v8.15.0",
+            "version": "v8.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "d9e6a156efb8332dcce427b7d1ccd2706609bfa5"
+                "reference": "a73835aad399da42e88217bdbb5e1e4c1e668807"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/d9e6a156efb8332dcce427b7d1ccd2706609bfa5",
-                "reference": "d9e6a156efb8332dcce427b7d1ccd2706609bfa5",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/a73835aad399da42e88217bdbb5e1e4c1e668807",
+                "reference": "a73835aad399da42e88217bdbb5e1e4c1e668807",
                 "shasum": ""
             },
             "require": {
@@ -767,20 +767,20 @@
             ],
             "description": "The Illuminate Contracts package.",
             "homepage": "https://laravel.com",
-            "time": "2020-11-10T15:48:45+00:00"
+            "time": "2020-11-18T13:57:08+00:00"
         },
         {
             "name": "illuminate/database",
-            "version": "v8.15.0",
+            "version": "v8.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "b113e3e4ce6e17569739cc3bbdf7c92a0686a0b9"
+                "reference": "2c20f8e96ab2f6b667e17fb3e6a7331f14dc3c97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/b113e3e4ce6e17569739cc3bbdf7c92a0686a0b9",
-                "reference": "b113e3e4ce6e17569739cc3bbdf7c92a0686a0b9",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/2c20f8e96ab2f6b667e17fb3e6a7331f14dc3c97",
+                "reference": "2c20f8e96ab2f6b667e17fb3e6a7331f14dc3c97",
                 "shasum": ""
             },
             "require": {
@@ -831,7 +831,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2020-11-17T14:53:20+00:00"
+            "time": "2020-11-24T16:13:01+00:00"
         },
         {
             "name": "illuminate/events",
@@ -931,7 +931,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v8.15.0",
+            "version": "v8.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
