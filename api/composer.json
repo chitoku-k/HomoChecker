@@ -5,7 +5,7 @@
         "illuminate/cache": "^8.15",
         "illuminate/config": "^8.15",
         "illuminate/container": "^8.15",
-        "illuminate/database": "^8.15",
+        "illuminate/database": "^8.16",
         "illuminate/events": "^8.15",
         "illuminate/log": "^8.15",
         "illuminate/redis": "^8.15",
