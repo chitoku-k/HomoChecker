@@ -150,9 +150,8 @@ class CheckActionTest extends TestCase
 
     /**
      * @dataProvider formatProvider
-     * @param null|mixed $format
      */
-    public function testRouteToSSE($format = null): void
+    public function testRouteToSSE(mixed $format = null): void
     {
         $request = (new RequestFactory())->createRequest('GET', "/check?format={$format}");
 

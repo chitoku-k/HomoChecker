@@ -11,13 +11,8 @@ use Slim\Http\ServerRequest as Request;
 
 class BadgeAction
 {
-    protected CheckService $check;
-    protected HomoService $homo;
-
-    public function __construct(CheckService $check, HomoService $homo)
+    public function __construct(protected CheckService $check, protected HomoService $homo)
     {
-        $this->check = $check;
-        $this->homo = $homo;
     }
 
     public function __invoke(Request $request, Response $response, array $args)

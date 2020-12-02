@@ -11,26 +11,23 @@ use Slim\Http\ServerRequest as Request;
 
 class ListAction
 {
-    protected HomoService $homo;
-
-    public function __construct(HomoService $homo)
+    public function __construct(protected HomoService $homo)
     {
-        $this->homo = $homo;
     }
 
     public function __invoke(Request $request, Response $response, array $args)
     {
         $screen_name = $args['name'] ?? null;
 
-        switch ($request->getQueryParams()['format'] ?? 'json') {
-            case 'sql': {
-                return $response->withHeader('Content-Type', 'application/sql')->withBody($this->createSql($response));
-            }
-            default: {
-                $users = $this->homo->find($screen_name);
-                return $response->withJson($this->createArray($users), !empty($users) ? 200 : 404);
-            }
-        }
+        return match ($request->getQueryParams()['format'] ?? 'json') {
+            'sql' => $response->withHeader('Content-Type', 'application/sql')->withBody($this->createSql($response)),
+            default => (
+                match ($users = $this->homo->find($screen_name)) {
+                    [] => $response->withJson([], 404),
+                    default => $response->withJson($this->createArray($users), 200),
+                }
+            )
+        };
     }
 
     protected function createSql(Response $response)

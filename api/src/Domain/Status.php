@@ -35,7 +35,7 @@ class Status implements \JsonSerializable
     /**
      * @param array|object $status
      */
-    public function __construct($status = null)
+    public function __construct(array|object $status = null)
     {
         $status = (object) $status;
 
