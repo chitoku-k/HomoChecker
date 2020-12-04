@@ -10,7 +10,7 @@
         "illuminate/log": "^8.17",
         "illuminate/redis": "^8.17",
         "illuminate/support": "^8.16",
-        "middlewares/access-log": "^1.2",
+        "middlewares/access-log": "^2.0",
         "phpoption/phpoption": "^1.7",
         "slim/http": "^1.2",
         "slim/psr7": "^1.3",
