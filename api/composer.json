@@ -14,7 +14,7 @@
         "phpoption/phpoption": "^1.7",
         "slim/http": "^1.1",
         "slim/psr7": "^1.3",
-        "slim/slim": "^4.6",
+        "slim/slim": "^4.7",
         "true/punycode": "~2.0",
         "vlucas/phpdotenv": "^5.2"
     },
