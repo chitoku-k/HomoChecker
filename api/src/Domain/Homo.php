@@ -28,7 +28,7 @@ class Homo
     /**
      * @param array|object $homo
      */
-    public function __construct($homo = null)
+    public function __construct(array|object $homo = null)
     {
         $homo = (object) $homo;
 

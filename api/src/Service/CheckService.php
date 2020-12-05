@@ -26,9 +26,6 @@ class CheckService implements CheckServiceContract
 {
     public const REDIRECT = 5;
 
-    protected ClientInterface $client;
-    protected HomoServiceContract $homo;
-
     /**
      * @var Collection<ProfileServiceContract>
      */
@@ -39,10 +36,8 @@ class CheckService implements CheckServiceContract
      */
     protected ?Collection $validators;
 
-    public function __construct(ClientInterface $client, HomoServiceContract $homo)
+    public function __construct(protected ClientInterface $client, protected HomoServiceContract $homo)
     {
-        $this->client = $client;
-        $this->homo = $homo;
     }
 
     /**
@@ -63,7 +58,7 @@ class CheckService implements CheckServiceContract
         $this->validators = $validators;
     }
 
-    private function getValidateStatus(Homo $homo, string $status, array $ips, $times): array
+    private function getValidateStatus(Homo $homo, string $status, array $ips, array|float $times): array
     {
         if (!is_array($times)) {
             return [$status, $ips[$homo->getUrl()], $times];
