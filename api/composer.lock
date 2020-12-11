@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b932db06d8571256517e29cafb6e1563",
+    "content-hash": "3dcb39fd268f5f55d4cdfc739de58ffa",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -771,16 +771,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v8.17.2",
+            "version": "v8.18.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "1ce3cd597b3907ae543987a807c10718ed03c3d4"
+                "reference": "98e0ab090b5a6616e554ca126842facb8426c262"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/1ce3cd597b3907ae543987a807c10718ed03c3d4",
-                "reference": "1ce3cd597b3907ae543987a807c10718ed03c3d4",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/98e0ab090b5a6616e554ca126842facb8426c262",
+                "reference": "98e0ab090b5a6616e554ca126842facb8426c262",
                 "shasum": ""
             },
             "require": {
@@ -791,7 +791,7 @@
                 "illuminate/macroable": "^8.0",
                 "illuminate/support": "^8.0",
                 "php": "^7.3|^8.0",
-                "symfony/console": "^5.1"
+                "symfony/console": "^5.1.4"
             },
             "suggest": {
                 "doctrine/dbal": "Required to rename columns and drop SQLite columns (^2.6|^3.0).",
@@ -800,7 +800,7 @@
                 "illuminate/events": "Required to use the observers with Eloquent (^8.0).",
                 "illuminate/filesystem": "Required to use the migrations (^8.0).",
                 "illuminate/pagination": "Required to paginate the result set (^8.0).",
-                "symfony/finder": "Required to use Eloquent model factories (^5.1)."
+                "symfony/finder": "Required to use Eloquent model factories (^5.1.4)."
             },
             "type": "library",
             "extra": {
@@ -831,7 +831,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2020-11-30T15:12:51+00:00"
+            "time": "2020-12-08T22:03:59+00:00"
         },
         {
             "name": "illuminate/events",
