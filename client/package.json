@@ -34,7 +34,7 @@
     "eslint": "^7.15.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-riot": "^0.1.8",
-    "event-source-polyfill": "1.0.21",
+    "event-source-polyfill": "1.0.22",
     "file-loader": "^6.2.0",
     "font-awesome": "^4.7.0",
     "git-revision-webpack-plugin": "^3.0.6",
