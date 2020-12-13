@@ -17,6 +17,7 @@ module.exports = {
         path: path.join(__dirname, "/dist"),
         filename: "bundle.js",
     },
+    target: ["web", "es5"],
     module: {
         rules: [
             {
