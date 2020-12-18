@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3dcb39fd268f5f55d4cdfc739de58ffa",
+    "content-hash": "d5f23d08b89dbc8b56c64dc8f23c8d58",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -586,7 +586,7 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v8.18.1",
+            "version": "v8.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
@@ -727,16 +727,16 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v8.18.1",
+            "version": "v8.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "a73835aad399da42e88217bdbb5e1e4c1e668807"
+                "reference": "ecc0ae5e02efa49b50efac567f410911f75fd993"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/a73835aad399da42e88217bdbb5e1e4c1e668807",
-                "reference": "a73835aad399da42e88217bdbb5e1e4c1e668807",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/ecc0ae5e02efa49b50efac567f410911f75fd993",
+                "reference": "ecc0ae5e02efa49b50efac567f410911f75fd993",
                 "shasum": ""
             },
             "require": {
@@ -767,7 +767,7 @@
             ],
             "description": "The Illuminate Contracts package.",
             "homepage": "https://laravel.com",
-            "time": "2020-11-18T13:57:08+00:00"
+            "time": "2020-12-11T14:35:03+00:00"
         },
         {
             "name": "illuminate/database",
@@ -931,7 +931,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v8.18.1",
+            "version": "v8.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -1017,16 +1017,16 @@
         },
         {
             "name": "illuminate/redis",
-            "version": "v8.18.1",
+            "version": "v8.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/redis.git",
-                "reference": "3a66fb2da348b0f83d47a9a4adf18153e9dd5fe6"
+                "reference": "3b2b6ce85b7303a5d4bf0e402fb9acee4ffbb008"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/redis/zipball/3a66fb2da348b0f83d47a9a4adf18153e9dd5fe6",
-                "reference": "3a66fb2da348b0f83d47a9a4adf18153e9dd5fe6",
+                "url": "https://api.github.com/repos/illuminate/redis/zipball/3b2b6ce85b7303a5d4bf0e402fb9acee4ffbb008",
+                "reference": "3b2b6ce85b7303a5d4bf0e402fb9acee4ffbb008",
                 "shasum": ""
             },
             "require": {
@@ -1063,7 +1063,7 @@
             ],
             "description": "The Illuminate Redis package.",
             "homepage": "https://laravel.com",
-            "time": "2020-11-29T20:28:11+00:00"
+            "time": "2020-12-09T13:42:21+00:00"
         },
         {
             "name": "illuminate/support",
