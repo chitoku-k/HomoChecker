@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d41a069133b41460745b028accb3bbe",
+    "content-hash": "ba3a6cf9e0e135cfb012eec7a5cab274",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -1067,16 +1067,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v8.18.1",
+            "version": "v8.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "89581f651b63c63fae87449d224f7cb1087e62d8"
+                "reference": "91c965bddd834aaae650043c4726bedf00d033dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/89581f651b63c63fae87449d224f7cb1087e62d8",
-                "reference": "89581f651b63c63fae87449d224f7cb1087e62d8",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/91c965bddd834aaae650043c4726bedf00d033dd",
+                "reference": "91c965bddd834aaae650043c4726bedf00d033dd",
                 "shasum": ""
             },
             "require": {
@@ -1126,7 +1126,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2020-12-08T17:15:16+00:00"
+            "time": "2020-12-14T14:16:56+00:00"
         },
         {
             "name": "middlewares/access-log",
@@ -2887,16 +2887,16 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v5.2.0",
+            "version": "v5.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "52f486a707510884450df461b5a6429dd7a67379"
+                "reference": "a04209ba0d1391c828e5b2373181dac63c52ee70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/52f486a707510884450df461b5a6429dd7a67379",
-                "reference": "52f486a707510884450df461b5a6429dd7a67379",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/a04209ba0d1391c828e5b2373181dac63c52ee70",
+                "reference": "a04209ba0d1391c828e5b2373181dac63c52ee70",
                 "shasum": ""
             },
             "require": {
@@ -2973,7 +2973,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-11-28T11:24:18+00:00"
+            "time": "2020-12-08T17:03:37+00:00"
         },
         {
             "name": "symfony/translation-contracts",
