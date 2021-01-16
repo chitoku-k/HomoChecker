@@ -17,10 +17,10 @@
                     width: 700px;
                 }
                 @media (min-width: 880px) {
-                    width: 817px;
+                    width: 816px;
                 }
                 @media (min-width: 1270px) {
-                    width: 1234px;
+                    width: 1232px;
                 }
             }
 
@@ -39,7 +39,7 @@
             this.shuffle = new Shuffle(document.querySelector(".wrapper"), {
                 itemSelector: "homo-item",
                 columnWidth: 400,
-                gutterWidth: 17,
+                gutterWidth: 16,
                 speed: 200,
                 easing: "cubic-bezier(.89, .08, .62, .94)",
                 initialSort: {
