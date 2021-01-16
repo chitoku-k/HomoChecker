@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c2fe482cd98e512840e22c093021504",
+    "content-hash": "206ccd5952391b4718244b7b3b133f26",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -1067,16 +1067,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v8.21.0",
+            "version": "v8.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "2393bca6dc657b4364cebb59be160ee7a8fa10e3"
+                "reference": "6a516676a83d2a73c46eaf7907f730e86ef60da5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/2393bca6dc657b4364cebb59be160ee7a8fa10e3",
-                "reference": "2393bca6dc657b4364cebb59be160ee7a8fa10e3",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/6a516676a83d2a73c46eaf7907f730e86ef60da5",
+                "reference": "6a516676a83d2a73c46eaf7907f730e86ef60da5",
                 "shasum": ""
             },
             "require": {
@@ -1126,7 +1126,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2020-12-29T15:08:35+00:00"
+            "time": "2021-01-13T13:37:56+00:00"
         },
         {
             "name": "middlewares/access-log",
