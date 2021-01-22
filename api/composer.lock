@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c521fb79b5a8d937174213998bf1c80",
+    "content-hash": "68d0690c0bdc235e076ae5277ac40972",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -771,16 +771,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v8.22.1",
+            "version": "v8.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "4a2040c25d28315be005784a9ea4c2efb2a95a27"
+                "reference": "49d9fb12529d9dfee26d98f9331c59791b3f55e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/4a2040c25d28315be005784a9ea4c2efb2a95a27",
-                "reference": "4a2040c25d28315be005784a9ea4c2efb2a95a27",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/49d9fb12529d9dfee26d98f9331c59791b3f55e9",
+                "reference": "49d9fb12529d9dfee26d98f9331c59791b3f55e9",
                 "shasum": ""
             },
             "require": {
@@ -831,7 +831,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2021-01-13T13:37:56+00:00"
+            "time": "2021-01-21T14:09:58+00:00"
         },
         {
             "name": "illuminate/events",
