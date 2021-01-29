@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "350f7053bc286a7d42af8bd841b3ef6b",
+    "content-hash": "022a2cd492a9adafee754e20442b26d0",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -636,7 +636,7 @@
         },
         {
             "name": "illuminate/config",
-            "version": "v8.24.0",
+            "version": "v8.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/config.git",
