@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e93f24d92b9824a8125f48ba499d2c69",
+    "content-hash": "0c0eac1e7d98fa01f802180ab31cb6ae",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -533,16 +533,16 @@
         },
         {
             "name": "illuminate/cache",
-            "version": "v8.24.0",
+            "version": "v8.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/cache.git",
-                "reference": "62933606323b1c6197b7e012ef3d1a3c179f97bb"
+                "reference": "251f524b01a422e3da51ebead2e75ef90b1ee448"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/cache/zipball/62933606323b1c6197b7e012ef3d1a3c179f97bb",
-                "reference": "62933606323b1c6197b7e012ef3d1a3c179f97bb",
+                "url": "https://api.github.com/repos/illuminate/cache/zipball/251f524b01a422e3da51ebead2e75ef90b1ee448",
+                "reference": "251f524b01a422e3da51ebead2e75ef90b1ee448",
                 "shasum": ""
             },
             "require": {
@@ -582,11 +582,11 @@
             ],
             "description": "The Illuminate Cache package.",
             "homepage": "https://laravel.com",
-            "time": "2021-01-20T14:18:13+00:00"
+            "time": "2021-01-24T09:49:02+00:00"
         },
         {
             "name": "illuminate/collections",
-            "version": "v8.24.0",
+            "version": "v8.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
@@ -931,7 +931,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v8.24.0",
+            "version": "v8.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
