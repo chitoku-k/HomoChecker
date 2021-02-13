@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "218ac0b8944ce55693734862b5db0a41",
+    "content-hash": "48863c69f828b986d69d9fd4e9e9d1d0",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -586,7 +586,7 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v8.26.1",
+            "version": "v8.27.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
@@ -771,16 +771,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v8.26.1",
+            "version": "v8.27.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "4f7a92b9c59175f2f204366b957851029cb8b0c0"
+                "reference": "61d7fd9083f76b49a51126fb8bfc3d17d02e84a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/4f7a92b9c59175f2f204366b957851029cb8b0c0",
-                "reference": "4f7a92b9c59175f2f204366b957851029cb8b0c0",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/61d7fd9083f76b49a51126fb8bfc3d17d02e84a5",
+                "reference": "61d7fd9083f76b49a51126fb8bfc3d17d02e84a5",
                 "shasum": ""
             },
             "require": {
@@ -831,7 +831,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2021-02-02T13:42:30+00:00"
+            "time": "2021-02-09T14:42:24+00:00"
         },
         {
             "name": "illuminate/events",
@@ -931,7 +931,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v8.26.1",
+            "version": "v8.27.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
