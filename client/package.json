@@ -38,7 +38,7 @@
     "file-loader": "^6.2.0",
     "font-awesome": "^4.7.0",
     "git-revision-webpack-plugin": "^3.0.6",
-    "html-webpack-plugin": "^5.1.0",
+    "html-webpack-plugin": "^5.2.0",
     "riot": "^3.13.2",
     "riot-compiler": "^3.6.0",
     "riot-hot-reload": "^1.0.0",
