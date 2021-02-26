@@ -6,7 +6,7 @@
         "illuminate/config": "^8.29",
         "illuminate/container": "^8.28",
         "illuminate/database": "^8.28",
-        "illuminate/events": "^8.28",
+        "illuminate/events": "^8.29",
         "illuminate/log": "^8.28",
         "illuminate/redis": "^8.29",
         "illuminate/support": "^8.28",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f2f3e70c795c14cb7d4aaee307e7413b",
+    "content-hash": "b538c29cec19ce4a0e53d2f54147945c",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -484,7 +484,7 @@
         },
         {
             "name": "illuminate/bus",
-            "version": "v8.28.1",
+            "version": "v8.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/bus.git",
@@ -835,7 +835,7 @@
         },
         {
             "name": "illuminate/events",
-            "version": "v8.28.1",
+            "version": "v8.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/events.git",
@@ -973,7 +973,7 @@
         },
         {
             "name": "illuminate/pipeline",
-            "version": "v8.28.1",
+            "version": "v8.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/pipeline.git",
