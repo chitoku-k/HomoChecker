@@ -7,6 +7,8 @@ RUN apk add --no-cache --virtual build-dependencies \
         autoconf \
         build-base \
         postgresql-dev && \
+    apk add \
+        postgresql-libs && \
     composer install --no-dev && \
     pecl install redis && \
     docker-php-ext-enable redis && \
