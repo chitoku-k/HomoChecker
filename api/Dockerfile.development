@@ -1,4 +1,4 @@
-FROM php:8.0.2-fpm
+FROM php:8.0.3-fpm-alpine
 
 RUN apt-get -y update && \
     apt-get -y install git unzip libpq-dev
