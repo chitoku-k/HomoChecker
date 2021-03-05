@@ -96,7 +96,7 @@ $ export HOMOCHECKER_API_HOST=api
 
 ```sh
 $ export HOMOCHECKER_DB_HOST=database
-$ export HOMOCHECKER_DB_PORT=3306
+$ export HOMOCHECKER_DB_PORT=5432
 $ export HOMOCHECKER_DB_USERNAME=homo
 $ export HOMOCHECKER_DB_PASSWORD=homo
 $ export HOMOCHECKER_REDIS_HOST=redis
@@ -150,14 +150,14 @@ $ docker-compose stop
 次のコマンドで MySQL にログインできます。
 
 ```sh
-$ docker-compose exec database mysql -uhomo -phomo -Dhomo
+$ docker-compose exec database psql -dhomo -Uhomo
 ```
 
 たとえば最新のデータを入れるには次のようにします。
 
 ```sh
 $ curl -s 'https://homo.chitoku.jp:4545/list/?format=sql' |
-  docker exec -i $(docker-compose ps -q database) mysql -uhomo -phomo -Dhomo
+  docker exec -i $(docker-compose ps -q database) psql -dhomo -Uhomo
 ```
 
 ## テストするには
@@ -168,7 +168,7 @@ $ curl -s 'https://homo.chitoku.jp:4545/list/?format=sql' |
 $ bin/test
 ```
 
-[workflow-link]:    https://github.com/chitoku-k/HomoChecker/actions?query=branch:master                                           
+[workflow-link]:    https://github.com/chitoku-k/HomoChecker/actions?query=branch:master
 [workflow-badge]:   https://img.shields.io/github/workflow/status/chitoku-k/HomoChecker/CI%20Workflow/master.svg?style=flat-square&logo=github
 [climate-link]:     https://codeclimate.com/github/chitoku-k/HomoChecker/maintainability
 [climate-badge]:    https://img.shields.io/codeclimate/maintainability/chitoku-k/HomoChecker.svg?style=flat-square&logo=code-climate

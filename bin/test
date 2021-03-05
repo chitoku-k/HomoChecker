@@ -7,3 +7,4 @@ export COMPOSE_FILE=docker-compose.test.yml
 
 docker-compose run --rm build
 docker-compose run --rm api
+docker-compose down

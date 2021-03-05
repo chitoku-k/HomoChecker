@@ -5,11 +5,12 @@ COPY . /var/www/html/api
 RUN apk add --no-cache --virtual build-dependencies \
         composer \
         autoconf \
-        build-base && \
+        build-base \
+        postgresql-dev && \
     composer install --no-dev && \
     pecl install redis && \
     docker-php-ext-enable redis && \
-    docker-php-ext-install pdo_mysql && \
+    docker-php-ext-install pdo_pgsql && \
     apk del build-dependencies
 
 RUN echo 'display_errors = 0' > /usr/local/etc/php/conf.d/overrides.ini
