@@ -81,9 +81,9 @@ Chrome、Firefox、Internet Explorer の最新版で動くのでたいていの�
 ### バックエンド
 
 開発環境の構築には Docker Compose のインストールが必要です。  
-nginx + PHP-FPM + MySQL + Redis で構成されています。
+nginx + PHP-FPM + PostgreSQL + Redis で構成されています。
 
-本番環境の構築には Docker のインストールが必要です。  
+本番環境の構築にはコンテナーランタイム（Docker など）のインストールが必要です。  
 nginx + PHP-FPM で構成されており、以下の環境変数を使用して設定を行います。
 
 #### nginx
@@ -109,7 +109,7 @@ $ export HOMOCHECKER_TWITTER_TOKEN_SECRET=
 
 ## 開発環境
 
-初回実行時のみコンテナーのビルド作業が必要です。
+初回実行時のみイメージのビルド作業が必要です。
 
 ```sh
 $ bin/init
@@ -147,7 +147,7 @@ $ docker-compose stop
 ```
 
 現在の最新データは SQL 形式で[ダウンロード](https://homo.chitoku.jp:4545/list/?format=sql)できます。  
-次のコマンドで MySQL にログインできます。
+次のコマンドで PostgreSQL にログインできます。
 
 ```sh
 $ docker-compose exec database psql -dhomo -Uhomo
