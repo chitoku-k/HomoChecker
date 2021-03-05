@@ -4,15 +4,21 @@ services:
   api:
     build:
       context: ./api
-      dockerfile: Dockerfile.development
+      target: runtime
     working_dir: /var/www/html/api
     command: composer test
     volumes:
-      - .:/var/www/html
+      - type: bind
+        source: .
+        target: /var/www/html
 
   build:
-    image: node:15.11
+    build:
+      context: .
+      target: build
     working_dir: /usr/src/app/client
     command: npm run build
     volumes:
-      - .:/usr/src/app
+      - type: bind
+        source: .
+        target: /usr/src/app
