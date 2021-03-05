@@ -6,4 +6,4 @@ touch client/fonts/atlan.{svg,ttf,woff}
 docker-compose build
 docker-compose run --rm api composer install
 docker-compose run --rm build npm install
-docker-compose stop database
+docker-compose down
