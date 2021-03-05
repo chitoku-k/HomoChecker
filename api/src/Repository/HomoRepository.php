@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace HomoChecker\Repository;
 
 use HomoChecker\Contracts\Repository\HomoRepository as HomoRepositoryContract;
-use Illuminate\Database\Query\Grammars\MySqlGrammar;
+use Illuminate\Database\Query\Grammars\PostgresGrammar;
 use Illuminate\Support\Facades\DB;
 
 class HomoRepository implements HomoRepositoryContract
@@ -36,7 +36,7 @@ class HomoRepository implements HomoRepositoryContract
         $builder = DB::table($this->table);
 
         // Create a Grammar instance that doesn't parameterize its values
-        $grammar = new class() extends MySqlGrammar {
+        $grammar = new class() extends PostgresGrammar {
             /**
              * Only quote the given parameter.
              * @return string

@@ -11,9 +11,9 @@ return [
     'database.default' => 'default',
     'database.connections' => [
         'default' => [
-            'driver' => 'mysql',
+            'driver' => 'pgsql',
             'host' => env('HOMOCHECKER_DB_HOST'),
-            'port' => env('HOMOCHECKER_DB_PORT', 3306),
+            'port' => env('HOMOCHECKER_DB_PORT', 5432),
             'database' => env('HOMOCHECKER_DB_DATABASE', 'homo'),
             'username' => env('HOMOCHECKER_DB_USERNAME'),
             'password' => env('HOMOCHECKER_DB_PASSWORD'),

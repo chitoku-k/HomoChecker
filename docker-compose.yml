@@ -22,7 +22,7 @@ services:
       - ipv6
 
   build:
-    image: node:15.2
+    image: node:15.11
     working_dir: /usr/src/app/client
     command: npm run watch
     environment:
@@ -41,21 +41,19 @@ services:
       - default
 
   database:
-    image: mysql:8.0
-    command: [--character-set-server=utf8, --default-authentication-plugin=mysql_native_password]
+    image: postgres:13.2
     volumes:
       - ./database:/docker-entrypoint-initdb.d
-      - database:/var/lib/mysql
+      - database:/var/lib/postgres/data
     environment:
-      MYSQL_DATABASE: homo
-      MYSQL_USER: homo
-      MYSQL_PASSWORD: homo
-      MYSQL_ROOT_PASSWORD: homo
+      POSTGRES_DB: homo
+      POSTGRES_USER: homo
+      POSTGRES_PASSWORD: homo
     networks:
       - default
 
   redis:
-    image: redis:6.0
+    image: redis:6.2
     networks:
       - default
 

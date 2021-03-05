@@ -1,13 +1,13 @@
 FROM php:8.0.2-fpm
 
 RUN apt-get -y update && \
-    apt-get -y install git unzip
+    apt-get -y install git unzip libpq-dev
 
 RUN curl -sSfL 'https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer' | php -- --quiet && \
     mv composer.phar /usr/bin/composer && \
     pecl install redis && \
     docker-php-ext-enable redis && \
-    docker-php-ext-install pdo_mysql
+    docker-php-ext-install pdo_pgsql
 
 RUN echo 'display_errors = 0' > /usr/local/etc/php/conf.d/overrides.ini
 RUN sed -i 's/^access\.log/; \0/' /usr/local/etc/php-fpm.d/docker.conf
