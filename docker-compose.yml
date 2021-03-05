@@ -4,7 +4,7 @@ services:
   api:
     build:
       context: ./api
-      dockerfile: Dockerfile.development
+      target: runtime
     working_dir: /var/www/html/api
     environment:
       HOMOCHECKER_DB_HOST: database
@@ -16,27 +16,37 @@ services:
       HOMOCHECKER_TWITTER_TOKEN:
       HOMOCHECKER_TWITTER_TOKEN_SECRET:
     volumes:
-      - .:/var/www/html
+      - type: bind
+        source: .
+        target: /var/www/html
     networks:
       - default
       - ipv6
 
   build:
-    image: node:15.11
+    build:
+      context: .
+      target: build
     working_dir: /usr/src/app/client
     command: npm run watch
     environment:
       HOMOCHECKER_ENV: "${HOMOCHECKER_ENV-development}"
     volumes:
-      - .:/usr/src/app
+      - type: bind
+        source: .
+        target: /usr/src/app
 
   client:
-    image: nginx:1.19
+    image: nginx:1.19-alpine
     ports:
       - "${HOMOCHECKER_PORT-4545}:80"
     volumes:
-      - ./client/dist:/var/www/html
-      - ./client/conf:/etc/nginx/conf.d
+      - type: bind
+        source: ./client/dist
+        target: /var/www/html
+      - type: bind
+        source: ./client/conf
+        target: /etc/nginx/conf.d
     networks:
       - default
 

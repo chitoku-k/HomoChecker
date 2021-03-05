@@ -1,12 +1,14 @@
-FROM node:15.11.0-alpine as build
+FROM node:15.11.0-alpine AS build
 ENV HOMOCHECKER_API_HOST homochecker-api
-WORKDIR /usr/src
-COPY . /usr/src
 
 RUN apk add --no-cache --virtual build-dependencies \
-        git && \
-    cd client && \
-    touch fonts/atlan.svg fonts/atlan.ttf fonts/atlan.woff && \
+        git
+
+FROM build AS production
+WORKDIR /usr/src/client
+COPY . /usr/src
+
+RUN touch fonts/atlan.svg fonts/atlan.ttf fonts/atlan.woff && \
     npm install && \
     npm run build && \
     apk del --no-cache build-dependencies && \
@@ -14,5 +16,7 @@ RUN apk add --no-cache --virtual build-dependencies \
 
 FROM nginx:1.19.7-alpine
 COPY client/conf /etc/nginx/conf.d
-COPY --from=build /usr/src/client/dist /var/www/html
+COPY --from=production /usr/src/client/dist /var/www/html
 CMD ["/bin/ash", "-c", "sed -i s/api:/$HOMOCHECKER_API_HOST:/ /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
+
+EXPOSE 80
