@@ -1,4 +1,4 @@
-FROM php:8.0.2-fpm AS runtime
+FROM php:8.0.3-fpm AS runtime
 COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
 
 RUN apt-get -y update && \
