@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "426802328e9e7cdcacf9de2a85580927",
+    "content-hash": "75d67cf7f2535a7bcb7bc7ab1d00dac6",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -586,16 +586,16 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v8.31.0",
+            "version": "v8.32.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
-                "reference": "ecc881c6dce66e22f2c236374f342d41c7ebeb67"
+                "reference": "d7cc717a00064b40fa63a8ad522042005e1de1ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/collections/zipball/ecc881c6dce66e22f2c236374f342d41c7ebeb67",
-                "reference": "ecc881c6dce66e22f2c236374f342d41c7ebeb67",
+                "url": "https://api.github.com/repos/illuminate/collections/zipball/d7cc717a00064b40fa63a8ad522042005e1de1ed",
+                "reference": "d7cc717a00064b40fa63a8ad522042005e1de1ed",
                 "shasum": ""
             },
             "require": {
@@ -632,11 +632,11 @@
             ],
             "description": "The Illuminate Collections package.",
             "homepage": "https://laravel.com",
-            "time": "2021-03-02T13:34:56+00:00"
+            "time": "2021-03-08T17:22:22+00:00"
         },
         {
             "name": "illuminate/config",
-            "version": "v8.31.0",
+            "version": "v8.32.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/config.git",
@@ -727,7 +727,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v8.31.0",
+            "version": "v8.32.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -931,7 +931,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v8.31.0",
+            "version": "v8.32.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -1476,27 +1476,22 @@
         },
         {
             "name": "psr/container",
-            "version": "1.0.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/container.git",
-                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f"
+                "reference": "8622567409010282b7aeebe4bb841fe98b58dcaf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/container/zipball/b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
-                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/8622567409010282b7aeebe4bb841fe98b58dcaf",
+                "reference": "8622567409010282b7aeebe4bb841fe98b58dcaf",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=7.2.0"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Psr\\Container\\": "src/"
@@ -1509,7 +1504,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common Container Interface (PHP FIG PSR-11)",
@@ -1521,7 +1516,7 @@
                 "container-interop",
                 "psr"
             ],
-            "time": "2017-02-14T16:28:37+00:00"
+            "time": "2021-03-05T17:36:06+00:00"
         },
         {
             "name": "psr/http-client",
