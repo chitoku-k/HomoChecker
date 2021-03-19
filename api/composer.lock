@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f4853336c9510d5526b232be67118f20",
+    "content-hash": "a1516dfbee43967cce4be435cae937da",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -586,7 +586,7 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v8.32.1",
+            "version": "v8.33.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
@@ -931,7 +931,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v8.32.1",
+            "version": "v8.33.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -1017,16 +1017,16 @@
         },
         {
             "name": "illuminate/redis",
-            "version": "v8.32.1",
+            "version": "v8.33.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/redis.git",
-                "reference": "1f4ba4efd2686d1e297546e9a1c75b19abe6948f"
+                "reference": "9fb4d52907d39cb4c5591cb687cbead26d59dc00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/redis/zipball/1f4ba4efd2686d1e297546e9a1c75b19abe6948f",
-                "reference": "1f4ba4efd2686d1e297546e9a1c75b19abe6948f",
+                "url": "https://api.github.com/repos/illuminate/redis/zipball/9fb4d52907d39cb4c5591cb687cbead26d59dc00",
+                "reference": "9fb4d52907d39cb4c5591cb687cbead26d59dc00",
                 "shasum": ""
             },
             "require": {
@@ -1063,7 +1063,7 @@
             ],
             "description": "The Illuminate Redis package.",
             "homepage": "https://laravel.com",
-            "time": "2021-03-09T14:28:59+00:00"
+            "time": "2021-03-09T17:43:21+00:00"
         },
         {
             "name": "illuminate/support",
