@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d89075db20ec68d6297131e57bbd8b1f",
+    "content-hash": "f7f1843d6315a425ba3ce3c3b83b19ae",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -684,7 +684,7 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v8.35.1",
+            "version": "v8.36.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
@@ -731,16 +731,16 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v8.35.1",
+            "version": "v8.36.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "121cea1d8b8772bc7fee99c71ecf0f57c1d77b3b"
+                "reference": "5764f703ea8f74ced163125d810951cd5ef2b7e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/121cea1d8b8772bc7fee99c71ecf0f57c1d77b3b",
-                "reference": "121cea1d8b8772bc7fee99c71ecf0f57c1d77b3b",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/5764f703ea8f74ced163125d810951cd5ef2b7e1",
+                "reference": "5764f703ea8f74ced163125d810951cd5ef2b7e1",
                 "shasum": ""
             },
             "require": {
@@ -771,7 +771,7 @@
             ],
             "description": "The Illuminate Contracts package.",
             "homepage": "https://laravel.com",
-            "time": "2021-03-12T14:45:30+00:00"
+            "time": "2021-04-01T13:09:31+00:00"
         },
         {
             "name": "illuminate/database",
