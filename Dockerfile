@@ -1,4 +1,4 @@
-FROM node:15.13.0-alpine AS build
+FROM node:15.14.0-alpine AS build
 ENV HOMOCHECKER_API_HOST homochecker-api
 
 RUN apk add --no-cache --virtual build-dependencies \
