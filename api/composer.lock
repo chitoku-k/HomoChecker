@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "452bfd5c05d8bebb9c3088dc829eb04d",
+    "content-hash": "bee376f6525e03c222f150cdb11e919c",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -488,16 +488,16 @@
         },
         {
             "name": "illuminate/bus",
-            "version": "v8.35.1",
+            "version": "v8.36.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/bus.git",
-                "reference": "18b3d810cfe52a4fa040994e68da4f356a498e8a"
+                "reference": "c40f6133be4559049b03aaa8c7d95c37e1c5b893"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/bus/zipball/18b3d810cfe52a4fa040994e68da4f356a498e8a",
-                "reference": "18b3d810cfe52a4fa040994e68da4f356a498e8a",
+                "url": "https://api.github.com/repos/illuminate/bus/zipball/c40f6133be4559049b03aaa8c7d95c37e1c5b893",
+                "reference": "c40f6133be4559049b03aaa8c7d95c37e1c5b893",
                 "shasum": ""
             },
             "require": {
@@ -533,7 +533,7 @@
             ],
             "description": "The Illuminate Bus package.",
             "homepage": "https://laravel.com",
-            "time": "2021-01-30T19:50:02+00:00"
+            "time": "2021-04-05T18:46:42+00:00"
         },
         {
             "name": "illuminate/cache",
@@ -839,16 +839,16 @@
         },
         {
             "name": "illuminate/events",
-            "version": "v8.35.1",
+            "version": "v8.36.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/events.git",
-                "reference": "0160e896c1909fa961a245d0628685321a4d58f5"
+                "reference": "bd2941d4d55f5d357b203dc2ed81ac5c138593dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/events/zipball/0160e896c1909fa961a245d0628685321a4d58f5",
-                "reference": "0160e896c1909fa961a245d0628685321a4d58f5",
+                "url": "https://api.github.com/repos/illuminate/events/zipball/bd2941d4d55f5d357b203dc2ed81ac5c138593dc",
+                "reference": "bd2941d4d55f5d357b203dc2ed81ac5c138593dc",
                 "shasum": ""
             },
             "require": {
@@ -886,7 +886,7 @@
             ],
             "description": "The Illuminate Events package.",
             "homepage": "https://laravel.com",
-            "time": "2021-03-11T13:55:37+00:00"
+            "time": "2021-04-06T19:21:57+00:00"
         },
         {
             "name": "illuminate/log",
@@ -977,7 +977,7 @@
         },
         {
             "name": "illuminate/pipeline",
-            "version": "v8.35.1",
+            "version": "v8.36.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/pipeline.git",
