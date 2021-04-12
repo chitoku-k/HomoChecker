@@ -17,6 +17,7 @@ return [
             'database' => env('HOMOCHECKER_DB_DATABASE', 'homo'),
             'username' => env('HOMOCHECKER_DB_USERNAME'),
             'password' => env('HOMOCHECKER_DB_PASSWORD'),
+            'sslmode' => env('HOMOCHECKER_DB_SSLMODE', 'prefer'),
             'charset' => 'utf8',
         ],
     ],
