@@ -11,7 +11,7 @@ use HomoChecker\Contracts\Service\ProfileService as ProfileServiceContract;
 
 class TwitterProfileService implements ProfileServiceContract
 {
-    public const CACHE_EXPIRE = 3;
+    public const CACHE_EXPIRE = 180;
 
     protected ClientInterface $client;
     protected CacheServiceContract $cache;
