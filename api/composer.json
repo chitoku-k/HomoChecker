@@ -4,7 +4,7 @@
         "guzzlehttp/oauth-subscriber": "^0.5.0",
         "illuminate/cache": "^8.37",
         "illuminate/config": "^8.36",
-        "illuminate/container": "^8.36",
+        "illuminate/container": "^8.37",
         "illuminate/database": "^8.36",
         "illuminate/events": "^8.36",
         "illuminate/log": "^8.37",
