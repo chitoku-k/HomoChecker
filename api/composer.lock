@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9696edc50cb9f8ce3fcacea83f4782d2",
+    "content-hash": "a8fcfc66490fe9f3b610b7b703df8d97",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -731,7 +731,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v8.37.0",
+            "version": "v8.38.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -890,7 +890,7 @@
         },
         {
             "name": "illuminate/log",
-            "version": "v8.37.0",
+            "version": "v8.38.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/log.git",
