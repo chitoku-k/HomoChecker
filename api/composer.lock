@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "460f0f9d56564ec91f88081c0b21e7d0",
+    "content-hash": "5cfd5499f0b8eb4fbaa2620b33206c86",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -537,16 +537,16 @@
         },
         {
             "name": "illuminate/cache",
-            "version": "v8.38.0",
+            "version": "v8.40.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/cache.git",
-                "reference": "8e7e15e726895a757f23602f410f4b28567214a8"
+                "reference": "267a541171a375d56622117fbd0a60515402f2ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/cache/zipball/8e7e15e726895a757f23602f410f4b28567214a8",
-                "reference": "8e7e15e726895a757f23602f410f4b28567214a8",
+                "url": "https://api.github.com/repos/illuminate/cache/zipball/267a541171a375d56622117fbd0a60515402f2ef",
+                "reference": "267a541171a375d56622117fbd0a60515402f2ef",
                 "shasum": ""
             },
             "require": {
@@ -586,7 +586,7 @@
             ],
             "description": "The Illuminate Cache package.",
             "homepage": "https://laravel.com",
-            "time": "2021-04-01T12:57:50+00:00"
+            "time": "2021-04-27T20:56:51+00:00"
         },
         {
             "name": "illuminate/collections",
