@@ -1,0 +1,40 @@
+version: 2
+updates:
+- package-ecosystem: composer
+  directory: "/api"
+  schedule:
+    interval: weekly
+    day: saturday
+    time: "00:00"
+    timezone: Asia/Tokyo
+  open-pull-requests-limit: 99
+  versioning-strategy: increase
+- package-ecosystem: npm
+  directory: "/client"
+  schedule:
+    interval: weekly
+    day: saturday
+    time: "00:00"
+    timezone: Asia/Tokyo
+  open-pull-requests-limit: 99
+  versioning-strategy: increase
+  ignore:
+  - dependency-name: riot
+    versions:
+    - "> 3.13.2"
+- package-ecosystem: docker
+  directory: "/api"
+  schedule:
+    interval: weekly
+    day: saturday
+    time: "00:00"
+    timezone: Asia/Tokyo
+  open-pull-requests-limit: 99
+- package-ecosystem: docker
+  directory: "/"
+  schedule:
+    interval: weekly
+    day: saturday
+    time: "00:00"
+    timezone: Asia/Tokyo
+  open-pull-requests-limit: 99
