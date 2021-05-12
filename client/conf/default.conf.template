@@ -16,7 +16,7 @@ server {
         }
 
         include fastcgi_params;
-        fastcgi_pass api:9000;
+        fastcgi_pass $HOMOCHECKER_API_HOST:9000;
         fastcgi_buffering off;
         fastcgi_param SCRIPT_NAME index.php;
         fastcgi_param SCRIPT_FILENAME /var/www/html/api/src/index.php;

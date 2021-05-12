@@ -1,23 +1,23 @@
-version: "2.1"
+version: "3.9"
 
 services:
   api:
     build:
       context: ./api
-      target: runtime
+      target: dev
     working_dir: /var/www/html/api
     command: composer test
     volumes:
       - type: bind
-        source: .
-        target: /var/www/html
+        source: ./api
+        target: /var/www/html/api
 
   build:
     build:
       context: .
-      target: build
+      target: dev
     working_dir: /usr/src/app/client
-    command: npm run build
+    command: npm run --no-update-notifier build
     volumes:
       - type: bind
         source: .

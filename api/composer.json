@@ -1,4 +1,6 @@
 {
+    "name": "chitoku-k/homochecker",
+    "description": "HomoChecker API",
     "require": {
         "guzzlehttp/guzzle": "^7.3",
         "guzzlehttp/oauth-subscriber": "^0.5.0",

@@ -1,10 +1,10 @@
-version: "2.1"
+version: "3.9"
 
 services:
   api:
     build:
       context: ./api
-      target: runtime
+      target: dev
     working_dir: /var/www/html/api
     environment:
       HOMOCHECKER_DB_HOST: database
@@ -17,8 +17,8 @@ services:
       HOMOCHECKER_TWITTER_TOKEN_SECRET:
     volumes:
       - type: bind
-        source: .
-        target: /var/www/html
+        source: ./api
+        target: /var/www/html/api
     networks:
       - default
       - ipv6
@@ -26,7 +26,7 @@ services:
   build:
     build:
       context: .
-      target: build
+      target: dev
     working_dir: /usr/src/app/client
     command: npm run watch
     environment:
@@ -40,25 +40,34 @@ services:
     image: nginx:1.19-alpine
     ports:
       - "${HOMOCHECKER_PORT-4545}:80"
+    environment:
+      HOMOCHECKER_API_HOST: api
     volumes:
       - type: bind
         source: ./client/dist
         target: /var/www/html
+        read_only: true
       - type: bind
         source: ./client/conf
-        target: /etc/nginx/conf.d
+        target: /etc/nginx/templates
+        read_only: true
     networks:
       - default
 
   database:
     image: postgres:13.2
-    volumes:
-      - ./database:/docker-entrypoint-initdb.d
-      - database:/var/lib/postgres/data
     environment:
       POSTGRES_DB: homo
       POSTGRES_USER: homo
       POSTGRES_PASSWORD: homo
+    volumes:
+      - type: bind
+        source: ./database
+        target: /docker-entrypoint-initdb.d
+        read_only: true
+      - type: volume
+        source: database
+        target: /var/lib/postgres/data
     networks:
       - default
 
