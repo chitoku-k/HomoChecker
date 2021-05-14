@@ -9,7 +9,7 @@
         "illuminate/events": "^8.41",
         "illuminate/log": "^8.41",
         "illuminate/redis": "^8.40",
-        "illuminate/support": "^8.40",
+        "illuminate/support": "^8.41",
         "middlewares/access-log": "^2.0",
         "phpoption/phpoption": "^1.7",
         "slim/http": "^1.2",
