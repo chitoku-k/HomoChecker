@@ -11,11 +11,22 @@ RUN --mount=type=cache,target=/var/cache/apt \
     docker-php-ext-enable redis && \
     docker-php-ext-install pdo_pgsql && \
     apt-get -y remove \
-        libpq-dev && \
+        $PHPIZE_DEPS \
+        libargon2-dev \
+        libc6-dev \
+        libcurl4-openssl-dev \
+        libedit-dev \
+        libonig-dev \
+        libpq-dev \
+        libsodium-dev \
+        libsqlite3-dev \
+        libssl-dev \
+        libxml2-dev \
+        zlib1g-dev && \
+    apt-get -y autoremove && \
     echo 'display_errors = 0' > /usr/local/etc/php/conf.d/overrides.ini && \
     sed -i 's/^access\.log/; \0/' /usr/local/etc/php-fpm.d/docker.conf && \
     echo 'label ::1/128 0' > /etc/gai.conf
-EXPOSE 9000
 
 FROM runtime AS dependencies
 COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
@@ -36,6 +47,17 @@ RUN --mount=type=cache,target=/root/.composer \
 RUN --mount=type=cache,target=/mnt/.composer,id=/root/.composer \
     cp -r /mnt/.composer /root/
 
-FROM runtime
+FROM debian:buster-slim
 COPY src /var/www/html/api/src
+COPY --from=runtime /etc/ssl/certs/ /etc/ssl/certs/
+COPY --from=runtime /etc/gai.conf /etc/
+COPY --from=runtime /lib/ /lib/
+COPY --from=runtime /usr/lib/ /usr/lib/
+COPY --from=runtime /usr/local/etc/ /usr/local/etc/
+COPY --from=runtime /usr/local/lib/ /usr/local/lib/
+COPY --from=runtime /usr/local/sbin/php-fpm /usr/local/sbin/
+COPY --from=runtime /usr/share/ca-certificates/ /usr/share/ca-certificates/
 COPY --from=dependencies /var/www/html/api /var/www/html/api
+STOPSIGNAL SIGQUIT
+EXPOSE 9000
+ENTRYPOINT ["php-fpm"]
