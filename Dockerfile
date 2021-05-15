@@ -1,22 +1,23 @@
-FROM node:16.1.0-alpine AS build
-ENV HOMOCHECKER_API_HOST homochecker-api
-
-RUN apk add --no-cache --virtual build-dependencies \
-        git
-
-FROM build AS production
+# syntax = docker/dockerfile:experimental
+FROM node:16.1.0-alpine AS dependencies
 WORKDIR /usr/src/client
-COPY . /usr/src
+RUN --mount=type=cache,target=/var/cache/apk \
+    apk add --no-cache --virtual build-dependencies \
+        git
+COPY client/package.json client/package-lock.json /usr/src/client/
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci --no-update-notifier --no-audit --no-fund
 
+FROM dependencies AS dev
+RUN --mount=type=cache,target=/mnt/.npm/,id=/root/.npm \
+    cp -r /mnt/.npm /root/
+
+FROM dependencies AS build
+COPY . /usr/src/
 RUN touch fonts/atlan.svg fonts/atlan.ttf fonts/atlan.woff && \
-    npm install && \
-    npm run build && \
-    apk del --no-cache build-dependencies && \
-    rm -rf node_modules
+    npm run --no-update-notifier build
 
 FROM nginx:1.19.10-alpine
-COPY client/conf /etc/nginx/conf.d
-COPY --from=production /usr/src/client/dist /var/www/html
-CMD ["/bin/ash", "-c", "sed -i s/api:/$HOMOCHECKER_API_HOST:/ /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
-
-EXPOSE 80
+ENV HOMOCHECKER_API_HOST homochecker-api
+COPY client/conf/. /etc/nginx/templates/
+COPY --from=build /usr/src/client/dist /var/www/html/

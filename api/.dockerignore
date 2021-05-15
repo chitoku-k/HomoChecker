@@ -1,7 +1,9 @@
-Dockerfile*
+Dockerfile
 README.md
+cghooks.lock
 build
 tests
 vendor
+.gitignore
 .php_cs*
 *phpunit*

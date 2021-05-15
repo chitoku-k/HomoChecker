@@ -9,41 +9,113 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Cache Buildx
+        uses: actions/cache@v2
+        with:
+          path: /tmp/buildx-cache
+          key: buildx-apitest-${{ github.sha }}
+          restore-keys: buildx-apitest-
+      - name: Build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./api
+          target: dev
+          cache-from: type=local,src=/tmp/buildx-cache
+          cache-to: type=local,mode=max,dest=/tmp/buildx-cache.new
+          load: true
+          tags: homochecker-test_api
       - name: Run tests
         run: |
-          docker-compose build
-          docker-compose run --rm api composer install
+          docker-compose run --rm api composer install --no-progress --no-scripts
           docker-compose run --rm api
         env:
           COMPOSE_PROJECT_NAME: homochecker-test
           COMPOSE_FILE: docker-compose.test.yml
-  client-test:
-    name: Client Tests
+      - name: Move cache
+        run: |
+          rm -rf /tmp/buildx-cache
+          mv /tmp/buildx-cache{.new,}
+  web-test:
+    name: Web Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Cache Buildx
+        uses: actions/cache@v2
+        with:
+          path: /tmp/buildx-cache
+          key: buildx-webtest-${{ github.sha }}
+          restore-keys: buildx-webtest-
+      - name: Build
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          target: dev
+          cache-from: type=local,src=/tmp/buildx-cache
+          cache-to: type=local,mode=max,dest=/tmp/buildx-cache.new
+          load: true
+          tags: homochecker-test_build
       - name: Run lints
         run: |
-          docker-compose run --rm build npm install
-          docker-compose run --rm build npm run lint
+          docker-compose run --rm build npm ci --no-update-notifier --prefer-offline --no-audit --no-fund
+          docker-compose run --rm build npm run --no-update-notifier lint
         env:
           COMPOSE_PROJECT_NAME: homochecker-test
           COMPOSE_FILE: docker-compose.test.yml
+      - name: Move cache
+        run: |
+          rm -rf /tmp/buildx-cache
+          mv /tmp/buildx-cache{.new,}
   api-build:
     name: API Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Build api
-        run: docker build .
-        working-directory: api
-  client-build:
-    name: Client Build
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Cache Buildx
+        uses: actions/cache@v2
+        with:
+          path: /tmp/buildx-cache
+          key: buildx-api-${{ github.sha }}
+          restore-keys: buildx-api-
+      - name: Build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./api
+          cache-from: type=local,src=/tmp/buildx-cache
+          cache-to: type=local,mode=max,dest=/tmp/buildx-cache.new
+      - name: Move cache
+        run: |
+          rm -rf /tmp/buildx-cache
+          mv /tmp/buildx-cache{.new,}
+  web-build:
+    name: Web Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Build client
-        run: docker build .
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Cache Buildx
+        uses: actions/cache@v2
+        with:
+          path: /tmp/buildx-cache
+          key: buildx-web-${{ github.sha }}
+          restore-keys: buildx-web-
+      - name: Build
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          cache-from: type=local,src=/tmp/buildx-cache
+          cache-to: type=local,mode=max,dest=/tmp/buildx-cache.new
+      - name: Move cache
+        run: |
+          rm -rf /tmp/buildx-cache
+          mv /tmp/buildx-cache{.new,}

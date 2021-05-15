@@ -132,7 +132,9 @@ $ docker network create --attachable --ipv6 --subnet=fd00:4545::/48 homochecker_
 次のコマンドでコンテナーを起動します。
 
 ```sh
-$ docker-compose up -d
+$ COMPOSE_DOCKER_CLI_BUILD=1 \
+  DOCKER_BUILDKIT=1 \
+  docker-compose up -d --build
 ```
 
 ブラウザーで次の URL にアクセスします。

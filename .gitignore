@@ -3,6 +3,7 @@
 ### Composer ###
 api/vendor
 api/.php_cs.cache
+api/.phpunit.result.cache
 
 
 ### Node ###
