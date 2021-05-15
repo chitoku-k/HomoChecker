@@ -47,11 +47,14 @@ RUN --mount=type=cache,target=/root/.composer \
 RUN --mount=type=cache,target=/mnt/.composer,id=/root/.composer \
     cp -r /mnt/.composer /root/
 
-FROM debian:buster-slim
+FROM scratch
 COPY src /var/www/html/api/src
-COPY --from=runtime /etc/ssl/certs/ /etc/ssl/certs/
 COPY --from=runtime /etc/gai.conf /etc/
+COPY --from=runtime /etc/group /etc/
+COPY --from=runtime /etc/passwd /etc/
+COPY --from=runtime /etc/ssl/certs/ /etc/ssl/certs/
 COPY --from=runtime /lib/ /lib/
+COPY --from=runtime /lib64/ /lib64/
 COPY --from=runtime /usr/lib/ /usr/lib/
 COPY --from=runtime /usr/local/etc/ /usr/local/etc/
 COPY --from=runtime /usr/local/lib/ /usr/local/lib/
@@ -60,4 +63,4 @@ COPY --from=runtime /usr/share/ca-certificates/ /usr/share/ca-certificates/
 COPY --from=dependencies /var/www/html/api /var/www/html/api
 STOPSIGNAL SIGQUIT
 EXPOSE 9000
-ENTRYPOINT ["php-fpm"]
+ENTRYPOINT ["/usr/local/sbin/php-fpm"]
