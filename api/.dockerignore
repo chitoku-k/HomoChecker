@@ -4,6 +4,7 @@ cghooks.lock
 build
 tests
 vendor
+.dockerignore
 .gitignore
 .php_cs*
 *phpunit*
