@@ -9,5 +9,6 @@ client/*.gpg
 database
 docker-compose.*
 .*.yml
+.dockerignore
 .github
 .gitignore
