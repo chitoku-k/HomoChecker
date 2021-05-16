@@ -6,5 +6,5 @@ tests
 vendor
 .dockerignore
 .gitignore
-.php_cs*
+.php-cs-fixer.*
 *phpunit*
