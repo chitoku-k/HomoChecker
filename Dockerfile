@@ -1,15 +1,17 @@
 # syntax = docker/dockerfile:experimental
-FROM node:16.1.0-alpine AS dependencies
+FROM node:16.1.0-slim AS dependencies
 WORKDIR /usr/src/client
-RUN --mount=type=cache,target=/var/cache/apk \
-    apk add --no-cache --virtual build-dependencies \
+RUN --mount=type=cache,target=/var/cache/apt \
+    --mount=type=cache,target=/var/lib/apt/lists \
+    apt-get -y update && \
+    apt-get -y install \
         git
 COPY client/package.json client/package-lock.json /usr/src/client/
 RUN --mount=type=cache,target=/root/.npm \
     npm ci --no-update-notifier --no-audit --no-fund
 
 FROM dependencies AS dev
-RUN --mount=type=cache,target=/mnt/.npm/,id=/root/.npm \
+RUN --mount=type=cache,target=/mnt/.npm,id=/root/.npm \
     cp -r /mnt/.npm /root/
 
 FROM dependencies AS build
