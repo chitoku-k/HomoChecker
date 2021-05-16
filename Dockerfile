@@ -11,7 +11,7 @@ RUN --mount=type=cache,target=/root/.npm \
     npm ci --no-update-notifier --no-audit --no-fund
 
 FROM dependencies AS dev
-RUN --mount=type=cache,target=/mnt/.npm/,id=/root/.npm \
+RUN --mount=type=cache,target=/mnt/.npm,id=/root/.npm \
     cp -r /mnt/.npm /root/
 
 FROM dependencies AS build
