@@ -3,12 +3,17 @@ $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__ . '/src')
     ->in(__DIR__ . '/tests');
 
-return PhpCsFixer\Config::create()
+return (new PhpCsFixer\Config())
     ->setRules([
         '@PSR2' => true,
         '@PhpCsFixer' => true,
         'array_syntax' => [
             'syntax' => 'short',
+        ],
+        'binary_operator_spaces' => [
+            'operators' => [
+                '|' => 'no_space',
+            ],
         ],
         'blank_line_after_opening_tag' => false,
         'blank_line_before_statement' => [
@@ -18,7 +23,7 @@ return PhpCsFixer\Config::create()
             'spacing' => 'one',
         ],
         'method_chaining_indentation' => false,
-        'no_multiline_whitespace_before_semicolons' => true,
+        'multiline_whitespace_before_semicolons' => false,
         'no_superfluous_phpdoc_tags' => true,
         'no_unneeded_curly_braces' => false,
         'ordered_class_elements' => false,

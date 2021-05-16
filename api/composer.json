@@ -22,12 +22,10 @@
     },
     "require-dev": {
         "brainmaestro/composer-git-hooks": "^2.8",
+        "friendsofphp/php-cs-fixer": "^3.0",
         "mockery/mockery": "^1.4",
         "php-coveralls/php-coveralls": "^2.4",
         "phpunit/phpunit": "^9"
-    },
-    "suggest": {
-        "friendsofphp/php-cs-fixer": "^2.16"
     },
     "autoload": {
         "psr-4": {
@@ -52,7 +50,7 @@
     "extra": {
         "hooks": {
             "pre-commit": [
-                "git diff-index --cached --name-only HEAD | php-cs-fixer fix --config api/.php_cs.dist",
+                "git diff-index --cached --name-only HEAD | (cd api && composer fix)",
                 "git update-index --again"
             ]
         }

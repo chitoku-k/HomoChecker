@@ -2,7 +2,7 @@
 
 ### Composer ###
 api/vendor
-api/.php_cs.cache
+api/.php-cs-fixer.cache
 api/.phpunit.result.cache
 
 
