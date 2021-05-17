@@ -26,6 +26,7 @@ RUN --mount=type=cache,target=/var/cache/apt \
         libxml2-dev \
         zlib1g-dev && \
     apt-get -y autoremove && \
+    rm -rf /tmp/* && \
     echo 'display_errors = 0' > /usr/local/etc/php/conf.d/overrides.ini && \
     sed -i 's/^access\.log/; \0/' /usr/local/etc/php-fpm.d/docker.conf && \
     echo 'label ::1/128 0' > /etc/gai.conf
@@ -57,6 +58,7 @@ COPY --from=runtime /etc/passwd /etc/
 COPY --from=runtime /etc/ssl/certs/ /etc/ssl/certs/
 COPY --from=runtime /lib/ /lib/
 COPY --from=runtime /lib64/ /lib64/
+COPY --from=runtime /tmp/ /tmp/
 COPY --from=runtime /usr/lib/ /usr/lib/
 COPY --from=runtime /usr/local/etc/ /usr/local/etc/
 COPY --from=runtime /usr/local/lib/ /usr/local/lib/
