@@ -9,7 +9,9 @@ RUN --mount=type=cache,target=/var/cache/apt \
         libpq-dev && \
     pecl install redis && \
     docker-php-ext-enable redis && \
-    docker-php-ext-install pdo_pgsql && \
+    docker-php-ext-install \
+        opcache \
+        pdo_pgsql && \
     apt-get -y remove \
         $PHPIZE_DEPS \
         libargon2-dev \
