@@ -81,13 +81,13 @@
                     filter(({ event }) => event.type === "initialize"),
                     map(({ resource, event }) => ({ resource, data: JSON.parse(event.data) })),
                     tap(({ resource, data }) => resource.count = data.count),
-                    tap(({ resource }) => stream.next({ count: resource.count })),
+                    map(({ resource }) => resource),
                 ),
                 multicast.pipe(
                     filter(({ event }) => event.type === "response"),
                     map(({ resource, event }) => ({ resource, data: JSON.parse(event.data) })),
                     tap(({ resource }) => ++resource.currentCount),
-                    tap(({ data }) => stream.next(data)),
+                    map(({ data }) => data),
                 ),
                 multicast.pipe(
                     filter(({ event }) => event.type === "error"),
@@ -105,14 +105,13 @@
             )),
             retry(2),
         ).subscribe(
-            () => {},
+            data => stream.next(data),
             error => stream.error(error),
         );
 
         stream.pipe(
             filter(({ count }) => count),
         ).subscribe(({ count }) => {
-            opts.initialized = true;
             opts.items.length = 0;
 
             opts.progress.max = count;

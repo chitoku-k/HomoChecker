@@ -21,7 +21,6 @@ const app = document.createElement("homo-app");
 document.body.appendChild(app);
 
 riot.mount("homo-app", {
-    initialized: false,
     items: [],
     progress: {
         max: 0,
