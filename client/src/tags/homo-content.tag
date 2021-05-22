@@ -30,6 +30,8 @@
         }
     </style>
     <script type="es6">
+        import { merge, fromEvent, using, Subject } from "rxjs";
+        import { first, filter, map, publish, retry, tap } from "rxjs/operators";
         import Shuffle from "shufflejs";
         import { EventSourcePolyfill } from "event-source-polyfill";
 
@@ -55,31 +57,86 @@
             this.shuffle.add([ this.root.querySelector("homo-item:last-child") ]);
         });
 
-        const source = new EventSource("/check/");
-        source.addEventListener("initialize", event => {
-            opts.initialized = true;
-            opts.progress.max = JSON.parse(event.data).count;
-            opts.progress.trigger("update");
-        });
-        source.addEventListener("response", event => {
-            opts.items.push(JSON.parse(event.data));
-            this.update();
+        const stream = new Subject();
+        using(
+            () => {
+                const source = new EventSource("/check/");
+                return {
+                    source,
+                    count: null,
+                    currentCount: 0,
+                    unsubscribe: () => source.close(),
+                };
+            },
+            resource => merge(
+                fromEvent(resource.source, "initialize"),
+                fromEvent(resource.source, "response"),
+                fromEvent(resource.source, "error"),
+            ).pipe(
+                map(event => ({ resource, event })),
+            ),
+        ).pipe(
+            publish(multicast => merge(
+                multicast.pipe(
+                    filter(({ event }) => event.type === "initialize"),
+                    map(({ resource, event }) => ({ resource, data: JSON.parse(event.data) })),
+                    tap(({ resource, data }) => resource.count = data.count),
+                    map(({ data }) => data),
+                ),
+                multicast.pipe(
+                    filter(({ event }) => event.type === "response"),
+                    map(({ resource, event }) => ({ resource, data: JSON.parse(event.data) })),
+                    tap(({ resource }) => ++resource.currentCount),
+                    map(({ data }) => data),
+                ),
+                multicast.pipe(
+                    filter(({ event }) => event.type === "error"),
+                    filter(({ resource }) => resource.count === null || resource.currentCount < resource.count),
+                    tap(() => {
+                        throw new Error("Service Unavailable");
+                    }),
+                ),
+                multicast.pipe(
+                    filter(({ event }) => event.type === "error"),
+                    filter(({ resource }) => resource.count === resource.currentCount),
+                    tap(() => stream.complete()),
+                    tap(({ resource }) => resource.unsubscribe()),
+                ),
+            )),
+            retry(2),
+        ).subscribe(
+            data => stream.next(data),
+            error => stream.error(error),
+        );
 
-            opts.progress.length = opts.items.length;
-            opts.progress.trigger("update");
-        });
-        source.addEventListener("error", event => {
-            if (!opts.initialized) {
-                this.error = new Error("Service Unavailable");
-                this.update();
-                return;
-            }
-            if (opts.progress.max === opts.items.length) {
-                source.close();
-                return;
-            }
+        stream.pipe(
+            filter(({ count }) => count),
+        ).subscribe(({ count }) => {
             opts.items.length = 0;
+
+            opts.progress.max = count;
             opts.progress.trigger("update");
         });
+
+        stream.pipe(
+            filter(({ homo }) => homo),
+        ).subscribe(
+            data => {
+                opts.items.push(data);
+                this.update();
+
+                opts.progress.length = opts.items.length;
+                opts.progress.trigger("update");
+            },
+            error => {
+                opts.items.length = 0;
+
+                opts.progress.length = 0;
+                opts.progress.trigger("update");
+
+                this.error = error;
+                this.update();
+            },
+        );
     </script>
 </homo-content>
