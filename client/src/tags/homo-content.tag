@@ -81,7 +81,7 @@
                     filter(({ event }) => event.type === "initialize"),
                     map(({ resource, event }) => ({ resource, data: JSON.parse(event.data) })),
                     tap(({ resource, data }) => resource.count = data.count),
-                    map(({ resource }) => resource),
+                    map(({ data }) => data),
                 ),
                 multicast.pipe(
                     filter(({ event }) => event.type === "response"),
