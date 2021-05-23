@@ -34,8 +34,8 @@ class ClientService implements ClientServiceContract
                         return;
                     }
                     $result = new Response($stats->getResponse());
-                    $result->setTotalTime($stats->getHandlerStat('total_time'));
-                    $result->setStartTransferTime($stats->getHandlerStat('starttransfer_time'));
+                    $result->setTotalTime($stats->getTransferTime());
+                    $result->setStartTransferTime($stats->getHandlerStat('starttransfer_time') ?? 0.0);
                     $result->setPrimaryIP($stats->getHandlerStat('primary_ip'));
                 },
             ])->then(function (Psr7Response $response) use (&$result, &$url) {
