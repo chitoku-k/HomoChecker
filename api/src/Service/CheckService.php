@@ -3,15 +3,14 @@ declare(strict_types=1);
 
 namespace HomoChecker\Service;
 
-use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Pool;
 use GuzzleHttp\Promise\Coroutine;
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Promise\Utils;
-use GuzzleHttp\RequestOptions;
-use GuzzleHttp\TransferStats;
 use HomoChecker\Contracts\Service\CheckService as CheckServiceContract;
+use HomoChecker\Contracts\Service\Client\Response;
+use HomoChecker\Contracts\Service\ClientService as ClientServiceContract;
 use HomoChecker\Contracts\Service\HomoService as HomoServiceContract;
 use HomoChecker\Contracts\Service\ProfileService as ProfileServiceContract;
 use HomoChecker\Contracts\Service\ValidatorService as ValidatorServiceContract;
@@ -24,8 +23,6 @@ use Throwable;
 
 class CheckService implements CheckServiceContract
 {
-    public const REDIRECT = 5;
-
     /**
      * @var Collection<ProfileServiceContract>
      */
@@ -36,7 +33,7 @@ class CheckService implements CheckServiceContract
      */
     protected ?Collection $validators;
 
-    public function __construct(protected ClientInterface $client, protected HomoServiceContract $homo)
+    public function __construct(protected ClientServiceContract $client, protected HomoServiceContract $homo)
     {
     }
 
@@ -82,24 +79,21 @@ class CheckService implements CheckServiceContract
             $total_time = 0.0;
             $times = [];
             $ips = [];
-            $url = $homo->getUrl();
+
             try {
-                for ($i = 0; $i < static::REDIRECT; ++$i) {
-                    $response = yield $this->client->getAsync($url, [
-                        RequestOptions::ON_STATS => function (TransferStats $stats) use ($url, &$times, &$total_time, &$ips) {
-                            $total_time += $stats->getHandlerStat('total_time') ?? 0;
-                            $times[$url] = $stats->getHandlerStat('starttransfer_time') ?? 0;
-                            $ips[$url] = $stats->getHandlerStat('primary_ip') ?? null;
-                        },
-                    ]);
+                foreach ($this->client->getAsync($homo->getUrl()) as $url => $promise) {
+                    /** @var Response $response */
+                    $response = yield $promise;
+
                     foreach ($this->validators as $validator) {
+                        $total_time += $response->getTotalTime();
+                        $times[$url] = $response->getStartTransferTime();
+                        $ips[$url] = $response->getPrimaryIP();
+
                         if (!$status = $validator->validate($response)) {
                             continue;
                         }
                         return yield $this->getValidateStatus($homo, $status, $ips, $times);
-                    }
-                    if (!$url = $response->getHeaderLine('Location')) {
-                        break;
                     }
                 }
 

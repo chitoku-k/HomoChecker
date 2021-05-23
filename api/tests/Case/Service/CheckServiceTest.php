@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace HomoChecker\Test\Service;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Promise\FulfilledPromise;
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Promise\RejectedPromise;
+use GuzzleHttp\Psr7\Request as Psr7Request;
+use GuzzleHttp\Psr7\Response as Psr7Response;
+use HomoChecker\Contracts\Service\Client\Response;
+use HomoChecker\Contracts\Service\ClientService;
 use HomoChecker\Contracts\Service\HomoService;
 use HomoChecker\Contracts\Service\ProfileService;
 use HomoChecker\Contracts\Service\ValidatorService;
@@ -17,6 +17,7 @@ use HomoChecker\Domain\Homo;
 use HomoChecker\Domain\Status;
 use HomoChecker\Domain\Validator\ValidationResult;
 use HomoChecker\Service\CheckService;
+use Illuminate\Support\Facades\Log;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
 use Mockery\MockInterface;
@@ -58,29 +59,6 @@ class CheckServiceTest extends TestCase
 
     public function testExecuteAsync(): void
     {
-        $client = new Client([
-            'allow_redirects' => false,
-            'handler' => HandlerStack::create(new MockHandler([
-                // 'https://foo.example.com/1' (1/1)
-                new Response(301, ['Location' => 'https://homo.example.com'], ''),
-                // 'https://foo.example.com/2' (1/2)
-                new Response(302, ['Location' => 'https://foo2.example.com'], ''),
-                // 'http://bar.example.com' (1/1)
-                new Response(200, [], '
-                    <!doctype html>
-                    <title>Success</title>
-                    <meta http-equiv="refresh" content="0; https://homo.example.com">
-                '),
-                // 'https://baz.example.com' (1/1)
-                new RequestException('Connection error', new Request('GET', '')),
-                // 'https://foo2.example.com' (2/2)
-                new Response(200, [], '
-                    <!doctype html>
-                    <title>Fail</title>
-                '),
-            ])),
-        ]);
-
         /** @var HomoService|MockInterface $homo */
         $homo = m::mock(HomoService::class);
         $homo->shouldReceive('find')
@@ -109,6 +87,67 @@ class CheckServiceTest extends TestCase
                       ValidationResult::OK,
                       false,
                   );
+
+        /** @var ClientService|MockInterface $client */
+        $client = m::mock(ClientService::class);
+        $client->shouldReceive('getAsync')
+               ->withArgs(['https://foo.example.com/1'])
+               ->andReturn(
+                   (function () {
+                       $response = new Response(new Psr7Response(301, ['Location' => 'https://homo.example.com'], ''));
+                       $response->setTotalTime(1.0);
+                       $response->setStartTransferTime(2.0);
+                       $response->setPrimaryIP('2001:db8::4545:1');
+                       yield 'https://foo.example.com/1' => new FulfilledPromise($response);
+                   })(),
+               );
+
+        $client->shouldReceive('getAsync')
+               ->withArgs(['https://foo.example.com/2'])
+               ->andReturn(
+                   (function () {
+                       $response = new Response(new Psr7Response(301, ['Location' => 'https://foo2.example.com'], ''));
+                       $response->setTotalTime(2.0);
+                       $response->setStartTransferTime(3.0);
+                       $response->setPrimaryIP('2001:db8::4545:2');
+                       yield 'https://foo.example.com/2' => new FulfilledPromise($response);
+
+                       $response = new Response(new Psr7Response(200, [], '
+                           <!doctype html>
+                           <title>Fail</title>
+                       '));
+                       $response->setTotalTime(3.0);
+                       $response->setStartTransferTime(4.0);
+                       $response->setPrimaryIP('2001:db8::4545:4');
+                       yield 'https://foo2.example.com' => new FulfilledPromise($response);
+                   })(),
+               );
+
+        $client->shouldReceive('getAsync')
+               ->withArgs(['http://bar.example.com'])
+               ->andReturn(
+                   (function () {
+                       $response = new Response(new Psr7Response(200, [], '
+                           <!doctype html>
+                           <title>Fail</title>
+                       '));
+                       $response->setTotalTime(3.0);
+                       $response->setStartTransferTime(4.0);
+                       $response->setPrimaryIP('2001:db8::4545:3');
+                       yield 'http://bar.example.com' => new FulfilledPromise($response);
+                   })(),
+               );
+
+        $client->shouldReceive('getAsync')
+               ->withArgs(['https://baz.example.com'])
+               ->andReturn(
+                   (function () {
+                       $exception = new RequestException('Connection error', new Psr7Request('GET', ''));
+                       yield 'https://baz.example.com' => new RejectedPromise($exception);
+                   })(),
+               );
+
+        Log::spy();
 
         $check = new CheckService($client, $homo);
         $check->setProfiles(collect(compact('twitter', 'mastodon')));
@@ -167,7 +206,7 @@ class CheckServiceTest extends TestCase
             ]),
         ];
 
-        $actual = $check->execute(null, fn (Status $status) => '');
+        $actual = $check->execute(null, fn () => null);
         $this->assertContainsOnlyInstancesOf(Status::class, $actual);
         $this->assertEquals($expected, $actual);
     }

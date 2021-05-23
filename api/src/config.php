@@ -50,6 +50,7 @@ return [
             'User-Agent' => 'Homozilla/5.0 (Checker/1.14.514; homOSeX 8.10)',
         ],
     ],
+    'client.redirect' => 5,
     'twitter.client' => [
         'base_uri' => 'https://api.twitter.com/1.1/',
         'auth' => 'oauth',
