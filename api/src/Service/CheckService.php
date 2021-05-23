@@ -144,11 +144,12 @@ class CheckService implements CheckServiceContract
      */
     public function execute(string $screen_name = null, callable $callback = null): array
     {
-        $users = $this->homo->find($screen_name);
-
         return Pool::batch(
             $this->client,
-            array_map(fn ($item) => fn () => $this->createStatusAsync(new Homo($item), $callback), $users),
+            collect($this->homo->find($screen_name))
+                ->map(fn (\stdClass $item) => new Homo($item))
+                ->map(fn (Homo $item) => fn () => $this->createStatusAsync($item, $callback))
+                ->toArray(),
             [
                 'concurrency' => 4,
             ],
