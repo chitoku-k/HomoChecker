@@ -19,9 +19,9 @@ class Response implements ResponseInterface
     protected float $startTransferTime;
 
     /**
-     * @var string The primary IP.
+     * @var ?string The primary IP.
      */
-    protected string $primaryIP;
+    protected ?string $primaryIP;
 
     public function __construct(protected ResponseInterface $response)
     {
@@ -65,18 +65,18 @@ class Response implements ResponseInterface
 
     /**
      * Get the primary IP.
-     * @return string The primary IP.
+     * @return ?string The primary IP.
      */
-    public function getPrimaryIP(): string
+    public function getPrimaryIP(): ?string
     {
         return $this->primaryIP;
     }
 
     /**
      * Set the primary IP.
-     * @param string $primaryIP The primary IP.
+     * @param ?string $primaryIP The primary IP.
      */
-    public function setPrimaryIP(string $primaryIP): void
+    public function setPrimaryIP(?string $primaryIP): void
     {
         $this->primaryIP = $primaryIP;
     }
