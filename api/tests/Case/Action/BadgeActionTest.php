@@ -54,6 +54,7 @@ class BadgeActionTest extends TestCase
                 ]),
                 'result' => new Result([
                     'status' => 'OK',
+                    'url' => 'https://foo.example.com/1',
                 ]),
             ]),
             new Status([
@@ -64,6 +65,7 @@ class BadgeActionTest extends TestCase
                 ]),
                 'result' => new Result([
                     'status' => 'NG',
+                    'url' => 'https://foo.example.com/2',
                 ]),
             ]),
             new Status([
@@ -74,6 +76,7 @@ class BadgeActionTest extends TestCase
                 ]),
                 'result' => new Result([
                     'status' => 'OK',
+                    'url' => 'http://bar.example.com',
                 ]),
             ]),
         ];

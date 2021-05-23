@@ -49,6 +49,7 @@ return [
         'headers' => [
             'User-Agent' => 'Homozilla/5.0 (Checker/1.14.514; homOSeX 8.10)',
         ],
+        'http_errors' => false,
     ],
     'client.redirect' => 5,
     'twitter.client' => [

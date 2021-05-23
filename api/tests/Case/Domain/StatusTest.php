@@ -29,6 +29,7 @@ class StatusTest extends TestCase
         $result = new Result(compact(
             'status',
             'ip',
+            'url',
             'duration',
         ));
 
@@ -62,6 +63,7 @@ class StatusTest extends TestCase
         $result = new Result(compact(
             'status',
             'ip',
+            'url',
             'duration',
         ));
 
@@ -82,6 +84,7 @@ class StatusTest extends TestCase
         $this->assertEquals($icon, $actual->getIcon());
         $this->assertEquals($status, $actual->getResultArray()['status']);
         $this->assertEquals($ip, $actual->getResultArray()['ip']);
+        $this->assertEquals('https://ホモ.example.com', $actual->getResultArray()['url']);
         $this->assertEquals($duration, $actual->getResultArray()['duration']);
     }
 
@@ -104,6 +107,7 @@ class StatusTest extends TestCase
         $result = new Result(compact(
             'status',
             'ip',
+            'url',
             'duration',
         ));
 
@@ -123,6 +127,7 @@ class StatusTest extends TestCase
         $this->assertEquals(false, $actual->getHomoArray()['secure']);
         $this->assertEquals($status, $actual->getResultArray()['status']);
         $this->assertEquals($ip, $actual->getResultArray()['ip']);
+        $this->assertEquals('', $actual->getResultArray()['url']);
         $this->assertEquals($duration, $actual->getResultArray()['duration']);
     }
 }

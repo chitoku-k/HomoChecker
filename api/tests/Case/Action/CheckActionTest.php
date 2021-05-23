@@ -55,7 +55,9 @@ class CheckActionTest extends TestCase
                 ]),
                 'result' => new Result([
                     'status' => 'OK',
+                    'code' => '302 Found',
                     'ip' => '2001:db8::4545:1',
+                    'url' => 'https://foo.example.com/1',
                     'duration' => 10,
                 ]),
                 'icon' => 'https://icon.example.com/1',
@@ -68,7 +70,9 @@ class CheckActionTest extends TestCase
                 ]),
                 'result' => new Result([
                     'status' => 'NG',
+                    'code' => '404 Not Found',
                     'ip' => '2001:db8::4545:2',
+                    'url' => 'https://foo.example.com/2',
                     'duration' => 20,
                 ]),
                 'icon' => 'https://icon.example.com/2',
@@ -81,7 +85,9 @@ class CheckActionTest extends TestCase
                 ]),
                 'result' => new Result([
                     'status' => 'OK',
+                    'code' => '200 OK',
                     'ip' => '2001:db8::4545:3',
+                    'url' => 'https://bar.example.com/2',
                     'duration' => 30,
                 ]),
                 'icon' => 'https://icon.example.com/3',
@@ -122,8 +128,11 @@ class CheckActionTest extends TestCase
                     'icon' => 'https://icon.example.com/1',
                 ],
                 'status' => 'OK',
+                'code' => '302 Found',
                 'ip' => '2001:db8::4545:1',
+                'url' => 'https://foo.example.com/1',
                 'duration' => 10,
+                'error' => null,
             ],
             [
                 'homo' => [
@@ -135,8 +144,11 @@ class CheckActionTest extends TestCase
                     'icon' => 'https://icon.example.com/2',
                 ],
                 'status' => 'NG',
+                'code' => '404 Not Found',
                 'ip' => '2001:db8::4545:2',
+                'url' => 'https://foo.example.com/2',
                 'duration' => 20,
+                'error' => null,
             ],
             [
                 'homo' => [
@@ -148,8 +160,11 @@ class CheckActionTest extends TestCase
                     'icon' => 'https://icon.example.com/3',
                 ],
                 'status' => 'OK',
+                'code' => '200 OK',
                 'ip' => '2001:db8::4545:3',
+                'url' => 'https://bar.example.com/2',
                 'duration' => 30,
+                'error' => null,
             ],
         ]);
         $this->assertJsonStringEqualsJsonString($actual, $expected);
@@ -184,7 +199,7 @@ class CheckActionTest extends TestCase
 
         $stream->shouldReceive('write')
                ->once()
-               ->with("data: {\"homo\":{\"screen_name\":\"foo\",\"service\":\"twitter\",\"url\":\"https:\\/\\/foo.example.com\\/1\",\"display_url\":\"foo.example.com\\/1\",\"secure\":true,\"icon\":\"https:\\/\\/icon.example.com\\/1\"},\"status\":\"OK\",\"ip\":\"2001:db8::4545:1\",\"duration\":10}\n\n");
+               ->with("data: {\"homo\":{\"screen_name\":\"foo\",\"service\":\"twitter\",\"url\":\"https:\\/\\/foo.example.com\\/1\",\"display_url\":\"foo.example.com\\/1\",\"secure\":true,\"icon\":\"https:\\/\\/icon.example.com\\/1\"},\"status\":\"OK\",\"code\":\"302 Found\",\"ip\":\"2001:db8::4545:1\",\"url\":\"https:\\/\\/foo.example.com\\/1\",\"duration\":10,\"error\":null}\n\n");
 
         $stream->shouldReceive('write')
                ->once()
@@ -192,7 +207,7 @@ class CheckActionTest extends TestCase
 
         $stream->shouldReceive('write')
                ->once()
-               ->with("data: {\"homo\":{\"screen_name\":\"foo\",\"service\":\"twitter\",\"url\":\"https:\\/\\/foo.example.com\\/2\",\"display_url\":\"foo.example.com\\/2\",\"secure\":true,\"icon\":\"https:\\/\\/icon.example.com\\/2\"},\"status\":\"NG\",\"ip\":\"2001:db8::4545:2\",\"duration\":20}\n\n");
+               ->with("data: {\"homo\":{\"screen_name\":\"foo\",\"service\":\"twitter\",\"url\":\"https:\\/\\/foo.example.com\\/2\",\"display_url\":\"foo.example.com\\/2\",\"secure\":true,\"icon\":\"https:\\/\\/icon.example.com\\/2\"},\"status\":\"NG\",\"code\":\"404 Not Found\",\"ip\":\"2001:db8::4545:2\",\"url\":\"https:\\/\\/foo.example.com\\/2\",\"duration\":20,\"error\":null}\n\n");
 
         $stream->shouldReceive('write')
                ->once()
@@ -200,7 +215,7 @@ class CheckActionTest extends TestCase
 
         $stream->shouldReceive('write')
                ->once()
-               ->with("data: {\"homo\":{\"screen_name\":\"bar\",\"service\":\"mastodon\",\"url\":\"http:\\/\\/bar.example.com\",\"display_url\":\"bar.example.com\",\"secure\":false,\"icon\":\"https:\\/\\/icon.example.com\\/3\"},\"status\":\"OK\",\"ip\":\"2001:db8::4545:3\",\"duration\":30}\n\n");
+               ->with("data: {\"homo\":{\"screen_name\":\"bar\",\"service\":\"mastodon\",\"url\":\"http:\\/\\/bar.example.com\",\"display_url\":\"bar.example.com\",\"secure\":false,\"icon\":\"https:\\/\\/icon.example.com\\/3\"},\"status\":\"OK\",\"code\":\"200 OK\",\"ip\":\"2001:db8::4545:3\",\"url\":\"https:\\/\\/bar.example.com\\/2\",\"duration\":30,\"error\":null}\n\n");
 
         /** @var CheckService|MockInterface $check */
         $check = m::mock(CheckService::class);

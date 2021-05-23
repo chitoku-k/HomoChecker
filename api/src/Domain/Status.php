@@ -90,17 +90,19 @@ class Status implements \JsonSerializable
 
     /**
      * Create a display URL from an absolute URL.
-     * @param  string $url Absolute URL.
+     * @param  string $url    Absolute URL.
+     * @param  bool   $scheme Scheme.
      * @return string Display URL.
      */
-    protected function createDisplayURL(string $url): string
+    protected function createDisplayURL(string $url, bool $scheme = false): string
     {
         $domain = parse_url($url, PHP_URL_HOST);
         if (!is_string($domain)) {
             return '';
         }
+        $scheme = $scheme ? parse_url($url, PHP_URL_SCHEME) . '://' : '';
         $path = (string) parse_url($url, PHP_URL_PATH);
-        return (new Punycode())->decode($domain) . $path;
+        return $scheme . (new Punycode())->decode($domain) . $path;
     }
 
     /**
@@ -128,8 +130,11 @@ class Status implements \JsonSerializable
     {
         return [
             'status' => $this->getResult()->getStatus(),
+            'code' => $this->getResult()->getCode(),
             'ip' => $this->getResult()->getIp(),
+            'url' => $this->createDisplayURL($this->getResult()->getUrl(), true),
             'duration' => $this->getResult()->getDuration(),
+            'error' => $this->getResult()->getError(),
         ];
     }
 

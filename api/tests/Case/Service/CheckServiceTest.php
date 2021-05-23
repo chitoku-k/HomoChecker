@@ -166,7 +166,9 @@ class CheckServiceTest extends TestCase
                 ]),
                 'result' => new Result([
                     'status' => 'OK',
+                    'code' => '301 Moved Permanently',
                     'ip' => '2001:db8::4545:1',
+                    'url' => 'https://foo.example.com/1',
                     'duration' => 2.0,
                 ]),
                 'icon' => 'https://img.example.com/foo',
@@ -180,7 +182,9 @@ class CheckServiceTest extends TestCase
                 ]),
                 'result' => new Result([
                     'status' => 'WRONG',
+                    'code' => '200 OK',
                     'ip' => '2001:db8::4545:4',
+                    'url' => 'https://foo2.example.com',
                     'duration' => 7.0,
                 ]),
                 'icon' => 'https://img.example.com/foo',
@@ -194,7 +198,9 @@ class CheckServiceTest extends TestCase
                 ]),
                 'result' => new Result([
                     'status' => 'OK',
+                    'code' => '200 OK',
                     'ip' => '2001:db8::4545:3',
+                    'url' => 'http://bar.example.com',
                     'duration' => 4.0,
                 ]),
                 'icon' => 'https://img.example.com/bar',
@@ -209,6 +215,7 @@ class CheckServiceTest extends TestCase
                 'result' => new Result([
                     'status' => 'ERROR',
                     'ip' => null,
+                    'url' => 'https://baz.example.com',
                     'duration' => 0.0,
                 ]),
                 'icon' => 'https://img.example.com/baz',

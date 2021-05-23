@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace HomoChecker\Service;
 
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Pool;
 use GuzzleHttp\Promise\Coroutine;
 use GuzzleHttp\Promise\PromiseInterface;
@@ -67,6 +69,7 @@ class CheckService implements CheckServiceContract
             $total_time = 0.0;
             $total_starttransfer_time = 0.0;
             $ip = null;
+            $code = null;
 
             try {
                 foreach ($this->client->getAsync($homo->getUrl()) as $url => $promise) {
@@ -77,6 +80,7 @@ class CheckService implements CheckServiceContract
                         $total_time += $response->getTotalTime();
                         $total_starttransfer_time += $response->getStartTransferTime();
                         $ip = $response->getPrimaryIP();
+                        $code = collect([$response->getStatusCode(), $response->getReasonPhrase()])->join(' ');
 
                         if (!$status = $validator->validate($response)) {
                             continue;
@@ -84,7 +88,9 @@ class CheckService implements CheckServiceContract
 
                         return yield new Result([
                             'status' => $status,
+                            'code' => $code,
                             'ip' => $ip,
+                            'url' => $url,
                             'duration' => $total_starttransfer_time,
                         ]);
                     }
@@ -92,15 +98,30 @@ class CheckService implements CheckServiceContract
 
                 return yield new Result([
                     'status' => ValidationResult::WRONG,
+                    'code' => $code ?? null,
                     'ip' => $ip,
+                    'url' => $url ?? null,
                     'duration' => $total_starttransfer_time,
+                ]);
+            } catch (ConnectException|RequestException $e) {
+                Log::debug($e);
+
+                return yield new Result([
+                    'status' => ValidationResult::ERROR,
+                    'code' => $code ?? null,
+                    'ip' => $ip,
+                    'url' => $url ?? null,
+                    'duration' => $total_time,
+                    'error' => $e->getHandlerContext()['error'] ?? null,
                 ]);
             } catch (GuzzleException $e) {
                 Log::debug($e);
 
                 return yield new Result([
                     'status' => ValidationResult::ERROR,
+                    'code' => $code ?? null,
                     'ip' => $ip,
+                    'url' => $url ?? null,
                     'duration' => $total_time,
                 ]);
             } catch (Throwable $e) {

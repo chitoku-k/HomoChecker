@@ -18,7 +18,7 @@
                         wrong: status === "WRONG",
                         error: status === "ERROR",
                         contains: status === "CONTAINS"
-                    }>
+                    } title={ error || code }>
                         <i class={
                             fa: true,
                             fa-check: status === "OK",
@@ -33,7 +33,7 @@
                         success: status !== "ERROR",
                         secure: homo.secure,
                         insecure: !homo.secure,
-                    }>
+                    } title={ url }>
                         <i class={
                             fa: true,
                             fa-lock: homo.secure,
