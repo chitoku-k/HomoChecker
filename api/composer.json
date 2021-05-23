@@ -39,7 +39,6 @@
     },
     "scripts": {
         "test": "phpdbg -qrr $(which phpunit)",
-        "coveralls": "coveralls",
         "fix": "php-cs-fixer fix",
         "post-install-cmd": "[ \"$COMPOSER_DEV_MODE\" = 0 ] || cghooks add --ignore-lock",
         "post-update-cmd": "[ \"$COMPOSER_DEV_MODE\" = 0 ] || cghooks update"

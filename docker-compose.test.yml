@@ -9,8 +9,8 @@ services:
     command: composer test
     volumes:
       - type: bind
-        source: ./api
-        target: /var/www/html/api
+        source: .
+        target: /var/www/html
 
   build:
     build:

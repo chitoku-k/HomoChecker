@@ -33,6 +33,20 @@ jobs:
         env:
           COMPOSE_PROJECT_NAME: homochecker-test
           COMPOSE_FILE: docker-compose.test.yml
+      - name: Upload coverage
+        run: |
+          docker-compose run \
+            --rm \
+            -e COVERALLS_REPO_TOKEN=${{ github.token }} \
+            -e GITHUB_ACTIONS=true \
+            -e GITHUB_EVENT_NAME=${{ github.event_name }} \
+            -e GITHUB_REF=${{ github.ref }} \
+            -e GITHUB_RUN_ID=${{ github.run_id }} \
+            api \
+            composer exec -- php-coveralls --verbose --coverage_clover=build/logs/clover.xml
+        env:
+          COMPOSE_PROJECT_NAME: homochecker-test
+          COMPOSE_FILE: docker-compose.test.yml
       - name: Move cache
         run: |
           rm -rf /tmp/buildx-cache
