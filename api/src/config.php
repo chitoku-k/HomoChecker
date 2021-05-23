@@ -32,13 +32,13 @@ return [
         'driver' => 'single',
         'tap' => [CustomizeFormatter::class . ":[%datetime%] %level_name%: %message% %context% %extra%\n"],
         'path' => 'php://stderr',
-        'level' => 'info',
+        'level' => env('HOMOCHECKER_LOG_LEVEL', 'info'),
     ],
     'logging.channels.router' => [
         'driver' => 'single',
         'tap' => [CustomizeFormatter::class . ":%message% %context% %extra%\n"],
         'path' => 'php://stderr',
-        'level' => 'info',
+        'level' => env('HOMOCHECKER_LOG_LEVEL', 'info'),
     ],
     'logging.channels.emergency' => [
         'path' => 'php://stderr',
