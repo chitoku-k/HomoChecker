@@ -14,6 +14,7 @@ use HomoChecker\Contracts\Service\HomoService;
 use HomoChecker\Contracts\Service\ProfileService;
 use HomoChecker\Contracts\Service\ValidatorService;
 use HomoChecker\Domain\Homo;
+use HomoChecker\Domain\Result;
 use HomoChecker\Domain\Status;
 use HomoChecker\Domain\Validator\ValidationResult;
 use HomoChecker\Service\CheckService;
@@ -163,10 +164,12 @@ class CheckServiceTest extends TestCase
                     'service' => 'twitter',
                     'url' => 'https://foo.example.com/1',
                 ]),
+                'result' => new Result([
+                    'status' => 'OK',
+                    'ip' => '2001:db8::4545:1',
+                    'duration' => 2.0,
+                ]),
                 'icon' => 'https://img.example.com/foo',
-                'status' => 'OK',
-                'ip' => null,
-                'duration' => 0.0,
             ]),
             new Status([
                 'homo' => new Homo([
@@ -175,10 +178,12 @@ class CheckServiceTest extends TestCase
                     'service' => 'twitter',
                     'url' => 'https://foo.example.com/2',
                 ]),
+                'result' => new Result([
+                    'status' => 'WRONG',
+                    'ip' => '2001:db8::4545:4',
+                    'duration' => 7.0,
+                ]),
                 'icon' => 'https://img.example.com/foo',
-                'status' => 'WRONG',
-                'ip' => null,
-                'duration' => 0.0,
             ]),
             new Status([
                 'homo' => new Homo([
@@ -187,10 +192,12 @@ class CheckServiceTest extends TestCase
                     'service' => 'mastodon',
                     'url' => 'http://bar.example.com',
                 ]),
+                'result' => new Result([
+                    'status' => 'OK',
+                    'ip' => '2001:db8::4545:3',
+                    'duration' => 4.0,
+                ]),
                 'icon' => 'https://img.example.com/bar',
-                'status' => 'OK',
-                'ip' => null,
-                'duration' => 0.0,
             ]),
             new Status([
                 'homo' => new Homo([
@@ -199,10 +206,12 @@ class CheckServiceTest extends TestCase
                     'service' => 'mastodon',
                     'url' => 'https://baz.example.com',
                 ]),
+                'result' => new Result([
+                    'status' => 'ERROR',
+                    'ip' => null,
+                    'duration' => 0.0,
+                ]),
                 'icon' => 'https://img.example.com/baz',
-                'status' => 'ERROR',
-                'ip' => null,
-                'duration' => 0.0,
             ]),
         ];
 

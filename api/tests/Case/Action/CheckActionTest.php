@@ -7,6 +7,7 @@ use HomoChecker\Action\CheckAction;
 use HomoChecker\Contracts\Service\CheckService;
 use HomoChecker\Contracts\Service\HomoService;
 use HomoChecker\Domain\Homo;
+use HomoChecker\Domain\Result;
 use HomoChecker\Domain\Status;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
@@ -52,10 +53,12 @@ class CheckActionTest extends TestCase
                     'service' => 'twitter',
                     'url' => 'https://foo.example.com/1',
                 ]),
+                'result' => new Result([
+                    'status' => 'OK',
+                    'ip' => '2001:db8::4545:1',
+                    'duration' => 10,
+                ]),
                 'icon' => 'https://icon.example.com/1',
-                'status' => 'OK',
-                'ip' => '2001:db8::4545:1',
-                'duration' => 10,
             ]),
             new Status([
                 'homo' => new Homo([
@@ -63,10 +66,12 @@ class CheckActionTest extends TestCase
                     'service' => 'twitter',
                     'url' => 'https://foo.example.com/2',
                 ]),
+                'result' => new Result([
+                    'status' => 'NG',
+                    'ip' => '2001:db8::4545:2',
+                    'duration' => 20,
+                ]),
                 'icon' => 'https://icon.example.com/2',
-                'status' => 'NG',
-                'ip' => '2001:db8::4545:2',
-                'duration' => 20,
             ]),
             new Status([
                 'homo' => new Homo([
@@ -74,10 +79,12 @@ class CheckActionTest extends TestCase
                     'service' => 'mastodon',
                     'url' => 'http://bar.example.com',
                 ]),
+                'result' => new Result([
+                    'status' => 'OK',
+                    'ip' => '2001:db8::4545:3',
+                    'duration' => 30,
+                ]),
                 'icon' => 'https://icon.example.com/3',
-                'status' => 'OK',
-                'ip' => '2001:db8::4545:3',
-                'duration' => 30,
             ]),
         ];
     }

@@ -13,24 +13,14 @@ class Status implements \JsonSerializable
     protected ?Homo $homo;
 
     /**
-     * @var ?string The URL of the icon.
+     * @var ?Result The result object.
+     */
+    protected ?Result $result;
+
+    /**
+     * @var ?string The icon URL.
      */
     protected ?string $icon;
-
-    /**
-     * @var ?string The status string that represents the result of the request.
-     */
-    protected ?string $status;
-
-    /**
-     * @var ?string The IP address to which the server sent a request.
-     */
-    protected ?string $ip;
-
-    /**
-     * @var ?float The duration of the request.
-     */
-    protected ?float $duration;
 
     /**
      * @param array|object $status
@@ -40,10 +30,8 @@ class Status implements \JsonSerializable
         $status = (object) $status;
 
         $this->setHomo($status->homo ?? null);
+        $this->setResult($status->result ?? null);
         $this->setIcon($status->icon ?? null);
-        $this->setStatus($status->status ?? null);
-        $this->setIp($status->ip ?? null);
-        $this->setDuration($status->duration ?? null);
     }
 
     /**
@@ -65,6 +53,24 @@ class Status implements \JsonSerializable
     }
 
     /**
+     * Get the result object.
+     * @return ?Result The result object.
+     */
+    public function getResult(): ?Result
+    {
+        return $this->result;
+    }
+
+    /**
+     * Set the result object.
+     * @param ?Result $result The result object.
+     */
+    public function setResult(?Result $result): void
+    {
+        $this->result = $result;
+    }
+
+    /**
      * Get the URL of the icon.
      * @return ?string The URL of the icon.
      */
@@ -80,60 +86,6 @@ class Status implements \JsonSerializable
     public function setIcon(?string $icon): void
     {
         $this->icon = $icon;
-    }
-
-    /**
-     * Get the status string that represents the result of the request.
-     * @return ?string The status string that represents the result of the request.
-     */
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    /**
-     * Set the status string that represents the result of the request.
-     * @param ?string $status The status string that represents the result of the request.
-     */
-    public function setStatus(?string $status): void
-    {
-        $this->status = $status;
-    }
-
-    /**
-     * Get the IP address to which the server sent a request.
-     * @return ?string The IP address to which the server sent a request.
-     */
-    public function getIp(): ?string
-    {
-        return $this->ip;
-    }
-
-    /**
-     * Set the IP address to which the server sent a request.
-     * @param ?string $ip The IP address to which the server sent a request.
-     */
-    public function setIp(?string $ip): void
-    {
-        $this->ip = $ip;
-    }
-
-    /**
-     * Get the duration of the request.
-     * @return ?float The duration of the request.
-     */
-    public function getDuration(): ?float
-    {
-        return $this->duration;
-    }
-
-    /**
-     * Set the duration of the request.
-     * @param ?float $duration The duration of the request.
-     */
-    public function setDuration(?float $duration): void
-    {
-        $this->duration = $duration;
     }
 
     /**
@@ -172,6 +124,15 @@ class Status implements \JsonSerializable
         ];
     }
 
+    public function getResultArray()
+    {
+        return [
+            'status' => $this->getResult()->getStatus(),
+            'ip' => $this->getResult()->getIp(),
+            'duration' => $this->getResult()->getDuration(),
+        ];
+    }
+
     /**
      * Return the serializable output of this object.
      * @return array The array.
@@ -182,9 +143,6 @@ class Status implements \JsonSerializable
             'homo' => $this->getHomoArray() + [
                 'icon' => $this->getIcon(),
             ],
-            'status' => $this->getStatus(),
-            'ip' => $this->getIp(),
-            'duration' => $this->getDuration(),
-        ];
+        ] + $this->getResultArray();
     }
 }

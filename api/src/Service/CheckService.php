@@ -15,6 +15,7 @@ use HomoChecker\Contracts\Service\HomoService as HomoServiceContract;
 use HomoChecker\Contracts\Service\ProfileService as ProfileServiceContract;
 use HomoChecker\Contracts\Service\ValidatorService as ValidatorServiceContract;
 use HomoChecker\Domain\Homo;
+use HomoChecker\Domain\Result;
 use HomoChecker\Domain\Status;
 use HomoChecker\Domain\Validator\ValidationResult;
 use Illuminate\Support\Collection;
@@ -55,19 +56,6 @@ class CheckService implements CheckServiceContract
         $this->validators = $validators;
     }
 
-    private function getValidateStatus(Homo $homo, string $status, array $ips, array|float $times): array
-    {
-        if (!is_array($times)) {
-            return [$status, $ips[$homo->getUrl()], $times];
-        }
-
-        $offset = array_search($homo->getUrl(), array_keys($ips)) + 1;
-        array_splice($ips, $offset);
-        array_splice($times, $offset);
-
-        return [$status, array_pop($ips), array_sum($times)];
-    }
-
     /**
      * Validate a user.
      * @param  Homo             $homo The user.
@@ -77,8 +65,8 @@ class CheckService implements CheckServiceContract
     {
         return Coroutine::of(function () use ($homo) {
             $total_time = 0.0;
-            $times = [];
-            $ips = [];
+            $total_starttransfer_time = 0.0;
+            $ip = null;
 
             try {
                 foreach ($this->client->getAsync($homo->getUrl()) as $url => $promise) {
@@ -87,19 +75,34 @@ class CheckService implements CheckServiceContract
 
                     foreach ($this->validators as $validator) {
                         $total_time += $response->getTotalTime();
-                        $times[$url] = $response->getStartTransferTime();
-                        $ips[$url] = $response->getPrimaryIP();
+                        $total_starttransfer_time += $response->getStartTransferTime();
+                        $ip = $response->getPrimaryIP();
 
                         if (!$status = $validator->validate($response)) {
                             continue;
                         }
-                        return yield $this->getValidateStatus($homo, $status, $ips, $times);
+
+                        return yield new Result([
+                            'status' => $status,
+                            'ip' => $ip,
+                            'duration' => $total_starttransfer_time,
+                        ]);
                     }
                 }
 
-                return yield $this->getValidateStatus($homo, ValidationResult::WRONG, $ips, $times);
+                return yield new Result([
+                    'status' => ValidationResult::WRONG,
+                    'ip' => $ip,
+                    'duration' => $total_starttransfer_time,
+                ]);
             } catch (GuzzleException $e) {
-                return yield $this->getValidateStatus($homo, ValidationResult::ERROR, $ips, $total_time);
+                Log::debug($e);
+
+                return yield new Result([
+                    'status' => ValidationResult::ERROR,
+                    'ip' => $ip,
+                    'duration' => $total_time,
+                ]);
             } catch (Throwable $e) {
                 Log::error($e);
             }
@@ -115,21 +118,19 @@ class CheckService implements CheckServiceContract
     protected function createStatusAsync(Homo $homo, callable $callback = null): PromiseInterface
     {
         return Coroutine::of(function () use ($homo, $callback) {
-            [[$status, $ip, $duration], $icon] = yield Utils::all([
+            [$result, $icon] = yield Utils::all([
                 $this->validateAsync($homo),
                 $this->profiles->get($homo->getService())->getIconAsync($homo->getScreenName()),
             ]);
-            $result = new Status(compact(
-                'homo',
-                'icon',
-                'status',
-                'ip',
-                'duration',
-            ));
+            $status = new Status([
+                'homo' => $homo,
+                'result' => $result,
+                'icon' => $icon,
+            ]);
             if ($callback) {
-                $callback($result);
+                $callback($status);
             }
-            return yield $result;
+            return yield $status;
         });
     }
 
