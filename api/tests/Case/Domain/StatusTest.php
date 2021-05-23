@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace HomoChecker\Test\Domain;
 
 use HomoChecker\Domain\Homo;
+use HomoChecker\Domain\Result;
 use HomoChecker\Domain\Status;
 use PHPUnit\Framework\TestCase;
 
@@ -25,19 +26,22 @@ class StatusTest extends TestCase
             'url',
         ));
 
-        $actual = new Status(compact(
-            'homo',
-            'icon',
+        $result = new Result(compact(
             'status',
             'ip',
+            'url',
             'duration',
         ));
 
+        $actual = new Status(compact(
+            'homo',
+            'result',
+            'icon',
+        ));
+
         $this->assertEquals($homo, $actual->getHomo());
+        $this->assertEquals($result, $actual->getResult());
         $this->assertEquals($icon, $actual->getIcon());
-        $this->assertEquals($status, $actual->getStatus());
-        $this->assertEquals($ip, $actual->getIp());
-        $this->assertEquals($duration, $actual->getDuration());
     }
 
     public function testCorrectDomain(): void
@@ -56,12 +60,17 @@ class StatusTest extends TestCase
             'url',
         ));
 
-        $actual = new Status(compact(
-            'homo',
-            'icon',
+        $result = new Result(compact(
             'status',
             'ip',
+            'url',
             'duration',
+        ));
+
+        $actual = new Status(compact(
+            'homo',
+            'result',
+            'icon',
         ));
 
         $this->assertEquals($screen_name, $actual->getHomo()->getScreenName());
@@ -73,9 +82,10 @@ class StatusTest extends TestCase
         $this->assertEquals('ホモ.example.com', $actual->getHomoArray()['display_url']);
         $this->assertEquals(true, $actual->getHomoArray()['secure']);
         $this->assertEquals($icon, $actual->getIcon());
-        $this->assertEquals($status, $actual->getStatus());
-        $this->assertEquals($ip, $actual->getIp());
-        $this->assertEquals($duration, $actual->getDuration());
+        $this->assertEquals($status, $actual->getResultArray()['status']);
+        $this->assertEquals($ip, $actual->getResultArray()['ip']);
+        $this->assertEquals('https://ホモ.example.com', $actual->getResultArray()['url']);
+        $this->assertEquals($duration, $actual->getResultArray()['duration']);
     }
 
     public function testIncorrectDomain(): void
@@ -94,12 +104,17 @@ class StatusTest extends TestCase
             'url',
         ));
 
-        $actual = new Status(compact(
-            'homo',
-            'icon',
+        $result = new Result(compact(
             'status',
             'ip',
+            'url',
             'duration',
+        ));
+
+        $actual = new Status(compact(
+            'homo',
+            'result',
+            'icon',
         ));
 
         $this->assertEquals($screen_name, $actual->getHomo()->getScreenName());
@@ -110,9 +125,9 @@ class StatusTest extends TestCase
         $this->assertEquals($url, $actual->getHomoArray()['url']);
         $this->assertEquals('', $actual->getHomoArray()['display_url']);
         $this->assertEquals(false, $actual->getHomoArray()['secure']);
-        $this->assertEquals($icon, $actual->getIcon());
-        $this->assertEquals($status, $actual->getStatus());
-        $this->assertEquals($ip, $actual->getIp());
-        $this->assertEquals($duration, $actual->getDuration());
+        $this->assertEquals($status, $actual->getResultArray()['status']);
+        $this->assertEquals($ip, $actual->getResultArray()['ip']);
+        $this->assertEquals('', $actual->getResultArray()['url']);
+        $this->assertEquals($duration, $actual->getResultArray()['duration']);
     }
 }

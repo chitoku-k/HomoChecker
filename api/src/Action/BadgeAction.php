@@ -35,7 +35,9 @@ class BadgeAction
             return $this->homo->count();
         }
 
-        $result = $this->check->execute();
-        return count(array_filter($result, fn (Status $item) => strcasecmp($item->getStatus(), $status) === 0));
+        return collect($this->check->execute())
+            ->map(fn (Status $item) => $item->getResult()->getStatus())
+            ->filter(fn (?string $item) => strcasecmp($item, $status) === 0)
+            ->count();
     }
 }

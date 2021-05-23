@@ -7,6 +7,7 @@ use HomoChecker\Action\BadgeAction;
 use HomoChecker\Contracts\Service\CheckService;
 use HomoChecker\Contracts\Service\HomoService;
 use HomoChecker\Domain\Homo;
+use HomoChecker\Domain\Result;
 use HomoChecker\Domain\Status;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
@@ -51,7 +52,10 @@ class BadgeActionTest extends TestCase
                     'service' => 'twitter',
                     'url' => 'https://foo.example.com/1',
                 ]),
-                'status' => 'OK',
+                'result' => new Result([
+                    'status' => 'OK',
+                    'url' => 'https://foo.example.com/1',
+                ]),
             ]),
             new Status([
                 'homo' => new Homo([
@@ -59,7 +63,10 @@ class BadgeActionTest extends TestCase
                     'service' => 'twitter',
                     'url' => 'https://foo.example.com/2',
                 ]),
-                'status' => 'NG',
+                'result' => new Result([
+                    'status' => 'NG',
+                    'url' => 'https://foo.example.com/2',
+                ]),
             ]),
             new Status([
                 'homo' => new Homo([
@@ -67,7 +74,10 @@ class BadgeActionTest extends TestCase
                     'service' => 'mastodon',
                     'url' => 'http://bar.example.com',
                 ]),
-                'status' => 'OK',
+                'result' => new Result([
+                    'status' => 'OK',
+                    'url' => 'http://bar.example.com',
+                ]),
             ]),
         ];
     }

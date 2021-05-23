@@ -7,10 +7,12 @@ use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use HomoChecker\Contracts\Service\CacheService as CacheServiceContract;
 use HomoChecker\Contracts\Service\CheckService as CheckServiceContract;
+use HomoChecker\Contracts\Service\ClientService as ClientServiceContract;
 use HomoChecker\Contracts\Service\HomoService as HomoServiceContract;
 use HomoChecker\Http\NonBufferedBody;
 use HomoChecker\Service\CacheService;
 use HomoChecker\Service\CheckService;
+use HomoChecker\Service\ClientService;
 use HomoChecker\Service\HomoService;
 use Illuminate\Cache\CacheServiceProvider;
 use Illuminate\Contracts\Container\Container;
@@ -50,6 +52,11 @@ class HomoProvider extends ServiceProvider
             $check->setValidators($app->make('validators'));
             return $check;
         });
+
+        $this->app->singleton(ClientServiceContract::class, ClientService::class);
+        $this->app->when(ClientService::class)
+            ->needs('$redirect')
+            ->give(fn (Container $app) => $app->make('config')->get('client.redirect'));
 
         $this->app->singleton(HomoServiceContract::class, HomoService::class);
 

@@ -32,13 +32,13 @@ return [
         'driver' => 'single',
         'tap' => [CustomizeFormatter::class . ":[%datetime%] %level_name%: %message% %context% %extra%\n"],
         'path' => 'php://stderr',
-        'level' => 'info',
+        'level' => env('HOMOCHECKER_LOG_LEVEL', 'info'),
     ],
     'logging.channels.router' => [
         'driver' => 'single',
         'tap' => [CustomizeFormatter::class . ":%message% %context% %extra%\n"],
         'path' => 'php://stderr',
-        'level' => 'info',
+        'level' => env('HOMOCHECKER_LOG_LEVEL', 'info'),
     ],
     'logging.channels.emergency' => [
         'path' => 'php://stderr',
@@ -49,7 +49,9 @@ return [
         'headers' => [
             'User-Agent' => 'Homozilla/5.0 (Checker/1.14.514; homOSeX 8.10)',
         ],
+        'http_errors' => false,
     ],
+    'client.redirect' => 5,
     'twitter.client' => [
         'base_uri' => 'https://api.twitter.com/1.1/',
         'auth' => 'oauth',

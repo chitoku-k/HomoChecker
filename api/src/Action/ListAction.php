@@ -39,10 +39,10 @@ class ListAction
 
     protected function createArray(array $homos): array
     {
-        return array_map(function (\stdClass $item): array {
-            $homo = new Homo($item);
-            $status = new Status(compact('homo'));
-            return $status->getHomoArray();
-        }, $homos);
+        return collect($homos)
+            ->map(fn (\stdClass $item) => new Homo($item))
+            ->map(fn (Homo $item) => new Status(['homo' => $item]))
+            ->map(fn (Status $item) => $item->getHomoArray())
+            ->toArray();
     }
 }

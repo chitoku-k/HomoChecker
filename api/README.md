@@ -30,7 +30,7 @@ event: initialize
 data: {"count":30}
 
 event: response
-data: {"homo":{"screen_name":"@chitoku@mstdn.jp","service":"mastodon","url":"https:\/\/homo.chitoku.jp","display_url":"homo.chitoku.jp","secure":true},"status":"OK","duration":0.45}
+data: {"homo":{"screen_name":"@chitoku@mstdn.jp","service":"mastodon","url":"https:\/\/homo.chitoku.jp","display_url":"homo.chitoku.jp","icon":"https:\/\/example.com\/icon.png","secure":true},"status":"OK","code":"302 Found","ip":"2001:db8::4545:4545","url":"https:\/\/homo.chitoku.jp","duration":0.45,"error":null}
 ```
 
 `event` が `initialize` の場合は `data` は `count` を持つ JSON データです。  
@@ -48,20 +48,20 @@ data: {"homo":{"screen_name":"@chitoku@mstdn.jp","service":"mastodon","url":"htt
             // (string) スクリーンネーム
             // Twitter の場合は @ を除くユーザー名
             // Mastodon の場合は @example@mastodon.social 表記のユーザー名
-            "screen_name": "",
+            "screen_name": "@chitoku@mstdn.jp",
 
             // (string) サービス
             // twitter または mastodon
-            "service": "",
+            "service": "mastodon",
 
             // (string) URL
-            "url": "",
+            "url": "https://homo.chitoku.jp",
 
             // (string) 表示用の URL
-            "display_url": "",
+            "display_url": "homo.chitoku.jp",
 
             // (string) アイコンの URL
-            "icon": "",
+            "icon": "https://example.com/icon.png",
 
             // (bool) HTTPS 接続かどうかを示す値
             "secure": true
@@ -72,13 +72,22 @@ data: {"homo":{"screen_name":"@chitoku@mstdn.jp","service":"mastodon","url":"htt
         // WRONG: リダイレクト未設定
         // CONTAINS: ページ内に URL を含む
         // ERROR: 接続失敗/タイムアウト
-        "status": "",
+        "status": "OK",
 
-        // (string) 直前の接続先の IPv4 または IPv6（サポートしている場合）アドレス
+        // (string|null) 直前の接続先の HTTP レスポンスコード
+        "code": "302 Found",
+
+        // (string|null) 直前の接続先の IPv4 または IPv6（サポートしている場合）アドレス
         "ip": "2001:db8::4545:4545",
 
+        // (string) 直前の接続先の URL
+        "url": "https://homo.chitoku.jp",
+
         // (number) リダイレクトにかかった時間 (s)
-        "duration": 0.0
+        "duration": 0.0,
+
+        // (string|null) エラーメッセージ
+        "error": "SSL: no alternative certificate subject name matches target host name 'homo.chitoku.jp'"
     }
 ]
 ```

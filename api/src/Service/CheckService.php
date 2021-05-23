@@ -3,19 +3,21 @@ declare(strict_types=1);
 
 namespace HomoChecker\Service;
 
-use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Pool;
 use GuzzleHttp\Promise\Coroutine;
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Promise\Utils;
-use GuzzleHttp\RequestOptions;
-use GuzzleHttp\TransferStats;
 use HomoChecker\Contracts\Service\CheckService as CheckServiceContract;
+use HomoChecker\Contracts\Service\Client\Response;
+use HomoChecker\Contracts\Service\ClientService as ClientServiceContract;
 use HomoChecker\Contracts\Service\HomoService as HomoServiceContract;
 use HomoChecker\Contracts\Service\ProfileService as ProfileServiceContract;
 use HomoChecker\Contracts\Service\ValidatorService as ValidatorServiceContract;
 use HomoChecker\Domain\Homo;
+use HomoChecker\Domain\Result;
 use HomoChecker\Domain\Status;
 use HomoChecker\Domain\Validator\ValidationResult;
 use Illuminate\Support\Collection;
@@ -24,8 +26,6 @@ use Throwable;
 
 class CheckService implements CheckServiceContract
 {
-    public const REDIRECT = 5;
-
     /**
      * @var Collection<ProfileServiceContract>
      */
@@ -36,7 +36,7 @@ class CheckService implements CheckServiceContract
      */
     protected ?Collection $validators;
 
-    public function __construct(protected ClientInterface $client, protected HomoServiceContract $homo)
+    public function __construct(protected ClientServiceContract $client, protected HomoServiceContract $homo)
     {
     }
 
@@ -58,19 +58,6 @@ class CheckService implements CheckServiceContract
         $this->validators = $validators;
     }
 
-    private function getValidateStatus(Homo $homo, string $status, array $ips, array|float $times): array
-    {
-        if (!is_array($times)) {
-            return [$status, $ips[$homo->getUrl()], $times];
-        }
-
-        $offset = array_search($homo->getUrl(), array_keys($ips)) + 1;
-        array_splice($ips, $offset);
-        array_splice($times, $offset);
-
-        return [$status, array_pop($ips), array_sum($times)];
-    }
-
     /**
      * Validate a user.
      * @param  Homo             $homo The user.
@@ -80,32 +67,63 @@ class CheckService implements CheckServiceContract
     {
         return Coroutine::of(function () use ($homo) {
             $total_time = 0.0;
-            $times = [];
-            $ips = [];
-            $url = $homo->getUrl();
+            $total_starttransfer_time = 0.0;
+            $ip = null;
+            $code = null;
+
             try {
-                for ($i = 0; $i < static::REDIRECT; ++$i) {
-                    $response = yield $this->client->getAsync($url, [
-                        RequestOptions::ON_STATS => function (TransferStats $stats) use ($url, &$times, &$total_time, &$ips) {
-                            $total_time += $stats->getHandlerStat('total_time') ?? 0;
-                            $times[$url] = $stats->getHandlerStat('starttransfer_time') ?? 0;
-                            $ips[$url] = $stats->getHandlerStat('primary_ip') ?? null;
-                        },
-                    ]);
+                foreach ($this->client->getAsync($homo->getUrl()) as $url => $promise) {
+                    /** @var Response $response */
+                    $response = yield $promise;
+
                     foreach ($this->validators as $validator) {
+                        $total_time += $response->getTotalTime();
+                        $total_starttransfer_time += $response->getStartTransferTime();
+                        $ip = $response->getPrimaryIP();
+                        $code = collect([$response->getStatusCode(), $response->getReasonPhrase()])->join(' ');
+
                         if (!$status = $validator->validate($response)) {
                             continue;
                         }
-                        return yield $this->getValidateStatus($homo, $status, $ips, $times);
-                    }
-                    if (!$url = $response->getHeaderLine('Location')) {
-                        break;
+
+                        return yield new Result([
+                            'status' => $status,
+                            'code' => $code,
+                            'ip' => $ip,
+                            'url' => $url,
+                            'duration' => $total_starttransfer_time,
+                        ]);
                     }
                 }
 
-                return yield $this->getValidateStatus($homo, ValidationResult::WRONG, $ips, $times);
+                return yield new Result([
+                    'status' => ValidationResult::WRONG,
+                    'code' => $code ?? null,
+                    'ip' => $ip,
+                    'url' => $url ?? null,
+                    'duration' => $total_starttransfer_time,
+                ]);
+            } catch (ConnectException|RequestException $e) {
+                Log::debug($e);
+
+                return yield new Result([
+                    'status' => ValidationResult::ERROR,
+                    'code' => $code ?? null,
+                    'ip' => $ip,
+                    'url' => $url ?? null,
+                    'duration' => $total_time,
+                    'error' => $e->getHandlerContext()['error'] ?? null,
+                ]);
             } catch (GuzzleException $e) {
-                return yield $this->getValidateStatus($homo, ValidationResult::ERROR, $ips, $total_time);
+                Log::debug($e);
+
+                return yield new Result([
+                    'status' => ValidationResult::ERROR,
+                    'code' => $code ?? null,
+                    'ip' => $ip,
+                    'url' => $url ?? null,
+                    'duration' => $total_time,
+                ]);
             } catch (Throwable $e) {
                 Log::error($e);
             }
@@ -121,21 +139,19 @@ class CheckService implements CheckServiceContract
     protected function createStatusAsync(Homo $homo, callable $callback = null): PromiseInterface
     {
         return Coroutine::of(function () use ($homo, $callback) {
-            [[$status, $ip, $duration], $icon] = yield Utils::all([
+            [$result, $icon] = yield Utils::all([
                 $this->validateAsync($homo),
                 $this->profiles->get($homo->getService())->getIconAsync($homo->getScreenName()),
             ]);
-            $result = new Status(compact(
-                'homo',
-                'icon',
-                'status',
-                'ip',
-                'duration',
-            ));
+            $status = new Status([
+                'homo' => $homo,
+                'result' => $result,
+                'icon' => $icon,
+            ]);
             if ($callback) {
-                $callback($result);
+                $callback($status);
             }
-            return yield $result;
+            return yield $status;
         });
     }
 
@@ -144,11 +160,12 @@ class CheckService implements CheckServiceContract
      */
     public function execute(string $screen_name = null, callable $callback = null): array
     {
-        $users = $this->homo->find($screen_name);
-
         return Pool::batch(
             $this->client,
-            array_map(fn ($item) => fn () => $this->createStatusAsync(new Homo($item), $callback), $users),
+            collect($this->homo->find($screen_name))
+                ->map(fn (\stdClass $item) => new Homo($item))
+                ->map(fn (Homo $item) => fn () => $this->createStatusAsync($item, $callback))
+                ->toArray(),
             [
                 'concurrency' => 4,
             ],
