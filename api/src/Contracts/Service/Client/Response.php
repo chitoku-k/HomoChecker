@@ -86,16 +86,16 @@ class Response implements ResponseInterface
         return $this->response->getStatusCode();
     }
 
+    public function getReasonPhrase(): string
+    {
+        return $this->response->getReasonPhrase();
+    }
+
     public function withStatus($code, $reasonPhrase = ''): static
     {
         $self = clone $this;
         $self->response = $self->response->withStatus($code, $reasonPhrase);
         return $self;
-    }
-
-    public function getReasonPhrase(): string
-    {
-        return $this->response->getReasonPhrase();
     }
 
     public function getProtocolVersion(): string
