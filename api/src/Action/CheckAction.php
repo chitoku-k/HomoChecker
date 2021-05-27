@@ -20,15 +20,10 @@ class CheckAction
     {
         $screen_name = $args['name'] ?? null;
 
-        switch ($request->getQueryParams()['format'] ?? 'sse') {
-            case 'json': {
-                return $this->byJSON($response, $screen_name);
-            }
-            case 'sse':
-            default: {
-                return $this->bySSE($response, $screen_name);
-            }
-        }
+        return match ($request->getQueryParam('format')) {
+            'json' => $this->byJSON($response, $screen_name),
+            default => $this->bySSE($response, $screen_name),
+        };
     }
 
     protected function byJSON(Response $response, string $screen_name = null): Response
