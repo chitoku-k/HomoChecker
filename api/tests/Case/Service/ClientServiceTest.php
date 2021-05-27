@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace HomoChecker\Test\Service;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -13,7 +14,11 @@ use GuzzleHttp\Psr7\Response as Psr7Response;
 use HomoChecker\Contracts\Service\Client\Response;
 use HomoChecker\Service\ClientService;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use Mockery as m;
+use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 class ClientServiceTest extends TestCase
 {
@@ -152,5 +157,100 @@ class ClientServiceTest extends TestCase
         $this->expectException(RequestException::class);
         $this->expectExceptionMessage('Connection error');
         $actual->wait();
+    }
+
+    public function testSend(): void
+    {
+        /** @var MockInterface|RequestInterface */
+        $request = m::mock(RequestInterface::class);
+
+        /** @var MockInterface|ResponseInterface */
+        $response = m::mock(ResponseInterface::class);
+
+        /** @var ClientInterface|MockInterface */
+        $client = m::mock(ClientInterface::class);
+        $client->shouldReceive('send')
+               ->withArgs([$request, ['http_errors' => false]])
+               ->andReturn($response);
+
+        $service = new ClientService($client, 5);
+        $actual = $service->send($request, [
+            'http_errors' => false,
+        ]);
+
+        $this->assertEquals($response, $actual);
+    }
+
+    public function testSendAsync(): void
+    {
+        /** @var MockInterface|RequestInterface */
+        $request = m::mock(RequestInterface::class);
+
+        /** @var MockInterface|PromiseInterface */
+        $promise = m::mock(PromiseInterface::class);
+
+        /** @var ClientInterface|MockInterface */
+        $client = m::mock(ClientInterface::class);
+        $client->shouldReceive('sendAsync')
+               ->withArgs([$request, ['http_errors' => false]])
+               ->andReturn($promise);
+
+        $service = new ClientService($client, 5);
+        $actual = $service->sendAsync($request, [
+            'http_errors' => false,
+        ]);
+
+        $this->assertEquals($promise, $actual);
+    }
+
+    public function testRequest(): void
+    {
+        /** @var MockInterface|ResponseInterface */
+        $response = m::mock(ResponseInterface::class);
+
+        /** @var ClientInterface|MockInterface */
+        $client = m::mock(ClientInterface::class);
+        $client->shouldReceive('request')
+               ->withArgs(['GET', 'https://example.com', ['http_errors' => false]])
+               ->andReturn($response);
+
+        $service = new ClientService($client, 5);
+        $actual = $service->request('GET', 'https://example.com', [
+            'http_errors' => false,
+        ]);
+
+        $this->assertEquals($response, $actual);
+    }
+
+    public function testRequestAsync(): void
+    {
+        /** @var MockInterface|PromiseInterface */
+        $promise = m::mock(PromiseInterface::class);
+
+        /** @var ClientInterface|MockInterface */
+        $client = m::mock(ClientInterface::class);
+        $client->shouldReceive('requestAsync')
+               ->withArgs(['GET', 'https://example.com', ['http_errors' => false]])
+               ->andReturn($promise);
+
+        $service = new ClientService($client, 5);
+        $actual = $service->requestAsync('GET', 'https://example.com', [
+            'http_errors' => false,
+        ]);
+
+        $this->assertEquals($promise, $actual);
+    }
+
+    public function testGetConfig(): void
+    {
+        /** @var ClientInterface|MockInterface */
+        $client = m::mock(ClientInterface::class);
+        $client->shouldReceive('getConfig')
+               ->andReturn(['http_errors' => false]);
+
+        $service = new ClientService($client, 5);
+        $actual = $service->getConfig();
+
+        $this->assertEquals(['http_errors' => false], $actual);
     }
 }

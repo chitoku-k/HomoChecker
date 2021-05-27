@@ -52,6 +52,10 @@ class ListActionTest extends TestCase
         $request = (new RequestFactory())->createRequest('GET', '/list');
 
         $response = $action(new HttpRequest($request), new HttpResponse(new Response(), new StreamFactory()), []);
+
+        $actual = $response->getStatusCode();
+        $this->assertEquals(200, $actual);
+
         $actual = $response->getHeaderLine('Content-Type');
         $this->assertMatchesRegularExpression('|^application/json|', $actual);
 
@@ -81,15 +85,41 @@ class ListActionTest extends TestCase
         ];
 
         $expected = json_encode($users);
-        $this->assertJsonStringEqualsJsonString($actual, $expected);
+        $this->assertJsonStringEqualsJsonString($expected, $actual);
+    }
+
+    public function testListWithNotFoundByJSON(): void
+    {
+        /** @var HomoService|MockInterface $homo */
+        $homo = m::mock(HomoService::class);
+        $homo->shouldReceive('find')
+             ->with('baz')
+             ->andReturn([]);
+
+        $action = new ListAction($homo);
+        $request = (new RequestFactory())->createRequest('GET', '/list/baz/');
+
+        $response = $action(new HttpRequest($request), new HttpResponse(new Response(), new StreamFactory()), ['name' => 'baz']);
+
+        $actual = $response->getStatusCode();
+        $this->assertEquals(404, $actual);
+
+        $actual = $response->getHeaderLine('Content-Type');
+        $this->assertMatchesRegularExpression('|^application/json|', $actual);
+
+        $actual = (string) $response->getBody();
+        $users = [];
+
+        $expected = json_encode($users);
+        $this->assertJsonStringEqualsJsonString($expected, $actual);
     }
 
     public function testListBySQL(): void
     {
         $sql = <<<'SQL'
-        insert into `users` (`screen_name`, `service`, `url`) values ('foo', 'twitter', 'https://foo.example.com/1');
-        insert into `users` (`screen_name`, `service`, `url`) values ('foo', 'twitter', 'https://foo.example.com/2');
-        insert into `users` (`screen_name`, `service`, `url`) values ('bar', 'twitter', 'https://bar.example.com');
+        insert into "users" ("screen_name", "service", "url") values ('foo', 'twitter', 'https://foo.example.com/1');
+        insert into "users" ("screen_name", "service", "url") values ('foo', 'twitter', 'https://foo.example.com/2');
+        insert into "users" ("screen_name", "service", "url") values ('bar', 'twitter', 'https://bar.example.com');
         SQL;
 
         /** @var HomoService|MockInterface $homo */

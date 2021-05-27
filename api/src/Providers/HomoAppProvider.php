@@ -8,11 +8,13 @@ use HomoChecker\Action\CheckAction;
 use HomoChecker\Action\HealthCheckAction;
 use HomoChecker\Action\ListAction;
 use HomoChecker\Contracts\Repository\HomoRepository as HomoRepositoryContract;
+use HomoChecker\Http\NonBufferedBody;
 use HomoChecker\Repository\HomoRepository;
 use Illuminate\Config\Repository;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
 use Middlewares\AccessLog;
+use Psr\Http\Message\StreamInterface;
 use Slim\Factory\AppFactory;
 
 class HomoAppProvider extends ServiceProvider
@@ -21,6 +23,10 @@ class HomoAppProvider extends ServiceProvider
     {
         $this->app->singleton(HealthCheckAction::class);
         $this->app->singleton(CheckAction::class);
+        $this->app->when(CheckAction::class)
+            ->needs(StreamInterface::class)
+            ->give(fn (Container $app) => $app->make(NonBufferedBody::class));
+
         $this->app->singleton(ListAction::class);
         $this->app->singleton(BadgeAction::class);
 
@@ -51,6 +57,7 @@ class HomoAppProvider extends ServiceProvider
             CheckAction::class,
             ListAction::class,
             BadgeAction::class,
+            HomoRepositoryContract::class,
             'app',
             'config',
         ];

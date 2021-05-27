@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 namespace HomoChecker\Logging;
 
-use Illuminate\Log\Logger;
 use Monolog\Formatter\LineFormatter;
+use Psr\Log\LoggerInterface;
 
 class CustomizeFormatter
 {
     protected $dateFormat = 'Y-m-d H:i:s';
 
-    public function __invoke(Logger $logger, ?string $format = null)
+    public function __invoke(LoggerInterface $logger, ?string $format = null)
     {
         /** @var \Monolog\Logger $logger */
         foreach ($logger->getHandlers() as $handler) {

@@ -9,7 +9,6 @@ use HomoChecker\Contracts\Service\CacheService as CacheServiceContract;
 use HomoChecker\Contracts\Service\CheckService as CheckServiceContract;
 use HomoChecker\Contracts\Service\ClientService as ClientServiceContract;
 use HomoChecker\Contracts\Service\HomoService as HomoServiceContract;
-use HomoChecker\Http\NonBufferedBody;
 use HomoChecker\Service\CacheService;
 use HomoChecker\Service\CheckService;
 use HomoChecker\Service\ClientService;
@@ -23,7 +22,6 @@ use Illuminate\Redis\RedisServiceProvider;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Middlewares\AccessLog;
-use Psr\Http\Message\StreamInterface;
 use Psr\Log\LoggerInterface;
 
 class HomoProvider extends ServiceProvider
@@ -32,8 +30,6 @@ class HomoProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->bind(StreamInterface::class, NonBufferedBody::class);
-
         $this->app->extend(AccessLog::class, fn (AccessLog $log) => $log->format($this->format));
         $this->app->when(AccessLog::class)
             ->needs(LoggerInterface::class)
@@ -74,10 +70,11 @@ class HomoProvider extends ServiceProvider
     public function provides()
     {
         return [
-            StreamInterface::class,
+            AccessLog::class,
             ClientInterface::class,
             CacheServiceContract::class,
             CheckServiceContract::class,
+            ClientServiceContract::class,
             HomoServiceContract::class,
         ];
     }

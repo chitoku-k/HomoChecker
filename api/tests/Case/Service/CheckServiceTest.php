@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HomoChecker\Test\Service;
 
+use GuzzleHttp\Exception\InvalidArgumentException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Promise\RejectedPromise;
@@ -23,6 +24,7 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 class CheckServiceTest extends TestCase
 {
@@ -55,6 +57,18 @@ class CheckServiceTest extends TestCase
                 'service' => 'mastodon',
                 'url' => 'https://baz.example.com',
             ],
+            (object) [
+                'id' => 5,
+                'screen_name' => 'qux',
+                'service' => 'mastodon',
+                'url' => 'https://qux.example.com',
+            ],
+            (object) [
+                'id' => 6,
+                'screen_name' => 'quux',
+                'service' => 'mastodon',
+                'url' => 'https://quux.example.com',
+            ],
         ];
     }
 
@@ -78,6 +92,8 @@ class CheckServiceTest extends TestCase
                  ->andReturn(
                      new FulfilledPromise('https://img.example.com/bar'),
                      new FulfilledPromise('https://img.example.com/baz'),
+                     new FulfilledPromise('https://img.example.com/qux'),
+                     new FulfilledPromise('https://img.example.com/quux'),
                  );
 
         $validator = m::mock(ValidatorService::class);
@@ -143,8 +159,28 @@ class CheckServiceTest extends TestCase
                ->withArgs(['https://baz.example.com'])
                ->andReturn(
                    (function () {
-                       $exception = new RequestException('Connection error', new Psr7Request('GET', ''));
+                       $exception = new RequestException('Connection error', new Psr7Request('GET', ''), null, null, [
+                           'error' => 'Resolving timed out after 5000 milliseconds',
+                       ]);
                        yield 'https://baz.example.com' => new RejectedPromise($exception);
+                   })(),
+               );
+
+        $client->shouldReceive('getAsync')
+               ->withArgs(['https://qux.example.com'])
+               ->andReturn(
+                   (function () {
+                       $exception = new InvalidArgumentException('Empty host provided');
+                       yield 'https://qux.example.com' => new RejectedPromise($exception);
+                   })(),
+               );
+
+        $client->shouldReceive('getAsync')
+               ->withArgs(['https://quux.example.com'])
+               ->andReturn(
+                   (function () {
+                       $exception = new RuntimeException('Internal error');
+                       yield 'https://quux.example.com' => new RejectedPromise($exception);
                    })(),
                );
 
@@ -217,8 +253,34 @@ class CheckServiceTest extends TestCase
                     'ip' => null,
                     'url' => 'https://baz.example.com',
                     'duration' => 0.0,
+                    'error' => 'Resolving timed out after 5000 milliseconds',
                 ]),
                 'icon' => 'https://img.example.com/baz',
+            ]),
+            new Status([
+                'homo' => new Homo([
+                    'id' => 5,
+                    'screen_name' => 'qux',
+                    'service' => 'mastodon',
+                    'url' => 'https://qux.example.com',
+                ]),
+                'result' => new Result([
+                    'status' => 'ERROR',
+                    'ip' => null,
+                    'url' => 'https://qux.example.com',
+                    'duration' => 0.0,
+                ]),
+                'icon' => 'https://img.example.com/qux',
+            ]),
+            new Status([
+                'homo' => new Homo([
+                    'id' => 6,
+                    'screen_name' => 'quux',
+                    'service' => 'mastodon',
+                    'url' => 'https://quux.example.com',
+                ]),
+                'result' => null,
+                'icon' => 'https://img.example.com/quux',
             ]),
         ];
 
