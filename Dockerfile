@@ -19,7 +19,7 @@ COPY . /usr/src/
 RUN touch fonts/atlan.svg fonts/atlan.ttf fonts/atlan.woff && \
     npm run --no-update-notifier build
 
-FROM nginx:1.19.10-alpine
+FROM nginx:1.21.0-alpine
 ENV HOMOCHECKER_API_HOST homochecker-api
 COPY client/conf/. /etc/nginx/templates/
 COPY --from=build /usr/src/client/dist /var/www/html/

@@ -38,7 +38,7 @@ services:
         target: /usr/src/app
 
   client:
-    image: nginx:1.19-alpine
+    image: nginx:1.21-alpine
     ports:
       - "${HOMOCHECKER_PORT-4545}:80"
     environment:
