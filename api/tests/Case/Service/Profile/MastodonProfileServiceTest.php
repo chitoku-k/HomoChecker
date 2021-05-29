@@ -16,6 +16,7 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
+use Prometheus\Counter;
 
 class MastodonProfileServiceTest extends TestCase
 {
@@ -55,7 +56,26 @@ class MastodonProfileServiceTest extends TestCase
         $cache->shouldReceive('saveIconMastodon')
               ->with($screen_name, $url, m::any());
 
-        $profile = new MastodonProfileService($client, $cache);
+        /** @var Counter|MockInterface $profileErrorCounter */
+        $profileErrorCounter = m::mock(Counter::class);
+        $profileErrorCounter->shouldReceive('inc')
+                            ->withArgs([
+                                [
+                                    'service' => 'mastodon',
+                                    'screen_name' => $screen_name,
+                                ],
+                            ])
+                            ->times(2);
+
+        $profileErrorCounter->shouldReceive('inc')
+                            ->withArgs([
+                                [
+                                    'service' => 'mastodon',
+                                    'screen_name' => 'example@wrong-format.example.com',
+                                ],
+                            ]);
+
+        $profile = new MastodonProfileService($client, $cache, $profileErrorCounter);
 
         $this->assertEquals($url, $profile->getIconAsync($screen_name)->wait());
         $this->assertEquals($profile->getDefaultUrl(), $profile->getIconAsync($screen_name)->wait());
@@ -76,7 +96,10 @@ class MastodonProfileServiceTest extends TestCase
         $cache->shouldReceive('loadIconMastodon')
               ->andReturn($url);
 
-        $profile = new MastodonProfileService($client, $cache);
+        /** @var Counter|MockInterface $profileErrorCounter */
+        $profileErrorCounter = m::mock(Counter::class);
+
+        $profile = new MastodonProfileService($client, $cache, $profileErrorCounter);
         $this->assertEquals($url, $profile->getIconAsync($screen_name)->wait());
     }
 
@@ -91,7 +114,10 @@ class MastodonProfileServiceTest extends TestCase
         /** @var CacheService|MockInterface $cache */
         $cache = m::mock(CacheService::class);
 
-        $profile = new MastodonProfileService($client, $cache);
+        /** @var Counter|MockInterface $profileErrorCounter */
+        $profileErrorCounter = m::mock(Counter::class);
+
+        $profile = new MastodonProfileService($client, $cache, $profileErrorCounter);
 
         $actual = $profile->parseScreenName($screen_name);
         $this->assertEquals([$username, $instance], $actual);
@@ -110,7 +136,10 @@ class MastodonProfileServiceTest extends TestCase
         /** @var CacheService|MockInterface $cache */
         $cache = m::mock(CacheService::class);
 
-        $profile = new MastodonProfileService($client, $cache);
+        /** @var Counter|MockInterface $profileErrorCounter */
+        $profileErrorCounter = m::mock(Counter::class);
+
+        $profile = new MastodonProfileService($client, $cache, $profileErrorCounter);
         $profile->parseScreenName($screen_name);
     }
 

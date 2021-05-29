@@ -52,7 +52,11 @@ return [
         'http_errors' => false,
     ],
     'client.redirect' => 5,
+    'mastodon.client' => [
+        'timeout' => 5,
+    ],
     'twitter.client' => [
+        'timeout' => 5,
         'base_uri' => 'https://api.twitter.com/1.1/',
         'auth' => 'oauth',
     ],

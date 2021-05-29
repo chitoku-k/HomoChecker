@@ -16,6 +16,7 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
+use Prometheus\Counter;
 
 class TwitterProfileServiceTest extends TestCase
 {
@@ -59,7 +60,17 @@ class TwitterProfileServiceTest extends TestCase
         $cache->shouldReceive('saveIconTwitter')
               ->with($screen_name, $url, m::any());
 
-        $profile = new TwitterProfileService($client, $cache);
+        /** @var Counter|MockInterface $profileErrorCounter */
+        $profileErrorCounter = m::mock(Counter::class);
+        $profileErrorCounter->shouldReceive('inc')
+                            ->withArgs([
+                                [
+                                    'service' => 'twitter',
+                                    'screen_name' => $screen_name,
+                                ],
+                            ]);
+
+        $profile = new TwitterProfileService($client, $cache, $profileErrorCounter);
 
         $this->assertEquals($url, $profile->getIconAsync($screen_name)->wait());
         $this->assertEquals($profile->getDefaultUrl(), $profile->getIconAsync($screen_name)->wait());
@@ -79,7 +90,10 @@ class TwitterProfileServiceTest extends TestCase
         $cache->shouldReceive('loadIconTwitter')
               ->andReturn($url);
 
-        $profile = new TwitterProfileService($client, $cache);
+        /** @var Counter|MockInterface $profileErrorCounter */
+        $profileErrorCounter = m::mock(Counter::class);
+
+        $profile = new TwitterProfileService($client, $cache, $profileErrorCounter);
         $this->assertEquals($url, $profile->getIconAsync($screen_name)->wait());
     }
 }

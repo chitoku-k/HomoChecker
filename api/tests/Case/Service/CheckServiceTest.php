@@ -24,7 +24,7 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
+use Prometheus\Counter;
 
 class CheckServiceTest extends TestCase
 {
@@ -63,12 +63,6 @@ class CheckServiceTest extends TestCase
                 'service' => 'mastodon',
                 'url' => 'https://qux.example.com',
             ],
-            (object) [
-                'id' => 6,
-                'screen_name' => 'quux',
-                'service' => 'mastodon',
-                'url' => 'https://quux.example.com',
-            ],
         ];
     }
 
@@ -93,7 +87,6 @@ class CheckServiceTest extends TestCase
                      new FulfilledPromise('https://img.example.com/bar'),
                      new FulfilledPromise('https://img.example.com/baz'),
                      new FulfilledPromise('https://img.example.com/qux'),
-                     new FulfilledPromise('https://img.example.com/quux'),
                  );
 
         $validator = m::mock(ValidatorService::class);
@@ -175,18 +168,83 @@ class CheckServiceTest extends TestCase
                    })(),
                );
 
-        $client->shouldReceive('getAsync')
-               ->withArgs(['https://quux.example.com'])
-               ->andReturn(
-                   (function () {
-                       $exception = new RuntimeException('Internal error');
-                       yield 'https://quux.example.com' => new RejectedPromise($exception);
-                   })(),
-               );
+        /** @var Counter|MockInterface $checkCounter */
+        $checkCounter = m::mock(Counter::class);
+        $checkCounter->shouldReceive('inc')
+                     ->withArgs([
+                         [
+                             'status' => 'OK',
+                             'code' => 301,
+                             'screen_name' => 'foo',
+                             'url' => 'https://foo.example.com/1',
+                         ],
+                     ]);
+
+        $checkCounter->shouldReceive('inc')
+                     ->withArgs([
+                         [
+                             'status' => 'WRONG',
+                             'code' => 200,
+                             'screen_name' => 'foo',
+                             'url' => 'https://foo.example.com/2',
+                         ],
+                     ]);
+
+        $checkCounter->shouldReceive('inc')
+                     ->withArgs([
+                         [
+                             'status' => 'OK',
+                             'code' => 200,
+                             'screen_name' => 'bar',
+                             'url' => 'http://bar.example.com',
+                         ],
+                     ]);
+
+        $checkCounter->shouldReceive('inc')
+                     ->withArgs([
+                         [
+                             'status' => 'ERROR',
+                             'code' => 0,
+                             'screen_name' => 'baz',
+                             'url' => 'https://baz.example.com',
+                         ],
+                     ]);
+
+        $checkCounter->shouldReceive('inc')
+                     ->withArgs([
+                         [
+                             'status' => 'ERROR',
+                             'code' => 0,
+                             'screen_name' => 'qux',
+                             'url' => 'https://qux.example.com',
+                         ],
+                     ]);
+
+        /** @var Counter|MockInterface $checkErrorCounter */
+        $checkErrorCounter = m::mock(Counter::class);
+        $checkErrorCounter->shouldReceive('inc')
+                          ->withArgs([
+                              [
+                                  'status' => 'ERROR',
+                                  'code' => 0,
+                                  'screen_name' => 'baz',
+                                  'url' => 'https://baz.example.com',
+                              ],
+                          ]);
+
+        $checkErrorCounter->shouldReceive('inc')
+                          ->withArgs([
+                              [
+                                  'status' => 'ERROR',
+                                  'code' => 0,
+                                  'screen_name' => 'qux',
+                                  'url' => 'https://qux.example.com',
+                              ],
+                          ]);
 
         Log::spy();
 
-        $check = new CheckService($client, $homo);
+        $check = new CheckService($client, $homo, $checkCounter, $checkErrorCounter);
         $check->setProfiles(collect(compact('twitter', 'mastodon')));
         $check->setValidators(collect([
             $validator,
@@ -271,16 +329,6 @@ class CheckServiceTest extends TestCase
                     'duration' => 0.0,
                 ]),
                 'icon' => 'https://img.example.com/qux',
-            ]),
-            new Status([
-                'homo' => new Homo([
-                    'id' => 6,
-                    'screen_name' => 'quux',
-                    'service' => 'mastodon',
-                    'url' => 'https://quux.example.com',
-                ]),
-                'result' => null,
-                'icon' => 'https://img.example.com/quux',
             ]),
         ];
 

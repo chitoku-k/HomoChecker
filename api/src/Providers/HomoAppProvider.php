@@ -7,6 +7,7 @@ use HomoChecker\Action\BadgeAction;
 use HomoChecker\Action\CheckAction;
 use HomoChecker\Action\HealthCheckAction;
 use HomoChecker\Action\ListAction;
+use HomoChecker\Action\MetricsAction;
 use HomoChecker\Contracts\Repository\HomoRepository as HomoRepositoryContract;
 use HomoChecker\Http\NonBufferedBody;
 use HomoChecker\Repository\HomoRepository;
@@ -22,6 +23,7 @@ class HomoAppProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(HealthCheckAction::class);
+        $this->app->singleton(MetricsAction::class);
         $this->app->singleton(CheckAction::class);
         $this->app->when(CheckAction::class)
             ->needs(StreamInterface::class)
@@ -38,6 +40,7 @@ class HomoAppProvider extends ServiceProvider
             $slim->addMiddleware($app->make(AccessLog::class));
             $slim->addErrorMiddleware(true, true, true)->setDefaultErrorHandler($app->make('errorHandler'));
             $slim->get('/healthz', HealthCheckAction::class);
+            $slim->get('/metrics', MetricsAction::class);
             $slim->get('/check[/[{name}[/]]]', CheckAction::class);
             $slim->get('/list[/[{name}[/]]]', ListAction::class);
             $slim->get('/badge[/[{status}[/]]]', BadgeAction::class);

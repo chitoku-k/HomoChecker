@@ -38,26 +38,27 @@ class HomoProvider extends ServiceProvider
         $this->app->singleton(ClientInterface::class, Client::class);
         $this->app->when(Client::class)
             ->needs('$config')
-            ->give(fn (Container $app) => $app->make('config')->get('client'));
+            ->giveConfig('client');
 
         $this->app->singleton(CacheServiceContract::class, CacheService::class);
 
-        $this->app->singleton(CheckServiceContract::class, CheckService::class);
-        $this->app->extend(CheckServiceContract::class, function (CheckServiceContract $check, Container $app) {
-            $check->setProfiles($app->make('profiles'));
-            $check->setValidators($app->make('validators'));
-            return $check;
-        });
+        $this->app->singleton(CheckServiceContract::class, fn (Container $app) => new CheckService(
+            $app->make(ClientServiceContract::class),
+            $app->make(HomoServiceContract::class),
+            $app->make('collector.check_total'),
+            $app->make('collector.check_error_total'),
+        ));
 
         $this->app->singleton(ClientServiceContract::class, ClientService::class);
         $this->app->when(ClientService::class)
             ->needs('$redirect')
-            ->give(fn (Container $app) => $app->make('config')->get('client.redirect'));
+            ->giveConfig('client.redirect');
 
         $this->app->singleton(HomoServiceContract::class, HomoService::class);
 
         (new HomoAppProvider($this->app))->register();
         (new HomoHandlerProvider($this->app))->register();
+        (new HomoMetricsProvider($this->app))->register();
         (new HomoProfileServiceProvider($this->app))->register();
         (new HomoValidatorServiceProvider($this->app))->register();
         (new EventServiceProvider($this->app))->register();

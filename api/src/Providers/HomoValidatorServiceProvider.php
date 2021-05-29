@@ -13,10 +13,14 @@ class HomoValidatorServiceProvider extends ServiceProvider
 {
     public function register()
     {
+        $this->app->when([HeaderValidatorService::class, DOMValidatorService::class, URLValidatorService::class])
+            ->needs('$regex')
+            ->giveConfig('regex');
+
         $this->app->singleton('validators', fn (Container $app) => collect([
-            new HeaderValidatorService($app->make('config')->get('regex')),
-            new DOMValidatorService($app->make('config')->get('regex')),
-            new URLValidatorService($app->make('config')->get('regex')),
+            $app->make(HeaderValidatorService::class),
+            $app->make(DOMValidatorService::class),
+            $app->make(URLValidatorService::class),
         ]));
     }
 
