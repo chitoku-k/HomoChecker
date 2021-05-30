@@ -1,6 +1,7 @@
 Dockerfile
 README.md
 cghooks.lock
+psalm.xml
 build
 tests
 vendor
