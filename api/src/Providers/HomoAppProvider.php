@@ -16,7 +16,9 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
 use Middlewares\AccessLog;
 use Psr\Http\Message\StreamInterface;
+use Slim\App;
 use Slim\Factory\AppFactory;
+use Slim\Interfaces\ErrorHandlerInterface;
 
 class HomoAppProvider extends ServiceProvider
 {
@@ -38,13 +40,15 @@ class HomoAppProvider extends ServiceProvider
             AppFactory::setContainer($app);
             $slim = AppFactory::create();
             $slim->addMiddleware($app->make(AccessLog::class));
-            $slim->addErrorMiddleware(true, true, true)->setDefaultErrorHandler($app->make('errorHandler'));
             $slim->get('/healthz', HealthCheckAction::class);
             $slim->get('/metrics', MetricsAction::class);
             $slim->get('/check[/[{name}[/]]]', CheckAction::class);
             $slim->get('/list[/[{name}[/]]]', ListAction::class);
             $slim->get('/badge[/[{status}[/]]]', BadgeAction::class);
             return $slim;
+        });
+        $this->app->resolving('app', function (App $slim, Container $app) {
+            $slim->addErrorMiddleware(true, true, true)->setDefaultErrorHandler($app->make(ErrorHandlerInterface::class));
         });
 
         $this->app->singleton('config', Repository::class);
