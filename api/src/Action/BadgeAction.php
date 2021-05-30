@@ -5,6 +5,7 @@ namespace HomoChecker\Action;
 
 use HomoChecker\Contracts\Service\CheckService;
 use HomoChecker\Contracts\Service\HomoService;
+use HomoChecker\Domain\Result;
 use HomoChecker\Domain\Status;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest as Request;
@@ -36,8 +37,10 @@ class BadgeAction
         }
 
         return collect($this->check->execute())
-            ->map(fn (Status $item) => $item->getResult()->getStatus())
-            ->filter(fn (?string $item) => strcasecmp($item, $status) === 0)
+            ->map(fn (Status $item) => $item->getResult())
+            ->filter(fn (?Result $item) => $item)
+            ->map(fn (Result $item) => $item->getStatus())
+            ->filter(fn (?string $item) => $item && strcasecmp($item, $status) === 0)
             ->count();
     }
 }

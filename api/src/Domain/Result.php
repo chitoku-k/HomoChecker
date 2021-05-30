@@ -6,9 +6,9 @@ namespace HomoChecker\Domain;
 class Result
 {
     /**
-     * @var string The status.
+     * @var ?string The status.
      */
-    protected string $status;
+    protected ?string $status;
 
     /**
      * @var ?string The status code and reason phrase.
@@ -21,9 +21,9 @@ class Result
     protected ?string $ip;
 
     /**
-     * @var string The URL.
+     * @var ?string The URL.
      */
-    protected string $url;
+    protected ?string $url;
 
     /**
      * @var ?float The duration.
@@ -102,18 +102,18 @@ class Result
 
     /**
      * Get the URL.
-     * @return string The URL.
+     * @return ?string The URL.
      */
-    public function getUrl(): string
+    public function getUrl(): ?string
     {
         return $this->url;
     }
 
     /**
      * Set the URL.
-     * @param string $url The URL.
+     * @param ?string $url The URL.
      */
-    public function setUrl(string $url): void
+    public function setUrl(?string $url): void
     {
         $this->url = $url;
     }

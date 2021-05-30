@@ -30,11 +30,12 @@ class ClientService implements ClientServiceContract
         for ($i = 0; $i < $this->redirect; ++$i) {
             yield $url => $this->client->requestAsync('GET', $url, [
                 RequestOptions::ON_STATS => function (TransferStats $stats) use (&$result) {
-                    if (!$stats->hasResponse()) {
+                    $response = $stats->getResponse();
+                    if (!$response) {
                         return;
                     }
-                    $result = new Response($stats->getResponse());
-                    $result->setTotalTime($stats->getTransferTime());
+                    $result = new Response($response);
+                    $result->setTotalTime($stats->getTransferTime() ?? 0.0);
                     $result->setStartTransferTime($stats->getHandlerStat('starttransfer_time') ?? 0.0);
                     $result->setPrimaryIP($stats->getHandlerStat('primary_ip'));
                 },

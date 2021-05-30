@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="3"
+    resolveFromConfigFile="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd">
+    <projectFiles>
+        <directory name="src" />
+        <ignoreFiles>
+            <directory name="vendor" />
+        </ignoreFiles>
+    </projectFiles>
+    <issueHandlers>
+        <DeprecatedMethod>
+            <errorLevel type="suppress">
+                <referencedMethod name="GuzzleHttp\ClientInterface::getConfig" />
+            </errorLevel>
+        </DeprecatedMethod>
+        <ImplicitToStringCast>
+            <errorLevel type="suppress">
+                <directory name="src" />
+            </errorLevel>
+        </ImplicitToStringCast>
+        <MissingClosureReturnType>
+            <errorLevel type="suppress">
+                <directory name="src" />
+            </errorLevel>
+        </MissingClosureReturnType>
+        <TooManyTemplateParams>
+            <errorLevel type="suppress">
+                <directory name="src" />
+            </errorLevel>
+        </TooManyTemplateParams>
+        <UndefinedInterfaceMethod>
+            <errorLevel type="suppress">
+                <referencedMethod name="GuzzleHttp\ClientInterface::getAsync" />
+                <referencedMethod name="Illuminate\Contracts\Container\ContextualBindingBuilder::giveConfig" />
+            </errorLevel>
+        </UndefinedInterfaceMethod>
+    </issueHandlers>
+</psalm>

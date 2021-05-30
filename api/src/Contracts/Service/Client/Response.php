@@ -11,17 +11,17 @@ class Response implements ResponseInterface
     /**
      * @var float The total time.
      */
-    protected float $totalTime;
+    protected float $totalTime = 0.0;
 
     /**
      * @var float The start transfer time.
      */
-    protected float $startTransferTime;
+    protected float $startTransferTime = 0.0;
 
     /**
      * @var ?string The primary IP.
      */
-    protected ?string $primaryIP;
+    protected ?string $primaryIP = null;
 
     public function __construct(protected ResponseInterface $response)
     {

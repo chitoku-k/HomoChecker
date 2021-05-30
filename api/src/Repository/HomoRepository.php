@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class HomoRepository implements HomoRepositoryContract
 {
-    protected $table = 'users';
+    protected string $table = 'users';
 
     public function count(): int
     {
@@ -38,8 +38,7 @@ class HomoRepository implements HomoRepositoryContract
         // Create a Grammar instance that doesn't parameterize its values
         $grammar = new class() extends PostgresGrammar {
             /**
-             * Only quote the given parameter.
-             * @return string
+             * {@inheritdoc}
              */
             public function parameter($value)
             {

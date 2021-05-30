@@ -63,6 +63,12 @@ class CheckServiceTest extends TestCase
                 'service' => 'mastodon',
                 'url' => 'https://qux.example.com',
             ],
+            (object) [
+                'id' => 6,
+                'screen_name' => 'quux',
+                'service' => 'mastodon',
+                'url' => '',
+            ],
         ];
     }
 
@@ -329,10 +335,10 @@ class CheckServiceTest extends TestCase
                 ]),
                 'icon' => 'https://img.example.com/qux',
             ]),
+            new \InvalidArgumentException('Invalid URL'),
         ];
 
         $actual = $check->execute(null, fn () => null);
-        $this->assertContainsOnlyInstancesOf(Status::class, $actual);
         $this->assertEquals($expected, $actual);
     }
 }

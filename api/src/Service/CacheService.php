@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 /**
- * @method string loadIconMastodon(string $screen_name)
- * @method string loadIconTwitter(string $screen_name)
- * @method void   saveIconMastodon(string $screen_name, string $url, int $expire)
- * @method void   saveIconTwitter(string $screen_name, string $url, int $expire)
+ * @method ?string loadIconMastodon(string $screen_name)
+ * @method ?string loadIconTwitter(string $screen_name)
+ * @method void    saveIconMastodon(string $screen_name, string $url, int $expire)
+ * @method void    saveIconTwitter(string $screen_name, string $url, int $expire)
  */
 class CacheService implements CacheServiceContract
 {
@@ -38,12 +38,12 @@ class CacheService implements CacheServiceContract
         );
     }
 
-    public function load(string $key, array $arguments = [])
+    public function load(string $key, array $arguments = []): ?string
     {
         return Cache::get($key, ...$arguments);
     }
 
-    public function save(string $key, array $arguments = [])
+    public function save(string $key, array $arguments = []): void
     {
         Cache::put($key, ...$arguments);
     }

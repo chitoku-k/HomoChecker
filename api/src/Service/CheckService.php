@@ -21,14 +21,15 @@ use HomoChecker\Domain\Status;
 use HomoChecker\Domain\Validator\ValidationResult;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
+use InvalidArgumentException;
 use Prometheus\Counter;
 use Throwable;
 
 class CheckService implements CheckServiceContract
 {
     /**
-     * @param Collection<ProfileServiceContract>   $checkCounter
-     * @param Collection<ValidatorServiceContract> $checkErrorCounter
+     * @param Collection<ProfileServiceContract>   $profiles
+     * @param Collection<ValidatorServiceContract> $validators
      */
     public function __construct(
         protected ClientServiceContract $client,
@@ -47,14 +48,19 @@ class CheckService implements CheckServiceContract
      */
     protected function validateAsync(Homo $homo): PromiseInterface
     {
-        return Coroutine::of(function () use ($homo) {
+        $url = $homo->getUrl();
+        if (!$url) {
+            throw new InvalidArgumentException('Invalid URL');
+        }
+
+        return Coroutine::of(function () use ($url) {
             $total_time = 0.0;
             $total_starttransfer_time = 0.0;
             $ip = null;
             $code = null;
 
             try {
-                foreach ($this->client->getAsync($homo->getUrl()) as $url => $promise) {
+                foreach ($this->client->getAsync($url) as $url => $promise) {
                     /** @var Response $response */
                     $response = yield $promise;
 
@@ -82,7 +88,7 @@ class CheckService implements CheckServiceContract
                     'status' => ValidationResult::WRONG,
                     'code' => $code ?? null,
                     'ip' => $ip,
-                    'url' => $url ?? null,
+                    'url' => $url,
                     'duration' => $total_starttransfer_time,
                 ]);
             } catch (ConnectException|RequestException $e) {
@@ -92,7 +98,7 @@ class CheckService implements CheckServiceContract
                     'status' => ValidationResult::ERROR,
                     'code' => $code ?? null,
                     'ip' => $ip,
-                    'url' => $url ?? null,
+                    'url' => $url,
                     'duration' => $total_time,
                     'error' => $e->getHandlerContext()['error'] ?? null,
                 ]);
@@ -103,7 +109,7 @@ class CheckService implements CheckServiceContract
                     'status' => ValidationResult::ERROR,
                     'code' => $code ?? null,
                     'ip' => $ip,
-                    'url' => $url ?? null,
+                    'url' => $url,
                     'duration' => $total_time,
                 ]);
             }
