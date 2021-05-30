@@ -26,7 +26,7 @@ use Psr\Log\LoggerInterface;
 
 class HomoProvider extends ServiceProvider
 {
-    protected $format = AccessLog::FORMAT_COMBINED . ' "%{X-Forwarded-For}i"';
+    protected string $format = AccessLog::FORMAT_COMBINED . ' "%{X-Forwarded-For}i"';
 
     public function register()
     {

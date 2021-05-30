@@ -6,6 +6,7 @@ namespace HomoChecker\Action;
 use HomoChecker\Contracts\Service\HomoService;
 use HomoChecker\Domain\Homo;
 use HomoChecker\Domain\Status;
+use Psr\Http\Message\StreamInterface;
 use Slim\Http\Response as Response;
 use Slim\Http\ServerRequest as Request;
 
@@ -30,7 +31,7 @@ class ListAction
         };
     }
 
-    protected function createSql(Response $response)
+    protected function createSql(Response $response): StreamInterface
     {
         $body = $response->getBody();
         $body->write($this->homo->export());

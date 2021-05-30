@@ -123,7 +123,7 @@ class Status implements \JsonSerializable
         };
     }
 
-    public function getHomoArray()
+    public function getHomoArray(): array
     {
         return [
             'screen_name' => $this->getHomo()->getScreenName(),
@@ -134,7 +134,7 @@ class Status implements \JsonSerializable
         ];
     }
 
-    public function getResultArray()
+    public function getResultArray(): array
     {
         return [
             'status' => $this->getResult()->getStatus(),

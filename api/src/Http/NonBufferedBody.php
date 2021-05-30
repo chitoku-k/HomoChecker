@@ -7,7 +7,7 @@ use Slim\Psr7\NonBufferedBody as NonBufferedBodyBase;
 
 class NonBufferedBody extends NonBufferedBodyBase
 {
-    protected $size = 0;
+    protected int $size = 0;
 
     /**
      * {@inheritdoc}

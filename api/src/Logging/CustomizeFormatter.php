@@ -8,7 +8,7 @@ use Psr\Log\LoggerInterface;
 
 class CustomizeFormatter
 {
-    protected $dateFormat = 'Y-m-d H:i:s';
+    protected string $dateFormat = 'Y-m-d H:i:s';
 
     public function __invoke(LoggerInterface $logger, ?string $format = null)
     {
