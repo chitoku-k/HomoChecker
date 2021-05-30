@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace HomoChecker\Service;
 
 use GuzzleHttp\Exception\ConnectException;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Pool;
 use GuzzleHttp\Promise\Coroutine;
@@ -22,46 +21,29 @@ use HomoChecker\Domain\Status;
 use HomoChecker\Domain\Validator\ValidationResult;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
+use Prometheus\Counter;
 use Throwable;
 
 class CheckService implements CheckServiceContract
 {
     /**
-     * @var Collection<ProfileServiceContract>
+     * @param Collection<ProfileServiceContract>   $checkCounter
+     * @param Collection<ValidatorServiceContract> $checkErrorCounter
      */
-    protected ?Collection $profiles;
-
-    /**
-     * @var Collection<ValidatorServiceContract>
-     */
-    protected ?Collection $validators;
-
-    public function __construct(protected ClientServiceContract $client, protected HomoServiceContract $homo)
-    {
-    }
-
-    /**
-     * Set the profiles.
-     * @param Collection<ProfileServiceContract> $profiles The Profiles.
-     */
-    public function setProfiles(Collection $profiles): void
-    {
-        $this->profiles = $profiles;
-    }
-
-    /**
-     * Set the validators.
-     * @param Collection<ValidatorServiceContract> $validators The Validators.
-     */
-    public function setValidators(Collection $validators): void
-    {
-        $this->validators = $validators;
+    public function __construct(
+        protected ClientServiceContract $client,
+        protected HomoServiceContract $homo,
+        protected Counter $checkCounter,
+        protected Counter $checkErrorCounter,
+        protected Collection $profiles,
+        protected Collection $validators,
+    ) {
     }
 
     /**
      * Validate a user.
-     * @param  Homo             $homo The user.
-     * @return PromiseInterface The Promise.
+     * @param  Homo                     $homo The user.
+     * @return PromiseInterface<Result> The Promise.
      */
     protected function validateAsync(Homo $homo): PromiseInterface
     {
@@ -114,8 +96,8 @@ class CheckService implements CheckServiceContract
                     'duration' => $total_time,
                     'error' => $e->getHandlerContext()['error'] ?? null,
                 ]);
-            } catch (GuzzleException $e) {
-                Log::debug($e);
+            } catch (Throwable $e) {
+                Log::error($e);
 
                 return yield new Result([
                     'status' => ValidationResult::ERROR,
@@ -124,21 +106,20 @@ class CheckService implements CheckServiceContract
                     'url' => $url ?? null,
                     'duration' => $total_time,
                 ]);
-            } catch (Throwable $e) {
-                Log::error($e);
             }
         });
     }
 
     /**
      * Create a status object from a user.
-     * @param  Homo             $homo     The user.
-     * @param  callable         $callback The callback that is called after resolution (optional).
-     * @return PromiseInterface The Promise.
+     * @param  Homo                     $homo     The user.
+     * @param  callable                 $callback The callback that is called after resolution (optional).
+     * @return PromiseInterface<Status> The Promise.
      */
     protected function createStatusAsync(Homo $homo, callable $callback = null): PromiseInterface
     {
         return Coroutine::of(function () use ($homo, $callback) {
+            /** @var Result $result */
             [$result, $icon] = yield Utils::all([
                 $this->validateAsync($homo),
                 $this->profiles->get($homo->getService())->getIconAsync($homo->getScreenName()),
@@ -148,9 +129,27 @@ class CheckService implements CheckServiceContract
                 'result' => $result,
                 'icon' => $icon,
             ]);
+
             if ($callback) {
                 $callback($status);
             }
+
+            $this->checkCounter->inc([
+                'status' => $result->getStatus(),
+                'code' => (int) $result->getCode(),
+                'screen_name' => $homo->getScreenName(),
+                'url' => $homo->getUrl(),
+            ]);
+
+            if ($result->getStatus() === ValidationResult::ERROR) {
+                $this->checkErrorCounter->inc([
+                    'status' => $result->getStatus(),
+                    'code' => (int) $result->getCode(),
+                    'screen_name' => $homo->getScreenName(),
+                    'url' => $homo->getUrl(),
+                ]);
+            }
+
             return yield $status;
         });
     }

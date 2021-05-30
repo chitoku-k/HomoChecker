@@ -8,18 +8,18 @@ use GuzzleHttp\Promise\Coroutine;
 use GuzzleHttp\Promise\PromiseInterface;
 use HomoChecker\Contracts\Service\CacheService as CacheServiceContract;
 use HomoChecker\Contracts\Service\ProfileService as ProfileServiceContract;
+use Illuminate\Support\Facades\Log;
+use Prometheus\Counter;
 
 class MastodonProfileService implements ProfileServiceContract
 {
     public const CACHE_EXPIRE = 180;
 
-    protected ClientInterface $client;
-    protected CacheServiceContract $cache;
-
-    public function __construct(ClientInterface $client, CacheServiceContract $cache)
-    {
-        $this->client = $client;
-        $this->cache = $cache;
+    public function __construct(
+        protected ClientInterface $client,
+        protected CacheServiceContract $cache,
+        protected Counter $profileErrorCounter,
+    ) {
     }
 
     public function parseScreenName(string $screen_name): array
@@ -58,7 +58,14 @@ class MastodonProfileService implements ProfileServiceContract
 
                 $this->cache->saveIconMastodon($screen_name, $url, static::CACHE_EXPIRE);
                 return yield $url;
-            } catch (\RuntimeException $e) {
+            } catch (\Throwable $e) {
+                Log::debug($e);
+
+                $this->profileErrorCounter->inc([
+                    'service' => 'mastodon',
+                    'screen_name' => $screen_name,
+                ]);
+
                 return yield $this->getDefaultUrl();
             }
         });
