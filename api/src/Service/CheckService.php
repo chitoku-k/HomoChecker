@@ -27,45 +27,23 @@ use Throwable;
 class CheckService implements CheckServiceContract
 {
     /**
-     * @var Collection<ProfileServiceContract>
+     * @param Collection<ProfileServiceContract>   $checkCounter
+     * @param Collection<ValidatorServiceContract> $checkErrorCounter
      */
-    protected ?Collection $profiles;
-
-    /**
-     * @var Collection<ValidatorServiceContract>
-     */
-    protected ?Collection $validators;
-
     public function __construct(
         protected ClientServiceContract $client,
         protected HomoServiceContract $homo,
         protected Counter $checkCounter,
         protected Counter $checkErrorCounter,
+        protected Collection $profiles,
+        protected Collection $validators,
     ) {
     }
 
     /**
-     * Set the profiles.
-     * @param Collection<ProfileServiceContract> $profiles The Profiles.
-     */
-    public function setProfiles(Collection $profiles): void
-    {
-        $this->profiles = $profiles;
-    }
-
-    /**
-     * Set the validators.
-     * @param Collection<ValidatorServiceContract> $validators The Validators.
-     */
-    public function setValidators(Collection $validators): void
-    {
-        $this->validators = $validators;
-    }
-
-    /**
      * Validate a user.
-     * @param  Homo             $homo The user.
-     * @return PromiseInterface The Promise.
+     * @param  Homo                     $homo The user.
+     * @return PromiseInterface<Result> The Promise.
      */
     protected function validateAsync(Homo $homo): PromiseInterface
     {
@@ -134,9 +112,9 @@ class CheckService implements CheckServiceContract
 
     /**
      * Create a status object from a user.
-     * @param  Homo             $homo     The user.
-     * @param  callable         $callback The callback that is called after resolution (optional).
-     * @return PromiseInterface The Promise.
+     * @param  Homo                     $homo     The user.
+     * @param  callable                 $callback The callback that is called after resolution (optional).
+     * @return PromiseInterface<Status> The Promise.
      */
     protected function createStatusAsync(Homo $homo, callable $callback = null): PromiseInterface
     {

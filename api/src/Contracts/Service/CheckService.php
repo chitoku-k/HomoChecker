@@ -4,22 +4,9 @@ declare(strict_types=1);
 namespace HomoChecker\Contracts\Service;
 
 use HomoChecker\Domain\Status;
-use Illuminate\Support\Collection;
 
 interface CheckService
 {
-    /**
-     * Set the profiles.
-     * @param Collection<ProfileService> $profiles The Profiles.
-     */
-    public function setProfiles(Collection $profiles): void;
-
-    /**
-     * Set the validators.
-     * @param Collection<ValidatorService> $validators The Validators.
-     */
-    public function setValidators(Collection $validators): void;
-
     /**
      * Execute the checker.
      * @param  string   $screen_name The screen_name to filter by (optional).

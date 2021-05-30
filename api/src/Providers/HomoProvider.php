@@ -47,6 +47,8 @@ class HomoProvider extends ServiceProvider
             $app->make(HomoServiceContract::class),
             $app->make('collector.check_total'),
             $app->make('collector.check_error_total'),
+            $app->make('profiles'),
+            $app->make('validators'),
         ));
 
         $this->app->singleton(ClientServiceContract::class, ClientService::class);

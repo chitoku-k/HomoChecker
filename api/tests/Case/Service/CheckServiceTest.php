@@ -244,11 +244,10 @@ class CheckServiceTest extends TestCase
 
         Log::spy();
 
-        $check = new CheckService($client, $homo, $checkCounter, $checkErrorCounter);
-        $check->setProfiles(collect(compact('twitter', 'mastodon')));
-        $check->setValidators(collect([
-            $validator,
-        ]));
+        $profiles = collect(compact('twitter', 'mastodon'));
+        $validators = collect([$validator]);
+
+        $check = new CheckService($client, $homo, $checkCounter, $checkErrorCounter, $profiles, $validators);
 
         $expected = [
             new Status([
