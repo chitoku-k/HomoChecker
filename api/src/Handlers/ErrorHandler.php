@@ -27,7 +27,7 @@ class ErrorHandler implements ErrorHandlerInterface
         }
 
         /** @var HttpResponse $response */
-        $response = $this->responseFactory->createResponse($exception->getCode());
+        $response = $this->responseFactory->createResponse((int) $exception->getCode());
         return $response->withJson([
             'errors' => [
                 [

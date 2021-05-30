@@ -8,14 +8,14 @@ use TrueBV\Punycode;
 class Status implements \JsonSerializable
 {
     /**
-     * @var ?Homo The homo object.
+     * @var Homo The homo object.
      */
-    protected ?Homo $homo;
+    protected Homo $homo;
 
     /**
-     * @var ?Result The result object.
+     * @var Result The result object.
      */
-    protected ?Result $result;
+    protected Result $result;
 
     /**
      * @var ?string The icon URL.
@@ -29,43 +29,43 @@ class Status implements \JsonSerializable
     {
         $status = (object) $status;
 
-        $this->setHomo($status->homo ?? null);
-        $this->setResult($status->result ?? null);
+        $this->setHomo($status->homo ?? new Homo());
+        $this->setResult($status->result ?? new Result());
         $this->setIcon($status->icon ?? null);
     }
 
     /**
      * Get the homo object.
-     * @return ?Homo The homo object.
+     * @return Homo The homo object.
      */
-    public function getHomo(): ?Homo
+    public function getHomo(): Homo
     {
         return $this->homo;
     }
 
     /**
      * Set the homo object.
-     * @param ?Homo $homo The homo object.
+     * @param Homo $homo The homo object.
      */
-    public function setHomo(?Homo $homo): void
+    public function setHomo(Homo $homo): void
     {
         $this->homo = $homo;
     }
 
     /**
      * Get the result object.
-     * @return ?Result The result object.
+     * @return Result The result object.
      */
-    public function getResult(): ?Result
+    public function getResult(): Result
     {
         return $this->result;
     }
 
     /**
      * Set the result object.
-     * @param ?Result $result The result object.
+     * @param Result $result The result object.
      */
-    public function setResult(?Result $result): void
+    public function setResult(Result $result): void
     {
         $this->result = $result;
     }
@@ -90,16 +90,21 @@ class Status implements \JsonSerializable
 
     /**
      * Create a display URL from an absolute URL.
-     * @param  string $url    Absolute URL.
-     * @param  bool   $scheme Scheme.
-     * @return string Display URL.
+     * @param  ?string $url    Absolute URL.
+     * @param  bool    $scheme Scheme.
+     * @return string  Display URL.
      */
-    protected function createDisplayURL(string $url, bool $scheme = false): string
+    protected function createDisplayURL(?string $url, bool $scheme = false): string
     {
+        if (!$url) {
+            return '';
+        }
+
         $domain = parse_url($url, PHP_URL_HOST);
         if (!is_string($domain)) {
             return '';
         }
+
         $scheme = $scheme ? parse_url($url, PHP_URL_SCHEME) . '://' : '';
         $path = (string) parse_url($url, PHP_URL_PATH);
         return $scheme . (new Punycode())->decode($domain) . $path;
@@ -107,12 +112,15 @@ class Status implements \JsonSerializable
 
     /**
      * Get whether the scheme of the URL supports secure transfer.
-     * @param  string $url The URL.
-     * @return bool   true if supported; otherwise false.
+     * @param  ?string $url The URL.
+     * @return bool    true if supported; otherwise false.
      */
-    protected function isSecure(string $url): bool
+    protected function isSecure(?string $url): bool
     {
-        return strtolower(parse_url($url, PHP_URL_SCHEME)) === 'https';
+        return match ($url) {
+            null => false,
+            default => strtolower(parse_url($url, PHP_URL_SCHEME)) === 'https',
+        };
     }
 
     public function getHomoArray()

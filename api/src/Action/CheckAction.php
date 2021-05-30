@@ -28,7 +28,7 @@ class CheckAction
 
     protected function byJSON(Response $response, string $screen_name = null): Response
     {
-        /** @var HttpResponse $response */
+        /** @var Response $response */
         $result = $this->check->execute($screen_name);
         return $response->withJson($result, !empty($result) ? 200 : 404);
     }

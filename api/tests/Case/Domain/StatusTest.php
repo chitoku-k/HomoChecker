@@ -130,4 +130,47 @@ class StatusTest extends TestCase
         $this->assertEquals('', $actual->getResultArray()['url']);
         $this->assertEquals($duration, $actual->getResultArray()['duration']);
     }
+
+    public function testIncorrectURL(): void
+    {
+        $screen_name = 'homo';
+        $service = 'twitter';
+        $url = null;
+        $icon = 'https://img.example.com';
+        $status = 'CONTAINS';
+        $ip = '2001:db8::4545:1';
+        $duration = 1.14514;
+
+        $homo = new Homo(compact(
+            'screen_name',
+            'service',
+            'url',
+        ));
+
+        $result = new Result(compact(
+            'status',
+            'ip',
+            'url',
+            'duration',
+        ));
+
+        $actual = new Status(compact(
+            'homo',
+            'result',
+            'icon',
+        ));
+
+        $this->assertEquals($screen_name, $actual->getHomo()->getScreenName());
+        $this->assertEquals($service, $actual->getHomo()->getService());
+        $this->assertEquals($url, $actual->getHomo()->getUrl());
+        $this->assertEquals($screen_name, $actual->getHomoArray()['screen_name']);
+        $this->assertEquals($service, $actual->getHomoArray()['service']);
+        $this->assertEquals($url, $actual->getHomoArray()['url']);
+        $this->assertEquals('', $actual->getHomoArray()['display_url']);
+        $this->assertEquals(false, $actual->getHomoArray()['secure']);
+        $this->assertEquals($status, $actual->getResultArray()['status']);
+        $this->assertEquals($ip, $actual->getResultArray()['ip']);
+        $this->assertEquals('', $actual->getResultArray()['url']);
+        $this->assertEquals($duration, $actual->getResultArray()['duration']);
+    }
 }
