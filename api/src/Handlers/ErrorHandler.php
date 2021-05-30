@@ -30,8 +30,10 @@ class ErrorHandler implements ErrorHandlerInterface
         $response = $this->responseFactory->createResponse($exception->getCode());
         return $response->withJson([
             'errors' => [
-                'code' => $response->getStatusCode(),
-                'message' => $response->getReasonPhrase(),
+                [
+                    'code' => $response->getStatusCode(),
+                    'message' => $response->getReasonPhrase(),
+                ],
             ],
         ]);
     }
