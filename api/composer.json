@@ -4,14 +4,14 @@
     "require": {
         "guzzlehttp/guzzle": "^7.3",
         "guzzlehttp/oauth-subscriber": "^0.5.0",
-        "illuminate/cache": "^8.44",
-        "illuminate/config": "^8.44",
-        "illuminate/container": "^8.44",
-        "illuminate/database": "^8.44",
-        "illuminate/events": "^8.44",
-        "illuminate/log": "^8.44",
-        "illuminate/redis": "^8.44",
-        "illuminate/support": "^8.44",
+        "illuminate/cache": "^8.45",
+        "illuminate/config": "^8.45",
+        "illuminate/container": "^8.45",
+        "illuminate/database": "^8.45",
+        "illuminate/events": "^8.45",
+        "illuminate/log": "^8.45",
+        "illuminate/redis": "^8.45",
+        "illuminate/support": "^8.45",
         "middlewares/access-log": "^2.0",
         "phpoption/phpoption": "^1.7",
         "promphp/prometheus_client_php": "^2.2",
@@ -28,6 +28,17 @@
         "php-coveralls/php-coveralls": "^2.4",
         "phpunit/phpunit": "^9",
         "vimeo/psalm": "^4.7"
+    },
+    "replace": {
+        "symfony/polyfill-apcu": "*",
+        "symfony/polyfill-ctype": "*",
+        "symfony/polyfill-intl-grapheme": "*",
+        "symfony/polyfill-intl-normalizer": "*",
+        "symfony/polyfill-mbstring": "*",
+        "symfony/polyfill-php72": "*",
+        "symfony/polyfill-php73": "*",
+        "symfony/polyfill-php80": "*",
+        "symfony/polyfill-php81": "*"
     },
     "autoload": {
         "psr-4": {
