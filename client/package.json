@@ -8,7 +8,7 @@
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.4",
     "babel-loader": "^8.2.2",
-    "caniuse-lite": "^1.0.30001230",
+    "caniuse-lite": "^1.0.30001234",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^9.0.0",
     "core-js": "^3.13.1",
