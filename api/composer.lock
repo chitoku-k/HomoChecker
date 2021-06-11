@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb527e4521e897a58e1d449ea41f4d52",
+    "content-hash": "e0a902bb94ec0569c9bff39f82320246",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -728,7 +728,7 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v8.45.1",
+            "version": "v8.46.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
@@ -827,16 +827,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v8.45.1",
+            "version": "v8.46.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "905886ead0b052878608cbe5f3fb0e38ff687cf4"
+                "reference": "a86efc94475ca00e1a11cfe7ee212699af9ddd61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/905886ead0b052878608cbe5f3fb0e38ff687cf4",
-                "reference": "905886ead0b052878608cbe5f3fb0e38ff687cf4",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/a86efc94475ca00e1a11cfe7ee212699af9ddd61",
+                "reference": "a86efc94475ca00e1a11cfe7ee212699af9ddd61",
                 "shasum": ""
             },
             "require": {
@@ -891,7 +891,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-06-03T16:39:17+00:00"
+            "time": "2021-06-08T13:23:07+00:00"
         },
         {
             "name": "illuminate/events",
