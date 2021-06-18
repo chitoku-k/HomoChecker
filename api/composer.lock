@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "045bf6cc5ba9f336d3bf8a8741646869",
+    "content-hash": "0c8f362281e1724a97c0366e41ca99e2",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -950,7 +950,7 @@
         },
         {
             "name": "illuminate/log",
-            "version": "v8.45.1",
+            "version": "v8.47.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/log.git",
