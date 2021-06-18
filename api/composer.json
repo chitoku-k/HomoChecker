@@ -11,7 +11,7 @@
         "illuminate/events": "^8.46",
         "illuminate/log": "^8.45",
         "illuminate/redis": "^8.46",
-        "illuminate/support": "^8.46",
+        "illuminate/support": "^8.47",
         "middlewares/access-log": "^2.0",
         "phpoption/phpoption": "^1.7",
         "promphp/prometheus_client_php": "^2.2",
