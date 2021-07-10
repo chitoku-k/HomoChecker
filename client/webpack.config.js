@@ -3,6 +3,7 @@ const sass = require("sass");
 const path = require("path");
 const { DefinePlugin } = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const { LicenseWebpackPlugin } = require("license-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { GitRevisionPlugin } = require("git-revision-webpack-plugin");
@@ -102,6 +103,9 @@ module.exports = {
                 "keywords": "HomoChecker, Homo Checker, まっぴー, mpyw",
                 "theme-color": "#7a6544",
             },
+        }),
+        new LicenseWebpackPlugin({
+            perChunkOutput: false,
         }),
     ],
 };
