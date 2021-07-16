@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:experimental
-FROM node:16.4.2-slim AS dependencies
+FROM node:16.5.0-slim AS dependencies
 WORKDIR /usr/src/client
 RUN --mount=type=cache,target=/var/cache/apt \
     --mount=type=cache,target=/var/lib/apt/lists \
