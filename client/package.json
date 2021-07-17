@@ -17,7 +17,6 @@
     "eslint-loader": "^4.0.2",
     "eslint-plugin-riot": "^0.1.8",
     "event-source-polyfill": "1.0.24",
-    "file-loader": "^6.2.0",
     "font-awesome": "^4.7.0",
     "git-revision-webpack-plugin": "^5.0.0",
     "html-webpack-plugin": "^5.3.2",
