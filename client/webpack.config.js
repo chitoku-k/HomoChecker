@@ -17,6 +17,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, "/dist"),
         filename: "bundle.js",
+        assetModuleFilename: "[name][ext]",
     },
     target: ["web", "es5"],
     module: {
@@ -62,9 +63,7 @@ module.exports = {
             },
             {
                 test: /\.(woff2?|ttf|eot|svg)(\?v=[\d.]+|\?[\s\S]+)?$/,
-                use: [
-                    { loader: "file-loader?name=[name].[ext]" },
-                ],
+                type: "asset/resource",
             },
         ],
     },
