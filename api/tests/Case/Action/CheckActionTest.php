@@ -113,8 +113,12 @@ class CheckActionTest extends TestCase
 
         $action = new CheckAction($check, $homo, $stream);
         $response = $action(new HttpRequest($request), new HttpResponse(new Response(), new StreamFactory()), []);
+
         $actual = $response->getHeaderLine('Content-Type');
         $this->assertMatchesRegularExpression('|^application/json|', $actual);
+
+        $actual = $response->getHeaderLine('Cache-Control');
+        $this->assertEquals('no-store', $actual);
 
         $actual = (string) $response->getBody();
         $expected = json_encode([
@@ -167,7 +171,7 @@ class CheckActionTest extends TestCase
                 'error' => null,
             ],
         ]);
-        $this->assertJsonStringEqualsJsonString($actual, $expected);
+        $this->assertJsonStringEqualsJsonString($expected, $actual);
     }
 
     /**
@@ -228,7 +232,13 @@ class CheckActionTest extends TestCase
               });
 
         $action = new CheckAction($check, $homo, $stream);
-        $action(new HttpRequest($request), new HttpResponse(new Response(), new StreamFactory()), []);
+        $response = $action(new HttpRequest($request), new HttpResponse(new Response(), new StreamFactory()), []);
+
+        $actual = $response->getHeaderLine('Content-Type');
+        $this->assertEquals('text/event-stream', $actual);
+
+        $actual = $response->getHeaderLine('Cache-Control');
+        $this->assertEquals('no-store', $actual);
     }
 
     public function formatProvider()

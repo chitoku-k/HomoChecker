@@ -30,12 +30,17 @@ class CheckAction
     {
         /** @var Response $response */
         $result = $this->check->execute($screen_name);
-        return $response->withJson($result, !empty($result) ? 200 : 404);
+        return $response
+            ->withHeader('Cache-Control', 'no-store')
+            ->withJson($result, !empty($result) ? 200 : 404);
     }
 
     protected function bySSE(Response $response, string $screen_name = null): Response
     {
-        $response = $response->withBody($this->stream)->withHeader('Content-Type', 'text/event-stream');
+        $response = $response
+            ->withBody($this->stream)
+            ->withHeader('Content-Type', 'text/event-stream')
+            ->withHeader('Cache-Control', 'no-store');
 
         // Output count
         $count = [
