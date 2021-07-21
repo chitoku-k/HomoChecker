@@ -43,6 +43,10 @@ return [
     'logging.channels.emergency' => [
         'path' => 'php://stderr',
     ],
+    'logging.skipPaths' => [
+        '/healthz',
+        '/metrics',
+    ],
     'client' => [
         'timeout' => 5,
         'allow_redirects' => false,

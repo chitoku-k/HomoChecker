@@ -9,6 +9,7 @@ use HomoChecker\Contracts\Service\CacheService as CacheServiceContract;
 use HomoChecker\Contracts\Service\CheckService as CheckServiceContract;
 use HomoChecker\Contracts\Service\ClientService as ClientServiceContract;
 use HomoChecker\Contracts\Service\HomoService as HomoServiceContract;
+use HomoChecker\Logging\AccessLog;
 use HomoChecker\Service\CacheService;
 use HomoChecker\Service\CheckService;
 use HomoChecker\Service\ClientService;
@@ -21,7 +22,6 @@ use Illuminate\Log\LogServiceProvider;
 use Illuminate\Redis\RedisServiceProvider;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
-use Middlewares\AccessLog;
 use Psr\Log\LoggerInterface;
 
 class HomoProvider extends ServiceProvider
@@ -34,6 +34,9 @@ class HomoProvider extends ServiceProvider
         $this->app->when(AccessLog::class)
             ->needs(LoggerInterface::class)
             ->give(fn () => Log::channel('router'));
+        $this->app->when(AccessLog::class)
+            ->needs('$skipPaths')
+            ->giveConfig('logging.skipPaths');
 
         $this->app->singleton(ClientInterface::class, Client::class);
         $this->app->when(Client::class)
