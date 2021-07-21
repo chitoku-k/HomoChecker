@@ -11,7 +11,7 @@ server {
     keepalive_timeout 0;
 
     location @api {
-        if ($request_uri = /healthz) {
+        if ($request_uri ~ ^/(healthz|metrics)) {
             access_log off;
         }
 
