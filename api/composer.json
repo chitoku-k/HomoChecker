@@ -11,7 +11,7 @@
         "illuminate/events": "^8.52",
         "illuminate/log": "^8.52",
         "illuminate/redis": "^8.52",
-        "illuminate/support": "^8.51",
+        "illuminate/support": "^8.52",
         "middlewares/access-log": "^2.0",
         "phpoption/phpoption": "^1.7",
         "promphp/prometheus_client_php": "^2.2",
@@ -27,7 +27,7 @@
         "mockery/mockery": "^1.4",
         "php-coveralls/php-coveralls": "^2.4",
         "phpunit/phpunit": "^9",
-        "vimeo/psalm": "^4.8"
+        "vimeo/psalm": "^4.9"
     },
     "replace": {
         "symfony/polyfill-apcu": "*",
