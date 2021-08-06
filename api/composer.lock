@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "26f8335b92ff51df4a003a2720eb05a2",
+    "content-hash": "295b24ad1523dde98dd66abc228e1818",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -522,16 +522,16 @@
         },
         {
             "name": "illuminate/bus",
-            "version": "v8.52.0",
+            "version": "v8.53.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/bus.git",
-                "reference": "0b9722013b908a67e9b815a3bad4f49e25828f7b"
+                "reference": "741819dbb813504f3ebd53596eccfe2c28212722"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/bus/zipball/0b9722013b908a67e9b815a3bad4f49e25828f7b",
-                "reference": "0b9722013b908a67e9b815a3bad4f49e25828f7b",
+                "url": "https://api.github.com/repos/illuminate/bus/zipball/741819dbb813504f3ebd53596eccfe2c28212722",
+                "reference": "741819dbb813504f3ebd53596eccfe2c28212722",
                 "shasum": ""
             },
             "require": {
@@ -571,7 +571,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-07-16T12:35:20+00:00"
+            "time": "2021-08-03T13:30:49+00:00"
         },
         {
             "name": "illuminate/cache",
@@ -901,7 +901,7 @@
         },
         {
             "name": "illuminate/events",
-            "version": "v8.52.0",
+            "version": "v8.53.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/events.git",
@@ -1051,7 +1051,7 @@
         },
         {
             "name": "illuminate/pipeline",
-            "version": "v8.52.0",
+            "version": "v8.53.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/pipeline.git",
