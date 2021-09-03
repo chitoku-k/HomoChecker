@@ -9,7 +9,7 @@
         "illuminate/container": "^8.57",
         "illuminate/database": "^8.57",
         "illuminate/events": "^8.57",
-        "illuminate/log": "^8.57",
+        "illuminate/log": "^8.58",
         "illuminate/redis": "^8.57",
         "illuminate/support": "^8.57",
         "middlewares/access-log": "^2.0",
