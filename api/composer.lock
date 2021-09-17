@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "16ddecebaa1ed72886de9aa6f8877cee",
+    "content-hash": "080038be8cdca88ad3826ad55f584541",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -1585,22 +1585,21 @@
         },
         {
             "name": "promphp/prometheus_client_php",
-            "version": "v2.2.2",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PromPHP/prometheus_client_php.git",
-                "reference": "5d27b6d84900d9b3208b5b6bf88d10ed0dc7a154"
+                "reference": "6e30c28d19acb65e5d9a445c8c9bdb11b0d56c73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PromPHP/prometheus_client_php/zipball/5d27b6d84900d9b3208b5b6bf88d10ed0dc7a154",
-                "reference": "5d27b6d84900d9b3208b5b6bf88d10ed0dc7a154",
+                "url": "https://api.github.com/repos/PromPHP/prometheus_client_php/zipball/6e30c28d19acb65e5d9a445c8c9bdb11b0d56c73",
+                "reference": "6e30c28d19acb65e5d9a445c8c9bdb11b0d56c73",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": "^7.2|^8.0",
-                "symfony/polyfill-apcu": "^1.6"
+                "php": "^7.2|^8.0"
             },
             "replace": {
                 "endclothing/prometheus_client_php": "*",
@@ -1614,12 +1613,14 @@
                 "phpstan/phpstan-phpunit": "^0.12.16",
                 "phpstan/phpstan-strict-rules": "^0.12.5",
                 "phpunit/phpunit": "^8.4|^9.4",
-                "squizlabs/php_codesniffer": "^3.5"
+                "squizlabs/php_codesniffer": "^3.5",
+                "symfony/polyfill-apcu": "^1.6"
             },
             "suggest": {
                 "ext-apc": "Required if using APCu.",
                 "ext-redis": "Required if using Redis.",
-                "promphp/prometheus_push_gateway_php": "An easy client for using Prometheus PushGateway."
+                "promphp/prometheus_push_gateway_php": "An easy client for using Prometheus PushGateway.",
+                "symfony/polyfill-apcu": "Required if you use APCu on PHP8.0+"
             },
             "type": "library",
             "extra": {
@@ -1645,9 +1646,9 @@
             "description": "Prometheus instrumentation library for PHP applications.",
             "support": {
                 "issues": "https://github.com/PromPHP/prometheus_client_php/issues",
-                "source": "https://github.com/PromPHP/prometheus_client_php/tree/v2.2.2"
+                "source": "https://github.com/PromPHP/prometheus_client_php/tree/v2.3.0"
             },
-            "time": "2021-03-05T08:54:14+00:00"
+            "time": "2021-09-14T05:39:00+00:00"
         },
         {
             "name": "psr/container",
