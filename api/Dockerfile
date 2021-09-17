@@ -32,9 +32,10 @@ RUN --mount=type=cache,target=/var/cache/apt \
     echo 'label ::1/128 0' > /etc/gai.conf
 
 FROM runtime AS dependencies
-COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 RUN --mount=type=cache,target=/var/cache/apt \
     --mount=type=cache,target=/var/lib/apt/lists \
+    apt-get -y update && \
     apt-get -y install \
         git \
         unzip
