@@ -9,16 +9,17 @@ use Prometheus\CollectorRegistry;
 use Prometheus\RegistryInterface;
 use Prometheus\RendererInterface;
 use Prometheus\RenderTextFormat;
-use Prometheus\Storage\Redis;
+use Prometheus\Storage\Adapter;
+use Prometheus\Storage\APC;
 
 class HomoMetricsProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->app->singleton(RegistryInterface::class, function (Container $app) {
-            Redis::setDefaultOptions($app->make('config')->get('database.redis')['default']);
-            return CollectorRegistry::getDefault();
-        });
+        $this->app->singleton(RegistryInterface::class, CollectorRegistry::class);
+        $this->app->when(CollectorRegistry::class)
+            ->needs(Adapter::class)
+            ->give(fn (Container $app) => $app->make(APC::class));
 
         $this->app->singleton('collector.check_total', function (Container $app) {
             /** @var RegistryInterface */
