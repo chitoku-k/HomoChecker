@@ -54,6 +54,17 @@ class HomoMetricsProvider extends ServiceProvider
             );
         });
 
+        $this->app->singleton('summary.http_server_requests_seconds', function (Container $app) {
+            /** @var RegistryInterface */
+            $registry = $app->make(RegistryInterface::class);
+            return $registry->registerSummary(
+                '',
+                'http_server_requests_seconds',
+                'The latency for requests.',
+                ['method', 'uri', 'exception', 'status', 'outcome'],
+            );
+        });
+
         $this->app->singleton(RendererInterface::class, RenderTextFormat::class);
     }
 
@@ -62,6 +73,10 @@ class HomoMetricsProvider extends ServiceProvider
         return [
             RegistryInterface::class,
             RendererInterface::class,
+            'collector.check_total',
+            'collector.check_error_total',
+            'collector.profile_error_total',
+            'summary.http_server_requests_seconds',
         ];
     }
 }

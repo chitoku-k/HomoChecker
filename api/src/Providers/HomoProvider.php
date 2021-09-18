@@ -11,6 +11,7 @@ use HomoChecker\Contracts\Service\ClientService as ClientServiceContract;
 use HomoChecker\Contracts\Service\HomoService as HomoServiceContract;
 use HomoChecker\Middleware\AccessLogMiddleware;
 use HomoChecker\Middleware\ErrorMiddleware;
+use HomoChecker\Middleware\MetricsMiddleware;
 use HomoChecker\Providers\Support\LogServiceProvider;
 use HomoChecker\Service\CacheService;
 use HomoChecker\Service\CheckService;
@@ -23,10 +24,12 @@ use Illuminate\Events\EventServiceProvider;
 use Illuminate\Redis\RedisServiceProvider;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
+use Prometheus\Summary;
 use Psr\Log\LoggerInterface;
 use Slim\App;
 use Slim\Interfaces\CallableResolverInterface;
 use Slim\Interfaces\ErrorHandlerInterface;
+use Slim\Interfaces\RouteResolverInterface;
 
 class HomoProvider extends ServiceProvider
 {
@@ -52,6 +55,18 @@ class HomoProvider extends ServiceProvider
             /** @var App */
             $slim = $app->make('app');
             return $slim->getCallableResolver();
+        });
+
+        $this->app->when(MetricsMiddleware::class)
+            ->needs(Summary::class)
+            ->give(fn (Container $app) => $app->make('summary.http_server_requests_seconds'));
+        $this->app->when(MetricsMiddleware::class)
+            ->needs('$skipPaths')
+            ->giveConfig('logging.skipPaths');
+        $this->app->singleton(RouteResolverInterface::class, function (Container $app) {
+            /** @var App */
+            $slim = $app->make('app');
+            return $slim->getRouteResolver();
         });
 
         $this->app->singleton(ClientInterface::class, Client::class);
@@ -93,6 +108,7 @@ class HomoProvider extends ServiceProvider
     {
         return [
             AccessLogMiddleware::class,
+            MetricsMiddleware::class,
             ClientInterface::class,
             CacheServiceContract::class,
             CheckServiceContract::class,

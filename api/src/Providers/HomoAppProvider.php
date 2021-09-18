@@ -12,6 +12,7 @@ use HomoChecker\Contracts\Repository\HomoRepository as HomoRepositoryContract;
 use HomoChecker\Http\NonBufferedBody;
 use HomoChecker\Middleware\AccessLogMiddleware;
 use HomoChecker\Middleware\ErrorMiddleware;
+use HomoChecker\Middleware\MetricsMiddleware;
 use HomoChecker\Repository\HomoRepository;
 use Illuminate\Config\Repository;
 use Illuminate\Contracts\Container\Container;
@@ -52,6 +53,7 @@ class HomoAppProvider extends ServiceProvider
             // For errors occurred in routing and actions
             $slim->addMiddleware($app->make(ErrorMiddleware::class));
             $slim->addMiddleware($app->make(AccessLogMiddleware::class));
+            $slim->addMiddleware($app->make(MetricsMiddleware::class));
 
             // For errors occurred in middleware
             $slim->addMiddleware($app->make(ErrorMiddleware::class));
@@ -67,6 +69,7 @@ class HomoAppProvider extends ServiceProvider
     {
         return [
             HealthCheckAction::class,
+            MetricsAction::class,
             CheckAction::class,
             ListAction::class,
             BadgeAction::class,
