@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace HomoChecker\Http;
 
-use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Slim\Http\Response;
 use Throwable;
@@ -27,7 +26,7 @@ class ErrorResponse extends Response
     /**
      * {@inheritdoc}
      */
-    public function withAddedHeader($name, $value)
+    public function withAddedHeader($name, $value): static
     {
         $response = new static(parent::withAddedHeader($name, $value), $this->streamFactory);
         $response->exception = $this->exception;
@@ -37,7 +36,7 @@ class ErrorResponse extends Response
     /**
      * {@inheritdoc}
      */
-    public function withBody(StreamInterface $body)
+    public function withBody(StreamInterface $body): static
     {
         $response = new static(parent::withBody($body), $this->streamFactory);
         $response->exception = $this->exception;
@@ -47,7 +46,7 @@ class ErrorResponse extends Response
     /**
      * {@inheritdoc}
      */
-    public function withHeader($name, $value)
+    public function withHeader($name, $value): static
     {
         $response = new static(parent::withHeader($name, $value), $this->streamFactory);
         $response->exception = $this->exception;
@@ -57,7 +56,7 @@ class ErrorResponse extends Response
     /**
      * {@inheritdoc}
      */
-    public function withoutHeader($name)
+    public function withoutHeader($name): static
     {
         $response = new static(parent::withoutHeader($name), $this->streamFactory);
         $response->exception = $this->exception;
@@ -67,7 +66,7 @@ class ErrorResponse extends Response
     /**
      * {@inheritdoc}
      */
-    public function withProtocolVersion($version)
+    public function withProtocolVersion($version): static
     {
         $response = new static(parent::withProtocolVersion($version), $this->streamFactory);
         $response->exception = $this->exception;
@@ -77,7 +76,7 @@ class ErrorResponse extends Response
     /**
      * {@inheritdoc}
      */
-    public function withStatus($code, $reasonPhrase = '')
+    public function withStatus($code, $reasonPhrase = ''): static
     {
         $response = new static(parent::withStatus($code, $reasonPhrase), $this->streamFactory);
         $response->exception = $this->exception;
@@ -87,7 +86,7 @@ class ErrorResponse extends Response
     /**
      * {@inheritdoc}
      */
-    public function withJson($data, ?int $status = null, int $options = 0, int $depth = 512): ResponseInterface
+    public function withJson($data, ?int $status = null, int $options = 0, int $depth = 512): static
     {
         $response = new static(parent::withJson($data, $status, $options, $depth), $this->streamFactory);
         $response->exception = $this->exception;
@@ -97,7 +96,7 @@ class ErrorResponse extends Response
     /**
      * {@inheritdoc}
      */
-    public function withRedirect(string $url, ?int $status = null): ResponseInterface
+    public function withRedirect(string $url, ?int $status = null): static
     {
         $response = new static(parent::withRedirect($url, $status), $this->streamFactory);
         $response->exception = $this->exception;
@@ -107,7 +106,7 @@ class ErrorResponse extends Response
     /**
      * {@inheritdoc}
      */
-    public function withFileDownload($file, ?string $name = null, $contentType = true): ResponseInterface
+    public function withFileDownload($file, ?string $name = null, $contentType = true): static
     {
         $response = new static(parent::withFileDownload($file, $name, $contentType), $this->streamFactory);
         $response->exception = $this->exception;
@@ -117,7 +116,7 @@ class ErrorResponse extends Response
     /**
      * {@inheritdoc}
      */
-    public function withFile($file, $contentType = true): ResponseInterface
+    public function withFile($file, $contentType = true): static
     {
         $response = new static(parent::withFile($file, $contentType), $this->streamFactory);
         $response->exception = $this->exception;
