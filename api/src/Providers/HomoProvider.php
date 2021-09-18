@@ -9,7 +9,8 @@ use HomoChecker\Contracts\Service\CacheService as CacheServiceContract;
 use HomoChecker\Contracts\Service\CheckService as CheckServiceContract;
 use HomoChecker\Contracts\Service\ClientService as ClientServiceContract;
 use HomoChecker\Contracts\Service\HomoService as HomoServiceContract;
-use HomoChecker\Logging\AccessLog;
+use HomoChecker\Middleware\AccessLogMiddleware;
+use HomoChecker\Middleware\ErrorMiddleware;
 use HomoChecker\Providers\Support\LogServiceProvider;
 use HomoChecker\Service\CacheService;
 use HomoChecker\Service\CheckService;
@@ -23,20 +24,35 @@ use Illuminate\Redis\RedisServiceProvider;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Psr\Log\LoggerInterface;
+use Slim\App;
+use Slim\Interfaces\CallableResolverInterface;
+use Slim\Interfaces\ErrorHandlerInterface;
 
 class HomoProvider extends ServiceProvider
 {
-    protected string $format = AccessLog::FORMAT_COMBINED . ' "%{X-Forwarded-For}i"';
+    protected string $format = AccessLogMiddleware::FORMAT_COMBINED . ' "%{X-Forwarded-For}i"';
 
     public function register()
     {
-        $this->app->extend(AccessLog::class, fn (AccessLog $log) => $log->format($this->format));
-        $this->app->when(AccessLog::class)
+        $this->app->extend(AccessLogMiddleware::class, fn (AccessLogMiddleware $log) => $log->format($this->format));
+        $this->app->when(AccessLogMiddleware::class)
             ->needs(LoggerInterface::class)
             ->give(fn () => Log::channel('router'));
-        $this->app->when(AccessLog::class)
+        $this->app->when(AccessLogMiddleware::class)
             ->needs('$skipPaths')
             ->giveConfig('logging.skipPaths');
+
+        $this->app->resolving(ErrorMiddleware::class, function (ErrorMiddleware $middleware, Container $app) {
+            /** @var ErrorHandlerInterface */
+            $handler = $app->make(ErrorHandlerInterface::class);
+            $middleware->setDefaultErrorHandler($handler);
+        });
+
+        $this->app->singleton(CallableResolverInterface::class, function (Container $app) {
+            /** @var App */
+            $slim = $app->make('app');
+            return $slim->getCallableResolver();
+        });
 
         $this->app->singleton(ClientInterface::class, Client::class);
         $this->app->when(Client::class)
@@ -76,7 +92,7 @@ class HomoProvider extends ServiceProvider
     public function provides()
     {
         return [
-            AccessLog::class,
+            AccessLogMiddleware::class,
             ClientInterface::class,
             CacheServiceContract::class,
             CheckServiceContract::class,
