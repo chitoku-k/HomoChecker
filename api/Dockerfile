@@ -7,8 +7,12 @@ RUN --mount=type=cache,target=/var/cache/apt \
     apt-get -y install \
         libpq5 \
         libpq-dev && \
-    pecl install redis && \
-    docker-php-ext-enable redis && \
+    pecl install \
+        apcu \
+        redis && \
+    docker-php-ext-enable \
+        apcu \
+        redis && \
     docker-php-ext-install \
         opcache \
         pdo_pgsql && \

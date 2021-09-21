@@ -9,16 +9,17 @@ use Prometheus\CollectorRegistry;
 use Prometheus\RegistryInterface;
 use Prometheus\RendererInterface;
 use Prometheus\RenderTextFormat;
-use Prometheus\Storage\Redis;
+use Prometheus\Storage\Adapter;
+use Prometheus\Storage\APC;
 
 class HomoMetricsProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->app->singleton(RegistryInterface::class, function (Container $app) {
-            Redis::setDefaultOptions($app->make('config')->get('database.redis')['default']);
-            return CollectorRegistry::getDefault();
-        });
+        $this->app->singleton(RegistryInterface::class, CollectorRegistry::class);
+        $this->app->when(CollectorRegistry::class)
+            ->needs(Adapter::class)
+            ->give(fn (Container $app) => $app->make(APC::class));
 
         $this->app->singleton('collector.check_total', function (Container $app) {
             /** @var RegistryInterface */
@@ -53,6 +54,17 @@ class HomoMetricsProvider extends ServiceProvider
             );
         });
 
+        $this->app->singleton('summary.http_server_requests_seconds', function (Container $app) {
+            /** @var RegistryInterface */
+            $registry = $app->make(RegistryInterface::class);
+            return $registry->registerSummary(
+                '',
+                'http_server_requests_seconds',
+                'The latency for requests.',
+                ['method', 'uri', 'exception', 'status', 'outcome'],
+            );
+        });
+
         $this->app->singleton(RendererInterface::class, RenderTextFormat::class);
     }
 
@@ -61,6 +73,10 @@ class HomoMetricsProvider extends ServiceProvider
         return [
             RegistryInterface::class,
             RendererInterface::class,
+            'collector.check_total',
+            'collector.check_error_total',
+            'collector.profile_error_total',
+            'summary.http_server_requests_seconds',
         ];
     }
 }

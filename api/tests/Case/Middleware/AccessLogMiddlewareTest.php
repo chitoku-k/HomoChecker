@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace HomoChecker\Test\Logging;
+namespace HomoChecker\Test\Middleware;
 
-use HomoChecker\Logging\AccessLog;
-use Middlewares\AccessLog as AccessLogBase;
+use HomoChecker\Middleware\AccessLogMiddleware;
+use Middlewares\AccessLog;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
 use Mockery\MockInterface;
@@ -16,7 +16,7 @@ use Slim\Psr7\Factory\ServerRequestFactory;
 use Slim\Psr7\Factory\StreamFactory;
 use Slim\Psr7\Response;
 
-class AccessLogTest extends TestCase
+class AccessLogMiddlewareTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
@@ -37,7 +37,7 @@ class AccessLogTest extends TestCase
                 ->withArgs([$request])
                 ->andReturn($response);
 
-        $log = new AccessLog($logger, ['/metrics']);
+        $log = new AccessLogMiddleware($logger, ['/metrics']);
         $actual = $log->process($request, $handler);
 
         $this->assertEquals($response, $actual);
@@ -57,13 +57,13 @@ class AccessLogTest extends TestCase
         /** @var MockInterface|RequestHandlerInterface $handler */
         $handler = m::mock(RequestHandlerInterface::class);
 
-        /** @var AccessLogBase|MockInterface $base */
-        $base = m::mock('overload:' . AccessLogBase::class);
+        /** @var AccessLog|MockInterface $base */
+        $base = m::mock('overload:' . AccessLog::class);
         $base->shouldReceive('process')
              ->withArgs([$request, $handler])
              ->andReturn($response);
 
-        $log = new AccessLog($logger, ['/metrics']);
+        $log = new AccessLogMiddleware($logger, ['/metrics']);
         $actual = $log->process($request, $handler);
 
         $this->assertEquals($response, $actual);

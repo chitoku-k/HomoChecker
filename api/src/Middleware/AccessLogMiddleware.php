@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace HomoChecker\Logging;
+namespace HomoChecker\Middleware;
 
-use Middlewares\AccessLog as AccessLogBase;
+use Middlewares\AccessLog;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 
-class AccessLog extends AccessLogBase
+class AccessLogMiddleware extends AccessLog
 {
     /**
      * @var string[] Paths to skip logging.
