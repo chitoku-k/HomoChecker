@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "db473e18e10375fe5ac7f5ed912a1759",
+    "content-hash": "050a270a0d3161a5bb7a2ef7babafc9d",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -831,16 +831,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v8.62.0",
+            "version": "v8.63.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "327c22dc8f117c07a3e00ecfb4f5011ede445407"
+                "reference": "4f46da6a564fe5a906f6dbeda968f8e18c35ad92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/327c22dc8f117c07a3e00ecfb4f5011ede445407",
-                "reference": "327c22dc8f117c07a3e00ecfb4f5011ede445407",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/4f46da6a564fe5a906f6dbeda968f8e18c35ad92",
+                "reference": "4f46da6a564fe5a906f6dbeda968f8e18c35ad92",
                 "shasum": ""
             },
             "require": {
@@ -895,7 +895,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-09-28T13:10:43+00:00"
+            "time": "2021-10-05T13:08:53+00:00"
         },
         {
             "name": "illuminate/events",
