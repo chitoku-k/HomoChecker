@@ -110,6 +110,12 @@ $ export HOMOCHECKER_TWITTER_TOKEN=
 $ export HOMOCHECKER_TWITTER_TOKEN_SECRET=
 ```
 
+#### ビルド
+
+```sh
+$ docker buildx bake -f ./docker-bake.hcl
+```
+
 ## 開発環境
 
 初回実行時のみイメージのビルド作業が必要です。
