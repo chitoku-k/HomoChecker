@@ -73,19 +73,16 @@ Web サーバーが静的コンテンツ配信のみの場合は HTML による�
     - `If the URL matches:` に `*homo.example.com/*` を指定します。
     - `Then the settings are:` に `Forwarding URL`、`301 - Permanent Redirect`、`https://twitter.com/mpyw` を指定します。
 
-## 動作環境
+## 本番環境
 
-### フロントエンド
+BuildKit（または Docker の対応するバージョン）あるいは Buildah のインストールが必要です。
 
-Chrome、Firefox、Internet Explorer の最新版で動くのでたいていのホモは救われます。
+- `docker build` を利用する場合: Docker 18.09 以上
+- `docker buildx` を利用する場合: Docker 19.03 以上
 
-### バックエンド
-
-開発環境の構築には Docker Compose のインストールが必要です。  
 nginx + PHP-FPM + PostgreSQL + Redis で構成されています。
 
-本番環境の構築にはコンテナーランタイム（Docker など）のインストールが必要です。  
-nginx + PHP-FPM で構成されており、以下の環境変数を使用して設定を行います。
+### 設定
 
 #### nginx
 
@@ -110,7 +107,7 @@ $ export HOMOCHECKER_TWITTER_TOKEN=
 $ export HOMOCHECKER_TWITTER_TOKEN_SECRET=
 ```
 
-#### ビルド
+### ビルド
 
 ```sh
 $ docker buildx bake -f ./docker-bake.hcl
@@ -118,11 +115,9 @@ $ docker buildx bake -f ./docker-bake.hcl
 
 ## 開発環境
 
-初回実行時のみイメージのビルド作業が必要です。
+Docker Compose のインストールが必要です。
 
-```sh
-$ bin/init
-```
+### 設定
 
 webpack のモード、ポート番号を指定する場合は環境変数を変更します（任意）。
 
@@ -137,9 +132,10 @@ IPv6 接続を有効にするためには、あらかじめサブネットを指
 $ docker network create --attachable --ipv6 --subnet=fd00:4545::/48 homochecker_ipv6
 ```
 
-次のコマンドでコンテナーを起動します。
+### 実行
 
 ```sh
+$ bin/init
 $ COMPOSE_DOCKER_CLI_BUILD=1 \
   DOCKER_BUILDKIT=1 \
   docker-compose up -d --build
@@ -171,9 +167,7 @@ $ curl -s 'https://homo.chitoku.jp:4545/list/?format=sql' |
   docker exec -i $(docker-compose ps -q database) psql -dhomo -Uhomo
 ```
 
-## テストするには
-
-次のコマンドでテストを実行します。
+### テスト
 
 ```sh
 $ bin/test
