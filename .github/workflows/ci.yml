@@ -97,8 +97,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: /tmp/buildx-cache
-          key: buildx-api-${{ github.sha }}
-          restore-keys: buildx-api-
+          key: buildx-${{ github.sha }}
+          restore-keys: buildx-
       - name: Build
         uses: docker/bake-action@v1.6.0
         with:
