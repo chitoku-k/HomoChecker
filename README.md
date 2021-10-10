@@ -11,9 +11,9 @@ HomoChecker はホモ（[@mpyw](https://twitter.com/mpyw)）にリダイレク�
 ## 目次
 
 - [ホモへの手引き](#ホモへの手引き)
-- [動作環境](#動作環境)
+- [本番環境](#本番環境)
 - [開発環境](#開発環境)
-- [テストするには](#テストするには)
+- [テスト](#テスト)
 - [API](/api/README.md)
 
 ## ホモへの手引き
@@ -58,20 +58,22 @@ hosts:
                     status: 301
 ```
 
-Web サーバーが静的コンテンツ配信のみの場合は HTML によるリダイレクトを行います。
+#### Cloudflare
+
+1. DNS で `homo.example.com` を Cloudflare を通すように設定します。
+2. Page Rule を作成します。
+   - `If the URL matches:` に `*homo.example.com/*` を指定します。
+   - `Then the settings are:` に `Forwarding URL`、`301 - Permanent Redirect`、`https://twitter.com/mpyw` を指定します。
+
+#### 静的配信
+
+下記の内容を HTML 形式で配信します。
 
 ```html
 <!doctype html>
 <title>homo</title>
 <meta http-equiv="refresh" content="1; url=https://twitter.com/mpyw">
 ```
-
-または Cloudflare を利用してサーバーレスホモを構築します。
-
-1. DNS で `homo.example.com` を Cloudflare を通すように設定します。
-2. Page Rule を作成します。
-    - `If the URL matches:` に `*homo.example.com/*` を指定します。
-    - `Then the settings are:` に `Forwarding URL`、`301 - Permanent Redirect`、`https://twitter.com/mpyw` を指定します。
 
 ## 本番環境
 
