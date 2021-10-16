@@ -81,7 +81,9 @@ module.exports = {
                 },
             ],
         }),
-        new ESLintPlugin(),
+        new ESLintPlugin({
+            extensions: ["js", "tag"],
+        }),
         new DefinePlugin({
             COMMIT_HASH: JSON.stringify((new GitRevisionPlugin()).commithash()),
         }),
