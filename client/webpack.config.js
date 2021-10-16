@@ -5,6 +5,7 @@ const { DefinePlugin } = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const { LicenseWebpackPlugin } = require("license-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { GitRevisionPlugin } = require("git-revision-webpack-plugin");
 
@@ -36,14 +37,6 @@ module.exports = {
                 exclude: /node_modules/,
                 use: [
                     { loader: "riot-tag-loader" },
-                ],
-            },
-            {
-                test: /\.(js|tag)$/,
-                enforce: "pre",
-                exclude: /node_modules/,
-                use: [
-                    { loader: "eslint-loader" },
                 ],
             },
             {
@@ -87,6 +80,9 @@ module.exports = {
                     to: path.join(__dirname, "/dist"),
                 },
             ],
+        }),
+        new ESLintPlugin({
+            extensions: ["js", "tag"],
         }),
         new DefinePlugin({
             COMMIT_HASH: JSON.stringify((new GitRevisionPlugin()).commithash()),
