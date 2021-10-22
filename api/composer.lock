@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "41fe832136de86b661114d5f4a2c308a",
+    "content-hash": "33234d2d9af5bdde947f3450a0f39e43",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -159,16 +159,16 @@
         },
         {
             "name": "graham-campbell/result-type",
-            "version": "v1.0.2",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/GrahamCampbell/Result-Type.git",
-                "reference": "84afea85c6841deeea872f36249a206e878a5de0"
+                "reference": "296c015dc30ec4322168c5ad3ee5cc11dae827ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GrahamCampbell/Result-Type/zipball/84afea85c6841deeea872f36249a206e878a5de0",
-                "reference": "84afea85c6841deeea872f36249a206e878a5de0",
+                "url": "https://api.github.com/repos/GrahamCampbell/Result-Type/zipball/296c015dc30ec4322168c5ad3ee5cc11dae827ac",
+                "reference": "296c015dc30ec4322168c5ad3ee5cc11dae827ac",
                 "shasum": ""
             },
             "require": {
@@ -204,7 +204,7 @@
             ],
             "support": {
                 "issues": "https://github.com/GrahamCampbell/Result-Type/issues",
-                "source": "https://github.com/GrahamCampbell/Result-Type/tree/v1.0.2"
+                "source": "https://github.com/GrahamCampbell/Result-Type/tree/v1.0.3"
             },
             "funding": [
                 {
@@ -216,28 +216,29 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-08-28T21:34:50+00:00"
+            "time": "2021-10-17T19:48:54+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "7.3.0",
+            "version": "7.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "7008573787b430c1c1f650e3722d9bba59967628"
+                "reference": "868b3571a039f0ebc11ac8f344f4080babe2cb94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/7008573787b430c1c1f650e3722d9bba59967628",
-                "reference": "7008573787b430c1c1f650e3722d9bba59967628",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/868b3571a039f0ebc11ac8f344f4080babe2cb94",
+                "reference": "868b3571a039f0ebc11ac8f344f4080babe2cb94",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "guzzlehttp/promises": "^1.4",
-                "guzzlehttp/psr7": "^1.7 || ^2.0",
+                "guzzlehttp/promises": "^1.5",
+                "guzzlehttp/psr7": "^1.8.3 || ^2.1",
                 "php": "^7.2.5 || ^8.0",
-                "psr/http-client": "^1.0"
+                "psr/http-client": "^1.0",
+                "symfony/deprecation-contracts": "^2.2"
             },
             "provide": {
                 "psr/http-client-implementation": "1.0"
@@ -247,7 +248,7 @@
                 "ext-curl": "*",
                 "php-http/client-integration-tests": "^3.0",
                 "phpunit/phpunit": "^8.5.5 || ^9.3.5",
-                "psr/log": "^1.1"
+                "psr/log": "^1.1 || ^2.0 || ^3.0"
             },
             "suggest": {
                 "ext-curl": "Required for CURL handler support",
@@ -257,7 +258,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "7.3-dev"
+                    "dev-master": "7.4-dev"
                 }
             },
             "autoload": {
@@ -274,18 +275,42 @@
             ],
             "authors": [
                 {
+                    "name": "Graham Campbell",
+                    "email": "hello@gjcampbell.co.uk",
+                    "homepage": "https://github.com/GrahamCampbell"
+                },
+                {
                     "name": "Michael Dowling",
                     "email": "mtdowling@gmail.com",
                     "homepage": "https://github.com/mtdowling"
                 },
                 {
+                    "name": "Jeremy Lindblom",
+                    "email": "jeremeamia@gmail.com",
+                    "homepage": "https://github.com/jeremeamia"
+                },
+                {
+                    "name": "George Mponos",
+                    "email": "gmponos@gmail.com",
+                    "homepage": "https://github.com/gmponos"
+                },
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com",
+                    "homepage": "https://github.com/Nyholm"
+                },
+                {
                     "name": "Márk Sági-Kazár",
                     "email": "mark.sagikazar@gmail.com",
-                    "homepage": "https://sagikazarmark.hu"
+                    "homepage": "https://github.com/sagikazarmark"
+                },
+                {
+                    "name": "Tobias Schultze",
+                    "email": "webmaster@tubo-world.de",
+                    "homepage": "https://github.com/Tobion"
                 }
             ],
             "description": "Guzzle is a PHP HTTP client library",
-            "homepage": "http://guzzlephp.org/",
             "keywords": [
                 "client",
                 "curl",
@@ -299,7 +324,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.3.0"
+                "source": "https://github.com/guzzle/guzzle/tree/7.4.0"
             },
             "funding": [
                 {
@@ -311,15 +336,11 @@
                     "type": "github"
                 },
                 {
-                    "url": "https://github.com/alexeyshockov",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/gmponos",
-                    "type": "github"
+                    "url": "https://tidelift.com/funding/github/packagist/guzzlehttp/guzzle",
+                    "type": "tidelift"
                 }
             ],
-            "time": "2021-03-23T11:33:13+00:00"
+            "time": "2021-10-18T09:52:00+00:00"
         },
         {
             "name": "guzzlehttp/oauth-subscriber",
@@ -748,7 +769,7 @@
         },
         {
             "name": "illuminate/config",
-            "version": "v8.64.0",
+            "version": "v8.67.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/config.git",
@@ -4709,16 +4730,16 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "5.2.2",
+            "version": "5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "069a785b2141f5bcf49f3e353548dc1cce6df556"
+                "reference": "622548b623e81ca6d78b721c5e029f4ce664f170"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/069a785b2141f5bcf49f3e353548dc1cce6df556",
-                "reference": "069a785b2141f5bcf49f3e353548dc1cce6df556",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/622548b623e81ca6d78b721c5e029f4ce664f170",
+                "reference": "622548b623e81ca6d78b721c5e029f4ce664f170",
                 "shasum": ""
             },
             "require": {
@@ -4729,7 +4750,8 @@
                 "webmozart/assert": "^1.9.1"
             },
             "require-dev": {
-                "mockery/mockery": "~1.3.2"
+                "mockery/mockery": "~1.3.2",
+                "psalm/phar": "^4.8"
             },
             "type": "library",
             "extra": {
@@ -4759,9 +4781,9 @@
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
             "support": {
                 "issues": "https://github.com/phpDocumentor/ReflectionDocBlock/issues",
-                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/master"
+                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/5.3.0"
             },
-            "time": "2020-09-03T19:13:55+00:00"
+            "time": "2021-10-19T17:43:47+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -5303,20 +5325,20 @@
         },
         {
             "name": "psr/cache",
-            "version": "1.0.1",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/cache.git",
-                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8"
+                "reference": "aa5030cfa5405eccfdcb1083ce040c2cb8d253bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/cache/zipball/d11b50ad223250cf17b86e38383413f5a6764bf8",
-                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8",
+                "url": "https://api.github.com/repos/php-fig/cache/zipball/aa5030cfa5405eccfdcb1083ce040c2cb8d253bf",
+                "reference": "aa5030cfa5405eccfdcb1083ce040c2cb8d253bf",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=8.0.0"
             },
             "type": "library",
             "extra": {
@@ -5336,7 +5358,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interface for caching libraries",
@@ -5346,9 +5368,9 @@
                 "psr-6"
             ],
             "support": {
-                "source": "https://github.com/php-fig/cache/tree/master"
+                "source": "https://github.com/php-fig/cache/tree/3.0.0"
             },
-            "time": "2016-08-06T20:24:11+00:00"
+            "time": "2021-02-03T23:26:27+00:00"
         },
         {
             "name": "psr/event-dispatcher",
@@ -6253,7 +6275,6 @@
                     "type": "github"
                 }
             ],
-            "abandoned": true,
             "time": "2020-09-28T06:45:17+00:00"
         },
         {
