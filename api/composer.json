@@ -27,7 +27,7 @@
         "mockery/mockery": "^1.4",
         "php-coveralls/php-coveralls": "^2.4",
         "phpunit/phpunit": "^9",
-        "vimeo/psalm": "^4.10"
+        "vimeo/psalm": "^4.11"
     },
     "replace": {
         "symfony/polyfill-apcu": "*",
