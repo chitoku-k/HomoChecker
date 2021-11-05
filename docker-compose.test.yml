@@ -17,7 +17,7 @@ services:
       context: .
       target: dev
     working_dir: /usr/src/app/client
-    command: npm run --no-update-notifier build
+    command: yarn build
     volumes:
       - type: bind
         source: .

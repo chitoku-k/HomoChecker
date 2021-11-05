@@ -7,5 +7,5 @@ export COMPOSE_PROJECT_NAME=homochecker-test
 export COMPOSE_FILE=docker-compose.test.yml
 
 docker-compose build
-docker-compose run --rm build npm run lint
+docker-compose run --rm build yarn lint
 docker-compose down

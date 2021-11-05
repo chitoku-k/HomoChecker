@@ -6,18 +6,19 @@ RUN --mount=type=cache,target=/var/cache/apt \
     apt-get -y update && \
     apt-get -y install \
         git
-COPY client/package.json client/package-lock.json /usr/src/client/
-RUN --mount=type=cache,target=/root/.npm \
-    npm ci --no-update-notifier --no-audit --no-fund
+COPY client/package.json client/yarn.lock /usr/src/client/
+RUN --mount=type=tmpfs,target=/tmp \
+    --mount=type=cache,target=/usr/local/share/.cache/yarn \
+    yarn
 
 FROM dependencies AS dev
-RUN --mount=type=cache,target=/mnt/.npm,id=/root/.npm \
-    cp -r /mnt/.npm /root/
+RUN --mount=type=cache,target=/mnt/yarn,id=/usr/local/share/.cache/yarn \
+    cp -r /mnt/yarn /usr/local/share/.cache/
 
 FROM dependencies AS build
 COPY . /usr/src/
 RUN touch fonts/atlan.svg fonts/atlan.ttf fonts/atlan.woff && \
-    npm run --no-update-notifier build
+    yarn build
 
 FROM nginx:1.21.3-alpine
 ENV HOMOCHECKER_API_HOST homochecker-api

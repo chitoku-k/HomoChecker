@@ -29,7 +29,7 @@ services:
       context: .
       target: dev
     working_dir: /usr/src/app/client
-    command: npm run watch
+    command: yarn watch
     environment:
       HOMOCHECKER_ENV: "${HOMOCHECKER_ENV-development}"
     volumes:
