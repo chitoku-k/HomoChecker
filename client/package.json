@@ -33,6 +33,10 @@
     "webpack": "^5.62.0",
     "webpack-cli": "^4.9.1"
   },
+  "resolutions": {
+    "glob-parent": "^5",
+    "set-value": "^4"
+  },
   "scripts": {
     "build": "webpack",
     "lint": "eslint 'src/tags/*.tag'",

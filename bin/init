@@ -8,5 +8,5 @@ touch client/fonts/atlan.{svg,ttf,woff}
 
 docker-compose build
 docker-compose run --rm api composer install --no-scripts
-docker-compose run --rm build npm ci --no-update-notifier --prefer-offline --no-audit --no-fund
+docker-compose run --rm build yarn
 docker-compose down

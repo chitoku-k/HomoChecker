@@ -76,8 +76,8 @@ jobs:
           tags: homochecker-test_build
       - name: Run lints
         run: |
-          docker-compose run --rm build npm ci --no-update-notifier --prefer-offline --no-audit --no-fund
-          docker-compose run --rm build npm run --no-update-notifier lint
+          docker-compose run --rm build yarn
+          docker-compose run --rm build yarn lint
         env:
           COMPOSE_PROJECT_NAME: homochecker-test
           COMPOSE_FILE: docker-compose.test.yml
