@@ -4,7 +4,7 @@
     "require": {
         "guzzlehttp/guzzle": "^7.4",
         "guzzlehttp/oauth-subscriber": "^0.6.0",
-        "illuminate/cache": "^8.68",
+        "illuminate/cache": "^8.69",
         "illuminate/config": "^8.68",
         "illuminate/container": "^8.68",
         "illuminate/database": "^8.69",
