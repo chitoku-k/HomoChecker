@@ -105,6 +105,7 @@ class HomoProvider extends ServiceProvider
                     $to = tmpfile();
                     $metadata = stream_get_meta_data($to);
                     stream_copy_to_stream($from, $to);
+                    fclose($to);
 
                     $config['sslkey'] = $metadata['uri'];
                 }
