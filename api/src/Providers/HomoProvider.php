@@ -103,11 +103,19 @@ class HomoProvider extends ServiceProvider
                 if (isset($config['sslkey'])) {
                     $from = fopen($config['sslkey'], 'r');
                     $to = tmpfile();
-                    $metadata = stream_get_meta_data($to);
                     stream_copy_to_stream($from, $to);
-                    fclose($to);
 
-                    $config['sslkey'] = $metadata['uri'];
+                    $config['sslkey'] = new class($to) {
+                        public function __construct(private $handle)
+                        {
+                        }
+
+                        public function __toString()
+                        {
+                            $metadata = stream_get_meta_data($this->handle);
+                            return $metadata['uri'];
+                        }
+                    };
                 }
 
                 return $factory->make($config, $name);
