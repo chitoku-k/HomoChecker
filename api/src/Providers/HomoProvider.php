@@ -19,6 +19,8 @@ use HomoChecker\Service\ClientService;
 use HomoChecker\Service\HomoService;
 use Illuminate\Cache\CacheServiceProvider;
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Database\Connectors\ConnectionFactory;
+use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\DatabaseServiceProvider;
 use Illuminate\Events\EventServiceProvider;
 use Illuminate\Redis\RedisServiceProvider;
@@ -91,6 +93,25 @@ class HomoProvider extends ServiceProvider
             ->giveConfig('client.redirect');
 
         $this->app->singleton(HomoServiceContract::class, HomoService::class);
+
+        $this->app->resolving('db', function (DatabaseManager $databaseManager, Container $app) {
+            $databaseManager->extend('pgsql', function (array $config, string $name) use ($app) {
+                /** @var ConnectionFactory */
+                $factory = $app->make('db.factory');
+
+                // Ensure that the permission for the private key is set to 0600.
+                if (isset($config['sslkey'])) {
+                    $from = fopen($config['sslkey'], 'r');
+                    $to = tmpfile();
+                    $metadata = stream_get_meta_data($to);
+                    stream_copy_to_stream($from, $to);
+
+                    $config['sslkey'] = $metadata['uri'];
+                }
+
+                return $factory->make($config, $name);
+            });
+        });
 
         (new HomoAppProvider($this->app))->register();
         (new HomoHandlerProvider($this->app))->register();
