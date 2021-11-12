@@ -8,7 +8,7 @@
         "illuminate/config": "^8.69",
         "illuminate/database": "^8.70",
         "illuminate/events": "^8.70",
-        "illuminate/log": "^8.69",
+        "illuminate/log": "^8.70",
         "illuminate/redis": "^8.70",
         "middlewares/access-log": "^2.0",
         "phpoption/phpoption": "^1.7",
