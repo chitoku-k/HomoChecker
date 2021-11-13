@@ -17,7 +17,7 @@
         "slim/psr7": "^1.4",
         "slim/slim": "^4.8",
         "true/punycode": "~2.0",
-        "vlucas/phpdotenv": "^5.3"
+        "vlucas/phpdotenv": "^5.4"
     },
     "require-dev": {
         "brainmaestro/composer-git-hooks": "^2.8",
