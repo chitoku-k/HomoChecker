@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7af35506d895bd0d2698585615ba274c",
+    "content-hash": "dd5bf87fb89b4a45063fd35b5456db84",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -1035,16 +1035,16 @@
         },
         {
             "name": "illuminate/log",
-            "version": "v8.70.2",
+            "version": "v8.73.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/log.git",
-                "reference": "046ad9ffcdaf83365ec65465964cb400ec603a58"
+                "reference": "ac693c06fbc60ac344c55925d34aa811b85f1455"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/log/zipball/046ad9ffcdaf83365ec65465964cb400ec603a58",
-                "reference": "046ad9ffcdaf83365ec65465964cb400ec603a58",
+                "url": "https://api.github.com/repos/illuminate/log/zipball/ac693c06fbc60ac344c55925d34aa811b85f1455",
+                "reference": "ac693c06fbc60ac344c55925d34aa811b85f1455",
                 "shasum": ""
             },
             "require": {
@@ -1080,7 +1080,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-11-04T14:18:09+00:00"
+            "time": "2021-11-17T15:04:30+00:00"
         },
         {
             "name": "illuminate/macroable",
