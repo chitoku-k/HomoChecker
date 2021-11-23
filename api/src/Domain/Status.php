@@ -139,6 +139,7 @@ class Status implements \JsonSerializable
         return [
             'status' => $this->getResult()->getStatus(),
             'code' => $this->getResult()->getCode(),
+            'http' => $this->getResult()->getHttp(),
             'ip' => $this->getResult()->getIp(),
             'url' => $this->createDisplayURL($this->getResult()->getUrl(), true),
             'duration' => $this->getResult()->getDuration(),

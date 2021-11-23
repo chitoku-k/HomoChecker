@@ -57,6 +57,7 @@ class ClientServiceTest extends TestCase
         $this->assertEquals(301, $actual->getStatusCode());
         $this->assertEquals(1.0, $actual->getTotalTime());
         $this->assertEquals(0.0, $actual->getStartTransferTime());
+        $this->assertNull($actual->getHttpVersion());
         $this->assertNull($actual->getPrimaryIP());
 
         $generator->next();
@@ -100,6 +101,7 @@ class ClientServiceTest extends TestCase
         $this->assertEquals(301, $actual->getStatusCode());
         $this->assertEquals(1.0, $actual->getTotalTime());
         $this->assertEquals(0.0, $actual->getStartTransferTime());
+        $this->assertNull($actual->getHttpVersion());
         $this->assertNull($actual->getPrimaryIP());
 
         $generator->next();
@@ -121,6 +123,7 @@ class ClientServiceTest extends TestCase
         $this->assertEquals(200, $actual->getStatusCode());
         $this->assertEquals(1.0, $actual->getTotalTime());
         $this->assertEquals(0.0, $actual->getStartTransferTime());
+        $this->assertNull($actual->getHttpVersion());
         $this->assertNull($actual->getPrimaryIP());
         $this->assertStringContainsString('<title>Fail</title>', (string) $actual->getBody());
 

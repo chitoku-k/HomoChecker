@@ -77,6 +77,9 @@ data: {"homo":{"screen_name":"@chitoku@mstdn.jp","service":"mastodon","url":"htt
         // (string|null) 直前の接続先の HTTP レスポンスコード
         "code": "302 Found",
 
+        // (string|null) 直前の接続先の HTTP バージョン（1.0, 1.1, 2）
+        "http": "2",
+
         // (string|null) 直前の接続先の IPv4 または IPv6（サポートしている場合）アドレス
         "ip": "2001:db8::4545:4545",
 

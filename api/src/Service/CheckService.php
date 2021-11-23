@@ -56,8 +56,9 @@ class CheckService implements CheckServiceContract
         return Coroutine::of(function () use ($url) {
             $total_time = 0.0;
             $total_starttransfer_time = 0.0;
-            $ip = null;
             $code = null;
+            $http = null;
+            $ip = null;
 
             try {
                 foreach ($this->client->getAsync($url) as $url => $promise) {
@@ -67,8 +68,9 @@ class CheckService implements CheckServiceContract
                     foreach ($this->validators as $validator) {
                         $total_time += $response->getTotalTime();
                         $total_starttransfer_time += $response->getStartTransferTime();
-                        $ip = $response->getPrimaryIP();
                         $code = collect([$response->getStatusCode(), $response->getReasonPhrase()])->join(' ');
+                        $http = $response->getHttpVersion();
+                        $ip = $response->getPrimaryIP();
 
                         if (!$status = $validator->validate($response)) {
                             continue;
@@ -77,6 +79,7 @@ class CheckService implements CheckServiceContract
                         return yield new Result([
                             'status' => $status,
                             'code' => $code,
+                            'http' => $http,
                             'ip' => $ip,
                             'url' => $url,
                             'duration' => $total_starttransfer_time,
@@ -87,6 +90,7 @@ class CheckService implements CheckServiceContract
                 return yield new Result([
                     'status' => ValidationResult::WRONG,
                     'code' => $code ?? null,
+                    'http' => $http,
                     'ip' => $ip,
                     'url' => $url,
                     'duration' => $total_starttransfer_time,
@@ -97,6 +101,7 @@ class CheckService implements CheckServiceContract
                 return yield new Result([
                     'status' => ValidationResult::ERROR,
                     'code' => $code ?? null,
+                    'http' => $http,
                     'ip' => $ip,
                     'url' => $url,
                     'duration' => $total_time,
@@ -108,6 +113,7 @@ class CheckService implements CheckServiceContract
                 return yield new Result([
                     'status' => ValidationResult::ERROR,
                     'code' => $code ?? null,
+                    'http' => $http,
                     'ip' => $ip,
                     'url' => $url,
                     'duration' => $total_time,

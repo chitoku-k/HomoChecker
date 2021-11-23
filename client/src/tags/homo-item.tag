@@ -39,7 +39,13 @@
                             fa-lock: homo.secure,
                             fa-unlock-alt: !homo.secure,
                         }></i>
-                        { homo.secure ? "HTTPS" : "HTTP" }
+                        <span if={ http }>
+                            HTTP/{ http }
+                            { homo.secure ? "over TLS" : "" }
+                        </span>
+                        <span if={ !http }>
+                            { homo.secure ? "HTTPS" : "HTTP" }
+                        </span>
                     </span>
                     <span if={ ip } class={
                         connection: true,
