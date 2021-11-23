@@ -19,6 +19,11 @@ class Response implements ResponseInterface
     protected float $startTransferTime = 0.0;
 
     /**
+     * @var ?string The HTTP version.
+     */
+    protected ?string $httpVersion = null;
+
+    /**
      * @var ?string The primary IP.
      */
     protected ?string $primaryIP = null;
@@ -61,6 +66,28 @@ class Response implements ResponseInterface
     public function setStartTransferTime(float $startTransferTime): void
     {
         $this->startTransferTime = $startTransferTime;
+    }
+
+    /**
+     * Get the HTTP version.
+     * @return ?string The HTTP Version.
+     */
+    public function getHttpVersion(): ?string
+    {
+        return $this->httpVersion;
+    }
+
+    /**
+     * Set the HTTP version.
+     */
+    public function setHttpVersion(null|int|string $httpVersion): void
+    {
+        $this->httpVersion = match ($httpVersion) {
+            CURL_HTTP_VERSION_1_0 => '1.0',
+            CURL_HTTP_VERSION_1_1 => '1.1',
+            CURL_HTTP_VERSION_2_0 => '2',
+            default => null,
+        };
     }
 
     /**

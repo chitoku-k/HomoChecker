@@ -16,6 +16,11 @@ class Result
     protected ?string $code;
 
     /**
+     * @var ?string The HTTP version.
+     */
+    protected ?string $http;
+
+    /**
      * @var ?string The IP address.
      */
     protected ?string $ip;
@@ -41,6 +46,7 @@ class Result
 
         $this->setStatus($result->status ?? null);
         $this->setCode($result->code ?? null);
+        $this->setHttp($result->http ?? null);
         $this->setIp($result->ip ?? null);
         $this->setUrl($result->url ?? null);
         $this->setDuration($result->duration ?? null);
@@ -80,6 +86,24 @@ class Result
     public function setCode(?string $code): void
     {
         $this->code = $code;
+    }
+
+    /**
+     * Get the HTTP version used to serve a response.
+     * @return ?string The HTTP version used to serve a response.
+     */
+    public function getHttp(): ?string
+    {
+        return $this->http;
+    }
+
+    /**
+     * Set the HTTP version used to serve a response.
+     * @param ?string $http The HTTP version used to serve a response.
+     */
+    public function setHttp(?string $http): void
+    {
+        $this->http = $http;
     }
 
     /**

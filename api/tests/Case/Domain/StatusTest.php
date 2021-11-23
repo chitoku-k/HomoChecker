@@ -17,6 +17,7 @@ class StatusTest extends TestCase
         $url = 'https://xn--ydko.example.com';
         $icon = 'https://img.example.com';
         $status = 'OK';
+        $http = '2.0';
         $ip = '2001:db8::4545:1';
         $duration = 1.14514;
 
@@ -28,6 +29,7 @@ class StatusTest extends TestCase
 
         $result = new Result(compact(
             'status',
+            'http',
             'ip',
             'url',
             'duration',
@@ -51,6 +53,7 @@ class StatusTest extends TestCase
         $url = 'https://xn--ydko.example.com';
         $icon = 'https://img.example.com';
         $status = 'OK';
+        $http = '2.0';
         $ip = '2001:db8::4545:1';
         $duration = 1.14514;
 
@@ -62,6 +65,7 @@ class StatusTest extends TestCase
 
         $result = new Result(compact(
             'status',
+            'http',
             'ip',
             'url',
             'duration',
@@ -83,6 +87,7 @@ class StatusTest extends TestCase
         $this->assertEquals(true, $actual->getHomoArray()['secure']);
         $this->assertEquals($icon, $actual->getIcon());
         $this->assertEquals($status, $actual->getResultArray()['status']);
+        $this->assertEquals($http, $actual->getResultArray()['http']);
         $this->assertEquals($ip, $actual->getResultArray()['ip']);
         $this->assertEquals('https://ホモ.example.com', $actual->getResultArray()['url']);
         $this->assertEquals($duration, $actual->getResultArray()['duration']);
@@ -95,6 +100,7 @@ class StatusTest extends TestCase
         $url = 'not:a:url';
         $icon = 'https://img.example.com';
         $status = 'CONTAINS';
+        $http = '1.1';
         $ip = '2001:db8::4545:1';
         $duration = 1.14514;
 
@@ -106,6 +112,7 @@ class StatusTest extends TestCase
 
         $result = new Result(compact(
             'status',
+            'http',
             'ip',
             'url',
             'duration',
@@ -126,6 +133,7 @@ class StatusTest extends TestCase
         $this->assertEquals('', $actual->getHomoArray()['display_url']);
         $this->assertEquals(false, $actual->getHomoArray()['secure']);
         $this->assertEquals($status, $actual->getResultArray()['status']);
+        $this->assertEquals($http, $actual->getResultArray()['http']);
         $this->assertEquals($ip, $actual->getResultArray()['ip']);
         $this->assertEquals('', $actual->getResultArray()['url']);
         $this->assertEquals($duration, $actual->getResultArray()['duration']);
@@ -138,6 +146,7 @@ class StatusTest extends TestCase
         $url = null;
         $icon = 'https://img.example.com';
         $status = 'CONTAINS';
+        $http = '1.1';
         $ip = '2001:db8::4545:1';
         $duration = 1.14514;
 
@@ -149,6 +158,7 @@ class StatusTest extends TestCase
 
         $result = new Result(compact(
             'status',
+            'http',
             'ip',
             'url',
             'duration',
@@ -169,6 +179,7 @@ class StatusTest extends TestCase
         $this->assertEquals('', $actual->getHomoArray()['display_url']);
         $this->assertEquals(false, $actual->getHomoArray()['secure']);
         $this->assertEquals($status, $actual->getResultArray()['status']);
+        $this->assertEquals($http, $actual->getResultArray()['http']);
         $this->assertEquals($ip, $actual->getResultArray()['ip']);
         $this->assertEquals('', $actual->getResultArray()['url']);
         $this->assertEquals($duration, $actual->getResultArray()['duration']);

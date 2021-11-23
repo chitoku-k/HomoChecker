@@ -113,6 +113,7 @@ class CheckServiceTest extends TestCase
                        $response = new Response(new Psr7Response(301, ['Location' => 'https://homo.example.com'], ''));
                        $response->setTotalTime(1.0);
                        $response->setStartTransferTime(2.0);
+                       $response->setHttpVersion(CURL_HTTP_VERSION_2_0);
                        $response->setPrimaryIP('2001:db8::4545:1');
                        yield 'https://foo.example.com/1' => new FulfilledPromise($response);
                    })(),
@@ -125,6 +126,7 @@ class CheckServiceTest extends TestCase
                        $response = new Response(new Psr7Response(301, ['Location' => 'https://foo2.example.com'], ''));
                        $response->setTotalTime(2.0);
                        $response->setStartTransferTime(3.0);
+                       $response->setHttpVersion(CURL_HTTP_VERSION_1_1);
                        $response->setPrimaryIP('2001:db8::4545:2');
                        yield 'https://foo.example.com/2' => new FulfilledPromise($response);
 
@@ -134,6 +136,7 @@ class CheckServiceTest extends TestCase
                        '));
                        $response->setTotalTime(3.0);
                        $response->setStartTransferTime(4.0);
+                       $response->setHttpVersion(CURL_HTTP_VERSION_1_1);
                        $response->setPrimaryIP('2001:db8::4545:4');
                        yield 'https://foo2.example.com' => new FulfilledPromise($response);
                    })(),
@@ -149,6 +152,7 @@ class CheckServiceTest extends TestCase
                        '));
                        $response->setTotalTime(3.0);
                        $response->setStartTransferTime(4.0);
+                       $response->setHttpVersion(null);
                        $response->setPrimaryIP('2001:db8::4545:3');
                        yield 'http://bar.example.com' => new FulfilledPromise($response);
                    })(),
@@ -266,6 +270,7 @@ class CheckServiceTest extends TestCase
                 'result' => new Result([
                     'status' => 'OK',
                     'code' => '301 Moved Permanently',
+                    'http' => '2',
                     'ip' => '2001:db8::4545:1',
                     'url' => 'https://foo.example.com/1',
                     'duration' => 2.0,
@@ -282,6 +287,7 @@ class CheckServiceTest extends TestCase
                 'result' => new Result([
                     'status' => 'WRONG',
                     'code' => '200 OK',
+                    'http' => '1.1',
                     'ip' => '2001:db8::4545:4',
                     'url' => 'https://foo2.example.com',
                     'duration' => 7.0,
@@ -314,6 +320,7 @@ class CheckServiceTest extends TestCase
                 'result' => new Result([
                     'status' => 'ERROR',
                     'ip' => null,
+                    'http' => null,
                     'url' => 'https://baz.example.com',
                     'duration' => 0.0,
                     'error' => 'Resolving timed out after 5000 milliseconds',
@@ -330,6 +337,7 @@ class CheckServiceTest extends TestCase
                 'result' => new Result([
                     'status' => 'ERROR',
                     'ip' => null,
+                    'http' => null,
                     'url' => 'https://qux.example.com',
                     'duration' => 0.0,
                 ]),
