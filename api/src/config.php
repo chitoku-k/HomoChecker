@@ -54,7 +54,7 @@ return [
         'timeout' => 5,
         'allow_redirects' => false,
         'curl' => [
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_2_0,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_2,
         ],
         'headers' => [
             'User-Agent' => 'Homozilla/5.0 (Checker/1.14.514; homOSeX 8.10)',
@@ -76,8 +76,5 @@ return [
         'token' => env('HOMOCHECKER_TWITTER_TOKEN'),
         'token_secret' => env('HOMOCHECKER_TWITTER_TOKEN_SECRET'),
     ],
-    'httpVersion' => '1.1',
-    'responseChunkSize' => 4096,
-    'routerCacheFile' => false,
     'regex' => '/https?:\/\/twitter\.com\/mpyw\/?/',
 ];

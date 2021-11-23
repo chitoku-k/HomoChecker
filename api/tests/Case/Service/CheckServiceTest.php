@@ -113,7 +113,7 @@ class CheckServiceTest extends TestCase
                        $response = new Response(new Psr7Response(301, ['Location' => 'https://homo.example.com'], ''));
                        $response->setTotalTime(1.0);
                        $response->setStartTransferTime(2.0);
-                       $response->setHttpVersion(CURL_HTTP_VERSION_2_0);
+                       $response->setHttpVersion(CURL_HTTP_VERSION_2);
                        $response->setPrimaryIP('2001:db8::4545:1');
                        yield 'https://foo.example.com/1' => new FulfilledPromise($response);
                    })(),

@@ -85,7 +85,7 @@ class Response implements ResponseInterface
         $this->httpVersion = match ($httpVersion) {
             CURL_HTTP_VERSION_1_0 => '1.0',
             CURL_HTTP_VERSION_1_1 => '1.1',
-            CURL_HTTP_VERSION_2_0 => '2',
+            CURL_HTTP_VERSION_2 => '2',
             default => null,
         };
     }
