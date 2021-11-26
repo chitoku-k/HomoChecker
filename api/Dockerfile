@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:experimental
-FROM php:8.0.12-fpm AS runtime
+FROM php:8.0.13-fpm AS runtime
 WORKDIR /var/www/html/api
 RUN --mount=type=cache,target=/var/cache/apt \
     --mount=type=cache,target=/var/lib/apt/lists \
