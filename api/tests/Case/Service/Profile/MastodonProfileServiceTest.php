@@ -48,7 +48,7 @@ class MastodonProfileServiceTest extends TestCase
 
         $client = new Client(compact('handler'));
 
-        /** @var CacheService|MockInterface $cache */
+        /** @var CacheService&MockInterface $cache */
         $cache = m::mock(CacheService::class);
         $cache->shouldReceive('loadIconMastodon')
               ->andReturn(null);
@@ -56,7 +56,7 @@ class MastodonProfileServiceTest extends TestCase
         $cache->shouldReceive('saveIconMastodon')
               ->with($screen_name, $url, m::any());
 
-        /** @var Counter|MockInterface $profileErrorCounter */
+        /** @var Counter&MockInterface $profileErrorCounter */
         $profileErrorCounter = m::mock(Counter::class);
         $profileErrorCounter->shouldReceive('inc')
                             ->withArgs([
@@ -88,15 +88,15 @@ class MastodonProfileServiceTest extends TestCase
         $url = 'https://files.mastodon.social/accounts/avatars/000/000/001/original/114514.png';
         $screen_name = '@example@mastodon.social';
 
-        /** @var ClientInterface|MockInterface $client */
+        /** @var ClientInterface&MockInterface $client */
         $client = m::mock(ClientInterface::class);
 
-        /** @var CacheService|MockInterface $cache */
+        /** @var CacheService&MockInterface $cache */
         $cache = m::mock(CacheService::class);
         $cache->shouldReceive('loadIconMastodon')
               ->andReturn($url);
 
-        /** @var Counter|MockInterface $profileErrorCounter */
+        /** @var Counter&MockInterface $profileErrorCounter */
         $profileErrorCounter = m::mock(Counter::class);
 
         $profile = new MastodonProfileService($client, $cache, $profileErrorCounter);
@@ -108,13 +108,13 @@ class MastodonProfileServiceTest extends TestCase
      */
     public function testParseScreenName($screen_name, $username, $instance): void
     {
-        /** @var ClientInterface|MockInterface $client */
+        /** @var ClientInterface&MockInterface $client */
         $client = m::mock(ClientInterface::class);
 
-        /** @var CacheService|MockInterface $cache */
+        /** @var CacheService&MockInterface $cache */
         $cache = m::mock(CacheService::class);
 
-        /** @var Counter|MockInterface $profileErrorCounter */
+        /** @var Counter&MockInterface $profileErrorCounter */
         $profileErrorCounter = m::mock(Counter::class);
 
         $profile = new MastodonProfileService($client, $cache, $profileErrorCounter);
@@ -130,13 +130,13 @@ class MastodonProfileServiceTest extends TestCase
     {
         $this->expectException(\RuntimeException::class);
 
-        /** @var ClientInterface|MockInterface $client */
+        /** @var ClientInterface&MockInterface $client */
         $client = m::mock(ClientInterface::class);
 
-        /** @var CacheService|MockInterface $cache */
+        /** @var CacheService&MockInterface $cache */
         $cache = m::mock(CacheService::class);
 
-        /** @var Counter|MockInterface $profileErrorCounter */
+        /** @var Counter&MockInterface $profileErrorCounter */
         $profileErrorCounter = m::mock(Counter::class);
 
         $profile = new MastodonProfileService($client, $cache, $profileErrorCounter);

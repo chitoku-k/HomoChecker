@@ -20,18 +20,18 @@ class CustomizeFormatterTest extends TestCase
     public function testInvoke(): void
     {
         /** @var LineFormatter $formatter1 */
-        /** @var HandlerWrapper|MockInterface */
+        /** @var HandlerWrapper&MockInterface $handler1 */
         $handler1 = m::mock(HandlerWrapper::class);
         $handler1->shouldReceive('setFormatter')
                  ->with(m::capture($formatter1));
 
         /** @var LineFormatter $formatter2 */
-        /** @var HandlerWrapper|MockInterface */
+        /** @var HandlerWrapper&MockInterface $handler2 */
         $handler2 = m::mock(HandlerWrapper::class);
         $handler2->shouldReceive('setFormatter')
                  ->with(m::capture($formatter2));
 
-        /** @var LoggerInterface|MockInterface */
+        /** @var LoggerInterface&MockInterface $logger */
         $logger = m::mock(LoggerInterface::class);
         $logger->shouldReceive('getHandlers')
                ->andReturn([$handler1, $handler2]);

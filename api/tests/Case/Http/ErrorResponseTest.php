@@ -20,7 +20,7 @@ class ErrorResponseTest extends TestCase
     {
         $response = new HttpResponse(new Response(500), new StreamFactory());
 
-        /** @var MockInterface|StreamFactoryInterface $streamFactory */
+        /** @var MockInterface&StreamFactoryInterface $streamFactory */
         $streamFactory = m::mock(StreamFactoryInterface::class);
 
         $errorResponse = new ErrorResponse($response, $streamFactory);
@@ -34,7 +34,7 @@ class ErrorResponseTest extends TestCase
         $response = new HttpResponse(new Response(500), new StreamFactory());
         $exception = new PDOException('SQLSTATE[08006] [7] could not translate host name "database" to address: Name or service not known');
 
-        /** @var MockInterface|StreamFactoryInterface $streamFactory */
+        /** @var MockInterface&StreamFactoryInterface $streamFactory */
         $streamFactory = m::mock(StreamFactoryInterface::class);
 
         $errorResponse = new ErrorResponse($response, $streamFactory);
@@ -49,7 +49,7 @@ class ErrorResponseTest extends TestCase
         $response = new HttpResponse(new Response(500), new StreamFactory());
         $exception = new PDOException('SQLSTATE[08006] [7] could not translate host name "database" to address: Name or service not known');
 
-        /** @var MockInterface|StreamFactoryInterface $streamFactory */
+        /** @var MockInterface&StreamFactoryInterface $streamFactory */
         $streamFactory = m::mock(StreamFactoryInterface::class);
 
         $errorResponse = new ErrorResponse($response, $streamFactory);
@@ -65,10 +65,10 @@ class ErrorResponseTest extends TestCase
         $response = new HttpResponse(new Response(500), new StreamFactory());
         $exception = new PDOException('SQLSTATE[08006] [7] could not translate host name "database" to address: Name or service not known');
 
-        /** @var MockInterface|StreamFactoryInterface $streamFactory */
+        /** @var MockInterface&StreamFactoryInterface $streamFactory */
         $streamFactory = m::mock(StreamFactoryInterface::class);
 
-        /** @var MockInterface|StreamInterface */
+        /** @var MockInterface&StreamInterface $body */
         $body = m::mock(StreamInterface::class);
 
         $errorResponse = new ErrorResponse($response, $streamFactory);
@@ -84,7 +84,7 @@ class ErrorResponseTest extends TestCase
         $response = new HttpResponse(new Response(500), new StreamFactory());
         $exception = new PDOException('SQLSTATE[08006] [7] could not translate host name "database" to address: Name or service not known');
 
-        /** @var MockInterface|StreamFactoryInterface $streamFactory */
+        /** @var MockInterface&StreamFactoryInterface $streamFactory */
         $streamFactory = m::mock(StreamFactoryInterface::class);
 
         $errorResponse = new ErrorResponse($response, $streamFactory);
@@ -100,7 +100,7 @@ class ErrorResponseTest extends TestCase
         $response = new HttpResponse(new Response(500), new StreamFactory());
         $exception = new PDOException('SQLSTATE[08006] [7] could not translate host name "database" to address: Name or service not known');
 
-        /** @var MockInterface|StreamFactoryInterface $streamFactory */
+        /** @var MockInterface&StreamFactoryInterface $streamFactory */
         $streamFactory = m::mock(StreamFactoryInterface::class);
 
         $errorResponse = new ErrorResponse($response, $streamFactory);
@@ -116,7 +116,7 @@ class ErrorResponseTest extends TestCase
         $response = new HttpResponse(new Response(500), new StreamFactory());
         $exception = new PDOException('SQLSTATE[08006] [7] could not translate host name "database" to address: Name or service not known');
 
-        /** @var MockInterface|StreamFactoryInterface $streamFactory */
+        /** @var MockInterface&StreamFactoryInterface $streamFactory */
         $streamFactory = m::mock(StreamFactoryInterface::class);
 
         $errorResponse = new ErrorResponse($response, $streamFactory);
@@ -132,7 +132,7 @@ class ErrorResponseTest extends TestCase
         $response = new HttpResponse(new Response(500), new StreamFactory());
         $exception = new PDOException('SQLSTATE[08006] [7] could not translate host name "database" to address: Name or service not known');
 
-        /** @var MockInterface|StreamFactoryInterface $streamFactory */
+        /** @var MockInterface&StreamFactoryInterface $streamFactory */
         $streamFactory = m::mock(StreamFactoryInterface::class);
 
         $errorResponse = new ErrorResponse($response, $streamFactory);
@@ -148,10 +148,10 @@ class ErrorResponseTest extends TestCase
         $response = new HttpResponse(new Response(500), new StreamFactory());
         $exception = new PDOException('SQLSTATE[08006] [7] could not translate host name "database" to address: Name or service not known');
 
-        /** @var MockInterface|StreamInterface */
+        /** @var MockInterface&StreamInterface $body */
         $body = m::mock(StreamInterface::class);
 
-        /** @var MockInterface|StreamFactoryInterface $streamFactory */
+        /** @var MockInterface&StreamFactoryInterface $streamFactory */
         $streamFactory = m::mock(StreamFactoryInterface::class);
         $streamFactory->shouldReceive('createStream')
                       ->withArgs(['{"errors":[{"code":500,"message":"Internal server error"}]}'])
@@ -177,7 +177,7 @@ class ErrorResponseTest extends TestCase
         $response = new HttpResponse(new Response(500), new StreamFactory());
         $exception = new PDOException('SQLSTATE[08006] [7] could not translate host name "database" to address: Name or service not known');
 
-        /** @var MockInterface|StreamFactoryInterface $streamFactory */
+        /** @var MockInterface&StreamFactoryInterface $streamFactory */
         $streamFactory = m::mock(StreamFactoryInterface::class);
 
         $errorResponse = new ErrorResponse($response, $streamFactory);
@@ -193,12 +193,12 @@ class ErrorResponseTest extends TestCase
         $response = new HttpResponse(new Response(500), new StreamFactory());
         $exception = new PDOException('SQLSTATE[08006] [7] could not translate host name "database" to address: Name or service not known');
 
-        /** @var MockInterface|StreamInterface */
+        /** @var MockInterface&StreamInterface $body */
         $body = m::mock(StreamInterface::class);
         $body->shouldReceive('getMetadata')
              ->andReturn([]);
 
-        /** @var MockInterface|StreamFactoryInterface $streamFactory */
+        /** @var MockInterface&StreamFactoryInterface $streamFactory */
         $streamFactory = m::mock(StreamFactoryInterface::class);
 
         $errorResponse = new ErrorResponse($response, $streamFactory);
@@ -214,12 +214,12 @@ class ErrorResponseTest extends TestCase
         $response = new HttpResponse(new Response(500), new StreamFactory());
         $exception = new PDOException('SQLSTATE[08006] [7] could not translate host name "database" to address: Name or service not known');
 
-        /** @var MockInterface|StreamInterface */
+        /** @var MockInterface&StreamInterface $body */
         $body = m::mock(StreamInterface::class);
         $body->shouldReceive('getMetadata')
              ->andReturn([]);
 
-        /** @var MockInterface|StreamFactoryInterface $streamFactory */
+        /** @var MockInterface&StreamFactoryInterface $streamFactory */
         $streamFactory = m::mock(StreamFactoryInterface::class);
 
         $errorResponse = new ErrorResponse($response, $streamFactory);

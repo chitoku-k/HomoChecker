@@ -48,13 +48,13 @@ class HomoProvider extends ServiceProvider
             ->giveConfig('logging.skipPaths');
 
         $this->app->resolving(ErrorMiddleware::class, function (ErrorMiddleware $middleware, Container $app) {
-            /** @var ErrorHandlerInterface */
+            /** @var ErrorHandlerInterface $handler */
             $handler = $app->make(ErrorHandlerInterface::class);
             $middleware->setDefaultErrorHandler($handler);
         });
 
         $this->app->singleton(CallableResolverInterface::class, function (Container $app) {
-            /** @var App */
+            /** @var App $slim */
             $slim = $app->make('app');
             return $slim->getCallableResolver();
         });
@@ -66,7 +66,7 @@ class HomoProvider extends ServiceProvider
             ->needs('$skipPaths')
             ->giveConfig('logging.skipPaths');
         $this->app->singleton(RouteResolverInterface::class, function (Container $app) {
-            /** @var App */
+            /** @var App $slim */
             $slim = $app->make('app');
             return $slim->getRouteResolver();
         });
@@ -96,7 +96,7 @@ class HomoProvider extends ServiceProvider
 
         $this->app->resolving('db', function (DatabaseManager $databaseManager, Container $app) {
             $databaseManager->extend('pgsql', function (array $config, string $name) use ($app) {
-                /** @var ConnectionFactory */
+                /** @var ConnectionFactory $factory */
                 $factory = $app->make('db.factory');
 
                 // Ensure that the permission for the private key is set to 0600.

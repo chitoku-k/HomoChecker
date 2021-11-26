@@ -42,7 +42,7 @@ class ListActionTest extends TestCase
 
     public function testListByJSON(): void
     {
-        /** @var HomoService|MockInterface $homo */
+        /** @var HomoService&MockInterface $homo */
         $homo = m::mock(HomoService::class);
         $homo->shouldReceive('find')
              ->with(null)
@@ -90,7 +90,7 @@ class ListActionTest extends TestCase
 
     public function testListWithNotFoundByJSON(): void
     {
-        /** @var HomoService|MockInterface $homo */
+        /** @var HomoService&MockInterface $homo */
         $homo = m::mock(HomoService::class);
         $homo->shouldReceive('find')
              ->with('baz')
@@ -122,7 +122,7 @@ class ListActionTest extends TestCase
         insert into "users" ("screen_name", "service", "url") values ('bar', 'twitter', 'https://bar.example.com');
         SQL;
 
-        /** @var HomoService|MockInterface $homo */
+        /** @var HomoService&MockInterface $homo */
         $homo = m::mock(HomoService::class);
         $homo->shouldReceive('export')
              ->andReturn($sql);

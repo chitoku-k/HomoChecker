@@ -74,12 +74,13 @@ class CheckServiceTest extends TestCase
 
     public function testExecuteAsync(): void
     {
-        /** @var HomoService|MockInterface $homo */
+        /** @var HomoService&MockInterface $homo */
         $homo = m::mock(HomoService::class);
         $homo->shouldReceive('find')
              ->with(null)
              ->andReturn($this->users);
 
+        /** @var ProfileService&MockInterface $twitter */
         $twitter = m::mock(ProfileService::class);
         $twitter->shouldReceive('getIconAsync')
                 ->andReturn(
@@ -87,6 +88,7 @@ class CheckServiceTest extends TestCase
                     new FulfilledPromise('https://img.example.com/foo'),
                 );
 
+        /** @var ProfileService&MockInterface $mastodon */
         $mastodon = m::mock(ProfileService::class);
         $mastodon->shouldReceive('getIconAsync')
                  ->andReturn(
@@ -95,6 +97,7 @@ class CheckServiceTest extends TestCase
                      new FulfilledPromise('https://img.example.com/qux'),
                  );
 
+        /** @var ValidatorService&MockInterface $validator */
         $validator = m::mock(ValidatorService::class);
         $validator->shouldReceive('validate')
                   ->andReturn(
@@ -104,7 +107,7 @@ class CheckServiceTest extends TestCase
                       false,
                   );
 
-        /** @var ClientService|MockInterface $client */
+        /** @var ClientService&MockInterface $client */
         $client = m::mock(ClientService::class);
         $client->shouldReceive('getAsync')
                ->withArgs(['https://foo.example.com/1'])
@@ -178,7 +181,7 @@ class CheckServiceTest extends TestCase
                    })(),
                );
 
-        /** @var Counter|MockInterface $checkCounter */
+        /** @var Counter&MockInterface $checkCounter */
         $checkCounter = m::mock(Counter::class);
         $checkCounter->shouldReceive('inc')
                      ->withArgs([
@@ -230,7 +233,7 @@ class CheckServiceTest extends TestCase
                          ],
                      ]);
 
-        /** @var Counter|MockInterface $checkErrorCounter */
+        /** @var Counter&MockInterface $checkErrorCounter */
         $checkErrorCounter = m::mock(Counter::class);
         $checkErrorCounter->shouldReceive('inc')
                           ->withArgs([

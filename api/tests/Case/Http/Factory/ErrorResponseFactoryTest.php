@@ -20,10 +20,10 @@ class ErrorResponseFactoryTest extends TestCase
     {
         $response = new HttpResponse(new Response(500), new StreamFactory());
 
-        /** @var MockInterface|StreamFactoryInterface $streamFactory */
+        /** @var MockInterface&StreamFactoryInterface $streamFactory */
         $streamFactory = m::mock(StreamFactoryInterface::class);
 
-        /** @var MockInterface|ResponseFactoryInterface $responseFactory */
+        /** @var MockInterface&ResponseFactoryInterface $responseFactory */
         $responseFactory = m::mock(ResponseFactoryInterface::class);
         $responseFactory->shouldReceive('createResponse')
                         ->withArgs([500, 'Internal server error'])

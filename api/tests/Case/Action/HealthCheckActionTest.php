@@ -29,7 +29,7 @@ class HealthCheckActionTest extends TestCase
 
     public function testOK(): void
     {
-        /** @var HomoService|MockInterface $homo */
+        /** @var HomoService&MockInterface $homo */
         $homo = m::mock(HomoService::class);
         $homo->shouldReceive('count')
              ->andReturn(3);
@@ -50,7 +50,7 @@ class HealthCheckActionTest extends TestCase
 
     public function testInternalServerError(): void
     {
-        /** @var HomoService|MockInterface $homo */
+        /** @var HomoService&MockInterface $homo */
         $homo = m::mock(HomoService::class);
         $homo->shouldReceive('count')
              ->andThrow($e = new Exception('Internal Server Error'));

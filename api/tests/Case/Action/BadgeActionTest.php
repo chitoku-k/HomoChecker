@@ -84,10 +84,10 @@ class BadgeActionTest extends TestCase
 
     public function testAllCount(): void
     {
-        /** @var CheckService|MockInterface $check */
+        /** @var CheckService&MockInterface $check */
         $check = m::mock(CheckService::class);
 
-        /** @var HomoService|MockInterface $homo */
+        /** @var HomoService&MockInterface $homo */
         $homo = m::mock(HomoService::class);
         $homo->shouldReceive('count')
              ->andReturn(3);
@@ -103,12 +103,12 @@ class BadgeActionTest extends TestCase
 
     public function testStatusCount(): void
     {
-        /** @var CheckService|MockInterface $check */
+        /** @var CheckService&MockInterface $check */
         $check = m::mock(CheckService::class);
         $check->shouldReceive('execute')
               ->andReturn($this->statuses);
 
-        /** @var HomoService|MockInterface $homo */
+        /** @var HomoService&MockInterface $homo */
         $homo = m::mock(HomoService::class);
 
         $action = new BadgeAction($check, $homo);
@@ -122,10 +122,10 @@ class BadgeActionTest extends TestCase
 
     public function testParams(): void
     {
-        /** @var CheckService|MockInterface $check */
+        /** @var CheckService&MockInterface $check */
         $check = m::mock(CheckService::class);
 
-        /** @var HomoService|MockInterface $homo */
+        /** @var HomoService&MockInterface $homo */
         $homo = m::mock(HomoService::class);
         $homo->shouldReceive('count')
              ->andReturn(3);

@@ -164,13 +164,13 @@ class ClientServiceTest extends TestCase
 
     public function testSend(): void
     {
-        /** @var MockInterface|RequestInterface */
+        /** @var MockInterface&RequestInterface $request */
         $request = m::mock(RequestInterface::class);
 
-        /** @var MockInterface|ResponseInterface */
+        /** @var MockInterface&ResponseInterface $response */
         $response = m::mock(ResponseInterface::class);
 
-        /** @var ClientInterface|MockInterface */
+        /** @var ClientInterface&MockInterface $client */
         $client = m::mock(ClientInterface::class);
         $client->shouldReceive('send')
                ->withArgs([$request, ['http_errors' => false]])
@@ -186,13 +186,13 @@ class ClientServiceTest extends TestCase
 
     public function testSendAsync(): void
     {
-        /** @var MockInterface|RequestInterface */
+        /** @var MockInterface&RequestInterface $request */
         $request = m::mock(RequestInterface::class);
 
-        /** @var MockInterface|PromiseInterface */
+        /** @var MockInterface&PromiseInterface $promise */
         $promise = m::mock(PromiseInterface::class);
 
-        /** @var ClientInterface|MockInterface */
+        /** @var ClientInterface&MockInterface $client */
         $client = m::mock(ClientInterface::class);
         $client->shouldReceive('sendAsync')
                ->withArgs([$request, ['http_errors' => false]])
@@ -208,10 +208,10 @@ class ClientServiceTest extends TestCase
 
     public function testRequest(): void
     {
-        /** @var MockInterface|ResponseInterface */
+        /** @var MockInterface&ResponseInterface $response */
         $response = m::mock(ResponseInterface::class);
 
-        /** @var ClientInterface|MockInterface */
+        /** @var ClientInterface&MockInterface $client */
         $client = m::mock(ClientInterface::class);
         $client->shouldReceive('request')
                ->withArgs(['GET', 'https://example.com', ['http_errors' => false]])
@@ -227,10 +227,10 @@ class ClientServiceTest extends TestCase
 
     public function testRequestAsync(): void
     {
-        /** @var MockInterface|PromiseInterface */
+        /** @var MockInterface&PromiseInterface $promise */
         $promise = m::mock(PromiseInterface::class);
 
-        /** @var ClientInterface|MockInterface */
+        /** @var ClientInterface&MockInterface $client */
         $client = m::mock(ClientInterface::class);
         $client->shouldReceive('requestAsync')
                ->withArgs(['GET', 'https://example.com', ['http_errors' => false]])
@@ -246,7 +246,7 @@ class ClientServiceTest extends TestCase
 
     public function testGetConfig(): void
     {
-        /** @var ClientInterface|MockInterface */
+        /** @var ClientInterface&MockInterface $client */
         $client = m::mock(ClientInterface::class);
         $client->shouldReceive('getConfig')
                ->andReturn(['http_errors' => false]);

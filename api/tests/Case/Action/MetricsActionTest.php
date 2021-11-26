@@ -108,12 +108,12 @@ class MetricsActionTest extends TestCase
         homochecker_check_total{status="ERROR",code="0",screen_name="baz",url="https://baz.example.com"} 2
         METRICS;
 
-        /** @var MockInterface|RegistryInterface $registry */
+        /** @var MockInterface&RegistryInterface $registry */
         $registry = m::mock(RegistryInterface::class);
         $registry->shouldReceive('getMetricFamilySamples')
                  ->andReturn($metrics);
 
-        /** @var MockInterface|RendererInterface $renderer */
+        /** @var MockInterface&RendererInterface $renderer */
         $renderer = m::mock(RendererInterface::class);
         $renderer->shouldReceive('render')
                  ->withArgs([$metrics])

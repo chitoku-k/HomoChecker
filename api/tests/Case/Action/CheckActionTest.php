@@ -102,13 +102,13 @@ class CheckActionTest extends TestCase
     {
         $request = (new RequestFactory())->createRequest('GET', '/check?format=json');
 
-        /** @var CheckService|MockInterface $check */
+        /** @var CheckService&MockInterface $check */
         $check = m::mock(CheckService::class);
         $check->shouldReceive('execute')
               ->with(null)
               ->andReturn($this->statuses);
 
-        /** @var HomoService|MockInterface $homo */
+        /** @var HomoService&MockInterface $homo */
         $homo = m::mock(HomoService::class);
 
         /** @var StreamInterface $stream */
@@ -187,13 +187,13 @@ class CheckActionTest extends TestCase
     {
         $request = (new RequestFactory())->createRequest('GET', "/check?format={$format}");
 
-        /** @var HomoService|MockInterface $homo */
+        /** @var HomoService&MockInterface $homo */
         $homo = m::mock(HomoService::class);
         $homo->shouldReceive('count')
              ->with(null)
              ->andReturn(3);
 
-        /** @var MockInterface|StreamInterface $stream */
+        /** @var MockInterface&StreamInterface $stream */
         $stream = m::mock(StreamInterface::class);
         $stream->shouldReceive('write')
                ->once()
@@ -227,7 +227,7 @@ class CheckActionTest extends TestCase
                ->once()
                ->with("data: {\"homo\":{\"screen_name\":\"bar\",\"service\":\"mastodon\",\"url\":\"http:\\/\\/bar.example.com\",\"display_url\":\"bar.example.com\",\"secure\":false,\"icon\":\"https:\\/\\/icon.example.com\\/3\"},\"status\":\"OK\",\"code\":\"200 OK\",\"http\":\"1.1\",\"ip\":\"2001:db8::4545:3\",\"url\":\"https:\\/\\/bar.example.com\\/2\",\"duration\":30,\"error\":null}\n\n");
 
-        /** @var CheckService|MockInterface $check */
+        /** @var CheckService&MockInterface $check */
         $check = m::mock(CheckService::class);
         $check->shouldReceive('execute')
               ->withArgs(function (?string $screen_name, callable $callback) {
