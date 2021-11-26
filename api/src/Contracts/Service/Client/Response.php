@@ -86,6 +86,7 @@ class Response implements ResponseInterface
             CURL_HTTP_VERSION_1_0 => '1.0',
             CURL_HTTP_VERSION_1_1 => '1.1',
             CURL_HTTP_VERSION_2 => '2',
+            CURL_HTTP_VERSION_3 => '3',
             default => null,
         };
     }

@@ -41,7 +41,7 @@
                         }></i>
                         <span if={ http }>
                             HTTP/{ http }
-                            { homo.secure ? "over TLS" : "" }
+                            { homo.secure ? http === "3" ? "over QUIC" : "over TLS" : "" }
                         </span>
                         <span if={ !http }>
                             { homo.secure ? "HTTPS" : "HTTP" }
