@@ -23,11 +23,57 @@ class ResponseTest extends TestCase
         $actual = new Response($response);
         $actual->setTotalTime(1.0);
         $actual->setStartTransferTime(2.0);
+        $actual->setHttpVersion(null);
         $actual->setPrimaryIP('2001:db8::4545:1');
 
         $this->assertEquals(1.0, $actual->getTotalTime());
         $this->assertEquals(2.0, $actual->getStartTransferTime());
+        $this->assertEquals(null, $actual->getHttpVersion());
         $this->assertEquals('2001:db8::4545:1', $actual->getPrimaryIP());
+    }
+
+    public function testConstructHttp10(): void
+    {
+        /** @var MockInterface&Response $response */
+        $response = m::mock(Psr7Response::class);
+
+        $actual = new Response($response);
+        $actual->setHttpVersion(CURL_HTTP_VERSION_1_0);
+
+        $this->assertEquals('1.0', $actual->getHttpVersion());
+    }
+
+    public function testConstructHttp11(): void
+    {
+        /** @var MockInterface&Response $response */
+        $response = m::mock(Psr7Response::class);
+
+        $actual = new Response($response);
+        $actual->setHttpVersion(CURL_HTTP_VERSION_1_1);
+
+        $this->assertEquals('1.1', $actual->getHttpVersion());
+    }
+
+    public function testConstructHttp20(): void
+    {
+        /** @var MockInterface&Response $response */
+        $response = m::mock(Psr7Response::class);
+
+        $actual = new Response($response);
+        $actual->setHttpVersion(CURL_HTTP_VERSION_2);
+
+        $this->assertEquals('2', $actual->getHttpVersion());
+    }
+
+    public function testConstructHttp30(): void
+    {
+        /** @var MockInterface&Response $response */
+        $response = m::mock(Psr7Response::class);
+
+        $actual = new Response($response);
+        $actual->setHttpVersion(CURL_HTTP_VERSION_3);
+
+        $this->assertEquals('3', $actual->getHttpVersion());
     }
 
     public function testGetStatus(): void

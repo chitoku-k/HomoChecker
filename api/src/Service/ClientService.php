@@ -9,14 +9,18 @@ use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\Response as Psr7Response;
 use GuzzleHttp\RequestOptions;
 use GuzzleHttp\TransferStats;
+use HomoChecker\Contracts\Service\CacheService as CacheServiceContract;
+use HomoChecker\Contracts\Service\Client\Altsvc;
 use HomoChecker\Contracts\Service\Client\Response;
 use HomoChecker\Contracts\Service\ClientService as ClientServiceContract;
+use Illuminate\Support\Str;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Throwable;
 
 class ClientService implements ClientServiceContract
 {
-    public function __construct(protected ClientInterface $client, protected int $redirect)
+    public function __construct(protected ClientInterface $client, protected CacheServiceContract $cache, protected int $redirect)
     {
     }
 
@@ -28,7 +32,33 @@ class ClientService implements ClientServiceContract
     public function getAsync(string $url): Generator
     {
         for ($i = 0; $i < $this->redirect; ++$i) {
-            yield $url => $this->client->requestAsync('GET', $url, [
+            $options = [];
+            if (str_starts_with($this->cache->loadAltsvc($url, ''), 'h3')) {
+                $options['curl'][CURLOPT_HTTP_VERSION] = CURL_HTTP_VERSION_3;
+            }
+
+            yield $url => $this->client->requestAsync('GET', $url, $options + [
+                RequestOptions::ON_HEADERS => function (ResponseInterface|Throwable $response) use ($url) {
+                    if ($response instanceof Throwable) {
+                        return;
+                    }
+
+                    $altsvc = $response->getHeaderLine('Alt-Svc');
+                    if (!$altsvc) {
+                        return;
+                    }
+
+                    /** @var ?Altsvc $h3 */
+                    $h3 = Str::of($altsvc)
+                        ->split('/\s*,\s*/')
+                        ->map(fn (string $entry) => new Altsvc($entry))
+                        ->first(fn (Altsvc $item) => str_starts_with($item->getProtocolId(), 'h3'));
+                    if (!$h3) {
+                        return;
+                    }
+
+                    $this->cache->saveAltsvc($url, $h3->getProtocolId(), $h3->getMaxAge());
+                },
                 RequestOptions::ON_STATS => function (TransferStats $stats) use (&$result) {
                     $response = $stats->getResponse();
                     if (!$response) {

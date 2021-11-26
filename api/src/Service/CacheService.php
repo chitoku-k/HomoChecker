@@ -10,8 +10,10 @@ use Illuminate\Support\Str;
 /**
  * @method ?string loadIconMastodon(string $screen_name)
  * @method ?string loadIconTwitter(string $screen_name)
+ * @method ?string loadAltsvc(string $url)
  * @method void    saveIconMastodon(string $screen_name, string $url, int $expire)
  * @method void    saveIconTwitter(string $screen_name, string $url, int $expire)
+ * @method void    saveAltsvc(string $url, string $value, int $expire)
  */
 class CacheService implements CacheServiceContract
 {

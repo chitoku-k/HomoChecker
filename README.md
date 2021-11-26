@@ -96,7 +96,6 @@ $ export HOMOCHECKER_API_HOST=api
 #### PHP-FPM
 
 ```sh
-$ export HOMOCHECKER_ALTSVC_CACHE=/tmp/altsvc-cache.txt
 $ export HOMOCHECKER_DB_HOST=database
 $ export HOMOCHECKER_DB_PORT=5432
 $ export HOMOCHECKER_DB_USERNAME=homo
