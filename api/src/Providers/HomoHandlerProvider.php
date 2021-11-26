@@ -24,7 +24,7 @@ class HomoHandlerProvider extends ServiceProvider
 
         $this->app->singleton(StreamFactoryInterface::class, StreamFactory::class);
         $this->app->singleton(ResponseFactoryInterface::class, function (Container $app) {
-            /** @var App */
+            /** @var App $slim */
             $slim = $app->make('app');
             return $slim->getResponseFactory();
         });

@@ -49,10 +49,10 @@ class TwitterProfileServiceTest extends TestCase
             new RequestException('Connection problem occurred', new Request('GET', '')),
         ]));
 
-        /** @var ClientInterface|MockInterface $client */
+        /** @var ClientInterface&MockInterface $client */
         $client = new Client(compact('handler'));
 
-        /** @var CacheService|MockInterface $cache */
+        /** @var CacheService&MockInterface $cache */
         $cache = m::mock(CacheService::class);
         $cache->shouldReceive('loadIconTwitter')
               ->andReturn(null);
@@ -60,7 +60,7 @@ class TwitterProfileServiceTest extends TestCase
         $cache->shouldReceive('saveIconTwitter')
               ->with($screen_name, $url, m::any());
 
-        /** @var Counter|MockInterface $profileErrorCounter */
+        /** @var Counter&MockInterface $profileErrorCounter */
         $profileErrorCounter = m::mock(Counter::class);
         $profileErrorCounter->shouldReceive('inc')
                             ->withArgs([
@@ -82,15 +82,15 @@ class TwitterProfileServiceTest extends TestCase
         $url = 'https://pbs.twimg.com/profile_images/114514/example_bigger.jpg';
         $screen_name = 'example';
 
-        /** @var ClientInterface|MockInterface $client */
+        /** @var ClientInterface&MockInterface $client */
         $client = m::mock(ClientInterface::class);
 
-        /** @var CacheService|MockInterface $cache */
+        /** @var CacheService&MockInterface $cache */
         $cache = m::mock(CacheService::class);
         $cache->shouldReceive('loadIconTwitter')
               ->andReturn($url);
 
-        /** @var Counter|MockInterface $profileErrorCounter */
+        /** @var Counter&MockInterface $profileErrorCounter */
         $profileErrorCounter = m::mock(Counter::class);
 
         $profile = new TwitterProfileService($client, $cache, $profileErrorCounter);

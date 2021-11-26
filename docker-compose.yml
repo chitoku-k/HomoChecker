@@ -7,7 +7,6 @@ services:
       target: dev
     working_dir: /var/www/html/api
     environment:
-      HOMOCHECKER_ALTSVC_CACHE: /tmp/altsvc-cache.txt
       HOMOCHECKER_DB_HOST: database
       HOMOCHECKER_DB_USERNAME: homo
       HOMOCHECKER_DB_PASSWORD: homo

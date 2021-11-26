@@ -28,10 +28,10 @@ class AccessLogMiddlewareTest extends TestCase
         $request = (new ServerRequestFactory())->createServerRequest('GET', '/metrics');
         $response = new HttpResponse(new Response(), new StreamFactory());
 
-        /** @var LoggerInterface|MockInterface $logger */
+        /** @var LoggerInterface&MockInterface $logger */
         $logger = m::mock(LoggerInterface::class);
 
-        /** @var MockInterface|RequestHandlerInterface $handler */
+        /** @var MockInterface&RequestHandlerInterface $handler */
         $handler = m::mock(RequestHandlerInterface::class);
         $handler->shouldReceive('handle')
                 ->withArgs([$request])
@@ -51,13 +51,13 @@ class AccessLogMiddlewareTest extends TestCase
         $request = (new ServerRequestFactory())->createServerRequest('GET', '/check');
         $response = new HttpResponse(new Response(), new StreamFactory());
 
-        /** @var LoggerInterface|MockInterface $logger */
+        /** @var LoggerInterface&MockInterface $logger */
         $logger = m::mock(LoggerInterface::class);
 
-        /** @var MockInterface|RequestHandlerInterface $handler */
+        /** @var MockInterface&RequestHandlerInterface $handler */
         $handler = m::mock(RequestHandlerInterface::class);
 
-        /** @var AccessLog|MockInterface $base */
+        /** @var AccessLog&MockInterface $base */
         $base = m::mock('overload:' . AccessLog::class);
         $base->shouldReceive('process')
              ->withArgs([$request, $handler])

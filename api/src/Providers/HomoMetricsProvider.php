@@ -22,7 +22,7 @@ class HomoMetricsProvider extends ServiceProvider
             ->give(fn (Container $app) => $app->make(APC::class));
 
         $this->app->singleton('collector.check_total', function (Container $app) {
-            /** @var RegistryInterface */
+            /** @var RegistryInterface $registry */
             $registry = $app->make(RegistryInterface::class);
             return $registry->registerCounter(
                 'homochecker',
@@ -33,7 +33,7 @@ class HomoMetricsProvider extends ServiceProvider
         });
 
         $this->app->singleton('collector.check_error_total', function (Container $app) {
-            /** @var RegistryInterface */
+            /** @var RegistryInterface $registry */
             $registry = $app->make(RegistryInterface::class);
             return $registry->registerCounter(
                 'homochecker',
@@ -44,7 +44,7 @@ class HomoMetricsProvider extends ServiceProvider
         });
 
         $this->app->singleton('collector.profile_error_total', function (Container $app) {
-            /** @var RegistryInterface */
+            /** @var RegistryInterface $registry */
             $registry = $app->make(RegistryInterface::class);
             return $registry->registerCounter(
                 'homochecker',
@@ -55,7 +55,7 @@ class HomoMetricsProvider extends ServiceProvider
         });
 
         $this->app->singleton('summary.http_server_requests_seconds', function (Container $app) {
-            /** @var RegistryInterface */
+            /** @var RegistryInterface $registry */
             $registry = $app->make(RegistryInterface::class);
             return $registry->registerSummary(
                 '',

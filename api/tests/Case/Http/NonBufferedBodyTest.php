@@ -19,7 +19,7 @@ class NonBufferedBodyTest extends TestCase
      */
     public function testWrite(): void
     {
-        /** @var MockInterface|Psr7NonBufferedBody $base */
+        /** @var MockInterface&Psr7NonBufferedBody $base */
         $base = m::mock('overload:' . Psr7NonBufferedBody::class);
         $base->size = 0;
         $base->shouldReceive('write')

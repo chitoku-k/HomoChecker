@@ -55,7 +55,6 @@ return [
         'allow_redirects' => false,
         'curl' => [
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_2,
-            CURLOPT_ALTSVC => env('HOMOCHECKER_ALTSVC_CACHE', null),
         ],
         'headers' => [
             'User-Agent' => 'Homozilla/5.0 (Checker/1.14.514; homOSeX 8.10)',
