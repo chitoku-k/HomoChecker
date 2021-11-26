@@ -1,0 +1,39 @@
+--- interface.c	2021-10-19 19:34:32.000000000 +0900
++++ interface+http3.c	2099-12-31 00:00:00.000000000 +0900
+@@ -1159,6 +1159,16 @@
+ 
+ #if LIBCURL_VERSION_NUM >= 0x074001 /* Available since 7.64.1 */
+ 	REGISTER_CURL_CONSTANT(CURL_VERSION_ALTSVC);
++	REGISTER_CURL_CONSTANT(CURLALTSVC_H1);
++	REGISTER_CURL_CONSTANT(CURLALTSVC_H2);
++	REGISTER_CURL_CONSTANT(CURLALTSVC_H3);
++	REGISTER_CURL_CONSTANT(CURLALTSVC_READONLYFILE);
++	REGISTER_CURL_CONSTANT(CURLOPT_ALTSVC);
++	REGISTER_CURL_CONSTANT(CURLOPT_ALTSVC_CTRL);
++#endif
++
++#if LIBCURL_VERSION_NUM >= 0x074200 /* Available since 7.66.0 */
++	REGISTER_CURL_CONSTANT(CURL_HTTP_VERSION_3);
+ #endif
+ 
+ 	REGISTER_CURL_CONSTANT(CURLOPT_SAFE_UPLOAD);
+@@ -2366,6 +2376,9 @@
+ #if LIBCURL_VERSION_NUM >= 0x074000 /* Available since 7.64.0 */
+ 		case CURLOPT_HTTP09_ALLOWED:
+ #endif
++#if LIBCURL_VERSION_NUM >= 0x074001 /* Available since 7.64.1 */
++		case CURLOPT_ALTSVC_CTRL:
++#endif
+ 			lval = zval_get_long(zvalue);
+ 			if ((option == CURLOPT_PROTOCOLS || option == CURLOPT_REDIR_PROTOCOLS) &&
+ 				(PG(open_basedir) && *PG(open_basedir)) && (lval & CURLPROTO_FILE)) {
+@@ -2810,6 +2823,9 @@
+ 		case CURLOPT_CRLFILE:
+ 		case CURLOPT_ISSUERCERT:
+ 		case CURLOPT_SSH_KNOWNHOSTS:
++#if LIBCURL_VERSION_NUM >= 0x074001 /* Available since 7.64.1 */
++		case CURLOPT_ALTSVC:
++#endif
+ 		{
+ 		    zend_string *tmp_str;
+ 			zend_string *str = zval_get_tmp_string(zvalue, &tmp_str);

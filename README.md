@@ -22,7 +22,8 @@ HomoChecker はホモ（[@mpyw](https://twitter.com/mpyw)）にリダイレク�
 
 ### 設定方法
 
-DNS を適切に設定したあと、お使いの Web サーバーに合わせて設定を行います。
+DNS を適切に設定したあと、お使いの Web サーバーに合わせて設定を行います。  
+HomoChecker は HTTP/1.1、HTTP/2、HTTP/3（Alt-Svc のみ）に対応しています。
 
 #### Apache
 
@@ -95,6 +96,7 @@ $ export HOMOCHECKER_API_HOST=api
 #### PHP-FPM
 
 ```sh
+$ export HOMOCHECKER_ALTSVC_CACHE=/tmp/altsvc-cache.txt
 $ export HOMOCHECKER_DB_HOST=database
 $ export HOMOCHECKER_DB_PORT=5432
 $ export HOMOCHECKER_DB_USERNAME=homo
