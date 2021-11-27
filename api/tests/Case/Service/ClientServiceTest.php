@@ -255,6 +255,7 @@ class ClientServiceTest extends TestCase
 
         $actual = $actual->wait();
         $this->assertEquals(CURL_HTTP_VERSION_3, $container[0]['options']['curl'][CURLOPT_HTTP_VERSION]);
+        $this->assertEquals(['foo.example.com'], $container[0]['request']->getHeader('Alt-Used'));
 
         /** @var Response $actual */
         $this->assertInstanceOf(Response::class, $actual);
