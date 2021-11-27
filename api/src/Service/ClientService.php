@@ -35,6 +35,7 @@ class ClientService implements ClientServiceContract
             $options = [];
             if (str_starts_with($this->cache->loadAltsvc($url, ''), 'h3')) {
                 $options['curl'][CURLOPT_HTTP_VERSION] = CURL_HTTP_VERSION_3;
+                $options['headers']['Alt-Used'] = parse_url($url, PHP_URL_HOST);
             }
 
             yield $url => $this->client->requestAsync('GET', $url, $options + [
