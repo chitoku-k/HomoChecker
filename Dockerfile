@@ -1,18 +1,18 @@
 # syntax = docker/dockerfile:experimental
 FROM node:17.1.0-slim AS dependencies
 WORKDIR /usr/src/client
-RUN --mount=type=cache,target=/var/cache/apt \
-    --mount=type=cache,target=/var/lib/apt/lists \
+RUN --mount=type=cache,id=client:/var/cache/apt,target=/var/cache/apt \
+    --mount=type=cache,id=client:/var/lib/apt/lists,target=/var/lib/apt/lists \
     apt-get -y update && \
     apt-get -y install \
         git
 COPY client/package.json client/yarn.lock /usr/src/client/
 RUN --mount=type=tmpfs,target=/tmp \
-    --mount=type=cache,target=/usr/local/share/.cache/yarn \
+    --mount=type=cache,id=client:/usr/local/share/.cache/yarn,target=/usr/local/share/.cache/yarn \
     yarn
 
 FROM dependencies AS dev
-RUN --mount=type=cache,target=/mnt/yarn,id=/usr/local/share/.cache/yarn \
+RUN --mount=type=cache,id=client:/usr/local/share/.cache/yarn,target=/mnt/yarn \
     cp -r /mnt/yarn /usr/local/share/.cache/
 
 FROM dependencies AS build
