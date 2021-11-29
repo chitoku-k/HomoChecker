@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:experimental
 FROM debian:bullseye-slim AS build-dependencies
-RUN --mount=type=cache,target=/var/cache/apt \
-    --mount=type=cache,target=/var/lib/apt/lists \
+RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
+    --mount=type=cache,id=api:/var/lib/apt/lists,target=/var/lib/apt/lists \
     apt-get -y update && \
     apt-get -y install \
         autoconf \
@@ -60,8 +60,8 @@ COPY --from=curl /usr/local/bin/curl-config /usr/local/bin/
 COPY --from=curl /usr/local/lib/ /usr/local/lib/
 RUN docker-php-source extract
 COPY php/ /usr/src/php/
-RUN --mount=type=cache,target=/var/cache/apt \
-    --mount=type=cache,target=/var/lib/apt/lists \
+RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
+    --mount=type=cache,id=api:/var/lib/apt/lists,target=/var/lib/apt/lists \
     apt-get -y update && \
     apt-get -y install \
         libargon2-dev \
@@ -126,22 +126,22 @@ RUN --mount=type=cache,target=/var/cache/apt \
 
 FROM runtime AS dependencies
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-RUN --mount=type=cache,target=/var/cache/apt \
-    --mount=type=cache,target=/var/lib/apt/lists \
+RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
+    --mount=type=cache,id=api:/var/lib/apt/lists,target=/var/lib/apt/lists \
     apt-get -y update && \
     apt-get -y install \
         git \
         unzip
 COPY composer.json composer.lock /var/www/html/api/
-RUN --mount=type=cache,target=/root/.composer \
+RUN --mount=type=cache,id=api:/root/.composer,target=/root/.composer \
     composer install --no-dev --no-progress --no-scripts --no-autoloader && \
     composer dump-autoload --no-dev --no-scripts --optimize
 
 FROM dependencies AS dev
-RUN --mount=type=cache,target=/root/.composer \
+RUN --mount=type=cache,id=api:/root/.composer,target=/root/.composer \
     composer install --no-progress --no-scripts && \
     composer dump-autoload --no-scripts --optimize
-RUN --mount=type=cache,target=/mnt/.composer,id=/root/.composer \
+RUN --mount=type=cache,id=api:/root/.composer,target=/mnt/.composer \
     cp -r /mnt/.composer /root/
 
 FROM scratch
