@@ -151,7 +151,7 @@ class Status implements \JsonSerializable
      * Return the serializable output of this object.
      * @return array The array.
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'homo' => $this->getHomoArray() + [
