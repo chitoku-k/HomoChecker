@@ -49,7 +49,7 @@ RUN git clone --depth=1 -b curl-7_80_0 https://github.com/curl/curl && \
     make install && \
     ldconfig
 
-FROM php:8.0.13-fpm AS runtime
+FROM php:8.1.0-fpm AS runtime
 WORKDIR /var/www/html/api
 COPY --from=openssl /usr/local/include/ /usr/local/include/
 COPY --from=nghttp3 /usr/local/include/ /usr/local/include/
@@ -138,11 +138,19 @@ RUN --mount=type=cache,id=api:/root/.composer,target=/root/.composer \
     composer dump-autoload --no-dev --no-scripts --optimize
 
 FROM dependencies AS dev
+RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
+    --mount=type=cache,id=api:/var/lib/apt/lists,target=/var/lib/apt/lists \
+    apt-get -y update && \
+    apt-get -y install \
+        autoconf \
+        build-essential
 RUN --mount=type=cache,id=api:/root/.composer,target=/root/.composer \
     composer install --no-progress --no-scripts && \
     composer dump-autoload --no-scripts --optimize
 RUN --mount=type=cache,id=api:/root/.composer,target=/mnt/.composer \
     cp -r /mnt/.composer /root/
+RUN pecl install pcov && \
+    docker-php-ext-enable pcov
 
 FROM scratch
 COPY src /var/www/html/api/src
