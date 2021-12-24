@@ -26,6 +26,7 @@ use Illuminate\Events\EventServiceProvider;
 use Illuminate\Redis\RedisServiceProvider;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
+use Middlewares\AccessLog;
 use Prometheus\Summary;
 use Psr\Log\LoggerInterface;
 use Slim\App;
@@ -35,12 +36,12 @@ use Slim\Interfaces\RouteResolverInterface;
 
 class HomoProvider extends ServiceProvider
 {
-    protected string $format = AccessLogMiddleware::FORMAT_COMBINED . ' "%{X-Forwarded-For}i"';
+    protected string $format = AccessLog::FORMAT_COMBINED . ' "%{X-Forwarded-For}i"';
 
     public function register()
     {
-        $this->app->extend(AccessLogMiddleware::class, fn (AccessLogMiddleware $log) => $log->format($this->format));
-        $this->app->when(AccessLogMiddleware::class)
+        $this->app->extend(AccessLog::class, fn (AccessLog $log) => $log->format($this->format));
+        $this->app->when(AccessLog::class)
             ->needs(LoggerInterface::class)
             ->give(fn () => Log::channel('router'));
         $this->app->when(AccessLogMiddleware::class)
@@ -138,6 +139,7 @@ class HomoProvider extends ServiceProvider
     {
         return [
             AccessLogMiddleware::class,
+            CallableResolverInterface::class,
             MetricsMiddleware::class,
             ClientInterface::class,
             CacheServiceContract::class,

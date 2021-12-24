@@ -54,7 +54,7 @@ class ResponseTest extends TestCase
         $this->assertEquals('1.1', $actual->getHttpVersion());
     }
 
-    public function testConstructHttp20(): void
+    public function testConstructHttp2(): void
     {
         /** @var MockInterface&Response $response */
         $response = m::mock(Psr7Response::class);
@@ -65,7 +65,7 @@ class ResponseTest extends TestCase
         $this->assertEquals('2', $actual->getHttpVersion());
     }
 
-    public function testConstructHttp30(): void
+    public function testConstructHttp3(): void
     {
         /** @var MockInterface&Response $response */
         $response = m::mock(Psr7Response::class);

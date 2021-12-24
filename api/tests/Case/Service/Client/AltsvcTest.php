@@ -17,7 +17,7 @@ class AltsvcTest extends TestCase
 
     public function testConstructProtocol(): void
     {
-        $actual = new Altsvc('h3=":443"; ma=86400; persist');
+        $actual = new Altsvc('h3=":443"; ma=86400; persist=1');
 
         $this->assertEquals('h3', $actual->getProtocolId());
         $this->assertEquals(':443', $actual->getAltAuthority());
