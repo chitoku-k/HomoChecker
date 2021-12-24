@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4b1a8258a31a6e958b53efe448ab00b7",
+    "content-hash": "14cea197e245092170707f09752276c2",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -1179,16 +1179,16 @@
         },
         {
             "name": "illuminate/redis",
-            "version": "v8.76.2",
+            "version": "v8.77.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/redis.git",
-                "reference": "594d162286eee201a4b3d0a7d7becd9a08f12617"
+                "reference": "513618b78fb42f440f7717ba05b28350f7edd284"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/redis/zipball/594d162286eee201a4b3d0a7d7becd9a08f12617",
-                "reference": "594d162286eee201a4b3d0a7d7becd9a08f12617",
+                "url": "https://api.github.com/repos/illuminate/redis/zipball/513618b78fb42f440f7717ba05b28350f7edd284",
+                "reference": "513618b78fb42f440f7717ba05b28350f7edd284",
                 "shasum": ""
             },
             "require": {
@@ -1229,7 +1229,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-11-08T20:30:52+00:00"
+            "time": "2021-12-17T20:07:09+00:00"
         },
         {
             "name": "illuminate/support",
