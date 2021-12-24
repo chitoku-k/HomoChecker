@@ -30,7 +30,7 @@ class Altsvc
 
     public function __construct(string $value)
     {
-        /** @var Collection<string> $params */
+        /** @var string[] $params */
         $params = Str::of($value)
             ->trim()
             ->split('/\s*;\s*/')
