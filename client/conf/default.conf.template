@@ -10,19 +10,5 @@ server {
     server_name _;
     keepalive_timeout 0;
 
-    location @api {
-        if ($request_uri ~ ^/(healthz|metrics)) {
-            access_log off;
-        }
-
-        include fastcgi_params;
-        fastcgi_pass $HOMOCHECKER_API_HOST:9000;
-        fastcgi_buffering off;
-        fastcgi_param SCRIPT_NAME index.php;
-        fastcgi_param SCRIPT_FILENAME /var/www/html/api/src/index.php;
-    }
-
-    location / {
-        try_files $uri $uri/ @api;
-    }
+    include /etc/nginx/conf.d/locations/*.conf;
 }
