@@ -7,6 +7,7 @@ use HomoChecker\Contracts\Service\CheckService;
 use HomoChecker\Contracts\Service\HomoService;
 use HomoChecker\Domain\Result;
 use HomoChecker\Domain\Status;
+use HomoChecker\Domain\Validator\ValidationResult;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest as Request;
 
@@ -40,7 +41,7 @@ class BadgeAction
             ->map(fn (Status $item) => $item->getResult())
             ->filter(fn (?Result $item) => $item)
             ->map(fn (Result $item) => $item->getStatus())
-            ->filter(fn (?string $item) => $item && strcasecmp($item, $status) === 0)
+            ->filter(fn (?ValidationResult $item) => ValidationResult::tryFrom(strtoupper($status)) === $item)
             ->count();
     }
 }

@@ -3,12 +3,14 @@ declare(strict_types=1);
 
 namespace HomoChecker\Domain;
 
+use HomoChecker\Domain\Validator\ValidationResult;
+
 class Result
 {
     /**
-     * @var ?string The status.
+     * @var ?ValidationResult The status.
      */
-    protected ?string $status;
+    protected ?ValidationResult $status;
 
     /**
      * @var ?string The status code and reason phrase.
@@ -54,19 +56,19 @@ class Result
     }
 
     /**
-     * Get the status string that represents the result of the response.
-     * @return ?string The status string that represents the result of the response.
+     * Get the status that represents the result of the response.
+     * @return ?ValidationResult The status that represents the result of the response.
      */
-    public function getStatus(): ?string
+    public function getStatus(): ?ValidationResult
     {
         return $this->status;
     }
 
     /**
-     * Set the status string that represents the result of the response.
-     * @param ?string $status The status string that represents the result of the response.
+     * Set the status that represents the result of the response.
+     * @param ?ValidationResult $status The status that represents the result of the response.
      */
-    public function setStatus(?string $status): void
+    public function setStatus(?ValidationResult $status): void
     {
         $this->status = $status;
     }

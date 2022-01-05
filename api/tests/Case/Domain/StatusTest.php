@@ -6,6 +6,7 @@ namespace HomoChecker\Test\Domain;
 use HomoChecker\Domain\Homo;
 use HomoChecker\Domain\Result;
 use HomoChecker\Domain\Status;
+use HomoChecker\Domain\Validator\ValidationResult;
 use PHPUnit\Framework\TestCase;
 
 class StatusTest extends TestCase
@@ -16,7 +17,7 @@ class StatusTest extends TestCase
         $service = 'twitter';
         $url = 'https://xn--ydko.example.com';
         $icon = 'https://img.example.com';
-        $status = 'OK';
+        $status = ValidationResult::OK;
         $http = '2.0';
         $ip = '2001:db8::4545:1';
         $duration = 1.14514;
@@ -52,7 +53,7 @@ class StatusTest extends TestCase
         $service = 'twitter';
         $url = 'https://xn--ydko.example.com';
         $icon = 'https://img.example.com';
-        $status = 'OK';
+        $status = ValidationResult::OK;
         $http = '2.0';
         $ip = '2001:db8::4545:1';
         $duration = 1.14514;
@@ -99,7 +100,7 @@ class StatusTest extends TestCase
         $service = 'twitter';
         $url = 'not:a:url';
         $icon = 'https://img.example.com';
-        $status = 'CONTAINS';
+        $status = ValidationResult::CONTAINS;
         $http = '1.1';
         $ip = '2001:db8::4545:1';
         $duration = 1.14514;
@@ -145,7 +146,7 @@ class StatusTest extends TestCase
         $service = 'twitter';
         $url = null;
         $icon = 'https://img.example.com';
-        $status = 'CONTAINS';
+        $status = ValidationResult::CONTAINS;
         $http = '1.1';
         $ip = '2001:db8::4545:1';
         $duration = 1.14514;

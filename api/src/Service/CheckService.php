@@ -147,7 +147,7 @@ class CheckService implements CheckServiceContract
             }
 
             $this->checkCounter->inc([
-                'status' => $result->getStatus(),
+                'status' => $result->getStatus()->value,
                 'code' => (int) $result->getCode(),
                 'screen_name' => $homo->getScreenName(),
                 'url' => $homo->getUrl(),
@@ -155,7 +155,7 @@ class CheckService implements CheckServiceContract
 
             if ($result->getStatus() === ValidationResult::ERROR) {
                 $this->checkErrorCounter->inc([
-                    'status' => $result->getStatus(),
+                    'status' => $result->getStatus()->value,
                     'code' => (int) $result->getCode(),
                     'screen_name' => $homo->getScreenName(),
                     'url' => $homo->getUrl(),

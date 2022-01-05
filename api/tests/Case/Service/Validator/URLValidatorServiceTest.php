@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace HomoChecker\Test\Service\Validator;
 
 use GuzzleHttp\Psr7\Response;
+use HomoChecker\Domain\Validator\ValidationResult;
 use HomoChecker\Service\Validator\URLValidatorService;
 use PHPUnit\Framework\TestCase;
 
@@ -12,10 +13,10 @@ class URLValidatorServiceTest extends TestCase
     public function testValidate(): void
     {
         $validator = new URLValidatorService('|https?://example\.com/?|');
-        $this->assertEquals('CONTAINS', $validator->validate(new Response(200, [], '
+        $this->assertEquals(ValidationResult::CONTAINS, $validator->validate(new Response(200, [], '
             We love https://example.com!
         ')));
-        $this->assertEquals('CONTAINS', $validator->validate(new Response(200, [], '
+        $this->assertEquals(ValidationResult::CONTAINS, $validator->validate(new Response(200, [], '
             <!doctype html>
             <html>
                 <head>

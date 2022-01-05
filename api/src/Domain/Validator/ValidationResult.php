@@ -3,17 +3,17 @@ declare(strict_types=1);
 
 namespace HomoChecker\Domain\Validator;
 
-class ValidationResult
-{
-    public const OK = 'OK';
-    public const CONTAINS = 'CONTAINS';
-    public const WRONG = 'WRONG';
-    public const ERROR = 'ERROR';
+use JsonSerializable;
 
-    /**
-     * @codeCoverageIgnore
-     */
-    private function __construct()
+enum ValidationResult: string implements JsonSerializable
+{
+    case OK = 'OK';
+    case CONTAINS = 'CONTAINS';
+    case WRONG = 'WRONG';
+    case ERROR = 'ERROR';
+
+    public function jsonSerialize(): mixed
     {
+        return $this->value;
     }
 }
