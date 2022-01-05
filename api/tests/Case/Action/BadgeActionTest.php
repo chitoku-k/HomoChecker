@@ -9,6 +9,7 @@ use HomoChecker\Contracts\Service\HomoService;
 use HomoChecker\Domain\Homo;
 use HomoChecker\Domain\Result;
 use HomoChecker\Domain\Status;
+use HomoChecker\Domain\Validator\ValidationResult;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
 use Mockery\MockInterface;
@@ -53,7 +54,7 @@ class BadgeActionTest extends TestCase
                     'url' => 'https://foo.example.com/1',
                 ]),
                 'result' => new Result([
-                    'status' => 'OK',
+                    'status' => ValidationResult::OK,
                     'url' => 'https://foo.example.com/1',
                 ]),
             ]),
@@ -64,7 +65,7 @@ class BadgeActionTest extends TestCase
                     'url' => 'https://foo.example.com/2',
                 ]),
                 'result' => new Result([
-                    'status' => 'NG',
+                    'status' => ValidationResult::WRONG,
                     'url' => 'https://foo.example.com/2',
                 ]),
             ]),
@@ -75,7 +76,7 @@ class BadgeActionTest extends TestCase
                     'url' => 'http://bar.example.com',
                 ]),
                 'result' => new Result([
-                    'status' => 'OK',
+                    'status' => ValidationResult::OK,
                     'url' => 'http://bar.example.com',
                 ]),
             ]),

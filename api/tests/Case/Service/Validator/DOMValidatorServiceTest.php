@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace HomoChecker\Test\Service\Validator;
 
 use GuzzleHttp\Psr7\Response;
+use HomoChecker\Domain\Validator\ValidationResult;
 use HomoChecker\Service\Validator\DOMValidatorService;
 use PHPUnit\Framework\TestCase;
 
@@ -12,7 +13,7 @@ class DOMValidatorServiceTest extends TestCase
     public function testValidate(): void
     {
         $validator = new DOMValidatorService('|https?://example\.com/?|');
-        $this->assertEquals('OK', $validator->validate(new Response(200, [], '
+        $this->assertEquals(ValidationResult::OK, $validator->validate(new Response(200, [], '
             <!doctype html>
             <html>
                 <head>
@@ -23,7 +24,7 @@ class DOMValidatorServiceTest extends TestCase
                 </body>
             </html>
         ')));
-        $this->assertEquals('OK', $validator->validate(new Response(200, [], '
+        $this->assertEquals(ValidationResult::OK, $validator->validate(new Response(200, [], '
             <!doctype html>
             <html>
                 <head>

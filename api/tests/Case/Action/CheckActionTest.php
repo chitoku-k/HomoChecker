@@ -9,6 +9,7 @@ use HomoChecker\Contracts\Service\HomoService;
 use HomoChecker\Domain\Homo;
 use HomoChecker\Domain\Result;
 use HomoChecker\Domain\Status;
+use HomoChecker\Domain\Validator\ValidationResult;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
 use Mockery\MockInterface;
@@ -54,7 +55,7 @@ class CheckActionTest extends TestCase
                     'url' => 'https://foo.example.com/1',
                 ]),
                 'result' => new Result([
-                    'status' => 'OK',
+                    'status' => ValidationResult::OK,
                     'code' => '302 Found',
                     'http' => '2.0',
                     'ip' => '2001:db8::4545:1',
@@ -70,7 +71,7 @@ class CheckActionTest extends TestCase
                     'url' => 'https://foo.example.com/2',
                 ]),
                 'result' => new Result([
-                    'status' => 'NG',
+                    'status' => ValidationResult::WRONG,
                     'code' => '404 Not Found',
                     'http' => '1.1',
                     'ip' => '2001:db8::4545:2',
@@ -86,7 +87,7 @@ class CheckActionTest extends TestCase
                     'url' => 'http://bar.example.com',
                 ]),
                 'result' => new Result([
-                    'status' => 'OK',
+                    'status' => ValidationResult::OK,
                     'code' => '200 OK',
                     'http' => '1.1',
                     'ip' => '2001:db8::4545:3',
@@ -151,7 +152,7 @@ class CheckActionTest extends TestCase
                     'secure' => true,
                     'icon' => 'https://icon.example.com/2',
                 ],
-                'status' => 'NG',
+                'status' => 'WRONG',
                 'code' => '404 Not Found',
                 'http' => '1.1',
                 'ip' => '2001:db8::4545:2',
@@ -217,7 +218,7 @@ class CheckActionTest extends TestCase
 
         $stream->shouldReceive('write')
                ->once()
-               ->with("data: {\"homo\":{\"screen_name\":\"foo\",\"service\":\"twitter\",\"url\":\"https:\\/\\/foo.example.com\\/2\",\"display_url\":\"foo.example.com\\/2\",\"secure\":true,\"icon\":\"https:\\/\\/icon.example.com\\/2\"},\"status\":\"NG\",\"code\":\"404 Not Found\",\"http\":\"1.1\",\"ip\":\"2001:db8::4545:2\",\"url\":\"https:\\/\\/foo.example.com\\/2\",\"duration\":20,\"error\":null}\n\n");
+               ->with("data: {\"homo\":{\"screen_name\":\"foo\",\"service\":\"twitter\",\"url\":\"https:\\/\\/foo.example.com\\/2\",\"display_url\":\"foo.example.com\\/2\",\"secure\":true,\"icon\":\"https:\\/\\/icon.example.com\\/2\"},\"status\":\"WRONG\",\"code\":\"404 Not Found\",\"http\":\"1.1\",\"ip\":\"2001:db8::4545:2\",\"url\":\"https:\\/\\/foo.example.com\\/2\",\"duration\":20,\"error\":null}\n\n");
 
         $stream->shouldReceive('write')
                ->once()

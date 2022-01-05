@@ -271,7 +271,7 @@ class CheckServiceTest extends TestCase
                     'url' => 'https://foo.example.com/1',
                 ]),
                 'result' => new Result([
-                    'status' => 'OK',
+                    'status' => ValidationResult::OK,
                     'code' => '301 Moved Permanently',
                     'http' => '2',
                     'ip' => '2001:db8::4545:1',
@@ -288,7 +288,7 @@ class CheckServiceTest extends TestCase
                     'url' => 'https://foo.example.com/2',
                 ]),
                 'result' => new Result([
-                    'status' => 'WRONG',
+                    'status' => ValidationResult::WRONG,
                     'code' => '200 OK',
                     'http' => '1.1',
                     'ip' => '2001:db8::4545:4',
@@ -305,7 +305,7 @@ class CheckServiceTest extends TestCase
                     'url' => 'http://bar.example.com',
                 ]),
                 'result' => new Result([
-                    'status' => 'OK',
+                    'status' => ValidationResult::OK,
                     'code' => '200 OK',
                     'ip' => '2001:db8::4545:3',
                     'url' => 'http://bar.example.com',
@@ -321,7 +321,7 @@ class CheckServiceTest extends TestCase
                     'url' => 'https://baz.example.com',
                 ]),
                 'result' => new Result([
-                    'status' => 'ERROR',
+                    'status' => ValidationResult::ERROR,
                     'ip' => null,
                     'http' => null,
                     'url' => 'https://baz.example.com',
@@ -338,7 +338,7 @@ class CheckServiceTest extends TestCase
                     'url' => 'https://qux.example.com',
                 ]),
                 'result' => new Result([
-                    'status' => 'ERROR',
+                    'status' => ValidationResult::ERROR,
                     'ip' => null,
                     'http' => null,
                     'url' => 'https://qux.example.com',
