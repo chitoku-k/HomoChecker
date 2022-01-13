@@ -230,7 +230,7 @@ class ClientServiceTest extends TestCase
         /** @var MockInterface&CacheService $cache */
         $cache = m::mock(CacheService::class);
         $cache->shouldReceive('loadAltsvc')
-              ->withArgs(['https://foo.example.com/1', ''])
+              ->withArgs(['http://foo.example.com/1', ''])
               ->andReturn('h3');
         $cache->shouldReceive('loadAltsvc')
               ->withArgs(['https://homo.example.com', ''])
@@ -239,7 +239,7 @@ class ClientServiceTest extends TestCase
               ->withArgs(['https://foo.example.com/1', 'h3', 86400]);
 
         $service = new ClientService($client, $cache, 5);
-        $generator = $service->getAsync('https://foo.example.com/1');
+        $generator = $service->getAsync('http://foo.example.com/1');
 
         $generator->rewind();
         $this->assertTrue($generator->valid());
