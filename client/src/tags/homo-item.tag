@@ -31,20 +31,20 @@
                     <span class={
                         connection: true,
                         success: status !== "ERROR",
-                        secure: homo.secure,
-                        insecure: !homo.secure,
+                        secure: secure,
+                        insecure: !secure,
                     } title={ url }>
                         <i class={
                             fa: true,
-                            fa-lock: homo.secure,
-                            fa-unlock-alt: !homo.secure,
+                            fa-lock: secure,
+                            fa-unlock-alt: !secure,
                         }></i>
                         <span if={ http }>
                             HTTP/{ http }
-                            { homo.secure ? http === "3" ? "over QUIC" : "over TLS" : "" }
+                            { secure ? http === "3" ? "over QUIC" : "over TLS" : "" }
                         </span>
                         <span if={ !http }>
-                            { homo.secure ? "HTTPS" : "HTTP" }
+                            { secure ? "HTTPS" : "HTTP" }
                         </span>
                     </span>
                     <span if={ ip } class={

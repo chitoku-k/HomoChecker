@@ -30,7 +30,7 @@ event: initialize
 data: {"count":30}
 
 event: response
-data: {"homo":{"screen_name":"@chitoku@mstdn.jp","service":"mastodon","url":"https:\/\/homo.chitoku.jp","display_url":"homo.chitoku.jp","icon":"https:\/\/example.com\/icon.png","secure":true},"status":"OK","code":"302 Found","ip":"2001:db8::4545:4545","url":"https:\/\/homo.chitoku.jp","duration":0.45,"error":null}
+data: {"homo":{"screen_name":"@chitoku@mstdn.jp","service":"mastodon","url":"https:\/\/homo.chitoku.jp","display_url":"homo.chitoku.jp","icon":"https:\/\/example.com\/icon.png","secure":true},"status":"OK","code":"302 Found","ip":"2001:db8::4545:4545","url":"https:\/\/homo.chitoku.jp","secure":true,"duration":0.45,"error":null}
 ```
 
 `event` が `initialize` の場合は `data` は `count` を持つ JSON データです。  
@@ -85,6 +85,9 @@ data: {"homo":{"screen_name":"@chitoku@mstdn.jp","service":"mastodon","url":"htt
 
         // (string) 直前の接続先の URL
         "url": "https://homo.chitoku.jp",
+
+        // (bool) HTTPS 接続かどうかを示す値
+        "secure": true,
 
         // (number) リダイレクトにかかった時間 (s)
         "duration": 0.0,

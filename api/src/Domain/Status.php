@@ -142,6 +142,7 @@ class Status implements \JsonSerializable
             'http' => $this->getResult()->getHttp(),
             'ip' => $this->getResult()->getIp(),
             'url' => $this->createDisplayURL($this->getResult()->getUrl(), true),
+            'secure' => $this->isSecure($this->getResult()->getUrl()),
             'duration' => $this->getResult()->getDuration(),
             'error' => $this->getResult()->getError(),
         ];
