@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "81fccb144686d357f8e5780a8f0334e2",
+    "content-hash": "c68bbfecf8d6952ca14bff3094be5507",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -652,16 +652,16 @@
         },
         {
             "name": "illuminate/cache",
-            "version": "v8.79.0",
+            "version": "v8.80.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/cache.git",
-                "reference": "0f307e63c11ba99122a3d864647125788aac6db8"
+                "reference": "bdfd3c9764133ef33d3aa480531214656e6f2fd2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/cache/zipball/0f307e63c11ba99122a3d864647125788aac6db8",
-                "reference": "0f307e63c11ba99122a3d864647125788aac6db8",
+                "url": "https://api.github.com/repos/illuminate/cache/zipball/bdfd3c9764133ef33d3aa480531214656e6f2fd2",
+                "reference": "bdfd3c9764133ef33d3aa480531214656e6f2fd2",
                 "shasum": ""
             },
             "require": {
@@ -708,7 +708,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-01-04T16:05:53+00:00"
+            "time": "2022-01-15T15:31:34+00:00"
         },
         {
             "name": "illuminate/collections",
