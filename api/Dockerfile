@@ -41,7 +41,7 @@ FROM build-dependencies AS curl
 COPY --from=openssl /usr/local/ /usr/local/
 COPY --from=nghttp3 /usr/local/ /usr/local/
 COPY --from=ngtcp2 /usr/local/ /usr/local/
-RUN git clone --depth=1 -b curl-7_81_0 https://github.com/curl/curl && \
+RUN git clone --depth=1 -b curl-7_80_0 https://github.com/curl/curl && \
     cd curl && \
     autoreconf -fi && \
     ./configure --enable-alt-svc --with-openssl --with-nghttp2 --with-nghttp3 --with-ngtcp2 && \
