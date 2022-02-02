@@ -20,7 +20,7 @@ RUN git clone --depth 1 -b OpenSSL_1_1_1k+quic https://github.com/quictls/openss
     ldconfig
 
 FROM build-dependencies AS nghttp3
-RUN git clone --depth=1 https://github.com/ngtcp2/nghttp3 && \
+RUN git clone --depth=1 -b v0.1.0 https://github.com/ngtcp2/nghttp3 && \
     cd nghttp3 && \
     autoreconf -fi && \
     ./configure --enable-lib-only && \
@@ -30,7 +30,7 @@ RUN git clone --depth=1 https://github.com/ngtcp2/nghttp3 && \
 FROM build-dependencies AS ngtcp2
 COPY --from=openssl /usr/local/ /usr/local/
 COPY --from=nghttp3 /usr/local/ /usr/local/
-RUN git clone --depth=1 https://github.com/ngtcp2/ngtcp2 && \
+RUN git clone --depth=1 -b v0.1.0 https://github.com/ngtcp2/ngtcp2 && \
     cd ngtcp2 && \
     autoreconf -fi && \
     ./configure --enable-lib-only && \
