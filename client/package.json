@@ -20,7 +20,7 @@
     "font-awesome": "^4.7.0",
     "git-revision-webpack-plugin": "^5.0.0",
     "html-webpack-plugin": "^5.5.0",
-    "license-webpack-plugin": "^4.0.1",
+    "license-webpack-plugin": "^4.0.2",
     "riot": "^3.13.2",
     "riot-compiler": "^3.6.0",
     "riot-hot-reload": "^1.0.0",
