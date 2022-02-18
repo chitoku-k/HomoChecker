@@ -11,7 +11,7 @@
     "caniuse-lite": "^1.0.30001311",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^10.2.4",
-    "core-js": "^3.21.0",
+    "core-js": "^3.21.1",
     "css-loader": "^6.6.0",
     "eslint": "^8.9.0",
     "eslint-plugin-riot": "^0.1.8",
