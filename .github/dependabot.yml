@@ -22,6 +22,9 @@ updates:
   - dependency-name: riot
     versions:
     - "> 3.13.2"
+  - dependency-name: shufflejs
+    versions:
+    - "> 5"
 - package-ecosystem: docker
   directory: "/api"
   schedule:
