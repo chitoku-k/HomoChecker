@@ -7,7 +7,7 @@ use HomoChecker\Contracts\Service\HomoService;
 use HomoChecker\Domain\Homo;
 use HomoChecker\Domain\Status;
 use Psr\Http\Message\StreamInterface;
-use Slim\Http\Response as Response;
+use Slim\Http\Response;
 use Slim\Http\ServerRequest as Request;
 
 class ListAction

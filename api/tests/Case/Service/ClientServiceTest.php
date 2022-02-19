@@ -37,7 +37,7 @@ class ClientServiceTest extends TestCase
             'transfer_time' => 1.0,
         ]);
 
-        /** @var MockInterface&CacheService $cache */
+        /** @var CacheService&MockInterface $cache */
         $cache = m::mock(CacheService::class);
         $cache->shouldReceive('loadAltsvc')
               ->withArgs(['https://foo.example.com/1', ''])
@@ -90,7 +90,7 @@ class ClientServiceTest extends TestCase
             'transfer_time' => 1.0,
         ]);
 
-        /** @var MockInterface&CacheService $cache */
+        /** @var CacheService&MockInterface $cache */
         $cache = m::mock(CacheService::class);
         $cache->shouldReceive('loadAltsvc')
               ->withArgs(['https://foo.example.com/2', ''])
@@ -169,7 +169,7 @@ class ClientServiceTest extends TestCase
             'transfer_time' => 1.0,
         ]);
 
-        /** @var MockInterface&CacheService $cache */
+        /** @var CacheService&MockInterface $cache */
         $cache = m::mock(CacheService::class);
         $cache->shouldReceive('loadAltsvc')
               ->withArgs(['https://foo.example.com/1', ''])
@@ -227,7 +227,7 @@ class ClientServiceTest extends TestCase
             'transfer_time' => 1.0,
         ]);
 
-        /** @var MockInterface&CacheService $cache */
+        /** @var CacheService&MockInterface $cache */
         $cache = m::mock(CacheService::class);
         $cache->shouldReceive('loadAltsvc')
               ->withArgs(['http://foo.example.com/1', ''])
@@ -281,7 +281,7 @@ class ClientServiceTest extends TestCase
             'transfer_time' => 1.0,
         ]);
 
-        /** @var MockInterface&CacheService $cache */
+        /** @var CacheService&MockInterface $cache */
         $cache = m::mock(CacheService::class);
         $cache->shouldReceive('loadAltsvc')
               ->withArgs(['https://baz.example.com', ''])
@@ -321,7 +321,7 @@ class ClientServiceTest extends TestCase
                ->withArgs([$request, ['http_errors' => false]])
                ->andReturn($response);
 
-        /** @var MockInterface&CacheService $cache */
+        /** @var CacheService&MockInterface $cache */
         $cache = m::mock(CacheService::class);
 
         $service = new ClientService($client, $cache, 5);
@@ -346,7 +346,7 @@ class ClientServiceTest extends TestCase
                ->withArgs([$request, ['http_errors' => false]])
                ->andReturn($promise);
 
-        /** @var MockInterface&CacheService $cache */
+        /** @var CacheService&MockInterface $cache */
         $cache = m::mock(CacheService::class);
 
         $service = new ClientService($client, $cache, 5);
@@ -368,7 +368,7 @@ class ClientServiceTest extends TestCase
                ->withArgs(['GET', 'https://example.com', ['http_errors' => false]])
                ->andReturn($response);
 
-        /** @var MockInterface&CacheService $cache */
+        /** @var CacheService&MockInterface $cache */
         $cache = m::mock(CacheService::class);
 
         $service = new ClientService($client, $cache, 5);
@@ -390,7 +390,7 @@ class ClientServiceTest extends TestCase
                ->withArgs(['GET', 'https://example.com', ['http_errors' => false]])
                ->andReturn($promise);
 
-        /** @var MockInterface&CacheService $cache */
+        /** @var CacheService&MockInterface $cache */
         $cache = m::mock(CacheService::class);
 
         $service = new ClientService($client, $cache, 5);
@@ -408,7 +408,7 @@ class ClientServiceTest extends TestCase
         $client->shouldReceive('getConfig')
                ->andReturn(['http_errors' => false]);
 
-        /** @var MockInterface&CacheService $cache */
+        /** @var CacheService&MockInterface $cache */
         $cache = m::mock(CacheService::class);
 
         $service = new ClientService($client, $cache, 5);

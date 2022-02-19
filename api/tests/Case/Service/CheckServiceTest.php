@@ -80,7 +80,7 @@ class CheckServiceTest extends TestCase
              ->with(null)
              ->andReturn($this->users);
 
-        /** @var ProfileService&MockInterface $twitter */
+        /** @var MockInterface&ProfileService $twitter */
         $twitter = m::mock(ProfileService::class);
         $twitter->shouldReceive('getIconAsync')
                 ->andReturn(
@@ -88,7 +88,7 @@ class CheckServiceTest extends TestCase
                     new FulfilledPromise('https://img.example.com/foo'),
                 );
 
-        /** @var ProfileService&MockInterface $mastodon */
+        /** @var MockInterface&ProfileService $mastodon */
         $mastodon = m::mock(ProfileService::class);
         $mastodon->shouldReceive('getIconAsync')
                  ->andReturn(
@@ -97,7 +97,7 @@ class CheckServiceTest extends TestCase
                      new FulfilledPromise('https://img.example.com/qux'),
                  );
 
-        /** @var ValidatorService&MockInterface $validator */
+        /** @var MockInterface&ValidatorService $validator */
         $validator = m::mock(ValidatorService::class);
         $validator->shouldReceive('validate')
                   ->andReturn(
