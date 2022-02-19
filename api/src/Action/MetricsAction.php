@@ -5,7 +5,7 @@ namespace HomoChecker\Action;
 
 use Prometheus\RegistryInterface;
 use Prometheus\RendererInterface;
-use Slim\Http\Response as Response;
+use Slim\Http\Response;
 use Slim\Http\ServerRequest as Request;
 
 class MetricsAction
