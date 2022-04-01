@@ -766,7 +766,7 @@
         },
         {
             "name": "illuminate/config",
-            "version": "v8.83.5",
+            "version": "v8.83.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/config.git",
