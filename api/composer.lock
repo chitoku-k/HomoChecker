@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0e4f285c13a4385b780ffa997a21cecf",
+    "content-hash": "85901827be5abf2da816d7620640c7d4",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -1301,16 +1301,16 @@
         },
         {
             "name": "middlewares/access-log",
-            "version": "v2.0.0",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/middlewares/access-log.git",
-                "reference": "1e674e1c73c25e6607adfa0bc11278e1708d48f0"
+                "reference": "972ec794e5c1e033b033b354490ced04aba75446"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/middlewares/access-log/zipball/1e674e1c73c25e6607adfa0bc11278e1708d48f0",
-                "reference": "1e674e1c73c25e6607adfa0bc11278e1708d48f0",
+                "url": "https://api.github.com/repos/middlewares/access-log/zipball/972ec794e5c1e033b033b354490ced04aba75446",
+                "reference": "972ec794e5c1e033b033b354490ced04aba75446",
                 "shasum": ""
             },
             "require": {
@@ -1352,9 +1352,9 @@
             ],
             "support": {
                 "issues": "https://github.com/middlewares/access-log/issues",
-                "source": "https://github.com/middlewares/access-log/tree/v2.0.0"
+                "source": "https://github.com/middlewares/access-log/tree/v2.1.0"
             },
-            "time": "2020-12-02T00:05:08+00:00"
+            "time": "2022-04-01T15:03:37+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -7381,5 +7381,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
