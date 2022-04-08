@@ -10,7 +10,7 @@
         "illuminate/events": "^8.83",
         "illuminate/log": "^8.83",
         "illuminate/redis": "^8.83",
-        "middlewares/access-log": "^2.0",
+        "middlewares/access-log": "^2.1",
         "phpoption/phpoption": "^1.8",
         "promphp/prometheus_client_php": "^2.4",
         "slim/http": "^1.2",
