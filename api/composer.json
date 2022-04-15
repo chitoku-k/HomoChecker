@@ -12,7 +12,7 @@
         "illuminate/redis": "^8.83",
         "middlewares/access-log": "^2.1",
         "phpoption/phpoption": "^1.8",
-        "promphp/prometheus_client_php": "^2.4",
+        "promphp/prometheus_client_php": "^2.6",
         "slim/http": "^1.2",
         "slim/psr7": "^1.4",
         "slim/slim": "^4.10",
