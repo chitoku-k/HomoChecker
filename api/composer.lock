@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "85901827be5abf2da816d7620640c7d4",
+    "content-hash": "c5e6aad09e09fa368e94faff9fc8d9ac",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -1674,16 +1674,16 @@
         },
         {
             "name": "promphp/prometheus_client_php",
-            "version": "v2.4.0",
+            "version": "v2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PromPHP/prometheus_client_php.git",
-                "reference": "7c998b3eca48d01930ccaa29d7ca4c0c3c52f045"
+                "reference": "10881142d2c55de19f529ebbcb7f89558c6d46d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PromPHP/prometheus_client_php/zipball/7c998b3eca48d01930ccaa29d7ca4c0c3c52f045",
-                "reference": "7c998b3eca48d01930ccaa29d7ca4c0c3c52f045",
+                "url": "https://api.github.com/repos/PromPHP/prometheus_client_php/zipball/10881142d2c55de19f529ebbcb7f89558c6d46d4",
+                "reference": "10881142d2c55de19f529ebbcb7f89558c6d46d4",
                 "shasum": ""
             },
             "require": {
@@ -1698,11 +1698,11 @@
             "require-dev": {
                 "guzzlehttp/guzzle": "^6.3|^7.0",
                 "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "^0.12.50",
-                "phpstan/phpstan-phpunit": "^0.12.16",
-                "phpstan/phpstan-strict-rules": "^0.12.5",
-                "phpunit/phpunit": "^8.4|^9.4",
-                "squizlabs/php_codesniffer": "^3.5",
+                "phpstan/phpstan": "^1.5.4",
+                "phpstan/phpstan-phpunit": "^1.1.0",
+                "phpstan/phpstan-strict-rules": "^1.1.0",
+                "phpunit/phpunit": "^9.4",
+                "squizlabs/php_codesniffer": "^3.6",
                 "symfony/polyfill-apcu": "^1.6"
             },
             "suggest": {
@@ -1735,9 +1735,9 @@
             "description": "Prometheus instrumentation library for PHP applications.",
             "support": {
                 "issues": "https://github.com/PromPHP/prometheus_client_php/issues",
-                "source": "https://github.com/PromPHP/prometheus_client_php/tree/v2.4.0"
+                "source": "https://github.com/PromPHP/prometheus_client_php/tree/v2.6.0"
             },
-            "time": "2021-11-05T05:53:43+00:00"
+            "time": "2022-04-12T14:07:05+00:00"
         },
         {
             "name": "psr/container",
