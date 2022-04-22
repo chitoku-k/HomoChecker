@@ -7,7 +7,7 @@
   "devDependencies": {
     "@babel/core": "^7.17.9",
     "@babel/preset-env": "^7.16.11",
-    "babel-loader": "^8.2.4",
+    "babel-loader": "^8.2.5",
     "caniuse-lite": "^1.0.30001332",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^10.2.4",
