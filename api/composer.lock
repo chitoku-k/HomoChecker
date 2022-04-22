@@ -1301,16 +1301,16 @@
         },
         {
             "name": "middlewares/access-log",
-            "version": "v2.1.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/middlewares/access-log.git",
-                "reference": "972ec794e5c1e033b033b354490ced04aba75446"
+                "reference": "205cfd7d47c3523c60624815244851fa0a97ed1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/middlewares/access-log/zipball/972ec794e5c1e033b033b354490ced04aba75446",
-                "reference": "972ec794e5c1e033b033b354490ced04aba75446",
+                "url": "https://api.github.com/repos/middlewares/access-log/zipball/205cfd7d47c3523c60624815244851fa0a97ed1f",
+                "reference": "205cfd7d47c3523c60624815244851fa0a97ed1f",
                 "shasum": ""
             },
             "require": {
@@ -1352,9 +1352,9 @@
             ],
             "support": {
                 "issues": "https://github.com/middlewares/access-log/issues",
-                "source": "https://github.com/middlewares/access-log/tree/v2.1.0"
+                "source": "https://github.com/middlewares/access-log/tree/v2.1.1"
             },
-            "time": "2022-04-01T15:03:37+00:00"
+            "time": "2022-04-21T17:32:51+00:00"
         },
         {
             "name": "monolog/monolog",
