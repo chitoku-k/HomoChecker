@@ -12,7 +12,7 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
         pkg-config
 
 FROM build-dependencies AS openssl
-RUN git clone --depth 1 -b OpenSSL_1_1_1k+quic https://github.com/quictls/openssl && \
+RUN git clone --depth 1 -b OpenSSL_1_1_1n+quic https://github.com/quictls/openssl && \
     cd openssl && \
     ./config enable-tls1_3 && \
     make -j $(nproc) && \
@@ -125,7 +125,7 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
     echo 'label ::1/128 0' > /etc/gai.conf
 
 FROM runtime AS dependencies
-COPY --from=composer:2.2.1 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.3.5 /usr/bin/composer /usr/bin/composer
 RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
     --mount=type=cache,id=api:/var/lib/apt/lists,target=/var/lib/apt/lists \
     apt-get -y update && \
