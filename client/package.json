@@ -6,7 +6,7 @@
   "homepage": "https://homo.chitoku.jp:4545/",
   "devDependencies": {
     "@babel/core": "^7.17.10",
-    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-env": "^7.17.10",
     "babel-loader": "^8.2.5",
     "caniuse-lite": "^1.0.30001338",
     "clean-webpack-plugin": "^4.0.0",
