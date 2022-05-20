@@ -913,16 +913,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v8.83.12",
+            "version": "v8.83.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "cb2696e8f41e3770f1f30d623aebbb73644f34d9"
+                "reference": "264976d81a37d06ad64242afa28bc8167cfd1efa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/cb2696e8f41e3770f1f30d623aebbb73644f34d9",
-                "reference": "cb2696e8f41e3770f1f30d623aebbb73644f34d9",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/264976d81a37d06ad64242afa28bc8167cfd1efa",
+                "reference": "264976d81a37d06ad64242afa28bc8167cfd1efa",
                 "shasum": ""
             },
             "require": {
@@ -977,7 +977,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-05-06T13:44:23+00:00"
+            "time": "2022-05-11T13:33:08+00:00"
         },
         {
             "name": "illuminate/events",
