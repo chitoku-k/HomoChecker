@@ -913,7 +913,7 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v8.83.14",
+            "version": "v8.83.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
