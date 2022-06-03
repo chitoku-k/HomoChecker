@@ -1680,16 +1680,16 @@
         },
         {
             "name": "promphp/prometheus_client_php",
-            "version": "v2.6.0",
+            "version": "v2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PromPHP/prometheus_client_php.git",
-                "reference": "10881142d2c55de19f529ebbcb7f89558c6d46d4"
+                "reference": "918b9962f0d5f2ecf401aa99b334a1620b6aeffe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PromPHP/prometheus_client_php/zipball/10881142d2c55de19f529ebbcb7f89558c6d46d4",
-                "reference": "10881142d2c55de19f529ebbcb7f89558c6d46d4",
+                "url": "https://api.github.com/repos/PromPHP/prometheus_client_php/zipball/918b9962f0d5f2ecf401aa99b334a1620b6aeffe",
+                "reference": "918b9962f0d5f2ecf401aa99b334a1620b6aeffe",
                 "shasum": ""
             },
             "require": {
@@ -1741,9 +1741,9 @@
             "description": "Prometheus instrumentation library for PHP applications.",
             "support": {
                 "issues": "https://github.com/PromPHP/prometheus_client_php/issues",
-                "source": "https://github.com/PromPHP/prometheus_client_php/tree/v2.6.0"
+                "source": "https://github.com/PromPHP/prometheus_client_php/tree/v2.6.1"
             },
-            "time": "2022-04-12T14:07:05+00:00"
+            "time": "2022-06-01T05:32:12+00:00"
         },
         {
             "name": "psr/container",
