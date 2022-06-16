@@ -1,11 +1,3 @@
-import "core-js/features/array/from";
-import "core-js/features/array/find";
-import "core-js/features/array/includes";
-import "core-js/features/object/assign";
-import "core-js/features/set";
-import "core-js/features/string/includes";
-import "core-js/web/url";
-
 import riot from "riot";
 import "riot-hot-reload";
 import "font-awesome/scss/font-awesome.scss";

@@ -73,7 +73,7 @@
             }
         }
     </style>
-    <script type="text/es6">
+    <script>
         this.COMMIT_HASH = COMMIT_HASH;
     </script>
 </homo-header>

@@ -29,13 +29,10 @@
             }
         }
     </style>
-    <script type="es6">
+    <script>
         import { merge, fromEvent, using, Subject } from "rxjs";
         import { first, filter, map, publish, retry, tap } from "rxjs/operators";
         import Shuffle from "shufflejs";
-        import { EventSourcePolyfill } from "event-source-polyfill";
-
-        const EventSource = global.EventSource || EventSourcePolyfill;
 
         this.on("mount", () => {
             this.shuffle = new Shuffle(document.querySelector(".wrapper"), {

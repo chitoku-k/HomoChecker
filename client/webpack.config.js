@@ -9,7 +9,7 @@ const ESLintPlugin = require("eslint-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { GitRevisionPlugin } = require("git-revision-webpack-plugin");
 
-riot.parsers.css["dart-sass"] = (tagName, css) => sass.renderSync({ data: css }).css + "";
+riot.parsers.css["dart-sass"] = (tagName, css) => sass.compileString(css).css + "";
 
 module.exports = {
     mode: process.env.HOMOCHECKER_ENV || "production",
@@ -20,7 +20,7 @@ module.exports = {
         filename: "bundle.js",
         assetModuleFilename: "[name][ext]",
     },
-    target: ["web", "es5"],
+    target: ["web", "es2021"],
     module: {
         rules: [
             {
@@ -37,21 +37,6 @@ module.exports = {
                 exclude: /node_modules/,
                 use: [
                     { loader: "riot-tag-loader" },
-                ],
-            },
-            {
-                test: /\.js$/,
-                enforce: "post",
-                use: [
-                    { loader: "babel-loader" },
-                ],
-            },
-            {
-                test: /\.tag$/,
-                enforce: "post",
-                exclude: /node_modules/,
-                use: [
-                    { loader: "babel-loader" },
                 ],
             },
             {

@@ -304,7 +304,7 @@
             }
         }
     </style>
-    <script type="es6">
+    <script>
         this.regex = /homo|ホモ/;
 
         this.getUserUrl = homo => {

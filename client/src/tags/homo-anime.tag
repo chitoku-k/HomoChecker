@@ -166,7 +166,7 @@
             }
         }
     </style>
-    <script type="es6">
+    <script>
         import { merge, from, fromEvent, zip } from "rxjs";
         import { repeat } from "rxjs/operators";
 

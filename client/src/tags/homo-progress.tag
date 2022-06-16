@@ -35,7 +35,7 @@
             }
         }
     </style>
-    <script type="text/es6">
+    <script>
         opts.progress.on("update", () => {
             opts.progress.done = opts.progress.length / opts.progress.max === 1;
             this.update();
