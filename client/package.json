@@ -21,7 +21,7 @@
     "riot-tag-loader": "^2.1.0",
     "rxjs": "^7.5.5",
     "sass": "^1.53.0",
-    "sass-loader": "^13.0.0",
+    "sass-loader": "^13.0.2",
     "shufflejs": "v6.0.0",
     "style-loader": "^3.3.1",
     "webpack": "^5.73.0",
