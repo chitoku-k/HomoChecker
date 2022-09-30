@@ -607,7 +607,7 @@
         },
         {
             "name": "illuminate/bus",
-            "version": "v8.83.24",
+            "version": "v8.83.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/bus.git",
@@ -822,7 +822,7 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v8.83.24",
+            "version": "v8.83.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
@@ -989,7 +989,7 @@
         },
         {
             "name": "illuminate/events",
-            "version": "v8.83.24",
+            "version": "v8.83.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/events.git",
@@ -1139,7 +1139,7 @@
         },
         {
             "name": "illuminate/pipeline",
-            "version": "v8.83.24",
+            "version": "v8.83.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/pipeline.git",
