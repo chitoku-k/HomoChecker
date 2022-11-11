@@ -13,7 +13,7 @@
         "middlewares/access-log": "^2.1",
         "phpoption/phpoption": "^1.9",
         "promphp/prometheus_client_php": "^2.6",
-        "slim/http": "^1.2",
+        "slim/http": "^1.3",
         "slim/psr7": "^1.6",
         "slim/slim": "^4.10",
         "true/punycode": "~2.0",
