@@ -2,6 +2,9 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
          bootstrap="./vendor/autoload.php">
+    <php>
+        <const name="CURL_HTTP_VERSION_3" value="30" />
+    </php>
     <testsuites>
         <testsuite name="all">
             <directory suffix="Test.php">./tests</directory>
