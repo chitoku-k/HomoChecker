@@ -116,6 +116,22 @@ class CheckServiceTest extends TestCase
                        $response = new Response(new Psr7Response(301, ['Location' => 'https://homo.example.com'], ''));
                        $response->setTotalTime(1.0);
                        $response->setStartTransferTime(2.0);
+                       $response->setCertificates([
+                           [
+                               'Subject' => 'CN = homo.example.com',
+                               'Issuer' => 'C = US, O = Amazon, OU = Server CA 1B, CN = Amazon',
+                               'Version' => '2',
+                               'Signature Algorithm' => 'sha256WithRSAEncryption',
+                               'Public Key Algorithm' => 'rsaEncryption',
+                               'X509v3 Subject Alternative Name' => 'DNS:*.homo.example.com, DNS:homo.example.com',
+                               'X509v3 Key Usage' => 'Digital Signature, Key Encipherment',
+                               'X509v3 Extended Key Usage' => 'TLS Web Server Authentication, TLS Web Client Authentication',
+                               'X509v3 Basic Constraints' => 'CA:FALSE',
+                               'Start date' => 'Jul  1 00:00:00 2022 GMT',
+                               'Expire date' => 'Jul 30 23:59:59 2023 GMT',
+                               'RSA Public Key' => '2048',
+                           ],
+                       ]);
                        $response->setHttpVersion(CURL_HTTP_VERSION_2);
                        $response->setPrimaryIP('2001:db8::4545:1');
                        yield 'https://foo.example.com/1' => new FulfilledPromise($response);
@@ -129,6 +145,21 @@ class CheckServiceTest extends TestCase
                        $response = new Response(new Psr7Response(301, ['Location' => 'https://foo2.example.com'], ''));
                        $response->setTotalTime(2.0);
                        $response->setStartTransferTime(3.0);
+                       $response->setCertificates([
+                           [
+                               'Subject' => 'CN = foo2.example.com',
+                               'Issuer' => 'C = US, O = Let\'s Encrypt, CN = E1',
+                               'Version' => '2',
+                               'Signature Algorithm' => 'ecdsa-with-SHA384',
+                               'Public Key Algorithm' => 'id-ecPublicKey',
+                               'X509v3 Subject Alternative Name' => 'DNS:foo2.example.com',
+                               'X509v3 Key Usage' => 'Digital Signature',
+                               'X509v3 Extended Key Usage' => 'TLS Web Server Authentication, TLS Web Client Authentication',
+                               'X509v3 Basic Constraints' => 'CA:FALSE',
+                               'Start date' => 'Aug  1 00:00:00 2022 GMT',
+                               'Expire date' => 'Aug 31 23:59:59 2022 GMT',
+                           ],
+                       ]);
                        $response->setHttpVersion(CURL_HTTP_VERSION_1_1);
                        $response->setPrimaryIP('2001:db8::4545:2');
                        yield 'https://foo.example.com/2' => new FulfilledPromise($response);
@@ -139,6 +170,21 @@ class CheckServiceTest extends TestCase
                        '));
                        $response->setTotalTime(3.0);
                        $response->setStartTransferTime(4.0);
+                       $response->setCertificates([
+                           [
+                               'Subject' => 'CN = foo2.example.com',
+                               'Issuer' => 'C = US, O = Let\'s Encrypt, CN = E1',
+                               'Version' => '2',
+                               'Signature Algorithm' => 'ecdsa-with-SHA384',
+                               'Public Key Algorithm' => 'id-ecPublicKey',
+                               'X509v3 Subject Alternative Name' => 'DNS:foo2.example.com',
+                               'X509v3 Key Usage' => 'Digital Signature',
+                               'X509v3 Extended Key Usage' => 'TLS Web Server Authentication, TLS Web Client Authentication',
+                               'X509v3 Basic Constraints' => 'CA:FALSE',
+                               'Start date' => 'Aug  1 00:00:00 2022 GMT',
+                               'Expire date' => 'Aug 31 23:59:59 2022 GMT',
+                           ],
+                       ]);
                        $response->setHttpVersion(CURL_HTTP_VERSION_1_1);
                        $response->setPrimaryIP('2001:db8::4545:4');
                        yield 'https://foo2.example.com' => new FulfilledPromise($response);
@@ -155,6 +201,7 @@ class CheckServiceTest extends TestCase
                        '));
                        $response->setTotalTime(3.0);
                        $response->setStartTransferTime(4.0);
+                       $response->setCertificates([]);
                        $response->setHttpVersion(null);
                        $response->setPrimaryIP('2001:db8::4545:3');
                        yield 'http://bar.example.com' => new FulfilledPromise($response);
@@ -274,6 +321,18 @@ class CheckServiceTest extends TestCase
                     'status' => ValidationResult::OK,
                     'code' => '301 Moved Permanently',
                     'http' => '2',
+                    'certificates' => [
+                        [
+                            'subject' => 'CN = homo.example.com',
+                            'issuer' => 'C = US, O = Amazon, OU = Server CA 1B, CN = Amazon',
+                            'subjectAlternativeName' => [
+                                '*.homo.example.com',
+                                'homo.example.com',
+                            ],
+                            'notBefore' => 'Jul  1 00:00:00 2022 GMT',
+                            'notAfter' => 'Jul 30 23:59:59 2023 GMT',
+                        ],
+                    ],
                     'ip' => '2001:db8::4545:1',
                     'url' => 'https://foo.example.com/1',
                     'duration' => 2.0,
@@ -291,6 +350,15 @@ class CheckServiceTest extends TestCase
                     'status' => ValidationResult::WRONG,
                     'code' => '200 OK',
                     'http' => '1.1',
+                    'certificates' => [
+                        [
+                            'subject' => 'CN = foo2.example.com',
+                            'issuer' => 'C = US, O = Let\'s Encrypt, CN = E1',
+                            'subjectAlternativeName' => ['foo2.example.com'],
+                            'notBefore' => 'Aug  1 00:00:00 2022 GMT',
+                            'notAfter' => 'Aug 31 23:59:59 2022 GMT',
+                        ],
+                    ],
                     'ip' => '2001:db8::4545:4',
                     'url' => 'https://foo2.example.com',
                     'duration' => 7.0,
@@ -307,6 +375,8 @@ class CheckServiceTest extends TestCase
                 'result' => new Result([
                     'status' => ValidationResult::OK,
                     'code' => '200 OK',
+                    'http' => null,
+                    'certificates' => [],
                     'ip' => '2001:db8::4545:3',
                     'url' => 'http://bar.example.com',
                     'duration' => 4.0,
@@ -324,6 +394,7 @@ class CheckServiceTest extends TestCase
                     'status' => ValidationResult::ERROR,
                     'ip' => null,
                     'http' => null,
+                    'certificates' => null,
                     'url' => 'https://baz.example.com',
                     'duration' => 0.0,
                     'error' => 'Resolving timed out after 5000 milliseconds',
@@ -341,6 +412,7 @@ class CheckServiceTest extends TestCase
                     'status' => ValidationResult::ERROR,
                     'ip' => null,
                     'http' => null,
+                    'certificates' => null,
                     'url' => 'https://qux.example.com',
                     'duration' => 0.0,
                 ]),

@@ -23,6 +23,11 @@ class Result
     protected ?string $http;
 
     /**
+     * @var string[][] The TLS certificates.
+     */
+    protected ?array $certificates;
+
+    /**
      * @var ?string The IP address.
      */
     protected ?string $ip;
@@ -49,6 +54,7 @@ class Result
         $this->setStatus($result->status ?? null);
         $this->setCode($result->code ?? null);
         $this->setHttp($result->http ?? null);
+        $this->setCertificates($result->certificates ?? []);
         $this->setIp($result->ip ?? null);
         $this->setUrl($result->url ?? null);
         $this->setDuration($result->duration ?? null);
@@ -106,6 +112,24 @@ class Result
     public function setHttp(?string $http): void
     {
         $this->http = $http;
+    }
+
+    /**
+     * Get the TLS certificates.
+     * @return string[][] The TLS certificates.
+     */
+    public function getCertificates(): array
+    {
+        return $this->certificates;
+    }
+
+    /**
+     * Set the TLS certificates.
+     * @param string[][] The TLS certificates.
+     */
+    public function setCertificates(array $certificates): void
+    {
+        $this->certificates = $certificates;
     }
 
     /**

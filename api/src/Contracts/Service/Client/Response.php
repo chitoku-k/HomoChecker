@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HomoChecker\Contracts\Service\Client;
 
+use Illuminate\Support\Str;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
@@ -17,6 +18,11 @@ class Response implements ResponseInterface
      * @var float The start transfer time.
      */
     protected float $startTransferTime = 0.0;
+
+    /**
+     * @var string[][] The TLS certificates.
+     */
+    protected array $certificates = [];
 
     /**
      * @var ?string The HTTP version.
@@ -66,6 +72,35 @@ class Response implements ResponseInterface
     public function setStartTransferTime(float $startTransferTime): void
     {
         $this->startTransferTime = $startTransferTime;
+    }
+
+    /**
+     * Get the TLS certificates.
+     * @return string[][] The TLS certificates.
+     */
+    public function getCertificates(): array
+    {
+        return $this->certificates;
+    }
+
+    /**
+     * Set the TLS certificates.
+     * @param string[][] The TLS certificates.
+     */
+    public function setCertificates(array $certificates): void
+    {
+        $this->certificates = collect($certificates)
+            ->map(fn ($cerificate) => [
+                'subject' => $cerificate['Subject'] ?? '',
+                'issuer' => $cerificate['Issuer'] ?? '',
+                'subjectAlternativeName' => Str::of($cerificate['X509v3 Subject Alternative Name'] ?? '')
+                    ->split('/,\s*/', -1, \PREG_SPLIT_NO_EMPTY)
+                    ->map(fn ($name) => Str::of($name)->replaceFirst('DNS:', ''))
+                    ->all(),
+                'notBefore' => $cerificate['Start date'] ?? '',
+                'notAfter' => $cerificate['Expire date'] ?? '',
+            ])
+            ->all();
     }
 
     /**

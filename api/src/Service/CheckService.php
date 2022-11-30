@@ -58,6 +58,7 @@ class CheckService implements CheckServiceContract
             $total_starttransfer_time = 0.0;
             $code = null;
             $http = null;
+            $certificates = null;
             $ip = null;
 
             try {
@@ -70,6 +71,7 @@ class CheckService implements CheckServiceContract
                         $total_starttransfer_time += $response->getStartTransferTime();
                         $code = collect([$response->getStatusCode(), $response->getReasonPhrase()])->join(' ');
                         $http = $response->getHttpVersion();
+                        $certificates = $response->getCertificates();
                         $ip = $response->getPrimaryIP();
 
                         if (!$status = $validator->validate($response)) {
@@ -80,6 +82,7 @@ class CheckService implements CheckServiceContract
                             'status' => $status,
                             'code' => $code,
                             'http' => $http,
+                            'certificates' => $certificates,
                             'ip' => $ip,
                             'url' => $url,
                             'duration' => $total_starttransfer_time,
@@ -91,6 +94,7 @@ class CheckService implements CheckServiceContract
                     'status' => ValidationResult::WRONG,
                     'code' => $code ?? null,
                     'http' => $http,
+                    'certificates' => $certificates,
                     'ip' => $ip,
                     'url' => $url,
                     'duration' => $total_starttransfer_time,
@@ -102,6 +106,7 @@ class CheckService implements CheckServiceContract
                     'status' => ValidationResult::ERROR,
                     'code' => $code ?? null,
                     'http' => $http,
+                    'certificates' => $certificates,
                     'ip' => $ip,
                     'url' => $url,
                     'duration' => $total_time,
@@ -114,6 +119,7 @@ class CheckService implements CheckServiceContract
                     'status' => ValidationResult::ERROR,
                     'code' => $code ?? null,
                     'http' => $http,
+                    'certificates' => $certificates,
                     'ip' => $ip,
                     'url' => $url,
                     'duration' => $total_time,
