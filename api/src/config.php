@@ -54,6 +54,7 @@ return [
         'timeout' => 5,
         'allow_redirects' => false,
         'curl' => [
+            CURLOPT_CERTINFO => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_2,
         ],
         'headers' => [

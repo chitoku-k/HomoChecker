@@ -23,11 +23,39 @@ class ResponseTest extends TestCase
         $actual = new Response($response);
         $actual->setTotalTime(1.0);
         $actual->setStartTransferTime(2.0);
+        $actual->setCertificates([
+            [
+                'Subject' => 'CN = homo.example.com',
+                'Issuer' => 'C = US, O = Amazon, OU = Server CA 1B, CN = Amazon',
+                'Version' => '2',
+                'Signature Algorithm' => 'sha256WithRSAEncryption',
+                'Public Key Algorithm' => 'rsaEncryption',
+                'X509v3 Subject Alternative Name' => 'DNS:*.homo.example.com, DNS:homo.example.com',
+                'X509v3 Key Usage' => 'Digital Signature, Key Encipherment',
+                'X509v3 Extended Key Usage' => 'TLS Web Server Authentication, TLS Web Client Authentication',
+                'X509v3 Basic Constraints' => 'CA:FALSE',
+                'Start date' => 'Jul  1 00:00:00 2022 GMT',
+                'Expire date' => 'Jul 30 23:59:59 2023 GMT',
+                'RSA Public Key' => '2048',
+            ],
+        ]);
         $actual->setHttpVersion(null);
         $actual->setPrimaryIP('2001:db8::4545:1');
 
         $this->assertEquals(1.0, $actual->getTotalTime());
         $this->assertEquals(2.0, $actual->getStartTransferTime());
+        $this->assertEquals([
+            [
+                'subject' => 'CN = homo.example.com',
+                'issuer' => 'C = US, O = Amazon, OU = Server CA 1B, CN = Amazon',
+                'subjectAlternativeName' => [
+                    '*.homo.example.com',
+                    'homo.example.com',
+                ],
+                'notBefore' => 'Jul  1 00:00:00 2022 GMT',
+                'notAfter' => 'Jul 30 23:59:59 2023 GMT',
+            ],
+        ], $actual->getCertificates());
         $this->assertEquals(null, $actual->getHttpVersion());
         $this->assertEquals('2001:db8::4545:1', $actual->getPrimaryIP());
     }

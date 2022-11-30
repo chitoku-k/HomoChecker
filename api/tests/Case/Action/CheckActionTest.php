@@ -58,6 +58,15 @@ class CheckActionTest extends TestCase
                     'status' => ValidationResult::OK,
                     'code' => '302 Found',
                     'http' => '2.0',
+                    'certificates' => [
+                        [
+                            'subject' => 'CN = foo.example.com',
+                            'issuer' => 'C = US, O = Let\'s Encrypt, CN = E1',
+                            'subjectAlternativeName' => ['foo.example.com'],
+                            'notBefore' => 'Aug  1 00:00:00 2022 GMT',
+                            'notAfter' => 'Aug 31 23:59:59 2022 GMT',
+                        ],
+                    ],
                     'ip' => '2001:db8::4545:1',
                     'url' => 'https://foo.example.com/1',
                     'secure' => true,
@@ -75,6 +84,15 @@ class CheckActionTest extends TestCase
                     'status' => ValidationResult::WRONG,
                     'code' => '404 Not Found',
                     'http' => '1.1',
+                    'certificates' => [
+                        [
+                            'subject' => 'CN = foo.example.com',
+                            'issuer' => 'C = US, O = Let\'s Encrypt, CN = E1',
+                            'subjectAlternativeName' => ['foo.example.com'],
+                            'notBefore' => 'Aug  1 00:00:00 2022 GMT',
+                            'notAfter' => 'Aug 31 23:59:59 2022 GMT',
+                        ],
+                    ],
                     'ip' => '2001:db8::4545:2',
                     'url' => 'https://foo.example.com/2',
                     'secure' => true,
@@ -92,6 +110,18 @@ class CheckActionTest extends TestCase
                     'status' => ValidationResult::OK,
                     'code' => '200 OK',
                     'http' => '1.1',
+                    'certificates' => [
+                        [
+                            'subject' => 'CN = bar.example.com',
+                            'issuer' => 'C = US, O = Amazon, OU = Server CA 1B, CN = Amazon',
+                            'subjectAlternativeName' => [
+                                '*.bar.example.com',
+                                'bar.example.com',
+                            ],
+                            'notBefore' => 'Jul  1 00:00:00 2022 GMT',
+                            'notAfter' => 'Jul 30 23:59:59 2023 GMT',
+                        ],
+                    ],
                     'ip' => '2001:db8::4545:3',
                     'url' => 'https://bar.example.com/2',
                     'secure' => true,
@@ -141,6 +171,15 @@ class CheckActionTest extends TestCase
                 'status' => 'OK',
                 'code' => '302 Found',
                 'http' => '2.0',
+                'certificates' => [
+                    [
+                        'subject' => 'CN = foo.example.com',
+                        'issuer' => 'C = US, O = Let\'s Encrypt, CN = E1',
+                        'subjectAlternativeName' => ['foo.example.com'],
+                        'notBefore' => 'Aug  1 00:00:00 2022 GMT',
+                        'notAfter' => 'Aug 31 23:59:59 2022 GMT',
+                    ],
+                ],
                 'ip' => '2001:db8::4545:1',
                 'url' => 'https://foo.example.com/1',
                 'secure' => true,
@@ -159,6 +198,15 @@ class CheckActionTest extends TestCase
                 'status' => 'WRONG',
                 'code' => '404 Not Found',
                 'http' => '1.1',
+                'certificates' => [
+                    [
+                        'subject' => 'CN = foo.example.com',
+                        'issuer' => 'C = US, O = Let\'s Encrypt, CN = E1',
+                        'subjectAlternativeName' => ['foo.example.com'],
+                        'notBefore' => 'Aug  1 00:00:00 2022 GMT',
+                        'notAfter' => 'Aug 31 23:59:59 2022 GMT',
+                    ],
+                ],
                 'ip' => '2001:db8::4545:2',
                 'url' => 'https://foo.example.com/2',
                 'secure' => true,
@@ -177,6 +225,18 @@ class CheckActionTest extends TestCase
                 'status' => 'OK',
                 'code' => '200 OK',
                 'http' => '1.1',
+                'certificates' => [
+                    [
+                        'subject' => 'CN = bar.example.com',
+                        'issuer' => 'C = US, O = Amazon, OU = Server CA 1B, CN = Amazon',
+                        'subjectAlternativeName' => [
+                            '*.bar.example.com',
+                            'bar.example.com',
+                        ],
+                        'notBefore' => 'Jul  1 00:00:00 2022 GMT',
+                        'notAfter' => 'Jul 30 23:59:59 2023 GMT',
+                    ],
+                ],
                 'ip' => '2001:db8::4545:3',
                 'url' => 'https://bar.example.com/2',
                 'secure' => true,
@@ -216,7 +276,7 @@ class CheckActionTest extends TestCase
 
         $stream->shouldReceive('write')
                ->once()
-               ->with("data: {\"homo\":{\"screen_name\":\"foo\",\"service\":\"twitter\",\"url\":\"https:\\/\\/foo.example.com\\/1\",\"display_url\":\"foo.example.com\\/1\",\"secure\":true,\"icon\":\"https:\\/\\/icon.example.com\\/1\"},\"status\":\"OK\",\"code\":\"302 Found\",\"http\":\"2.0\",\"ip\":\"2001:db8::4545:1\",\"url\":\"https:\\/\\/foo.example.com\\/1\",\"secure\":true,\"duration\":10,\"error\":null}\n\n");
+               ->with("data: {\"homo\":{\"screen_name\":\"foo\",\"service\":\"twitter\",\"url\":\"https:\\/\\/foo.example.com\\/1\",\"display_url\":\"foo.example.com\\/1\",\"secure\":true,\"icon\":\"https:\\/\\/icon.example.com\\/1\"},\"status\":\"OK\",\"code\":\"302 Found\",\"http\":\"2.0\",\"certificates\":[{\"subject\":\"CN = foo.example.com\",\"issuer\":\"C = US, O = Let's Encrypt, CN = E1\",\"subjectAlternativeName\":[\"foo.example.com\"],\"notBefore\":\"Aug  1 00:00:00 2022 GMT\",\"notAfter\":\"Aug 31 23:59:59 2022 GMT\"}],\"ip\":\"2001:db8::4545:1\",\"url\":\"https:\\/\\/foo.example.com\\/1\",\"secure\":true,\"duration\":10,\"error\":null}\n\n");
 
         $stream->shouldReceive('write')
                ->once()
@@ -224,7 +284,7 @@ class CheckActionTest extends TestCase
 
         $stream->shouldReceive('write')
                ->once()
-               ->with("data: {\"homo\":{\"screen_name\":\"foo\",\"service\":\"twitter\",\"url\":\"https:\\/\\/foo.example.com\\/2\",\"display_url\":\"foo.example.com\\/2\",\"secure\":true,\"icon\":\"https:\\/\\/icon.example.com\\/2\"},\"status\":\"WRONG\",\"code\":\"404 Not Found\",\"http\":\"1.1\",\"ip\":\"2001:db8::4545:2\",\"url\":\"https:\\/\\/foo.example.com\\/2\",\"secure\":true,\"duration\":20,\"error\":null}\n\n");
+               ->with("data: {\"homo\":{\"screen_name\":\"foo\",\"service\":\"twitter\",\"url\":\"https:\\/\\/foo.example.com\\/2\",\"display_url\":\"foo.example.com\\/2\",\"secure\":true,\"icon\":\"https:\\/\\/icon.example.com\\/2\"},\"status\":\"WRONG\",\"code\":\"404 Not Found\",\"http\":\"1.1\",\"certificates\":[{\"subject\":\"CN = foo.example.com\",\"issuer\":\"C = US, O = Let's Encrypt, CN = E1\",\"subjectAlternativeName\":[\"foo.example.com\"],\"notBefore\":\"Aug  1 00:00:00 2022 GMT\",\"notAfter\":\"Aug 31 23:59:59 2022 GMT\"}],\"ip\":\"2001:db8::4545:2\",\"url\":\"https:\\/\\/foo.example.com\\/2\",\"secure\":true,\"duration\":20,\"error\":null}\n\n");
 
         $stream->shouldReceive('write')
                ->once()
@@ -232,7 +292,7 @@ class CheckActionTest extends TestCase
 
         $stream->shouldReceive('write')
                ->once()
-               ->with("data: {\"homo\":{\"screen_name\":\"bar\",\"service\":\"mastodon\",\"url\":\"http:\\/\\/bar.example.com\",\"display_url\":\"bar.example.com\",\"secure\":false,\"icon\":\"https:\\/\\/icon.example.com\\/3\"},\"status\":\"OK\",\"code\":\"200 OK\",\"http\":\"1.1\",\"ip\":\"2001:db8::4545:3\",\"url\":\"https:\\/\\/bar.example.com\\/2\",\"secure\":true,\"duration\":30,\"error\":null}\n\n");
+               ->with("data: {\"homo\":{\"screen_name\":\"bar\",\"service\":\"mastodon\",\"url\":\"http:\\/\\/bar.example.com\",\"display_url\":\"bar.example.com\",\"secure\":false,\"icon\":\"https:\\/\\/icon.example.com\\/3\"},\"status\":\"OK\",\"code\":\"200 OK\",\"http\":\"1.1\",\"certificates\":[{\"subject\":\"CN = bar.example.com\",\"issuer\":\"C = US, O = Amazon, OU = Server CA 1B, CN = Amazon\",\"subjectAlternativeName\":[\"*.bar.example.com\",\"bar.example.com\"],\"notBefore\":\"Jul  1 00:00:00 2022 GMT\",\"notAfter\":\"Jul 30 23:59:59 2023 GMT\"}],\"ip\":\"2001:db8::4545:3\",\"url\":\"https:\\/\\/bar.example.com\\/2\",\"secure\":true,\"duration\":30,\"error\":null}\n\n");
 
         /** @var CheckService&MockInterface $check */
         $check = m::mock(CheckService::class);

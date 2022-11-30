@@ -33,7 +33,7 @@
                         success: status !== "ERROR",
                         secure: secure,
                         insecure: !secure,
-                    } title={ url }>
+                    } title={ this.getConnection(url, certificates).join("&#x0d;&#x0a;") }>
                         <i class={
                             fa: true,
                             fa-lock: secure,
@@ -320,6 +320,23 @@
                     return null;
                 }
             }
+        };
+
+        this.getConnection = (url, certificates) => {
+            if (!certificates.length) {
+                return [ url ];
+            }
+
+            const [ certificate ] = certificates;
+            return [
+                url,
+                "",
+                "Certificate:",
+                `\tSubject: ${certificate.subject}`,
+                `\tIssuer: ${certificate.issuer}`,
+                `\tNot Before: ${certificate.notBefore}`,
+                `\tNot After: ${certificate.notAfter}`,
+            ];
         };
 
         this.on("mount", () => {

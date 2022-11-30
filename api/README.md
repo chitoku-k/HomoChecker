@@ -80,6 +80,31 @@ data: {"homo":{"screen_name":"@chitoku@mstdn.jp","service":"mastodon","url":"htt
         // (string|null) 直前の接続先の HTTP バージョン（1.0, 1.1, 2, 3）
         "http": "2",
 
+        // (array) 直前の接続先の TLS 証明書チェイン
+        "certificates": [
+            {
+                "subject": "CN = chitoku.jp",
+                "issuer": "C = US, O = Let's Encrypt, CN = R3",
+                "subjectAlternativeName": ["*.chitoku.jp", "chitoku.jp"],
+                "notBefore": "Nov 20 10:24:37 2022 GMT",
+                "notAfter": "Feb 18 10:24:36 2023 GMT"
+            },
+            {
+                "subject": "C = US, O = Let's Encrypt, CN = R3",
+                "issuer": "C = US, O = Internet Security Research Group, CN = ISRG Root X1",
+                "subjectAlternativeName": [],
+                "notBefore": "Sep  4 00:00:00 2020 GMT",
+                "notAfter": "Sep 15 16:00:00 2025 GMT"
+            },
+            {
+                "subject": "C = US, O = Internet Security Research Group, CN = ISRG Root X1",
+                "issuer": "O = Digital Signature Trust Co., CN = DST Root CA X3",
+                "subjectAlternativeName": [],
+                "notBefore": "Jan 20 19:14:03 2021 GMT",
+                "notAfter": "Sep 30 18:14:03 2024 GMT"
+            }
+        ],
+
         // (string|null) 直前の接続先の IPv4 または IPv6（サポートしている場合）アドレス
         "ip": "2001:db8::4545:4545",
 

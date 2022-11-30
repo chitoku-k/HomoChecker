@@ -35,7 +35,10 @@ class ClientService implements ClientServiceContract
             $options = [];
 
             if (str_starts_with($this->cache->loadAltsvc($url, ''), 'h3')) {
-                $options['curl'][CURLOPT_HTTP_VERSION] = CURL_HTTP_VERSION_3;
+                $options['curl'] = [
+                    CURLOPT_CERTINFO => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_3,
+                ];
                 $options['headers']['Alt-Used'] = parse_url($url, PHP_URL_HOST);
                 $url = Str::replaceFirst('http://', 'https://', $url);
             }
@@ -70,6 +73,7 @@ class ClientService implements ClientServiceContract
                     $result = new Response($response);
                     $result->setTotalTime($stats->getTransferTime() ?? 0.0);
                     $result->setStartTransferTime($stats->getHandlerStat('starttransfer_time') ?? 0.0);
+                    $result->setCertificates($stats->getHandlerStat('certinfo') ?? []);
                     $result->setHttpVersion($stats->getHandlerStat('http_version'));
                     $result->setPrimaryIP($stats->getHandlerStat('primary_ip'));
                 },
