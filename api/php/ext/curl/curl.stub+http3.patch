@@ -1,0 +1,14 @@
+--- curl.stub.php	2022-08-20 18:01:40.000000000 +0900
++++ curl.stub+http3.php	2099-12-31 00:00:00.000000000 +0900
+@@ -3127,6 +3127,11 @@
+ * @cvalue CURLOPT_SASL_AUTHZID
+ */
+ const CURLOPT_SASL_AUTHZID = UNKNOWN;
++/**
++ * @var int
++ * @cvalue CURL_HTTP_VERSION_3
++ */
++const CURL_HTTP_VERSION_3 = UNKNOWN;
+ /**
+  * @var int
+  * @cvalue CURL_VERSION_HTTP3

@@ -77,7 +77,8 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
         zlib1g-dev && \
     ldconfig && \
     cd /usr/src/php/ext/curl && \
-    patch -u < /usr/src/php/ext/curl/interface.patch && \
+    patch -u < /usr/src/php/ext/curl/curl.stub+http3.patch && \
+    patch -u < /usr/src/php/ext/curl/curl_arginfo+http3.patch && \
     cd /usr/src/php && \
     ./configure \
         --disable-cgi \
