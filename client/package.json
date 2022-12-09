@@ -19,7 +19,7 @@
     "riot-compiler": "^3.6.0",
     "riot-hot-reload": "^1.0.0",
     "riot-tag-loader": "^2.1.0",
-    "rxjs": "^7.5.7",
+    "rxjs": "^7.6.0",
     "sass": "^1.56.2",
     "sass-loader": "^13.2.0",
     "shufflejs": "v6.1.0",
