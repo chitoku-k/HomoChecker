@@ -49,7 +49,7 @@ RUN git clone --depth=1 -b curl-7_86_0 https://github.com/curl/curl && \
     make install && \
     ldconfig
 
-FROM php:8.1.13-fpm AS runtime
+FROM php:8.2.0-fpm AS runtime
 WORKDIR /var/www/html/api
 COPY --from=openssl /usr/local/include/ /usr/local/include/
 COPY --from=nghttp3 /usr/local/include/ /usr/local/include/
@@ -77,7 +77,8 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
         zlib1g-dev && \
     ldconfig && \
     cd /usr/src/php/ext/curl && \
-    patch -u < /usr/src/php/ext/curl/interface.patch && \
+    patch -u < /usr/src/php/ext/curl/curl.stub+http3.patch && \
+    patch -u < /usr/src/php/ext/curl/curl_arginfo+http3.patch && \
     cd /usr/src/php && \
     ./configure \
         --disable-cgi \
