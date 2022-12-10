@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace HomoChecker\Test\Logging;
 
-use DateTime;
 use HomoChecker\Logging\CustomizeFormatter;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
@@ -43,7 +42,7 @@ class CustomizeFormatterTest extends TestCase
         $this->assertInstanceOf(LineFormatter::class, $formatter2);
 
         $this->assertEquals("[2001-02-03 04:05:06] DEBUG: Test message {\"url\":\"/healthz\"} \n", $formatter1->format([
-            'datetime' => new DateTime('2001-02-03 04:05:06'),
+            'datetime' => new \DateTime('2001-02-03 04:05:06'),
             'level_name' => 'DEBUG',
             'message' => 'Test message',
             'context' => [
@@ -52,7 +51,7 @@ class CustomizeFormatterTest extends TestCase
             'extra' => [],
         ]));
         $this->assertEquals("[2001-02-03 04:05:06] DEBUG: Test message {\"url\":\"/healthz\"} \n", $formatter2->format([
-            'datetime' => new DateTime('2001-02-03 04:05:06'),
+            'datetime' => new \DateTime('2001-02-03 04:05:06'),
             'level_name' => 'DEBUG',
             'message' => 'Test message',
             'context' => [

@@ -11,7 +11,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Slim\Exception\HttpSpecializedException;
 use Slim\Interfaces\CallableResolverInterface;
 use Slim\Middleware\ErrorMiddleware as ErrorMiddlewareBase;
-use Throwable;
 
 class ErrorMiddleware extends ErrorMiddlewareBase
 {
@@ -24,7 +23,7 @@ class ErrorMiddleware extends ErrorMiddlewareBase
     {
         try {
             return $handler->handle($request);
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             /** @var ErrorResponse $response */
             $response = $this->handleException($request, $e);
             if ($e instanceof HttpSpecializedException) {

@@ -11,7 +11,6 @@ use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use RuntimeException;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Interfaces\CallableResolverInterface;
 use Slim\Interfaces\ErrorHandlerInterface;
@@ -61,7 +60,7 @@ class ErrorMiddlewareTest extends TestCase
     {
         $request = (new ServerRequestFactory())->createServerRequest('GET', '/metrics');
         $response = new ErrorResponse(new Response(), new StreamFactory());
-        $exception = new RuntimeException();
+        $exception = new \RuntimeException();
 
         /** @var ErrorHandlerInterface&MockInterface $errorHandler */
         $errorHandler = m::mock(ErrorHandlerInterface::class);

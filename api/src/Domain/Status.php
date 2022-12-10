@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace HomoChecker\Domain;
 
-use TrueBV\Punycode;
-
 class Status implements \JsonSerializable
 {
     /**
@@ -107,7 +105,7 @@ class Status implements \JsonSerializable
 
         $scheme = $scheme ? parse_url($url, PHP_URL_SCHEME) . '://' : '';
         $path = (string) parse_url($url, PHP_URL_PATH);
-        return $scheme . (new Punycode())->decode($domain) . $path;
+        return $scheme . idn_to_utf8($domain) . $path;
     }
 
     /**

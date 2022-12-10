@@ -9,7 +9,6 @@ use HomoChecker\Middleware\MetricsMiddleware;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
 use Mockery\MockInterface;
-use PDOException;
 use PHPUnit\Framework\TestCase;
 use Prometheus\Summary;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -99,7 +98,7 @@ class MetricsMiddlewareTest extends TestCase
     public function testProcessHttpInternalServerErrorException(): void
     {
         $request = (new ServerRequestFactory())->createServerRequest('GET', '/list');
-        $exception = new PDOException('SQLSTATE[08006] [7] could not translate host name "database" to address: Name or service not known');
+        $exception = new \PDOException('SQLSTATE[08006] [7] could not translate host name "database" to address: Name or service not known');
         $response = (new ErrorResponse(new Response(StatusCodeInterface::STATUS_INTERNAL_SERVER_ERROR), new StreamFactory()))->withException($exception);
 
         /** @var MockInterface&Summary $summary */

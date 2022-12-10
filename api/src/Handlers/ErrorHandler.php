@@ -11,7 +11,6 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Exception\HttpSpecializedException;
 use Slim\Interfaces\ErrorHandlerInterface;
-use Throwable;
 
 class ErrorHandler implements ErrorHandlerInterface
 {
@@ -19,7 +18,7 @@ class ErrorHandler implements ErrorHandlerInterface
     {
     }
 
-    public function __invoke(Request $request, Throwable $exception, bool $displayErrorDetails, bool $logErrors, bool $logErrorDetails): Response
+    public function __invoke(Request $request, \Throwable $exception, bool $displayErrorDetails, bool $logErrors, bool $logErrorDetails): Response
     {
         if (!$exception instanceof HttpSpecializedException) {
             Log::error($exception);

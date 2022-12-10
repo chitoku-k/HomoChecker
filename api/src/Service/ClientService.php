@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace HomoChecker\Service;
 
-use Generator;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\Response as Psr7Response;
@@ -16,7 +15,6 @@ use HomoChecker\Contracts\Service\ClientService as ClientServiceContract;
 use Illuminate\Support\Str;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Throwable;
 
 class ClientService implements ClientServiceContract
 {
@@ -26,10 +24,10 @@ class ClientService implements ClientServiceContract
 
     /**
      * Get the responses for URL.
-     * @param  string                                $url The URL.
-     * @return Generator<PromiseInterface<Response>> The responses.
+     * @param  string                                 $url The URL.
+     * @return \Generator<PromiseInterface<Response>> The responses.
      */
-    public function getAsync(string $url): Generator
+    public function getAsync(string $url): \Generator
     {
         for ($i = 0; $i < $this->redirect; ++$i) {
             $options = [];
@@ -44,8 +42,8 @@ class ClientService implements ClientServiceContract
             }
 
             yield $url => $this->client->requestAsync('GET', $url, $options + [
-                RequestOptions::ON_HEADERS => function (ResponseInterface|Throwable $response) use ($url) {
-                    if ($response instanceof Throwable) {
+                RequestOptions::ON_HEADERS => function (ResponseInterface|\Throwable $response) use ($url) {
+                    if ($response instanceof \Throwable) {
                         return;
                     }
 
