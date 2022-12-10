@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace HomoChecker\Contracts\Service\Client;
 
-use Illuminate\Support\Str;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
@@ -93,9 +92,9 @@ class Response implements ResponseInterface
             ->map(fn ($cerificate) => [
                 'subject' => $cerificate['Subject'] ?? '',
                 'issuer' => $cerificate['Issuer'] ?? '',
-                'subjectAlternativeName' => Str::of($cerificate['X509v3 Subject Alternative Name'] ?? '')
+                'subjectAlternativeName' => str($cerificate['X509v3 Subject Alternative Name'] ?? '')
                     ->split('/,\s*/', -1, \PREG_SPLIT_NO_EMPTY)
-                    ->map(fn ($name) => Str::of($name)->replaceFirst('DNS:', ''))
+                    ->map(fn (string $name) => str($name)->replaceFirst('DNS:', ''))
                     ->all(),
                 'notBefore' => $cerificate['Start date'] ?? '',
                 'notAfter' => $cerificate['Expire date'] ?? '',

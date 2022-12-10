@@ -12,7 +12,6 @@ use HomoChecker\Contracts\Service\CacheService as CacheServiceContract;
 use HomoChecker\Contracts\Service\Client\Altsvc;
 use HomoChecker\Contracts\Service\Client\Response;
 use HomoChecker\Contracts\Service\ClientService as ClientServiceContract;
-use Illuminate\Support\Str;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -38,7 +37,7 @@ class ClientService implements ClientServiceContract
                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_3,
                 ];
                 $options['headers']['Alt-Used'] = parse_url($url, PHP_URL_HOST);
-                $url = Str::replaceFirst('http://', 'https://', $url);
+                $url = str($url)->replaceFirst('http://', 'https://')->toString();
             }
 
             yield $url => $this->client->requestAsync('GET', $url, $options + [
@@ -53,9 +52,9 @@ class ClientService implements ClientServiceContract
                     }
 
                     /** @var ?Altsvc $h3 */
-                    $h3 = Str::of($altsvc)
+                    $h3 = str($altsvc)
                         ->split('/\s*,\s*/')
-                        ->map(fn (string $entry) => new Altsvc($entry))
+                        ->mapInto(Altsvc::class)
                         ->first(fn (Altsvc $item) => str_starts_with($item->getProtocolId(), 'h3'));
                     if (!$h3) {
                         return;

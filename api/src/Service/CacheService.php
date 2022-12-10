@@ -5,7 +5,6 @@ namespace HomoChecker\Service;
 
 use HomoChecker\Contracts\Service\CacheService as CacheServiceContract;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Str;
 
 /**
  * @method ?string loadIconMastodon(string $screen_name)
@@ -30,8 +29,9 @@ class CacheService implements CacheServiceContract
         [ , $feature, $identifier ] = $matches;
 
         return $this->{$feature}(
-            collect(preg_split('/(?=[A-Z])/', Str::camel($identifier)))
-                ->map(fn (string $item) => Str::lower($item))
+            str($identifier)
+                ->ucsplit()
+                ->map(fn (string $item) => str($item)->lower())
                 ->push(collect($arguments)->first())
                 ->join(':'),
             collect($arguments)
