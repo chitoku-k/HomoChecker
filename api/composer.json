@@ -4,12 +4,12 @@
     "require": {
         "guzzlehttp/guzzle": "^7.5",
         "guzzlehttp/oauth-subscriber": "^0.6.0",
-        "illuminate/cache": "^8.83",
-        "illuminate/config": "^8.83",
-        "illuminate/database": "^8.83",
-        "illuminate/events": "^8.83",
-        "illuminate/log": "^8.83",
-        "illuminate/redis": "^8.83",
+        "illuminate/cache": "^9.43",
+        "illuminate/config": "^9.43",
+        "illuminate/database": "^9.43",
+        "illuminate/events": "^9.43",
+        "illuminate/log": "^9.43",
+        "illuminate/redis": "^9.43",
         "middlewares/access-log": "^2.1",
         "phpoption/phpoption": "^1.9",
         "promphp/prometheus_client_php": "^2.6",
@@ -20,7 +20,7 @@
         "vlucas/phpdotenv": "^5.5"
     },
     "require-dev": {
-        "brainmaestro/composer-git-hooks": "^2.8",
+        "brainmaestro/composer-git-hooks": "^3.0-alpha",
         "friendsofphp/php-cs-fixer": "^3.13",
         "mockery/mockery": "^1.5",
         "php-coveralls/php-coveralls": "^2.5",
@@ -28,13 +28,10 @@
         "vimeo/psalm": "^5.1"
     },
     "replace": {
-        "symfony/polyfill-apcu": "*",
         "symfony/polyfill-ctype": "*",
         "symfony/polyfill-intl-grapheme": "*",
         "symfony/polyfill-intl-normalizer": "*",
         "symfony/polyfill-mbstring": "*",
-        "symfony/polyfill-php72": "*",
-        "symfony/polyfill-php73": "*",
         "symfony/polyfill-php80": "*",
         "symfony/polyfill-php81": "*"
     },
