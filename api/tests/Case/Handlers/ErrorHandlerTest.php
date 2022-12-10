@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace HomoChecker\Test\Handlers;
 
-use Exception;
 use HomoChecker\Handlers\ErrorHandler;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\Facades\Log;
@@ -27,7 +26,7 @@ class ErrorHandlerTest extends TestCase
     public function testInternalServerError(): void
     {
         $request = (new RequestFactory())->createRequest('GET', '/healthz');
-        $e = new Exception('Internal Server Error');
+        $e = new \Exception('Internal Server Error');
 
         Log::shouldReceive('error')
             ->once()

@@ -21,9 +21,7 @@ use HomoChecker\Domain\Status;
 use HomoChecker\Domain\Validator\ValidationResult;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
-use InvalidArgumentException;
 use Prometheus\Counter;
-use Throwable;
 
 class CheckService implements CheckServiceContract
 {
@@ -50,7 +48,7 @@ class CheckService implements CheckServiceContract
     {
         $url = $homo->getUrl();
         if (!$url) {
-            throw new InvalidArgumentException('Invalid URL');
+            throw new \InvalidArgumentException('Invalid URL');
         }
 
         return Coroutine::of(function () use ($url) {
@@ -112,7 +110,7 @@ class CheckService implements CheckServiceContract
                     'duration' => $total_time,
                     'error' => $e->getHandlerContext()['error'] ?? null,
                 ]);
-            } catch (Throwable $e) {
+            } catch (\Throwable $e) {
                 Log::error($e);
 
                 return yield new Result([

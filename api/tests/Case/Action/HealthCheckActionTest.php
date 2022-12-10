@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace HomoChecker\Test\Action;
 
-use Exception;
 use HomoChecker\Action\HealthCheckAction;
 use HomoChecker\Contracts\Service\HomoService;
 use Illuminate\Support\Facades\Facade;
@@ -53,7 +52,7 @@ class HealthCheckActionTest extends TestCase
         /** @var HomoService&MockInterface $homo */
         $homo = m::mock(HomoService::class);
         $homo->shouldReceive('count')
-             ->andThrow($e = new Exception('Internal Server Error'));
+             ->andThrow($e = new \Exception('Internal Server Error'));
 
         Log::shouldReceive('error')
             ->once()
