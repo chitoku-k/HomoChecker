@@ -3,9 +3,6 @@ declare(strict_types=1);
 
 namespace HomoChecker\Contracts\Service\Client;
 
-use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
-
 class Altsvc
 {
     /**
@@ -31,11 +28,11 @@ class Altsvc
     public function __construct(string $value)
     {
         /** @var string[] $params */
-        $params = Str::of($value)
+        $params = str($value)
             ->trim()
             ->split('/\s*;\s*/')
-            ->map(fn (string $param) => Str::of($param)->split('/=/'))
-            ->map(fn (Collection $param) => $param->map(fn (string $v) => (string) Str::of($v)->trim('"'))->pad(2, '')->toArray())
+            ->map(fn (string $param) => str($param)->explode('=', 2)->pad(2, ''))
+            ->map->map(fn (string $v) => str($v)->trim('"')->toString())
             ->toArray();
 
         foreach ($params as [$key, $value]) {
