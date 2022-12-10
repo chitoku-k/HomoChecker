@@ -83,6 +83,7 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
     ./configure \
         --disable-cgi \
         --enable-fpm \
+        --enable-intl \
         --enable-mbstring \
         --with-config-file-path=$PHP_INI_DIR \
         --with-config-file-scan-dir=$PHP_INI_DIR/conf.d \

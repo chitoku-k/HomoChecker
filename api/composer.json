@@ -16,7 +16,6 @@
         "slim/http": "^1.3",
         "slim/psr7": "^1.6",
         "slim/slim": "^4.11",
-        "true/punycode": "~2.0",
         "vlucas/phpdotenv": "^5.5"
     },
     "require-dev": {
