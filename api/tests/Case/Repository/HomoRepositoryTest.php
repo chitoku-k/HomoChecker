@@ -194,6 +194,7 @@ class HomoRepositoryTest extends TestCase
         insert into "users" ("screen_name", "service", "url") values ('foo', 'twitter', 'https://foo.example.com/2');
         insert into "users" ("screen_name", "service", "url") values ('bar', 'mastodon', 'http://bar.example.com');
         insert into "users" ("screen_name", "service", "url") values ('baz', 'mastodon', 'https://baz.example.com');
+
         SQL;
 
         $homo = new HomoRepository();

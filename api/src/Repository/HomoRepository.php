@@ -66,7 +66,7 @@ class HomoRepository implements HomoRepositoryContract
 
         return $builder
             ->get(['screen_name', 'service', 'url'])
-            ->map(fn (\stdClass $item) => $grammar->compileInsert($builder, (array) $item) . ';')
-            ->join("\n");
+            ->map(fn (\stdClass $item) => $grammar->compileInsert($builder, (array) $item) . ";\n")
+            ->join('');
     }
 }
