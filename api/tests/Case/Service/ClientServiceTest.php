@@ -12,7 +12,7 @@ use GuzzleHttp\Middleware;
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\Request as Psr7Request;
 use GuzzleHttp\Psr7\Response as Psr7Response;
-use HomoChecker\Contracts\Service\CacheService;
+use HomoChecker\Contracts\Repository\AltsvcRepository;
 use HomoChecker\Contracts\Service\Client\Response;
 use HomoChecker\Service\ClientService;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -37,16 +37,12 @@ class ClientServiceTest extends TestCase
             'transfer_time' => 1.0,
         ]);
 
-        /** @var CacheService&MockInterface $cache */
-        $cache = m::mock(CacheService::class);
-        $cache->shouldReceive('loadAltsvc')
-              ->withArgs(['https://foo.example.com/1', ''])
-              ->andReturn('');
-        $cache->shouldReceive('loadAltsvc')
-              ->withArgs(['https://homo.example.com', ''])
-              ->andReturn('');
+        /** @var AltsvcRepository&MockInterface $altsvc */
+        $altsvc = m::mock(AltsvcRepository::class);
+        $altsvc->shouldReceive('findAll')
+               ->andReturn([]);
 
-        $service = new ClientService($client, $cache, 5);
+        $service = new ClientService($client, $altsvc, 5);
         $generator = $service->getAsync('https://foo.example.com/1');
 
         $generator->rewind();
@@ -90,16 +86,12 @@ class ClientServiceTest extends TestCase
             'transfer_time' => 1.0,
         ]);
 
-        /** @var CacheService&MockInterface $cache */
-        $cache = m::mock(CacheService::class);
-        $cache->shouldReceive('loadAltsvc')
-              ->withArgs(['https://foo.example.com/2', ''])
-              ->andReturn('');
-        $cache->shouldReceive('loadAltsvc')
-              ->withArgs(['https://foo2.example.com', ''])
-              ->andReturn('');
+        /** @var AltsvcRepository&MockInterface $altsvc */
+        $altsvc = m::mock(AltsvcRepository::class);
+        $altsvc->shouldReceive('findAll')
+               ->andReturn([]);
 
-        $service = new ClientService($client, $cache, 5);
+        $service = new ClientService($client, $altsvc, 5);
         $generator = $service->getAsync('https://foo.example.com/2');
 
         $generator->rewind();
@@ -169,16 +161,12 @@ class ClientServiceTest extends TestCase
             'transfer_time' => 1.0,
         ]);
 
-        /** @var CacheService&MockInterface $cache */
-        $cache = m::mock(CacheService::class);
-        $cache->shouldReceive('loadAltsvc')
-              ->withArgs(['https://foo.example.com/1', ''])
-              ->andReturn('');
-        $cache->shouldReceive('loadAltsvc')
-              ->withArgs(['https://homo.example.com', ''])
-              ->andReturn('');
+        /** @var AltsvcRepository&MockInterface $altsvc */
+        $altsvc = m::mock(AltsvcRepository::class);
+        $altsvc->shouldReceive('findAll')
+               ->andReturn([]);
 
-        $service = new ClientService($client, $cache, 5);
+        $service = new ClientService($client, $altsvc, 5);
         $generator = $service->getAsync('https://foo.example.com/1');
 
         $generator->rewind();
@@ -227,18 +215,23 @@ class ClientServiceTest extends TestCase
             'transfer_time' => 1.0,
         ]);
 
-        /** @var CacheService&MockInterface $cache */
-        $cache = m::mock(CacheService::class);
-        $cache->shouldReceive('loadAltsvc')
-              ->withArgs(['http://foo.example.com/1', ''])
-              ->andReturn('h3');
-        $cache->shouldReceive('loadAltsvc')
-              ->withArgs(['https://homo.example.com', ''])
-              ->andReturn('h3');
-        $cache->shouldReceive('saveAltsvc')
-              ->withArgs(['https://foo.example.com/1', 'h3', 86400]);
+        /** @var AltsvcRepository&MockInterface $altsvc */
+        $altsvc = m::mock(AltsvcRepository::class);
+        $altsvc->shouldReceive('findAll')
+               ->andReturn([
+                   [
+                       'url' => 'http://foo.example.com/1',
+                       'protocol' => 'h3',
+                   ],
+                   [
+                       'url' => 'https://homo.example.com',
+                       'protocol' => 'h3',
+                   ],
+               ]);
+        $altsvc->shouldReceive('save')
+               ->withArgs(['https://foo.example.com/1', 'h3', m::type('string')]);
 
-        $service = new ClientService($client, $cache, 5);
+        $service = new ClientService($client, $altsvc, 5);
         $generator = $service->getAsync('http://foo.example.com/1');
 
         $generator->rewind();
@@ -281,13 +274,12 @@ class ClientServiceTest extends TestCase
             'transfer_time' => 1.0,
         ]);
 
-        /** @var CacheService&MockInterface $cache */
-        $cache = m::mock(CacheService::class);
-        $cache->shouldReceive('loadAltsvc')
-              ->withArgs(['https://baz.example.com', ''])
-              ->andReturn('');
+        /** @var AltsvcRepository&MockInterface $altsvc */
+        $altsvc = m::mock(AltsvcRepository::class);
+        $altsvc->shouldReceive('findAll')
+               ->andReturn([]);
 
-        $service = new ClientService($client, $cache, 5);
+        $service = new ClientService($client, $altsvc, 5);
         $generator = $service->getAsync('https://baz.example.com');
 
         $generator->rewind();
@@ -321,10 +313,12 @@ class ClientServiceTest extends TestCase
                ->withArgs([$request, ['http_errors' => false]])
                ->andReturn($response);
 
-        /** @var CacheService&MockInterface $cache */
-        $cache = m::mock(CacheService::class);
+        /** @var AltsvcRepository&MockInterface $altsvc */
+        $altsvc = m::mock(AltsvcRepository::class);
+        $altsvc->shouldReceive('findAll')
+               ->andReturn([]);
 
-        $service = new ClientService($client, $cache, 5);
+        $service = new ClientService($client, $altsvc, 5);
         $actual = $service->send($request, [
             'http_errors' => false,
         ]);
@@ -346,10 +340,12 @@ class ClientServiceTest extends TestCase
                ->withArgs([$request, ['http_errors' => false]])
                ->andReturn($promise);
 
-        /** @var CacheService&MockInterface $cache */
-        $cache = m::mock(CacheService::class);
+        /** @var AltsvcRepository&MockInterface $altsvc */
+        $altsvc = m::mock(AltsvcRepository::class);
+        $altsvc->shouldReceive('findAll')
+               ->andReturn([]);
 
-        $service = new ClientService($client, $cache, 5);
+        $service = new ClientService($client, $altsvc, 5);
         $actual = $service->sendAsync($request, [
             'http_errors' => false,
         ]);
@@ -368,10 +364,12 @@ class ClientServiceTest extends TestCase
                ->withArgs(['GET', 'https://example.com', ['http_errors' => false]])
                ->andReturn($response);
 
-        /** @var CacheService&MockInterface $cache */
-        $cache = m::mock(CacheService::class);
+        /** @var AltsvcRepository&MockInterface $altsvc */
+        $altsvc = m::mock(AltsvcRepository::class);
+        $altsvc->shouldReceive('findAll')
+               ->andReturn([]);
 
-        $service = new ClientService($client, $cache, 5);
+        $service = new ClientService($client, $altsvc, 5);
         $actual = $service->request('GET', 'https://example.com', [
             'http_errors' => false,
         ]);
@@ -390,10 +388,12 @@ class ClientServiceTest extends TestCase
                ->withArgs(['GET', 'https://example.com', ['http_errors' => false]])
                ->andReturn($promise);
 
-        /** @var CacheService&MockInterface $cache */
-        $cache = m::mock(CacheService::class);
+        /** @var AltsvcRepository&MockInterface $altsvc */
+        $altsvc = m::mock(AltsvcRepository::class);
+        $altsvc->shouldReceive('findAll')
+               ->andReturn([]);
 
-        $service = new ClientService($client, $cache, 5);
+        $service = new ClientService($client, $altsvc, 5);
         $actual = $service->requestAsync('GET', 'https://example.com', [
             'http_errors' => false,
         ]);
@@ -408,10 +408,12 @@ class ClientServiceTest extends TestCase
         $client->shouldReceive('getConfig')
                ->andReturn(['http_errors' => false]);
 
-        /** @var CacheService&MockInterface $cache */
-        $cache = m::mock(CacheService::class);
+        /** @var AltsvcRepository&MockInterface $altsvc */
+        $altsvc = m::mock(AltsvcRepository::class);
+        $altsvc->shouldReceive('findAll')
+               ->andReturn([]);
 
-        $service = new ClientService($client, $cache, 5);
+        $service = new ClientService($client, $altsvc, 5);
         $actual = $service->getConfig();
 
         $this->assertEquals(['http_errors' => false], $actual);

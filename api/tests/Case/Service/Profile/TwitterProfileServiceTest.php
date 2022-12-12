@@ -10,7 +10,7 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use HomoChecker\Contracts\Service\CacheService;
+use HomoChecker\Contracts\Repository\ProfileRepository;
 use HomoChecker\Service\Profile\TwitterProfileService;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
@@ -22,7 +22,7 @@ class TwitterProfileServiceTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
-    public function testGetIconAsyncNotCached(): void
+    public function testGetIconAsync(): void
     {
         $screen_name = 'example';
         $url = 'https://pbs.twimg.com/profile_images/114514/example_bigger.jpg';
@@ -52,13 +52,10 @@ class TwitterProfileServiceTest extends TestCase
         /** @var ClientInterface&MockInterface $client */
         $client = new Client(compact('handler'));
 
-        /** @var CacheService&MockInterface $cache */
-        $cache = m::mock(CacheService::class);
-        $cache->shouldReceive('loadIconTwitter')
-              ->andReturn(null);
-
-        $cache->shouldReceive('saveIconTwitter')
-              ->with($screen_name, $url, m::any());
+        /** @var MockInterface&ProfileRepository $repository */
+        $repository = m::mock(ProfileRepository::class);
+        $repository->shouldReceive('save')
+                   ->withArgs([$screen_name, $url, m::type('string')]);
 
         /** @var Counter&MockInterface $profileErrorCounter */
         $profileErrorCounter = m::mock(Counter::class);
@@ -70,30 +67,10 @@ class TwitterProfileServiceTest extends TestCase
                                 ],
                             ]);
 
-        $profile = new TwitterProfileService($client, $cache, $profileErrorCounter);
+        $profile = new TwitterProfileService($client, $repository, $profileErrorCounter);
 
         $this->assertEquals($url, $profile->getIconAsync($screen_name)->wait());
         $this->assertEquals($profile->getDefaultUrl(), $profile->getIconAsync($screen_name)->wait());
         $this->assertEquals($profile->getDefaultUrl(), $profile->getIconAsync($screen_name)->wait());
-    }
-
-    public function testGetIconAsyncCached(): void
-    {
-        $url = 'https://pbs.twimg.com/profile_images/114514/example_bigger.jpg';
-        $screen_name = 'example';
-
-        /** @var ClientInterface&MockInterface $client */
-        $client = m::mock(ClientInterface::class);
-
-        /** @var CacheService&MockInterface $cache */
-        $cache = m::mock(CacheService::class);
-        $cache->shouldReceive('loadIconTwitter')
-              ->andReturn($url);
-
-        /** @var Counter&MockInterface $profileErrorCounter */
-        $profileErrorCounter = m::mock(Counter::class);
-
-        $profile = new TwitterProfileService($client, $cache, $profileErrorCounter);
-        $this->assertEquals($url, $profile->getIconAsync($screen_name)->wait());
     }
 }

@@ -138,7 +138,7 @@ class CheckService implements CheckServiceContract
             /** @var Result $result */
             [$result, $icon] = yield Utils::all([
                 $this->validateAsync($homo),
-                $this->profiles->get($homo->getService())->getIconAsync($homo->getScreenName()),
+                $homo->getProfile()?->getIconUrl() ?? $this->profiles->get($homo->getService())->getIconAsync($homo->getScreenName()),
             ]);
             $status = new Status([
                 'homo' => $homo,
@@ -178,7 +178,7 @@ class CheckService implements CheckServiceContract
         return Pool::batch(
             $this->client,
             collect($this->homo->find($screen_name))
-                ->map(fn (\stdClass $item) => new Homo($item))
+                ->mapInto(Homo::class)
                 ->map(fn (Homo $item) => fn () => $this->createStatusAsync($item, $callback))
                 ->toArray(),
             [

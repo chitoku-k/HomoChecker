@@ -6,7 +6,7 @@ namespace HomoChecker\Service\Profile;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Promise\Coroutine;
 use GuzzleHttp\Promise\PromiseInterface;
-use HomoChecker\Contracts\Service\CacheService as CacheServiceContract;
+use HomoChecker\Contracts\Repository\ProfileRepository as ProfileRepositoryContract;
 use HomoChecker\Contracts\Service\ProfileService as ProfileServiceContract;
 use Illuminate\Support\Facades\Log;
 use Prometheus\Counter;
@@ -17,7 +17,7 @@ class TwitterProfileService implements ProfileServiceContract
 
     public function __construct(
         protected ClientInterface $client,
-        protected CacheServiceContract $cache,
+        protected ProfileRepositoryContract $repository,
         protected Counter $profileErrorCounter,
     ) {
     }
@@ -30,17 +30,17 @@ class TwitterProfileService implements ProfileServiceContract
     public function getIconAsync(string $screen_name): PromiseInterface
     {
         return Coroutine::of(function () use ($screen_name) {
-            if ($url = $this->cache->loadIconTwitter($screen_name)) {
-                return yield $url;
-            }
-
             try {
                 $target = "users/show.json?screen_name={$screen_name}";
                 $response = yield $this->client->getAsync($target);
                 $user = json_decode((string) $response->getBody());
                 $url = str_replace('_normal', '_200x200', $user->profile_image_url_https);
 
-                $this->cache->saveIconTwitter($screen_name, $url, static::CACHE_EXPIRE);
+                $this->repository->save(
+                    $screen_name,
+                    $url,
+                    (new \DateTimeImmutable(static::CACHE_EXPIRE . ' seconds'))->format(\DateTimeInterface::ATOM),
+                );
                 return yield $url;
             } catch (\Throwable $e) {
                 Log::debug($e);

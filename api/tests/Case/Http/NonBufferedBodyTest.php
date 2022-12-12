@@ -19,6 +19,7 @@ class NonBufferedBodyTest extends TestCase
         /** @var MockInterface&Psr7NonBufferedBody $base */
         $base = m::mock(Psr7NonBufferedBody::class);
         $base->shouldReceive('__toString')
+             ->once()
              ->andReturn('');
 
         $actual = new NonBufferedBody($base);
@@ -31,6 +32,7 @@ class NonBufferedBodyTest extends TestCase
         /** @var MockInterface&Psr7NonBufferedBody $base */
         $base = m::mock(Psr7NonBufferedBody::class);
         $base->shouldReceive('close')
+             ->once()
              ->andReturn();
 
         $actual = new NonBufferedBody($base);
@@ -42,6 +44,7 @@ class NonBufferedBodyTest extends TestCase
         /** @var MockInterface&Psr7NonBufferedBody $base */
         $base = m::mock(Psr7NonBufferedBody::class);
         $base->shouldReceive('detach')
+             ->once()
              ->andReturn(null);
 
         $actual = new NonBufferedBody($base);
@@ -64,6 +67,7 @@ class NonBufferedBodyTest extends TestCase
         /** @var MockInterface&Psr7NonBufferedBody $base */
         $base = m::mock(Psr7NonBufferedBody::class);
         $base->shouldReceive('tell')
+             ->once()
              ->andReturn(0);
 
         $actual = new NonBufferedBody($base);
@@ -76,6 +80,7 @@ class NonBufferedBodyTest extends TestCase
         /** @var MockInterface&Psr7NonBufferedBody $base */
         $base = m::mock(Psr7NonBufferedBody::class);
         $base->shouldReceive('eof')
+             ->once()
              ->andReturn(true);
 
         $actual = new NonBufferedBody($base);
@@ -88,6 +93,7 @@ class NonBufferedBodyTest extends TestCase
         /** @var MockInterface&Psr7NonBufferedBody $base */
         $base = m::mock(Psr7NonBufferedBody::class);
         $base->shouldReceive('isSeekable')
+             ->once()
              ->andReturn(false);
 
         $actual = new NonBufferedBody($base);
@@ -100,6 +106,7 @@ class NonBufferedBodyTest extends TestCase
         /** @var MockInterface&Psr7NonBufferedBody $base */
         $base = m::mock(Psr7NonBufferedBody::class);
         $base->shouldReceive('seek')
+             ->once()
              ->withArgs([0, SEEK_SET])
              ->andReturn();
 
@@ -112,6 +119,7 @@ class NonBufferedBodyTest extends TestCase
         /** @var MockInterface&Psr7NonBufferedBody $base */
         $base = m::mock(Psr7NonBufferedBody::class);
         $base->shouldReceive('rewind')
+             ->once()
              ->andReturn();
 
         $actual = new NonBufferedBody($base);
@@ -123,6 +131,7 @@ class NonBufferedBodyTest extends TestCase
         /** @var MockInterface&Psr7NonBufferedBody $base */
         $base = m::mock(Psr7NonBufferedBody::class);
         $base->shouldReceive('isWritable')
+             ->once()
              ->andReturn(true);
 
         $actual = new NonBufferedBody($base);
@@ -136,6 +145,7 @@ class NonBufferedBodyTest extends TestCase
         $base = m::mock(Psr7NonBufferedBody::class);
         $base->size = 0;
         $base->shouldReceive('write')
+             ->once()
              ->withArgs(['test'])
              ->andReturn(4);
 
@@ -151,6 +161,7 @@ class NonBufferedBodyTest extends TestCase
         /** @var MockInterface&Psr7NonBufferedBody $base */
         $base = m::mock(Psr7NonBufferedBody::class);
         $base->shouldReceive('isReadable')
+             ->once()
              ->andReturn(false);
 
         $actual = new NonBufferedBody($base);
@@ -163,6 +174,7 @@ class NonBufferedBodyTest extends TestCase
         /** @var MockInterface&Psr7NonBufferedBody $base */
         $base = m::mock(Psr7NonBufferedBody::class);
         $base->shouldReceive('read')
+             ->once()
              ->withArgs([4])
              ->andReturn('homo');
 
@@ -176,6 +188,7 @@ class NonBufferedBodyTest extends TestCase
         /** @var MockInterface&Psr7NonBufferedBody $base */
         $base = m::mock(Psr7NonBufferedBody::class);
         $base->shouldReceive('getContents')
+             ->once()
              ->andReturn('');
 
         $actual = new NonBufferedBody($base);
@@ -188,6 +201,7 @@ class NonBufferedBodyTest extends TestCase
         /** @var MockInterface&Psr7NonBufferedBody $base */
         $base = m::mock(Psr7NonBufferedBody::class);
         $base->shouldReceive('getMetadata')
+             ->once()
              ->withArgs([null])
              ->andReturn(null);
 

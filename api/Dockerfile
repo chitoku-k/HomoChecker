@@ -98,11 +98,9 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
     make clean && \
     ln -s /etc/ssl /usr/local/ssl && \
     pecl install \
-        apcu \
-        redis && \
+        apcu && \
     docker-php-ext-enable \
-        apcu \
-        redis && \
+        apcu && \
     docker-php-ext-install \
         opcache \
         pdo_pgsql && \

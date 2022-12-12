@@ -83,7 +83,7 @@ BuildKit（または Docker の対応するバージョン）あるいは Builda
 - `docker build` を利用する場合: Docker 18.09 以上
 - `docker buildx` を利用する場合: Docker 19.03 以上
 
-nginx + PHP-FPM + PostgreSQL + Redis で構成されています。
+nginx + PHP-FPM + PostgreSQL で構成されています。
 
 ### 設定
 
@@ -105,8 +105,6 @@ $ export HOMOCHECKER_DB_SSLCERT=/path/to/sslcert
 $ export HOMOCHECKER_DB_SSLKEY=/path/to/sslkey
 $ export HOMOCHECKER_DB_SSLROOTCERT=/path/to/sslrootcert
 $ export HOMOCHECKER_LOG_LEVEL=debug
-$ export HOMOCHECKER_REDIS_HOST=redis
-$ export HOMOCHECKER_REDIS_PORT=6379
 $ export HOMOCHECKER_TWITTER_CONSUMER_KEY=
 $ export HOMOCHECKER_TWITTER_CONSUMER_SECRET=
 $ export HOMOCHECKER_TWITTER_TOKEN=

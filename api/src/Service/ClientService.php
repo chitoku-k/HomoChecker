@@ -8,17 +8,40 @@ use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\Response as Psr7Response;
 use GuzzleHttp\RequestOptions;
 use GuzzleHttp\TransferStats;
-use HomoChecker\Contracts\Service\CacheService as CacheServiceContract;
+use HomoChecker\Contracts\Repository\AltsvcRepository as AltsvcRepositoryContract;
 use HomoChecker\Contracts\Service\Client\Altsvc;
 use HomoChecker\Contracts\Service\Client\Response;
 use HomoChecker\Contracts\Service\ClientService as ClientServiceContract;
+use Illuminate\Support\Collection;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class ClientService implements ClientServiceContract
 {
-    public function __construct(protected ClientInterface $client, protected CacheServiceContract $cache, protected int $redirect)
+    protected ?Collection $altsvc = null;
+
+    public function __construct(
+        protected ClientInterface $client,
+        protected AltsvcRepositoryContract $altsvcRepository,
+        protected int $redirect,
+    ) {
+    }
+
+    protected function getAltsvc(string $url): null|string
     {
+        if (!$this->altsvc) {
+            $this->altsvc = collect($this->altsvcRepository->findAll());
+        }
+        return $this->altsvc->where('url', $url)->pluck('protocol')->first();
+    }
+
+    protected function saveAltsvc(string $url, string $protocolId, float $maxAge): void
+    {
+        $this->altsvcRepository->save(
+            $url,
+            $protocolId,
+            (new \DateTimeImmutable("{$maxAge} seconds"))->format(\DateTimeInterface::ATOM),
+        );
     }
 
     /**
@@ -31,7 +54,7 @@ class ClientService implements ClientServiceContract
         for ($i = 0; $i < $this->redirect; ++$i) {
             $options = [];
 
-            if (str_starts_with($this->cache->loadAltsvc($url, ''), 'h3')) {
+            if (str_starts_with($this->getAltsvc($url) ?? '', 'h3')) {
                 $options['curl'] = [
                     CURLOPT_CERTINFO => true,
                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_3,
@@ -60,7 +83,7 @@ class ClientService implements ClientServiceContract
                         return;
                     }
 
-                    $this->cache->saveAltsvc($url, $h3->getProtocolId(), $h3->getMaxAge());
+                    $this->saveAltsvc($url, $h3->getProtocolId(), $h3->getMaxAge());
                 },
                 RequestOptions::ON_STATS => function (TransferStats $stats) use (&$result) {
                     $response = $stats->getResponse();
