@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e307145ec5b7f55206796e2eb2a4de0a",
+    "content-hash": "075388069cc0cc87879a8cf25e2dbd6f",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -659,66 +659,6 @@
             "time": "2022-11-25T07:56:47+00:00"
         },
         {
-            "name": "illuminate/cache",
-            "version": "v9.43.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/illuminate/cache.git",
-                "reference": "8ba188bcfad7d2b5ed13f8cd1ccbb67db22cfa04"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/cache/zipball/8ba188bcfad7d2b5ed13f8cd1ccbb67db22cfa04",
-                "reference": "8ba188bcfad7d2b5ed13f8cd1ccbb67db22cfa04",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/collections": "^9.0",
-                "illuminate/contracts": "^9.0",
-                "illuminate/macroable": "^9.0",
-                "illuminate/support": "^9.0",
-                "php": "^8.0.2"
-            },
-            "provide": {
-                "psr/simple-cache-implementation": "1.0|2.0|3.0"
-            },
-            "suggest": {
-                "ext-memcached": "Required to use the memcache cache driver.",
-                "illuminate/database": "Required to use the database cache driver (^9.0).",
-                "illuminate/filesystem": "Required to use the file cache driver (^9.0).",
-                "illuminate/redis": "Required to use the redis cache driver (^9.0).",
-                "symfony/cache": "Required to use PSR-6 cache bridge (^6.0)."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "9.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Illuminate\\Cache\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylor@laravel.com"
-                }
-            ],
-            "description": "The Illuminate Cache package.",
-            "homepage": "https://laravel.com",
-            "support": {
-                "issues": "https://github.com/laravel/framework/issues",
-                "source": "https://github.com/laravel/framework"
-            },
-            "time": "2022-08-24T13:50:51+00:00"
-        },
-        {
             "name": "illuminate/collections",
             "version": "v9.43.0",
             "source": {
@@ -1231,60 +1171,6 @@
                 "source": "https://github.com/laravel/framework"
             },
             "time": "2022-06-09T14:13:53+00:00"
-        },
-        {
-            "name": "illuminate/redis",
-            "version": "v9.43.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/illuminate/redis.git",
-                "reference": "6e36ee3846112c82032562d7f525fedf5ad93169"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/redis/zipball/6e36ee3846112c82032562d7f525fedf5ad93169",
-                "reference": "6e36ee3846112c82032562d7f525fedf5ad93169",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/collections": "^9.0",
-                "illuminate/contracts": "^9.0",
-                "illuminate/macroable": "^9.0",
-                "illuminate/support": "^9.0",
-                "php": "^8.0.2"
-            },
-            "suggest": {
-                "ext-redis": "Required to use the phpredis connector (^4.0|^5.0).",
-                "predis/predis": "Required to use the predis connector (^1.1.9|^2.0.2)."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "9.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Illuminate\\Redis\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylor@laravel.com"
-                }
-            ],
-            "description": "The Illuminate Redis package.",
-            "homepage": "https://laravel.com",
-            "support": {
-                "issues": "https://github.com/laravel/framework/issues",
-                "source": "https://github.com/laravel/framework"
-            },
-            "time": "2022-10-04T13:30:33+00:00"
         },
         {
             "name": "illuminate/support",

@@ -38,36 +38,42 @@ class CheckServiceTest extends TestCase
                 'screen_name' => 'foo',
                 'service' => 'twitter',
                 'url' => 'https://foo.example.com/1',
+                'icon_url' => null,
             ],
             (object) [
                 'id' => 2,
                 'screen_name' => 'foo',
                 'service' => 'twitter',
                 'url' => 'https://foo.example.com/2',
+                'icon_url' => null,
             ],
             (object) [
                 'id' => 3,
                 'screen_name' => 'bar',
                 'service' => 'mastodon',
                 'url' => 'http://bar.example.com',
+                'icon_url' => null,
             ],
             (object) [
                 'id' => 4,
                 'screen_name' => 'baz',
                 'service' => 'mastodon',
                 'url' => 'https://baz.example.com',
+                'icon_url' => null,
             ],
             (object) [
                 'id' => 5,
                 'screen_name' => 'qux',
                 'service' => 'mastodon',
                 'url' => 'https://qux.example.com',
+                'icon_url' => 'https://img.example.com/qux',
             ],
             (object) [
                 'id' => 6,
                 'screen_name' => 'quux',
                 'service' => 'mastodon',
                 'url' => '',
+                'icon_url' => null,
             ],
         ];
     }
@@ -94,7 +100,6 @@ class CheckServiceTest extends TestCase
                  ->andReturn(
                      new FulfilledPromise('https://img.example.com/bar'),
                      new FulfilledPromise('https://img.example.com/baz'),
-                     new FulfilledPromise('https://img.example.com/qux'),
                  );
 
         /** @var MockInterface&ValidatorService $validator */
@@ -316,6 +321,7 @@ class CheckServiceTest extends TestCase
                     'screen_name' => 'foo',
                     'service' => 'twitter',
                     'url' => 'https://foo.example.com/1',
+                    'icon_url' => null,
                 ]),
                 'result' => new Result([
                     'status' => ValidationResult::OK,
@@ -345,6 +351,7 @@ class CheckServiceTest extends TestCase
                     'screen_name' => 'foo',
                     'service' => 'twitter',
                     'url' => 'https://foo.example.com/2',
+                    'icon_url' => null,
                 ]),
                 'result' => new Result([
                     'status' => ValidationResult::WRONG,
@@ -371,6 +378,7 @@ class CheckServiceTest extends TestCase
                     'screen_name' => 'bar',
                     'service' => 'mastodon',
                     'url' => 'http://bar.example.com',
+                    'icon_url' => null,
                 ]),
                 'result' => new Result([
                     'status' => ValidationResult::OK,
@@ -389,6 +397,7 @@ class CheckServiceTest extends TestCase
                     'screen_name' => 'baz',
                     'service' => 'mastodon',
                     'url' => 'https://baz.example.com',
+                    'icon_url' => null,
                 ]),
                 'result' => new Result([
                     'status' => ValidationResult::ERROR,
@@ -407,6 +416,7 @@ class CheckServiceTest extends TestCase
                     'screen_name' => 'qux',
                     'service' => 'mastodon',
                     'url' => 'https://qux.example.com',
+                    'icon_url' => 'https://img.example.com/qux',
                 ]),
                 'result' => new Result([
                     'status' => ValidationResult::ERROR,

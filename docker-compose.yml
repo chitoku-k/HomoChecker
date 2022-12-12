@@ -11,7 +11,6 @@ services:
       HOMOCHECKER_DB_USERNAME: homo
       HOMOCHECKER_DB_PASSWORD: homo
       HOMOCHECKER_LOG_LEVEL: debug
-      HOMOCHECKER_REDIS_HOST: redis
       HOMOCHECKER_TWITTER_CONSUMER_KEY:
       HOMOCHECKER_TWITTER_CONSUMER_SECRET:
       HOMOCHECKER_TWITTER_TOKEN:
@@ -69,11 +68,6 @@ services:
       - type: volume
         source: database
         target: /var/lib/postgres/data
-    networks:
-      - default
-
-  redis:
-    image: redis:7.0
     networks:
       - default
 

@@ -4,10 +4,6 @@ declare(strict_types=1);
 use HomoChecker\Logging\CustomizeFormatter;
 
 return [
-    'cache.default' => 'default',
-    'cache.stores.default' => [
-        'driver' => 'redis',
-    ],
     'database.default' => 'default',
     'database.connections' => [
         'default' => [
@@ -22,12 +18,6 @@ return [
             'sslkey' => env('HOMOCHECKER_DB_SSLKEY'),
             'sslrootcert' => env('HOMOCHECKER_DB_SSLROOTCERT'),
             'charset' => 'utf8',
-        ],
-    ],
-    'database.redis' => [
-        'default' => [
-            'host' => env('HOMOCHECKER_REDIS_HOST'),
-            'port' => (int) env('HOMOCHECKER_REDIS_PORT', 6379),
         ],
     ],
     'logging.default' => 'default',

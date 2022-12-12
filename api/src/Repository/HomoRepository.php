@@ -4,36 +4,54 @@ declare(strict_types=1);
 namespace HomoChecker\Repository;
 
 use HomoChecker\Contracts\Repository\HomoRepository as HomoRepositoryContract;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\Grammars\PostgresGrammar;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\DB;
 
 class HomoRepository implements HomoRepositoryContract
 {
-    protected string $table = 'users';
-
     public function count(): int
     {
-        return DB::table($this->table)->count();
+        return DB::table('users')->count();
     }
 
     public function countByScreenName(string $screenName): int
     {
-        return DB::table($this->table)->where('screen_name', $screenName)->count();
+        return DB::table('users')->where('screen_name', $screenName)->count();
+    }
+
+    protected function join(): Builder
+    {
+        return DB::table('users')
+            ->leftJoin(
+                'profiles',
+                fn (JoinClause $join) => $join
+                    ->on('users.screen_name', '=', 'profiles.screen_name')
+                    ->whereRaw('profiles.expires_at >= CURRENT_TIMESTAMP'),
+            )
+            ->select([
+                'users.id',
+                'users.screen_name',
+                'users.service',
+                'users.url',
+                'profiles.icon_url',
+            ]);
     }
 
     public function findAll(): array
     {
-        return DB::table($this->table)->get()->all();
+        return $this->join()->get()->all();
     }
 
     public function findByScreenName(string $screenName): array
     {
-        return DB::table($this->table)->where('screen_name', $screenName)->get()->all();
+        return $this->join()->where('screen_name', $screenName)->get()->all();
     }
 
     public function export(): string
     {
-        $builder = DB::table($this->table);
+        $builder = DB::table('users');
 
         // Create a Grammar instance that doesn't parameterize its values
         $grammar = new class() extends PostgresGrammar {
@@ -46,9 +64,9 @@ class HomoRepository implements HomoRepositoryContract
             }
         };
 
-        return $builder->get()->map(function (\stdClass $item) use ($builder, $grammar) {
-            unset($item->id);
-            return $grammar->compileInsert($builder, (array) $item) . ';';
-        })->join("\n");
+        return $builder
+            ->get(['screen_name', 'service', 'url'])
+            ->map(fn (\stdClass $item) => $grammar->compileInsert($builder, (array) $item) . ";\n")
+            ->join('');
     }
 }

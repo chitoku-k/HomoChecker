@@ -6,7 +6,7 @@ namespace HomoChecker\Service\Profile;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Promise\Coroutine;
 use GuzzleHttp\Promise\PromiseInterface;
-use HomoChecker\Contracts\Service\CacheService as CacheServiceContract;
+use HomoChecker\Contracts\Repository\ProfileRepository as ProfileRepositoryContract;
 use HomoChecker\Contracts\Service\ProfileService as ProfileServiceContract;
 use Illuminate\Support\Facades\Log;
 use Prometheus\Counter;
@@ -17,7 +17,7 @@ class MastodonProfileService implements ProfileServiceContract
 
     public function __construct(
         protected ClientInterface $client,
-        protected CacheServiceContract $cache,
+        protected ProfileRepositoryContract $repository,
         protected Counter $profileErrorCounter,
     ) {
     }
@@ -42,10 +42,6 @@ class MastodonProfileService implements ProfileServiceContract
     public function getIconAsync(string $screen_name): PromiseInterface
     {
         return Coroutine::of(function () use ($screen_name) {
-            if ($url = $this->cache->loadIconMastodon($screen_name)) {
-                return yield $url;
-            }
-
             try {
                 [ $username, $instance ] = $this->parseScreenName($screen_name);
                 $target = "https://{$instance}/users/{$username}.json";
@@ -56,7 +52,11 @@ class MastodonProfileService implements ProfileServiceContract
                     throw new \RuntimeException('Avatar not found');
                 }
 
-                $this->cache->saveIconMastodon($screen_name, $url, static::CACHE_EXPIRE);
+                $this->repository->save(
+                    $screen_name,
+                    $url,
+                    (new \DateTimeImmutable(static::CACHE_EXPIRE . ' seconds'))->format(\DateTimeInterface::ATOM),
+                );
                 return yield $url;
             } catch (\Throwable $e) {
                 Log::debug($e);

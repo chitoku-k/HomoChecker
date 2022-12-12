@@ -26,6 +26,11 @@ class Homo
     protected ?string $url;
 
     /**
+     * @var ?Profile The profile.
+     */
+    protected ?Profile $profile = null;
+
+    /**
      * @param array|object $homo
      */
     public function __construct(array|object $homo = null)
@@ -36,6 +41,10 @@ class Homo
         $this->setScreenName($homo->screen_name ?? null);
         $this->setService($homo->service ?? null);
         $this->setUrl($homo->url ?? null);
+
+        if (isset($homo->icon_url)) {
+            $this->setProfile(new Profile(['icon_url' => $homo->icon_url]));
+        }
     }
 
     /**
@@ -108,5 +117,23 @@ class Homo
     public function setUrl(?string $url): void
     {
         $this->url = $url;
+    }
+
+    /**
+     * Get the profile.
+     * @return ?Profile The profile.
+     */
+    public function getProfile(): ?Profile
+    {
+        return $this->profile;
+    }
+
+    /**
+     * Set the profile.
+     * @param ?Profile $profile The profile.
+     */
+    public function setProfile(?Profile $profile): void
+    {
+        $this->profile = $profile;
     }
 }

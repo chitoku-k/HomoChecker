@@ -10,7 +10,7 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use HomoChecker\Contracts\Service\CacheService;
+use HomoChecker\Contracts\Repository\ProfileRepository;
 use HomoChecker\Service\Profile\MastodonProfileService;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
@@ -22,7 +22,7 @@ class MastodonProfileServiceTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
-    public function testGetIconAsyncNotCached(): void
+    public function testGetIconAsync(): void
     {
         $screen_name = '@example@mastodon.social';
         $url = 'https://files.mastodon.social/accounts/avatars/000/000/001/original/114514.png';
@@ -48,13 +48,10 @@ class MastodonProfileServiceTest extends TestCase
 
         $client = new Client(compact('handler'));
 
-        /** @var CacheService&MockInterface $cache */
-        $cache = m::mock(CacheService::class);
-        $cache->shouldReceive('loadIconMastodon')
-              ->andReturn(null);
-
-        $cache->shouldReceive('saveIconMastodon')
-              ->with($screen_name, $url, m::any());
+        /** @var MockInterface&ProfileRepository $repository */
+        $repository = m::mock(ProfileRepository::class);
+        $repository->shouldReceive('save')
+                   ->withArgs([$screen_name, $url, m::type('string')]);
 
         /** @var Counter&MockInterface $profileErrorCounter */
         $profileErrorCounter = m::mock(Counter::class);
@@ -75,32 +72,12 @@ class MastodonProfileServiceTest extends TestCase
                                 ],
                             ]);
 
-        $profile = new MastodonProfileService($client, $cache, $profileErrorCounter);
+        $profile = new MastodonProfileService($client, $repository, $profileErrorCounter);
 
         $this->assertEquals($url, $profile->getIconAsync($screen_name)->wait());
         $this->assertEquals($profile->getDefaultUrl(), $profile->getIconAsync($screen_name)->wait());
         $this->assertEquals($profile->getDefaultUrl(), $profile->getIconAsync($screen_name)->wait());
         $this->assertEquals($profile->getDefaultUrl(), $profile->getIconAsync('example@wrong-format.example.com')->wait());
-    }
-
-    public function testGetIconAsyncCached(): void
-    {
-        $url = 'https://files.mastodon.social/accounts/avatars/000/000/001/original/114514.png';
-        $screen_name = '@example@mastodon.social';
-
-        /** @var ClientInterface&MockInterface $client */
-        $client = m::mock(ClientInterface::class);
-
-        /** @var CacheService&MockInterface $cache */
-        $cache = m::mock(CacheService::class);
-        $cache->shouldReceive('loadIconMastodon')
-              ->andReturn($url);
-
-        /** @var Counter&MockInterface $profileErrorCounter */
-        $profileErrorCounter = m::mock(Counter::class);
-
-        $profile = new MastodonProfileService($client, $cache, $profileErrorCounter);
-        $this->assertEquals($url, $profile->getIconAsync($screen_name)->wait());
     }
 
     /**
@@ -111,13 +88,13 @@ class MastodonProfileServiceTest extends TestCase
         /** @var ClientInterface&MockInterface $client */
         $client = m::mock(ClientInterface::class);
 
-        /** @var CacheService&MockInterface $cache */
-        $cache = m::mock(CacheService::class);
+        /** @var MockInterface&ProfileRepository $repository */
+        $repository = m::mock(ProfileRepository::class);
 
         /** @var Counter&MockInterface $profileErrorCounter */
         $profileErrorCounter = m::mock(Counter::class);
 
-        $profile = new MastodonProfileService($client, $cache, $profileErrorCounter);
+        $profile = new MastodonProfileService($client, $repository, $profileErrorCounter);
 
         $actual = $profile->parseScreenName($screen_name);
         $this->assertEquals([$username, $instance], $actual);
@@ -133,13 +110,13 @@ class MastodonProfileServiceTest extends TestCase
         /** @var ClientInterface&MockInterface $client */
         $client = m::mock(ClientInterface::class);
 
-        /** @var CacheService&MockInterface $cache */
-        $cache = m::mock(CacheService::class);
+        /** @var MockInterface&ProfileRepository $repository */
+        $repository = m::mock(ProfileRepository::class);
 
         /** @var Counter&MockInterface $profileErrorCounter */
         $profileErrorCounter = m::mock(Counter::class);
 
-        $profile = new MastodonProfileService($client, $cache, $profileErrorCounter);
+        $profile = new MastodonProfileService($client, $repository, $profileErrorCounter);
         $profile->parseScreenName($screen_name);
     }
 
