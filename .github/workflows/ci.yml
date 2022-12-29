@@ -18,7 +18,7 @@ jobs:
           key: buildx-apitest-${{ github.sha }}
           restore-keys: buildx-apitest-
       - name: Build
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: ./api
           target: dev
@@ -66,7 +66,7 @@ jobs:
           key: buildx-webtest-${{ github.sha }}
           restore-keys: buildx-webtest-
       - name: Build
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           target: dev
