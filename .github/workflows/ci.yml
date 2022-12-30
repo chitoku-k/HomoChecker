@@ -100,7 +100,7 @@ jobs:
           key: buildx-${{ github.sha }}
           restore-keys: buildx-
       - name: Build
-        uses: docker/bake-action@v1.6.0
+        uses: docker/bake-action@v2.3.0
         with:
           files: docker-bake.hcl
           set: |
