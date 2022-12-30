@@ -31,7 +31,7 @@ jobs:
           cd client/fonts
           tar xf ../fonts.tar.gz
       - name: Build and push
-        uses: docker/bake-action@v1.6.0
+        uses: docker/bake-action@v2.3.0
         with:
           files: docker-bake.hcl
           push: true
