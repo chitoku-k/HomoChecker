@@ -20,7 +20,7 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - name: Cache Buildx
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: /tmp/buildx-cache
           key: buildx-${{ github.sha }}

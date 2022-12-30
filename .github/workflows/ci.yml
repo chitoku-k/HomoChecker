@@ -12,7 +12,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Cache Buildx
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: /tmp/buildx-cache
           key: buildx-apitest-${{ github.sha }}
@@ -60,7 +60,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Cache Buildx
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: /tmp/buildx-cache
           key: buildx-webtest-${{ github.sha }}
@@ -94,7 +94,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Cache Buildx
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: /tmp/buildx-cache
           key: buildx-${{ github.sha }}
