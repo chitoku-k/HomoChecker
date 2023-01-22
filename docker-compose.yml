@@ -67,7 +67,7 @@ services:
         read_only: true
       - type: volume
         source: database
-        target: /var/lib/postgres/data
+        target: /var/lib/postgresql/data
     networks:
       - default
 
