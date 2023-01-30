@@ -37,7 +37,7 @@ services:
         target: /usr/src/app
 
   client:
-    image: nginx:1.21-alpine
+    image: nginx:1.23-alpine
     ports:
       - "${HOMOCHECKER_PORT-4545}:80"
     environment:
@@ -55,7 +55,7 @@ services:
       - default
 
   database:
-    image: postgres:14.2
+    image: postgres:15.1
     environment:
       POSTGRES_DB: homo
       POSTGRES_USER: homo
