@@ -49,7 +49,7 @@ RUN git clone --depth=1 -b curl-7_86_0 https://github.com/curl/curl && \
     make install && \
     ldconfig
 
-FROM php:8.2.1-fpm AS runtime
+FROM php:8.2.2-fpm AS runtime
 WORKDIR /var/www/html/api
 COPY --from=openssl /usr/local/include/ /usr/local/include/
 COPY --from=nghttp3 /usr/local/include/ /usr/local/include/
