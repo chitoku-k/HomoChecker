@@ -145,7 +145,7 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
         autoconf \
         build-essential
 RUN --mount=type=cache,id=api:/root/.composer,target=/root/.composer \
-    git config --system --add safe.directory /var/www && \
+    git config --system --add safe.directory /var/www/html && \
     composer install --no-progress --no-scripts && \
     composer dump-autoload --no-scripts --optimize
 RUN --mount=type=cache,id=api:/root/.composer,target=/mnt/.composer \
