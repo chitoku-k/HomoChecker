@@ -13,7 +13,7 @@ use Prometheus\Counter;
 
 class TwitterProfileService implements ProfileServiceContract
 {
-    public const CACHE_EXPIRE = 180;
+    public const CACHE_EXPIRE = 60 * 60 * 24 * 30;
 
     public function __construct(
         protected ClientInterface $client,
