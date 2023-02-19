@@ -1,12 +1,4 @@
 #!/usr/bin/env bash
 set -e
 
-export DOCKER_BUILDKIT=1
-export COMPOSE_DOCKER_CLI_BUILD=1
-
 touch client/fonts/atlan.{svg,ttf,woff}
-
-docker-compose build
-docker-compose run --rm api composer install --no-scripts
-docker-compose run --rm build yarn
-docker-compose down

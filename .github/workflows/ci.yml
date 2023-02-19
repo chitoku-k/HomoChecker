@@ -28,14 +28,14 @@ jobs:
           tags: homochecker-test_api
       - name: Run tests
         run: |
-          docker-compose run --rm api composer install --no-progress --no-scripts
-          docker-compose run --rm api
+          docker compose run --rm api composer install --no-progress --no-scripts
+          docker compose run --rm api
         env:
           COMPOSE_PROJECT_NAME: homochecker-test
           COMPOSE_FILE: docker-compose.test.yml
       - name: Upload coverage
         run: |
-          docker-compose run \
+          docker compose run \
             --rm \
             -e COVERALLS_REPO_TOKEN=${{ github.token }} \
             -e GITHUB_ACTIONS=true \
@@ -76,8 +76,8 @@ jobs:
           tags: homochecker-test_build
       - name: Run lints
         run: |
-          docker-compose run --rm build yarn
-          docker-compose run --rm build yarn lint
+          docker compose run --rm build yarn
+          docker compose run --rm build yarn lint
         env:
           COMPOSE_PROJECT_NAME: homochecker-test
           COMPOSE_FILE: docker-compose.test.yml
