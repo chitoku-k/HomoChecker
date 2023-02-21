@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-export DOCKER_BUILDKIT=1
-export COMPOSE_DOCKER_CLI_BUILD=1
 export COMPOSE_PROJECT_NAME=homochecker-test
 export COMPOSE_FILE=docker-compose.test.yml
 
-docker-compose build
-docker-compose run --rm build yarn lint
-docker-compose down
+docker compose run --rm --build build yarn lint
+docker compose down

@@ -119,8 +119,6 @@ $ docker buildx bake -f ./docker-bake.hcl
 
 ## 開発環境
 
-Docker Compose のインストールが必要です。
-
 ### 設定
 
 webpack のモード、ポート番号を指定する場合は環境変数を変更します（任意）。
@@ -140,9 +138,7 @@ $ docker network create --attachable --ipv6 --subnet=fd00:4545::/48 homochecker_
 
 ```sh
 $ bin/init
-$ COMPOSE_DOCKER_CLI_BUILD=1 \
-  DOCKER_BUILDKIT=1 \
-  docker-compose up -d --build
+$ docker compose up -d --build
 ```
 
 ブラウザーで次の URL にアクセスします。
@@ -154,21 +150,21 @@ http://localhost:4545
 コンテナーを終了するには次のコマンドを使用します。
 
 ```sh
-$ docker-compose stop
+$ docker compose stop
 ```
 
 現在の最新データは SQL 形式で[ダウンロード](https://homo.chitoku.jp:4545/list/?format=sql)できます。  
 次のコマンドで PostgreSQL にログインできます。
 
 ```sh
-$ docker-compose exec database psql -dhomo -Uhomo
+$ docker compose exec database psql -dhomo -Uhomo
 ```
 
 たとえば最新のデータを入れるには次のようにします。
 
 ```sh
 $ curl -s 'https://homo.chitoku.jp:4545/list/?format=sql' |
-  docker exec -i $(docker-compose ps -q database) psql -dhomo -Uhomo
+    docker compose exec --no-TTY database psql -dhomo -Uhomo
 ```
 
 ### テスト
