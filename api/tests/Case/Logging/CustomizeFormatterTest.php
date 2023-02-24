@@ -9,6 +9,8 @@ use Mockery as m;
 use Mockery\MockInterface;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\HandlerWrapper;
+use Monolog\Level;
+use Monolog\LogRecord;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
@@ -41,23 +43,27 @@ class CustomizeFormatterTest extends TestCase
         $this->assertInstanceOf(LineFormatter::class, $formatter1);
         $this->assertInstanceOf(LineFormatter::class, $formatter2);
 
-        $this->assertEquals("[2001-02-03 04:05:06] DEBUG: Test message {\"url\":\"/healthz\"} \n", $formatter1->format([
-            'datetime' => new \DateTime('2001-02-03 04:05:06'),
-            'level_name' => 'DEBUG',
-            'message' => 'Test message',
-            'context' => [
-                'url' => '/healthz',
-            ],
-            'extra' => [],
-        ]));
-        $this->assertEquals("[2001-02-03 04:05:06] DEBUG: Test message {\"url\":\"/healthz\"} \n", $formatter2->format([
-            'datetime' => new \DateTime('2001-02-03 04:05:06'),
-            'level_name' => 'DEBUG',
-            'message' => 'Test message',
-            'context' => [
-                'url' => '/healthz',
-            ],
-            'extra' => [],
-        ]));
+        $this->assertEquals("[2001-02-03 04:05:06] DEBUG: Test message {\"url\":\"/healthz\"} \n", $formatter1->format(
+            new LogRecord(
+                new \DateTimeImmutable('2001-02-03 04:05:06'),
+                'default',
+                Level::Debug,
+                'Test message',
+                [
+                    'url' => '/healthz',
+                ],
+            ),
+        ));
+        $this->assertEquals("[2001-02-03 04:05:06] DEBUG: Test message {\"url\":\"/healthz\"} \n", $formatter2->format(
+            new LogRecord(
+                new \DateTimeImmutable('2001-02-03 04:05:06'),
+                'default',
+                Level::Debug,
+                'Test message',
+                [
+                    'url' => '/healthz',
+                ],
+            ),
+        ));
     }
 }
