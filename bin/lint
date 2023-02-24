@@ -2,7 +2,7 @@
 set -e
 
 export COMPOSE_PROJECT_NAME=homochecker-test
-export COMPOSE_FILE=docker-compose.test.yml
+export COMPOSE_FILE=compose.test.yaml
 
 docker compose run --rm --build build yarn lint
 docker compose down
