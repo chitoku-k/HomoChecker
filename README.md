@@ -114,7 +114,7 @@ $ export HOMOCHECKER_TWITTER_TOKEN_SECRET=
 ### ビルド
 
 ```sh
-$ docker buildx bake -f ./docker-bake.hcl
+$ docker buildx bake
 ```
 
 ## 開発環境
