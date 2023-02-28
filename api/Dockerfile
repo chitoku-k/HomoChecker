@@ -170,6 +170,7 @@ COPY --from=runtime /tmp/ /tmp/
 COPY --from=runtime /usr/lib/ /usr/lib/
 COPY --from=runtime /usr/local/etc/ /usr/local/etc/
 COPY --from=runtime /usr/local/lib/ /usr/local/lib/
+COPY --from=runtime /usr/local/lib64/ /usr/local/lib64/
 COPY --from=runtime /usr/local/sbin/php-fpm /usr/local/sbin/
 COPY --from=runtime /usr/share/ca-certificates/ /usr/share/ca-certificates/
 COPY --from=dependencies /var/www/html/api /var/www/html/api
