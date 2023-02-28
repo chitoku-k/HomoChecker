@@ -12,7 +12,7 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
         pkg-config
 
 FROM build-dependencies AS openssl
-RUN git clone --depth 1 -b OpenSSL_1_1_1t+quic https://github.com/quictls/openssl && \
+RUN git clone --depth 1 -b openssl-3.0.8+quic https://github.com/quictls/openssl && \
     cd openssl && \
     ./config enable-tls1_3 && \
     make -j $(nproc) && \
@@ -20,7 +20,7 @@ RUN git clone --depth 1 -b OpenSSL_1_1_1t+quic https://github.com/quictls/openss
     ldconfig
 
 FROM build-dependencies AS nghttp3
-RUN git clone --depth=1 -b v0.7.1 https://github.com/ngtcp2/nghttp3 && \
+RUN git clone --depth=1 -b v0.9.0 https://github.com/ngtcp2/nghttp3 && \
     cd nghttp3 && \
     autoreconf -fi && \
     ./configure --enable-lib-only && \
@@ -30,10 +30,10 @@ RUN git clone --depth=1 -b v0.7.1 https://github.com/ngtcp2/nghttp3 && \
 FROM build-dependencies AS ngtcp2
 COPY --from=openssl /usr/local/ /usr/local/
 COPY --from=nghttp3 /usr/local/ /usr/local/
-RUN git clone --depth=1 -b v0.10.0 https://github.com/ngtcp2/ngtcp2 && \
+RUN git clone --depth=1 -b v0.13.1 https://github.com/ngtcp2/ngtcp2 && \
     cd ngtcp2 && \
     autoreconf -fi && \
-    ./configure --enable-lib-only && \
+    ./configure PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig --enable-lib-only && \
     make -j $(nproc) && \
     make install
 
@@ -41,7 +41,7 @@ FROM build-dependencies AS curl
 COPY --from=openssl /usr/local/ /usr/local/
 COPY --from=nghttp3 /usr/local/ /usr/local/
 COPY --from=ngtcp2 /usr/local/ /usr/local/
-RUN git clone --depth=1 -b curl-7_86_0 https://github.com/curl/curl && \
+RUN git clone --depth=1 -b curl-7_87_0 https://github.com/curl/curl && \
     cd curl && \
     autoreconf -fi && \
     ./configure --enable-alt-svc --with-openssl --with-nghttp2 --with-nghttp3 --with-ngtcp2 && \
@@ -58,6 +58,7 @@ COPY --from=curl /usr/local/include/curl/ /usr/local/include/curl/
 COPY --from=curl /usr/local/bin/curl /usr/local/bin/
 COPY --from=curl /usr/local/bin/curl-config /usr/local/bin/
 COPY --from=curl /usr/local/lib/ /usr/local/lib/
+COPY --from=curl /usr/local/lib64/ /usr/local/lib64/
 RUN docker-php-source extract
 COPY php/ /usr/src/php/
 RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
@@ -81,6 +82,9 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
     patch -u < /usr/src/php/ext/curl/curl_arginfo+http3.patch && \
     cd /usr/src/php && \
     ./configure \
+        PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig \
+        OPENSSL_CFLAGS=-I/usr/local/include/openssl \
+        OPENSSL_LIBS=-L/usr/local/lib64 \
         --disable-cgi \
         --enable-fpm \
         --enable-intl \
