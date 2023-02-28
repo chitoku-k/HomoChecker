@@ -8,7 +8,7 @@ client/node_modules
 client/*.gpg
 database
 docker-bake.hcl
-docker-compose.*
+compose.*
 .*.yml
 .dockerignore
 .github
