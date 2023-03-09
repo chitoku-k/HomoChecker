@@ -128,12 +128,6 @@ $ export HOMOCHECKER_ENV=production
 $ export HOMOCHECKER_PORT=4545
 ```
 
-IPv6 接続を有効にするためには、あらかじめサブネットを指定してネットワークを作成しておく必要があります。
-
-```sh
-$ docker network create --attachable --ipv6 --subnet=fd00:4545::/48 homochecker_ipv6
-```
-
 ### 実行
 
 ```sh
