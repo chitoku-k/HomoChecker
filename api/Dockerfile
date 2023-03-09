@@ -125,8 +125,7 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
     docker-php-source delete && \
     rm -rf /tmp/* && \
     echo 'display_errors = 0' > /usr/local/etc/php/conf.d/overrides.ini && \
-    sed -i 's/^access\.log/; \0/' /usr/local/etc/php-fpm.d/docker.conf && \
-    echo 'label ::1/128 0' > /etc/gai.conf
+    sed -i '/^access\.log/d' /usr/local/etc/php-fpm.d/docker.conf
 
 FROM runtime AS dependencies
 COPY --from=composer:2.4.4 /usr/bin/composer /usr/bin/composer
@@ -159,7 +158,6 @@ RUN pecl install pcov && \
 
 FROM scratch
 COPY src /var/www/html/api/src
-COPY --from=runtime /etc/gai.conf /etc/
 COPY --from=runtime /etc/group /etc/
 COPY --from=runtime /etc/ld.so.cache /etc/
 COPY --from=runtime /etc/passwd /etc/

@@ -17,6 +17,7 @@ client/node_modules
 
 
 ### Project Files ###
+compose.override.yaml
 api/build
 client/dist
 client/fonts/*

@@ -17,9 +17,6 @@ services:
       - type: bind
         source: ./api
         target: /var/www/html/api
-    networks:
-      - default
-      - ipv6
 
   build:
     build:
@@ -49,8 +46,6 @@ services:
         source: ./client/conf
         target: /etc/nginx/templates
         read_only: true
-    networks:
-      - default
 
   database:
     image: postgres:15.2
@@ -66,12 +61,7 @@ services:
       - type: volume
         source: database
         target: /var/lib/postgresql/data
-    networks:
-      - default
 
 volumes:
   database:
     driver: local
-
-networks:
-  ipv6:
