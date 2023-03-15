@@ -30,6 +30,8 @@ class CheckServiceTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
+    protected array $users;
+
     public function setUp(): void
     {
         $this->users = [

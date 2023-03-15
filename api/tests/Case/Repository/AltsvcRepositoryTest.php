@@ -16,6 +16,8 @@ class AltsvcRepositoryTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
+    protected array $altsvcs;
+
     public function setUp(): void
     {
         Facade::clearResolvedInstances();
