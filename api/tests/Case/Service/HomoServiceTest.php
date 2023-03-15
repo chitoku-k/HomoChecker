@@ -15,6 +15,8 @@ class HomoServiceTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
+    protected array $users;
+
     public function setUp(): void
     {
         parent::setUp();

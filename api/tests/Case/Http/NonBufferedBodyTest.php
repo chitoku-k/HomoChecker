@@ -143,7 +143,6 @@ class NonBufferedBodyTest extends TestCase
     {
         /** @var MockInterface&Psr7NonBufferedBody $base */
         $base = m::mock(Psr7NonBufferedBody::class);
-        $base->size = 0;
         $base->shouldReceive('write')
              ->once()
              ->withArgs(['test'])

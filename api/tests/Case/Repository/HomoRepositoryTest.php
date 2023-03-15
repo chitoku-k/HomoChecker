@@ -16,6 +16,9 @@ class HomoRepositoryTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
+    protected array $users;
+    protected array $usersFoo;
+
     public function setUp(): void
     {
         Facade::clearResolvedInstances();

@@ -21,6 +21,8 @@ class MetricsActionTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
+    protected array $users;
+
     public function testMetrics()
     {
         /** @var MetricFamilySamples[] $metrics */

@@ -26,6 +26,9 @@ class CheckActionTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
+    protected array $users;
+    protected array $statuses;
+
     public function setUp(): void
     {
         parent::setUp();
