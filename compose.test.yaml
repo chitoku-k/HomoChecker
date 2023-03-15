@@ -1,12 +1,10 @@
-version: "3.9"
-
 services:
   api:
     build:
       context: ./api
       target: dev
     working_dir: /var/www/html/api
-    command: composer test
+    command: composer test -- --display-deprecations --display-notices --display-warnings
     volumes:
       - type: bind
         source: .
