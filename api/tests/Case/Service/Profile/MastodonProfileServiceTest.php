@@ -15,6 +15,7 @@ use HomoChecker\Service\Profile\MastodonProfileService;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
 use Mockery\MockInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Prometheus\Counter;
 
@@ -80,9 +81,7 @@ class MastodonProfileServiceTest extends TestCase
         $this->assertEquals($profile->getDefaultUrl(), $profile->getIconAsync('example@wrong-format.example.com')->wait());
     }
 
-    /**
-     * @dataProvider screenNameProvider
-     */
+    #[DataProvider('screenNameProvider')]
     public function testParseScreenName($screen_name, $username, $instance): void
     {
         /** @var ClientInterface&MockInterface $client */
@@ -100,9 +99,7 @@ class MastodonProfileServiceTest extends TestCase
         $this->assertEquals([$username, $instance], $actual);
     }
 
-    /**
-     * @dataProvider invalidScreenNameProvider
-     */
+    #[DataProvider('invalidScreenNameProvider')]
     public function testParseScreenNameInvalid($screen_name): void
     {
         $this->expectException(\RuntimeException::class);
@@ -120,7 +117,7 @@ class MastodonProfileServiceTest extends TestCase
         $profile->parseScreenName($screen_name);
     }
 
-    public function screenNameProvider(): array
+    public static function screenNameProvider(): array
     {
         return [
             'start with @' => [
@@ -136,7 +133,7 @@ class MastodonProfileServiceTest extends TestCase
         ];
     }
 
-    public function invalidScreenNameProvider(): array
+    public static function invalidScreenNameProvider(): array
     {
         return [
             'start with @@' => [

@@ -13,6 +13,7 @@ use HomoChecker\Domain\Validator\ValidationResult;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
 use Mockery\MockInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\StreamInterface;
 use Slim\Http\Response as HttpResponse;
@@ -247,9 +248,7 @@ class CheckActionTest extends TestCase
         $this->assertJsonStringEqualsJsonString($expected, $actual);
     }
 
-    /**
-     * @dataProvider formatProvider
-     */
+    #[DataProvider('formatProvider')]
     public function testRouteToSSE(mixed $format = null): void
     {
         $request = (new RequestFactory())->createRequest('GET', "/check?format={$format}");
@@ -314,7 +313,7 @@ class CheckActionTest extends TestCase
         $this->assertEquals('no-store', $actual);
     }
 
-    public function formatProvider()
+    public static function formatProvider()
     {
         return [
             'default' => [

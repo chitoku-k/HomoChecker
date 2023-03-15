@@ -3,7 +3,7 @@
 ### Composer ###
 api/vendor
 api/.php-cs-fixer.cache
-api/.phpunit.result.cache
+api/.phpunit.cache
 
 
 ### Node ###
