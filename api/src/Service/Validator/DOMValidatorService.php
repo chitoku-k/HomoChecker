@@ -18,7 +18,7 @@ class DOMValidatorService implements ValidatorServiceContract
      */
     public function validate(Response $response)
     {
-        set_error_handler(fn ($severity, $message) => throw new \RuntimeException($message));
+        set_error_handler(fn ($severity, $message, $filename, $line) => throw new \ErrorException($message, 0, $severity, $filename, $line));
 
         try {
             $doc = new \DOMDocument();
@@ -28,7 +28,7 @@ class DOMValidatorService implements ValidatorServiceContract
             $xpath->registerPhpFunctions();
             $url = $xpath->evaluate('string(//meta[contains(php:functionString("strtolower", @http-equiv), "refresh")]/@content)');
             return preg_match($this->regex, $url) ? ValidationResult::OK : false;
-        } catch (\RuntimeException) {
+        } catch (\ErrorException) {
             return false;
         } finally {
             restore_error_handler();
