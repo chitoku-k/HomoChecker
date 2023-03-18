@@ -16,7 +16,7 @@ class URLValidatorService implements ValidatorServiceContract
     /**
      * {@inheritdoc}
      */
-    public function validate(Response $response)
+    public function validate(Response $response): false|ValidationResult
     {
         return preg_match($this->regex, (string) $response->getBody()) ? ValidationResult::CONTAINS : false;
     }
