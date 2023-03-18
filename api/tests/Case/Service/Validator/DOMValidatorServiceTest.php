@@ -35,6 +35,7 @@ class DOMValidatorServiceTest extends TestCase
                 </body>
             </html>
         ')));
+        $this->assertFalse($validator->validate(new Response(200, [], '')));
         $this->assertFalse($validator->validate(new Response(200, [], '
             <!doctype html>
             <html>
