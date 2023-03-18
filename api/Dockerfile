@@ -12,7 +12,7 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
         pkg-config
 
 FROM build-dependencies AS openssl
-RUN git clone --depth 1 -b openssl-3.1.0+quic https://github.com/quictls/openssl && \
+RUN git clone --depth 1 -b openssl-3.0.8+quic https://github.com/quictls/openssl && \
     cd openssl && \
     ./config enable-tls1_3 && \
     make -j $(nproc) && \
