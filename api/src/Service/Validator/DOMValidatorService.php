@@ -16,7 +16,7 @@ class DOMValidatorService implements ValidatorServiceContract
     /**
      * {@inheritdoc}
      */
-    public function validate(Response $response)
+    public function validate(Response $response): false|ValidationResult
     {
         set_error_handler(fn ($severity, $message, $filename, $line) => throw new \ErrorException($message, 0, $severity, $filename, $line));
 

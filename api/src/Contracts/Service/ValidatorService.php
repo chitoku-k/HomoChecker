@@ -10,8 +10,8 @@ interface ValidatorService
 {
     /**
      * Return the result of validation.
-     * @param  Response              $response Response.
-     * @return bool|ValidationResult The result.
+     * @param  Response               $response Response.
+     * @return false|ValidationResult The result.
      */
-    public function validate(Response $response);
+    public function validate(Response $response): false|ValidationResult;
 }
