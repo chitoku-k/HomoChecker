@@ -164,7 +164,6 @@ COPY --from=runtime /etc/passwd /etc/
 COPY --from=runtime /etc/ssl/certs/ /etc/ssl/certs/
 COPY --from=runtime /lib/ /lib/
 COPY --from=runtime /lib64/ /lib64/
-COPY --from=runtime /tmp/ /tmp/
 COPY --from=runtime /usr/lib/ /usr/lib/
 COPY --from=runtime /usr/local/etc/ /usr/local/etc/
 COPY --from=runtime /usr/local/lib/ /usr/local/lib/
@@ -172,6 +171,7 @@ COPY --from=runtime /usr/local/lib64/ /usr/local/lib64/
 COPY --from=runtime /usr/local/sbin/php-fpm /usr/local/sbin/
 COPY --from=runtime /usr/share/ca-certificates/ /usr/share/ca-certificates/
 COPY --from=dependencies /var/www/html/api /var/www/html/api
+RUN --mount=from=dependencies,src=/bin,dst=/bin mkdir --mode=1777 /tmp
 STOPSIGNAL SIGQUIT
 EXPOSE 9000
 ENTRYPOINT ["/usr/local/sbin/php-fpm"]
