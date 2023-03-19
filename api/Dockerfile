@@ -59,7 +59,6 @@ COPY --from=curl /usr/local/bin/curl /usr/local/bin/
 COPY --from=curl /usr/local/bin/curl-config /usr/local/bin/
 COPY --from=curl /usr/local/lib/ /usr/local/lib/
 COPY --from=curl /usr/local/lib64/ /usr/local/lib64/
-RUN docker-php-source extract
 COPY php/ /usr/src/php/
 RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
     --mount=type=cache,id=api:/var/lib/apt/lists,target=/var/lib/apt/lists \
@@ -77,6 +76,7 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
         libxml2-dev \
         zlib1g-dev && \
     ldconfig && \
+    docker-php-source extract && \
     cd /usr/src/php/ext/curl && \
     patch -u < /usr/src/php/ext/curl/curl.stub+http3.patch && \
     patch -u < /usr/src/php/ext/curl/curl_arginfo+http3.patch && \
@@ -108,6 +108,7 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
     docker-php-ext-install \
         opcache \
         pdo_pgsql && \
+    docker-php-source delete && \
     apt-get -y remove \
         $PHPIZE_DEPS \
         libargon2-dev \
@@ -122,7 +123,6 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
         libxml2-dev \
         zlib1g-dev && \
     apt-get -y autoremove && \
-    docker-php-source delete && \
     rm -rf /tmp/* && \
     echo 'display_errors = 0' > /usr/local/etc/php/conf.d/overrides.ini && \
     sed -i '/^access\.log/d' /usr/local/etc/php-fpm.d/docker.conf
