@@ -16,8 +16,7 @@ RUN git clone --depth 1 -b openssl-3.0.8+quic https://github.com/quictls/openssl
     cd openssl && \
     ./config enable-tls1_3 && \
     make -j $(nproc) && \
-    make install_sw && \
-    ldconfig
+    make install_sw
 
 FROM build-dependencies AS nghttp3
 RUN git clone --depth=1 -b v0.10.0 https://github.com/ngtcp2/nghttp3 && \
@@ -46,11 +45,11 @@ RUN git clone --depth=1 -b curl-8_0_1 https://github.com/curl/curl && \
     autoreconf -fi && \
     ./configure --enable-alt-svc --with-openssl --with-nghttp2 --with-nghttp3 --with-ngtcp2 && \
     make -j $(nproc) && \
-    make install && \
-    ldconfig
+    make install
 
 FROM php:8.2.5-fpm AS runtime
 WORKDIR /var/www/html/api
+COPY --from=openssl /usr/local/bin/ /usr/local/bin/
 COPY --from=openssl /usr/local/include/ /usr/local/include/
 COPY --from=nghttp3 /usr/local/include/ /usr/local/include/
 COPY --from=ngtcp2 /usr/local/include/ /usr/local/include/
@@ -101,6 +100,8 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
     make install && \
     make clean && \
     ln -s /etc/ssl /usr/local/ssl && \
+    echo /usr/local/lib64 >> /etc/ld.so.conf.d/libc.conf && \
+    ldconfig && \
     pecl install \
         apcu && \
     docker-php-ext-enable \
