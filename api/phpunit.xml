@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd" bootstrap="./vendor/autoload.php" cacheDirectory=".phpunit.cache">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.1/phpunit.xsd" bootstrap="./vendor/autoload.php" cacheDirectory=".phpunit.cache">
   <php>
     <const name="CURL_HTTP_VERSION_3" value="30"/>
   </php>
@@ -8,7 +8,7 @@
       <directory suffix="Test.php">./tests</directory>
     </testsuite>
   </testsuites>
-  <coverage>
+  <source>
     <include>
       <directory>./src</directory>
     </include>
@@ -17,6 +17,8 @@
       <file>./src/index.php</file>
       <directory>./src/Providers</directory>
     </exclude>
+  </source>
+  <coverage>
     <report>
       <clover outputFile="build/logs/clover.xml"/>
       <html outputDirectory="build/coverage"/>
