@@ -23,7 +23,7 @@ HomoChecker はホモ（[@mpyw](https://twitter.com/mpyw)）にリダイレク�
 ### 設定方法
 
 DNS を適切に設定したあと、お使いの Web サーバーに合わせて設定を行います。  
-HomoChecker は HTTP/1.1、HTTP/2、HTTP/3（Alt-Svc のみ）に対応しています。
+HomoChecker は HTTP/1.1、HTTP/2、HTTP/3 に対応しています。
 
 #### Apache
 

@@ -8,11 +8,9 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Middleware;
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\Request as Psr7Request;
 use GuzzleHttp\Psr7\Response as Psr7Response;
-use HomoChecker\Contracts\Repository\AltsvcRepository;
 use HomoChecker\Contracts\Service\Client\Response;
 use HomoChecker\Service\ClientService;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -37,12 +35,7 @@ class ClientServiceTest extends TestCase
             'transfer_time' => 1.0,
         ]);
 
-        /** @var AltsvcRepository&MockInterface $altsvc */
-        $altsvc = m::mock(AltsvcRepository::class);
-        $altsvc->shouldReceive('findAll')
-               ->andReturn([]);
-
-        $service = new ClientService($client, $altsvc, 5);
+        $service = new ClientService($client, 5);
         $generator = $service->getAsync('https://foo.example.com/1');
 
         $generator->rewind();
@@ -86,12 +79,7 @@ class ClientServiceTest extends TestCase
             'transfer_time' => 1.0,
         ]);
 
-        /** @var AltsvcRepository&MockInterface $altsvc */
-        $altsvc = m::mock(AltsvcRepository::class);
-        $altsvc->shouldReceive('findAll')
-               ->andReturn([]);
-
-        $service = new ClientService($client, $altsvc, 5);
+        $service = new ClientService($client, 5);
         $generator = $service->getAsync('https://foo.example.com/2');
 
         $generator->rewind();
@@ -143,126 +131,6 @@ class ClientServiceTest extends TestCase
         $this->assertFalse($generator->valid());
     }
 
-    public function testGetAsyncWithAltsvcH2(): void
-    {
-        $container = [];
-        $handler = HandlerStack::create(new MockHandler([
-            new Psr7Response(301, [
-                'Location' => 'https://homo.example.com',
-                'Alt-Svc' => 'h2=":443"; ma=86400',
-            ], ''),
-        ]));
-        $handler->push(Middleware::history($container));
-
-        $client = new Client([
-            'allow_redirects' => false,
-            'http_errors' => false,
-            'handler' => $handler,
-            'transfer_time' => 1.0,
-        ]);
-
-        /** @var AltsvcRepository&MockInterface $altsvc */
-        $altsvc = m::mock(AltsvcRepository::class);
-        $altsvc->shouldReceive('findAll')
-               ->andReturn([]);
-
-        $service = new ClientService($client, $altsvc, 5);
-        $generator = $service->getAsync('https://foo.example.com/1');
-
-        $generator->rewind();
-        $this->assertTrue($generator->valid());
-
-        // (1/2) https://foo.example.com/1
-        /** @var string $actual */
-        $actual = $generator->key();
-        $this->assertEquals('https://foo.example.com/1', $actual);
-
-        /** @var PromiseInterface<Response> $actual */
-        $actual = $generator->current();
-        $this->assertInstanceOf(PromiseInterface::class, $actual);
-
-        $actual = $actual->wait();
-        $this->assertArrayNotHasKey('curl', $container[0]['options']);
-
-        /** @var Response $actual */
-        $this->assertInstanceOf(Response::class, $actual);
-        $this->assertEquals('https://homo.example.com', $actual->getHeaderLine('Location'));
-        $this->assertEquals(301, $actual->getStatusCode());
-        $this->assertEquals(1.0, $actual->getTotalTime());
-        $this->assertEquals(0.0, $actual->getStartTransferTime());
-        $this->assertNull($actual->getHttpVersion());
-        $this->assertNull($actual->getPrimaryIP());
-
-        $generator->next();
-        $this->assertTrue($generator->valid());
-    }
-
-    public function testGetAsyncWithAltsvcH3(): void
-    {
-        $container = [];
-        $handler = HandlerStack::create(new MockHandler([
-            new Psr7Response(301, [
-                'Location' => 'https://homo.example.com',
-                'Alt-Svc' => 'h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443"; ma=86400',
-            ], ''),
-        ]));
-        $handler->push(Middleware::history($container));
-
-        $client = new Client([
-            'allow_redirects' => false,
-            'http_errors' => false,
-            'handler' => $handler,
-            'transfer_time' => 1.0,
-        ]);
-
-        /** @var AltsvcRepository&MockInterface $altsvc */
-        $altsvc = m::mock(AltsvcRepository::class);
-        $altsvc->shouldReceive('findAll')
-               ->andReturn([
-                   [
-                       'url' => 'http://foo.example.com/1',
-                       'protocol' => 'h3',
-                   ],
-                   [
-                       'url' => 'https://homo.example.com',
-                       'protocol' => 'h3',
-                   ],
-               ]);
-        $altsvc->shouldReceive('save')
-               ->withArgs(['https://foo.example.com/1', 'h3', m::type('string')]);
-
-        $service = new ClientService($client, $altsvc, 5);
-        $generator = $service->getAsync('http://foo.example.com/1');
-
-        $generator->rewind();
-        $this->assertTrue($generator->valid());
-
-        // (1/2) https://foo.example.com/1
-        /** @var string $actual */
-        $actual = $generator->key();
-        $this->assertEquals('https://foo.example.com/1', $actual);
-
-        /** @var PromiseInterface<Response> $actual */
-        $actual = $generator->current();
-        $this->assertInstanceOf(PromiseInterface::class, $actual);
-
-        $actual = $actual->wait();
-        $this->assertEquals(CURL_HTTP_VERSION_3, $container[0]['options']['curl'][CURLOPT_HTTP_VERSION]);
-        $this->assertEquals(['foo.example.com'], $container[0]['request']->getHeader('Alt-Used'));
-
-        /** @var Response $actual */
-        $this->assertInstanceOf(Response::class, $actual);
-        $this->assertEquals('https://homo.example.com', $actual->getHeaderLine('Location'));
-        $this->assertEquals(301, $actual->getStatusCode());
-        $this->assertEquals(1.0, $actual->getTotalTime());
-        $this->assertEquals(0.0, $actual->getStartTransferTime());
-        $this->assertNull($actual->getHttpVersion());
-        $this->assertNull($actual->getPrimaryIP());
-
-        $generator->next();
-        $this->assertTrue($generator->valid());
-    }
-
     public function testGetAsyncWithException(): void
     {
         $client = new Client([
@@ -274,12 +142,7 @@ class ClientServiceTest extends TestCase
             'transfer_time' => 1.0,
         ]);
 
-        /** @var AltsvcRepository&MockInterface $altsvc */
-        $altsvc = m::mock(AltsvcRepository::class);
-        $altsvc->shouldReceive('findAll')
-               ->andReturn([]);
-
-        $service = new ClientService($client, $altsvc, 5);
+        $service = new ClientService($client, 5);
         $generator = $service->getAsync('https://baz.example.com');
 
         $generator->rewind();
@@ -313,12 +176,7 @@ class ClientServiceTest extends TestCase
                ->withArgs([$request, ['http_errors' => false]])
                ->andReturn($response);
 
-        /** @var AltsvcRepository&MockInterface $altsvc */
-        $altsvc = m::mock(AltsvcRepository::class);
-        $altsvc->shouldReceive('findAll')
-               ->andReturn([]);
-
-        $service = new ClientService($client, $altsvc, 5);
+        $service = new ClientService($client, 5);
         $actual = $service->send($request, [
             'http_errors' => false,
         ]);
@@ -340,12 +198,7 @@ class ClientServiceTest extends TestCase
                ->withArgs([$request, ['http_errors' => false]])
                ->andReturn($promise);
 
-        /** @var AltsvcRepository&MockInterface $altsvc */
-        $altsvc = m::mock(AltsvcRepository::class);
-        $altsvc->shouldReceive('findAll')
-               ->andReturn([]);
-
-        $service = new ClientService($client, $altsvc, 5);
+        $service = new ClientService($client, 5);
         $actual = $service->sendAsync($request, [
             'http_errors' => false,
         ]);
@@ -364,12 +217,7 @@ class ClientServiceTest extends TestCase
                ->withArgs(['GET', 'https://example.com', ['http_errors' => false]])
                ->andReturn($response);
 
-        /** @var AltsvcRepository&MockInterface $altsvc */
-        $altsvc = m::mock(AltsvcRepository::class);
-        $altsvc->shouldReceive('findAll')
-               ->andReturn([]);
-
-        $service = new ClientService($client, $altsvc, 5);
+        $service = new ClientService($client, 5);
         $actual = $service->request('GET', 'https://example.com', [
             'http_errors' => false,
         ]);
@@ -388,12 +236,7 @@ class ClientServiceTest extends TestCase
                ->withArgs(['GET', 'https://example.com', ['http_errors' => false]])
                ->andReturn($promise);
 
-        /** @var AltsvcRepository&MockInterface $altsvc */
-        $altsvc = m::mock(AltsvcRepository::class);
-        $altsvc->shouldReceive('findAll')
-               ->andReturn([]);
-
-        $service = new ClientService($client, $altsvc, 5);
+        $service = new ClientService($client, 5);
         $actual = $service->requestAsync('GET', 'https://example.com', [
             'http_errors' => false,
         ]);
@@ -408,12 +251,7 @@ class ClientServiceTest extends TestCase
         $client->shouldReceive('getConfig')
                ->andReturn(['http_errors' => false]);
 
-        /** @var AltsvcRepository&MockInterface $altsvc */
-        $altsvc = m::mock(AltsvcRepository::class);
-        $altsvc->shouldReceive('findAll')
-               ->andReturn([]);
-
-        $service = new ClientService($client, $altsvc, 5);
+        $service = new ClientService($client, 5);
         $actual = $service->getConfig();
 
         $this->assertEquals(['http_errors' => false], $actual);

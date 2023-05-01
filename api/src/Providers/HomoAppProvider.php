@@ -8,14 +8,12 @@ use HomoChecker\Action\CheckAction;
 use HomoChecker\Action\HealthCheckAction;
 use HomoChecker\Action\ListAction;
 use HomoChecker\Action\MetricsAction;
-use HomoChecker\Contracts\Repository\AltsvcRepository as AltsvcRepositoryContract;
 use HomoChecker\Contracts\Repository\HomoRepository as HomoRepositoryContract;
 use HomoChecker\Contracts\Repository\ProfileRepository as ProfileRepositoryContract;
 use HomoChecker\Http\NonBufferedBody;
 use HomoChecker\Middleware\AccessLogMiddleware;
 use HomoChecker\Middleware\ErrorMiddleware;
 use HomoChecker\Middleware\MetricsMiddleware;
-use HomoChecker\Repository\AltsvcRepository;
 use HomoChecker\Repository\HomoRepository;
 use HomoChecker\Repository\ProfileRepository;
 use Illuminate\Config\Repository;
@@ -39,7 +37,6 @@ class HomoAppProvider extends ServiceProvider
         $this->app->singleton(ListAction::class);
         $this->app->singleton(BadgeAction::class);
 
-        $this->app->singleton(AltsvcRepositoryContract::class, AltsvcRepository::class);
         $this->app->singleton(HomoRepositoryContract::class, HomoRepository::class);
         $this->app->singleton(ProfileRepositoryContract::class, ProfileRepository::class);
 

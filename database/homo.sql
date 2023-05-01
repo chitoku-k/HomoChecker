@@ -12,9 +12,3 @@ CREATE TABLE IF NOT EXISTS "profiles" (
     "expires_at" timestamp NOT NULL,
     UNIQUE ("screen_name")
 );
-
-CREATE TABLE IF NOT EXISTS "altsvcs" (
-    "url" varchar(255) NOT NULL PRIMARY KEY,
-    "protocol" varchar(20) NOT NULL,
-    "expires_at" timestamp NOT NULL
-);

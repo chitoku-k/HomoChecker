@@ -43,7 +43,7 @@ class ProfileRepositoryTest extends TestCase
           ->with('profiles')
           ->andReturn($builder);
 
-        $altsvc = new ProfileRepository();
-        $altsvc->save('foo', 'https://img.example.com/foo', '2022-12-31 23:59:59');
+        $profile = new ProfileRepository();
+        $profile->save('foo', 'https://img.example.com/foo', '2022-12-31 23:59:59');
     }
 }
