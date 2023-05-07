@@ -1,0 +1,33 @@
+# Created by https://www.toptal.com/developers/gitignore/api/composer,phpunit,php-cs-fixer
+# Edit at https://www.toptal.com/developers/gitignore?templates=composer,phpunit,php-cs-fixer
+
+### Composer ###
+composer.phar
+/vendor/
+cghooks.lock
+
+### PHP-CS-Fixer ###
+# Covers PHP CS Fixer
+# Reference: https://cs.symfony.com/
+
+# Generated files
+.php-cs-fixer.cache
+
+# Local config See: https://cs.symfony.com/doc/config.html
+.php-cs-fixer.php
+
+### PHPUnit ###
+# Covers PHPUnit
+# Reference: https://phpunit.de/
+
+# Generated files
+.phpunit.result.cache
+.phpunit.cache
+
+# PHPUnit
+/phpunit.xml
+
+# Build data
+/build/
+
+# End of https://www.toptal.com/developers/gitignore/api/composer,phpunit,php-cs-fixer
