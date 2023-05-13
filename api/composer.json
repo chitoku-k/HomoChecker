@@ -4,10 +4,10 @@
     "require": {
         "guzzlehttp/guzzle": "^7.5",
         "guzzlehttp/oauth-subscriber": "^0.6.0",
-        "illuminate/config": "^10.9",
-        "illuminate/database": "^10.9",
-        "illuminate/events": "^10.9",
-        "illuminate/log": "^10.9",
+        "illuminate/config": "^10.10",
+        "illuminate/database": "^10.10",
+        "illuminate/events": "^10.10",
+        "illuminate/log": "^10.10",
         "middlewares/access-log": "^2.1",
         "phpoption/phpoption": "^1.9",
         "promphp/prometheus_client_php": "^2.7",
@@ -22,7 +22,7 @@
         "mockery/mockery": "^1.5",
         "php-coveralls/php-coveralls": "^2.5",
         "phpunit/phpunit": "^10",
-        "vimeo/psalm": "^5.9"
+        "vimeo/psalm": "^5.11"
     },
     "replace": {
         "symfony/polyfill-ctype": "*",
