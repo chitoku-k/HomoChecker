@@ -1,0 +1,73 @@
+name: Update Dockerfile by git Workflow
+on:
+  workflow_call:
+    inputs:
+      name:
+        type: string
+        required: true
+      directory:
+        type: string
+        default: ''
+      filename:
+        type: string
+        required: true
+      arg:
+        type: string
+        required: true
+      git-url:
+        type: string
+        required: true
+      git-tag-filter:
+        type: string
+        required: true
+    secrets:
+      GH_TOKEN:
+        required: true
+      PAT:
+        required: true
+
+jobs:
+  update:
+    name: Update ${{ inputs.name }}
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      GIT_AUTHOR_NAME: 'github-actions[bot]'
+      GIT_AUTHOR_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
+      GIT_COMMITTER_NAME: 'github-actions[bot]'
+      GIT_COMMITTER_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PAT }}
+      - name: Get current version
+        id: current-version
+        run: |
+          sed -n -E 's/^ARG\s${{ inputs.arg }}=(.+)/version=\1/p' '${{ inputs.filename }}' >> "$GITHUB_OUTPUT"
+      - name: Get new version
+        id: new-version
+        run: |
+          git clone --filter=tree:0 '${{ inputs.git-url }}' '${{ inputs.name }}'
+          cd '${{ inputs.name }}'
+          echo "version=$(git tag --list --sort=-refname '${{ inputs.git-tag-filter }}' | head -n 1)" >> "$GITHUB_OUTPUT"
+      - name: Update version
+        if: ${{ steps.current-version.outputs.version != steps.new-version.outputs.version }}
+        run: |
+          name=${{ inputs.name }}
+          directory=${{ inputs.directory }}
+
+          current_version=${{ steps.current-version.outputs.version }}
+          new_version=${{ steps.new-version.outputs.version }}
+
+          title="Bump $name from $current_version to $new_version in $directory"
+          body="Bumps $name from $current_version to $new_version."
+
+          sed -i -E "s/(${{ inputs.arg }}=).+/\\1$new_version/" '${{ inputs.filename }}'
+
+          git checkout -b "dependencies/docker${directory%/}/$name-$new_version"
+          git add --all
+          git commit --message="$title"
+          git push origin HEAD
+
+          gh pr create --base=master --title="$title" --body="$body"
