@@ -1,0 +1,55 @@
+name: Dependencies Workflow
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 15 * * 5'
+
+jobs:
+  openssl:
+    uses: ./.github/workflows/_update-dockerfile-by-git.yml
+    with:
+      name: openssl
+      directory: /api
+      filename: api/Dockerfile
+      arg: OPENSSL_VERSION
+      git-url: https://github.com/quictls/openssl
+      git-tag-filter: openssl-*quic*
+    secrets:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PAT: ${{ secrets.PAT }}
+  nghttp3:
+    uses: ./.github/workflows/_update-dockerfile-by-git.yml
+    with:
+      name: nghttp3
+      directory: /api
+      filename: api/Dockerfile
+      arg: NGHTTP3_VERSION
+      git-url: https://github.com/ngtcp2/nghttp3
+      git-tag-filter: v*
+    secrets:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PAT: ${{ secrets.PAT }}
+  ngtcp2:
+    uses: ./.github/workflows/_update-dockerfile-by-git.yml
+    with:
+      name: ngtcp2
+      directory: /api
+      filename: api/Dockerfile
+      arg: NGTCP2_VERSION
+      git-url: https://github.com/ngtcp2/ngtcp2
+      git-tag-filter: v*
+    secrets:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PAT: ${{ secrets.PAT }}
+  curl:
+    uses: ./.github/workflows/_update-dockerfile-by-git.yml
+    with:
+      name: curl
+      directory: /api
+      filename: api/Dockerfile
+      arg: CURL_VERSION
+      git-url: https://github.com/curl/curl
+      git-tag-filter: curl-*_*_*
+    secrets:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PAT: ${{ secrets.PAT }}
