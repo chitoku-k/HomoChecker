@@ -12,14 +12,16 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
         pkg-config
 
 FROM build-dependencies AS openssl
-RUN git clone --depth 1 -b openssl-3.0.8+quic https://github.com/quictls/openssl && \
+ARG OPENSSL_VERSION=openssl-3.0.8+quic
+RUN git clone --depth 1 -b $OPENSSL_VERSION https://github.com/quictls/openssl && \
     cd openssl && \
     ./config enable-tls1_3 && \
     make -j $(nproc) && \
     make install_sw
 
 FROM build-dependencies AS nghttp3
-RUN git clone --depth=1 -b v0.10.0 https://github.com/ngtcp2/nghttp3 && \
+ARG NGHTTP3_VERSION=v0.10.0
+RUN git clone --depth=1 -b $NGHTTP3_VERSION https://github.com/ngtcp2/nghttp3 && \
     cd nghttp3 && \
     autoreconf -fi && \
     ./configure --enable-lib-only && \
@@ -29,7 +31,8 @@ RUN git clone --depth=1 -b v0.10.0 https://github.com/ngtcp2/nghttp3 && \
 FROM build-dependencies AS ngtcp2
 COPY --from=openssl /usr/local/ /usr/local/
 COPY --from=nghttp3 /usr/local/ /usr/local/
-RUN git clone --depth=1 -b v0.14.1 https://github.com/ngtcp2/ngtcp2 && \
+ARG NGTCP2_VERSION=v0.14.1
+RUN git clone --depth=1 -b $NGTCP2_VERSION https://github.com/ngtcp2/ngtcp2 && \
     cd ngtcp2 && \
     autoreconf -fi && \
     ./configure PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig --enable-lib-only && \
@@ -40,7 +43,8 @@ FROM build-dependencies AS curl
 COPY --from=openssl /usr/local/ /usr/local/
 COPY --from=nghttp3 /usr/local/ /usr/local/
 COPY --from=ngtcp2 /usr/local/ /usr/local/
-RUN git clone --depth=1 -b curl-8_0_1 https://github.com/curl/curl && \
+ARG CURL_VERSION=curl-8_0_1
+RUN git clone --depth=1 -b $CURL_VERSION https://github.com/curl/curl && \
     cd curl && \
     autoreconf -fi && \
     ./configure --enable-alt-svc --with-openssl --with-nghttp2 --with-nghttp3 --with-ngtcp2 && \
