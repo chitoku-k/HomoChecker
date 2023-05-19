@@ -29,6 +29,18 @@ jobs:
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       PAT: ${{ secrets.PAT }}
+  ngtcp2:
+    uses: ./.github/workflows/_update-dockerfile-by-git.yml
+    with:
+      name: ngtcp2
+      directory: /api
+      filename: api/Dockerfile
+      arg: NGTCP2_VERSION
+      git-url: https://github.com/ngtcp2/ngtcp2
+      git-tag-filter: v*
+    secrets:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PAT: ${{ secrets.PAT }}
   curl:
     uses: ./.github/workflows/_update-dockerfile-by-git.yml
     with:
