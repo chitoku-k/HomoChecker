@@ -1,0 +1,46 @@
+name: Update Composer Packages Workflow
+on:
+  workflow_call:
+    inputs:
+      directory:
+        type: string
+        default: .
+    secrets:
+      GH_TOKEN:
+        required: true
+      PAT:
+        required: true
+
+jobs:
+  update:
+    name: Update Composer Packages
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      GIT_AUTHOR_NAME: 'github-actions[bot]'
+      GIT_AUTHOR_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
+      GIT_COMMITTER_NAME: 'github-actions[bot]'
+      GIT_COMMITTER_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PAT }}
+      - name: Update version
+        run: |
+          directory=${{ inputs.directory }}
+
+          title="Bump dependencies in $directory"
+          body="Bumps dependencies in $directory."
+
+          (cd "${directory#/}" && composer update)
+          if git diff --exit-code &> /dev/null; then
+            exit 0
+          fi
+
+          git checkout -b "dependencies/composer${directory%/}all"
+          git add "${directory#/}/composer.lock"
+          git commit --message="$title"
+          git push origin HEAD
+
+          gh pr create --base=master --title="$title" --body="$body"
