@@ -38,7 +38,7 @@ jobs:
             exit 0
           fi
 
-          git checkout -b "dependencies/composer${directory%/}all"
+          git checkout -b "dependencies/composer${directory#.}/all"
           git add "${directory#/}/composer.lock"
           git commit --message="$title"
           git push origin HEAD
