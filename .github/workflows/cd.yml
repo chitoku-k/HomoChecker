@@ -4,6 +4,10 @@ on:
     tags:
       - '*'
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   build:
     name: Build
@@ -50,11 +54,19 @@ jobs:
     steps:
       - name: Set up kubectl
         uses: azure/setup-kubectl@v3
-      - name: Set context
-        uses: azure/k8s-set-context@v3
+      - name: Set up ID token
+        uses: actions/github-script@v6
+        id: id-token
         with:
-          method: service-account
-          k8s-url: https://k8s.chitoku.jp
-          k8s-secret: ${{ secrets.K8S_SECRET }}
+          result-encoding: string
+          script: |
+            return await core.getIDToken('k8s.chitoku.jp');
+      - name: Set context
+        run: |
+          kubectl config set-cluster k8s.chitoku.jp --server=https://k8s.chitoku.jp
+          kubectl config set-credentials github-actions --token=${{ steps.id-token.outputs.result }}
+          kubectl config set-context k8s.chitoku.jp --cluster=k8s.chitoku.jp --user=github-actions
+          kubectl config use-context k8s.chitoku.jp
       - name: Rollout restart
-        run: kubectl rollout restart deployment/homochecker-app
+        run: |
+          kubectl rollout restart deployment/homochecker-app
