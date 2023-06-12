@@ -1,4 +1,4 @@
-# syntax = docker/dockerfile:experimental
+# syntax = docker/dockerfile:1
 FROM node:20.2.0-slim AS dependencies
 WORKDIR /usr/src/client
 RUN --mount=type=cache,id=client:/var/cache/apt,target=/var/cache/apt \
