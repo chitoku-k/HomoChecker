@@ -11,19 +11,13 @@ jobs:
         uses: actions/checkout@v3
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Cache Buildx
-        uses: actions/cache@v3
-        with:
-          path: /tmp/buildx-cache
-          key: buildx-apitest-${{ github.sha }}
-          restore-keys: buildx-apitest-
       - name: Build
         uses: docker/build-push-action@v4
         with:
           context: ./api
           target: dev
-          cache-from: type=local,src=/tmp/buildx-cache
-          cache-to: type=local,mode=max,dest=/tmp/buildx-cache.new
+          cache-from: type=gha,scope=${{ github.ref_name }}-apitest
+          cache-to: type=gha,scope=${{ github.ref_name }}-apitest,mode=max
           load: true
           tags: homochecker-test_api
       - name: Run tests
@@ -47,10 +41,6 @@ jobs:
         env:
           COMPOSE_PROJECT_NAME: homochecker-test
           COMPOSE_FILE: compose.test.yaml
-      - name: Move cache
-        run: |
-          rm -rf /tmp/buildx-cache
-          mv /tmp/buildx-cache{.new,}
   web-test:
     name: Web Tests
     runs-on: ubuntu-latest
@@ -59,19 +49,13 @@ jobs:
         uses: actions/checkout@v3
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Cache Buildx
-        uses: actions/cache@v3
-        with:
-          path: /tmp/buildx-cache
-          key: buildx-webtest-${{ github.sha }}
-          restore-keys: buildx-webtest-
       - name: Build
         uses: docker/build-push-action@v4
         with:
           context: .
           target: dev
-          cache-from: type=local,src=/tmp/buildx-cache
-          cache-to: type=local,mode=max,dest=/tmp/buildx-cache.new
+          cache-from: type=gha,scope=${{ github.ref_name }}-webtest
+          cache-to: type=gha,scope=${{ github.ref_name }}-webtest,mode=max
           load: true
           tags: homochecker-test_build
       - name: Run lints
@@ -81,10 +65,6 @@ jobs:
         env:
           COMPOSE_PROJECT_NAME: homochecker-test
           COMPOSE_FILE: compose.test.yaml
-      - name: Move cache
-        run: |
-          rm -rf /tmp/buildx-cache
-          mv /tmp/buildx-cache{.new,}
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -93,20 +73,10 @@ jobs:
         uses: actions/checkout@v3
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Cache Buildx
-        uses: actions/cache@v3
-        with:
-          path: /tmp/buildx-cache
-          key: buildx-${{ github.sha }}
-          restore-keys: buildx-
       - name: Build
         uses: docker/bake-action@v3.0.1
         with:
           files: docker-bake.hcl
           set: |
-            *.cache-from=type=local,src=/tmp/buildx-cache
-            *.cache-to=type=local,mode=max,dest=/tmp/buildx-cache.new
-      - name: Move cache
-        run: |
-          rm -rf /tmp/buildx-cache
-          mv /tmp/buildx-cache{.new,}
+            *.cache-from=type=gha
+            *.cache-to=type=gha,mode=max

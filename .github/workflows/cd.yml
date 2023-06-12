@@ -23,12 +23,6 @@ jobs:
           registry: container.chitoku.jp
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
-      - name: Cache Buildx
-        uses: actions/cache@v3
-        with:
-          path: /tmp/buildx-cache
-          key: buildx-${{ github.sha }}
-          restore-keys: buildx-
       - name: Unpackage fonts
         run: |
           gpg --quiet --batch --yes --decrypt --passphrase=${{ secrets.FONTS_PASSPHRASE }} --output client/fonts.tar.gz client/fonts.tar.gz.gpg
@@ -40,12 +34,8 @@ jobs:
           files: docker-bake.hcl
           push: true
           set: |
-            *.cache-from=type=local,src=/tmp/buildx-cache
-            *.cache-to=type=local,mode=max,dest=/tmp/buildx-cache.new
-      - name: Move cache
-        run: |
-          rm -rf /tmp/buildx-cache
-          mv /tmp/buildx-cache{.new,}
+            *.cache-from=type=gha
+            *.cache-to=type=gha,mode=max
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
