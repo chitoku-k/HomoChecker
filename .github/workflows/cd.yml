@@ -41,7 +41,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: container.chitoku.jp
-          username: oauth2accesstoken
+          username: oidc-idtoken
           password: ${{ steps.id-token.outputs.result }}
       - name: Push to Container Registry
         run: |
