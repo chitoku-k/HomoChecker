@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:1
-FROM debian:bullseye-slim AS build-dependencies
+FROM debian:bookworm-slim AS build-dependencies
 RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
     --mount=type=cache,id=api:/var/lib/apt/lists,target=/var/lib/apt/lists \
     apt-get -y update && \
