@@ -60,3 +60,10 @@ jobs:
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       PAT: ${{ secrets.PAT }}
+  yarn:
+    uses: ./.github/workflows/_update-yarn.yml
+    with:
+      directory: /client
+    secrets:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PAT: ${{ secrets.PAT }}
