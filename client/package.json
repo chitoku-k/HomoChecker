@@ -4,7 +4,7 @@
   "author": "Chitoku <odango@chitoku.jp>",
   "description": "A client application for HomoChecker",
   "homepage": "https://homo.chitoku.jp:4545/",
-  "packageManager": "yarn@3.6.0",
+  "packageManager": "yarn@3.6.1",
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
