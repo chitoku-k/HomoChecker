@@ -7,6 +7,19 @@ updates:
     day: saturday
     time: "00:00"
     timezone: Asia/Tokyo
+- package-ecosystem: composer
+  directory: "/api"
+  schedule:
+    interval: weekly
+    day: saturday
+    time: "00:00"
+    timezone: Asia/Tokyo
+  groups:
+    illuminate:
+      patterns:
+      - illuminate/*
+  open-pull-requests-limit: 99
+  versioning-strategy: increase-if-necessary
 - package-ecosystem: npm
   directory: "/client"
   schedule:
