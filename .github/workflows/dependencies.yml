@@ -5,6 +5,13 @@ on:
     - cron: '0 15 * * 5'
 
 jobs:
+  composer:
+    uses: ./.github/workflows/_update-composer-packages.yml
+    with:
+      directory: /api
+    secrets:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PAT: ${{ secrets.PAT }}
   openssl:
     uses: ./.github/workflows/_update-dockerfile-by-git.yml
     with:
