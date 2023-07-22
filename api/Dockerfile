@@ -31,7 +31,7 @@ RUN git clone --depth=1 -b $NGHTTP3_VERSION https://github.com/ngtcp2/nghttp3 &&
 FROM build-dependencies AS ngtcp2
 COPY --from=openssl /usr/local/ /usr/local/
 COPY --from=nghttp3 /usr/local/ /usr/local/
-ARG NGTCP2_VERSION=v0.15.0
+ARG NGTCP2_VERSION=v0.17.0
 RUN git clone --depth=1 -b $NGTCP2_VERSION https://github.com/ngtcp2/ngtcp2 && \
     cd ngtcp2 && \
     autoreconf -fi && \
@@ -43,7 +43,7 @@ FROM build-dependencies AS curl
 COPY --from=openssl /usr/local/ /usr/local/
 COPY --from=nghttp3 /usr/local/ /usr/local/
 COPY --from=ngtcp2 /usr/local/ /usr/local/
-ARG CURL_VERSION=curl-8_1_2
+ARG CURL_VERSION=curl-8_2_0
 RUN git clone --depth=1 -b $CURL_VERSION https://github.com/curl/curl && \
     cd curl && \
     autoreconf -fi && \
