@@ -48,9 +48,8 @@ jobs:
       - name: Get new version
         id: new-version
         run: |
-          git clone --filter=tree:0 '${{ inputs.git-url }}' '${{ inputs.name }}'
-          cd '${{ inputs.name }}'
-          echo "version=$(git tag --list --sort=-version:refname '${{ inputs.git-tag-filter }}' | head -n 1)" >> "$GITHUB_OUTPUT"
+          git ls-remote --refs --tags --sort=-version:refname '${{ inputs.git-url }}' '${{ inputs.git-tag-filter }}' |
+            awk 'NR == 1 { gsub(".*/", ""); print "version=" $1 }' >> "$GITHUB_OUTPUT"
       - name: Update version
         if: ${{ steps.current-version.outputs.version != steps.new-version.outputs.version }}
         run: |
