@@ -12,7 +12,7 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
         pkg-config
 
 FROM build-dependencies AS openssl
-ARG OPENSSL_VERSION=openssl-3.0.9-quic1
+ARG OPENSSL_VERSION=openssl-3.1.2-quic1
 RUN git clone --depth 1 -b $OPENSSL_VERSION https://github.com/quictls/openssl && \
     cd openssl && \
     ./config enable-tls1_3 && \
