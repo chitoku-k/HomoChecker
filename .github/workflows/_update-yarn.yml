@@ -24,7 +24,7 @@ jobs:
       YARN_ENABLE_IMMUTABLE_INSTALLS : 'false'
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.PAT }}
       - name: Update version
