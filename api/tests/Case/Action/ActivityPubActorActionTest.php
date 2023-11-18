@@ -33,6 +33,8 @@ class ActivityPubActorActionTest extends TestCase
                         ],
                         'id' => 'https://example.com/actor',
                         'type' => 'Application',
+                        'inbox' => 'https://example.com/actor/inbox',
+                        'outbox' => 'https://example.com/actor/outbox',
                         'preferredUsername' => 'example.com',
                         'publicKey' => [
                             'id' => 'https://example.com/actor#main-key',
@@ -55,6 +57,8 @@ class ActivityPubActorActionTest extends TestCase
             ],
             'id' => 'https://example.com/actor',
             'type' => 'Application',
+            'inbox' => 'https://example.com/actor/inbox',
+            'outbox' => 'https://example.com/actor/outbox',
             'preferredUsername' => 'example.com',
             'publicKey' => [
                 'id' => 'https://example.com/actor#main-key',
