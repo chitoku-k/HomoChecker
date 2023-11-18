@@ -42,6 +42,7 @@ return [
     ],
     'activityPub.actor' => [
         'id' => env('HOMOCHECKER_AP_ACTOR_ID'),
+        'preferred_username' => env('HOMOCHECKER_AP_ACTOR_PREFERRED_USERNAME'),
         'public_key' => env('HOMOCHECKER_AP_ACTOR_PUBLIC_KEY'),
     ],
     'client' => [
