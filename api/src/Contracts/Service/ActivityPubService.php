@@ -10,4 +10,9 @@ interface ActivityPubService
      * @return array The actor object that describes this application.
      */
     public function actor(): array;
+
+    /**
+     * Retrieves the Web Finger of the given resource.
+     */
+    public function webFinger(string $resource): null|array;
 }

@@ -3,10 +3,19 @@ API リファレンス
 
 ## 目次
 
+- [Web Finger API](#web-finger-api)
 - [Activity Streams API](#activity-streams-api)
 - [Check API](#check-api)
 - [List API](#list-api)
 - [Badge API](#badge-api)
+
+## Web Finger API
+
+```
+/.well-known/webfinger?resource={resource}
+```
+
+指定されたリソースの情報を [Web Finger](https://datatracker.ietf.org/doc/html/rfc7033) 形式で返します。
 
 ## Activity Streams API
 

@@ -43,4 +43,50 @@ class ActivityPubServiceTest extends TestCase
         $actual = $activityPub->actor();
         $this->assertEquals($expected, $actual);
     }
+
+    public function testInstanceActorWebFinger(): void
+    {
+        $activityPub = new ActivityPubService($this->id, $this->preferredUsername, $this->publicKeyPem);
+
+        $expected = [
+            'subject' => 'acct:example.com@example.com',
+            'links' => [
+                [
+                    'rel' => 'self',
+                    'type' => 'application/activity+json',
+                    'href' => 'https://example.com/actor',
+                ],
+            ],
+        ];
+
+        $actual = $activityPub->webFinger('acct:example.com@example.com');
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testInstanceActorWebFingerByURL(): void
+    {
+        $activityPub = new ActivityPubService($this->id, $this->preferredUsername, $this->publicKeyPem);
+
+        $expected = [
+            'subject' => 'acct:example.com@example.com',
+            'links' => [
+                [
+                    'rel' => 'self',
+                    'type' => 'application/activity+json',
+                    'href' => 'https://example.com/actor',
+                ],
+            ],
+        ];
+
+        $actual = $activityPub->webFinger('https://example.com/actor');
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testNonActorWebFinger(): void
+    {
+        $activityPub = new ActivityPubService($this->id, $this->preferredUsername, $this->publicKeyPem);
+
+        $actual = $activityPub->webFinger('acct:non-actor@example.com');
+        $this->assertNull($actual);
+    }
 }

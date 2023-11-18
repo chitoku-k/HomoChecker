@@ -33,4 +33,28 @@ class ActivityPubService implements ActivityPubServiceContract
             ],
         ];
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function webFinger(string $resource): null|array
+    {
+        $domain = \parse_url($this->id, \PHP_URL_HOST);
+        $acct = "acct:{$this->preferredUsername}@{$domain}";
+
+        if ($resource === $acct || $resource === $this->id) {
+            return [
+                'subject' => $acct,
+                'links' => [
+                    [
+                        'rel' => 'self',
+                        'type' => 'application/activity+json',
+                        'href' => $this->id,
+                    ],
+                ],
+            ];
+        }
+
+        return null;
+    }
 }
