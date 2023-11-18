@@ -10,9 +10,7 @@ use Slim\Http\ServerRequest as Request;
 
 class MetricsAction
 {
-    public function __construct(protected RegistryInterface $registry, protected RendererInterface $format)
-    {
-    }
+    public function __construct(protected RegistryInterface $registry, protected RendererInterface $format) {}
 
     public function __invoke(Request $request, Response $response, array $args)
     {

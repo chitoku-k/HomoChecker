@@ -1,5 +1,6 @@
 Dockerfile
 README.md
+activity_pub_actor*
 cghooks.lock
 psalm.xml
 build

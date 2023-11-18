@@ -31,3 +31,6 @@ cghooks.lock
 /build/
 
 # End of https://www.toptal.com/developers/gitignore/api/composer,phpunit,php-cs-fixer
+
+### ActivityPub data ###
+activity_pub_actor*

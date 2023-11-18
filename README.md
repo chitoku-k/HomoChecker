@@ -96,6 +96,8 @@ $ export HOMOCHECKER_API_HOST=api
 #### PHP-FPM
 
 ```sh
+$ export HOMOCHECKER_AP_ACTOR_ID=https://example.com/actor
+$ export HOMOCHECKER_AP_ACTOR_PUBLIC_KEY=/path/to/public_key
 $ export HOMOCHECKER_DB_HOST=database
 $ export HOMOCHECKER_DB_PORT=5432
 $ export HOMOCHECKER_DB_USERNAME=homo

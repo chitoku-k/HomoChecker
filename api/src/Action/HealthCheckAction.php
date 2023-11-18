@@ -10,9 +10,7 @@ use Slim\Http\ServerRequest as Request;
 
 class HealthCheckAction
 {
-    public function __construct(protected HomoService $homo)
-    {
-    }
+    public function __construct(protected HomoService $homo) {}
 
     public function __invoke(Request $request, Response $response, array $args)
     {

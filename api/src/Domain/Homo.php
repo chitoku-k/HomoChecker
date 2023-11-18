@@ -30,9 +30,6 @@ class Homo
      */
     protected ?Profile $profile = null;
 
-    /**
-     * @param array|object $homo
-     */
     public function __construct(array|object $homo = null)
     {
         $homo = (object) $homo;

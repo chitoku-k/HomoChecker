@@ -10,9 +10,7 @@ use Psr\Http\Message\StreamFactoryInterface;
 
 class ErrorResponseFactory implements ResponseFactoryInterface
 {
-    public function __construct(protected ResponseFactoryInterface $responseFactory, protected StreamFactoryInterface $streamFactory)
-    {
-    }
+    public function __construct(protected ResponseFactoryInterface $responseFactory, protected StreamFactoryInterface $streamFactory) {}
 
     public function createResponse(int $code = 200, string $reasonPhrase = ''): ResponseInterface
     {

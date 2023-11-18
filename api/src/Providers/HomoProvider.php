@@ -5,6 +5,7 @@ namespace HomoChecker\Providers;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use HomoChecker\Contracts\Service\ActivityPubService as ActivityPubServiceContract;
 use HomoChecker\Contracts\Service\CheckService as CheckServiceContract;
 use HomoChecker\Contracts\Service\ClientService as ClientServiceContract;
 use HomoChecker\Contracts\Service\HomoService as HomoServiceContract;
@@ -12,6 +13,7 @@ use HomoChecker\Middleware\AccessLogMiddleware;
 use HomoChecker\Middleware\ErrorMiddleware;
 use HomoChecker\Middleware\MetricsMiddleware;
 use HomoChecker\Providers\Support\LogServiceProvider;
+use HomoChecker\Service\ActivityPubService;
 use HomoChecker\Service\CheckService;
 use HomoChecker\Service\ClientService;
 use HomoChecker\Service\HomoService;
@@ -70,6 +72,17 @@ class HomoProvider extends ServiceProvider
         $this->app->when(Client::class)
             ->needs('$config')
             ->giveConfig('client');
+
+        $this->app->singleton(ActivityPubServiceContract::class, ActivityPubService::class);
+        $this->app->when(ActivityPubService::class)
+            ->needs('$id')
+            ->give(fn (Container $app) => $app->make('config')->get('activityPub.actor')['id']);
+        $this->app->when(ActivityPubService::class)
+            ->needs('$publicKeyPem')
+            ->give(function (Container $app) {
+                $actor = $app->make('config')->get('activityPub.actor');
+                return \file_get_contents($actor['public_key']);
+            });
 
         $this->app->singleton(CheckServiceContract::class, fn (Container $app) => new CheckService(
             $app->make(ClientServiceContract::class),

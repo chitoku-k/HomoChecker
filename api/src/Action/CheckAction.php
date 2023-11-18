@@ -12,9 +12,7 @@ use Slim\Http\ServerRequest as Request;
 
 class CheckAction
 {
-    public function __construct(protected CheckService $check, protected HomoService $homo, protected StreamInterface $stream)
-    {
-    }
+    public function __construct(protected CheckService $check, protected HomoService $homo, protected StreamInterface $stream) {}
 
     public function __invoke(Request $request, Response $response, array $args)
     {

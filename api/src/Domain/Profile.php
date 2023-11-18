@@ -10,9 +10,6 @@ class Profile
      */
     protected ?string $iconUrl;
 
-    /**
-     * @param array|object $profile
-     */
     public function __construct(array|object $profile = null)
     {
         $profile = (object) $profile;

@@ -28,8 +28,7 @@ class MetricsMiddleware implements MiddlewareInterface
         protected Summary $httpServerRequestsSeconds,
         protected RouteResolverInterface $routeResolver,
         protected array $skipPaths,
-    ) {
-    }
+    ) {}
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {

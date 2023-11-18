@@ -36,8 +36,7 @@ class CheckService implements CheckServiceContract
         protected Counter $checkErrorCounter,
         protected Collection $profiles,
         protected Collection $validators,
-    ) {
-    }
+    ) {}
 
     /**
      * Validate a user.

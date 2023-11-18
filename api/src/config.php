@@ -40,6 +40,10 @@ return [
         '/healthz',
         '/metrics',
     ],
+    'activityPub.actor' => [
+        'id' => env('HOMOCHECKER_AP_ACTOR_ID'),
+        'public_key' => env('HOMOCHECKER_AP_ACTOR_PUBLIC_KEY'),
+    ],
     'client' => [
         'timeout' => 5,
         'allow_redirects' => false,

@@ -3,9 +3,19 @@ API リファレンス
 
 ## 目次
 
+- [Activity Streams API](#activity-streams-api)
 - [Check API](#check-api)
 - [List API](#list-api)
 - [Badge API](#badge-api)
+
+## Activity Streams API
+
+```
+/actor
+```
+
+アプリケーションの情報を [Activity Streams](https://www.w3.org/TR/activitystreams-core/) 形式で返します。  
+[The Security Vocabulary](https://w3c-ccg.github.io/security-vocab/) の一部を実装します。
 
 ## Check API
 
