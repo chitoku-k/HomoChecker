@@ -18,7 +18,17 @@ class ActivityPubServiceTest extends TestCase
 
         $this->id = 'https://example.com/actor';
         $this->preferredUsername = 'example.com';
-        $this->publicKeyPem = "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAUVd1lBkQ8I/3PJIRLgXbm2TDv16wQBXuN09wWo8lh74=\n-----END PUBLIC KEY-----\n";
+        $this->publicKeyPem = <<<'EOF'
+        -----BEGIN PUBLIC KEY-----
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsBn2IZ9I0tiwtlmQclZ6
+        J2IEaV/h6lDidqMrVFwRbS/c2wKqtT+OnqmXSYl5Mvl/9wDxwFiHOe87FOdC0gHz
+        Exjkq4EsWrsleMLAAagpDSxLyeFtdFJKLG08fT75hhZqyQIhTCk8cRc5lqpex6aP
+        nfouBWaUvPh+VyJjNTUykoSHTR11/M7mM8lwu1d2OkOQWn7C3Wy9e85acxGYLTSO
+        K4YSearvK97gNaOg6JU56H8QtBMzWDeuaTh11+v2s4uc1flADP5TzKNtwg51D/AK
+        O2lj+Eq1ksYsoqi/uqcBcVHgV3ZYrGIyRWf31+zlpuVlrnbrgCvN6cicSxlU8PQq
+        1QIDAQAB
+        -----END PUBLIC KEY-----
+        EOF;
     }
 
     public function testActor(): void
@@ -38,7 +48,7 @@ class ActivityPubServiceTest extends TestCase
             'publicKey' => [
                 'id' => 'https://example.com/actor#main-key',
                 'owner' => 'https://example.com/actor',
-                'publicKeyPem' => "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAUVd1lBkQ8I/3PJIRLgXbm2TDv16wQBXuN09wWo8lh74=\n-----END PUBLIC KEY-----\n",
+                'publicKeyPem' => "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsBn2IZ9I0tiwtlmQclZ6\nJ2IEaV/h6lDidqMrVFwRbS/c2wKqtT+OnqmXSYl5Mvl/9wDxwFiHOe87FOdC0gHz\nExjkq4EsWrsleMLAAagpDSxLyeFtdFJKLG08fT75hhZqyQIhTCk8cRc5lqpex6aP\nnfouBWaUvPh+VyJjNTUykoSHTR11/M7mM8lwu1d2OkOQWn7C3Wy9e85acxGYLTSO\nK4YSearvK97gNaOg6JU56H8QtBMzWDeuaTh11+v2s4uc1flADP5TzKNtwg51D/AK\nO2lj+Eq1ksYsoqi/uqcBcVHgV3ZYrGIyRWf31+zlpuVlrnbrgCvN6cicSxlU8PQq\n1QIDAQAB\n-----END PUBLIC KEY-----",
             ],
         ];
 
