@@ -41,7 +41,7 @@ class ActivityPubService implements ActivityPubServiceContract
      */
     public function webFinger(string $resource): null|array
     {
-        $domain = \parse_url($this->id, \PHP_URL_HOST);
+        $domain = parse_url($this->id, \PHP_URL_HOST);
         $acct = "acct:{$this->preferredUsername}@{$domain}";
 
         if ($resource === $acct || $resource === $this->id) {
