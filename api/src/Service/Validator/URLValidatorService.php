@@ -9,9 +9,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 class URLValidatorService implements ValidatorServiceContract
 {
-    public function __construct(protected string $regex)
-    {
-    }
+    public function __construct(protected string $regex) {}
 
     /**
      * {@inheritdoc}

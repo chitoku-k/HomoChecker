@@ -19,8 +19,7 @@ class TwitterProfileService implements ProfileServiceContract
         protected ClientInterface $client,
         protected ProfileRepositoryContract $repository,
         protected Counter $profileErrorCounter,
-    ) {
-    }
+    ) {}
 
     /**
      * Get the URL of profile image of the user.

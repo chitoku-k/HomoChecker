@@ -18,8 +18,7 @@ class ClientService implements ClientServiceContract
     public function __construct(
         protected ClientInterface $client,
         protected int $redirect,
-    ) {
-    }
+    ) {}
 
     /**
      * Get the responses for URL.

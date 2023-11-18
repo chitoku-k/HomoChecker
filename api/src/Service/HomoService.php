@@ -8,9 +8,7 @@ use HomoChecker\Contracts\Service\HomoService as HomoServiceContract;
 
 class HomoService implements HomoServiceContract
 {
-    public function __construct(protected HomoRepositoryContract $repository)
-    {
-    }
+    public function __construct(protected HomoRepositoryContract $repository) {}
 
     public function count(string $screenName = null): int
     {

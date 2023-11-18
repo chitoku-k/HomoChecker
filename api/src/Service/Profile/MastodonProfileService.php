@@ -19,8 +19,7 @@ class MastodonProfileService implements ProfileServiceContract
         protected ClientInterface $client,
         protected ProfileRepositoryContract $repository,
         protected Counter $profileErrorCounter,
-    ) {
-    }
+    ) {}
 
     public function parseScreenName(string $screen_name): array
     {
@@ -43,7 +42,7 @@ class MastodonProfileService implements ProfileServiceContract
     {
         return Coroutine::of(function () use ($screen_name) {
             try {
-                [ $username, $instance ] = $this->parseScreenName($screen_name);
+                [$username, $instance] = $this->parseScreenName($screen_name);
                 $target = "https://{$instance}/users/{$username}.json";
                 $response = yield $this->client->getAsync($target);
                 $body = json_decode((string) $response->getBody());

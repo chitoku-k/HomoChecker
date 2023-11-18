@@ -11,9 +11,7 @@ class NonBufferedBody extends NonBufferedBodyBase
 {
     protected int $size = 0;
 
-    public function __construct(protected NonBufferedBodyBase $base)
-    {
-    }
+    public function __construct(protected NonBufferedBodyBase $base) {}
 
     /**
      * {@inheritdoc}
