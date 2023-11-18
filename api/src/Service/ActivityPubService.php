@@ -25,8 +25,8 @@ class ActivityPubService implements ActivityPubServiceContract
             ],
             'id' => $this->id,
             'type' => 'Application',
-            'inbox' => 'https://example.com/actor/inbox',
-            'outbox' => 'https://example.com/actor/outbox',
+            'inbox' => $this->id . '/inbox',
+            'outbox' => $this->id . '/outbox',
             'preferredUsername' => $this->preferredUsername,
             'publicKey' => [
                 'id' => $this->id . '#main-key',
