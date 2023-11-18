@@ -5,6 +5,8 @@ services:
       target: dev
     working_dir: /var/www/html/api
     environment:
+      HOMOCHECKER_AP_ACTOR_ID: http://localhost:4545/actor
+      HOMOCHECKER_AP_ACTOR_PUBLIC_KEY: /activity_pub_actor_public_key
       HOMOCHECKER_DB_HOST: database
       HOMOCHECKER_DB_USERNAME: homo
       HOMOCHECKER_DB_PASSWORD: homo
@@ -13,6 +15,8 @@ services:
       HOMOCHECKER_TWITTER_CONSUMER_SECRET:
       HOMOCHECKER_TWITTER_TOKEN:
       HOMOCHECKER_TWITTER_TOKEN_SECRET:
+    configs:
+      - activity_pub_actor_public_key
     volumes:
       - type: bind
         source: ./api
@@ -61,6 +65,10 @@ services:
       - type: volume
         source: database
         target: /var/lib/postgresql/data
+
+configs:
+  activity_pub_actor_public_key:
+    file: ./api/activity_pub_actor.pub
 
 volumes:
   database:

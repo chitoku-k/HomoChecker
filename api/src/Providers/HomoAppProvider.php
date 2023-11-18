@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HomoChecker\Providers;
 
+use HomoChecker\Action\ActivityPubActorAction;
 use HomoChecker\Action\BadgeAction;
 use HomoChecker\Action\CheckAction;
 use HomoChecker\Action\HealthCheckAction;
@@ -27,6 +28,7 @@ class HomoAppProvider extends ServiceProvider
 {
     public function register()
     {
+        $this->app->singleton(ActivityPubActorAction::class);
         $this->app->singleton(HealthCheckAction::class);
         $this->app->singleton(MetricsAction::class);
         $this->app->singleton(CheckAction::class);
@@ -43,6 +45,7 @@ class HomoAppProvider extends ServiceProvider
         $this->app->singleton('app', function (Container $app) {
             AppFactory::setContainer($app);
             $slim = AppFactory::create();
+            $slim->get('/actor', ActivityPubActorAction::class);
             $slim->get('/healthz', HealthCheckAction::class);
             $slim->get('/metrics', MetricsAction::class);
             $slim->get('/check[/[{name}[/]]]', CheckAction::class);

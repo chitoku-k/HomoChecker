@@ -1,4 +1,15 @@
 #!/usr/bin/env bash
 set -e
 
+cd -- "$(dirname -- "$(dirname -- "$0")")"
 touch client/fonts/atlan.{svg,ttf,woff}
+
+if [[ ! -f api/activity_pub_actor.key ]]; then
+    if ! type openssl &> /dev/null; then
+        echo 'ERROR: OpenSSL is required to generate a key pair for ActivityPub.' >&2
+        exit 1
+    fi
+
+    openssl genpkey -algorithm ed25519 -out api/activity_pub_actor.key
+    openssl pkey -in api/activity_pub_actor.key -pubout -out api/activity_pub_actor.pub
+fi
