@@ -9,6 +9,7 @@ use HomoChecker\Action\CheckAction;
 use HomoChecker\Action\HealthCheckAction;
 use HomoChecker\Action\ListAction;
 use HomoChecker\Action\MetricsAction;
+use HomoChecker\Action\WebFingerAction;
 use HomoChecker\Contracts\Repository\HomoRepository as HomoRepositoryContract;
 use HomoChecker\Contracts\Repository\ProfileRepository as ProfileRepositoryContract;
 use HomoChecker\Http\NonBufferedBody;
@@ -28,6 +29,7 @@ class HomoAppProvider extends ServiceProvider
 {
     public function register()
     {
+        $this->app->singleton(WebFingerAction::class);
         $this->app->singleton(ActivityPubActorAction::class);
         $this->app->singleton(HealthCheckAction::class);
         $this->app->singleton(MetricsAction::class);
@@ -45,6 +47,7 @@ class HomoAppProvider extends ServiceProvider
         $this->app->singleton('app', function (Container $app) {
             AppFactory::setContainer($app);
             $slim = AppFactory::create();
+            $slim->get('/.well-known/webfinger', WebFingerAction::class);
             $slim->get('/actor', ActivityPubActorAction::class);
             $slim->get('/healthz', HealthCheckAction::class);
             $slim->get('/metrics', MetricsAction::class);
