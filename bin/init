@@ -10,6 +10,6 @@ if [[ ! -f api/activity_pub_actor.key ]]; then
         exit 1
     fi
 
-    openssl genpkey -algorithm ed25519 -out api/activity_pub_actor.key
+    openssl genpkey -quiet -algorithm rsa -pkeyopt rsa_keygen_bits:2048 -out api/activity_pub_actor.key
     openssl pkey -in api/activity_pub_actor.key -pubout -out api/activity_pub_actor.pub
 fi

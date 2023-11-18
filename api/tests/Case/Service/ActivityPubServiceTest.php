@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 class ActivityPubServiceTest extends TestCase
 {
     protected string $id;
+    protected string $preferredUsername;
     protected string $publicKeyPem;
 
     public function setUp(): void
@@ -16,12 +17,13 @@ class ActivityPubServiceTest extends TestCase
         parent::setUp();
 
         $this->id = 'https://example.com/actor';
+        $this->preferredUsername = 'example.com';
         $this->publicKeyPem = "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAUVd1lBkQ8I/3PJIRLgXbm2TDv16wQBXuN09wWo8lh74=\n-----END PUBLIC KEY-----\n";
     }
 
     public function testActor(): void
     {
-        $activityPub = new ActivityPubService($this->id, $this->publicKeyPem);
+        $activityPub = new ActivityPubService($this->id, $this->preferredUsername, $this->publicKeyPem);
 
         $expected = [
             '@context' => [
@@ -30,6 +32,7 @@ class ActivityPubServiceTest extends TestCase
             ],
             'id' => 'https://example.com/actor',
             'type' => 'Application',
+            'preferredUsername' => 'example.com',
             'publicKey' => [
                 'id' => 'https://example.com/actor#main-key',
                 'owner' => 'https://example.com/actor',

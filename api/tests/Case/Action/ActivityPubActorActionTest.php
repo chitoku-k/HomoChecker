@@ -33,6 +33,7 @@ class ActivityPubActorActionTest extends TestCase
                         ],
                         'id' => 'https://example.com/actor',
                         'type' => 'Application',
+                        'preferredUsername' => 'example.com',
                         'publicKey' => [
                             'id' => 'https://example.com/actor#main-key',
                             'owner' => 'https://example.com/actor',
@@ -54,6 +55,7 @@ class ActivityPubActorActionTest extends TestCase
             ],
             'id' => 'https://example.com/actor',
             'type' => 'Application',
+            'preferredUsername' => 'example.com',
             'publicKey' => [
                 'id' => 'https://example.com/actor#main-key',
                 'owner' => 'https://example.com/actor',

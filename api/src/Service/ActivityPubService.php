@@ -9,6 +9,7 @@ class ActivityPubService implements ActivityPubServiceContract
 {
     public function __construct(
         protected string $id,
+        protected string $preferredUsername,
         protected string $publicKeyPem,
     ) {}
 
@@ -24,6 +25,7 @@ class ActivityPubService implements ActivityPubServiceContract
             ],
             'id' => $this->id,
             'type' => 'Application',
+            'preferredUsername' => $this->preferredUsername,
             'publicKey' => [
                 'id' => $this->id . '#main-key',
                 'owner' => $this->id,

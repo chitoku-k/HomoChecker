@@ -78,6 +78,9 @@ class HomoProvider extends ServiceProvider
             ->needs('$id')
             ->give(fn (Container $app) => $app->make('config')->get('activityPub.actor')['id']);
         $this->app->when(ActivityPubService::class)
+            ->needs('$preferredUsername')
+            ->give(fn (Container $app) => $app->make('config')->get('activityPub.actor')['preferred_username']);
+        $this->app->when(ActivityPubService::class)
             ->needs('$publicKeyPem')
             ->give(function (Container $app) {
                 $actor = $app->make('config')->get('activityPub.actor');
