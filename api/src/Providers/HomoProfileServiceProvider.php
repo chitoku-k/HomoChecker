@@ -7,6 +7,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Subscriber\Oauth\Oauth1;
+use HomoChecker\Http\RequestSigner;
 use HomoChecker\Service\Profile\MastodonProfileService;
 use HomoChecker\Service\Profile\TwitterProfileService;
 use Illuminate\Contracts\Container\Container;
@@ -17,9 +18,15 @@ class HomoProfileServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->app->singleton('mastodon.client', fn (Container $app) => new Client(
-            $app->make('config')->get('mastodon.client'),
-        ));
+        $this->app->singleton('mastodon.client', function (Container $app) {
+            $handler = HandlerStack::create();
+            $handler->push($app->make('mastodon.signer'));
+
+            $config = $app->make('config')->get('mastodon.client');
+            $config['handler'] = $handler;
+
+            return new Client($config);
+        });
 
         $this->app->singleton('twitter.client', function (Container $app) {
             $handler = HandlerStack::create();
@@ -30,6 +37,17 @@ class HomoProfileServiceProvider extends ServiceProvider
 
             return new Client($config);
         });
+
+        $this->app->singleton('mastodon.signer', RequestSigner::class);
+        $this->app->when(RequestSigner::class)
+            ->needs('$id')
+            ->give(fn (Container $app) => $app->make('config')->get('activityPub.actor')['id']);
+        $this->app->when(RequestSigner::class)
+            ->needs('$privateKeyPem')
+            ->give(function (Container $app) {
+                $actor = $app->make('config')->get('activityPub.actor');
+                return \file_get_contents($actor['private_key']);
+            });
 
         $this->app->singleton('twitter.oauth', Oauth1::class);
         $this->app->when(Oauth1::class)

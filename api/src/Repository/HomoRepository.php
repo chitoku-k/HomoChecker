@@ -46,7 +46,7 @@ class HomoRepository implements HomoRepositoryContract
 
     public function findByScreenName(string $screenName): array
     {
-        return $this->join()->where('screen_name', $screenName)->get()->all();
+        return $this->join()->where('users.screen_name', $screenName)->get()->all();
     }
 
     public function export(): string
