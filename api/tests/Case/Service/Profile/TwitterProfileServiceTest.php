@@ -27,25 +27,31 @@ class TwitterProfileServiceTest extends TestCase
         $screen_name = 'example';
         $url = 'https://pbs.twimg.com/profile_images/114514/example_bigger.jpg';
         $handler = HandlerStack::create(new MockHandler([
-            new Response(200, [], "
+            new Response(200, [], '{}'),
+            new Response(200, [], '
                 {
-                    \"id\": 114514,
-                    \"id_str\": \"114514\",
-                    \"name\": \"test\",
-                    \"screen_name\": \"test\",
-                    \"profile_image_url_https\": \"{$url}\"
-                }
-            "),
-            new Response(404, [], '
-                {
-                    "errors": [
-                        {
-                            "code": 50,
-                            "message": "User not found."
-                        }
-                    ]
+                    "guest_token": "1145141919"
                 }
             '),
+            new Response(200, [], '
+                {
+                    "data": {
+                        "user": {
+                            "result": {
+                                "__typename": "User",
+                                "id": "VXNlcjoxMTQ1MTQ=",
+                                "rest_id": "114514",
+                                "legacy": {
+                                    "name": "test",
+                                    "screen_name": "test",
+                                    "profile_image_url_https": "https://pbs.twimg.com/profile_images/114514/example_bigger.jpg"
+                                }
+                            }
+                        }
+                    }
+                }
+            '),
+            new Response(200, [], '{"data": {}}'),
             new RequestException('Connection problem occurred', new Request('GET', '')),
         ]));
 
@@ -69,8 +75,16 @@ class TwitterProfileServiceTest extends TestCase
 
         $profile = new TwitterProfileService($client, $repository, $profileErrorCounter);
 
-        $this->assertEquals($url, $profile->getIconAsync($screen_name)->wait());
+        // (1) Retrieving guest_token fails
         $this->assertEquals($profile->getDefaultUrl(), $profile->getIconAsync($screen_name)->wait());
+
+        // (2) Retrieving guest_token succeeds and user is retrieved
+        $this->assertEquals($url, $profile->getIconAsync($screen_name)->wait());
+
+        // (3) Using the cached guest_token and retrieved user is empty
+        $this->assertEquals($profile->getDefaultUrl(), $profile->getIconAsync($screen_name)->wait());
+
+        // (4) Using the cached guest_token and retrieving user fails
         $this->assertEquals($profile->getDefaultUrl(), $profile->getIconAsync($screen_name)->wait());
     }
 }
