@@ -87,9 +87,10 @@ class RequestSignerTest extends TestCase
         $middleware($request, []);
     }
 
-    public function testSignWithoutDate(): void
+    public function testSignWithoutDateAndHost(): void
     {
         $request = (new RequestFactory())->createRequest('GET', 'https://example.com/users/example.json');
+        $request = $request->withoutHeader('Date')->withoutHeader('Host');
 
         $pattern = '|keyId="https://example\.com/actor#main-key",headers="\(request-target\) date host",signature="(?<signature>.+)"|';
 
