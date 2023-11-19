@@ -3,7 +3,6 @@
     "description": "HomoChecker API",
     "require": {
         "guzzlehttp/guzzle": "^7",
-        "guzzlehttp/oauth-subscriber": "^0",
         "illuminate/config": "^10",
         "illuminate/database": "^10",
         "illuminate/events": "^10",

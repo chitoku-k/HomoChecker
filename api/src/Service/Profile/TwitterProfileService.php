@@ -13,13 +13,67 @@ use Prometheus\Counter;
 
 class TwitterProfileService implements ProfileServiceContract
 {
-    public const CACHE_EXPIRE = 60 * 60 * 24 * 30;
+    public const CACHE_EXPIRE = 180;
+
+    public const TWITTER_API_GRAPHQL_ROOT = 'https://twitter.com/i/api/graphql/sLVLhk0bGj3MVFEKTdax1w/';
+    public const TOKEN = 'Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA';
+
+    protected ?string $guestToken = null;
 
     public function __construct(
         protected ClientInterface $client,
         protected ProfileRepositoryContract $repository,
         protected Counter $profileErrorCounter,
     ) {}
+
+    protected function getGuestToken(): PromiseInterface
+    {
+        return Coroutine::of(function () {
+            if ($this->guestToken) {
+                return yield $this->guestToken;
+            }
+
+            $target = 'guest/activate.json';
+            $response = yield $this->client->postAsync($target, [
+                'headers' => [
+                    'Authorization' => static::TOKEN,
+                ],
+            ]);
+            $guest = json_decode((string) $response->getBody());
+            if (!$guest->guest_token) {
+                throw new \RuntimeException('Error issuing guest_token');
+            }
+
+            $this->guestToken = $guest->guest_token;
+            return yield $this->guestToken;
+        });
+    }
+
+    protected function generateHeaders(): PromiseInterface
+    {
+        return Coroutine::of(function () {
+            $guestToken = yield $this->getGuestToken();
+            $csrfToken = uniqid();
+            $cookie = implode('; ', [
+                'guest_id=' . urlencode("v1:{$guestToken}"),
+                'ct0=' . urlencode($csrfToken),
+            ]);
+
+            return yield [
+                'Accept' => '*/*',
+                'Authorization' => static::TOKEN,
+                'Content-Type' => 'application/x-www-form-urlencoded',
+                'Cookie' => $cookie,
+                'Dnt' => '1',
+                'Origin' => 'https://twitter.com',
+                'Referer' => 'https://twitter.com',
+                'X-Csrf-Token' => $csrfToken,
+                'X-Guest-Token' => $guestToken,
+                'X-Twitter-Active-User' => 'yes',
+                'X-Twitter-Client-Language' => 'en',
+            ];
+        });
+    }
 
     /**
      * Get the URL of profile image of the user.
@@ -30,10 +84,26 @@ class TwitterProfileService implements ProfileServiceContract
     {
         return Coroutine::of(function () use ($screen_name) {
             try {
-                $target = "users/show.json?screen_name={$screen_name}";
-                $response = yield $this->client->getAsync($target);
+                $headers = yield $this->generateHeaders();
+                $variables = urlencode(json_encode([
+                    'screen_name' => $screen_name,
+                ]));
+                $features = urlencode(json_encode([
+                    'blue_business_profile_image_shape_enabled' => true,
+                    'responsive_web_graphql_exclude_directive_enabled' => true,
+                    'responsive_web_graphql_skip_user_profile_image_extensions_enabled' => true,
+                    'responsive_web_graphql_timeline_navigation_enabled' => true,
+                    'verified_phone_label_enabled' => true,
+                ]));
+                $target = static::TWITTER_API_GRAPHQL_ROOT . "UserByScreenName?variables={$variables}&features={$features}";
+                $response = yield $this->client->getAsync($target, [
+                    'headers' => $headers,
+                ]);
                 $user = json_decode((string) $response->getBody());
-                $url = str_replace('_normal', '_200x200', $user->profile_image_url_https);
+                if (!isset($user->data->user)) {
+                    throw new \RuntimeException('User not found');
+                }
+                $url = str_replace('_normal', '_200x200', $user->data->user->result->legacy->profile_image_url_https);
 
                 $this->repository->save(
                     $screen_name,

@@ -65,13 +65,6 @@ return [
     'twitter.client' => [
         'timeout' => 5,
         'base_uri' => 'https://api.twitter.com/1.1/',
-        'auth' => 'oauth',
-    ],
-    'twitter.oauth' => [
-        'consumer_key' => env('HOMOCHECKER_TWITTER_CONSUMER_KEY'),
-        'consumer_secret' => env('HOMOCHECKER_TWITTER_CONSUMER_SECRET'),
-        'token' => env('HOMOCHECKER_TWITTER_TOKEN'),
-        'token_secret' => env('HOMOCHECKER_TWITTER_TOKEN_SECRET'),
     ],
     'regex' => '/https?:\/\/twitter\.com\/mpyw\/?/',
 ];

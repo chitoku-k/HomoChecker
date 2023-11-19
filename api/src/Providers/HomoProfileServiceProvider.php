@@ -6,7 +6,6 @@ namespace HomoChecker\Providers;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Subscriber\Oauth\Oauth1;
 use HomoChecker\Http\RequestSigner;
 use HomoChecker\Service\Profile\MastodonProfileService;
 use HomoChecker\Service\Profile\TwitterProfileService;
@@ -28,15 +27,7 @@ class HomoProfileServiceProvider extends ServiceProvider
             return new Client($config);
         });
 
-        $this->app->singleton('twitter.client', function (Container $app) {
-            $handler = HandlerStack::create();
-            $handler->push($app->make('twitter.oauth'));
-
-            $config = $app->make('config')->get('twitter.client');
-            $config['handler'] = $handler;
-
-            return new Client($config);
-        });
+        $this->app->singleton('twitter.client', fn (Container $app) => new Client($app->make('config')->get('twitter.client')));
 
         $this->app->singleton('mastodon.signer', RequestSigner::class);
         $this->app->when(RequestSigner::class)
@@ -48,11 +39,6 @@ class HomoProfileServiceProvider extends ServiceProvider
                 $actor = $app->make('config')->get('activityPub.actor');
                 return \file_get_contents($actor['private_key']);
             });
-
-        $this->app->singleton('twitter.oauth', Oauth1::class);
-        $this->app->when(Oauth1::class)
-            ->needs('$config')
-            ->giveConfig('twitter.oauth');
 
         $this->app->when(MastodonProfileService::class)
             ->needs(ClientInterface::class)
@@ -76,8 +62,9 @@ class HomoProfileServiceProvider extends ServiceProvider
     {
         return [
             'profiles',
+            'mastodon.client',
+            'mastodon.signer',
             'twitter.client',
-            'twitter.oauth',
         ];
     }
 }
