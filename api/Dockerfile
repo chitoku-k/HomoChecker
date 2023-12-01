@@ -20,7 +20,7 @@ RUN git clone --depth 1 -b $OPENSSL_VERSION https://github.com/quictls/openssl &
     make install_sw
 
 FROM build-dependencies AS nghttp3
-ARG NGHTTP3_VERSION=v1.0.0
+ARG NGHTTP3_VERSION=v1.1.0
 RUN git clone --depth=1 -b $NGHTTP3_VERSION https://github.com/ngtcp2/nghttp3 && \
     cd nghttp3 && \
     autoreconf -fi && \
