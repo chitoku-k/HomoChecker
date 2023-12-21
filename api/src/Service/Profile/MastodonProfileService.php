@@ -13,7 +13,7 @@ use Prometheus\Counter;
 
 class MastodonProfileService implements ProfileServiceContract
 {
-    public const CACHE_EXPIRE = 180;
+    public const int CACHE_EXPIRE = 180;
 
     public function __construct(
         protected ClientInterface $client,
@@ -38,6 +38,7 @@ class MastodonProfileService implements ProfileServiceContract
      * @param  string           $screen_name The screen_name of the user, e.g., @example@mastodon.social
      * @return PromiseInterface The promise.
      */
+    #[\Override]
     public function getIconAsync(string $screen_name): PromiseInterface
     {
         return Coroutine::of(function () use ($screen_name) {
@@ -70,6 +71,7 @@ class MastodonProfileService implements ProfileServiceContract
         });
     }
 
+    #[\Override]
     public function getDefaultUrl(): string
     {
         return 'https://mastodon.social/avatars/original/missing.png';

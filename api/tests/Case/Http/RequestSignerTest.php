@@ -14,6 +14,7 @@ class RequestSignerTest extends TestCase
     protected string $publicKeyPem;
     protected string $privateKeyPem;
 
+    #[\Override]
     public function setUp(): void
     {
         parent::setUp();

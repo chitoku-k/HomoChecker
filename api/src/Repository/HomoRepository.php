@@ -11,11 +11,13 @@ use Illuminate\Support\Facades\DB;
 
 class HomoRepository implements HomoRepositoryContract
 {
+    #[\Override]
     public function count(): int
     {
         return DB::table('users')->count();
     }
 
+    #[\Override]
     public function countByScreenName(string $screenName): int
     {
         return DB::table('users')->where('screen_name', $screenName)->count();
@@ -39,16 +41,19 @@ class HomoRepository implements HomoRepositoryContract
             ]);
     }
 
+    #[\Override]
     public function findAll(): array
     {
         return $this->join()->get()->all();
     }
 
+    #[\Override]
     public function findByScreenName(string $screenName): array
     {
         return $this->join()->where('users.screen_name', $screenName)->get()->all();
     }
 
+    #[\Override]
     public function export(): string
     {
         $builder = DB::table('users');
@@ -58,6 +63,7 @@ class HomoRepository implements HomoRepositoryContract
             /**
              * {@inheritdoc}
              */
+            #[\Override]
             public function parameter($value)
             {
                 return $this->quoteString($value);

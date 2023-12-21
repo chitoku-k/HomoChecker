@@ -12,6 +12,7 @@ class ActivityPubServiceTest extends TestCase
     protected string $preferredUsername;
     protected string $publicKeyPem;
 
+    #[\Override]
     public function setUp(): void
     {
         parent::setUp();

@@ -13,10 +13,10 @@ use Prometheus\Counter;
 
 class TwitterProfileService implements ProfileServiceContract
 {
-    public const CACHE_EXPIRE = 180;
+    public const int CACHE_EXPIRE = 180;
 
-    public const TWITTER_API_GRAPHQL_ROOT = 'https://twitter.com/i/api/graphql/sLVLhk0bGj3MVFEKTdax1w/';
-    public const TOKEN = 'Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA';
+    public const string TWITTER_API_GRAPHQL_ROOT = 'https://twitter.com/i/api/graphql/sLVLhk0bGj3MVFEKTdax1w/';
+    public const string TOKEN = 'Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA';
 
     protected ?string $guestToken = null;
 
@@ -80,6 +80,7 @@ class TwitterProfileService implements ProfileServiceContract
      * @param  string           $screen_name The screen_name of the user.
      * @return PromiseInterface The promise.
      */
+    #[\Override]
     public function getIconAsync(string $screen_name): PromiseInterface
     {
         return Coroutine::of(function () use ($screen_name) {
@@ -124,6 +125,7 @@ class TwitterProfileService implements ProfileServiceContract
         });
     }
 
+    #[\Override]
     public function getDefaultUrl(): string
     {
         return 'https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png';

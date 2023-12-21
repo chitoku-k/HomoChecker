@@ -17,6 +17,7 @@ class ErrorHandlerTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
+    #[\Override]
     public function setUp(): void
     {
         parent::setUp();

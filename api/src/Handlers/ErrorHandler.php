@@ -16,6 +16,7 @@ class ErrorHandler implements ErrorHandlerInterface
 {
     public function __construct(protected ResponseFactoryInterface $responseFactory) {}
 
+    #[\Override]
     public function __invoke(Request $request, \Throwable $exception, bool $displayErrorDetails, bool $logErrors, bool $logErrorDetails): Response
     {
         if (!$exception instanceof HttpSpecializedException) {

@@ -14,6 +14,7 @@ class HeaderValidatorService implements ValidatorServiceContract
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function validate(Response $response): false|ValidationResult
     {
         $url = $response->getHeaderLine('Location');

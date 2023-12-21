@@ -15,6 +15,7 @@ use Prometheus\Counter;
 
 class HomoProfileServiceProvider extends ServiceProvider
 {
+    #[\Override]
     public function register()
     {
         $this->app->singleton('mastodon.client', function (Container $app) {
@@ -58,6 +59,7 @@ class HomoProfileServiceProvider extends ServiceProvider
         ]));
     }
 
+    #[\Override]
     public function provides()
     {
         return [

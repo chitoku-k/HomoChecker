@@ -172,6 +172,7 @@ class CheckService implements CheckServiceContract
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function execute(string $screen_name = null, callable $callback = null): array
     {
         return Pool::batch(

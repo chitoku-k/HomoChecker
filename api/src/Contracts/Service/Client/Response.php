@@ -141,16 +141,19 @@ class Response implements ResponseInterface
         $this->primaryIP = $primaryIP;
     }
 
+    #[\Override]
     public function getStatusCode(): int
     {
         return $this->response->getStatusCode();
     }
 
+    #[\Override]
     public function getReasonPhrase(): string
     {
         return $this->response->getReasonPhrase();
     }
 
+    #[\Override]
     public function withStatus($code, $reasonPhrase = ''): static
     {
         $self = clone $this;
@@ -158,11 +161,13 @@ class Response implements ResponseInterface
         return $self;
     }
 
+    #[\Override]
     public function getProtocolVersion(): string
     {
         return $this->response->getProtocolVersion();
     }
 
+    #[\Override]
     public function withProtocolVersion($version): static
     {
         $self = clone $this;
@@ -170,26 +175,31 @@ class Response implements ResponseInterface
         return $self;
     }
 
+    #[\Override]
     public function getHeaders(): array
     {
         return $this->response->getHeaders();
     }
 
+    #[\Override]
     public function hasHeader($name): bool
     {
         return $this->response->hasHeader($name);
     }
 
+    #[\Override]
     public function getHeader($name): array
     {
         return $this->response->getHeader($name);
     }
 
+    #[\Override]
     public function getHeaderLine($name): string
     {
         return $this->response->getHeaderLine($name);
     }
 
+    #[\Override]
     public function withHeader($name, $value): static
     {
         $self = clone $this;
@@ -197,6 +207,7 @@ class Response implements ResponseInterface
         return $self;
     }
 
+    #[\Override]
     public function withAddedHeader($name, $value): static
     {
         $self = clone $this;
@@ -204,6 +215,7 @@ class Response implements ResponseInterface
         return $self;
     }
 
+    #[\Override]
     public function withoutHeader($name): static
     {
         $self = clone $this;
@@ -211,11 +223,13 @@ class Response implements ResponseInterface
         return $self;
     }
 
+    #[\Override]
     public function getBody(): StreamInterface
     {
         return $this->response->getBody();
     }
 
+    #[\Override]
     public function withBody(StreamInterface $body): static
     {
         $self = clone $this;

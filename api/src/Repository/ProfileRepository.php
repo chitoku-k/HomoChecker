@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class ProfileRepository implements ProfileRepositoryContract
 {
+    #[\Override]
     public function save(string $screenName, string $iconURL, string $expiresAt): void
     {
         DB::table('profiles')

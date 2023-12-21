@@ -14,6 +14,7 @@ use Prometheus\Storage\APC;
 
 class HomoMetricsProvider extends ServiceProvider
 {
+    #[\Override]
     public function register()
     {
         $this->app->singleton(RegistryInterface::class, CollectorRegistry::class);
@@ -68,6 +69,7 @@ class HomoMetricsProvider extends ServiceProvider
         $this->app->singleton(RendererInterface::class, RenderTextFormat::class);
     }
 
+    #[\Override]
     public function provides()
     {
         return [

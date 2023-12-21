@@ -21,6 +21,7 @@ class ListActionTest extends TestCase
 
     protected array $users;
 
+    #[\Override]
     public function setUp(): void
     {
         $this->users = [

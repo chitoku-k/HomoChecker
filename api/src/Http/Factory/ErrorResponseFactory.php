@@ -12,6 +12,7 @@ class ErrorResponseFactory implements ResponseFactoryInterface
 {
     public function __construct(protected ResponseFactoryInterface $responseFactory, protected StreamFactoryInterface $streamFactory) {}
 
+    #[\Override]
     public function createResponse(int $code = 200, string $reasonPhrase = ''): ResponseInterface
     {
         $response = $this->responseFactory->createResponse($code, $reasonPhrase);

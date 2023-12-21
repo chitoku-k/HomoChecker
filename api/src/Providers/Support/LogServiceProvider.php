@@ -8,6 +8,7 @@ use Illuminate\Log\LogServiceProvider as LogServiceProviderBase;
 
 class LogServiceProvider extends LogServiceProviderBase
 {
+    #[\Override]
     public function register()
     {
         $this->app->singleton('log', function ($app) {
@@ -15,11 +16,20 @@ class LogServiceProvider extends LogServiceProviderBase
                 /**
                  * {@inheritdoc}
                  */
+                #[\Override]
                 protected function parseDriver($driver)
                 {
                     return $driver ?? $this->getDefaultDriver();
                 }
             };
         });
+    }
+
+    #[\Override]
+    public function provides()
+    {
+        return [
+            'log',
+        ];
     }
 }
