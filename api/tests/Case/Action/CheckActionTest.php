@@ -29,6 +29,7 @@ class CheckActionTest extends TestCase
     protected array $users;
     protected array $statuses;
 
+    #[\Override]
     public function setUp(): void
     {
         parent::setUp();

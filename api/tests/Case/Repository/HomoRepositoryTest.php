@@ -19,6 +19,7 @@ class HomoRepositoryTest extends TestCase
     protected array $users;
     protected array $usersFoo;
 
+    #[\Override]
     public function setUp(): void
     {
         Facade::clearResolvedInstances();

@@ -17,6 +17,7 @@ class HomoServiceTest extends TestCase
 
     protected array $users;
 
+    #[\Override]
     public function setUp(): void
     {
         parent::setUp();

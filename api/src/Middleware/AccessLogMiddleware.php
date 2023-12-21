@@ -30,6 +30,7 @@ class AccessLogMiddleware implements MiddlewareInterface
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         if (collect($this->skipPaths)->contains($request->getUri()->getPath())) {

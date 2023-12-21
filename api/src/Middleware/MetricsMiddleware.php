@@ -14,12 +14,12 @@ use Slim\Routing\RoutingResults;
 
 class MetricsMiddleware implements MiddlewareInterface
 {
-    public const INFORMATIONAL = 'INFORMATIONAL';
-    public const SUCCESS = 'SUCCESS';
-    public const REDIRECTION = 'REDIRECTION';
-    public const CLIENT_ERROR = 'CLIENT_ERROR';
-    public const SERVER_ERROR = 'SERVER_ERROR';
-    public const UNKNOWN = 'UNKNOWN';
+    public const string INFORMATIONAL = 'INFORMATIONAL';
+    public const string SUCCESS = 'SUCCESS';
+    public const string REDIRECTION = 'REDIRECTION';
+    public const string CLIENT_ERROR = 'CLIENT_ERROR';
+    public const string SERVER_ERROR = 'SERVER_ERROR';
+    public const string UNKNOWN = 'UNKNOWN';
 
     /**
      * @param string[] $skipPaths Paths from which to skip collecting metrics.
@@ -30,6 +30,7 @@ class MetricsMiddleware implements MiddlewareInterface
         protected array $skipPaths,
     ) {}
 
+    #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         if (collect($this->skipPaths)->contains($request->getUri()->getPath())) {

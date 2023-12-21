@@ -10,6 +10,7 @@ class HomoService implements HomoServiceContract
 {
     public function __construct(protected HomoRepositoryContract $repository) {}
 
+    #[\Override]
     public function count(string $screenName = null): int
     {
         if (!$screenName) {
@@ -19,6 +20,7 @@ class HomoService implements HomoServiceContract
         return $this->repository->countByScreenName($screenName);
     }
 
+    #[\Override]
     public function find(string $screenName = null): array
     {
         if (!$screenName) {
@@ -28,6 +30,7 @@ class HomoService implements HomoServiceContract
         return $this->repository->findByScreenName($screenName);
     }
 
+    #[\Override]
     public function export(): string
     {
         return $this->repository->export();

@@ -25,6 +25,7 @@ class ClientService implements ClientServiceContract
      * @param  string                                 $url The URL.
      * @return \Generator<PromiseInterface<Response>> The responses.
      */
+    #[\Override]
     public function getAsync(string $url): \Generator
     {
         for ($i = 0; $i < $this->redirect; ++$i) {
@@ -52,26 +53,31 @@ class ClientService implements ClientServiceContract
         }
     }
 
+    #[\Override]
     public function send(RequestInterface $request, array $options = []): ResponseInterface
     {
         return $this->client->send($request, $options);
     }
 
+    #[\Override]
     public function sendAsync(RequestInterface $request, array $options = []): PromiseInterface
     {
         return $this->client->sendAsync($request, $options);
     }
 
+    #[\Override]
     public function request(string $method, $uri, array $options = []): ResponseInterface
     {
         return $this->client->request($method, $uri, $options);
     }
 
+    #[\Override]
     public function requestAsync(string $method, $uri, array $options = []): PromiseInterface
     {
         return $this->client->requestAsync($method, $uri, $options);
     }
 
+    #[\Override]
     public function getConfig(?string $option = null)
     {
         return $this->client->getConfig();

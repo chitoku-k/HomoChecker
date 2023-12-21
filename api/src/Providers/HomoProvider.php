@@ -34,6 +34,7 @@ class HomoProvider extends ServiceProvider
 {
     protected string $format = AccessLog::FORMAT_COMBINED . ' "%{X-Forwarded-For}i"';
 
+    #[\Override]
     public function register()
     {
         $this->app->extend(AccessLog::class, fn (AccessLog $log) => $log->format($this->format));
@@ -113,6 +114,7 @@ class HomoProvider extends ServiceProvider
         (new DatabaseServiceProvider($this->app))->register();
     }
 
+    #[\Override]
     public function provides()
     {
         return [

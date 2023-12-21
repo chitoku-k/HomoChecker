@@ -11,6 +11,7 @@ use Illuminate\Support\ServiceProvider;
 
 class HomoValidatorServiceProvider extends ServiceProvider
 {
+    #[\Override]
     public function register()
     {
         $this->app->when([HeaderValidatorService::class, DOMValidatorService::class, URLValidatorService::class])
@@ -24,6 +25,7 @@ class HomoValidatorServiceProvider extends ServiceProvider
         ]));
     }
 
+    #[\Override]
     public function provides()
     {
         return [

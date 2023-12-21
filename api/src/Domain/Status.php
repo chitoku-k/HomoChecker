@@ -148,6 +148,7 @@ class Status implements \JsonSerializable
      * Return the serializable output of this object.
      * @return array The array.
      */
+    #[\Override]
     public function jsonSerialize(): mixed
     {
         return [

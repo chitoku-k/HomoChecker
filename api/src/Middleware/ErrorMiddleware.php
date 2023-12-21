@@ -19,6 +19,7 @@ class ErrorMiddleware extends ErrorMiddlewareBase
         parent::__construct($callableResolver, $responseFactory, false, false, false);
     }
 
+    #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         try {

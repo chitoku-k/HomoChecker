@@ -16,6 +16,7 @@ class ProfileRepositoryTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
+    #[\Override]
     public function setUp(): void
     {
         Facade::clearResolvedInstances();

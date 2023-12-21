@@ -16,6 +16,7 @@ class NonBufferedBody extends NonBufferedBodyBase
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function __toString(): string
     {
         return $this->base->__toString();
@@ -24,6 +25,7 @@ class NonBufferedBody extends NonBufferedBodyBase
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function close(): void
     {
         $this->base->close();
@@ -32,6 +34,7 @@ class NonBufferedBody extends NonBufferedBodyBase
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function detach()
     {
         return $this->base->detach();
@@ -40,6 +43,7 @@ class NonBufferedBody extends NonBufferedBodyBase
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getSize(): ?int
     {
         return $this->size;
@@ -48,6 +52,7 @@ class NonBufferedBody extends NonBufferedBodyBase
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function tell(): int
     {
         return $this->base->tell();
@@ -56,6 +61,7 @@ class NonBufferedBody extends NonBufferedBodyBase
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function eof(): bool
     {
         return $this->base->eof();
@@ -64,6 +70,7 @@ class NonBufferedBody extends NonBufferedBodyBase
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function isSeekable(): bool
     {
         return $this->base->isSeekable();
@@ -72,6 +79,7 @@ class NonBufferedBody extends NonBufferedBodyBase
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function seek($offset, $whence = SEEK_SET): void
     {
         $this->base->seek($offset, $whence);
@@ -80,6 +88,7 @@ class NonBufferedBody extends NonBufferedBodyBase
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function rewind(): void
     {
         $this->base->rewind();
@@ -88,6 +97,7 @@ class NonBufferedBody extends NonBufferedBodyBase
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function isWritable(): bool
     {
         return $this->base->isWritable();
@@ -96,6 +106,7 @@ class NonBufferedBody extends NonBufferedBodyBase
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function write($string): int
     {
         $size = $this->base->write($string);
@@ -106,6 +117,7 @@ class NonBufferedBody extends NonBufferedBodyBase
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function isReadable(): bool
     {
         return $this->base->isReadable();
@@ -114,6 +126,7 @@ class NonBufferedBody extends NonBufferedBodyBase
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function read($length): string
     {
         return $this->base->read($length);
@@ -122,6 +135,7 @@ class NonBufferedBody extends NonBufferedBodyBase
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getContents(): string
     {
         return $this->base->getContents();
@@ -130,6 +144,7 @@ class NonBufferedBody extends NonBufferedBodyBase
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getMetadata($key = null): ?array
     {
         return $this->base->getMetadata($key);

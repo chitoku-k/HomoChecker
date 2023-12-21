@@ -16,6 +16,7 @@ class ActivityPubService implements ActivityPubServiceContract
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function actor(): array
     {
         return [
@@ -39,6 +40,7 @@ class ActivityPubService implements ActivityPubServiceContract
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function webFinger(string $resource): null|array
     {
         $domain = parse_url($this->id, \PHP_URL_HOST);

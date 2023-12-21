@@ -15,6 +15,7 @@ use Slim\Psr7\Factory\StreamFactory;
 
 class HomoHandlerProvider extends ServiceProvider
 {
+    #[\Override]
     public function register()
     {
         $this->app->singleton(ErrorHandlerInterface::class, ErrorHandler::class);
@@ -30,6 +31,7 @@ class HomoHandlerProvider extends ServiceProvider
         });
     }
 
+    #[\Override]
     public function provides()
     {
         return [

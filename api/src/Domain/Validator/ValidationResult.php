@@ -10,6 +10,7 @@ enum ValidationResult: string implements \JsonSerializable
     case WRONG = 'WRONG';
     case ERROR = 'ERROR';
 
+    #[\Override]
     public function jsonSerialize(): mixed
     {
         return $this->value;

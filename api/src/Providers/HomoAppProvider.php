@@ -27,6 +27,7 @@ use Slim\Factory\AppFactory;
 
 class HomoAppProvider extends ServiceProvider
 {
+    #[\Override]
     public function register()
     {
         $this->app->singleton(WebFingerAction::class);
@@ -74,6 +75,7 @@ class HomoAppProvider extends ServiceProvider
             ->give(fn (Container $app) => $app->make('settings'));
     }
 
+    #[\Override]
     public function provides()
     {
         return [
