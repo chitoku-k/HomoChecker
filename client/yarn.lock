@@ -2402,7 +2402,7 @@ __metadata:
     riot-tag-loader: "npm:^2.1.0"
     rxjs: "npm:^7.8.1"
     sass: "npm:^1.69.6"
-    sass-loader: "npm:^13.3.2"
+    sass-loader: "npm:^13.3.3"
     shufflejs: "npm:v6.1.0"
     style-loader: "npm:^3.3.3"
     webpack: "npm:^5.89.0"
@@ -4337,9 +4337,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass-loader@npm:^13.3.2":
-  version: 13.3.2
-  resolution: "sass-loader@npm:13.3.2"
+"sass-loader@npm:^13.3.3":
+  version: 13.3.3
+  resolution: "sass-loader@npm:13.3.3"
   dependencies:
     neo-async: "npm:^2.6.2"
   peerDependencies:
@@ -4357,7 +4357,7 @@ __metadata:
       optional: true
     sass-embedded:
       optional: true
-  checksum: 3486134c8813660772448bcd73e169fbe180fbaea0b825ec3e8fd1017de026e4e177e4b659a5b7d0f6c1b9f334ebe0134d91c60bd627d8ffff9b21018325a532
+  checksum: a8a8519add9f0bb2d3d1b834dbf30b1b67e22833425755a56640cc20845107850adfc6f243cdab07a5cb26ec964513b950a02dca7b1d5b3cf3659c89bf1988eb
   languageName: node
   linkType: hard
 
