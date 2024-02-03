@@ -47,7 +47,7 @@ ARG CURL_VERSION=curl-8_6_0
 RUN git clone --depth=1 -b $CURL_VERSION https://github.com/curl/curl && \
     cd curl && \
     autoreconf -fi && \
-    ./configure --enable-alt-svc --with-openssl --with-nghttp2 --with-nghttp3 --with-ngtcp2 && \
+    ./configure --enable-alt-svc --with-openssl --with-nghttp2 --with-nghttp3 --with-ngtcp2 --without-libpsl && \
     make -j $(nproc) && \
     make install
 
