@@ -13,7 +13,7 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
 
 FROM build-dependencies AS openssl
 ARG OPENSSL_VERSION=openssl-3.1.4-quic1
-RUN git clone --depth 1 -b $OPENSSL_VERSION https://github.com/quictls/openssl && \
+RUN git clone --depth=1 --recurse-submodules -b $OPENSSL_VERSION https://github.com/quictls/openssl && \
     cd openssl && \
     ./config enable-tls1_3 && \
     make -j $(nproc) && \
@@ -21,7 +21,7 @@ RUN git clone --depth 1 -b $OPENSSL_VERSION https://github.com/quictls/openssl &
 
 FROM build-dependencies AS nghttp3
 ARG NGHTTP3_VERSION=v1.2.0
-RUN git clone --depth=1 -b $NGHTTP3_VERSION https://github.com/ngtcp2/nghttp3 && \
+RUN git clone --depth=1 --recurse-submodules -b $NGHTTP3_VERSION https://github.com/ngtcp2/nghttp3 && \
     cd nghttp3 && \
     autoreconf -fi && \
     ./configure --enable-lib-only && \
@@ -32,7 +32,7 @@ FROM build-dependencies AS ngtcp2
 COPY --from=openssl /usr/local/ /usr/local/
 COPY --from=nghttp3 /usr/local/ /usr/local/
 ARG NGTCP2_VERSION=v1.2.0
-RUN git clone --depth=1 -b $NGTCP2_VERSION https://github.com/ngtcp2/ngtcp2 && \
+RUN git clone --depth=1 --recurse-submodules -b $NGTCP2_VERSION https://github.com/ngtcp2/ngtcp2 && \
     cd ngtcp2 && \
     autoreconf -fi && \
     ./configure PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig --enable-lib-only && \
