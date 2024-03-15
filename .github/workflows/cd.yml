@@ -23,7 +23,7 @@ jobs:
           cd client/fonts
           tar xf ../fonts.tar.gz
       - name: Build
-        uses: docker/bake-action@v4.1.0
+        uses: docker/bake-action@v4.3.0
         with:
           files: docker-bake.hcl
           load: true
