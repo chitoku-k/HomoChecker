@@ -40,7 +40,7 @@ class TwitterProfileService implements ProfileServiceContract
                 ],
             ]);
             $guest = json_decode((string) $response->getBody());
-            if (!$guest->guest_token) {
+            if (!isset($guest->guest_token)) {
                 throw new \RuntimeException('Error issuing guest_token');
             }
 
