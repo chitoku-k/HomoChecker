@@ -37,7 +37,7 @@ services:
         target: /usr/src/app
 
   client:
-    image: nginx:1.23-alpine
+    image: nginx:1.25-alpine
     ports:
       - "${HOMOCHECKER_PORT-4545}:80"
     environment:
@@ -53,7 +53,7 @@ services:
         read_only: true
 
   database:
-    image: postgres:15.2
+    image: postgres:16.2
     environment:
       POSTGRES_DB: homo
       POSTGRES_USER: homo
