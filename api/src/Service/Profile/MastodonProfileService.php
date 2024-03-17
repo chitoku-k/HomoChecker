@@ -49,7 +49,7 @@ class MastodonProfileService implements ProfileServiceContract
                 $body = json_decode((string) $response->getBody());
                 $url = $body->icon->url ?? null;
                 if (!$url) {
-                    throw new \RuntimeException('Avatar not found');
+                    throw new \RuntimeException("Avatar not found: {$screen_name}");
                 }
 
                 $this->repository->save(
