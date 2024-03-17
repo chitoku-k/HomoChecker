@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace HomoChecker\Logging;
 
 use Monolog\Formatter\LineFormatter;
+use Monolog\Handler\HandlerWrapper;
+use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 
 class CustomizeFormatter
@@ -12,9 +14,9 @@ class CustomizeFormatter
 
     public function __invoke(LoggerInterface $logger, ?string $format = null)
     {
-        /** @var \Monolog\Logger $logger */
+        /** @var Logger $logger */
         foreach ($logger->getHandlers() as $handler) {
-            /** @var \Monolog\Handler\HandlerWrapper $handler */
+            /** @var HandlerWrapper $handler */
             $handler->setFormatter(new LineFormatter($format, $this->dateFormat, true, true));
         }
     }

@@ -14,5 +14,5 @@ interface ActivityPubService
     /**
      * Retrieves the Web Finger of the given resource.
      */
-    public function webFinger(string $resource): null|array;
+    public function webFinger(string $resource): ?array;
 }
