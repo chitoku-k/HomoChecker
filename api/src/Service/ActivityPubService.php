@@ -41,7 +41,7 @@ class ActivityPubService implements ActivityPubServiceContract
      * {@inheritdoc}
      */
     #[\Override]
-    public function webFinger(string $resource): null|array
+    public function webFinger(string $resource): ?array
     {
         $domain = parse_url($this->id, \PHP_URL_HOST);
         $acct = "acct:{$this->preferredUsername}@{$domain}";

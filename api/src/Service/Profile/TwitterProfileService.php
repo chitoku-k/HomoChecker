@@ -40,7 +40,7 @@ class TwitterProfileService implements ProfileServiceContract
                 ],
             ]);
             $guest = json_decode((string) $response->getBody());
-            if (!$guest->guest_token) {
+            if (!isset($guest->guest_token)) {
                 throw new \RuntimeException('Error issuing guest_token');
             }
 
@@ -102,7 +102,7 @@ class TwitterProfileService implements ProfileServiceContract
                 ]);
                 $user = json_decode((string) $response->getBody());
                 if (!isset($user->data->user)) {
-                    throw new \RuntimeException('User not found');
+                    throw new \RuntimeException("User not found: {$screen_name}");
                 }
                 $url = str_replace('_normal', '_200x200', $user->data->user->result->legacy->profile_image_url_https);
 
