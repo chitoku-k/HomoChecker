@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace HomoChecker\Service;
 
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\ClientTrait;
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\Response as Psr7Response;
 use GuzzleHttp\RequestOptions;
@@ -15,6 +16,8 @@ use Psr\Http\Message\ResponseInterface;
 
 class ClientService implements ClientServiceContract
 {
+    use ClientTrait;
+
     public function __construct(
         protected ClientInterface $client,
         protected int $redirect,
@@ -22,12 +25,13 @@ class ClientService implements ClientServiceContract
 
     /**
      * Get the responses for URL.
-     * @param  string                                 $url The URL.
-     * @return \Generator<PromiseInterface<Response>> The responses.
+     * @param  string                                         $url The URL.
+     * @return \Generator<string, PromiseInterface<Response>> The responses.
      */
     #[\Override]
-    public function getAsync(string $url): \Generator
+    public function getRedirectsAsync(string $url): \Generator
     {
+        /** @var ?Response $result */
         for ($i = 0; $i < $this->redirect; ++$i) {
             yield $url => $this->client->requestAsync('GET', $url, [
                 RequestOptions::ON_STATS => function (TransferStats $stats) use (&$result) {
@@ -80,6 +84,10 @@ class ClientService implements ClientServiceContract
     #[\Override]
     public function getConfig(?string $option = null)
     {
+        /**
+         * @disregard
+         * @psalm-suppress DeprecatedMethod
+         */
         return $this->client->getConfig();
     }
 }

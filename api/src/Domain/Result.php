@@ -23,7 +23,7 @@ class Result
     protected ?string $http;
 
     /**
-     * @var string[][] The TLS certificates.
+     * @var ?string[][] The TLS certificates.
      */
     protected ?array $certificates;
 
@@ -116,18 +116,18 @@ class Result
 
     /**
      * Get the TLS certificates.
-     * @return string[][] The TLS certificates.
+     * @return ?string[][] The TLS certificates.
      */
-    public function getCertificates(): array
+    public function getCertificates(): ?array
     {
         return $this->certificates;
     }
 
     /**
      * Set the TLS certificates.
-     * @param string[][] The TLS certificates.
+     * @param ?string[][] The TLS certificates.
      */
-    public function setCertificates(array $certificates): void
+    public function setCertificates(?array $certificates): void
     {
         $this->certificates = $certificates;
     }

@@ -36,7 +36,7 @@ class ClientServiceTest extends TestCase
         ]);
 
         $service = new ClientService($client, 5);
-        $generator = $service->getAsync('https://foo.example.com/1');
+        $generator = $service->getRedirectsAsync('https://foo.example.com/1');
 
         $generator->rewind();
         $this->assertTrue($generator->valid());
@@ -80,7 +80,7 @@ class ClientServiceTest extends TestCase
         ]);
 
         $service = new ClientService($client, 5);
-        $generator = $service->getAsync('https://foo.example.com/2');
+        $generator = $service->getRedirectsAsync('https://foo.example.com/2');
 
         $generator->rewind();
         $this->assertTrue($generator->valid());
@@ -143,7 +143,7 @@ class ClientServiceTest extends TestCase
         ]);
 
         $service = new ClientService($client, 5);
-        $generator = $service->getAsync('https://baz.example.com');
+        $generator = $service->getRedirectsAsync('https://baz.example.com');
 
         $generator->rewind();
         $this->assertTrue($generator->valid());

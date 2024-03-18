@@ -35,8 +35,8 @@ class MastodonProfileService implements ProfileServiceContract
 
     /**
      * Get the URL of profile image of the user.
-     * @param  string           $screen_name The screen_name of the user, e.g., @example@mastodon.social
-     * @return PromiseInterface The promise.
+     * @param  string                   $screen_name The screen_name of the user, e.g., @example@mastodon.social
+     * @return PromiseInterface<string> The promise.
      */
     #[\Override]
     public function getIconAsync(string $screen_name): PromiseInterface

@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <psalm
     errorLevel="3"
+    findUnusedBaselineEntry="true"
+    findUnusedCode="false"
     resolveFromConfigFile="true"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
@@ -11,32 +13,14 @@
             <directory name="vendor" />
         </ignoreFiles>
     </projectFiles>
+    <stubs>
+        <file name="stubs/consts.php" />
+        <file name="stubs/GuzzleHttp/ClientInterface.php" />
+        <file name="stubs/GuzzleHttp/Promise/PromiseInterface.php" />
+        <file name="stubs/GuzzleHttp/Promise/Utils.php" />
+    </stubs>
     <issueHandlers>
-        <DeprecatedMethod>
-            <errorLevel type="suppress">
-                <referencedMethod name="GuzzleHttp\ClientInterface::getConfig" />
-            </errorLevel>
-        </DeprecatedMethod>
-        <ImplicitToStringCast>
-            <errorLevel type="suppress">
-                <directory name="src" />
-            </errorLevel>
-        </ImplicitToStringCast>
-        <MissingClosureReturnType>
-            <errorLevel type="suppress">
-                <directory name="src" />
-            </errorLevel>
-        </MissingClosureReturnType>
-        <TooManyTemplateParams>
-            <errorLevel type="suppress">
-                <directory name="src" />
-            </errorLevel>
-        </TooManyTemplateParams>
-        <UndefinedInterfaceMethod>
-            <errorLevel type="suppress">
-                <referencedMethod name="GuzzleHttp\ClientInterface::getAsync" />
-                <referencedMethod name="Illuminate\Contracts\Container\ContextualBindingBuilder::giveConfig" />
-            </errorLevel>
-        </UndefinedInterfaceMethod>
+        <MissingClosureReturnType errorLevel="suppress" />
+        <RiskyTruthyFalsyComparison errorLevel="suppress" />
     </issueHandlers>
 </psalm>

@@ -66,7 +66,7 @@ class MetricsMiddlewareTest extends TestCase
                         'method' => 'GET',
                         'uri' => '/**',
                         'exception' => 'None',
-                        'status' => 404,
+                        'status' => '404',
                         'outcome' => 'CLIENT_ERROR',
                     ];
                 })
@@ -112,7 +112,7 @@ class MetricsMiddlewareTest extends TestCase
                         'method' => 'GET',
                         'uri' => '/list[/[{name}[/]]]',
                         'exception' => 'PDOException',
-                        'status' => 500,
+                        'status' => '500',
                         'outcome' => 'SERVER_ERROR',
                     ];
                 })

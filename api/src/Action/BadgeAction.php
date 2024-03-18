@@ -37,7 +37,7 @@ class BadgeAction
 
         return collect($this->check->execute())
             ->map(fn (Status $item) => $item->getResult())
-            ->filter(fn (?Result $item) => $item)
+            ->filter(fn (?Result $item) => (bool) $item)
             ->map(fn (Result $item) => $item->getStatus())
             ->filter(fn (?ValidationResult $item) => ValidationResult::tryFrom(strtoupper($status)) === $item)
             ->count();

@@ -11,8 +11,8 @@ interface ClientService extends ClientInterface
 {
     /**
      * Get the responses for URL.
-     * @param  string                                 $url The URL.
-     * @return \Generator<PromiseInterface<Response>> The responses.
+     * @param  string                                         $url The URL.
+     * @return \Generator<string, PromiseInterface<Response>> The responses.
      */
-    public function getAsync(string $url): \Generator;
+    public function getRedirectsAsync(string $url): \Generator;
 }

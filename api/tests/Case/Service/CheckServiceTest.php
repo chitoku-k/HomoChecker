@@ -117,7 +117,7 @@ class CheckServiceTest extends TestCase
 
         /** @var ClientService&MockInterface $client */
         $client = m::mock(ClientService::class);
-        $client->shouldReceive('getAsync')
+        $client->shouldReceive('getRedirectsAsync')
                ->withArgs(['https://foo.example.com/1'])
                ->andReturn(
                    (function () {
@@ -146,7 +146,7 @@ class CheckServiceTest extends TestCase
                    })(),
                );
 
-        $client->shouldReceive('getAsync')
+        $client->shouldReceive('getRedirectsAsync')
                ->withArgs(['https://foo.example.com/2'])
                ->andReturn(
                    (function () {
@@ -199,7 +199,7 @@ class CheckServiceTest extends TestCase
                    })(),
                );
 
-        $client->shouldReceive('getAsync')
+        $client->shouldReceive('getRedirectsAsync')
                ->withArgs(['http://bar.example.com'])
                ->andReturn(
                    (function () {
@@ -216,7 +216,7 @@ class CheckServiceTest extends TestCase
                    })(),
                );
 
-        $client->shouldReceive('getAsync')
+        $client->shouldReceive('getRedirectsAsync')
                ->withArgs(['https://baz.example.com'])
                ->andReturn(
                    (function () {
@@ -227,7 +227,7 @@ class CheckServiceTest extends TestCase
                    })(),
                );
 
-        $client->shouldReceive('getAsync')
+        $client->shouldReceive('getRedirectsAsync')
                ->withArgs(['https://qux.example.com'])
                ->andReturn(
                    (function () {
@@ -242,7 +242,7 @@ class CheckServiceTest extends TestCase
                      ->withArgs([
                          [
                              'status' => 'OK',
-                             'code' => 301,
+                             'code' => '301',
                              'screen_name' => 'foo',
                              'url' => 'https://foo.example.com/1',
                          ],
@@ -252,7 +252,7 @@ class CheckServiceTest extends TestCase
                      ->withArgs([
                          [
                              'status' => 'WRONG',
-                             'code' => 200,
+                             'code' => '200',
                              'screen_name' => 'foo',
                              'url' => 'https://foo.example.com/2',
                          ],
@@ -262,7 +262,7 @@ class CheckServiceTest extends TestCase
                      ->withArgs([
                          [
                              'status' => 'OK',
-                             'code' => 200,
+                             'code' => '200',
                              'screen_name' => 'bar',
                              'url' => 'http://bar.example.com',
                          ],
@@ -272,7 +272,7 @@ class CheckServiceTest extends TestCase
                      ->withArgs([
                          [
                              'status' => 'ERROR',
-                             'code' => 0,
+                             'code' => '0',
                              'screen_name' => 'baz',
                              'url' => 'https://baz.example.com',
                          ],
@@ -282,7 +282,7 @@ class CheckServiceTest extends TestCase
                      ->withArgs([
                          [
                              'status' => 'ERROR',
-                             'code' => 0,
+                             'code' => '0',
                              'screen_name' => 'qux',
                              'url' => 'https://qux.example.com',
                          ],
@@ -294,7 +294,7 @@ class CheckServiceTest extends TestCase
                           ->withArgs([
                               [
                                   'status' => 'ERROR',
-                                  'code' => 0,
+                                  'code' => '0',
                                   'screen_name' => 'baz',
                                   'url' => 'https://baz.example.com',
                               ],
@@ -304,7 +304,7 @@ class CheckServiceTest extends TestCase
                           ->withArgs([
                               [
                                   'status' => 'ERROR',
-                                  'code' => 0,
+                                  'code' => '0',
                                   'screen_name' => 'qux',
                                   'url' => 'https://qux.example.com',
                               ],

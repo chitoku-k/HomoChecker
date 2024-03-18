@@ -26,8 +26,8 @@ use Prometheus\Counter;
 class CheckService implements CheckServiceContract
 {
     /**
-     * @param Collection<ProfileServiceContract>   $profiles
-     * @param Collection<ValidatorServiceContract> $validators
+     * @param Collection<string, ProfileServiceContract> $profiles
+     * @param Collection<int, ValidatorServiceContract>  $validators
      */
     public function __construct(
         protected ClientServiceContract $client,
@@ -59,7 +59,7 @@ class CheckService implements CheckServiceContract
             $ip = null;
 
             try {
-                foreach ($this->client->getAsync($url) as $url => $promise) {
+                foreach ($this->client->getRedirectsAsync($url) as $url => $promise) {
                     /** @var Response $response */
                     $response = yield $promise;
 
@@ -134,10 +134,16 @@ class CheckService implements CheckServiceContract
     protected function createStatusAsync(Homo $homo, callable $callback = null): PromiseInterface
     {
         return Coroutine::of(function () use ($homo, $callback) {
-            /** @var Result $result */
+            $service = $homo->getService();
+            $screen_name = $homo->getScreenName();
+
+            /**
+             * @var Result  $result
+             * @var ?string $icon
+             */
             [$result, $icon] = yield Utils::all([
                 $this->validateAsync($homo),
-                $homo->getProfile()?->getIconUrl() ?? $this->profiles->get($homo->getService())->getIconAsync($homo->getScreenName()),
+                $homo->getProfile()?->getIconUrl() ?? $this->profiles->get($service)?->getIconAsync($screen_name),
             ]);
             $status = new Status([
                 'homo' => $homo,
@@ -150,16 +156,16 @@ class CheckService implements CheckServiceContract
             }
 
             $this->checkCounter->inc([
-                'status' => $result->getStatus()->value,
-                'code' => (int) $result->getCode(),
+                'status' => (string) $result->getStatus()?->value,
+                'code' => (string) (int) $result->getCode(),
                 'screen_name' => $homo->getScreenName(),
                 'url' => $homo->getUrl(),
             ]);
 
             if ($result->getStatus() === ValidationResult::ERROR) {
                 $this->checkErrorCounter->inc([
-                    'status' => $result->getStatus()->value,
-                    'code' => (int) $result->getCode(),
+                    'status' => (string) $result->getStatus()?->value,
+                    'code' => (string) (int) $result->getCode(),
                     'screen_name' => $homo->getScreenName(),
                     'url' => $homo->getUrl(),
                 ]);
