@@ -40,7 +40,7 @@ class TwitterProfileService implements ProfileServiceContract
                 ],
             ]);
             $guest = json_decode((string) $response->getBody());
-            if (!isset($guest->guest_token)) {
+            if (!isset($guest->guest_token) || !is_string($guest->guest_token)) {
                 throw new \RuntimeException('Error issuing guest_token');
             }
 
@@ -52,6 +52,7 @@ class TwitterProfileService implements ProfileServiceContract
     protected function generateHeaders(): PromiseInterface
     {
         return Coroutine::of(function () {
+            /** @var string $guestToken */
             $guestToken = yield $this->getGuestToken();
             $csrfToken = uniqid();
             $cookie = implode('; ', [
@@ -77,8 +78,8 @@ class TwitterProfileService implements ProfileServiceContract
 
     /**
      * Get the URL of profile image of the user.
-     * @param  string           $screen_name The screen_name of the user.
-     * @return PromiseInterface The promise.
+     * @param  string                   $screen_name The screen_name of the user.
+     * @return PromiseInterface<string> The promise.
      */
     #[\Override]
     public function getIconAsync(string $screen_name): PromiseInterface
@@ -104,7 +105,7 @@ class TwitterProfileService implements ProfileServiceContract
                 if (!isset($user->data->user)) {
                     throw new \RuntimeException("User not found: {$screen_name}");
                 }
-                $url = str_replace('_normal', '_200x200', $user->data->user->result->legacy->profile_image_url_https);
+                $url = str_replace('_normal', '_200x200', (string) $user->data->user->result->legacy->profile_image_url_https);
 
                 $this->repository->save(
                     $screen_name,

@@ -6,24 +6,24 @@ namespace HomoChecker\Domain;
 class Homo
 {
     /**
-     * @var ?int The id.
+     * @var int The id.
      */
-    protected ?int $id;
+    protected int $id;
 
     /**
-     * @var ?string The screen name.
+     * @var string The screen name.
      */
-    protected ?string $screenName;
+    protected string $screenName;
 
     /**
-     * @var ?string The name of the service.
+     * @var string The name of the service.
      */
-    protected ?string $service;
+    protected string $service;
 
     /**
-     * @var ?string The URL.
+     * @var string The URL.
      */
-    protected ?string $url;
+    protected string $url;
 
     /**
      * @var ?Profile The profile.
@@ -34,10 +34,10 @@ class Homo
     {
         $homo = (object) $homo;
 
-        $this->setId($homo->id ?? null);
-        $this->setScreenName($homo->screen_name ?? null);
-        $this->setService($homo->service ?? null);
-        $this->setUrl($homo->url ?? null);
+        $this->setId($homo->id);
+        $this->setScreenName($homo->screen_name);
+        $this->setService($homo->service);
+        $this->setUrl($homo->url);
 
         if (isset($homo->icon_url)) {
             $this->setProfile(new Profile(['icon_url' => $homo->icon_url]));
@@ -46,9 +46,9 @@ class Homo
 
     /**
      * Get the id.
-     * @return ?int The id.
+     * @return int The id.
      */
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -57,61 +57,61 @@ class Homo
      * Set the id.
      * @param int $id The id.
      */
-    public function setId(?int $id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
 
     /**
      * Get the screen name.
-     * @return ?string The screen name.
+     * @return string The screen name.
      */
-    public function getScreenName(): ?string
+    public function getScreenName(): string
     {
         return $this->screenName;
     }
 
     /**
      * Set the screen name.
-     * @param ?string $screenName The screen name.
+     * @param string $screenName The screen name.
      */
-    public function setScreenName(?string $screenName): void
+    public function setScreenName(string $screenName): void
     {
         $this->screenName = $screenName;
     }
 
     /**
      * Get the name of the service.
-     * @return ?string The name of the service.
+     * @return string The name of the service.
      */
-    public function getService(): ?string
+    public function getService(): string
     {
         return $this->service;
     }
 
     /**
      * Set the name of the service.
-     * @param ?string $service The name of the service.
+     * @param string $service The name of the service.
      */
-    public function setService(?string $service): void
+    public function setService(string $service): void
     {
         $this->service = $service;
     }
 
     /**
      * Get the URL.
-     * @return ?string The URL.
+     * @return string The URL.
      */
-    public function getUrl(): ?string
+    public function getUrl(): string
     {
         return $this->url;
     }
 
     /**
      * Set the URL.
-     * @param ?string $url The URL.
+     * @param string $url The URL.
      */
-    public function setUrl(?string $url): void
+    public function setUrl(string $url): void
     {
         $this->url = $url;
     }

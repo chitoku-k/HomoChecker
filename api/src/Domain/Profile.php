@@ -6,22 +6,22 @@ namespace HomoChecker\Domain;
 class Profile
 {
     /**
-     * @var ?string The icon URL.
+     * @var string The icon URL.
      */
-    protected ?string $iconUrl;
+    protected string $iconUrl;
 
     public function __construct(array|object $profile = null)
     {
         $profile = (object) $profile;
 
-        $this->setIconUrl($profile->icon_url ?? null);
+        $this->setIconUrl($profile->icon_url);
     }
 
     /**
      * Get the icon URL.
-     * @return ?string The icon URL.
+     * @return string The icon URL.
      */
-    public function getIconUrl(): ?string
+    public function getIconUrl(): string
     {
         return $this->iconUrl;
     }
@@ -29,7 +29,7 @@ class Profile
     /**
      * Set the icon URL.
      */
-    public function setIconUrl(?string $iconUrl): void
+    public function setIconUrl(string $iconUrl): void
     {
         $this->iconUrl = $iconUrl;
     }

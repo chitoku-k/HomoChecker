@@ -9,6 +9,9 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 class DOMValidatorService implements ValidatorServiceContract
 {
+    /**
+     * @param non-empty-string $regex
+     */
     public function __construct(protected string $regex) {}
 
     /**
@@ -20,8 +23,11 @@ class DOMValidatorService implements ValidatorServiceContract
         set_error_handler(fn ($severity, $message, $filename, $line) => throw new \ErrorException($message, 0, $severity, $filename, $line));
 
         try {
+            if (!$body = (string) $response->getBody()) {
+                return false;
+            }
             $doc = new \DOMDocument();
-            $doc->loadHTML((string) $response->getBody());
+            $doc->loadHTML($body);
             $xpath = new \DOMXPath($doc);
             $xpath->registerNamespace('php', 'http://php.net/xpath');
             $xpath->registerPhpFunctions();

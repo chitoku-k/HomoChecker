@@ -26,16 +26,19 @@ class ListActionTest extends TestCase
     {
         $this->users = [
             (object) [
+                'id' => 1,
                 'screen_name' => 'foo',
                 'service' => 'twitter',
                 'url' => 'https://foo.example.com/1',
             ],
             (object) [
+                'id' => 2,
                 'screen_name' => 'foo',
                 'service' => 'twitter',
                 'url' => 'https://foo.example.com/2',
             ],
             (object) [
+                'id' => 3,
                 'screen_name' => 'bar',
                 'service' => 'mastodon',
                 'url' => 'http://bar.example.com',

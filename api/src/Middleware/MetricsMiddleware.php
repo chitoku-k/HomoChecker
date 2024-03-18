@@ -45,7 +45,7 @@ class MetricsMiddleware implements MiddlewareInterface
             'method' => $request->getMethod(),
             'uri' => $this->getRoutePattern($request),
             'exception' => $this->getException($response),
-            'status' => $response->getStatusCode(),
+            'status' => (string) $response->getStatusCode(),
             'outcome' => $this->getOutcome($response->getStatusCode()),
         ]);
 
@@ -55,11 +55,11 @@ class MetricsMiddleware implements MiddlewareInterface
     protected function getRoutePattern(ServerRequestInterface $request): string
     {
         $results = $this->routeResolver->computeRoutingResults($request->getUri()->getPath(), $request->getMethod());
+        if ($results->getRouteStatus() !== RoutingResults::FOUND || !$id = $results->getRouteIdentifier()) {
+            return '/**';
+        }
 
-        return match ($results->getRouteStatus()) {
-            RoutingResults::FOUND => $this->routeResolver->resolveRoute($results->getRouteIdentifier())->getPattern(),
-            default => '/**',
-        };
+        return $this->routeResolver->resolveRoute($id)->getPattern();
     }
 
     protected function getOutcome(int $status): string

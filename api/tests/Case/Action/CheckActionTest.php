@@ -36,16 +36,19 @@ class CheckActionTest extends TestCase
 
         $this->users = [
             new Homo([
+                'id' => 1,
                 'screen_name' => 'foo',
                 'service' => 'twitter',
                 'url' => 'https://foo.example.com/1',
             ]),
             new Homo([
+                'id' => 2,
                 'screen_name' => 'foo',
                 'service' => 'twitter',
                 'url' => 'https://foo.example.com/2',
             ]),
             new Homo([
+                'id' => 3,
                 'screen_name' => 'bar',
                 'service' => 'mastodon',
                 'url' => 'http://bar.example.com',
@@ -55,6 +58,7 @@ class CheckActionTest extends TestCase
         $this->statuses = [
             new Status([
                 'homo' => new Homo([
+                    'id' => 1,
                     'screen_name' => 'foo',
                     'service' => 'twitter',
                     'url' => 'https://foo.example.com/1',
@@ -81,6 +85,7 @@ class CheckActionTest extends TestCase
             ]),
             new Status([
                 'homo' => new Homo([
+                    'id' => 2,
                     'screen_name' => 'foo',
                     'service' => 'twitter',
                     'url' => 'https://foo.example.com/2',
@@ -107,6 +112,7 @@ class CheckActionTest extends TestCase
             ]),
             new Status([
                 'homo' => new Homo([
+                    'id' => 3,
                     'screen_name' => 'bar',
                     'service' => 'mastodon',
                     'url' => 'http://bar.example.com',

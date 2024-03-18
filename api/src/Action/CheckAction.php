@@ -26,7 +26,6 @@ class CheckAction
 
     protected function byJSON(Response $response, string $screen_name = null): Response
     {
-        /** @var Response $response */
         $result = $this->check->execute($screen_name);
         return $response
             ->withHeader('Cache-Control', 'no-store')
