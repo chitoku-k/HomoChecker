@@ -113,7 +113,7 @@ class Status implements \JsonSerializable
     protected function isSecure(?string $url): bool
     {
         return match ($url) {
-            null => false,
+            null, '' => false,
             default => strtolower(parse_url($url, PHP_URL_SCHEME)) === 'https',
         };
     }
