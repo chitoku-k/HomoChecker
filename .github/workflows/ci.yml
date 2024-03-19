@@ -3,6 +3,21 @@ on:
   - push
 
 jobs:
+  api-analysis:
+    name: API Analyses
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          tools: composer
+      - name: Run analyses
+        working-directory: api
+        run: |
+          composer install
+          composer psalm --show-info=true
   api-test:
     name: API Tests
     runs-on: ubuntu-latest
