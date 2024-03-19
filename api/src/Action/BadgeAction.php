@@ -29,7 +29,7 @@ class BadgeAction
         return $query ? $uri . '?' . http_build_query($query) : $uri;
     }
 
-    protected function getCount(string $status = null): int
+    protected function getCount(?string $status = null): int
     {
         if (!$status) {
             return $this->homo->count();
