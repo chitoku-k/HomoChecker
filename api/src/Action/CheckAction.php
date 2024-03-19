@@ -24,7 +24,7 @@ class CheckAction
         };
     }
 
-    protected function byJSON(Response $response, string $screen_name = null): Response
+    protected function byJSON(Response $response, ?string $screen_name = null): Response
     {
         $result = $this->check->execute($screen_name);
         return $response
@@ -32,7 +32,7 @@ class CheckAction
             ->withJson($result, !empty($result) ? 200 : 404);
     }
 
-    protected function bySSE(Response $response, string $screen_name = null): Response
+    protected function bySSE(Response $response, ?string $screen_name = null): Response
     {
         $response = $response
             ->withBody($this->stream)

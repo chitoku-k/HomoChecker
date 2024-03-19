@@ -11,7 +11,7 @@ class HomoService implements HomoServiceContract
     public function __construct(protected HomoRepositoryContract $repository) {}
 
     #[\Override]
-    public function count(string $screenName = null): int
+    public function count(?string $screenName = null): int
     {
         if (!$screenName) {
             return $this->repository->count();
@@ -21,7 +21,7 @@ class HomoService implements HomoServiceContract
     }
 
     #[\Override]
-    public function find(string $screenName = null): array
+    public function find(?string $screenName = null): array
     {
         if (!$screenName) {
             return $this->repository->findAll();

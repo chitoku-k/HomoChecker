@@ -20,7 +20,7 @@ class Status implements \JsonSerializable
      */
     protected ?string $icon;
 
-    public function __construct(array|object $status = null)
+    public function __construct(null|array|object $status = null)
     {
         $status = (object) $status;
 

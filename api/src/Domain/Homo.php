@@ -30,7 +30,7 @@ class Homo
      */
     protected ?Profile $profile = null;
 
-    public function __construct(array|object $homo = null)
+    public function __construct(null|array|object $homo = null)
     {
         $homo = (object) $homo;
 

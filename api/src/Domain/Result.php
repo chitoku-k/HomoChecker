@@ -47,7 +47,7 @@ class Result
      */
     protected ?string $error;
 
-    public function __construct(array|object $result = null)
+    public function __construct(null|array|object $result = null)
     {
         $result = (object) $result;
 

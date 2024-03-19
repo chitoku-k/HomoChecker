@@ -131,7 +131,7 @@ class CheckService implements CheckServiceContract
      * @param  callable                 $callback The callback that is called after resolution (optional).
      * @return PromiseInterface<Status> The Promise.
      */
-    protected function createStatusAsync(Homo $homo, callable $callback = null): PromiseInterface
+    protected function createStatusAsync(Homo $homo, ?callable $callback = null): PromiseInterface
     {
         return Coroutine::of(function () use ($homo, $callback) {
             $service = $homo->getService();
@@ -179,7 +179,7 @@ class CheckService implements CheckServiceContract
      * {@inheritdoc}
      */
     #[\Override]
-    public function execute(string $screen_name = null, callable $callback = null): array
+    public function execute(?string $screen_name = null, ?callable $callback = null): array
     {
         return Pool::batch(
             $this->client,
