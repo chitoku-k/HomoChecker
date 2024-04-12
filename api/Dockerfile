@@ -51,7 +51,7 @@ RUN git clone --depth=1 -b $CURL_VERSION https://github.com/curl/curl && \
     make -j $(nproc) && \
     make install
 
-FROM php:8.3.4-fpm AS runtime
+FROM php:8.3.6-fpm AS runtime
 WORKDIR /var/www/html/api
 COPY --from=openssl /usr/local/bin/ /usr/local/bin/
 COPY --from=openssl /usr/local/include/ /usr/local/include/
