@@ -67,7 +67,10 @@ module.exports = {
             ],
         }),
         new ESLintPlugin({
+            configType: "flat",
             extensions: ["js", "tag"],
+            // TODO: Remove eslintPath after eslint-webpack-plugin supports ESLint v9.x
+            eslintPath: "eslint/use-at-your-own-risk",
         }),
         new DefinePlugin({
             COMMIT_HASH: JSON.stringify((new GitRevisionPlugin()).commithash()),
