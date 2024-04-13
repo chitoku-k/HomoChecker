@@ -1,6 +1,6 @@
 <homo-anime class={ state }>
-    <i class="fa fa-mars part-passive"></i>
-    <i class="fa fa-mars part-active" onanimationend={ trigger.bind(this, "animationend") }></i>
+    <i class="fa-solid fa-mars part-passive"></i>
+    <i class="fa-solid fa-mars part-active" onanimationend={ trigger.bind(this, "animationend") }></i>
     <style type="text/dart-sass">
         homo-anime {
             display: inline-block;
