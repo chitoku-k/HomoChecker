@@ -9,12 +9,14 @@ module.exports = [
         ignores: [
             "**/*{.,-}min.js",
         ],
-        processor: {
-            meta: {
-                name: "riot",
+        plugins: {
+            riot: {
+                processors: {
+                    tag: riot.processors['.tag'],
+                },
             },
-            ...riot.processors['.tag'],
         },
+        processor: "riot/tag",
         rules: {
             "comma-dangle": [2, "always-multiline"],
             "no-cond-assign": [2, "except-parens"],
