@@ -61,6 +61,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fortawesome/fontawesome-free@npm:^6.5.2":
+  version: 6.5.2
+  resolution: "@fortawesome/fontawesome-free@npm:6.5.2"
+  checksum: 10/8eb70fa76263a79f43d95c7b8d2a839c04cd96ec17ca0f14d7b6ec659ce25abd89e47b436616b5fd9e1aec74f2f4e9c02c6be7549d37b5cb9ceb5f15c8834cbf
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.1.3":
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
@@ -2091,13 +2098,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"font-awesome@npm:^4.7.0":
-  version: 4.7.0
-  resolution: "font-awesome@npm:4.7.0"
-  checksum: 10/eefb0e49c06428c646c22ae0f406e2b31b05fc89cdf7bedb0352a99ce94cd34b5e2e7bb52e8a8fdfb486b5e6481de010d00d6be79f426e1033a1dea726fbc8a8
-  languageName: node
-  linkType: hard
-
 "for-in@npm:^1.0.2":
   version: 1.0.2
   resolution: "for-in@npm:1.0.2"
@@ -2403,13 +2403,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "homo-checker@workspace:."
   dependencies:
+    "@fortawesome/fontawesome-free": "npm:^6.5.2"
     clean-webpack-plugin: "npm:^4.0.0"
     copy-webpack-plugin: "npm:^12.0.2"
     css-loader: "npm:^7.1.1"
     eslint: "npm:^9.0.0"
     eslint-plugin-riot: "npm:^0.1.8"
     eslint-webpack-plugin: "npm:^4.1.0"
-    font-awesome: "npm:^4.7.0"
     git-revision-webpack-plugin: "npm:^5.0.0"
     html-webpack-plugin: "npm:^5.6.0"
     license-webpack-plugin: "npm:^4.0.2"

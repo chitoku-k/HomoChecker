@@ -20,11 +20,11 @@
                         contains: status === "CONTAINS"
                     } title={ error || code }>
                         <i class={
-                            fa: true,
+                            fa-solid: true,
                             fa-check: status === "OK",
                             fa-ban: status === "WRONG",
-                            fa-times: status === "ERROR",
-                            fa-exclamation-triangle: status === "CONTAINS"
+                            fa-xmark: status === "ERROR",
+                            fa-triangle-exclamation: status === "CONTAINS"
                         }></i>
                         { status }
                     </span>
@@ -35,9 +35,9 @@
                         insecure: !secure,
                     } title={ this.getConnection(url, certificates).join("&#x0d;&#x0a;") }>
                         <i class={
-                            fa: true,
+                            fa-solid: true,
                             fa-lock: secure,
-                            fa-unlock-alt: !secure,
+                            fa-unlock: !secure,
                         }></i>
                         <span if={ http }>
                             HTTP/{ http }
@@ -53,7 +53,7 @@
                         ipv4: ip.includes("."),
                         ipv6: ip.includes(":"),
                     } title={ ip }>
-                        <i class="fa fa-globe"></i>
+                        <i class="fa-solid fa-earth-asia"></i>
                         { ip.includes(":") ? "IPv6" : "IPv4" }
                     </span>
                 </div>
@@ -141,8 +141,7 @@
                         color: #666;
                         border-color: #666;
 
-                        .fa {
-                            font-family: FontAwesome, Atlan;
+                        .fa-solid {
                             font-size: 14px;
 
                             &:before {
@@ -278,7 +277,7 @@
                         .attributes-container {
                             font-size: 10px;
 
-                            .fa {
+                            .fa-solid {
                                 font-size: 10px;
                             }
 

@@ -1,6 +1,7 @@
 import riot from "riot";
 import "riot-hot-reload";
-import "font-awesome/scss/font-awesome.scss";
+import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
+import "@fortawesome/fontawesome-free/scss/solid.scss";
 import "./styles.scss";
 import "./tags/homo-anime";
 import "./tags/homo-app";
