@@ -1,13 +1,15 @@
-const riot = require("eslint-plugin-riot");
+import riot from "eslint-plugin-riot";
 
-module.exports = [
+export default [
+    {
+        ignores: [
+            ".yarn",
+        ],
+    },
     {
         files: [
             "**/*.js",
             "**/*.tag",
-        ],
-        ignores: [
-            "**/*{.,-}min.js",
         ],
         plugins: {
             riot: {
