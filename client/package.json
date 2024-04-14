@@ -33,7 +33,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "lint": "eslint 'src/tags/*.tag'",
+    "lint": "eslint",
     "watch": "webpack --watch"
   },
   "keywords": [
