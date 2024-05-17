@@ -61,10 +61,13 @@ hosts:
 
 #### Cloudflare
 
-1. DNS で `homo.example.com` を Cloudflare を通すように設定します。
-2. Page Rule を作成します。
-   - `If the URL matches:` に `*homo.example.com/*` を指定します。
-   - `Then the settings are:` に `Forwarding URL`、`301 - Permanent Redirect`、`https://twitter.com/mpyw` を指定します。
+1. DNS > Records で `homo.example.com` が Cloudflare に Proxy されるよう設定します。
+2. Rules > Redirect Rules を作成します。
+   - Rule name に任意の名前を入力します。
+   - Custom filter expression を選択します。
+   - Field に `Hostname`、Operator に `equals`、Value に `homo.example.com` となるように条件を設定します。
+   - Type に `Static`、URL に `https://twitter.com/mpyw`、Status code に `301` となるようにリダイレクト先を設定します。
+   - Deploy ボタンを押下します。
 
 #### 静的配信
 
