@@ -61,8 +61,8 @@ hosts:
 
 #### Cloudflare
 
-1. DNS > Records で `homo.example.com` が Cloudflare に Proxy されるよう設定します。
-2. Rules > Redirect Rules を作成します。
+1. DNS \> Records で `homo.example.com` が Cloudflare に Proxy されるよう設定します。
+2. Rules \> Redirect Rules を作成します。
    - Rule name に任意の名前を入力します。
    - Custom filter expression を選択します。
    - Field に `Hostname`、Operator に `equals`、Value に `homo.example.com` となるように条件を設定します。
