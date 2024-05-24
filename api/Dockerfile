@@ -43,7 +43,7 @@ FROM build-dependencies AS curl
 COPY --from=openssl /usr/local/ /usr/local/
 COPY --from=nghttp3 /usr/local/ /usr/local/
 COPY --from=ngtcp2 /usr/local/ /usr/local/
-ARG CURL_VERSION=curl-8_7_1
+ARG CURL_VERSION=curl-8_8_0
 RUN git clone --depth=1 -b $CURL_VERSION https://github.com/curl/curl && \
     cd curl && \
     autoreconf -fi && \
