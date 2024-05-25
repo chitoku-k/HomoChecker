@@ -1,7 +1,7 @@
-<homo-anime class={ state }>
+<homo-anime class={ state.className }>
     <i class="fa-solid fa-mars part-passive"></i>
-    <i class="fa-solid fa-mars part-active" onanimationend={ trigger.bind(this, "animationend") }></i>
-    <style type="text/dart-sass">
+    <i class="fa-solid fa-mars part-active" onanimationend={ onAnimationEnd }></i>
+    <style type="scss">
         homo-anime {
             display: inline-block;
             margin-right: -15px;
@@ -22,7 +22,7 @@
             .part-active {
                 position: relative;
                 top: 0.6em;
-                left: -1.775em;
+                left: -1.65em;
             }
 
             &.start {
@@ -167,26 +167,39 @@
         }
     </style>
     <script>
-        import { merge, from, fromEvent, zip } from "rxjs";
+        import { from, zip, Subject } from "rxjs";
         import { repeat } from "rxjs/operators";
 
-        zip(
-            merge(
-                fromEvent(this, "mount"),
-                fromEvent(this, "animationend"),
-            ),
-            from([
-                "start",
-                "pako",
-                "finish",
-                "dopyulicated",
-                "end",
-                "void",
-            ]),
-        ).pipe(
-            repeat(),
-        ).subscribe(([ e, state ]) => {
-            this.update({ state });
-        });
+        export default {
+            state: {
+                className: "start",
+                events: new Subject(),
+            },
+            onBeforeMount(props, state) {
+                zip(
+                    this.state.events,
+                    from([
+                        "start",
+                        "pako",
+                        "finish",
+                        "dopyulicated",
+                        "end",
+                        "void",
+                    ]),
+                ).pipe(
+                    repeat(),
+                ).subscribe(([ e, state ]) => {
+                    this.update({
+                        className: state,
+                    });
+                });
+            },
+            onAnimationEnd() {
+                this.state.events.next();
+            },
+            onMounted() {
+                this.state.events.next();
+            },
+        };
     </script>
 </homo-anime>

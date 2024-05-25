@@ -1,0 +1,23 @@
+<homo-app>
+    <homo-progress progress={ state.progress }></homo-progress>
+    <homo-header></homo-header>
+    <homo-content progress={ state.progress }></homo-content>
+    <script>
+        import { Subject } from "rxjs";
+
+        import HomoProgress from "./homo-progress.riot";
+        import HomoHeader from "./homo-header.riot";
+        import HomoContent from "./homo-content.riot";
+
+        export default {
+            components: {
+                HomoProgress,
+                HomoHeader,
+                HomoContent,
+            },
+            state: {
+                progress: new Subject(),
+            },
+        };
+    </script>
+</homo-app>

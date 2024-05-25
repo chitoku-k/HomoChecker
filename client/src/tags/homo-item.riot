@@ -1,69 +1,45 @@
 <homo-item>
     <div class="container">
-        <a href={ this.getUserUrl(homo) } target="_blank">
-            <img src={ homo.icon } width="60" height="60">
+        <a href={ getUserUrl(props.homo) } target="_blank">
+            <img src={ props.homo.icon } width="60" height="60">
         </a>
         <div class="information">
             <div class="subdomain">
                 <h2>
-                    <a class="url" href={ homo.url } target="_blank">{ homo.display_url }</a>
+                    <a class="url" href={ props.homo.url } target="_blank">{ props.homo.display_url }</a>
                 </h2>
             </div>
             <div class="result">
                 <div class="attributes-container">
-                    <span class={
-                        connection: true,
-                        status: true,
-                        ok: status === "OK",
-                        wrong: status === "WRONG",
-                        error: status === "ERROR",
-                        contains: status === "CONTAINS"
-                    } title={ error || code }>
-                        <i class={
-                            fa-solid: true,
-                            fa-check: status === "OK",
-                            fa-ban: status === "WRONG",
-                            fa-xmark: status === "ERROR",
-                            fa-triangle-exclamation: status === "CONTAINS"
-                        }></i>
-                        { status }
+                    <span class={ clsx("connection", "status", props.status.toLowerCase()) } title={ props.error || props.code }>
+                        <i class={ clsx("fa-solid", statusIcons[props.status]) }></i>
+                        { props.status }
                     </span>
-                    <span class={
-                        connection: true,
-                        success: status !== "ERROR",
-                        secure: secure,
-                        insecure: !secure,
-                    } title={ this.getConnection(url, certificates).join("&#x0d;&#x0a;") }>
-                        <i class={
-                            fa-solid: true,
-                            fa-lock: secure,
-                            fa-unlock: !secure,
-                        }></i>
-                        <span if={ http }>
-                            HTTP/{ http }
-                            { secure ? http === "3" ? "over QUIC" : "over TLS" : "" }
+                    <span
+                        class={ clsx("connection", props.status !== "ERROR" && "success", props.secure ? "secure" : "insecure") }
+                        title={ getConnection(props.url, props.certificates).join("&#x0d;&#x0a;") }
+                    >
+                        <i class={ clsx("fa-solid", props.secure ? "fa-lock" : "fa-unlock") }></i>
+                        <span if={ props.http }>
+                            HTTP/{ props.http }
+                            { props.secure ? props.http === "3" ? "over QUIC" : "over TLS" : "" }
                         </span>
-                        <span if={ !http }>
-                            { secure ? "HTTPS" : "HTTP" }
+                        <span if={ !props.http }>
+                            { props.secure ? "HTTPS" : "HTTP" }
                         </span>
                     </span>
-                    <span if={ ip } class={
-                        connection: true,
-                        success: status !== "ERROR",
-                        ipv4: ip.includes("."),
-                        ipv6: ip.includes(":"),
-                    } title={ ip }>
+                    <span if={ props.ip } class={ clsx("connection", props.ip.includes(":") ? "ipv6" : "ipv4") } title={ props.ip }>
                         <i class="fa-solid fa-earth-asia"></i>
-                        { ip.includes(":") ? "IPv6" : "IPv4" }
+                        { props.ip.includes(":") ? "IPv6" : "IPv4" }
                     </span>
                 </div>
                 <div class="performance-container">
-                    <div if={ status !== "ERROR" } class="duration">{ Math.round(duration * 1000) } ms</div>
+                    <div if={ props.status !== "ERROR" } class="duration">{ Math.round(props.duration * 1000) } ms</div>
                 </div>
             </div>
         </div>
     </div>
-    <style type="text/dart-sass">
+    <style type="scss">
         homo-item {
             color: #111;
             width: 100%;
@@ -304,61 +280,68 @@
         }
     </style>
     <script>
-        this.regex = /homo|ホモ/;
+        import clsx from "clsx";
 
-        this.getUserUrl = homo => {
-            switch (homo.service) {
-                case "twitter": {
-                    return `https://twitter.com/${homo.screen_name}`;
+        export default {
+            regex: /homo|ホモ/,
+            statusIcons: {
+                OK: "fa-check",
+                WRONG: "fa-ban",
+                ERROR: "fa-xmark",
+                CONTAINS: "fa-triangle-exclamation",
+            },
+            getUserUrl(homo) {
+                switch (homo.service) {
+                    case "twitter": {
+                        return `https://x.com/${homo.screen_name}`;
+                    }
+                    case "mastodon": {
+                        const [ , username, instance ] = /@?([^@]*)@(.*)\/*/.exec(homo.screen_name) || [];
+                        return `https://${instance}/@${username}`;
+                    }
+                    default: {
+                        return null;
+                    }
                 }
-                case "mastodon": {
-                    const [ , username, instance ] = /@?([^@]*)@(.*)\/*/.exec(homo.screen_name) || [];
-                    return `https://${instance}/@${username}`;
+            },
+            getConnection(url, certificates) {
+                if (!certificates.length) {
+                    return [ url ];
                 }
-                default: {
-                    return null;
+
+                const [ certificate ] = certificates;
+                return [
+                    url,
+                    "",
+                    "Certificate:",
+                    `\tSubject: ${certificate.subject}`,
+                    `\tIssuer: ${certificate.issuer}`,
+                    `\tNot Before: ${certificate.notBefore}`,
+                    `\tNot After: ${certificate.notAfter}`,
+                ];
+            },
+            onMounted() {
+                const [ elm ] = this.root.getElementsByClassName("url");
+                if (!elm) {
+                    return;
                 }
-            }
+
+                let match;
+                while ((match = this.regex.exec(elm.lastChild.textContent))) {
+                    if (match.index < 0 || elm.lastChild.nodeType !== Node.TEXT_NODE) {
+                        break;
+                    }
+
+                    // Get the matched string
+                    const [ target ] = match;
+
+                    // Create range and surround the keyword, then lastChild points another node
+                    const range = document.createRange();
+                    range.setStart(elm.lastChild, match.index);
+                    range.setEnd(elm.lastChild, match.index + target.length);
+                    range.surroundContents(document.createElement("span"));
+                }
+            },
         };
-
-        this.getConnection = (url, certificates) => {
-            if (!certificates.length) {
-                return [ url ];
-            }
-
-            const [ certificate ] = certificates;
-            return [
-                url,
-                "",
-                "Certificate:",
-                `\tSubject: ${certificate.subject}`,
-                `\tIssuer: ${certificate.issuer}`,
-                `\tNot Before: ${certificate.notBefore}`,
-                `\tNot After: ${certificate.notAfter}`,
-            ];
-        };
-
-        this.on("mount", () => {
-            const [ elm ] = this.root.getElementsByClassName("url");
-            if (!elm) {
-                return;
-            }
-
-            let match;
-            while ((match = this.regex.exec(elm.lastChild.textContent))) {
-                if (match.index < 0 || elm.lastChild.nodeType !== Node.TEXT_NODE) {
-                    break;
-                }
-
-                // Get the matched string
-                const [ target ] = match;
-
-                // Create range and surround the keyword, then lastChild points another node
-                const range = document.createRange();
-                range.setStart(elm.lastChild, match.index);
-                range.setEnd(elm.lastChild, match.index + target.length);
-                range.surroundContents(document.createElement("span"));
-            }
-        });
     </script>
 </homo-item>

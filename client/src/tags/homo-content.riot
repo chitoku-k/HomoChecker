@@ -1,0 +1,144 @@
+<homo-content>
+    <div class="wrapper">
+        <homo-item each={ item in items } { ...item } data-duration={ item.status === "ERROR" ? Infinity : item.duration } />
+        <homo-error if={ error } />
+    </div>
+    <style type="scss">
+        homo-content {
+            display: block;
+            padding: 20px 0;
+
+            .wrapper {
+                margin-left: auto;
+                margin-right: auto;
+                overflow: visible !important;
+
+                @media (min-width: 768px) {
+                    width: 700px;
+                }
+                @media (min-width: 880px) {
+                    width: 816px;
+                }
+                @media (min-width: 1270px) {
+                    width: 1232px;
+                }
+            }
+
+            @media (max-width: 767px), (max-width: 900px) and (orientation: landscape) {
+                padding: 12px 12px 0;
+            }
+        }
+    </style>
+    <script>
+        import { merge, fromEvent, using, Subject } from "rxjs";
+        import { first, filter, map, publish, retry, tap } from "rxjs/operators";
+        import Shuffle from "shufflejs";
+
+        import HomoItem from "./homo-item.riot";
+        import HomoError from "./homo-error.riot";
+
+        export default {
+            max: 0,
+            items: [],
+            components: {
+                HomoItem,
+            },
+            onBeforeMount() {
+                const stream = new Subject();
+                using(
+                    () => {
+                        const source = new EventSource("/check/");
+                        return {
+                            source,
+                            count: null,
+                            currentCount: 0,
+                            unsubscribe: () => source.close(),
+                        };
+                    },
+                    resource => merge(
+                        fromEvent(resource.source, "initialize"),
+                        fromEvent(resource.source, "response"),
+                        fromEvent(resource.source, "error"),
+                    ).pipe(
+                        map(event => ({ resource, event })),
+                    ),
+                ).pipe(
+                    publish(multicast => merge(
+                        multicast.pipe(
+                            filter(({ event }) => event.type === "initialize"),
+                            map(({ resource, event }) => ({ resource, data: JSON.parse(event.data) })),
+                            tap(({ resource, data }) => resource.count = data.count),
+                            map(({ data }) => data),
+                        ),
+                        multicast.pipe(
+                            filter(({ event }) => event.type === "response"),
+                            map(({ resource, event }) => ({ resource, data: JSON.parse(event.data) })),
+                            tap(({ resource }) => ++resource.currentCount),
+                            map(({ data }) => data),
+                        ),
+                        multicast.pipe(
+                            filter(({ event }) => event.type === "error"),
+                            filter(({ resource }) => resource.count === null || resource.currentCount < resource.count),
+                            tap(() => {
+                                throw new Error("Service Unavailable");
+                            }),
+                        ),
+                        multicast.pipe(
+                            filter(({ event }) => event.type === "error"),
+                            filter(({ resource }) => resource.count === resource.currentCount),
+                            tap(() => stream.complete()),
+                            tap(({ resource }) => resource.unsubscribe()),
+                        ),
+                    )),
+                    retry(2),
+                ).subscribe(
+                    data => stream.next(data),
+                    error => stream.error(error),
+                );
+
+                stream.pipe(
+                    filter(({ count }) => count),
+                ).subscribe(({ count }) => {
+                    this.max = count;
+                    this.items.length = 0;
+                    this.props.progress.next({ length: 0, max: count });
+                    this.update();
+                });
+
+                stream.pipe(
+                    filter(({ homo }) => homo),
+                ).subscribe(
+                    data => {
+                        this.items.push(data);
+                        this.props.progress.next({ length: this.items.length, max: this.max });
+                        this.update();
+                    },
+                    error => {
+                        this.items.length = 0;
+                        this.props.progress.next({ length: 0, max: 0 });
+                        this.error = error;
+                        this.update();
+                    },
+                );
+            },
+            onMounted() {
+                this.state.shuffle = new Shuffle(this.root.querySelector(".wrapper"), {
+                    itemSelector: "homo-item",
+                    columnWidth: 400,
+                    gutterWidth: 16,
+                    speed: 200,
+                    easing: "cubic-bezier(.89, .08, .62, .94)",
+                    initialSort: {
+                        by: elm => +elm.dataset.duration,
+                    },
+                });
+            },
+            onUpdated() {
+                if (!this.items.length) {
+                    return;
+                }
+                this.state.shuffle.add([ this.root.querySelector("homo-item:last-child") ]);
+            },
+        };
+    </script>
+</homo-content>
