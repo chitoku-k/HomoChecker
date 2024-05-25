@@ -17,7 +17,7 @@
                     </span>
                     <span
                         class={ clsx("connection", props.status !== "ERROR" && "success", props.secure ? "secure" : "insecure") }
-                        title={ getConnection(props.url, props.certificates).join("&#x0d;&#x0a;") }
+                        title={ getConnection(props.url, props.certificates).join("\n") }
                     >
                         <i class={ clsx("fa-solid", props.secure ? "fa-lock" : "fa-unlock") }></i>
                         <span if={ props.http }>
@@ -28,7 +28,7 @@
                             { props.secure ? "HTTPS" : "HTTP" }
                         </span>
                     </span>
-                    <span if={ props.ip } class={ clsx("connection", props.ip.includes(":") ? "ipv6" : "ipv4") } title={ props.ip }>
+                    <span if={ props.ip } class={ clsx("connection", props.status !== "ERROR" && "success", props.ip.includes(":") ? "ipv6" : "ipv4") } title={ props.ip }>
                         <i class="fa-solid fa-earth-asia"></i>
                         { props.ip.includes(":") ? "IPv6" : "IPv4" }
                     </span>
