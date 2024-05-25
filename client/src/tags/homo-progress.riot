@@ -1,6 +1,6 @@
 <homo-progress>
-    <div class={ body: true, done: opts.progress.done } style="width: { opts.progress.length / opts.progress.max * 100 }%"></div>
-    <style type="text/dart-sass">
+    <div class={ clsx("body", done && "done") } style="width: { percentage }%"></div>
+    <style type="scss">
         homo-progress {
             display: block;
             position: fixed;
@@ -36,9 +36,19 @@
         }
     </style>
     <script>
-        opts.progress.on("update", () => {
-            opts.progress.done = opts.progress.length / opts.progress.max === 1;
-            this.update();
-        });
+        import clsx from "clsx";
+
+        export default {
+            clsx,
+            percentage: 0,
+            done: false,
+            onBeforeMount() {
+                this.props.progress.subscribe(({ length, max }) => {
+                    this.percentage = length / max * 100;
+                    this.done = length / max === 1;
+                    this.update();
+                });
+            },
+        };
     </script>
 </homo-progress>

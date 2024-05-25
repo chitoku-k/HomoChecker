@@ -1,26 +1,36 @@
-const riot = require("riot-compiler");
-const sass = require("sass");
-const path = require("path");
-const { DefinePlugin } = require("webpack");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const { LicenseWebpackPlugin } = require("license-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const ESLintPlugin = require("eslint-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { GitRevisionPlugin } = require("git-revision-webpack-plugin");
+import path from "node:path";
+import { createRequire } from "node:module";
+import { fileURLToPath } from "node:url";
+import webpack from "webpack";
+import * as sass from "sass";
+import { CleanWebpackPlugin } from "clean-webpack-plugin";
+import { LicenseWebpackPlugin } from "license-webpack-plugin";
+import CopyWebpackPlugin from "copy-webpack-plugin";
+import ESLintPlugin from "eslint-webpack-plugin";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import { GitRevisionPlugin } from "git-revision-webpack-plugin";
 
-riot.parsers.css["dart-sass"] = (tagName, css) => sass.compileString(css).css + "";
+const require = createRequire(import.meta.url);
+const { registerPreprocessor } = require("@riotjs/compiler");
 
-module.exports = {
+registerPreprocessor("css", "scss", code => ({
+    code: sass.compileString(code).css,
+    map: null,
+}));
+
+const { DefinePlugin } = webpack;
+const dirname = path.dirname(fileURLToPath(import.meta.url));
+
+export default {
     mode: process.env.HOMOCHECKER_ENV || "production",
     devtool: process.env.HOMOCHECKER_ENV === "development" ? "eval-cheap-module-source-map" : undefined,
-    entry: "./src/app.js",
+    entry: "./src/app.mjs",
     output: {
-        path: path.join(__dirname, "/dist"),
+        path: path.join(dirname, "/dist"),
         filename: "bundle.js",
         assetModuleFilename: "[name][ext]",
     },
-    target: ["web", "es2021"],
+    target: ["web", "es2023"],
     module: {
         rules: [
             {
@@ -32,23 +42,16 @@ module.exports = {
                 ],
             },
             {
-                test: /\.tag$/,
-                enforce: "pre",
+                test: /\.riot$/,
                 exclude: /node_modules/,
                 use: [
-                    { loader: "riot-tag-loader" },
+                    { loader: "@riotjs/webpack-loader" },
                 ],
             },
             {
                 test: /\.(woff2?|ttf|eot|svg)(\?v=[\d.]+|\?[\s\S]+)?$/,
                 type: "asset/resource",
             },
-        ],
-    },
-    resolve: {
-        extensions: [
-            ".js",
-            ".tag",
         ],
     },
     plugins: [
@@ -61,17 +64,12 @@ module.exports = {
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: path.join(__dirname, "/src/resources/favicon.ico"),
-                    to: path.join(__dirname, "/dist"),
+                    from: path.join(dirname, "/src/resources/favicon.ico"),
+                    to: path.join(dirname, "/dist"),
                 },
             ],
         }),
-        new ESLintPlugin({
-            configType: "flat",
-            extensions: ["js", "tag"],
-            // TODO: Remove eslintPath after eslint-webpack-plugin supports ESLint v9.x
-            eslintPath: "eslint/use-at-your-own-risk",
-        }),
+        new ESLintPlugin(),
         new DefinePlugin({
             COMMIT_HASH: JSON.stringify((new GitRevisionPlugin()).commithash()),
         }),
