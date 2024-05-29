@@ -11,11 +11,11 @@ use HomoChecker\Contracts\Service\ProfileService as ProfileServiceContract;
 use Illuminate\Support\Facades\Log;
 use Prometheus\Counter;
 
-class TwitterProfileService implements ProfileServiceContract
+class XProfileService implements ProfileServiceContract
 {
     public const int CACHE_EXPIRE = 180;
 
-    public const string TWITTER_API_GRAPHQL_ROOT = 'https://twitter.com/i/api/graphql/sLVLhk0bGj3MVFEKTdax1w/';
+    public const string X_API_GRAPHQL_ROOT = 'https://x.com/i/api/graphql/sLVLhk0bGj3MVFEKTdax1w/';
     public const string TOKEN = 'Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA';
 
     protected ?string $guestToken = null;
@@ -66,8 +66,8 @@ class TwitterProfileService implements ProfileServiceContract
                 'Content-Type' => 'application/x-www-form-urlencoded',
                 'Cookie' => $cookie,
                 'Dnt' => '1',
-                'Origin' => 'https://twitter.com',
-                'Referer' => 'https://twitter.com',
+                'Origin' => 'https://x.com',
+                'Referer' => 'https://x.com',
                 'X-Csrf-Token' => $csrfToken,
                 'X-Guest-Token' => $guestToken,
                 'X-Twitter-Active-User' => 'yes',
@@ -97,7 +97,7 @@ class TwitterProfileService implements ProfileServiceContract
                     'responsive_web_graphql_timeline_navigation_enabled' => true,
                     'verified_phone_label_enabled' => true,
                 ]));
-                $target = static::TWITTER_API_GRAPHQL_ROOT . "UserByScreenName?variables={$variables}&features={$features}";
+                $target = static::X_API_GRAPHQL_ROOT . "UserByScreenName?variables={$variables}&features={$features}";
                 $response = yield $this->client->getAsync($target, [
                     'headers' => $headers,
                 ]);

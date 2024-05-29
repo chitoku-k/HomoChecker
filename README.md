@@ -6,7 +6,7 @@ HomoChecker
 [![][climate-badge]][climate-link]
 [![][homo-badge]][homo-link]
 
-HomoChecker はホモ（[@mpyw](https://twitter.com/mpyw)）にリダイレクトするホモのためのホモの輪です。
+HomoChecker はホモ（[@mpyw](https://x.com/mpyw)）にリダイレクトするホモのためのホモの輪です。
 
 ## 目次
 
@@ -18,7 +18,7 @@ HomoChecker はホモ（[@mpyw](https://twitter.com/mpyw)）にリダイレク�
 
 ## ホモへの手引き
 
-[@java\_shit](https://twitter.com/java_shit) にカミングアウトしてください。[@mpyw](https://twitter.com/mpyw) と関係があってもなくても構いません。
+[@java\_shit](https://x.com/java_shit) にカミングアウトしてください。[@mpyw](https://x.com/mpyw) と関係があってもなくても構いません。
 
 ### 設定方法
 
@@ -30,7 +30,7 @@ HomoChecker は HTTP/1.1、HTTP/2、HTTP/3 に対応しています。
 ```apache
 <VirtualHost *:80>
     ServerName homo.example.com
-    Redirect permanent / https://twitter.com/mpyw
+    Redirect permanent / https://x.com/mpyw
 </VirtualHost>
 ```
 
@@ -41,7 +41,7 @@ server {
     listen 80;
     listen [::]:80;
     server_name homo.example.com;
-    return 301 https://twitter.com/mpyw;
+    return 301 https://x.com/mpyw;
 }
 ```
 
@@ -55,7 +55,7 @@ hosts:
         paths:
             "/":
                 redirect:
-                    url: https://twitter.com/mpyw
+                    url: https://x.com/mpyw
                     status: 301
 ```
 
@@ -66,7 +66,7 @@ hosts:
    - Rule name に任意の名前を入力します。
    - Custom filter expression を選択します。
    - Field に `Hostname`、Operator に `equals`、Value に `homo.example.com` となるように条件を設定します。
-   - Type に `Static`、URL に `https://twitter.com/mpyw`、Status code に `301` となるようにリダイレクト先を設定します。
+   - Type に `Static`、URL に `https://x.com/mpyw`、Status code に `301` となるようにリダイレクト先を設定します。
    - Deploy ボタンを押下します。
 
 #### 静的配信
@@ -76,7 +76,7 @@ hosts:
 ```html
 <!doctype html>
 <title>homo</title>
-<meta http-equiv="refresh" content="1; url=https://twitter.com/mpyw">
+<meta http-equiv="refresh" content="1; url=https://x.com/mpyw">
 ```
 
 ## 本番環境

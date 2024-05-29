@@ -11,14 +11,14 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use HomoChecker\Contracts\Repository\ProfileRepository;
-use HomoChecker\Service\Profile\TwitterProfileService;
+use HomoChecker\Service\Profile\XProfileService;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 use Prometheus\Counter;
 
-class TwitterProfileServiceTest extends TestCase
+class XProfileServiceTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
@@ -73,7 +73,7 @@ class TwitterProfileServiceTest extends TestCase
                                 ],
                             ]);
 
-        $profile = new TwitterProfileService($client, $repository, $profileErrorCounter);
+        $profile = new XProfileService($client, $repository, $profileErrorCounter);
 
         // (1) Retrieving guest_token fails
         $this->assertEquals($profile->getDefaultUrl(), $profile->getIconAsync($screen_name)->wait());
