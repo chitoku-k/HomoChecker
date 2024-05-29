@@ -8,7 +8,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\HandlerStack;
 use HomoChecker\Http\RequestSigner;
 use HomoChecker\Service\Profile\MastodonProfileService;
-use HomoChecker\Service\Profile\TwitterProfileService;
+use HomoChecker\Service\Profile\XProfileService;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
 use Prometheus\Counter;
@@ -28,7 +28,7 @@ class HomoProfileServiceProvider extends ServiceProvider
             return new Client($config);
         });
 
-        $this->app->singleton('twitter.client', fn (Container $app) => new Client($app->make('config')->get('twitter.client')));
+        $this->app->singleton('x.client', fn (Container $app) => new Client($app->make('config')->get('x.client')));
 
         $this->app->singleton('mastodon.signer', RequestSigner::class);
         $this->app->when(RequestSigner::class)
@@ -45,17 +45,17 @@ class HomoProfileServiceProvider extends ServiceProvider
             ->needs(ClientInterface::class)
             ->give('mastodon.client');
 
-        $this->app->when(TwitterProfileService::class)
+        $this->app->when(XProfileService::class)
             ->needs(ClientInterface::class)
-            ->give('twitter.client');
+            ->give('x.client');
 
-        $this->app->when([MastodonProfileService::class, TwitterProfileService::class])
+        $this->app->when([MastodonProfileService::class, XProfileService::class])
             ->needs(Counter::class)
             ->give('collector.profile_error_total');
 
         $this->app->singleton('profiles', fn (Container $app) => collect([
             'mastodon' => $app->make(MastodonProfileService::class),
-            'twitter' => $app->make(TwitterProfileService::class),
+            'twitter' => $app->make(XProfileService::class),
         ]));
     }
 
@@ -66,7 +66,7 @@ class HomoProfileServiceProvider extends ServiceProvider
             'profiles',
             'mastodon.client',
             'mastodon.signer',
-            'twitter.client',
+            'x.client',
         ];
     }
 }

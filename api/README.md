@@ -65,7 +65,7 @@ data: {"homo":{"screen_name":"@chitoku@mstdn.jp","service":"mastodon","url":"htt
         // (object) ホモ
         "homo": {
             // (string) スクリーンネーム
-            // Twitter の場合は @ を除くユーザー名
+            // X の場合は @ を除くユーザー名
             // Mastodon の場合は @example@mastodon.social 表記のユーザー名
             "screen_name": "@chitoku@mstdn.jp",
 
@@ -160,7 +160,7 @@ data: {"homo":{"screen_name":"@chitoku@mstdn.jp","service":"mastodon","url":"htt
 [
     {
         // (string) スクリーンネーム
-        // Twitter の場合は @ を除くユーザー名
+        // X の場合は @ を除くユーザー名
         // Mastodon の場合は @example@mastodon.social 表記のユーザー名
         "screen_name": "",
 

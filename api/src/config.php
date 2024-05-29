@@ -62,9 +62,9 @@ return [
     'mastodon.client' => [
         'timeout' => 5,
     ],
-    'twitter.client' => [
+    'x.client' => [
         'timeout' => 5,
-        'base_uri' => 'https://api.twitter.com/1.1/',
+        'base_uri' => 'https://api.x.com/1.1/',
     ],
-    'regex' => '/https?:\/\/twitter\.com\/mpyw\/?/',
+    'regex' => '/https?:\/\/(?:x\.com|twitter\.com)\/mpyw\/?/',
 ];
