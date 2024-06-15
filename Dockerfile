@@ -6,10 +6,10 @@ RUN --mount=type=cache,id=client:/var/cache/apt,target=/var/cache/apt \
     apt-get -y update && \
     apt-get -y install \
         git
-COPY client/.yarn /usr/src/client/.yarn/
 COPY client/package.json client/yarn.lock client/.yarnrc.yml /usr/src/client/
 RUN --mount=type=tmpfs,target=/tmp \
     --mount=type=cache,id=client:/usr/local/share/.cache/yarn,target=/usr/local/share/.cache/yarn \
+    corepack enable && \
     yarn
 
 FROM dependencies AS dev
