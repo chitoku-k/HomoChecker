@@ -19,7 +19,7 @@ class Response implements ResponseInterface
     protected float $startTransferTime = 0.0;
 
     /**
-     * @var string[][] The TLS certificates.
+     * @var (string|string[])[][] The TLS certificates.
      */
     protected array $certificates = [];
 
@@ -73,7 +73,7 @@ class Response implements ResponseInterface
 
     /**
      * Get the TLS certificates.
-     * @return string[][] The TLS certificates.
+     * @return (string|string[])[][] The TLS certificates.
      */
     public function getCertificates(): array
     {
