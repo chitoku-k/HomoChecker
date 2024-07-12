@@ -7,7 +7,7 @@
   "packageManager": "yarn@4.3.1",
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^6.5.2",
-    "@riotjs/compiler": "^9.0.9",
+    "@riotjs/compiler": "^9.1.2",
     "@riotjs/webpack-loader": "^9.0.1",
     "clean-webpack-plugin": "^4.0.0",
     "clsx": "^2.1.1",
