@@ -26,12 +26,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/parser@npm:^7.24.4":
-  version: 7.24.6
-  resolution: "@babel/parser@npm:7.24.6"
+"@babel/parser@npm:^7.24.7":
+  version: 7.24.8
+  resolution: "@babel/parser@npm:7.24.8"
   bin:
     parser: ./bin/babel-parser.js
-  checksum: 10/48af4251d030623a8fbf22979fc718bd9dead6ba6a64cae717270c6c809faaf303d137d82593912291ee761130c4731f0c25feb54629ba3fa4edcc496690cb44
+  checksum: 10/e44b8327da46e8659bc9fb77f66e2dc4364dd66495fb17d046b96a77bf604f0446f1e9a89cf2f011d78fc3f5cdfbae2e9e0714708e1c985988335683b2e781ef
   languageName: node
   linkType: hard
 
@@ -297,21 +297,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@riotjs/compiler@npm:^9.0.9":
-  version: 9.0.9
-  resolution: "@riotjs/compiler@npm:9.0.9"
+"@riotjs/compiler@npm:^9.1.2":
+  version: 9.1.2
+  resolution: "@riotjs/compiler@npm:9.1.2"
   dependencies:
-    "@babel/parser": "npm:^7.24.4"
+    "@babel/parser": "npm:^7.24.7"
     "@riotjs/parser": "npm:^5.0.1"
-    "@riotjs/util": "npm:2.2.4"
+    "@riotjs/util": "npm:2.4.0"
+    css-simple-parser: "npm:^3.0.0"
     cssesc: "npm:^3.0.0"
     cumpa: "npm:^2.0.1"
     curri: "npm:^2.0.3"
     dom-nodes: "npm:^1.1.3"
-    globals: "npm:^15.0.0"
-    recast: "npm:^0.23.6"
+    globals: "npm:^15.8.0"
+    recast: "npm:^0.23.9"
     source-map: "npm:^0.7.4"
-  checksum: 10/d48b7926c1dbae0766c277767d4c490dab9c9af36342e09a90348a6b57db6930d151836d3510ffd4f8abf519629ec7e18994bccb8d20ddfadf92fdd3c60c9cbd
+  checksum: 10/a28bcd1bbe5a508d1ab27f44f04c16d64e525f361a63c97f97d7b23afe35594c457e4e290b54df31b96123cbd7e768cd9dce419157fb9e0f1a5bc76e3fc832ad
   languageName: node
   linkType: hard
 
@@ -334,7 +335,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@riotjs/util@npm:2.2.4, @riotjs/util@npm:^2.2.4":
+"@riotjs/util@npm:2.4.0":
+  version: 2.4.0
+  resolution: "@riotjs/util@npm:2.4.0"
+  checksum: 10/1e5fc49b7f48de2ad164a14f98ac17a4bbd8c815dc2e0bae0084d10b9936327e105e9cb196cb207d277d01c0623e23b06edefacaaade6e197650941f0d76572f
+  languageName: node
+  linkType: hard
+
+"@riotjs/util@npm:^2.2.4":
   version: 2.2.4
   resolution: "@riotjs/util@npm:2.2.4"
   checksum: 10/0fd4f139d2bcbc2a16aec59d03547bfd786c9e6bfc95fff24b7aa1a60660ae9596cc5feccb722c0f6e04db26027165660a52d5321ea6a6293ebf98ad22f31479
@@ -1273,6 +1281,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"css-simple-parser@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "css-simple-parser@npm:3.0.0"
+  dependencies:
+    string-indexes: "npm:^2.0.0"
+  checksum: 10/5a2eedac2d10512d994156f758107955474281276e78291e7dc570547bb6e1cf0950b7bc925cb2bf91feafc831b0442398bdd03345ccb42f3b73d84cbf191887
+  languageName: node
+  linkType: hard
+
 "css-what@npm:^5.0.0":
   version: 5.1.0
   resolution: "css-what@npm:5.1.0"
@@ -1928,10 +1945,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:^15.0.0":
-  version: 15.3.0
-  resolution: "globals@npm:15.3.0"
-  checksum: 10/ad4e845884e045d211fd7c4511f51a3484d6db8438d7a8ec9366919771f802596964aaa514f2561bd375ee7d0d57e83a056ef50996eee5a676400534c75e4d06
+"globals@npm:^15.8.0":
+  version: 15.8.0
+  resolution: "globals@npm:15.8.0"
+  checksum: 10/fbca69cc1084c28a5155fea06224f6f0fcd9a371d8b8057db9c1851adc4bf2aad8016dd0db4e161e0ad1da0953e4286b90c826ff9ef5dbfb864493f2bba806df
   languageName: node
   linkType: hard
 
@@ -2013,7 +2030,7 @@ __metadata:
   resolution: "homo-checker@workspace:."
   dependencies:
     "@fortawesome/fontawesome-free": "npm:^6.5.2"
-    "@riotjs/compiler": "npm:^9.0.9"
+    "@riotjs/compiler": "npm:^9.1.2"
     "@riotjs/webpack-loader": "npm:^9.0.1"
     clean-webpack-plugin: "npm:^4.0.0"
     clsx: "npm:^2.1.1"
@@ -3189,16 +3206,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"recast@npm:^0.23.6":
-  version: 0.23.7
-  resolution: "recast@npm:0.23.7"
+"recast@npm:^0.23.9":
+  version: 0.23.9
+  resolution: "recast@npm:0.23.9"
   dependencies:
     ast-types: "npm:^0.16.1"
     esprima: "npm:~4.0.0"
     source-map: "npm:~0.6.1"
     tiny-invariant: "npm:^1.3.3"
     tslib: "npm:^2.0.1"
-  checksum: 10/f9f6436a8c7d2dcdaab81314a79094ad7079838988e008af8a07bf05f7aca5c13d2830f4f5b076c58633b6857260fa9f744fd24be8934de6bb8bee3961b7bd3c
+  checksum: 10/d60584be179d81a82fbe58b5bbe009aa42831ee114a21a3e3a22bda91334e0b8a1a4610dca8ecb7f9ea1426da4febc08134d3003085ad6ecee478d1808eb8796
   languageName: node
   linkType: hard
 
@@ -3598,6 +3615,13 @@ __metadata:
   dependencies:
     minipass: "npm:^3.1.1"
   checksum: 10/7638a61e91432510718e9265d48d0438a17d53065e5184f1336f234ef6aa3479663942e41e97df56cda06bb24d9d0b5ef342c10685add3cac7267a82d7fa6718
+  languageName: node
+  linkType: hard
+
+"string-indexes@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "string-indexes@npm:2.0.0"
+  checksum: 10/841227f605926b936e6cb9ea2e8d91a6e5ac0de11bd0a8d5ce9504b1ea095d73a27a5ab9d643d458c3f6b3221e6b8352737601f2e67972e9e5a22dd5bf592164
   languageName: node
   linkType: hard
 
