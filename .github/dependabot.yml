@@ -17,15 +17,9 @@ updates:
   open-pull-requests-limit: 99
   versioning-strategy: increase
 - package-ecosystem: docker
-  directory: "/api"
-  schedule:
-    interval: weekly
-    day: saturday
-    time: "00:00"
-    timezone: Asia/Tokyo
-  open-pull-requests-limit: 99
-- package-ecosystem: docker
-  directory: "/"
+  directories:
+  - "/"
+  - "/api"
   schedule:
     interval: weekly
     day: saturday
