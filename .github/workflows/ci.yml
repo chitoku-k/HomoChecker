@@ -1,85 +1,97 @@
 name: CI Workflow
 on:
-  - push
+  push:
+    branches:
+      - master
+  pull_request:
 
 jobs:
-  api-analysis:
-    name: API Analyses
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          tools: composer
-      - name: Run analyses
-        working-directory: api
-        run: |
-          composer install
-          composer psalm --show-info=true
   api-test:
     name: API Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Set up reviewdog
+        uses: reviewdog/action-setup@v1
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Build
         uses: docker/build-push-action@v6
+        id: build
         with:
           context: ./api
           target: dev
           cache-from: type=gha,scope=${{ github.ref_name }}-apitest
           cache-to: type=gha,scope=${{ github.ref_name }}-apitest,mode=max
           load: true
-          tags: homochecker-test_api
+      - name: Install dependencies
+        if: ${{ always() && steps.build.conclusion == 'success' }}
+        run: |
+          docker run --rm --volume=$(pwd):/var/www/html --workdir=/var/www/html/api ${{ steps.build.outputs.imageid }} composer install
       - name: Run tests
         run: |
-          docker compose run --rm api composer install --no-progress --no-scripts
-          docker compose run --rm api
+          docker run --rm --volume=$(pwd):/var/www/html --workdir=/var/www/html/api ${{ steps.build.outputs.imageid }} composer exec -- phpunit --display-deprecations --display-notices --display-warnings
+      - name: Run php-cs-fixer
+        if: ${{ always() && steps.build.conclusion == 'success' }}
         env:
-          COMPOSE_PROJECT_NAME: homochecker-test
-          COMPOSE_FILE: compose.test.yaml
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          docker run --rm --volume=$(pwd):/var/www/html --workdir=/var/www/html/api ${{ steps.build.outputs.imageid }} composer exec -- php-cs-fixer check --diff |
+            sed -n 's!/var/www/html/!!g; /---------- begin diff ----------/,/^$/ { //!p }' |
+            reviewdog -f=diff -f.diff.strip=0 -name=php-cs-fixer -reporter=github-pr-annotations -filter-mode=nofilter -fail-on-error -tee
+      - name: Run psalm
+        if: ${{ always() && steps.build.conclusion == 'success' }}
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          docker run --rm --volume=$(pwd):/var/www/html --workdir=/var/www/html/api ${{ steps.build.outputs.imageid }} composer run -- psalm --show-info=true --output-format=text |
+            sed "s!/var/www/html/!!g" |
+            reviewdog -f=psalm -reporter=github-pr-annotations -filter-mode=nofilter -fail-on-error -tee
       - name: Upload coverage
         run: |
-          docker compose run \
+          docker run \
             --rm \
+            --volume=$(pwd):/var/www/html \
+            --workdir=/var/www/html/api \
             -e COVERALLS_REPO_TOKEN=${{ github.token }} \
             -e GITHUB_ACTIONS=true \
             -e GITHUB_EVENT_NAME=${{ github.event_name }} \
             -e GITHUB_REF=${{ github.ref }} \
             -e GITHUB_RUN_ID=${{ github.run_id }} \
-            api \
+            ${{ steps.build.outputs.imageid }} \
             composer exec -- php-coveralls --verbose --coverage_clover=build/logs/clover.xml
-        env:
-          COMPOSE_PROJECT_NAME: homochecker-test
-          COMPOSE_FILE: compose.test.yaml
   web-test:
     name: Web Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Set up reviewdog
+        uses: reviewdog/action-setup@v1
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Build
         uses: docker/build-push-action@v6
+        id: build
         with:
           context: .
           target: dev
           cache-from: type=gha,scope=${{ github.ref_name }}-webtest
           cache-to: type=gha,scope=${{ github.ref_name }}-webtest,mode=max
           load: true
-          tags: homochecker-test_build
-      - name: Run lints
+      - name: Install dependencies
+        if: ${{ always() && steps.build.conclusion == 'success' }}
         run: |
-          docker compose run --rm build yarn
-          docker compose run --rm build yarn lint
+          docker run --rm --volume=$(pwd):/usr/src/app --workdir=/usr/src/app/client ${{ steps.build.outputs.imageid }} yarn
+      - name: Run eslint
+        if: ${{ always() && steps.build.conclusion == 'success' }}
         env:
-          COMPOSE_PROJECT_NAME: homochecker-test
-          COMPOSE_FILE: compose.test.yaml
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          docker run --rm --volume=$(pwd):/usr/src/app --workdir=/usr/src/app/client ${{ steps.build.outputs.imageid }} yarn lint |
+            sed "s!/usr/src/app/!!g" |
+            reviewdog -f=eslint -reporter=github-pr-annotations -filter-mode=nofilter -fail-on-error -tee
   build:
     name: Build
     runs-on: ubuntu-latest
