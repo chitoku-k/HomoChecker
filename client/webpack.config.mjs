@@ -30,11 +30,11 @@ export default {
         filename: "bundle.js",
         assetModuleFilename: "[name][ext]",
     },
-    target: ["web", "es2023"],
+    target: [ "web", "es2023" ],
     module: {
         rules: [
             {
-                test: /\.scss$/,
+                test: /\.scss$/u,
                 use: [
                     { loader: "style-loader" },
                     { loader: "css-loader" },
@@ -42,14 +42,14 @@ export default {
                 ],
             },
             {
-                test: /\.riot$/,
-                exclude: /node_modules/,
+                test: /\.riot$/u,
+                exclude: /node_modules/u,
                 use: [
                     { loader: "@riotjs/webpack-loader" },
                 ],
             },
             {
-                test: /\.(woff2?|ttf|eot|svg)(\?v=[\d.]+|\?[\s\S]+)?$/,
+                test: /\.(?:woff2?|ttf|eot|svg)(?:\?v=[\d.]+|\?[\s\S]+)?$/u,
                 type: "asset/resource",
             },
         ],
