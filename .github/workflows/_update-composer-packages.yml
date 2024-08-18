@@ -11,6 +11,10 @@ on:
       PAT:
         required: true
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   update:
     name: Update Composer Packages
