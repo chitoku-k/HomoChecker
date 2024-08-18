@@ -6,7 +6,6 @@ import * as sass from "sass";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import { LicenseWebpackPlugin } from "license-webpack-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
-import ESLintPlugin from "eslint-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import { GitRevisionPlugin } from "git-revision-webpack-plugin";
 
@@ -69,7 +68,6 @@ export default {
                 },
             ],
         }),
-        new ESLintPlugin(),
         new DefinePlugin({
             COMMIT_HASH: JSON.stringify((new GitRevisionPlugin()).commithash()),
         }),
