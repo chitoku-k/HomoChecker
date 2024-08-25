@@ -1,13 +1,23 @@
+variable "TAG" {
+    default = "latest"
+}
+
 group "default" {
     targets = ["api", "web"]
 }
 
 target "api" {
     context = "./api"
-    tags = ["container.chitoku.jp/chitoku-k/homochecker/api"]
+    tags = [
+        "ghcr.io/chitoku-k/homochecker/api:latest",
+        "ghcr.io/chitoku-k/homochecker/api:${TAG}",
+    ]
 }
 
 target "web" {
     context = "."
-    tags = ["container.chitoku.jp/chitoku-k/homochecker/web"]
+    tags = [
+        "ghcr.io/chitoku-k/homochecker/web:latest",
+        "ghcr.io/chitoku-k/homochecker/web:${TAG}",
+    ]
 }
