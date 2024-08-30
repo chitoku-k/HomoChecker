@@ -12,37 +12,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-string-parser@npm:^7.24.6":
-  version: 7.24.6
-  resolution: "@babel/helper-string-parser@npm:7.24.6"
-  checksum: 10/a24631e13850eb24a5e88fba4d1b86115a79f6d4a0b3a96641fdcdc4a6d706d7e09f17ae77fa26bc72a8a7253bc83b535a2e2865a78185ed1f957b299ea6c59c
-  languageName: node
-  linkType: hard
-
-"@babel/helper-validator-identifier@npm:^7.24.6":
-  version: 7.24.6
-  resolution: "@babel/helper-validator-identifier@npm:7.24.6"
-  checksum: 10/7e725ef0684291ca3306d5174a5d1cd9072ad58ba444cfa50aaf92a5c59dd723fa15031733ac598bb6b066cb62c2472e14cd82325522348977a72e99aa21b97a
-  languageName: node
-  linkType: hard
-
-"@babel/parser@npm:^7.24.8":
+"@babel/helper-string-parser@npm:^7.24.8":
   version: 7.24.8
-  resolution: "@babel/parser@npm:7.24.8"
+  resolution: "@babel/helper-string-parser@npm:7.24.8"
+  checksum: 10/6d1bf8f27dd725ce02bdc6dffca3c95fb9ab8a06adc2edbd9c1c9d68500274230d1a609025833ed81981eff560045b6b38f7b4c6fb1ab19fc90e5004e3932535
+  languageName: node
+  linkType: hard
+
+"@babel/helper-validator-identifier@npm:^7.24.7":
+  version: 7.24.7
+  resolution: "@babel/helper-validator-identifier@npm:7.24.7"
+  checksum: 10/86875063f57361471b531dbc2ea10bbf5406e12b06d249b03827d361db4cad2388c6f00936bcd9dc86479f7e2c69ea21412c2228d4b3672588b754b70a449d4b
+  languageName: node
+  linkType: hard
+
+"@babel/parser@npm:^7.25.4":
+  version: 7.25.6
+  resolution: "@babel/parser@npm:7.25.6"
+  dependencies:
+    "@babel/types": "npm:^7.25.6"
   bin:
     parser: ./bin/babel-parser.js
-  checksum: 10/e44b8327da46e8659bc9fb77f66e2dc4364dd66495fb17d046b96a77bf604f0446f1e9a89cf2f011d78fc3f5cdfbae2e9e0714708e1c985988335683b2e781ef
+  checksum: 10/830aab72116aa14eb8d61bfa8f9d69fc8f3a43d909ce993cb4350ae14d3af1a2f740a54410a22d821c48a253263643dfecbc094f9608e6a70ce9ff3c0bbfe91a
   languageName: node
   linkType: hard
 
-"@babel/types@npm:^7.8.3":
-  version: 7.24.6
-  resolution: "@babel/types@npm:7.24.6"
+"@babel/types@npm:^7.25.6":
+  version: 7.25.6
+  resolution: "@babel/types@npm:7.25.6"
   dependencies:
-    "@babel/helper-string-parser": "npm:^7.24.6"
-    "@babel/helper-validator-identifier": "npm:^7.24.6"
+    "@babel/helper-string-parser": "npm:^7.24.8"
+    "@babel/helper-validator-identifier": "npm:^7.24.7"
     to-fast-properties: "npm:^2.0.0"
-  checksum: 10/34552539cdc740513650cb3c7754f77a55cc5253dff9d45afd52292d366eb1c099939d5db066e458abcf4c9a7dedfe43467445f9c2208b3cb64866762dee5e9d
+  checksum: 10/7b54665e1b51f525fe0f451efdd9fe7a4a6dfba3fd4956c3530bc77336b66ffe3d78c093796ed044119b5d213176af7cf326f317a2057c538d575c6cefcb3562
   languageName: node
   linkType: hard
 
@@ -240,11 +242,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@riotjs/compiler@npm:^9.1.3":
-  version: 9.1.3
-  resolution: "@riotjs/compiler@npm:9.1.3"
+"@riotjs/compiler@npm:^9.2.0":
+  version: 9.2.0
+  resolution: "@riotjs/compiler@npm:9.2.0"
   dependencies:
-    "@babel/parser": "npm:^7.24.8"
+    "@babel/parser": "npm:^7.25.4"
     "@riotjs/parser": "npm:^5.0.1"
     "@riotjs/util": "npm:2.4.0"
     css-simple-parser: "npm:^3.0.0"
@@ -252,10 +254,10 @@ __metadata:
     cumpa: "npm:^2.0.1"
     curri: "npm:^2.0.3"
     dom-nodes: "npm:^1.1.3"
-    globals: "npm:^15.8.0"
+    globals: "npm:^15.9.0"
     recast: "npm:^0.23.9"
     source-map: "npm:^0.7.4"
-  checksum: 10/d80f76a70e6dc56211ebfc2f24fee23d795c380fcd3e68dd7474c963bcb85ba247e972a2520f40025770ff1982c500e98376e06497bfd640cef10479cacabe9a
+  checksum: 10/09cbc3a6479a79370cc1264f0cb7d5fd67396df51b72a11c599d612ed14f6938aa5b4e079a302409e5b84b72652b24fd94d21f14a5bc37b751f79ebdbda9b9c8
   languageName: node
   linkType: hard
 
@@ -1711,7 +1713,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:^15.8.0, globals@npm:^15.9.0":
+"globals@npm:^15.9.0":
   version: 15.9.0
   resolution: "globals@npm:15.9.0"
   checksum: 10/19bca70131c5d3e0d4171deed0f8ae16adda19f18d39b67421056f1eaa160b4433c3ffc8eb69b8b19adebbbdad4834d8a0494c5fe1ae295f0f769a5c0331d794
@@ -1789,7 +1791,7 @@ __metadata:
   resolution: "homo-checker@workspace:."
   dependencies:
     "@fortawesome/fontawesome-free": "npm:^6.6.0"
-    "@riotjs/compiler": "npm:^9.1.3"
+    "@riotjs/compiler": "npm:^9.2.0"
     "@riotjs/webpack-loader": "npm:^9.0.1"
     clean-webpack-plugin: "npm:^4.0.0"
     clsx: "npm:^2.1.1"
