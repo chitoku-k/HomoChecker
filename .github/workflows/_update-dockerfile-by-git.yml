@@ -23,8 +23,6 @@ on:
     secrets:
       GH_TOKEN:
         required: true
-      PAT:
-        required: true
 
 defaults:
   run:
@@ -44,7 +42,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.PAT }}
+          token: ${{ secrets.GH_TOKEN }}
       - name: Get current version
         id: current-version
         run: |
