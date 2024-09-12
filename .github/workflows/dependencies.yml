@@ -25,19 +25,13 @@ jobs:
             directory: /api
             filename: api/Dockerfile
             arg: OPENSSL_VERSION
-            git-url: https://github.com/quictls/openssl
-            git-tag-filter: openssl-*quic*
+            git-url: https://github.com/openssl/openssl
+            git-tag-filter: openssl-*
           - name: nghttp3
             directory: /api
             filename: api/Dockerfile
             arg: NGHTTP3_VERSION
             git-url: https://github.com/ngtcp2/nghttp3
-            git-tag-filter: v*
-          - name: ngtcp2
-            directory: /api
-            filename: api/Dockerfile
-            arg: NGTCP2_VERSION
-            git-url: https://github.com/ngtcp2/ngtcp2
             git-tag-filter: v*
           - name: curl
             directory: /api

@@ -51,6 +51,7 @@ jobs:
         id: new-version
         run: |
           git ls-remote --refs --tags --sort=-version:refname '${{ inputs.git-url }}' '${{ inputs.git-tag-filter }}' |
+            grep -v -E 'alpha|beta' |
             awk 'NR == 1 { gsub(".*/", ""); print "version=" $1 }' >> "$GITHUB_OUTPUT"
       - name: Update version
         if: ${{ steps.current-version.outputs.version != steps.new-version.outputs.version }}
