@@ -12,8 +12,8 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
         pkg-config
 
 FROM build-dependencies AS openssl
-ARG OPENSSL_VERSION=openssl-3.1.7-quic1
-RUN git clone --depth=1 --recurse-submodules -b $OPENSSL_VERSION https://github.com/quictls/openssl && \
+ARG OPENSSL_VERSION=openssl-3.3.2
+RUN git clone --depth=1 --recurse-submodules -b $OPENSSL_VERSION https://github.com/openssl/openssl && \
     cd openssl && \
     ./config enable-tls1_3 && \
     make -j $(nproc) && \
@@ -28,26 +28,14 @@ RUN git clone --depth=1 --recurse-submodules -b $NGHTTP3_VERSION https://github.
     make -j $(nproc) && \
     make install
 
-FROM build-dependencies AS ngtcp2
-COPY --from=openssl /usr/local/ /usr/local/
-COPY --from=nghttp3 /usr/local/ /usr/local/
-ARG NGTCP2_VERSION=v1.7.0
-RUN git clone --depth=1 --recurse-submodules -b $NGTCP2_VERSION https://github.com/ngtcp2/ngtcp2 && \
-    cd ngtcp2 && \
-    autoreconf -fi && \
-    ./configure PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig --enable-lib-only && \
-    make -j $(nproc) && \
-    make install
-
 FROM build-dependencies AS curl
 COPY --from=openssl /usr/local/ /usr/local/
 COPY --from=nghttp3 /usr/local/ /usr/local/
-COPY --from=ngtcp2 /usr/local/ /usr/local/
 ARG CURL_VERSION=curl-8_10_0
 RUN git clone --depth=1 -b $CURL_VERSION https://github.com/curl/curl && \
     cd curl && \
     autoreconf -fi && \
-    ./configure --enable-alt-svc --with-openssl --with-nghttp2 --with-nghttp3 --with-ngtcp2 --without-libpsl && \
+    ./configure --enable-alt-svc --with-openssl --with-openssl-quic --with-nghttp2 --with-nghttp3 --without-libpsl && \
     make -j $(nproc) && \
     make install
 
@@ -56,7 +44,6 @@ WORKDIR /var/www/html/api
 COPY --from=openssl /usr/local/bin/ /usr/local/bin/
 COPY --from=openssl /usr/local/include/ /usr/local/include/
 COPY --from=nghttp3 /usr/local/include/ /usr/local/include/
-COPY --from=ngtcp2 /usr/local/include/ /usr/local/include/
 COPY --from=curl /usr/local/include/curl/ /usr/local/include/curl/
 COPY --from=curl /usr/local/bin/curl /usr/local/bin/
 COPY --from=curl /usr/local/bin/curl-config /usr/local/bin/
