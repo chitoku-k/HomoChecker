@@ -261,12 +261,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@riotjs/dom-bindings@npm:^9.1.0":
-  version: 9.1.0
-  resolution: "@riotjs/dom-bindings@npm:9.1.0"
+"@riotjs/dom-bindings@npm:^9.2.0":
+  version: 9.2.0
+  resolution: "@riotjs/dom-bindings@npm:9.2.0"
   dependencies:
     "@riotjs/util": "npm:^2.4.0"
-  checksum: 10/269c2caa34d91e68ca483e2bd4f0f3b3ef33abf60d5b640c63d457762adbe8bd10a45e6d92b42ad5998ed5c9eeb83f674429651927e62e3dc57f7cc3164f1bc0
+  checksum: 10/f927b42b908a4e24b9340122ba7e181b047b76d272bb93f3fdd82118c550b9b735423662843d98a9b5b580c6f2491f821a58bc772ba01ea1c54dae273f0c5601
   languageName: node
   linkType: hard
 
@@ -1802,7 +1802,7 @@ __metadata:
     globals: "npm:^15.9.0"
     html-webpack-plugin: "npm:^5.6.0"
     license-webpack-plugin: "npm:^4.0.2"
-    riot: "npm:^9.3.0"
+    riot: "npm:^9.4.0"
     rxjs: "npm:^7.8.1"
     sass: "npm:^1.78.0"
     sass-loader: "npm:^16.0.1"
@@ -3061,12 +3061,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"riot@npm:^9.3.0":
-  version: 9.3.0
-  resolution: "riot@npm:9.3.0"
+"riot@npm:^9.4.0":
+  version: 9.4.0
+  resolution: "riot@npm:9.4.0"
   dependencies:
-    "@riotjs/dom-bindings": "npm:^9.1.0"
-  checksum: 10/df56d7676e9cc1128fbde9699c1dd424d923496b3a40f7d71509a9c9c1ec12fd2d18d1f6e3cc4b415fdd1af46ec7be301b59ce1ffa2a63746d9618f39d885eab
+    "@riotjs/dom-bindings": "npm:^9.2.0"
+  checksum: 10/c1b5fccce9ef98f394752742abce54e9380c53753765450480a670c471f0b55b4b89d5f1a2d2ce0d910d1d19fd53496ce7d1720c7429091f063a9f5377ed3cd2
   languageName: node
   linkType: hard
 
