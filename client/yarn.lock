@@ -1465,6 +1465,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"globals@npm:^15.10.0":
+  version: 15.10.0
+  resolution: "globals@npm:15.10.0"
+  checksum: 10/d649208c62406fa71f131be643cb6d18703be5e612f8fa4da8a35bda56ce5a6a8caeb13a2f5a927e4d3324d73872e897067eb6f92ddd46a29876ffa5c4910cb8
+  languageName: node
+  linkType: hard
+
 "globals@npm:^15.9.0":
   version: 15.9.0
   resolution: "globals@npm:15.9.0"
@@ -1544,7 +1551,7 @@ __metadata:
     css-loader: "npm:^7.1.2"
     eslint: "npm:^9.11.1"
     git-revision-webpack-plugin: "npm:^5.0.0"
-    globals: "npm:^15.9.0"
+    globals: "npm:^15.10.0"
     html-webpack-plugin: "npm:^5.6.0"
     license-webpack-plugin: "npm:^4.0.2"
     riot: "npm:^9.4.0"
