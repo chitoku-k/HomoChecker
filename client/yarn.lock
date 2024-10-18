@@ -1970,7 +1970,7 @@ __metadata:
     globals: "npm:^15.11.0"
     html-webpack-plugin: "npm:^5.6.0"
     license-webpack-plugin: "npm:^4.0.2"
-    riot: "npm:^9.4.0"
+    riot: "npm:^9.4.1"
     rxjs: "npm:^7.8.1"
     sass: "npm:^1.79.5"
     sass-loader: "npm:^16.0.2"
@@ -3219,12 +3219,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"riot@npm:^9.4.0":
-  version: 9.4.0
-  resolution: "riot@npm:9.4.0"
+"riot@npm:^9.4.1":
+  version: 9.4.1
+  resolution: "riot@npm:9.4.1"
   dependencies:
     "@riotjs/dom-bindings": "npm:^9.2.0"
-  checksum: 10/c1b5fccce9ef98f394752742abce54e9380c53753765450480a670c471f0b55b4b89d5f1a2d2ce0d910d1d19fd53496ce7d1720c7429091f063a9f5377ed3cd2
+  checksum: 10/9f30bf1f6f08195c74d5a9dc4e931b9bb275083ead5020c9d97515a94e91b6688f08b61dd27542651bc1808fd4a4805aad73bf8432b8ec9df2a3f6be0698628d
   languageName: node
   linkType: hard
 
