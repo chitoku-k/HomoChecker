@@ -43,7 +43,7 @@ jobs:
         run: |
           docker run --rm --volume=$(pwd):/var/www/html --workdir=/var/www/html/api ${{ steps.build.outputs.imageid }} composer exec -- php-cs-fixer check --diff |
             sed -n 's!/var/www/html/!!g; /---------- begin diff ----------/,/^$/ { //!p }' |
-            reviewdog -f=diff -f.diff.strip=0 -name=php-cs-fixer -reporter=github-pr-annotations -filter-mode=nofilter -fail-on-error -tee
+            reviewdog -f=diff -f.diff.strip=0 -name=php-cs-fixer -reporter=github-pr-annotations -filter-mode=nofilter -fail-level=any -tee
       - name: Run psalm
         if: ${{ always() && steps.build.conclusion == 'success' }}
         env:
@@ -51,7 +51,7 @@ jobs:
         run: |
           docker run --rm --volume=$(pwd):/var/www/html --workdir=/var/www/html/api ${{ steps.build.outputs.imageid }} composer run -- psalm --show-info=true --output-format=text |
             sed "s!/var/www/html/!!g" |
-            reviewdog -f=psalm -reporter=github-pr-annotations -filter-mode=nofilter -fail-on-error -tee
+            reviewdog -f=psalm -reporter=github-pr-annotations -filter-mode=nofilter -fail-level=any -tee
       - name: Upload coverage
         run: |
           docker run \
@@ -95,7 +95,7 @@ jobs:
         run: |
           docker run --rm --volume=$(pwd):/usr/src/app --workdir=/usr/src/app/client ${{ steps.build.outputs.imageid }} yarn lint |
             sed "s!/usr/src/app/!!g" |
-            reviewdog -f=eslint -reporter=github-pr-annotations -filter-mode=nofilter -fail-on-error -tee
+            reviewdog -f=eslint -reporter=github-pr-annotations -filter-mode=nofilter -fail-level=any -tee
   build:
     name: Build
     runs-on: ubuntu-latest
