@@ -3,7 +3,7 @@
     "description": "HomoChecker API",
     "require": {
         "guzzlehttp/guzzle": "^7.9.2",
-        "illuminate/config": "^11.32.0",
+        "illuminate/config": "^11.33.2",
         "illuminate/database": "^11.32.0",
         "illuminate/events": "^11.32.0",
         "illuminate/log": "^11.32.0",
