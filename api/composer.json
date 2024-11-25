@@ -5,7 +5,7 @@
         "guzzlehttp/guzzle": "^7.9.2",
         "illuminate/config": "^11.32.0",
         "illuminate/database": "^11.32.0",
-        "illuminate/events": "^11.32.0",
+        "illuminate/events": "^11.33.2",
         "illuminate/log": "^11.32.0",
         "middlewares/access-log": "^2.1.2",
         "phpoption/phpoption": "^1.9.3",
