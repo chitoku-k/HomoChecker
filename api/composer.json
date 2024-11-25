@@ -2,26 +2,26 @@
     "name": "chitoku-k/homochecker",
     "description": "HomoChecker API",
     "require": {
-        "guzzlehttp/guzzle": "^7",
-        "illuminate/config": "^11",
-        "illuminate/database": "^11",
-        "illuminate/events": "^11",
-        "illuminate/log": "^11",
-        "middlewares/access-log": "^2",
-        "phpoption/phpoption": "^1",
-        "promphp/prometheus_client_php": "^2",
-        "slim/http": "^1",
-        "slim/psr7": "^1",
-        "slim/slim": "^4",
-        "vlucas/phpdotenv": "^5"
+        "guzzlehttp/guzzle": "^7.9.2",
+        "illuminate/config": "^11.32.0",
+        "illuminate/database": "^11.32.0",
+        "illuminate/events": "^11.32.0",
+        "illuminate/log": "^11.32.0",
+        "middlewares/access-log": "^2.1.2",
+        "phpoption/phpoption": "^1.9.3",
+        "promphp/prometheus_client_php": "^2.12.0",
+        "slim/http": "^1.4.0",
+        "slim/psr7": "^1.7.0",
+        "slim/slim": "^4.14.0",
+        "vlucas/phpdotenv": "^5.6.1"
     },
     "require-dev": {
-        "brainmaestro/composer-git-hooks": "^3.0-alpha",
-        "friendsofphp/php-cs-fixer": "^3",
-        "mockery/mockery": "^1",
-        "php-coveralls/php-coveralls": "^2",
-        "phpunit/phpunit": "^11",
-        "psalm/phar": "^5"
+        "brainmaestro/composer-git-hooks": "^3.0.0",
+        "friendsofphp/php-cs-fixer": "^3.64.0",
+        "mockery/mockery": "^1.6.12",
+        "php-coveralls/php-coveralls": "^2.7.0",
+        "phpunit/phpunit": "^11.4.3",
+        "psalm/phar": "^5.26.1"
     },
     "replace": {
         "symfony/polyfill-ctype": "*",
@@ -50,6 +50,9 @@
         "post-update-cmd": "[ \"$COMPOSER_DEV_MODE\" = 0 ] || cghooks update"
     },
     "config": {
+        "platform": {
+            "php": "8.3"
+        },
         "sort-packages": true
     },
     "extra": {
