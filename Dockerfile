@@ -21,7 +21,7 @@ COPY . /usr/src/
 RUN touch fonts/atlan.svg fonts/atlan.ttf fonts/atlan.woff && \
     yarn build
 
-FROM nginx:1.27.2
+FROM nginx:1.27.3
 ENV HOMOCHECKER_API_HOST=homochecker-api
 COPY client/conf/. /etc/nginx/templates/
 COPY --from=build /usr/src/client/dist /var/www/html/
