@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "89ba58dfbda7bfab8af048296438c69c",
+    "content-hash": "63442fc22961c3e1bf90404ca0723d82",
     "packages": [
         {
             "name": "brick/math",
@@ -1710,16 +1710,16 @@
         },
         {
             "name": "promphp/prometheus_client_php",
-            "version": "v2.12.0",
+            "version": "v2.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PromPHP/prometheus_client_php.git",
-                "reference": "50b70a6df4017081917e004f177a3c01cc8115db"
+                "reference": "abe6bbb198ba83a306c45c9872c8f386dc323e91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PromPHP/prometheus_client_php/zipball/50b70a6df4017081917e004f177a3c01cc8115db",
-                "reference": "50b70a6df4017081917e004f177a3c01cc8115db",
+                "url": "https://api.github.com/repos/PromPHP/prometheus_client_php/zipball/abe6bbb198ba83a306c45c9872c8f386dc323e91",
+                "reference": "abe6bbb198ba83a306c45c9872c8f386dc323e91",
                 "shasum": ""
             },
             "require": {
@@ -1772,9 +1772,9 @@
             "description": "Prometheus instrumentation library for PHP applications.",
             "support": {
                 "issues": "https://github.com/PromPHP/prometheus_client_php/issues",
-                "source": "https://github.com/PromPHP/prometheus_client_php/tree/v2.12.0"
+                "source": "https://github.com/PromPHP/prometheus_client_php/tree/v2.13.0"
             },
-            "time": "2024-10-18T07:33:22+00:00"
+            "time": "2024-12-02T12:27:42+00:00"
         },
         {
             "name": "psr/clock",
