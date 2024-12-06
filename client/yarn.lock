@@ -1977,7 +1977,7 @@ __metadata:
     riot: "npm:^9.4.4"
     rxjs: "npm:^7.8.1"
     sass: "npm:^1.81.0"
-    sass-loader: "npm:^16.0.3"
+    sass-loader: "npm:^16.0.4"
     shufflejs: "npm:v6.1.1"
     style-loader: "npm:^4.0.0"
     webpack: "npm:^5.96.1"
@@ -3271,9 +3271,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass-loader@npm:^16.0.3":
-  version: 16.0.3
-  resolution: "sass-loader@npm:16.0.3"
+"sass-loader@npm:^16.0.4":
+  version: 16.0.4
+  resolution: "sass-loader@npm:16.0.4"
   dependencies:
     neo-async: "npm:^2.6.2"
   peerDependencies:
@@ -3293,7 +3293,7 @@ __metadata:
       optional: true
     webpack:
       optional: true
-  checksum: 10/cd49635013efae80b3a24b7e655a6f2334078006f270d50ac9e6ed19a44a80d689b402b5584b64ca737c3f948366a47e2896d07cead19015de7b2bd03f778d2b
+  checksum: 10/16e3552e04301864d59d99f1c90952e0c97cfa793a38a551b6dc19e49a9c0779ec8b3dd8ab39bc79cc4401972f13e8d5baaf577c96ea39911db5866a0b4bdcdd
   languageName: node
   linkType: hard
 
