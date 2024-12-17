@@ -53,7 +53,7 @@ services:
         read_only: true
 
   database:
-    image: postgres:16.4
+    image: postgres:16.6
     environment:
       POSTGRES_DB: homo
       POSTGRES_USER: homo
