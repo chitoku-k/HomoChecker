@@ -20,7 +20,7 @@
         "friendsofphp/php-cs-fixer": "^3.65.0",
         "mockery/mockery": "^1.6.12",
         "php-coveralls/php-coveralls": "^2.7.0",
-        "phpunit/phpunit": "^11.5.1",
+        "phpunit/phpunit": "^11.5.2",
         "psalm/phar": "^5.26.1"
     },
     "replace": {
