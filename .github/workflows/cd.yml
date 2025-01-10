@@ -34,7 +34,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push
-        uses: docker/bake-action@v5
+        uses: docker/bake-action@v6
         env:
           TAG: ${{ github.ref_name }}
         with:
