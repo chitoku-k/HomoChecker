@@ -109,5 +109,6 @@ jobs:
         with:
           files: docker-bake.hcl
           set: |
+            *.args.BUILDKIT_CONTEXT_KEEP_GIT_DIR=1
             *.cache-from=type=gha
             *.cache-to=type=gha,mode=max
