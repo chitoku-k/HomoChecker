@@ -36,6 +36,7 @@ jobs:
       - name: Build and push
         uses: docker/bake-action@v6
         with:
+          source: .
           files: docker-bake.hcl
           push: true
           set: |
