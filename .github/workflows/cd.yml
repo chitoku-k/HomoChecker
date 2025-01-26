@@ -68,6 +68,6 @@ jobs:
           kubectl config use-context k8s.chitoku.jp
       - name: Update images
         run: |
-          kubectl set image deployment/homochecker-app \
+          kubectl set image --field-manager=github-actions deployment/homochecker-app \
             api=ghcr.io/chitoku-k/homochecker/api:${{ github.ref_name }} \
             web=ghcr.io/chitoku-k/homochecker/web:${{ github.ref_name }}
