@@ -17,7 +17,7 @@
     },
     "require-dev": {
         "brainmaestro/composer-git-hooks": "^3.0.0",
-        "friendsofphp/php-cs-fixer": "^3.68.1",
+        "friendsofphp/php-cs-fixer": "^3.68.5",
         "mockery/mockery": "^1.6.12",
         "php-coveralls/php-coveralls": "^2.7.0",
         "phpunit/phpunit": "^11.5.3",
