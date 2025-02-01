@@ -45,12 +45,12 @@ class CheckAction
         ];
 
         $response->getBody()->write("event: initialize\n");
-        $response->getBody()->write('data: ' . json_encode($count) . "\n\n");
+        $response->getBody()->write('data: ' . json_encode($count, JSON_THROW_ON_ERROR) . "\n\n");
 
         // Output response
         $this->check->execute($screen_name, function (Status $status) use ($response) {
             $response->getBody()->write("event: response\n");
-            $response->getBody()->write('data: ' . json_encode($status) . "\n\n");
+            $response->getBody()->write('data: ' . json_encode($status, JSON_THROW_ON_ERROR) . "\n\n");
         });
 
         return $response;
