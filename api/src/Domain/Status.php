@@ -100,9 +100,17 @@ class Status implements \JsonSerializable
             return '';
         }
 
-        $scheme = $scheme ? parse_url($url, PHP_URL_SCHEME) . '://' : '';
+        $domain = idn_to_utf8($domain);
+        if (!is_string($domain)) {
+            return '';
+        }
+
+        if ($scheme && $scheme = parse_url($url, PHP_URL_SCHEME)) {
+            $scheme = "{$scheme}://";
+        }
+
         $path = (string) parse_url($url, PHP_URL_PATH);
-        return $scheme . idn_to_utf8($domain) . $path;
+        return (string) $scheme . $domain . $path;
     }
 
     /**
@@ -114,7 +122,7 @@ class Status implements \JsonSerializable
     {
         return match ($url) {
             null, '' => false,
-            default => strtolower(parse_url($url, PHP_URL_SCHEME)) === 'https',
+            default => strtolower((string) parse_url($url, PHP_URL_SCHEME)) === 'https',
         };
     }
 

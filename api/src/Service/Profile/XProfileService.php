@@ -89,14 +89,14 @@ class XProfileService implements ProfileServiceContract
                 $headers = yield $this->generateHeaders();
                 $variables = urlencode(json_encode([
                     'screen_name' => $screen_name,
-                ]));
+                ], JSON_THROW_ON_ERROR));
                 $features = urlencode(json_encode([
                     'blue_business_profile_image_shape_enabled' => true,
                     'responsive_web_graphql_exclude_directive_enabled' => true,
                     'responsive_web_graphql_skip_user_profile_image_extensions_enabled' => true,
                     'responsive_web_graphql_timeline_navigation_enabled' => true,
                     'verified_phone_label_enabled' => true,
-                ]));
+                ], JSON_THROW_ON_ERROR));
                 $target = static::X_API_GRAPHQL_ROOT . "UserByScreenName?variables={$variables}&features={$features}";
                 $response = yield $this->client->getAsync($target, [
                     'headers' => $headers,
