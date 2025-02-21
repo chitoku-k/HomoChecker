@@ -26,24 +26,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/parser@npm:^7.26.2":
-  version: 7.26.2
-  resolution: "@babel/parser@npm:7.26.2"
+"@babel/parser@npm:^7.26.9":
+  version: 7.26.9
+  resolution: "@babel/parser@npm:7.26.9"
   dependencies:
-    "@babel/types": "npm:^7.26.0"
+    "@babel/types": "npm:^7.26.9"
   bin:
     parser: ./bin/babel-parser.js
-  checksum: 10/8baee43752a3678ad9f9e360ec845065eeee806f1fdc8e0f348a8a0e13eef0959dabed4a197c978896c493ea205c804d0a1187cc52e4a1ba017c7935bab4983d
+  checksum: 10/cb84fe3ba556d6a4360f3373cf7eb0901c46608c8d77330cc1ca021d60f5d6ebb4056a8e7f9dd0ef231923ef1fe69c87b11ce9e160d2252e089a20232a2b942b
   languageName: node
   linkType: hard
 
-"@babel/types@npm:^7.26.0":
-  version: 7.26.0
-  resolution: "@babel/types@npm:7.26.0"
+"@babel/types@npm:^7.26.9":
+  version: 7.26.9
+  resolution: "@babel/types@npm:7.26.9"
   dependencies:
     "@babel/helper-string-parser": "npm:^7.25.9"
     "@babel/helper-validator-identifier": "npm:^7.25.9"
-  checksum: 10/40780741ecec886ed9edae234b5eb4976968cc70d72b4e5a40d55f83ff2cc457de20f9b0f4fe9d858350e43dab0ea496e7ef62e2b2f08df699481a76df02cd6e
+  checksum: 10/11b62ea7ed64ef7e39cc9b33852c1084064c3b970ae0eaa5db659241cfb776577d1e68cbff4de438bada885d3a827b52cc0f3746112d8e1bc672bb99a8eb5b56
   languageName: node
   linkType: hard
 
@@ -453,22 +453,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@riotjs/compiler@npm:^9.4.1":
-  version: 9.4.1
-  resolution: "@riotjs/compiler@npm:9.4.1"
+"@riotjs/compiler@npm:^9.4.2":
+  version: 9.4.2
+  resolution: "@riotjs/compiler@npm:9.4.2"
   dependencies:
-    "@babel/parser": "npm:^7.26.2"
+    "@babel/parser": "npm:^7.26.9"
     "@riotjs/parser": "npm:^9.0.1"
     "@riotjs/util": "npm:2.4.0"
-    css-simple-parser: "npm:^3.0.0"
+    css-simple-parser: "npm:^3.0.2"
     cssesc: "npm:^3.0.0"
     cumpa: "npm:^2.0.1"
     curri: "npm:^2.0.3"
     dom-nodes: "npm:^1.1.3"
-    globals: "npm:^15.12.0"
+    globals: "npm:^15.15.0"
     recast: "npm:^0.23.9"
     source-map: "npm:^0.7.4"
-  checksum: 10/e660f0c6c213f8e25bfeae0272ca64bf3623ebf92c0d466c4e262b4a567ce8784e1a3416494a0fb9d3b8f1866c6e1f6c1d99708c4e8740d8134f2cc3612d816e
+  checksum: 10/b379814806944ad3661dcbd75615786d8ea9272be05056907e84548273f9e0c1fb18715d1f4886ec126cc02e3a60dfe75bb3738fcf458b7bd2f61d07c5dc1bd9
   languageName: node
   linkType: hard
 
@@ -1256,12 +1256,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-simple-parser@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "css-simple-parser@npm:3.0.0"
+"css-simple-parser@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "css-simple-parser@npm:3.0.2"
   dependencies:
-    string-indexes: "npm:^2.0.0"
-  checksum: 10/5a2eedac2d10512d994156f758107955474281276e78291e7dc570547bb6e1cf0950b7bc925cb2bf91feafc831b0442398bdd03345ccb42f3b73d84cbf191887
+    string-indexes: "npm:^2.0.1"
+  checksum: 10/af8d9d9f18525eb1ce2f8c2ae34df913ec68096e05cd0bce9174e455634eb249fb97d0af5a2932ee397927d474f0595b0a59c0e5aff1c4c8984995fc326bfe04
   languageName: node
   linkType: hard
 
@@ -1914,10 +1914,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:^15.12.0":
-  version: 15.12.0
-  resolution: "globals@npm:15.12.0"
-  checksum: 10/07cac4ee7cc9befa7894be9b4d1a57f46eeedf9065939f39ffb875009394908eb7bac84147712cfd4bbabab5abc7ab98fc3a6d0fd881f9548fffa10ba2e4bf67
+"globals@npm:^15.15.0":
+  version: 15.15.0
+  resolution: "globals@npm:15.15.0"
+  checksum: 10/7f561c87b2fd381b27fc2db7df8a4ea7a9bb378667b8a7193e61fd2ca3a876479174e2a303a74345fbea6e1242e16db48915c1fd3bf35adcf4060a795b425e18
   languageName: node
   linkType: hard
 
@@ -1992,7 +1992,7 @@ __metadata:
   resolution: "homo-checker@workspace:."
   dependencies:
     "@fortawesome/fontawesome-free": "npm:^6.7.2"
-    "@riotjs/compiler": "npm:^9.4.1"
+    "@riotjs/compiler": "npm:^9.4.2"
     "@riotjs/webpack-loader": "npm:^9.0.1"
     clean-webpack-plugin: "npm:^4.0.0"
     clsx: "npm:^2.1.1"
@@ -3520,10 +3520,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"string-indexes@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "string-indexes@npm:2.0.0"
-  checksum: 10/841227f605926b936e6cb9ea2e8d91a6e5ac0de11bd0a8d5ce9504b1ea095d73a27a5ab9d643d458c3f6b3221e6b8352737601f2e67972e9e5a22dd5bf592164
+"string-indexes@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "string-indexes@npm:2.0.1"
+  checksum: 10/04243a286a27c399a657696c4cc68a7541b05aae7d3efd360439279824cd05416f1924be8243cfb7e1b713fb9b241a24f9446ba37bc08e8db78f0e923ca277d9
   languageName: node
   linkType: hard
 
