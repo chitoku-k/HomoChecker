@@ -41,7 +41,7 @@ jobs:
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          docker run --rm --volume=$(pwd):/var/www/html --workdir=/var/www/html/api ${{ steps.build.outputs.imageid }} composer exec -- php-cs-fixer check --diff |
+          docker run --rm --volume=$(pwd):/var/www/html --workdir=/var/www/html/api -e PHP_CS_FIXER_IGNORE_ENV=1 ${{ steps.build.outputs.imageid }} composer exec -- php-cs-fixer check --diff |
             sed -n 's!/var/www/html/!!g; /---------- begin diff ----------/,/^$/ { //!p }' |
             reviewdog -f=diff -f.diff.strip=0 -name=php-cs-fixer -reporter=github-pr-annotations -filter-mode=nofilter -fail-level=any -tee
       - name: Run psalm

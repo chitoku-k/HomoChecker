@@ -39,7 +39,7 @@ RUN git clone --depth=1 -b $CURL_VERSION https://github.com/curl/curl && \
     make -j $(nproc) && \
     make install
 
-FROM php:8.3.17-fpm AS runtime
+FROM php:8.4.4-fpm AS runtime
 WORKDIR /var/www/html/api
 COPY --from=openssl /usr/local/bin/ /usr/local/bin/
 COPY --from=openssl /usr/local/include/ /usr/local/include/
@@ -49,7 +49,6 @@ COPY --from=curl /usr/local/bin/curl /usr/local/bin/
 COPY --from=curl /usr/local/bin/curl-config /usr/local/bin/
 COPY --from=curl /usr/local/lib/ /usr/local/lib/
 COPY --from=curl /usr/local/lib64/ /usr/local/lib64/
-COPY php/ /usr/src/php/
 RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
     --mount=type=cache,id=api:/var/lib/apt/lists,target=/var/lib/apt/lists \
     apt-get -y update && \
@@ -67,9 +66,6 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
         zlib1g-dev && \
     ldconfig && \
     docker-php-source extract && \
-    cd /usr/src/php/ext/curl && \
-    patch -u < /usr/src/php/ext/curl/curl.stub+http3.patch && \
-    patch -u < /usr/src/php/ext/curl/curl_arginfo+http3.patch && \
     cd /usr/src/php && \
     ./configure \
         PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig \
