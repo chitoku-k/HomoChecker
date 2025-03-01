@@ -164,7 +164,7 @@ final class CheckService implements CheckServiceContract
 
             if ($result->getStatus() === ValidationResult::ERROR) {
                 $this->checkErrorCounter->inc([
-                    'status' => (string) $result->getStatus()?->value,
+                    'status' => $result->getStatus()->value,
                     'code' => (string) (int) $result->getCode(),
                     'screen_name' => $homo->getScreenName(),
                     'url' => $homo->getUrl(),
