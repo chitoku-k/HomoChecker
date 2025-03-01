@@ -8,7 +8,7 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 
-class ErrorResponseFactory implements ResponseFactoryInterface
+final class ErrorResponseFactory implements ResponseFactoryInterface
 {
     public function __construct(protected ResponseFactoryInterface $responseFactory, protected StreamFactoryInterface $streamFactory) {}
 

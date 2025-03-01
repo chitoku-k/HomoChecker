@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace HomoChecker\Domain;
 
-class Profile
+final class Profile
 {
     /**
      * @var string The icon URL.
      */
-    protected string $iconUrl;
+    private string $iconUrl;
 
     public function __construct(null|array|object $profile = null)
     {

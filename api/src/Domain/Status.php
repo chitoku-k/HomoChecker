@@ -3,22 +3,22 @@ declare(strict_types=1);
 
 namespace HomoChecker\Domain;
 
-class Status implements \JsonSerializable
+final class Status implements \JsonSerializable
 {
     /**
      * @var Homo The homo object.
      */
-    protected Homo $homo;
+    private Homo $homo;
 
     /**
      * @var Result The result object.
      */
-    protected Result $result;
+    private Result $result;
 
     /**
      * @var ?string The icon URL.
      */
-    protected ?string $icon;
+    private ?string $icon;
 
     public function __construct(null|array|object $status = null)
     {
@@ -89,7 +89,7 @@ class Status implements \JsonSerializable
      * @param  bool    $scheme Scheme.
      * @return string  Display URL.
      */
-    protected function createDisplayURL(?string $url, bool $scheme = false): string
+    private function createDisplayURL(?string $url, bool $scheme = false): string
     {
         if (!$url) {
             return '';
@@ -118,7 +118,7 @@ class Status implements \JsonSerializable
      * @param  ?string $url The URL.
      * @return bool    true if supported; otherwise false.
      */
-    protected function isSecure(?string $url): bool
+    private function isSecure(?string $url): bool
     {
         return match ($url) {
             null, '' => false,

@@ -6,32 +6,32 @@ namespace HomoChecker\Contracts\Service\Client;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
-class Response implements ResponseInterface
+final class Response implements ResponseInterface
 {
     /**
      * @var float The total time.
      */
-    protected float $totalTime = 0.0;
+    private float $totalTime = 0.0;
 
     /**
      * @var float The start transfer time.
      */
-    protected float $startTransferTime = 0.0;
+    private float $startTransferTime = 0.0;
 
     /**
      * @var (string|string[])[][] The TLS certificates.
      */
-    protected array $certificates = [];
+    private array $certificates = [];
 
     /**
      * @var ?string The HTTP version.
      */
-    protected ?string $httpVersion = null;
+    private ?string $httpVersion = null;
 
     /**
      * @var ?string The primary IP.
      */
-    protected ?string $primaryIP = null;
+    private ?string $primaryIP = null;
 
     public function __construct(protected ResponseInterface $response) {}
 

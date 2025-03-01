@@ -9,7 +9,7 @@ use Illuminate\Database\Query\Grammars\PostgresGrammar;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\DB;
 
-class HomoRepository implements HomoRepositoryContract
+final class HomoRepository implements HomoRepositoryContract
 {
     #[\Override]
     public function count(): int
@@ -23,7 +23,7 @@ class HomoRepository implements HomoRepositoryContract
         return DB::table('users')->where('screen_name', $screenName)->count();
     }
 
-    protected function join(): Builder
+    private function join(): Builder
     {
         return DB::table('users')
             ->leftJoin(

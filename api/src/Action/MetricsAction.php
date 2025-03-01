@@ -8,7 +8,7 @@ use Prometheus\RendererInterface;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest as Request;
 
-class MetricsAction
+final class MetricsAction
 {
     public function __construct(protected RegistryInterface $registry, protected RendererInterface $format) {}
 

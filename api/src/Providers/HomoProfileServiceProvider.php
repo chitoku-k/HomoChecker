@@ -13,7 +13,7 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
 use Prometheus\Counter;
 
-class HomoProfileServiceProvider extends ServiceProvider
+final class HomoProfileServiceProvider extends ServiceProvider
 {
     #[\Override]
     public function register()

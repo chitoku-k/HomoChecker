@@ -5,7 +5,7 @@ namespace HomoChecker\Http;
 
 use Psr\Http\Message\RequestInterface as Request;
 
-class RequestSigner
+final class RequestSigner
 {
     public function __construct(
         protected string $id,
@@ -16,7 +16,7 @@ class RequestSigner
      * Sign the given HTTP request.
      * @return Request The signed request.
      */
-    protected function sign(Request $request): Request
+    private function sign(Request $request): Request
     {
         $requestTarget = strtolower($request->getMethod()) . ' ' . $request->getRequestTarget();
         if (!$date = $request->getHeaderLine('Date')) {

@@ -10,7 +10,7 @@ use Psr\Http\Message\StreamInterface;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest as Request;
 
-class ListAction
+final class ListAction
 {
     public function __construct(protected HomoService $homo) {}
 
@@ -29,14 +29,14 @@ class ListAction
         };
     }
 
-    protected function createSql(Response $response): StreamInterface
+    private function createSql(Response $response): StreamInterface
     {
         $body = $response->getBody();
         $body->write($this->homo->export());
         return $body;
     }
 
-    protected function createArray(array $homos): array
+    private function createArray(array $homos): array
     {
         return collect($homos)
             ->map(fn (\stdClass $item) => new Homo($item))

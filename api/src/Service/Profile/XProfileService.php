@@ -11,14 +11,14 @@ use HomoChecker\Contracts\Service\ProfileService as ProfileServiceContract;
 use Illuminate\Support\Facades\Log;
 use Prometheus\Counter;
 
-class XProfileService implements ProfileServiceContract
+final class XProfileService implements ProfileServiceContract
 {
     public const int CACHE_EXPIRE = 180;
 
     public const string X_API_GRAPHQL_ROOT = 'https://x.com/i/api/graphql/sLVLhk0bGj3MVFEKTdax1w/';
     public const string TOKEN = 'Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA';
 
-    protected ?string $guestToken = null;
+    private ?string $guestToken = null;
 
     public function __construct(
         protected ClientInterface $client,
@@ -26,7 +26,7 @@ class XProfileService implements ProfileServiceContract
         protected Counter $profileErrorCounter,
     ) {}
 
-    protected function getGuestToken(): PromiseInterface
+    private function getGuestToken(): PromiseInterface
     {
         return Coroutine::of(function () {
             if ($this->guestToken) {
@@ -49,7 +49,7 @@ class XProfileService implements ProfileServiceContract
         });
     }
 
-    protected function generateHeaders(): PromiseInterface
+    private function generateHeaders(): PromiseInterface
     {
         return Coroutine::of(function () {
             /** @var string $guestToken */

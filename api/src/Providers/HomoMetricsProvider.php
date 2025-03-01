@@ -12,7 +12,7 @@ use Prometheus\RenderTextFormat;
 use Prometheus\Storage\Adapter;
 use Prometheus\Storage\APC;
 
-class HomoMetricsProvider extends ServiceProvider
+final class HomoMetricsProvider extends ServiceProvider
 {
     #[\Override]
     public function register()

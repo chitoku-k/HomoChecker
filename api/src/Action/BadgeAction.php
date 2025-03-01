@@ -11,7 +11,7 @@ use HomoChecker\Domain\Validator\ValidationResult;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest as Request;
 
-class BadgeAction
+final class BadgeAction
 {
     public function __construct(protected CheckService $check, protected HomoService $homo) {}
 
@@ -23,13 +23,13 @@ class BadgeAction
         return $response->withRedirect($this->getURL('homo', $label, '7a6544', $request->getQueryParams()));
     }
 
-    protected function getURL(string $service, string $label, string $color, array $query = []): string
+    private function getURL(string $service, string $label, string $color, array $query = []): string
     {
         $uri = "https://img.shields.io/badge/{$service}-{$label}-{$color}.svg";
         return $query ? $uri . '?' . http_build_query($query) : $uri;
     }
 
-    protected function getCount(?string $status = null): int
+    private function getCount(?string $status = null): int
     {
         if (!$status) {
             return $this->homo->count();

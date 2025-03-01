@@ -23,7 +23,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Prometheus\Counter;
 
-class CheckService implements CheckServiceContract
+final class CheckService implements CheckServiceContract
 {
     /**
      * @param Collection<string, ProfileServiceContract> $profiles
@@ -43,7 +43,7 @@ class CheckService implements CheckServiceContract
      * @param  Homo                     $homo The user.
      * @return PromiseInterface<Result> The Promise.
      */
-    protected function validateAsync(Homo $homo): PromiseInterface
+    private function validateAsync(Homo $homo): PromiseInterface
     {
         $url = $homo->getUrl();
         if (!$url) {
@@ -131,7 +131,7 @@ class CheckService implements CheckServiceContract
      * @param  callable                 $callback The callback that is called after resolution (optional).
      * @return PromiseInterface<Status> The Promise.
      */
-    protected function createStatusAsync(Homo $homo, ?callable $callback = null): PromiseInterface
+    private function createStatusAsync(Homo $homo, ?callable $callback = null): PromiseInterface
     {
         return Coroutine::of(function () use ($homo, $callback) {
             $service = $homo->getService();

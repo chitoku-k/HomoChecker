@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest as Request;
 
-class HealthCheckAction
+final class HealthCheckAction
 {
     public function __construct(protected HomoService $homo) {}
 

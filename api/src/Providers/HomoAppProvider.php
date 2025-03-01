@@ -25,7 +25,7 @@ use Psr\Http\Message\StreamInterface;
 use Slim\App;
 use Slim\Factory\AppFactory;
 
-class HomoAppProvider extends ServiceProvider
+final class HomoAppProvider extends ServiceProvider
 {
     #[\Override]
     public function register()

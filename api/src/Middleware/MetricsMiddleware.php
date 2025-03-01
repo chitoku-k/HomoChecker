@@ -12,7 +12,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Slim\Interfaces\RouteResolverInterface;
 use Slim\Routing\RoutingResults;
 
-class MetricsMiddleware implements MiddlewareInterface
+final class MetricsMiddleware implements MiddlewareInterface
 {
     public const string INFORMATIONAL = 'INFORMATIONAL';
     public const string SUCCESS = 'SUCCESS';
@@ -52,7 +52,7 @@ class MetricsMiddleware implements MiddlewareInterface
         return $response;
     }
 
-    protected function getRoutePattern(ServerRequestInterface $request): string
+    private function getRoutePattern(ServerRequestInterface $request): string
     {
         $results = $this->routeResolver->computeRoutingResults($request->getUri()->getPath(), $request->getMethod());
         if ($results->getRouteStatus() !== RoutingResults::FOUND || !$id = $results->getRouteIdentifier()) {
@@ -62,19 +62,19 @@ class MetricsMiddleware implements MiddlewareInterface
         return $this->routeResolver->resolveRoute($id)->getPattern();
     }
 
-    protected function getOutcome(int $status): string
+    private function getOutcome(int $status): string
     {
         return match (true) {
-            $status >= 100 && $status < 200 => static::INFORMATIONAL,
-            $status >= 200 && $status < 300 => static::SUCCESS,
-            $status >= 300 && $status < 400 => static::REDIRECTION,
-            $status >= 400 && $status < 500 => static::CLIENT_ERROR,
-            $status >= 500 && $status < 600 => static::SERVER_ERROR,
-            default => static::UNKNOWN,
+            $status >= 100 && $status < 200 => self::INFORMATIONAL,
+            $status >= 200 && $status < 300 => self::SUCCESS,
+            $status >= 300 && $status < 400 => self::REDIRECTION,
+            $status >= 400 && $status < 500 => self::CLIENT_ERROR,
+            $status >= 500 && $status < 600 => self::SERVER_ERROR,
+            default => self::UNKNOWN,
         };
     }
 
-    protected function getException(ResponseInterface $response): string
+    private function getException(ResponseInterface $response): string
     {
         if ($response instanceof ErrorResponse && $response->getException()) {
             return $response->getException()::class;

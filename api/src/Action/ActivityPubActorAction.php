@@ -7,7 +7,7 @@ use HomoChecker\Contracts\Service\ActivityPubService;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest as Request;
 
-class ActivityPubActorAction
+final class ActivityPubActorAction
 {
     public function __construct(protected ActivityPubService $activityPub) {}
 

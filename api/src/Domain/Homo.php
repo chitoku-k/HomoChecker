@@ -3,32 +3,32 @@ declare(strict_types=1);
 
 namespace HomoChecker\Domain;
 
-class Homo
+final class Homo
 {
     /**
      * @var int The id.
      */
-    protected int $id;
+    private int $id;
 
     /**
      * @var string The screen name.
      */
-    protected string $screenName;
+    private string $screenName;
 
     /**
      * @var string The name of the service.
      */
-    protected string $service;
+    private string $service;
 
     /**
      * @var string The URL.
      */
-    protected string $url;
+    private string $url;
 
     /**
      * @var ?Profile The profile.
      */
-    protected ?Profile $profile = null;
+    private ?Profile $profile = null;
 
     public function __construct(null|array|object $homo = null)
     {

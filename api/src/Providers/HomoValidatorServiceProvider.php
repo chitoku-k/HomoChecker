@@ -9,7 +9,7 @@ use HomoChecker\Service\Validator\URLValidatorService;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
 
-class HomoValidatorServiceProvider extends ServiceProvider
+final class HomoValidatorServiceProvider extends ServiceProvider
 {
     #[\Override]
     public function register()
