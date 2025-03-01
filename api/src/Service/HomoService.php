@@ -6,7 +6,7 @@ namespace HomoChecker\Service;
 use HomoChecker\Contracts\Repository\HomoRepository as HomoRepositoryContract;
 use HomoChecker\Contracts\Service\HomoService as HomoServiceContract;
 
-class HomoService implements HomoServiceContract
+final class HomoService implements HomoServiceContract
 {
     public function __construct(protected HomoRepositoryContract $repository) {}
 

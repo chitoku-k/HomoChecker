@@ -12,7 +12,7 @@ use Slim\Exception\HttpSpecializedException;
 use Slim\Interfaces\CallableResolverInterface;
 use Slim\Middleware\ErrorMiddleware as ErrorMiddlewareBase;
 
-class ErrorMiddleware extends ErrorMiddlewareBase
+final class ErrorMiddleware extends ErrorMiddlewareBase
 {
     public function __construct(CallableResolverInterface $callableResolver, ResponseFactoryInterface $responseFactory)
     {

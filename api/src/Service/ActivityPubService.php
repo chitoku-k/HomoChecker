@@ -5,7 +5,7 @@ namespace HomoChecker\Service;
 
 use HomoChecker\Contracts\Service\ActivityPubService as ActivityPubServiceContract;
 
-class ActivityPubService implements ActivityPubServiceContract
+final class ActivityPubService implements ActivityPubServiceContract
 {
     public function __construct(
         protected string $id,

@@ -11,7 +11,7 @@ use HomoChecker\Contracts\Service\ProfileService as ProfileServiceContract;
 use Illuminate\Support\Facades\Log;
 use Prometheus\Counter;
 
-class MastodonProfileService implements ProfileServiceContract
+final class MastodonProfileService implements ProfileServiceContract
 {
     public const int CACHE_EXPIRE = 180;
 

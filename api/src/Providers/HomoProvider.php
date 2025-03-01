@@ -30,7 +30,7 @@ use Slim\Interfaces\CallableResolverInterface;
 use Slim\Interfaces\ErrorHandlerInterface;
 use Slim\Interfaces\RouteResolverInterface;
 
-class HomoProvider extends ServiceProvider
+final class HomoProvider extends ServiceProvider
 {
     protected string $format = AccessLog::FORMAT_COMBINED . ' "%{X-Forwarded-For}i"';
 

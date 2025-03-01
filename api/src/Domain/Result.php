@@ -5,47 +5,47 @@ namespace HomoChecker\Domain;
 
 use HomoChecker\Domain\Validator\ValidationResult;
 
-class Result
+final class Result
 {
     /**
      * @var ?ValidationResult The status.
      */
-    protected ?ValidationResult $status;
+    private ?ValidationResult $status;
 
     /**
      * @var ?string The status code and reason phrase.
      */
-    protected ?string $code;
+    private ?string $code;
 
     /**
      * @var ?string The HTTP version.
      */
-    protected ?string $http;
+    private ?string $http;
 
     /**
      * @var ?string[][] The TLS certificates.
      */
-    protected ?array $certificates;
+    private ?array $certificates;
 
     /**
      * @var ?string The IP address.
      */
-    protected ?string $ip;
+    private ?string $ip;
 
     /**
      * @var ?string The URL.
      */
-    protected ?string $url;
+    private ?string $url;
 
     /**
      * @var ?float The duration.
      */
-    protected ?float $duration;
+    private ?float $duration;
 
     /**
      * @var ?string The error message.
      */
-    protected ?string $error;
+    private ?string $error;
 
     public function __construct(null|array|object $result = null)
     {

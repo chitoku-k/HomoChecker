@@ -8,9 +8,9 @@ use Monolog\Handler\HandlerWrapper;
 use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 
-class CustomizeFormatter
+final class CustomizeFormatter
 {
-    protected string $dateFormat = 'Y-m-d H:i:s';
+    private string $dateFormat = 'Y-m-d H:i:s';
 
     public function __invoke(LoggerInterface $logger, ?string $format = null)
     {

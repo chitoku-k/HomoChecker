@@ -8,7 +8,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Log\LogManager;
 use Illuminate\Log\LogServiceProvider as LogServiceProviderBase;
 
-class LogServiceProvider extends LogServiceProviderBase
+final class LogServiceProvider extends LogServiceProviderBase
 {
     #[\Override]
     public function register()

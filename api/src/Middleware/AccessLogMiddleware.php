@@ -9,17 +9,17 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class AccessLogMiddleware implements MiddlewareInterface
+final class AccessLogMiddleware implements MiddlewareInterface
 {
     /**
      * @var AccessLog The base access log.
      */
-    protected AccessLog $base;
+    private AccessLog $base;
 
     /**
      * @var string[] Paths to skip logging.
      */
-    protected array $skipPaths;
+    private array $skipPaths;
 
     public function __construct(AccessLog $base, array $skipPaths = [])
     {

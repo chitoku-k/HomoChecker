@@ -10,7 +10,7 @@ use Psr\Http\Message\StreamInterface;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest as Request;
 
-class CheckAction
+final class CheckAction
 {
     public function __construct(protected CheckService $check, protected HomoService $homo, protected StreamInterface $stream) {}
 
@@ -24,7 +24,7 @@ class CheckAction
         };
     }
 
-    protected function byJSON(Response $response, ?string $screen_name = null): Response
+    private function byJSON(Response $response, ?string $screen_name = null): Response
     {
         $result = $this->check->execute($screen_name);
         return $response
@@ -32,7 +32,7 @@ class CheckAction
             ->withJson($result, !empty($result) ? 200 : 404);
     }
 
-    protected function bySSE(Response $response, ?string $screen_name = null): Response
+    private function bySSE(Response $response, ?string $screen_name = null): Response
     {
         $response = $response
             ->withBody($this->stream)

@@ -14,7 +14,7 @@ use HomoChecker\Contracts\Service\ClientService as ClientServiceContract;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class ClientService implements ClientServiceContract
+final class ClientService implements ClientServiceContract
 {
     use ClientTrait;
 

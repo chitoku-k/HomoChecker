@@ -13,7 +13,7 @@ use Slim\App;
 use Slim\Interfaces\ErrorHandlerInterface;
 use Slim\Psr7\Factory\StreamFactory;
 
-class HomoHandlerProvider extends ServiceProvider
+final class HomoHandlerProvider extends ServiceProvider
 {
     #[\Override]
     public function register()

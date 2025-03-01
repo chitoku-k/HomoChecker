@@ -12,7 +12,7 @@ use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Exception\HttpSpecializedException;
 use Slim\Interfaces\ErrorHandlerInterface;
 
-class ErrorHandler implements ErrorHandlerInterface
+final class ErrorHandler implements ErrorHandlerInterface
 {
     public function __construct(protected ResponseFactoryInterface $responseFactory) {}
 

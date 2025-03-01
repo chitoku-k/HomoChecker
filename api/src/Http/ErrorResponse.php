@@ -6,7 +6,7 @@ namespace HomoChecker\Http;
 use Psr\Http\Message\StreamInterface;
 use Slim\Http\Response;
 
-class ErrorResponse extends Response
+final class ErrorResponse extends Response
 {
     protected ?\Throwable $exception = null;
 
@@ -17,7 +17,7 @@ class ErrorResponse extends Response
 
     public function withException(\Throwable $exception): static
     {
-        $response = new static($this, $this->streamFactory);
+        $response = new self($this, $this->streamFactory);
         $response->exception = $exception;
         return $response;
     }

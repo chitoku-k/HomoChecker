@@ -6,7 +6,7 @@ namespace HomoChecker\Repository;
 use HomoChecker\Contracts\Repository\ProfileRepository as ProfileRepositoryContract;
 use Illuminate\Support\Facades\DB;
 
-class ProfileRepository implements ProfileRepositoryContract
+final class ProfileRepository implements ProfileRepositoryContract
 {
     #[\Override]
     public function save(string $screenName, string $iconURL, string $expiresAt): void

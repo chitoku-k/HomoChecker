@@ -7,7 +7,7 @@ use HomoChecker\Contracts\Service\ValidatorService as ValidatorServiceContract;
 use HomoChecker\Domain\Validator\ValidationResult;
 use Psr\Http\Message\ResponseInterface as Response;
 
-class URLValidatorService implements ValidatorServiceContract
+final class URLValidatorService implements ValidatorServiceContract
 {
     /**
      * @param non-empty-string $regex

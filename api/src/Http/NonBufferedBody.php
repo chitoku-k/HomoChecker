@@ -7,7 +7,7 @@ use Slim\Psr7\NonBufferedBody as NonBufferedBodyBase;
 
 // Slim\Psr7\Message::withHeader() requires $body to be a subclass of
 // Slim\Psr7\NonBufferedBody in order to get \header() to be called.
-class NonBufferedBody extends NonBufferedBodyBase
+final class NonBufferedBody extends NonBufferedBodyBase
 {
     protected int $size = 0;
 
