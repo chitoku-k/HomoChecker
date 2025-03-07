@@ -436,12 +436,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@riotjs/dom-bindings@npm:^9.2.5":
-  version: 9.2.5
-  resolution: "@riotjs/dom-bindings@npm:9.2.5"
+"@riotjs/dom-bindings@npm:^9.2.6":
+  version: 9.2.6
+  resolution: "@riotjs/dom-bindings@npm:9.2.6"
   dependencies:
-    "@riotjs/util": "npm:^2.4.0"
-  checksum: 10/dcee0308124abc553fc8467a082c25cfa27c62679cbd322e7a0931f4e5ebe6647c9dd172d8b9f5312e03f7466e38e2efed7de446f023ec4f76512e739b817db7
+    "@riotjs/util": "npm:^2.5.0"
+  checksum: 10/32d6900116a7a22067efb3fca2e7fdaa94f2ddb1e516989a9fb6ba041cc80fa2ecfa2c712b8393815dffbc2f963fc0022e474a95a103d1c89853be37841be48d
   languageName: node
   linkType: hard
 
@@ -455,17 +455,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@riotjs/util@npm:2.5.0":
+"@riotjs/util@npm:2.5.0, @riotjs/util@npm:^2.5.0":
   version: 2.5.0
   resolution: "@riotjs/util@npm:2.5.0"
   checksum: 10/7785409c5ccb35b0745a6c0d7f0f15a934778d2ebd512f2982c22494c71bf6935c09ed24a145cd157c5d91d37384d90da6c10770fd650f4b379abd93e7e1bdec
-  languageName: node
-  linkType: hard
-
-"@riotjs/util@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "@riotjs/util@npm:2.4.0"
-  checksum: 10/1e5fc49b7f48de2ad164a14f98ac17a4bbd8c815dc2e0bae0084d10b9936327e105e9cb196cb207d277d01c0623e23b06edefacaaade6e197650941f0d76572f
   languageName: node
   linkType: hard
 
@@ -1926,7 +1919,7 @@ __metadata:
     globals: "npm:^16.0.0"
     html-webpack-plugin: "npm:^5.6.3"
     license-webpack-plugin: "npm:^4.0.2"
-    riot: "npm:^9.4.5"
+    riot: "npm:^9.4.6"
     rxjs: "npm:^7.8.2"
     sass: "npm:^1.85.1"
     sass-loader: "npm:^16.0.5"
@@ -3161,12 +3154,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"riot@npm:^9.4.5":
-  version: 9.4.5
-  resolution: "riot@npm:9.4.5"
+"riot@npm:^9.4.6":
+  version: 9.4.6
+  resolution: "riot@npm:9.4.6"
   dependencies:
-    "@riotjs/dom-bindings": "npm:^9.2.5"
-  checksum: 10/282974c38caab4732992be50b7b80912444d5c396fced5d21775d8c7f6f83a0df677f1dd873bfcf0d38be7a6e7d4d6eed08e82408c5460d07204ff5118a601c3
+    "@riotjs/dom-bindings": "npm:^9.2.6"
+  checksum: 10/6dbeb9e9f4b141804e36f7b8ddaa9cc1a584e4b28f8f77789c8330bd8744a11b1f38c50439c3caf70b3aa3f1ffef9342729da9d0222b7fe7b9069a9c776ada8f
   languageName: node
   linkType: hard
 
