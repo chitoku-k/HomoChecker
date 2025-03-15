@@ -9,7 +9,7 @@
         "illuminate/log": "^11.43.2",
         "middlewares/access-log": "^2.1.2",
         "phpoption/phpoption": "^1.9.3",
-        "promphp/prometheus_client_php": "^2.13.1",
+        "promphp/prometheus_client_php": "^2.14.0",
         "slim/http": "^1.4.0",
         "slim/psr7": "^1.7.0",
         "slim/slim": "^4.14.0",
