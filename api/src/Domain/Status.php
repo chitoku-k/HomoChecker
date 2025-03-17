@@ -96,7 +96,7 @@ final class Status implements \JsonSerializable
         }
 
         $domain = parse_url($url, PHP_URL_HOST);
-        if (!is_string($domain)) {
+        if (!is_string($domain) || !$domain) {
             return '';
         }
 
