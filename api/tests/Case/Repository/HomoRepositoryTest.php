@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace HomoChecker\Test\Repository;
 
 use HomoChecker\Repository\HomoRepository;
+use Illuminate\Database\Connection;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Facade;
@@ -192,6 +193,14 @@ class HomoRepositoryTest extends TestCase
           ->once()
           ->with('users')
           ->andReturn($builder);
+
+        $connection = m::mock(Connection::class);
+        $connection->shouldReceive('getTablePrefix')
+                   ->andReturn('');
+
+        DB::shouldReceive('connection')
+          ->once()
+          ->andReturn($connection);
 
         $sql = <<<'SQL'
         insert into "users" ("screen_name", "service", "url") values ('foo', 'twitter', 'https://foo.example.com/1');
