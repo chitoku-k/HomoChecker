@@ -59,7 +59,7 @@ final class HomoRepository implements HomoRepositoryContract
         $builder = DB::table('users');
 
         // Create a Grammar instance that doesn't parameterize its values
-        $grammar = new class extends PostgresGrammar {
+        $grammar = new class(DB::connection()) extends PostgresGrammar {
             /**
              * {@inheritdoc}
              */
