@@ -20,6 +20,7 @@ use HomoChecker\Service\HomoService;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\DatabaseServiceProvider;
 use Illuminate\Events\EventServiceProvider;
+use Illuminate\Log\Context\ContextServiceProvider;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Middlewares\AccessLog;
@@ -109,6 +110,7 @@ final class HomoProvider extends ServiceProvider
         (new HomoMetricsProvider($this->app))->register();
         (new HomoProfileServiceProvider($this->app))->register();
         (new HomoValidatorServiceProvider($this->app))->register();
+        (new ContextServiceProvider($this->app))->register();
         (new EventServiceProvider($this->app))->register();
         (new LogServiceProvider($this->app))->register();
         (new DatabaseServiceProvider($this->app))->register();
