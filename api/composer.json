@@ -7,7 +7,7 @@
         "illuminate/database": "^12.3.0",
         "illuminate/events": "^12.3.0",
         "illuminate/log": "^12.3.0",
-        "middlewares/access-log": "^2.1.2",
+        "middlewares/access-log": "^2.2.0",
         "phpoption/phpoption": "^1.9.3",
         "promphp/prometheus_client_php": "^2.14.0",
         "slim/http": "^1.4.0",
