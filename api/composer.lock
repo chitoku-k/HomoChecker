@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3c7cd44dfa35a238e2483d522be02357",
+    "content-hash": "7ca68c4921a437d7d2091fb37b884908",
     "packages": [
         {
             "name": "brick/math",
@@ -1382,32 +1382,32 @@
         },
         {
             "name": "middlewares/access-log",
-            "version": "v2.1.2",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/middlewares/access-log.git",
-                "reference": "20ac3e5bb76ba63676ef6879708235c169d904af"
+                "reference": "033a36d1fc14fc7a4efd22062cc314cf44012fbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/middlewares/access-log/zipball/20ac3e5bb76ba63676ef6879708235c169d904af",
-                "reference": "20ac3e5bb76ba63676ef6879708235c169d904af",
+                "url": "https://api.github.com/repos/middlewares/access-log/zipball/033a36d1fc14fc7a4efd22062cc314cf44012fbe",
+                "reference": "033a36d1fc14fc7a4efd22062cc314cf44012fbe",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2 || ^8.0",
-                "psr/http-server-middleware": "^1.0",
+                "psr/http-server-middleware": "^1",
                 "psr/log-implementation": "^1.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.0",
-                "laminas/laminas-diactoros": "^2.3",
-                "middlewares/utils": "^3.0",
+                "friendsofphp/php-cs-fixer": "^3",
+                "laminas/laminas-diactoros": "^2 || ^3",
+                "middlewares/utils": "^2 || ^3 || ^4",
                 "monolog/monolog": "^2.0",
-                "oscarotero/php-cs-fixer-config": "^1.0",
-                "phpstan/phpstan": "^0.12",
-                "phpunit/phpunit": "^8|^9",
-                "squizlabs/php_codesniffer": "^3.0"
+                "oscarotero/php-cs-fixer-config": "^2",
+                "phpstan/phpstan": "^1 || ^2",
+                "phpunit/phpunit": "^8 || ^9",
+                "squizlabs/php_codesniffer": "^3"
             },
             "type": "library",
             "autoload": {
@@ -1433,9 +1433,9 @@
             ],
             "support": {
                 "issues": "https://github.com/middlewares/access-log/issues",
-                "source": "https://github.com/middlewares/access-log/tree/v2.1.2"
+                "source": "https://github.com/middlewares/access-log/tree/v2.2.0"
             },
-            "time": "2022-05-17T17:43:36+00:00"
+            "time": "2025-03-22T19:26:07+00:00"
         },
         {
             "name": "monolog/monolog",
