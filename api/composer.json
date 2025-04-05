@@ -6,6 +6,7 @@
         "illuminate/config": "^12.7.2",
         "illuminate/database": "^12.7.2",
         "illuminate/events": "^12.7.2",
+        "illuminate/http": "^12.7.2",
         "illuminate/log": "^12.7.2",
         "middlewares/access-log": "^2.2.0",
         "phpoption/phpoption": "^1.9.3",
