@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "36331fc8751147cf102b86c5521872e8",
+    "content-hash": "a754f183b28a5dc8c03b96348d150696",
     "packages": [
         {
             "name": "brick/math",
@@ -3581,16 +3581,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.74.0",
+            "version": "v3.75.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "6b7cb12a6cf592fd9a2b46a2d5d4c3b44003973d"
+                "reference": "399a128ff2fdaf4281e4e79b755693286cdf325c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/6b7cb12a6cf592fd9a2b46a2d5d4c3b44003973d",
-                "reference": "6b7cb12a6cf592fd9a2b46a2d5d4c3b44003973d",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/399a128ff2fdaf4281e4e79b755693286cdf325c",
+                "reference": "399a128ff2fdaf4281e4e79b755693286cdf325c",
                 "shasum": ""
             },
             "require": {
@@ -3673,7 +3673,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.74.0"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.75.0"
             },
             "funding": [
                 {
@@ -3681,7 +3681,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-27T22:31:30+00:00"
+            "time": "2025-03-31T18:40:42+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
