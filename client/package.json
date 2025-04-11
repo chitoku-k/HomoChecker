@@ -4,7 +4,7 @@
   "author": "Chitoku <odango@chitoku.jp>",
   "description": "A client application for HomoChecker",
   "homepage": "https://homo.chitoku.jp:4545/",
-  "packageManager": "yarn@4.8.1",
+  "packageManager": "yarn@4.9.1",
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
     "@riotjs/compiler": "^9.4.4",
