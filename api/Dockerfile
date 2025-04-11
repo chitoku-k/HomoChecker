@@ -12,7 +12,7 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
         pkg-config
 
 FROM build-dependencies AS openssl
-ARG OPENSSL_VERSION=openssl-3.4.1
+ARG OPENSSL_VERSION=openssl-3.5.0
 RUN git clone --depth=1 --recurse-submodules -b $OPENSSL_VERSION https://github.com/openssl/openssl && \
     cd openssl && \
     ./Configure enable-tls1_3 no-tests && \
