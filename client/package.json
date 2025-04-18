@@ -24,7 +24,7 @@
     "sass-loader": "^16.0.5",
     "shufflejs": "v6.1.1",
     "style-loader": "^4.0.0",
-    "webpack": "^5.99.5",
+    "webpack": "^5.99.6",
     "webpack-cli": "^6.0.1"
   },
   "scripts": {
