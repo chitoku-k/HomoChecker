@@ -22,7 +22,7 @@
         "mockery/mockery": "^1.6.12",
         "php-coveralls/php-coveralls": "^2.7.0",
         "phpunit/phpunit": "^12.1.4",
-        "psalm/phar": "^6.10.1"
+        "psalm/phar": "^6.10.3"
     },
     "replace": {
         "symfony/polyfill-ctype": "*",
