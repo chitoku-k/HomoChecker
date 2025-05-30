@@ -20,7 +20,7 @@ RUN git clone --depth=1 --recurse-submodules -b $OPENSSL_VERSION https://github.
     make install_sw
 
 FROM build-dependencies AS nghttp3
-ARG NGHTTP3_VERSION=v1.9.0
+ARG NGHTTP3_VERSION=v1.10.1
 RUN git clone --depth=1 --recurse-submodules -b $NGHTTP3_VERSION https://github.com/ngtcp2/nghttp3 && \
     cd nghttp3 && \
     autoreconf -fi && \
