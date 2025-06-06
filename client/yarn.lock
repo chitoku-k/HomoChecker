@@ -1938,7 +1938,7 @@ __metadata:
     rxjs: "npm:^7.8.2"
     sass: "npm:^1.89.0"
     sass-loader: "npm:^16.0.5"
-    shufflejs: "npm:v6.1.1"
+    shufflejs: "npm:v6.1.2"
     style-loader: "npm:^4.0.0"
     webpack: "npm:^5.99.9"
     webpack-cli: "npm:^6.0.1"
@@ -3334,13 +3334,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shufflejs@npm:v6.1.1":
-  version: 6.1.1
-  resolution: "shufflejs@npm:6.1.1"
+"shufflejs@npm:v6.1.2":
+  version: 6.1.2
+  resolution: "shufflejs@npm:6.1.2"
   dependencies:
     array-parallel: "npm:^0.1.3"
     tiny-emitter: "npm:^2.1.0"
-  checksum: 10/cf718ea7a256cec3be67bc77edae6de2ea0970cdfb18d06f877af3dd823a61d9ea0e48e1bd7e2f9cd18bdf2281977eae412584938eee67f65c354a243d917fd7
+  checksum: 10/90a00ae56151d1157d59737c05a213dd95b2ca791fd6687b38a1926d3b1fa88f2604e2f4d2363e11a1705c46e79e7fc6e004b455d33de1767e9081885d74139f
   languageName: node
   linkType: hard
 
