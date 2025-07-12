@@ -16,9 +16,9 @@ final class MastodonProfileService implements ProfileServiceContract
     public const int CACHE_EXPIRE = 180;
 
     public function __construct(
-        protected ClientInterface $client,
-        protected ProfileRepositoryContract $repository,
-        protected Counter $profileErrorCounter,
+        private ClientInterface $client,
+        private ProfileRepositoryContract $repository,
+        private Counter $profileErrorCounter,
     ) {}
 
     public function parseScreenName(string $screen_name): array

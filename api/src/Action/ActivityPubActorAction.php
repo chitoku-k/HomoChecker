@@ -9,7 +9,7 @@ use Slim\Http\ServerRequest as Request;
 
 final class ActivityPubActorAction
 {
-    public function __construct(protected ActivityPubService $activityPub) {}
+    public function __construct(private ActivityPubService $activityPub) {}
 
     public function __invoke(Request $request, Response $response)
     {

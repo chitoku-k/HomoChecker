@@ -14,7 +14,7 @@ use Slim\Interfaces\ErrorHandlerInterface;
 
 final class ErrorHandler implements ErrorHandlerInterface
 {
-    public function __construct(protected ResponseFactoryInterface $responseFactory) {}
+    public function __construct(private ResponseFactoryInterface $responseFactory) {}
 
     #[\Override]
     public function __invoke(Request $request, \Throwable $exception, bool $displayErrorDetails, bool $logErrors, bool $logErrorDetails): Response

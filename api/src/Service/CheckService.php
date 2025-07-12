@@ -30,12 +30,12 @@ final class CheckService implements CheckServiceContract
      * @param Collection<int, ValidatorServiceContract>  $validators
      */
     public function __construct(
-        protected ClientServiceContract $client,
-        protected HomoServiceContract $homo,
-        protected Counter $checkCounter,
-        protected Counter $checkErrorCounter,
-        protected Collection $profiles,
-        protected Collection $validators,
+        private ClientServiceContract $client,
+        private HomoServiceContract $homo,
+        private Counter $checkCounter,
+        private Counter $checkErrorCounter,
+        private Collection $profiles,
+        private Collection $validators,
     ) {}
 
     /**

@@ -12,7 +12,7 @@ final class URLValidatorService implements ValidatorServiceContract
     /**
      * @param non-empty-string $regex
      */
-    public function __construct(protected string $regex) {}
+    public function __construct(private string $regex) {}
 
     /**
      * {@inheritdoc}

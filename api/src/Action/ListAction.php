@@ -12,7 +12,7 @@ use Slim\Http\ServerRequest as Request;
 
 final class ListAction
 {
-    public function __construct(protected HomoService $homo) {}
+    public function __construct(private HomoService $homo) {}
 
     public function __invoke(Request $request, Response $response, array $args)
     {

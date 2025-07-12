@@ -21,9 +21,9 @@ final class XProfileService implements ProfileServiceContract
     private ?string $guestToken = null;
 
     public function __construct(
-        protected ClientInterface $client,
-        protected ProfileRepositoryContract $repository,
-        protected Counter $profileErrorCounter,
+        private ClientInterface $client,
+        private ProfileRepositoryContract $repository,
+        private Counter $profileErrorCounter,
     ) {}
 
     private function getGuestToken(): PromiseInterface
