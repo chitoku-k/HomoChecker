@@ -8,8 +8,8 @@ use Psr\Http\Message\RequestInterface as Request;
 final class RequestSigner
 {
     public function __construct(
-        protected string $id,
-        protected string $privateKeyPem,
+        private string $id,
+        private string $privateKeyPem,
     ) {}
 
     /**

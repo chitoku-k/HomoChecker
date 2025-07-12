@@ -25,9 +25,9 @@ final class MetricsMiddleware implements MiddlewareInterface
      * @param string[] $skipPaths Paths from which to skip collecting metrics.
      */
     public function __construct(
-        protected Summary $httpServerRequestsSeconds,
-        protected RouteResolverInterface $routeResolver,
-        protected array $skipPaths,
+        private Summary $httpServerRequestsSeconds,
+        private RouteResolverInterface $routeResolver,
+        private array $skipPaths,
     ) {}
 
     #[\Override]

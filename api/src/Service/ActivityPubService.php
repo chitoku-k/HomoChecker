@@ -8,9 +8,9 @@ use HomoChecker\Contracts\Service\ActivityPubService as ActivityPubServiceContra
 final class ActivityPubService implements ActivityPubServiceContract
 {
     public function __construct(
-        protected string $id,
-        protected string $preferredUsername,
-        protected string $publicKeyPem,
+        private string $id,
+        private string $preferredUsername,
+        private string $publicKeyPem,
     ) {}
 
     /**

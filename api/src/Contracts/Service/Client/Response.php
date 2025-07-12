@@ -33,7 +33,7 @@ final class Response implements ResponseInterface
      */
     private ?string $primaryIP = null;
 
-    public function __construct(protected ResponseInterface $response) {}
+    public function __construct(private ResponseInterface $response) {}
 
     /**
      * Get the total time.

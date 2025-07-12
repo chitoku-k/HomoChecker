@@ -99,6 +99,22 @@ class MastodonProfileServiceTest extends TestCase
         $this->assertEquals([$username, $instance], $actual);
     }
 
+    public static function screenNameProvider(): array
+    {
+        return [
+            'start with @' => [
+                '@example@mastodon.social',
+                'example',
+                'mastodon.social',
+            ],
+            'start not with @' => [
+                'example@mastodon.social',
+                'example',
+                'mastodon.social',
+            ],
+        ];
+    }
+
     #[DataProvider('invalidScreenNameProvider')]
     public function testParseScreenNameInvalid($screen_name): void
     {
@@ -115,22 +131,6 @@ class MastodonProfileServiceTest extends TestCase
 
         $profile = new MastodonProfileService($client, $repository, $profileErrorCounter);
         $profile->parseScreenName($screen_name);
-    }
-
-    public static function screenNameProvider(): array
-    {
-        return [
-            'start with @' => [
-                '@example@mastodon.social',
-                'example',
-                'mastodon.social',
-            ],
-            'start not with @' => [
-                'example@mastodon.social',
-                'example',
-                'mastodon.social',
-            ],
-        ];
     }
 
     public static function invalidScreenNameProvider(): array
