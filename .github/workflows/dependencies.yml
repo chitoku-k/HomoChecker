@@ -10,6 +10,7 @@ defaults:
 
 jobs:
   dockerfile:
+    name: Dockerfile (${{ matrix.include.name }})
     uses: ./.github/workflows/_update-dockerfile-by-git.yml
     strategy:
       fail-fast: false
@@ -43,6 +44,7 @@ jobs:
     secrets:
       GH_TOKEN: ${{ secrets.PAT }}
   yarn:
+    name: Yarn
     uses: ./.github/workflows/_update-yarn.yml
     with:
       directory: /client
