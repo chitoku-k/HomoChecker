@@ -10,7 +10,7 @@ defaults:
 
 jobs:
   dockerfile:
-    name: Dockerfile (${{ matrix.include.name }})
+    name: Dockerfile (${{ matrix.name }})
     uses: ./.github/workflows/_update-dockerfile-by-git.yml
     strategy:
       fail-fast: false
