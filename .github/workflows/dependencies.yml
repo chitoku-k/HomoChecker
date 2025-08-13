@@ -9,40 +9,6 @@ defaults:
     shell: bash
 
 jobs:
-  dockerfile:
-    name: Dockerfile (${{ matrix.name }})
-    uses: ./.github/workflows/_update-dockerfile-by-git.yml
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - name: openssl
-            directory: /api
-            filename: api/Dockerfile
-            arg: OPENSSL_VERSION
-            git-url: https://github.com/openssl/openssl
-            git-tag-filter: openssl-*
-          - name: nghttp3
-            directory: /api
-            filename: api/Dockerfile
-            arg: NGHTTP3_VERSION
-            git-url: https://github.com/ngtcp2/nghttp3
-            git-tag-filter: v*
-          - name: curl
-            directory: /api
-            filename: api/Dockerfile
-            arg: CURL_VERSION
-            git-url: https://github.com/curl/curl
-            git-tag-filter: curl-*_*_*
-    with:
-      name: ${{ matrix.name }}
-      directory: ${{ matrix.directory }}
-      filename: ${{ matrix.filename }}
-      arg: ${{ matrix.arg }}
-      git-url: ${{ matrix.git-url }}
-      git-tag-filter: ${{ matrix.git-tag-filter }}
-    secrets:
-      GH_TOKEN: ${{ secrets.PAT }}
   yarn:
     name: Yarn
     uses: ./.github/workflows/_update-yarn.yml
