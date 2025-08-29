@@ -443,12 +443,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@riotjs/dom-bindings@npm:^9.2.8":
-  version: 9.2.8
-  resolution: "@riotjs/dom-bindings@npm:9.2.8"
+"@riotjs/dom-bindings@npm:^10.0.1":
+  version: 10.0.1
+  resolution: "@riotjs/dom-bindings@npm:10.0.1"
   dependencies:
-    "@riotjs/util": "npm:^2.5.0"
-  checksum: 10/a520e175dbb6dbece4a88e9768ef58cd49589ca1a9939655e68ba6d3e280804972b2d162e24c58867d83f7592c06830043612107a3d00fd81347198deca2e8b4
+    "@riotjs/util": "npm:^10.0.0"
+  checksum: 10/78ff2f24f3d787f702d2e8199c374bce825ece75ffb700bfd5d5d16604ce4b174f42e8f473a49dd2d6ddef5eba04631a01fd597f41b604f21e255619770f6432
   languageName: node
   linkType: hard
 
@@ -466,13 +466,6 @@ __metadata:
   version: 10.0.0
   resolution: "@riotjs/util@npm:10.0.0"
   checksum: 10/d417e67027320a21a6ec3f8f1cef23ee71af49f3e30a837cf0fe841354298d8d248c85c86e161c84396ea25400017e75c1ddbcfb47f450f8918c863fd4d134a9
-  languageName: node
-  linkType: hard
-
-"@riotjs/util@npm:^2.5.0":
-  version: 2.5.0
-  resolution: "@riotjs/util@npm:2.5.0"
-  checksum: 10/7785409c5ccb35b0745a6c0d7f0f15a934778d2ebd512f2982c22494c71bf6935c09ed24a145cd157c5d91d37384d90da6c10770fd650f4b379abd93e7e1bdec
   languageName: node
   linkType: hard
 
@@ -1950,7 +1943,7 @@ __metadata:
     globals: "npm:^16.3.0"
     html-webpack-plugin: "npm:^5.6.4"
     license-webpack-plugin: "npm:^4.0.2"
-    riot: "npm:^9.4.11"
+    riot: "npm:^10.0.0"
     rxjs: "npm:^7.8.2"
     sass: "npm:^1.91.0"
     sass-loader: "npm:^16.0.5"
@@ -3185,12 +3178,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"riot@npm:^9.4.11":
-  version: 9.4.11
-  resolution: "riot@npm:9.4.11"
+"riot@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "riot@npm:10.0.0"
   dependencies:
-    "@riotjs/dom-bindings": "npm:^9.2.8"
-  checksum: 10/99c8a4e4923ccacbf17cf2e2bcc73ffbe349386cf4bd5b93e85d9d65722146dffaa44fa1eac00ea30bebc138a792fd7d64932ab6b0d6ebad614be358b32fa4ca
+    "@riotjs/dom-bindings": "npm:^10.0.1"
+  checksum: 10/ac98d9eddd213ea507b0dcb85baaa70b304db277bfa080a484a1c36dbc907f5f23c6e48e4b677d1ace37d81c3a637722e34c35c7960288c1ffd0ad40adfc582f
   languageName: node
   linkType: hard
 
