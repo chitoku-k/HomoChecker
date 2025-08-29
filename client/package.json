@@ -8,7 +8,7 @@
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^7.0.0",
     "@riotjs/compiler": "^9.4.9",
-    "@riotjs/webpack-loader": "^9.0.1",
+    "@riotjs/webpack-loader": "^10.0.0",
     "clean-webpack-plugin": "^4.0.0",
     "clsx": "^2.1.1",
     "copy-webpack-plugin": "^13.0.1",

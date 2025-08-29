@@ -469,13 +469,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@riotjs/webpack-loader@npm:^9.0.1":
-  version: 9.0.1
-  resolution: "@riotjs/webpack-loader@npm:9.0.1"
+"@riotjs/webpack-loader@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "@riotjs/webpack-loader@npm:10.0.0"
   peerDependencies:
-    "@riotjs/compiler": ^6.0.0 || ^9.0.0
+    "@riotjs/compiler": ^6.0.0 || ^9.0.0 || ^10.0.0
     webpack: ">=5.0.0"
-  checksum: 10/92136329d15535f0301661a5d970d226d3bd7d30f6e7ce1ebc1f80c207e58e038cd960a2218fba83e3b0709038bc97ebc75f2734faf5d2716b90b40a6fa9dedc
+  checksum: 10/f2626b641c6dfa94c1ba87b0b7bd3df8031846166bce1b342418cde3dc05028711d7e890acfca978e43a513935f586932f4e7469672af1a9219bf0a208c30a52
   languageName: node
   linkType: hard
 
@@ -1940,7 +1940,7 @@ __metadata:
   dependencies:
     "@fortawesome/fontawesome-free": "npm:^7.0.0"
     "@riotjs/compiler": "npm:^9.4.9"
-    "@riotjs/webpack-loader": "npm:^9.0.1"
+    "@riotjs/webpack-loader": "npm:^10.0.0"
     clean-webpack-plugin: "npm:^4.0.0"
     clsx: "npm:^2.1.1"
     copy-webpack-plugin: "npm:^13.0.1"
