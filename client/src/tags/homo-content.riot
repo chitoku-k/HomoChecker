@@ -1,6 +1,6 @@
 <homo-content>
     <div class="wrapper">
-        <homo-item each={ item in items } { ...item } data-duration={ item.status === "ERROR" ? Infinity : item.duration } />
+        <homo-item each={ item in items } { ...item } />
         <homo-error if={ error } />
     </div>
     <style type="scss">

@@ -1,4 +1,4 @@
-<homo-item>
+<homo-item data-duration={ props.status === "ERROR" ? Infinity : props.duration }>
     <div class="container">
         <a href={ getUserUrl(props.homo) } target="_blank">
             <img src={ props.homo.icon } width="60" height="60">
