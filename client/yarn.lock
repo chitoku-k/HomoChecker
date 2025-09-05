@@ -424,9 +424,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@riotjs/compiler@npm:^10.0.0":
-  version: 10.0.0
-  resolution: "@riotjs/compiler@npm:10.0.0"
+"@riotjs/compiler@npm:^10.0.1":
+  version: 10.0.1
+  resolution: "@riotjs/compiler@npm:10.0.1"
   dependencies:
     "@babel/parser": "npm:^7.28.3"
     "@riotjs/parser": "npm:^10.0.0"
@@ -439,7 +439,7 @@ __metadata:
     globals: "npm:^16.3.0"
     recast: "npm:^0.23.11"
     source-map: "npm:^0.7.6"
-  checksum: 10/8db8ac3cd26e2e43724f104b6a99fe6cd574fddc2623ad5f90d51609906ca74d9113a94e1a321139550a0da44c6b95b7bb380a548d0b338f1bd8f25ce7b32ca5
+  checksum: 10/3547d53c9ff168b2a77db497338c35c3c0ff36f988cf8a4ff1b6b332f65547c60a2d71a9b79a5d5b85b51d22b4dd2d6b83fb285389acf18a64856c5435a292fb
   languageName: node
   linkType: hard
 
@@ -1932,7 +1932,7 @@ __metadata:
   resolution: "homo-checker@workspace:."
   dependencies:
     "@fortawesome/fontawesome-free": "npm:^7.0.1"
-    "@riotjs/compiler": "npm:^10.0.0"
+    "@riotjs/compiler": "npm:^10.0.1"
     "@riotjs/webpack-loader": "npm:^10.0.0"
     clean-webpack-plugin: "npm:^4.0.0"
     clsx: "npm:^2.1.1"
