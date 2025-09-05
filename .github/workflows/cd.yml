@@ -54,7 +54,7 @@ jobs:
       - name: Set up kubectl
         uses: azure/setup-kubectl@v4
       - name: Set up ID token
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         id: id-token
         with:
           result-encoding: string
