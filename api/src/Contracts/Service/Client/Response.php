@@ -112,7 +112,7 @@ final class Response implements ResponseInterface
     /**
      * Set the HTTP version.
      */
-    public function setHttpVersion(null|int|string $httpVersion): void
+    public function setHttpVersion(int|string|null $httpVersion): void
     {
         $this->httpVersion = match ($httpVersion) {
             CURL_HTTP_VERSION_1_0 => '1.0',
