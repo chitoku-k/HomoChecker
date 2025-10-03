@@ -6,7 +6,7 @@
   "homepage": "https://homo.chitoku.jp:4545/",
   "packageManager": "yarn@4.10.3",
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^7.0.1",
+    "@fortawesome/fontawesome-free": "^7.1.0",
     "@riotjs/compiler": "^10.0.1",
     "@riotjs/webpack-loader": "^10.0.0",
     "clean-webpack-plugin": "^4.0.0",
