@@ -140,10 +140,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fortawesome/fontawesome-free@npm:^7.0.1":
-  version: 7.0.1
-  resolution: "@fortawesome/fontawesome-free@npm:7.0.1"
-  checksum: 10/72fcb5be1c16c46dab8c8af58fb9abe54380d9acb54c3ab5bda42c247aa8139ddc038163d4b9ac15191c6b7b6aa255753022eb40b336bf8f88368371af4078f7
+"@fortawesome/fontawesome-free@npm:^7.1.0":
+  version: 7.1.0
+  resolution: "@fortawesome/fontawesome-free@npm:7.1.0"
+  checksum: 10/7a7bbb470b2de4e2764b4f9cc91703c5e1d5f430c834353035ef7aecba278cc9b5e2917ddaa7f1c28445530216543b3aa37598f56bb16576395fa060cbb33323
   languageName: node
   linkType: hard
 
@@ -1938,7 +1938,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "homo-checker@workspace:."
   dependencies:
-    "@fortawesome/fontawesome-free": "npm:^7.0.1"
+    "@fortawesome/fontawesome-free": "npm:^7.1.0"
     "@riotjs/compiler": "npm:^10.0.1"
     "@riotjs/webpack-loader": "npm:^10.0.0"
     clean-webpack-plugin: "npm:^4.0.0"
