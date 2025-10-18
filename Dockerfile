@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:1
-FROM node:24.10.0-slim AS dependencies
+FROM node:25.0.0-slim AS dependencies
 WORKDIR /usr/src/client
 RUN --mount=type=cache,id=client:/var/cache/apt,target=/var/cache/apt \
     --mount=type=cache,id=client:/var/lib/apt/lists,target=/var/lib/apt/lists \
@@ -9,6 +9,7 @@ RUN --mount=type=cache,id=client:/var/cache/apt,target=/var/cache/apt \
 COPY client/package.json client/yarn.lock client/.yarnrc.yml /usr/src/client/
 RUN --mount=type=tmpfs,target=/tmp \
     --mount=type=cache,id=client:/usr/local/share/.cache/yarn,target=/usr/local/share/.cache/yarn \
+    npm install -g -f corepack && \
     corepack enable && \
     yarn
 
