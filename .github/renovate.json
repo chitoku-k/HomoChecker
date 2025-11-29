@@ -1,0 +1,60 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", ":disableDependencyDashboard"],
+  "schedule": ["* 0-3 * * 6"],
+  "timezone": "Asia/Tokyo",
+  "labels": ["dependencies"],
+  "commitMessageAction": "Bump",
+  "commitMessageExtra": "",
+  "commitMessageSuffix": "from {{currentVersion}} to {{newVersion}}",
+  "commitMessageTopic": "{{depName}}",
+  "prConcurrentLimit": 0,
+  "prHourlyLimit": 0,
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/(^|/)\\.php-version$/"],
+      "matchStrings": ["(?<currentValue>\\d+\\.\\d+(\\.\\d+)?)"],
+      "depNameTemplate": "php",
+      "lookupNameTemplate": "php/php-src",
+      "datasourceTemplate": "github-releases",
+      "extractVersionTemplate": "php-(?<version>\\d+\\.\\d+\\.\\d+?)"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchManagers": ["dockerfile"],
+      "addLabels": ["docker"]
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "addLabels": ["github_actions"]
+    },
+    {
+      "matchManagers": ["npm"],
+      "addLabels": ["javascript"]
+    },
+    {
+      "matchManagers": ["cargo"],
+      "addLabels": ["rust"]
+    },
+    {
+      "matchDepNames": ["node"],
+      "groupName": "node",
+      "minimumGroupSize": 2
+    },
+    {
+      "matchDepNames": ["php"],
+      "groupName": "php",
+      "minimumGroupSize": 2
+    },
+    {
+      "matchDepNames": ["illuminate/*"],
+      "groupName": "illuminate"
+    },
+    {
+      "matchDepNames": ["slim/*"],
+      "groupName": "slim"
+    }
+  ]
+}
