@@ -6,6 +6,7 @@
   "labels": ["dependencies"],
   "prConcurrentLimit": 0,
   "prHourlyLimit": 0,
+  "rangeStrategy": "bump",
   "customManagers": [
     {
       "customType": "regex",
