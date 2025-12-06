@@ -32,8 +32,8 @@
       "addLabels": ["javascript"]
     },
     {
-      "matchManagers": ["cargo"],
-      "addLabels": ["rust"]
+      "matchManagers": ["composer"],
+      "addLabels": ["php"]
     },
     {
       "matchDepNames": ["node"],
