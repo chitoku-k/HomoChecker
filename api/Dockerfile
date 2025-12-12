@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:1
-FROM php:8.4.14-fpm-trixie AS runtime
+FROM php:8.5.0-fpm-trixie AS runtime
 WORKDIR /var/www/html/api
 RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
     --mount=type=cache,id=api:/var/lib/apt/lists,target=/var/lib/apt/lists \
