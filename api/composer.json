@@ -51,9 +51,6 @@
         "post-update-cmd": "[ \"$COMPOSER_DEV_MODE\" = 0 ] || cghooks update"
     },
     "config": {
-        "platform": {
-            "php": "8.4"
-        },
         "sort-packages": true
     },
     "extra": {
