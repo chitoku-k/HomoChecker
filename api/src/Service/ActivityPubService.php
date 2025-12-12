@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace HomoChecker\Service;
 
 use HomoChecker\Contracts\Service\ActivityPubService as ActivityPubServiceContract;
+use Uri\WhatWg\Url;
 
 final class ActivityPubService implements ActivityPubServiceContract
 {
@@ -43,7 +44,7 @@ final class ActivityPubService implements ActivityPubServiceContract
     #[\Override]
     public function webFinger(string $resource): ?array
     {
-        $domain = parse_url($this->id, \PHP_URL_HOST);
+        $domain = new Url($this->id)->getAsciiHost();
         $acct = "acct:{$this->preferredUsername}@{$domain}";
 
         if ($resource === $acct || $resource === $this->id) {

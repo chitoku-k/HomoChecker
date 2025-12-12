@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace HomoChecker\Domain;
 
+use Uri\WhatWg\InvalidUrlException;
+use Uri\WhatWg\Url;
+
 final class Status implements \JsonSerializable
 {
     /**
@@ -95,22 +98,27 @@ final class Status implements \JsonSerializable
             return '';
         }
 
-        $domain = parse_url($url, PHP_URL_HOST);
-        if (!is_string($domain) || !$domain) {
+        try {
+            $url = new Url($url);
+
+            if ($scheme && $scheme = $url->getScheme()) {
+                $scheme = "{$scheme}://";
+            }
+
+            $domain = $url->getUnicodeHost();
+            if (!$domain) {
+                return '';
+            }
+
+            $path = $url->getPath();
+            if ($path === '/') {
+                $path = '';
+            }
+
+            return (string) $scheme . $domain . $path;
+        } catch (InvalidUrlException) {
             return '';
         }
-
-        $domain = idn_to_utf8($domain);
-        if (!is_string($domain)) {
-            return '';
-        }
-
-        if ($scheme && $scheme = parse_url($url, PHP_URL_SCHEME)) {
-            $scheme = "{$scheme}://";
-        }
-
-        $path = (string) parse_url($url, PHP_URL_PATH);
-        return (string) $scheme . $domain . $path;
     }
 
     /**
