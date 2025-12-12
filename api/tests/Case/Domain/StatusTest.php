@@ -104,7 +104,7 @@ class StatusTest extends TestCase
         $id = 1;
         $screen_name = 'homo';
         $service = 'twitter';
-        $url = 'not:a:url';
+        $url = 'not*a*valid*url';
         $icon = 'https://img.example.com';
         $status = ValidationResult::CONTAINS;
         $http = '1.1';
@@ -153,7 +153,7 @@ class StatusTest extends TestCase
         $id = 1;
         $screen_name = 'homo';
         $service = 'twitter';
-        $url = 'https://xn------.example.com';
+        $url = 'https://xn---.example.com';
         $icon = 'https://img.example.com';
         $status = ValidationResult::CONTAINS;
         $http = '1.1';

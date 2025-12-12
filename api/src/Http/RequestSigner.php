@@ -20,7 +20,7 @@ final class RequestSigner
     {
         $requestTarget = strtolower($request->getMethod()) . ' ' . $request->getRequestTarget();
         if (!$date = $request->getHeaderLine('Date')) {
-            $date = (new \DateTimeImmutable())->format(\DateTimeImmutable::RFC7231);
+            $date = (new \DateTimeImmutable('now', new \DateTimeZone('GMT')))->format('D, d M Y H:i:s \G\M\T');
             $request = $request->withHeader('Date', $date);
         }
         if (!$host = $request->getHeaderLine('Host')) {
