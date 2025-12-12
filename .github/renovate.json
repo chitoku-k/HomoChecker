@@ -9,6 +9,16 @@
   "rangeStrategy": "bump",
   "customManagers": [
     {
+      "customType": "jsonata",
+      "fileFormat": "json",
+      "managerFilePatterns": ["api/composer.json"],
+      "matchStrings": ["config.platform.{\"currentValue\": php}"],
+      "depNameTemplate": "php",
+      "lookupNameTemplate": "php/php-src",
+      "datasourceTemplate": "github-releases",
+      "extractVersionTemplate": "php-(?<version>\\d+\\.\\d+\\.\\d+?)"
+    },
+    {
       "customType": "regex",
       "managerFilePatterns": ["/(^|/)\\.php-version$/"],
       "matchStrings": ["(?<currentValue>\\d+\\.\\d+(\\.\\d+)?)"],
