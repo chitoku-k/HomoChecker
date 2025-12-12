@@ -15,7 +15,6 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
         apcu && \
     docker-php-ext-install \
         intl \
-        opcache \
         pdo_pgsql && \
     apt-get -y remove \
         $PHPIZE_DEPS \
