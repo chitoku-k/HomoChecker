@@ -124,10 +124,9 @@ $ docker buildx bake
 
 ### 設定
 
-webpack のモード、ポート番号を指定する場合は環境変数を変更します（任意）。
+ポート番号を指定する場合は環境変数を変更します（任意）。
 
 ```sh
-$ export HOMOCHECKER_ENV=production
 $ export HOMOCHECKER_PORT=4545
 ```
 

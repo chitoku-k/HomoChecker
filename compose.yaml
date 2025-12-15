@@ -29,8 +29,6 @@ services:
       target: dev
     working_dir: /usr/src
     command: yarn watch
-    environment:
-      HOMOCHECKER_ENV: "${HOMOCHECKER_ENV-development}"
     volumes:
       - type: bind
         source: ./web
