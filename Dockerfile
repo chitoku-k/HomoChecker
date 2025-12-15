@@ -15,7 +15,8 @@ RUN --mount=type=cache,id=client:/usr/local/share/.cache/yarn,target=/mnt/yarn \
 FROM dependencies AS build
 ARG SCM_URL
 COPY client /usr/src/
-RUN touch fonts/atlan.svg fonts/atlan.ttf fonts/atlan.woff && \
+RUN --mount=type=secret,id=client:src/fonts.tar.gz,target=/run/secrets/fonts.tar.gz \
+    [ -f /run/secrets/fonts.tar.gz ] && tar xzf /run/secrets/fonts.tar.gz -C src; \
     yarn build
 
 FROM nginx:1.29.4

@@ -5,7 +5,7 @@ api
 bin
 client/dist
 client/node_modules
-client/*.gpg
+client/src/fonts.tar.gz{,.gpg}
 database
 docker-bake.hcl
 compose.*

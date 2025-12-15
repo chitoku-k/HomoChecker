@@ -1,21 +1,14 @@
+@use 'fonts';
+
 html, body {
     margin: 0;
     padding: 0;
     background: #efefef;
-    font-family: Atlan, Helvetica, ".HiraKakuInterface-W3", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ Pro W3", "Yu Gothic Medium", Meiryo, sans-serif;
+    font-family: fonts.$font-family;
 }
 body {
     margin-top: 60px;
     @media (max-width: 767px), (max-width: 900px) and (orientation: landscape) {
         margin-top: 44px;
     }
-}
-
-@font-face {
-    $font-path: '../fonts';
-    font-family: Atlan;
-    font-weight: 600;
-    src: url($font-path + '/atlan.woff') format('woff'),
-         url($font-path + '/atlan.ttf') format('truetype'),
-         url($font-path + '/atlan.svg#svgFontName') format('svg');
 }

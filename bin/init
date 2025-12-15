@@ -2,7 +2,6 @@
 set -e
 
 cd -- "$(dirname -- "$(dirname -- "$0")")"
-touch client/fonts/atlan.{svg,ttf,woff}
 
 if [[ ! -f api/activity_pub_actor.key ]]; then
     if ! type openssl &> /dev/null; then
