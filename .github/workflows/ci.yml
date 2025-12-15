@@ -126,6 +126,6 @@ jobs:
           set: |
             api.tags=ghcr.io/chitoku-k/homochecker/api:latest
             web.tags=ghcr.io/chitoku-k/homochecker/web:latest
-            *.args.BUILDKIT_CONTEXT_KEEP_GIT_DIR=1
+            web.args.SCM_URL=https://{{ github.server_url }}/${{ github.repository }}/tree/${{ github.sha }}
             *.cache-from=type=gha
             *.cache-to=type=gha,mode=max

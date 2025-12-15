@@ -14,7 +14,6 @@
     "copy-webpack-plugin": "^13.0.1",
     "css-loader": "^7.1.2",
     "eslint": "^9.39.1",
-    "git-revision-webpack-plugin": "^5.0.0",
     "globals": "^16.5.0",
     "html-webpack-plugin": "^5.6.5",
     "license-webpack-plugin": "^4.0.2",

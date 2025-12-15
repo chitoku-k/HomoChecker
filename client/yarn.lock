@@ -1831,15 +1831,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"git-revision-webpack-plugin@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "git-revision-webpack-plugin@npm:5.0.0"
-  peerDependencies:
-    webpack: ^5.0.0
-  checksum: 10/68b5149124e77e291e3a85c6569cbfb1a6e3c60cf8d02818f957a6f53877a7b61f10d65a35ee00ff569af973cbf1a11d6f8ea0c5a386cc2a89f2437f0f846fc4
-  languageName: node
-  linkType: hard
-
 "glob-parent@npm:^6.0.1, glob-parent@npm:^6.0.2":
   version: 6.0.2
   resolution: "glob-parent@npm:6.0.2"
@@ -1964,7 +1955,6 @@ __metadata:
     copy-webpack-plugin: "npm:^13.0.1"
     css-loader: "npm:^7.1.2"
     eslint: "npm:^9.39.1"
-    git-revision-webpack-plugin: "npm:^5.0.0"
     globals: "npm:^16.5.0"
     html-webpack-plugin: "npm:^5.6.5"
     license-webpack-plugin: "npm:^4.0.2"

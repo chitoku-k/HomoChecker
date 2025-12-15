@@ -7,7 +7,6 @@ import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import { LicenseWebpackPlugin } from "license-webpack-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
-import { GitRevisionPlugin } from "git-revision-webpack-plugin";
 
 const require = createRequire(import.meta.url);
 const { registerPreprocessor } = require("@riotjs/compiler");
@@ -69,7 +68,7 @@ export default {
             ],
         }),
         new DefinePlugin({
-            COMMIT_HASH: JSON.stringify((new GitRevisionPlugin()).commithash()),
+            SCM_URL: JSON.stringify(process.env.SCM_URL),
         }),
         new HtmlWebpackPlugin({
             title: "まっぴー (@mpyw) 被害者の会",
