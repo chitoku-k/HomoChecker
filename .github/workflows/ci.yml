@@ -79,7 +79,7 @@ jobs:
         uses: docker/build-push-action@v6
         id: build
         with:
-          context: .
+          context: ./web
           target: dev
           cache-from: type=gha,scope=${{ github.ref_name }}-webtest
           cache-to: type=gha,scope=${{ github.ref_name }}-webtest,mode=max
@@ -87,14 +87,14 @@ jobs:
       - name: Install dependencies
         if: ${{ always() && steps.build.conclusion == 'success' }}
         run: |
-          docker run --rm --volume=$(pwd):/usr/src/app --workdir=/usr/src/app/client ${{ steps.build.outputs.imageid }} yarn
+          docker run --rm --volume=$(pwd):/usr/src --workdir=/usr/src/web ${{ steps.build.outputs.imageid }} yarn
       - name: Run eslint
         if: ${{ always() && steps.build.conclusion == 'success' }}
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          docker run --rm --volume=$(pwd):/usr/src/app --workdir=/usr/src/app/client ${{ steps.build.outputs.imageid }} yarn lint |
-            sed "s!/usr/src/app/!!g" |
+          docker run --rm --volume=$(pwd):/usr/src --workdir=/usr/src/web ${{ steps.build.outputs.imageid }} yarn lint |
+            sed "s!/usr/src/!!g" |
             reviewdog -f=eslint -reporter=github-pr-annotations -filter-mode=nofilter -fail-level=any -tee
   build:
     name: Build
@@ -106,7 +106,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
       - name: Decrypt fonts
         if: ${{ github.ref_name == 'master' }}
-        working-directory: client/src
+        working-directory: web/src
         run: |
           gpg --quiet --batch --yes --decrypt --passphrase=${{ secrets.FONTS_PASSPHRASE }} --output=fonts.tar.gz fonts.tar.gz.gpg
       - name: Log into Container Registry
@@ -126,6 +126,6 @@ jobs:
             api.tags=ghcr.io/chitoku-k/homochecker/api:latest
             web.tags=ghcr.io/chitoku-k/homochecker/web:latest
             web.args.SCM_URL=https://{{ github.server_url }}/${{ github.repository }}/tree/${{ github.sha }}
-            ${{ github.ref_name == 'master' && 'web.secrets=id=client:src/fonts.tar.gz,src=client/src/fonts.tar.gz' || '' }}
+            ${{ github.ref_name == 'master' && 'web.secrets=id=web:src/fonts.tar.gz,src=web/src/fonts.tar.gz' || '' }}
             *.cache-from=type=gha
             *.cache-to=type=gha,mode=max

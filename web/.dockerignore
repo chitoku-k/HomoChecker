@@ -1,0 +1,6 @@
+Dockerfile
+dist
+node_modules
+src/fonts.tar.gz{,.gpg}
+.dockerignore
+.gitignore

@@ -25,18 +25,18 @@ services:
 
   build:
     build:
-      context: .
+      context: ./web
       target: dev
-    working_dir: /usr/src/app/client
+    working_dir: /usr/src
     command: yarn watch
     environment:
       HOMOCHECKER_ENV: "${HOMOCHECKER_ENV-development}"
     volumes:
       - type: bind
-        source: .
-        target: /usr/src/app
+        source: ./web
+        target: /usr/src
 
-  client:
+  web:
     image: nginx:1.29
     ports:
       - "${HOMOCHECKER_PORT-4545}:80"
@@ -44,11 +44,11 @@ services:
       HOMOCHECKER_API_HOST: api
     volumes:
       - type: bind
-        source: ./client/dist
+        source: ./web/dist
         target: /var/www/html
         read_only: true
       - type: bind
-        source: ./client/conf
+        source: ./web/conf
         target: /etc/nginx/templates
         read_only: true
 

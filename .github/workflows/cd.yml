@@ -23,7 +23,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Decrypt fonts
-        working-directory: client/src
+        working-directory: web/src
         run: |
           gpg --quiet --batch --yes --decrypt --passphrase=${{ secrets.FONTS_PASSPHRASE }} --output=fonts.tar.gz fonts.tar.gz.gpg
       - name: Log into Container Registry
@@ -42,7 +42,7 @@ jobs:
             api.tags=ghcr.io/chitoku-k/homochecker/api:${{ github.ref_name }}
             web.tags=ghcr.io/chitoku-k/homochecker/web:${{ github.ref_name }}
             web.args.SCM_URL=https://{{ github.server_url }}/${{ github.repository }}/tree/${{ github.sha }}
-            web.secrets=id=client:src/fonts.tar.gz,src=client/src/fonts.tar.gz
+            web.secrets=id=web:src/fonts.tar.gz,src=web/src/fonts.tar.gz
             *.cache-from=type=gha
             *.cache-to=type=gha,mode=max
   deploy:
