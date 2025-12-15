@@ -7,5 +7,5 @@ target "api" {
 }
 
 target "web" {
-    context = "."
+    context = "./web"
 }

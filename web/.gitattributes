@@ -1,3 +1,2 @@
-*.tag linguist-language=Vue
 .yarn/releases/** binary
 .yarn/plugins/** binary
