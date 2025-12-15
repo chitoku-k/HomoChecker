@@ -4,8 +4,10 @@ group "default" {
 
 target "api" {
     context = "./api"
+    target = "production"
 }
 
 target "web" {
     context = "./web"
+    target = "production"
 }

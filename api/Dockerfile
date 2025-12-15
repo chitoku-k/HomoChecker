@@ -63,7 +63,7 @@ RUN --mount=type=cache,id=api:/root/.composer,target=/mnt/.composer \
 RUN pecl install pcov && \
     docker-php-ext-enable pcov
 
-FROM scratch
+FROM scratch AS production
 COPY src /var/www/html/api/src
 COPY --from=runtime /etc/group /etc/
 COPY --from=runtime /etc/passwd /etc/
