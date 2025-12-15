@@ -17,7 +17,6 @@
         "vlucas/phpdotenv": "^5.6.2"
     },
     "require-dev": {
-        "brainmaestro/composer-git-hooks": "^3.0.0",
         "friendsofphp/php-cs-fixer": "^3.92.0",
         "mockery/mockery": "^1.6.12",
         "php-coveralls/php-coveralls": "^2.9.0",
@@ -48,19 +47,9 @@
     "scripts": {
         "psalm": "psalm.phar",
         "test": "phpunit",
-        "fix": "php-cs-fixer fix",
-        "post-install-cmd": "[ \"$COMPOSER_DEV_MODE\" = 0 ] || cghooks add --ignore-lock",
-        "post-update-cmd": "[ \"$COMPOSER_DEV_MODE\" = 0 ] || cghooks update"
+        "fix": "php-cs-fixer fix"
     },
     "config": {
         "sort-packages": true
-    },
-    "extra": {
-        "hooks": {
-            "pre-commit": [
-                "git diff-index --cached --name-only HEAD | (cd api && composer fix)",
-                "git update-index --again"
-            ]
-        }
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b98a4390320aef3ba58d886b05669843",
+    "content-hash": "de28578d63d1c5176fae6546202d624a",
     "packages": [
         {
             "name": "brick/math",
@@ -4304,79 +4304,6 @@
         }
     ],
     "packages-dev": [
-        {
-            "name": "brainmaestro/composer-git-hooks",
-            "version": "v3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/BrainMaestro/composer-git-hooks.git",
-                "reference": "684dc85f480268baf5e13f39a3cc494eeb2536e8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/BrainMaestro/composer-git-hooks/zipball/684dc85f480268baf5e13f39a3cc494eeb2536e8",
-                "reference": "684dc85f480268baf5e13f39a3cc494eeb2536e8",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.0",
-                "symfony/console": "^5.0|^6.0|^7.0"
-            },
-            "require-dev": {
-                "ext-json": "*",
-                "friendsofphp/php-cs-fixer": "^3.0",
-                "phpunit/phpunit": "^9|^10|^11"
-            },
-            "bin": [
-                "cghooks"
-            ],
-            "type": "library",
-            "extra": {
-                "hooks": {
-                    "pre-commit": "composer check-style",
-                    "pre-push": [
-                        "composer test",
-                        "appver=$(grep -o -E '[0-9]+\\.[0-9]+\\.[0-9]+(-alpha\\.[0-9]+)?' cghooks)",
-                        "tag=$(git tag | tail -n 1)",
-                        "tag=${tag#v}",
-                        "if [ \"$tag\" != \"$appver\" ]; then",
-                        "echo \"The most recent tag $tag does not match the application version $appver\\n\"",
-                        "sed -i -E \"s/$appver/$tag/\" cghooks",
-                        "exit 1",
-                        "fi"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "BrainMaestro\\GitHooks\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ezinwa Okpoechi",
-                    "email": "brainmaestro@outlook.com"
-                }
-            ],
-            "description": "Easily manage git hooks in your composer config",
-            "keywords": [
-                "HOOK",
-                "composer",
-                "git"
-            ],
-            "support": {
-                "issues": "https://github.com/BrainMaestro/composer-git-hooks/issues",
-                "source": "https://github.com/BrainMaestro/composer-git-hooks/tree/v3.0.0"
-            },
-            "time": "2024-06-22T09:17:59+00:00"
-        },
         {
             "name": "clue/ndjson-react",
             "version": "v1.3.0",
