@@ -81,22 +81,35 @@ hosts:
 
 ## 本番環境
 
-BuildKit（または Docker の対応するバージョン）あるいは Buildah のインストールが必要です。
+nginx + PHP-FPM + PostgreSQL で構成します。
 
-- `docker build` を利用する場合: Docker 18.09 以上
-- `docker buildx` を利用する場合: Docker 19.03 以上
+### コンテナーイメージ版
 
-nginx + PHP-FPM + PostgreSQL で構成されています。
+- [ghcr.io/chitoku-k/homochecker/api](https://github.com/chitoku-k/HomoChecker/pkgs/container/homochecker%2Fapi)
+- [ghcr.io/chitoku-k/homochecker/web](https://github.com/chitoku-k/HomoChecker/pkgs/container/homochecker%2Fweb)
 
-### 設定
+```console
+$ docker buildx bake
+```
 
-#### nginx
+## 開発環境
+
+```console
+$ bin/init
+$ docker compose up -d --build
+```
+
+## 設定
+
+環境変数に値の設定を行います。
+
+### nginx
 
 ```sh
 $ export HOMOCHECKER_API_HOST=api
 ```
 
-#### PHP-FPM
+### PHP-FPM
 
 ```sh
 $ export HOMOCHECKER_AP_ACTOR_ID=https://example.com/actor
@@ -114,27 +127,14 @@ $ export HOMOCHECKER_DB_SSLROOTCERT=/path/to/sslrootcert
 $ export HOMOCHECKER_LOG_LEVEL=debug
 ```
 
-### ビルド
+## 実行
 
-```sh
-$ docker buildx bake
-```
+現在の最新データは SQL 形式で[ダウンロード](https://homo.chitoku.jp:4545/list/?format=sql)できます。  
+最新のデータを挿入するには次のようにします。
 
-## 開発環境
-
-### 設定
-
-ポート番号を指定する場合は環境変数を変更します（任意）。
-
-```sh
-$ export HOMOCHECKER_PORT=4545
-```
-
-### 実行
-
-```sh
-$ bin/init
-$ docker compose up -d --build
+```console
+$ curl -s 'https://homo.chitoku.jp:4545/list/?format=sql' |
+    docker compose exec --no-TTY database psql
 ```
 
 ブラウザーで次の URL にアクセスします。
@@ -143,27 +143,7 @@ $ docker compose up -d --build
 http://localhost:4545
 ```
 
-コンテナーを終了するには次のコマンドを使用します。
-
-```sh
-$ docker compose stop
-```
-
-現在の最新データは SQL 形式で[ダウンロード](https://homo.chitoku.jp:4545/list/?format=sql)できます。  
-次のコマンドで PostgreSQL にログインできます。
-
-```sh
-$ docker compose exec database psql -dhomo -Uhomo
-```
-
-たとえば最新のデータを入れるには次のようにします。
-
-```sh
-$ curl -s 'https://homo.chitoku.jp:4545/list/?format=sql' |
-    docker compose exec --no-TTY database psql -dhomo -Uhomo
-```
-
-### テスト
+## テスト
 
 ```sh
 $ cd api

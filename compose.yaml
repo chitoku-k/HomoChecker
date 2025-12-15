@@ -53,6 +53,7 @@ services:
   database:
     image: postgres:17.5
     environment:
+      PGUSER: homo
       POSTGRES_DB: homo
       POSTGRES_USER: homo
       POSTGRES_PASSWORD: homo
