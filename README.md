@@ -167,7 +167,8 @@ $ curl -s 'https://homo.chitoku.jp:4545/list/?format=sql' |
 ### テスト
 
 ```sh
-$ bin/test
+$ cd api
+$ composer test -- --no-coverage
 ```
 
 [workflow-link]:    https://github.com/chitoku-k/HomoChecker/actions?query=branch:master
