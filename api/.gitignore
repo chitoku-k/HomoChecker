@@ -4,7 +4,6 @@
 ### Composer ###
 composer.phar
 /vendor/
-cghooks.lock
 
 ### PHP-CS-Fixer ###
 # Covers PHP CS Fixer
