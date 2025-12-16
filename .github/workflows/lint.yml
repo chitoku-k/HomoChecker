@@ -1,0 +1,82 @@
+name: Lint
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+  workflow_call:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  eslint:
+    name: ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: web/.node-version
+      - name: Install corepack
+        working-directory: web
+        run: |
+          npm install -g -f corepack
+          corepack enable
+      - name: Install dependencies
+        working-directory: web
+        run: |
+          yarn install
+      - name: Run eslint
+        uses: reviewdog/action-eslint@v1
+        with:
+          reporter: github-pr-annotations
+          filter_mode: nofilter
+          fail_level: any
+          workdir: web
+
+  php-cs-fixer:
+    name: PHP CS Fixer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version-file: api/.php-version
+          tools: cs2pr
+        env:
+          fail-fast: true
+      - name: Install dependencies
+        working-directory: api
+        run: |
+          composer install --prefer-dist
+      - name: Run php-cs-fixer
+        working-directory: api
+        run: |
+          composer exec -- php-cs-fixer fix --dry-run --format=checkstyle | cs2pr
+
+  psalm:
+    name: Psalm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version-file: api/.php-version
+        env:
+          fail-fast: true
+      - name: Install dependencies
+        working-directory: api
+        run: |
+          composer install --prefer-dist
+      - name: Run psalm
+        working-directory: api
+        run: |
+          composer run -- psalm --show-info=true --output-format=github
