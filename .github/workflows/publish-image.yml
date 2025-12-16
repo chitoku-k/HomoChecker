@@ -1,0 +1,64 @@
+name: Publish image
+on:
+  push:
+    branches:
+      - master
+  workflow_call:
+    secrets:
+      FONTS_PASSPHRASE:
+        required: true
+    inputs:
+      tags:
+        type: string
+        required: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    name: Build
+    uses: ./.github/workflows/build-image.yml
+    permissions:
+      packages: write
+    secrets: inherit
+    with:
+      push: true
+      fonts: true
+
+  combine:
+    name: ${{ matrix.target }}
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - api
+          - web
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Download digests
+        uses: chitoku-k/actions/download-image-digests@master
+        with:
+          pattern: digests-${{ matrix.target }}-*
+      - name: Log into Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+      - name: Combine images
+        uses: chitoku-k/actions/combine-images@master
+        with:
+          name: ghcr.io/${{ github.repository }}/${{ matrix.target }}
+          tags: ${{ inputs.tags || 'latest' }}
+          annotations: |-
+            org.opencontainers.image.source=${{ github.repositoryUrl }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.version=${{ needs.build.outputs.version }}

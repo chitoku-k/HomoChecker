@@ -1,0 +1,90 @@
+name: Build image
+on:
+  pull_request:
+  workflow_call:
+    secrets:
+      FONTS_PASSPHRASE:
+        required: false
+    inputs:
+      push:
+        type: boolean
+        default: false
+      fonts:
+        type: boolean
+        default: false
+      set:
+        type: string
+    outputs:
+      version:
+        value: ${{ jobs.image.outputs.version }}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  image:
+    name: ${{ matrix.target }} (${{ matrix.platform.os }}/${{ matrix.platform.arch }})
+    runs-on: ${{ matrix.platform.label }}
+    permissions:
+      packages: write
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - api
+          - web
+        platform:
+          - os: linux
+            arch: amd64
+            label: ubuntu-24.04
+          - os: linux
+            arch: arm64
+            label: ubuntu-24.04-arm
+    outputs:
+      version: ${{ steps.version.outputs.value }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          filter: tree:0
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Get version
+        uses: chitoku-k/actions/describe-git-tag@master
+        id: version
+      - name: Decrypt fonts
+        if: ${{ matrix.target == 'web' && inputs.fonts || false }}
+        working-directory: web/src
+        run: |
+          gpg --quiet --batch --yes --decrypt --passphrase=${{ secrets.FONTS_PASSPHRASE }} --output=fonts.tar.gz fonts.tar.gz.gpg
+      - name: Log into Container Registry
+        if: ${{ inputs.push || false }}
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+      - name: Build
+        uses: docker/bake-action@v6
+        id: build
+        with:
+          targets: ${{ matrix.target }}
+          set: |
+            ${{ matrix.target }}.tags=ghcr.io/${{ github.repository_owner }}/homochecker/${{ matrix.target }}
+            ${{ matrix.target }}.args.SCM_URL=https://{{ github.server_url }}/${{ github.repository }}/tree/${{ github.sha }}
+            ${{ matrix.target == 'web' && inputs.fonts && 'web.secrets=id=web:src/fonts.tar.gz,src=web/src/fonts.tar.gz' || '' }}
+            *.cache-from=type=gha
+            *.cache-to=type=gha,mode=max
+            *.output=type=image,push=${{ inputs.push || false }},push-by-digest=${{ inputs.push || false }}
+            *.annotations=org.opencontainers.image.source=${{ github.repositoryUrl }}
+            *.annotations=org.opencontainers.image.revision=${{ github.sha }}
+            *.annotations=org.opencontainers.image.version=${{ steps.version.outputs.value }}
+            ${{ inputs.set }}
+      - name: Upload digest
+        if: ${{ inputs.push || false }}
+        uses: chitoku-k/actions/upload-image-digest@master
+        with:
+          digest: ${{ fromJSON(steps.build.outputs.metadata)[matrix.target]['containerimage.digest'] }}
+          artifact: digests-${{ matrix.target }}-${{ matrix.platform.os }}-${{ matrix.platform.arch }}

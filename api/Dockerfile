@@ -63,14 +63,21 @@ RUN --mount=type=cache,id=api:/root/.composer,target=/mnt/.composer \
 RUN pecl install pcov && \
     docker-php-ext-enable pcov
 
-FROM scratch AS production
+FROM scratch AS production-linux-amd64
+ARG DEB_BUILD_MULTIARCH=x86_64-linux-gnu
+ARG LD=/lib64/ld-linux-x86-64.so.2
+
+FROM scratch AS production-linux-arm64
+ARG DEB_BUILD_MULTIARCH=aarch64-linux-gnu
+ARG LD=/lib/ld-linux-aarch64.so.1
+
+FROM production-${TARGETPLATFORM//\//-} AS production
 COPY src /var/www/html/api/src
 COPY --from=runtime /etc/group /etc/
 COPY --from=runtime /etc/passwd /etc/
 COPY --from=runtime /etc/ssl/certs/ /etc/ssl/certs/
-COPY --from=runtime /lib/ /lib/
-COPY --from=runtime /lib64/ /lib64/
-COPY --from=runtime /usr/lib/ /usr/lib/
+COPY --from=runtime $LD $LD
+COPY --from=runtime /lib/$DEB_BUILD_MULTIARCH/ /lib/$DEB_BUILD_MULTIARCH/
 COPY --from=runtime /usr/local/etc/ /usr/local/etc/
 COPY --from=runtime /usr/local/lib/ /usr/local/lib/
 COPY --from=runtime /usr/local/sbin/php-fpm /usr/local/sbin/
@@ -79,4 +86,5 @@ COPY --from=dependencies /var/www/html/api /var/www/html/api
 RUN --mount=from=dependencies,src=/bin,dst=/bin mkdir --mode=1777 /tmp
 STOPSIGNAL SIGQUIT
 EXPOSE 9000
+RUN ["/usr/local/sbin/php-fpm", "--version"]
 ENTRYPOINT ["/usr/local/sbin/php-fpm"]
