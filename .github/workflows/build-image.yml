@@ -73,7 +73,7 @@ jobs:
           targets: ${{ matrix.target }}
           set: |
             ${{ matrix.target }}.tags=ghcr.io/${{ github.repository_owner }}/homochecker/${{ matrix.target }}
-            ${{ matrix.target }}.args.SCM_URL=https://{{ github.server_url }}/${{ github.repository }}/tree/${{ github.sha }}
+            ${{ matrix.target }}.args.SCM_URL=https://${{ github.server_url }}/${{ github.repository }}/tree/${{ github.sha }}
             ${{ matrix.target == 'web' && inputs.fonts && 'web.secrets=id=web:src/fonts.tar.gz,src=web/src/fonts.tar.gz' || '' }}
             *.cache-from=type=gha
             *.cache-to=type=gha,mode=max
