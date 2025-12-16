@@ -1,0 +1,68 @@
+name: Test
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+  workflow_call:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  phpunit:
+    name: PHPUnit (${{ matrix.platform.os }}/${{ matrix.platform.arch }})
+    runs-on: ${{ matrix.platform.label }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - os: linux
+            arch: amd64
+            label: ubuntu-24.04
+          - os: linux
+            arch: arm64
+            label: ubuntu-24.04-arm
+          - os: windows
+            arch: amd64
+            label: windows-2025
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version-file: api/.php-version
+          extensions: apcu, fileinfo, intl
+          coverage: pcov
+        env:
+          fail-fast: true
+      - name: Install dependencies
+        working-directory: api
+        run: |
+          composer install --prefer-dist
+      - name: Run phpunit
+        working-directory: api
+        run: |
+          composer exec -- phpunit --display-deprecations --display-notices --display-warnings
+      - name: Upload coverage
+        uses: coverallsapp/github-action@v2
+        with:
+          parallel: true
+          flag-name: ${{ matrix.platform.os }}/${{ matrix.platform.arch }}
+
+  coveralls:
+    name: Merge coverage
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    needs:
+      - phpunit
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@v2
+        with:
+          parallel-finished: true
+          carryforward: linux/amd64,linux/arm64
