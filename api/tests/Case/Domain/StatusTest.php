@@ -148,12 +148,12 @@ class StatusTest extends TestCase
         $this->assertEquals($duration, $actual->getResultArray()['duration']);
     }
 
-    public function testIncorrectIDN(): void
+    public function testEmptyDomain(): void
     {
         $id = 1;
         $screen_name = 'homo';
         $service = 'twitter';
-        $url = 'https://xn---.example.com';
+        $url = 'file:///';
         $icon = 'https://img.example.com';
         $status = ValidationResult::CONTAINS;
         $http = '1.1';
@@ -189,7 +189,7 @@ class StatusTest extends TestCase
         $this->assertEquals($service, $actual->getHomoArray()['service']);
         $this->assertEquals($url, $actual->getHomoArray()['url']);
         $this->assertEquals('', $actual->getHomoArray()['display_url']);
-        $this->assertEquals(true, $actual->getHomoArray()['secure']);
+        $this->assertEquals(false, $actual->getHomoArray()['secure']);
         $this->assertEquals($status, $actual->getResultArray()['status']);
         $this->assertEquals($http, $actual->getResultArray()['http']);
         $this->assertEquals($ip, $actual->getResultArray()['ip']);
