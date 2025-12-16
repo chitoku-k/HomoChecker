@@ -56,7 +56,7 @@ jobs:
       - name: Combine images
         uses: chitoku-k/actions/combine-images@master
         with:
-          name: ghcr.io/${{ github.repository }}/${{ matrix.target }}
+          name: ghcr.io/${{ github.repository_owner }}/homochecker/${{ matrix.target }}
           tags: ${{ inputs.tags || 'latest' }}
           annotations: |-
             org.opencontainers.image.source=${{ github.repositoryUrl }}

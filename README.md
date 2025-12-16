@@ -151,7 +151,7 @@ $ composer test -- --no-coverage
 ```
 
 [workflow-link]:    https://github.com/chitoku-k/HomoChecker/actions?query=branch:master
-[workflow-badge]:   https://img.shields.io/github/actions/workflow/status/chitoku-k/HomoChecker/ci.yml?branch=master&style=flat-square&logo=github
+[workflow-badge]:   https://img.shields.io/github/actions/workflow/status/chitoku-k/HomoChecker/publish-image.yml?branch=master&style=flat-square&logo=github
 [coveralls-link]:   https://coveralls.io/github/chitoku-k/HomoChecker?branch=master
 [coveralls-badge]:  https://img.shields.io/coveralls/github/chitoku-k/HomoChecker/master?style=flat-square&logo=coveralls
 [climate-link]:     https://codeclimate.com/github/chitoku-k/HomoChecker/maintainability
