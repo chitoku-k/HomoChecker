@@ -46,7 +46,7 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         working-directory: web/src
         run: |
-          gpg --quiet --batch --yes --decrypt --passphrase=${{ secrets.FONTS_PASSPHRASE }} fonts.tar.gz.gpg | tar xzf
+          gpg --quiet --batch --yes --decrypt --passphrase=${{ secrets.FONTS_PASSPHRASE }} fonts.tar.gz.gpg | tar xz
       - name: Build
         working-directory: web
         run: |
