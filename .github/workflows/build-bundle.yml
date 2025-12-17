@@ -49,5 +49,7 @@ jobs:
           gpg --quiet --batch --yes --decrypt --passphrase=${{ secrets.FONTS_PASSPHRASE }} fonts.tar.gz.gpg | tar xz
       - name: Build
         working-directory: web
+        env:
+          SCM_URL: ${{ github.server_url }}/${{ github.repository }}/tree/${{ github.sha }}
         run: |
           yarn build
