@@ -1,0 +1,53 @@
+name: Build bundle
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  bundle:
+    name: ${{ matrix.platform.os }}/${{ matrix.platform.arch }}
+    runs-on: ${{ matrix.platform.label }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - os: linux
+            arch: amd64
+            label: ubuntu-24.04
+          - os: linux
+            arch: arm64
+            label: ubuntu-24.04-arm
+          - os: windows
+            arch: amd64
+            label: windows-2025
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: web/.node-version
+      - name: Install corepack
+        working-directory: web
+        run: |
+          npm install -g -f corepack
+          corepack enable
+      - name: Install dependencies
+        working-directory: web
+        run: |
+          yarn install
+      - name: Decrypt fonts
+        if: ${{ github.event_name == 'push' }}
+        working-directory: web/src
+        run: |
+          gpg --quiet --batch --yes --decrypt --passphrase=${{ secrets.FONTS_PASSPHRASE }} fonts.tar.gz.gpg | tar xzf
+      - name: Build
+        working-directory: web
+        run: |
+          yarn build
