@@ -82,7 +82,7 @@ jobs:
             *.output=type=image,push=${{ inputs.push || false }},push-by-digest=${{ inputs.push || false }}
             *.annotations=org.opencontainers.image.source=${{ github.repositoryUrl }}
             *.annotations=org.opencontainers.image.revision=${{ github.sha }}
-            *.annotations=org.opencontainers.image.version=${{ steps.version.outputs.value }}
+            *.annotations=org.opencontainers.image.version=v${{ steps.version.outputs.value }}
             ${{ inputs.set }}
       - name: Upload digest
         if: ${{ inputs.push || false }}
