@@ -54,6 +54,8 @@ jobs:
       - name: Get version
         uses: chitoku-k/actions/describe-git-tag@master
         id: version
+        with:
+          semantic-versioning: true
       - name: Decrypt fonts
         if: ${{ matrix.target == 'web' && inputs.fonts || false }}
         working-directory: web/src
