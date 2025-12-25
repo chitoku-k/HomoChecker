@@ -61,4 +61,4 @@ jobs:
           annotations: |-
             org.opencontainers.image.source=${{ github.repositoryUrl }}
             org.opencontainers.image.revision=${{ github.sha }}
-            org.opencontainers.image.version=${{ needs.build.outputs.version }}
+            org.opencontainers.image.version=v${{ needs.build.outputs.version }}
