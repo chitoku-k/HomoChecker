@@ -20,7 +20,7 @@
         "friendsofphp/php-cs-fixer": "^3.93.1",
         "mockery/mockery": "^1.6.12",
         "phpunit/phpunit": "^12.5.8",
-        "psalm/phar": "^6.14.3"
+        "psalm/phar": "^6.15.0"
     },
     "replace": {
         "symfony/polyfill-ctype": "*",
