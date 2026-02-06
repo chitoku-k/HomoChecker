@@ -20,7 +20,7 @@
     "riot": "^10.1.2",
     "rxjs": "^7.8.2",
     "sass": "^1.97.3",
-    "sass-loader": "^16.0.6",
+    "sass-loader": "^16.0.7",
     "shufflejs": "v6.1.2",
     "style-loader": "^4.0.0",
     "webpack": "^5.104.1",
