@@ -19,7 +19,7 @@ RUN --mount=type=secret,id=web:src/fonts.tar.gz,target=/run/secrets/fonts.tar.gz
     [ -f /run/secrets/fonts.tar.gz ] && tar xzf /run/secrets/fonts.tar.gz -C src; \
     yarn build
 
-FROM nginx:1.29.4 AS production
+FROM nginx:1.29.5 AS production
 ENV HOMOCHECKER_API_HOST=localhost
 COPY conf /etc/nginx/templates/
 COPY --from=build /usr/src/dist /var/www/html/
