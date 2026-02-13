@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:1
-FROM node:25.6.0-slim AS dependencies
+FROM node:25.6.1-slim AS dependencies
 WORKDIR /usr/src
 COPY package.json yarn.lock .yarnrc.yml /usr/src/
 RUN --mount=type=tmpfs,target=/tmp \
