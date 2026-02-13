@@ -21,7 +21,7 @@
     "rxjs": "^7.8.2",
     "sass": "^1.97.3",
     "sass-loader": "^16.0.7",
-    "shufflejs": "v6.1.2",
+    "shufflejs": "7.0.0",
     "style-loader": "^4.0.0",
     "webpack": "^5.105.2",
     "webpack-cli": "^6.0.1"
