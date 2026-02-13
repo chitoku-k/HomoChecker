@@ -57,7 +57,7 @@ jobs:
         with:
           semantic-versioning: true
       - name: Decrypt fonts
-        if: ${{ matrix.target == 'web' && inputs.fonts || false }}
+        if: ${{ matrix.target == 'web' && inputs.fonts }}
         working-directory: web/src
         run: |
           gpg --quiet --batch --yes --decrypt --passphrase=${{ secrets.FONTS_PASSPHRASE }} --output=fonts.tar.gz fonts.tar.gz.gpg
@@ -76,7 +76,7 @@ jobs:
           set: |
             ${{ matrix.target }}.tags=ghcr.io/${{ github.repository_owner }}/homochecker/${{ matrix.target }}
             ${{ matrix.target }}.args.SCM_URL=${{ github.server_url }}/${{ github.repository }}/tree/${{ github.sha }}
-            ${{ matrix.target == 'web' && inputs.fonts && 'web.secrets=id=web:src/fonts.tar.gz,src=web/src/fonts.tar.gz' || '' }}
+            ${{ case(matrix.target == 'web' && inputs.fonts || false, 'web.secrets=id=web:src/fonts.tar.gz,src=web/src/fonts.tar.gz', '') }}
             *.cache-from=type=gha
             *.cache-to=type=gha,mode=max
             *.output=type=image,push=${{ inputs.push || false }},push-by-digest=${{ inputs.push || false }}
