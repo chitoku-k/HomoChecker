@@ -14,7 +14,7 @@
     "clsx": "^2.1.1",
     "copy-webpack-plugin": "^13.0.1",
     "css-loader": "^7.1.4",
-    "eslint": "^10.0.0",
+    "eslint": "^10.0.1",
     "globals": "^17.3.0",
     "html-webpack-plugin": "^5.6.6",
     "license-webpack-plugin": "^4.0.2",
