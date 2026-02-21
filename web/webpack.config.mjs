@@ -4,7 +4,6 @@ import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import webpack from "webpack";
 import * as sass from "sass";
-import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import { LicenseWebpackPlugin } from "license-webpack-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
@@ -28,6 +27,7 @@ export default {
         path: path.join(dirname, "/dist"),
         filename: "bundle.js",
         assetModuleFilename: "[name][ext]",
+        clean: true,
     },
     target: [ "web", "es2023" ],
     module: {
@@ -54,12 +54,6 @@ export default {
         ],
     },
     plugins: [
-        new CleanWebpackPlugin({
-            cleanStaleWebpackAssets: process.env.HOMOCHECKER_ENV === "production",
-            cleanOnceBeforeBuildPatterns: [
-                "**/*.{html,js,ico}",
-            ],
-        }),
         new CopyWebpackPlugin({
             patterns: [
                 {

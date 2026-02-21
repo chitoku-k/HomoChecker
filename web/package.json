@@ -10,7 +10,6 @@
     "@fortawesome/fontawesome-free": "^7.2.0",
     "@riotjs/compiler": "^10.0.1",
     "@riotjs/webpack-loader": "^10.0.0",
-    "clean-webpack-plugin": "^4.0.0",
     "clsx": "^2.1.1",
     "copy-webpack-plugin": "^13.0.1",
     "css-loader": "^7.1.4",
