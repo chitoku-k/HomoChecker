@@ -63,7 +63,7 @@ jobs:
           gpg --quiet --batch --yes --decrypt --passphrase=${{ secrets.FONTS_PASSPHRASE }} --output=fonts.tar.gz fonts.tar.gz.gpg
       - name: Log into Container Registry
         if: ${{ inputs.push || false }}
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
