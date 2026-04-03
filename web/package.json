@@ -19,7 +19,7 @@
     "license-webpack-plugin": "^4.0.2",
     "riot": "^10.1.3",
     "rxjs": "^7.8.2",
-    "sass": "^1.98.0",
+    "sass": "^1.99.0",
     "sass-loader": "^16.0.7",
     "shufflejs": "7.0.0",
     "style-loader": "^4.0.0",
