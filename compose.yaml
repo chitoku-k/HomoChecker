@@ -51,7 +51,7 @@ services:
         read_only: true
 
   database:
-    image: postgres:17.5
+    image: postgres:18.3
     environment:
       PGUSER: homo
       POSTGRES_DB: homo
