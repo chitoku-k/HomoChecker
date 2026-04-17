@@ -35,7 +35,7 @@ services:
         target: /usr/src
 
   web:
-    image: nginx:1.29
+    image: nginx:1.30
     ports:
       - "${HOMOCHECKER_PORT-4545}:80"
     environment:
