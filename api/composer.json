@@ -8,6 +8,7 @@
         "illuminate/events": "^13.5.0",
         "illuminate/http": "^13.5.0",
         "illuminate/log": "^13.5.0",
+        "illuminate/support": "^13.5.0",
         "middlewares/access-log": "^2.2.0",
         "phpoption/phpoption": "^1.9.5",
         "promphp/prometheus_client_php": "^2.15.0",
