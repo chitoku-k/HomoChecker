@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7c20827cbc118d7fc6260cf5213aa3d8",
+    "content-hash": "41d68501388c1a7de2828e2f9f0d32ac",
     "packages": [
         {
             "name": "brick/math",
@@ -984,7 +984,7 @@
         },
         {
             "name": "illuminate/config",
-            "version": "v13.8.0",
+            "version": "v13.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/config.git",
@@ -1142,16 +1142,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v13.8.0",
+            "version": "v13.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "b04b338f22d4625e78d1427d3eb68758c17a97eb"
+                "reference": "c0f1b78ed5e4cbdad0744181050aa689c477124f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/b04b338f22d4625e78d1427d3eb68758c17a97eb",
-                "reference": "b04b338f22d4625e78d1427d3eb68758c17a97eb",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/c0f1b78ed5e4cbdad0744181050aa689c477124f",
+                "reference": "c0f1b78ed5e4cbdad0744181050aa689c477124f",
                 "shasum": ""
             },
             "require": {
@@ -1164,8 +1164,9 @@
                 "illuminate/support": "^13.0",
                 "laravel/serializable-closure": "^2.0.10",
                 "php": "^8.3",
-                "symfony/polyfill-php84": "^1.34",
-                "symfony/polyfill-php85": "^1.34"
+                "symfony/polyfill-php84": "^1.36",
+                "symfony/polyfill-php85": "^1.36",
+                "symfony/polyfill-php86": "^1.36"
             },
             "suggest": {
                 "ext-filter": "Required to use the Postgres database driver.",
@@ -1210,11 +1211,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2026-05-04T12:35:50+00:00"
+            "time": "2026-05-10T15:49:54+00:00"
         },
         {
             "name": "illuminate/events",
-            "version": "v13.8.0",
+            "version": "v13.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/events.git",
@@ -1336,16 +1337,16 @@
         },
         {
             "name": "illuminate/http",
-            "version": "v13.8.0",
+            "version": "v13.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/http.git",
-                "reference": "206443f151fce91c8b91105962dec7a3e6b38c10"
+                "reference": "a8b3be103c1092e3986223520daa1af2a59ac418"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/http/zipball/206443f151fce91c8b91105962dec7a3e6b38c10",
-                "reference": "206443f151fce91c8b91105962dec7a3e6b38c10",
+                "url": "https://api.github.com/repos/illuminate/http/zipball/a8b3be103c1092e3986223520daa1af2a59ac418",
+                "reference": "a8b3be103c1092e3986223520daa1af2a59ac418",
                 "shasum": ""
             },
             "require": {
@@ -1361,7 +1362,7 @@
                 "symfony/http-foundation": "^7.4.0 || ^8.0.0",
                 "symfony/http-kernel": "^7.4.0 || ^8.0.0",
                 "symfony/mime": "^7.4.0 || ^8.0.0",
-                "symfony/polyfill-php85": "^1.33"
+                "symfony/polyfill-php85": "^1.36"
             },
             "suggest": {
                 "ext-gd": "Required to use Illuminate\\Http\\Testing\\FileFactory::image()."
@@ -1393,11 +1394,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2026-04-24T15:07:52+00:00"
+            "time": "2026-05-06T18:18:46+00:00"
         },
         {
             "name": "illuminate/log",
-            "version": "v13.8.0",
+            "version": "v13.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/log.git",
@@ -1656,16 +1657,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v13.8.0",
+            "version": "v13.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "ff687db22aefef516efd3ea21d01664af332da38"
+                "reference": "3367c25b040788835fd043fbddb64bd5af659ec6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/ff687db22aefef516efd3ea21d01664af332da38",
-                "reference": "ff687db22aefef516efd3ea21d01664af332da38",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/3367c25b040788835fd043fbddb64bd5af659ec6",
+                "reference": "3367c25b040788835fd043fbddb64bd5af659ec6",
                 "shasum": ""
             },
             "require": {
@@ -1680,7 +1681,7 @@
                 "illuminate/reflection": "^13.0",
                 "nesbot/carbon": "^3.8.4",
                 "php": "^8.3",
-                "symfony/polyfill-php85": "^1.33",
+                "symfony/polyfill-php85": "^1.36",
                 "voku/portable-ascii": "^2.0.2"
             },
             "conflict": {
@@ -1731,7 +1732,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2026-05-04T12:34:54+00:00"
+            "time": "2026-05-10T15:47:41+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -3927,6 +3928,86 @@
                 }
             ],
             "time": "2024-09-10T14:38:51+00:00"
+        },
+        {
+            "name": "symfony/polyfill-php86",
+            "version": "v1.37.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php86.git",
+                "reference": "33d8fc5a705481e21fe3a81212b26f9b1f61749c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php86/zipball/33d8fc5a705481e21fe3a81212b26f9b1f61749c",
+                "reference": "33d8fc5a705481e21fe3a81212b26f9b1f61749c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "type": "library",
+            "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php86\\": ""
+                },
+                "classmap": [
+                    "Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 8.6+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-php86/tree/v1.37.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-04-26T13:13:48+00:00"
         },
         {
             "name": "symfony/translation",
