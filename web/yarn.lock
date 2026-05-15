@@ -19,31 +19,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-validator-identifier@npm:^7.27.1":
-  version: 7.27.1
-  resolution: "@babel/helper-validator-identifier@npm:7.27.1"
-  checksum: 10/75041904d21bdc0cd3b07a8ac90b11d64cd3c881e89cb936fa80edd734bf23c35e6bd1312611e8574c4eab1f3af0f63e8a5894f4699e9cfdf70c06fcf4252320
+"@babel/helper-validator-identifier@npm:^7.28.5":
+  version: 7.28.5
+  resolution: "@babel/helper-validator-identifier@npm:7.28.5"
+  checksum: 10/8e5d9b0133702cfacc7f368bf792f0f8ac0483794877c6dca5fcb73810ee138e27527701826fb58a40a004f3a5ec0a2f3c3dd5e326d262530b119918f3132ba7
   languageName: node
   linkType: hard
 
-"@babel/parser@npm:^7.28.3":
-  version: 7.28.3
-  resolution: "@babel/parser@npm:7.28.3"
+"@babel/parser@npm:^7.29.3":
+  version: 7.29.3
+  resolution: "@babel/parser@npm:7.29.3"
   dependencies:
-    "@babel/types": "npm:^7.28.2"
+    "@babel/types": "npm:^7.29.0"
   bin:
     parser: ./bin/babel-parser.js
-  checksum: 10/9fa08282e345b9d892a6757b2789a9a53a00f7b7b34d6254a4ee0bf32c5eb275919091ea96d6f136a948d5de9c8219235957d04a36ab7378a9d93a4cf0799155
+  checksum: 10/10e8f34e0fdaa495b9db8be71f4eb29b16d8a57e0818c1bb1c4084015b0383803fd77812ed41597760cbf3d9ab3ae9f4af54f39ff5e5d8e081ba43593232f0ca
   languageName: node
   linkType: hard
 
-"@babel/types@npm:^7.28.2":
-  version: 7.28.2
-  resolution: "@babel/types@npm:7.28.2"
+"@babel/types@npm:^7.29.0":
+  version: 7.29.0
+  resolution: "@babel/types@npm:7.29.0"
   dependencies:
     "@babel/helper-string-parser": "npm:^7.27.1"
-    "@babel/helper-validator-identifier": "npm:^7.27.1"
-  checksum: 10/a8de404a2e3109651f346d892dc020ce2c82046068f4ce24de7f487738dfbfa7bd716b35f1dcd6d6c32dde96208dc74a56b7f56a2c0bcb5af0ddc56cbee13533
+    "@babel/helper-validator-identifier": "npm:^7.28.5"
+  checksum: 10/bfc2b211210f3894dcd7e6a33b2d1c32c93495dc1e36b547376aa33441abe551ab4bc1640d4154ee2acd8e46d3bbc925c7224caae02fcaf0e6a771e97fccc661
   languageName: node
   linkType: hard
 
@@ -390,22 +390,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@riotjs/compiler@npm:^10.0.1":
-  version: 10.0.1
-  resolution: "@riotjs/compiler@npm:10.0.1"
+"@riotjs/compiler@npm:^10.0.2":
+  version: 10.0.2
+  resolution: "@riotjs/compiler@npm:10.0.2"
   dependencies:
-    "@babel/parser": "npm:^7.28.3"
+    "@babel/parser": "npm:^7.29.3"
     "@riotjs/parser": "npm:^10.0.0"
-    "@riotjs/util": "npm:^10.0.0"
+    "@riotjs/util": "npm:^10.1.2"
     css-simple-parser: "npm:^3.0.2"
     cssesc: "npm:^3.0.0"
     cumpa: "npm:^2.0.1"
     curri: "npm:^2.0.3"
     dom-nodes: "npm:^1.1.3"
-    globals: "npm:^16.3.0"
+    globals: "npm:^17.6.0"
     recast: "npm:^0.23.11"
     source-map: "npm:^0.7.6"
-  checksum: 10/3547d53c9ff168b2a77db497338c35c3c0ff36f988cf8a4ff1b6b332f65547c60a2d71a9b79a5d5b85b51d22b4dd2d6b83fb285389acf18a64856c5435a292fb
+  checksum: 10/d38cd088ea0543a43d1eacd212af7369d66d3ab92e77a61be196cc361f2c3bb6d6e245e119b69d0e04e6af5eb5759265035314a4b6c265135b1ceca83612f28f
   languageName: node
   linkType: hard
 
@@ -425,13 +425,6 @@ __metadata:
     curri: "npm:^2.0.3"
     dom-nodes: "npm:^1.1.3"
   checksum: 10/117389e606142132a7c11e5a44ce6401131860ed265c21558bf89187b5256844bcf37869ae24aba0a7aa0496342168b80489c75111e89dae32d655062c2b88b8
-  languageName: node
-  linkType: hard
-
-"@riotjs/util@npm:^10.0.0":
-  version: 10.0.0
-  resolution: "@riotjs/util@npm:10.0.0"
-  checksum: 10/d417e67027320a21a6ec3f8f1cef23ee71af49f3e30a837cf0fe841354298d8d248c85c86e161c84396ea25400017e75c1ddbcfb47f450f8918c863fd4d134a9
   languageName: node
   linkType: hard
 
@@ -1462,13 +1455,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:^16.3.0":
-  version: 16.3.0
-  resolution: "globals@npm:16.3.0"
-  checksum: 10/accb0939d993a1c461df8d961ce9911a9a96120929e0a61057ae8e75b7df0a8bf8089da0f4e3a476db0211156416fbd26e222a56f74b389a140b34481c0a72b0
-  languageName: node
-  linkType: hard
-
 "globals@npm:^17.6.0":
   version: 17.6.0
   resolution: "globals@npm:17.6.0"
@@ -1514,7 +1500,7 @@ __metadata:
   dependencies:
     "@eslint/js": "npm:^10.0.1"
     "@fortawesome/fontawesome-free": "npm:^7.2.0"
-    "@riotjs/compiler": "npm:^10.0.1"
+    "@riotjs/compiler": "npm:^10.0.2"
     "@riotjs/webpack-loader": "npm:^10.0.0"
     clsx: "npm:^2.1.1"
     copy-webpack-plugin: "npm:^14.0.0"

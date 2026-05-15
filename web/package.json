@@ -8,7 +8,7 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@fortawesome/fontawesome-free": "^7.2.0",
-    "@riotjs/compiler": "^10.0.1",
+    "@riotjs/compiler": "^10.0.2",
     "@riotjs/webpack-loader": "^10.0.0",
     "clsx": "^2.1.1",
     "copy-webpack-plugin": "^14.0.0",
