@@ -1435,6 +1435,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"globals@npm:^17.7.0":
+  version: 17.7.0
+  resolution: "globals@npm:17.7.0"
+  checksum: 10/79304ccc4d2ca167ea15bdb25da346aa34ce3847b18fbd6c3cad182e152505305db3c9722fd5e292c62f6db97a8fa06e0c110a1e7703d7325498e5351d08cab4
+  languageName: node
+  linkType: hard
+
 "graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.2.11, graceful-fs@npm:^4.2.4, graceful-fs@npm:^4.2.6":
   version: 4.2.11
   resolution: "graceful-fs@npm:4.2.11"
@@ -1479,7 +1486,7 @@ __metadata:
     copy-webpack-plugin: "npm:^14.0.0"
     css-loader: "npm:^7.1.4"
     eslint: "npm:^10.5.0"
-    globals: "npm:^17.6.0"
+    globals: "npm:^17.7.0"
     html-webpack-plugin: "npm:^5.6.7"
     license-webpack-plugin: "npm:^4.0.2"
     riot: "npm:^10.1.4"
