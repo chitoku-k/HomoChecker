@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ba3695ed50faefd7121f878b86926b58",
+    "content-hash": "7107e77f27d985a657a6c2a52e0ae4e1",
     "packages": [
         {
             "name": "brick/math",
@@ -990,7 +990,7 @@
         },
         {
             "name": "illuminate/config",
-            "version": "v13.16.1",
+            "version": "v13.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/config.git",
@@ -1148,20 +1148,20 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v13.16.1",
+            "version": "v13.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "6de19d93c6d157ec469a8852d567667c7bfd321f"
+                "reference": "e9e3901def42739290761e28fab10e0433a1a07b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/6de19d93c6d157ec469a8852d567667c7bfd321f",
-                "reference": "6de19d93c6d157ec469a8852d567667c7bfd321f",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/e9e3901def42739290761e28fab10e0433a1a07b",
+                "reference": "e9e3901def42739290761e28fab10e0433a1a07b",
                 "shasum": ""
             },
             "require": {
-                "brick/math": "^0.14.2 || ^0.15 || ^0.16 || ^0.17",
+                "brick/math": "^0.14.2 || ^0.15 || ^0.16 || ^0.17 || ^0.18",
                 "ext-pdo": "*",
                 "illuminate/collections": "^13.0",
                 "illuminate/container": "^13.0",
@@ -1217,20 +1217,20 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2026-06-15T15:15:33+00:00"
+            "time": "2026-06-22T14:01:12+00:00"
         },
         {
             "name": "illuminate/events",
-            "version": "v13.16.1",
+            "version": "v13.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/events.git",
-                "reference": "c04390e0b0a5d5c91a4e44b55baef2af6e30670a"
+                "reference": "dcd5a5c1853a127d768a88cf57e256d6dd3a1cc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/events/zipball/c04390e0b0a5d5c91a4e44b55baef2af6e30670a",
-                "reference": "c04390e0b0a5d5c91a4e44b55baef2af6e30670a",
+                "url": "https://api.github.com/repos/illuminate/events/zipball/dcd5a5c1853a127d768a88cf57e256d6dd3a1cc5",
+                "reference": "dcd5a5c1853a127d768a88cf57e256d6dd3a1cc5",
                 "shasum": ""
             },
             "require": {
@@ -1272,7 +1272,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2026-04-02T16:58:55+00:00"
+            "time": "2026-06-18T15:47:27+00:00"
         },
         {
             "name": "illuminate/filesystem",
@@ -1343,16 +1343,16 @@
         },
         {
             "name": "illuminate/http",
-            "version": "v13.16.1",
+            "version": "v13.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/http.git",
-                "reference": "abfa626d446e95b276fd41313a1fdef215aec98e"
+                "reference": "b62cb9f0bae9132d4bf4449d3c1480c9d7018dc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/http/zipball/abfa626d446e95b276fd41313a1fdef215aec98e",
-                "reference": "abfa626d446e95b276fd41313a1fdef215aec98e",
+                "url": "https://api.github.com/repos/illuminate/http/zipball/b62cb9f0bae9132d4bf4449d3c1480c9d7018dc7",
+                "reference": "b62cb9f0bae9132d4bf4449d3c1480c9d7018dc7",
                 "shasum": ""
             },
             "require": {
@@ -1400,11 +1400,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2026-06-16T15:20:20+00:00"
+            "time": "2026-06-19T13:43:35+00:00"
         },
         {
             "name": "illuminate/log",
-            "version": "v13.16.1",
+            "version": "v13.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/log.git",
@@ -1663,16 +1663,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v13.16.1",
+            "version": "v13.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "a9b6430d36595b9f99b17869a81dfe28179379aa"
+                "reference": "0e8c393be2fb6163be35b4a738075bf76444c246"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/a9b6430d36595b9f99b17869a81dfe28179379aa",
-                "reference": "a9b6430d36595b9f99b17869a81dfe28179379aa",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/0e8c393be2fb6163be35b4a738075bf76444c246",
+                "reference": "0e8c393be2fb6163be35b4a738075bf76444c246",
                 "shasum": ""
             },
             "require": {
@@ -1738,7 +1738,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2026-06-16T15:02:05+00:00"
+            "time": "2026-06-21T21:14:09+00:00"
         },
         {
             "name": "laravel/serializable-closure",
