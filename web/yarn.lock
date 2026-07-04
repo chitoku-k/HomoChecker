@@ -1488,7 +1488,7 @@ __metadata:
     sass-loader: "npm:^17.0.0"
     shufflejs: "npm:7.0.0"
     style-loader: "npm:^4.0.0"
-    webpack: "npm:^5.108.0"
+    webpack: "npm:^5.108.3"
     webpack-cli: "npm:^7.1.0"
   languageName: unknown
   linkType: soft
@@ -2707,9 +2707,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.108.0":
-  version: 5.108.0
-  resolution: "webpack@npm:5.108.0"
+"webpack@npm:^5.108.3":
+  version: 5.108.3
+  resolution: "webpack@npm:5.108.3"
   dependencies:
     "@types/estree": "npm:^1.0.8"
     "@types/json-schema": "npm:^7.0.15"
@@ -2738,7 +2738,7 @@ __metadata:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 10/16f261d0785d7c29efa139131325d4d09725a14b163a29e2ce9c7089e817158e0f6c57a0f1ee2be7f66d79b2a20aa60e0766677a2ed223f05136e7780b7895fc
+  checksum: 10/1333c3cf78c9cc2d99c1b8d4ac1415f8303022af1e46508fa942d59757fc4b30e4f96cdd60a803bbd84c295486c7ee5554e6ec4a42b8cf39e8372b2a94d50423
   languageName: node
   linkType: hard
 
