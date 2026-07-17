@@ -2,7 +2,7 @@
     "name": "chitoku-k/homochecker",
     "description": "HomoChecker API",
     "require": {
-        "guzzlehttp/guzzle": "^7.14.0",
+        "guzzlehttp/guzzle": "^7.15.0",
         "illuminate/config": "^13.19.0",
         "illuminate/database": "^13.19.0",
         "illuminate/events": "^13.19.0",
