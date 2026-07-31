@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bd36c6a2916f007f55c6ac18adcf5f29",
+    "content-hash": "4aaf7f0c51df8bb8aa6ff0ffd690ce72",
     "packages": [
         {
             "name": "brick/math",
@@ -5237,16 +5237,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "13.2.4",
+            "version": "13.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "8f5180f4627fc1978be2f61d8d9979dbe37e0c10"
+                "reference": "5d2afe181339a56348ef9a80fa7eb806b7eae508"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/8f5180f4627fc1978be2f61d8d9979dbe37e0c10",
-                "reference": "8f5180f4627fc1978be2f61d8d9979dbe37e0c10",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/5d2afe181339a56348ef9a80fa7eb806b7eae508",
+                "reference": "5d2afe181339a56348ef9a80fa7eb806b7eae508",
                 "shasum": ""
             },
             "require": {
@@ -5269,7 +5269,7 @@
                 "sebastian/comparator": "^8.3.0",
                 "sebastian/diff": "^9.0",
                 "sebastian/environment": "^9.3.2",
-                "sebastian/exporter": "^8.1.0",
+                "sebastian/exporter": "^8.1.1",
                 "sebastian/file-filter": "^1.0",
                 "sebastian/git-state": "^1.0",
                 "sebastian/global-state": "^9.0.1",
@@ -5317,7 +5317,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/13.2.4"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/13.2.6"
             },
             "funding": [
                 {
@@ -5325,7 +5325,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2026-07-08T08:36:51+00:00"
+            "time": "2026-07-28T14:00:09+00:00"
         },
         {
             "name": "psalm/phar",
@@ -5750,16 +5750,16 @@
         },
         {
             "name": "sebastian/exporter",
-            "version": "8.1.0",
+            "version": "8.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/exporter.git",
-                "reference": "c0d29a945f8cf82f300a05e69874508e307ca4c6"
+                "reference": "cfaa77c750dcad6f44c9bac8f62ac486e1c82c26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/c0d29a945f8cf82f300a05e69874508e307ca4c6",
-                "reference": "c0d29a945f8cf82f300a05e69874508e307ca4c6",
+                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/cfaa77c750dcad6f44c9bac8f62ac486e1c82c26",
+                "reference": "cfaa77c750dcad6f44c9bac8f62ac486e1c82c26",
                 "shasum": ""
             },
             "require": {
@@ -5768,7 +5768,7 @@
                 "sebastian/recursion-context": "^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^13.1.10"
+                "phpunit/phpunit": "^13.2.4"
             },
             "type": "library",
             "extra": {
@@ -5816,7 +5816,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/exporter/issues",
                 "security": "https://github.com/sebastianbergmann/exporter/security/policy",
-                "source": "https://github.com/sebastianbergmann/exporter/tree/8.1.0"
+                "source": "https://github.com/sebastianbergmann/exporter/tree/8.1.1"
             },
             "funding": [
                 {
@@ -5836,7 +5836,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-21T11:50:56+00:00"
+            "time": "2026-07-13T11:35:11+00:00"
         },
         {
             "name": "sebastian/file-filter",
