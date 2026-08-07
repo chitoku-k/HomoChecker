@@ -17,7 +17,7 @@
     "globals": "^17.9.0",
     "html-webpack-plugin": "^5.6.8",
     "license-webpack-plugin": "^4.0.2",
-    "riot": "^10.1.5",
+    "riot": "^10.1.6",
     "rxjs": "^7.8.2",
     "sass": "^1.102.0",
     "sass-loader": "^17.0.0",
