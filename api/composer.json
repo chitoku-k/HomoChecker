@@ -18,7 +18,7 @@
         "vlucas/phpdotenv": "^5.6.4"
     },
     "require-dev": {
-        "mockery/mockery": "^1.6.12",
+        "mockery/mockery": "^1.6.15",
         "php-cs-fixer/shim": "^3.95.18",
         "phpunit/phpunit": "^13.3.1",
         "psalm/phar": "^6.16.1"
