@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace HomoChecker\Test\Service;
 
+use GuzzleHttp\Exception\ConnectTimeoutException;
 use GuzzleHttp\Exception\InvalidArgumentException;
-use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Promise\RejectedPromise;
 use GuzzleHttp\Psr7\Request as Psr7Request;
@@ -220,9 +220,7 @@ class CheckServiceTest extends TestCase
                ->withArgs(['https://baz.example.com'])
                ->andReturn(
                    (function () {
-                       $exception = new RequestException('Connection error', new Psr7Request('GET', ''), null, null, [
-                           'error' => 'Resolving timed out after 5000 milliseconds',
-                       ]);
+                       $exception = new ConnectTimeoutException('cURL error 28: Resolving timed out after 5000 milliseconds (see https://curl.se/libcurl/c/libcurl-errors.html)', new Psr7Request('GET', ''));
                        yield 'https://baz.example.com' => new RejectedPromise($exception);
                    })(),
                );
@@ -409,7 +407,7 @@ class CheckServiceTest extends TestCase
                     'certificates' => null,
                     'url' => 'https://baz.example.com',
                     'duration' => 0.0,
-                    'error' => 'Resolving timed out after 5000 milliseconds',
+                    'error' => 'cURL error 28: Resolving timed out after 5000 milliseconds (see https://curl.se/libcurl/c/libcurl-errors.html)',
                 ]),
                 'icon' => 'https://img.example.com/baz',
             ]),

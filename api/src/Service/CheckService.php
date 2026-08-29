@@ -40,8 +40,8 @@ final class CheckService implements CheckServiceContract
 
     /**
      * Validate a user.
-     * @param  Homo                     $homo The user.
-     * @return PromiseInterface<Result> The Promise.
+     * @param  Homo                            $homo The user.
+     * @return PromiseInterface<Result, mixed> The Promise.
      */
     private function validateAsync(Homo $homo): PromiseInterface
     {
@@ -107,7 +107,7 @@ final class CheckService implements CheckServiceContract
                     'ip' => $ip,
                     'url' => $url,
                     'duration' => $total_time,
-                    'error' => $e->getHandlerContext()['error'] ?? null,
+                    'error' => $e->getMessage(),
                 ]);
             } catch (\Throwable $e) {
                 Log::error($e);
@@ -127,9 +127,9 @@ final class CheckService implements CheckServiceContract
 
     /**
      * Create a status object from a user.
-     * @param  Homo                     $homo     The user.
-     * @param  callable                 $callback The callback that is called after resolution (optional).
-     * @return PromiseInterface<Status> The Promise.
+     * @param  Homo                            $homo     The user.
+     * @param  callable                        $callback The callback that is called after resolution (optional).
+     * @return PromiseInterface<Status, mixed> The Promise.
      */
     private function createStatusAsync(Homo $homo, ?callable $callback = null): PromiseInterface
     {

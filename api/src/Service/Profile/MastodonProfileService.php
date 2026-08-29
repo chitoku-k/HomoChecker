@@ -35,8 +35,8 @@ final class MastodonProfileService implements ProfileServiceContract
 
     /**
      * Get the URL of profile image of the user.
-     * @param  string                   $screen_name The screen_name of the user, e.g., @example@mastodon.social
-     * @return PromiseInterface<string> The promise.
+     * @param  string                          $screen_name The screen_name of the user, e.g., @example@mastodon.social
+     * @return PromiseInterface<string, mixed> The promise.
      */
     #[\Override]
     public function getIconAsync(string $screen_name): PromiseInterface
@@ -45,7 +45,7 @@ final class MastodonProfileService implements ProfileServiceContract
             try {
                 [$username, $instance] = $this->parseScreenName($screen_name);
                 $target = "https://{$instance}/users/{$username}.json";
-                $response = yield $this->client->getAsync($target);
+                $response = yield $this->client->requestAsync('GET', $target);
                 $body = json_decode((string) $response->getBody());
                 $url = $body->icon->url ?? null;
                 if (!$url) {

@@ -11,5 +11,5 @@ final class Utils
      * @psalm-yield T
      * @return      PromiseInterface<T>
      */
-    public static function all($promises, bool $recursive = false): PromiseInterface {}
+    public static function all(iterable $promises, bool $recursive = false, array $config = []): PromiseInterface {}
 }

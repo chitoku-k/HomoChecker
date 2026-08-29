@@ -243,17 +243,4 @@ class ClientServiceTest extends TestCase
 
         $this->assertEquals($promise, $actual);
     }
-
-    public function testGetConfig(): void
-    {
-        /** @var ClientInterface&MockInterface $client */
-        $client = m::mock(ClientInterface::class);
-        $client->shouldReceive('getConfig')
-               ->andReturn(['http_errors' => false]);
-
-        $service = new ClientService($client, 5);
-        $actual = $service->getConfig();
-
-        $this->assertEquals(['http_errors' => false], $actual);
-    }
 }
