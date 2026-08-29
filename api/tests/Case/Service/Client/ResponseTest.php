@@ -17,7 +17,7 @@ class ResponseTest extends TestCase
 
     public function testConstruct(): void
     {
-        /** @var MockInterface&Response $response */
+        /** @var MockInterface&Psr7Response $response */
         $response = m::mock(Psr7Response::class);
 
         $actual = new Response($response);
@@ -62,7 +62,7 @@ class ResponseTest extends TestCase
 
     public function testConstructHttp10(): void
     {
-        /** @var MockInterface&Response $response */
+        /** @var MockInterface&Psr7Response $response */
         $response = m::mock(Psr7Response::class);
 
         $actual = new Response($response);
@@ -73,7 +73,7 @@ class ResponseTest extends TestCase
 
     public function testConstructHttp11(): void
     {
-        /** @var MockInterface&Response $response */
+        /** @var MockInterface&Psr7Response $response */
         $response = m::mock(Psr7Response::class);
 
         $actual = new Response($response);
@@ -84,7 +84,7 @@ class ResponseTest extends TestCase
 
     public function testConstructHttp2(): void
     {
-        /** @var MockInterface&Response $response */
+        /** @var MockInterface&Psr7Response $response */
         $response = m::mock(Psr7Response::class);
 
         $actual = new Response($response);
@@ -95,7 +95,7 @@ class ResponseTest extends TestCase
 
     public function testConstructHttp3(): void
     {
-        /** @var MockInterface&Response $response */
+        /** @var MockInterface&Psr7Response $response */
         $response = m::mock(Psr7Response::class);
 
         $actual = new Response($response);
@@ -106,7 +106,7 @@ class ResponseTest extends TestCase
 
     public function testGetStatus(): void
     {
-        /** @var MockInterface&Response $response */
+        /** @var MockInterface&Psr7Response $response */
         $response = m::mock(Psr7Response::class);
         $response->shouldReceive('getStatusCode')
                  ->andReturn(404);
@@ -118,7 +118,7 @@ class ResponseTest extends TestCase
 
     public function testGetReasonPhrase(): void
     {
-        /** @var MockInterface&Response $response */
+        /** @var MockInterface&Psr7Response $response */
         $response = m::mock(Psr7Response::class);
         $response->shouldReceive('getReasonPhrase')
                  ->andReturn('Not Found');
@@ -130,7 +130,7 @@ class ResponseTest extends TestCase
 
     public function testWithStatus(): void
     {
-        /** @var MockInterface&Response $response */
+        /** @var MockInterface&Psr7Response $response */
         $response = m::mock(Psr7Response::class);
         $response->shouldReceive('withStatus')
                  ->withArgs([302, 'Found'])
@@ -145,7 +145,7 @@ class ResponseTest extends TestCase
 
     public function testGetProtocolVersion(): void
     {
-        /** @var MockInterface&Response $response */
+        /** @var MockInterface&Psr7Response $response */
         $response = m::mock(Psr7Response::class);
         $response->shouldReceive('getProtocolVersion')
                  ->andReturn('1.1');
@@ -157,7 +157,7 @@ class ResponseTest extends TestCase
 
     public function testWithProtocolVersion(): void
     {
-        /** @var MockInterface&Response $response */
+        /** @var MockInterface&Psr7Response $response */
         $response = m::mock(Psr7Response::class);
         $response->shouldReceive('withProtocolVersion')
                  ->withArgs(['1.0'])
@@ -172,7 +172,7 @@ class ResponseTest extends TestCase
 
     public function testGetHeaders(): void
     {
-        /** @var MockInterface&Response $response */
+        /** @var MockInterface&Psr7Response $response */
         $response = m::mock(Psr7Response::class);
         $response->shouldReceive('getHeaders')
                  ->andReturn(['Location' => 'https://example.com']);
@@ -184,7 +184,7 @@ class ResponseTest extends TestCase
 
     public function testHasHeader(): void
     {
-        /** @var MockInterface&Response $response */
+        /** @var MockInterface&Psr7Response $response */
         $response = m::mock(Psr7Response::class);
         $response->shouldReceive('hasHeader')
                  ->withArgs(['Location'])
@@ -197,7 +197,7 @@ class ResponseTest extends TestCase
 
     public function testGetHeader(): void
     {
-        /** @var MockInterface&Response $response */
+        /** @var MockInterface&Psr7Response $response */
         $response = m::mock(Psr7Response::class);
         $response->shouldReceive('getHeader')
                  ->withArgs(['Location'])
@@ -210,7 +210,7 @@ class ResponseTest extends TestCase
 
     public function testWithHeader(): void
     {
-        /** @var MockInterface&Response $response */
+        /** @var MockInterface&Psr7Response $response */
         $response = m::mock(Psr7Response::class);
         $response->shouldReceive('withHeader')
                  ->withArgs(['Location', 'https://example.com'])
@@ -225,7 +225,7 @@ class ResponseTest extends TestCase
 
     public function testWithAddedHeader(): void
     {
-        /** @var MockInterface&Response $response */
+        /** @var MockInterface&Psr7Response $response */
         $response = m::mock(Psr7Response::class);
         $response->shouldReceive('withAddedHeader')
                  ->withArgs(['Location', 'https://example.com'])
@@ -240,7 +240,7 @@ class ResponseTest extends TestCase
 
     public function testWithoutHeader(): void
     {
-        /** @var MockInterface&Response $response */
+        /** @var MockInterface&Psr7Response $response */
         $response = m::mock(Psr7Response::class);
         $response->shouldReceive('withoutHeader')
                  ->withArgs(['Location'])
@@ -258,7 +258,7 @@ class ResponseTest extends TestCase
         /** @var MockInterface&StreamInterface $body */
         $body = m::mock(StreamInterface::class);
 
-        /** @var MockInterface&Response $response */
+        /** @var MockInterface&Psr7Response $response */
         $response = m::mock(Psr7Response::class);
         $response->shouldReceive('getBody')
                  ->andReturn($body);
@@ -273,7 +273,7 @@ class ResponseTest extends TestCase
         /** @var MockInterface&StreamInterface $body */
         $body = m::mock(StreamInterface::class);
 
-        /** @var MockInterface&Response $response */
+        /** @var MockInterface&Psr7Response $response */
         $response = m::mock(Psr7Response::class);
         $response->shouldReceive('withBody')
                  ->withArgs([$body])

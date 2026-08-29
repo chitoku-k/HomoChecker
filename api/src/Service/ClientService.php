@@ -25,8 +25,8 @@ final class ClientService implements ClientServiceContract
 
     /**
      * Get the responses for URL.
-     * @param  string                                         $url The URL.
-     * @return \Generator<string, PromiseInterface<Response>> The responses.
+     * @param  string                                                $url The URL.
+     * @return \Generator<string, PromiseInterface<Response, mixed>> The responses.
      */
     #[\Override]
     public function getRedirectsAsync(string $url): \Generator
@@ -34,6 +34,10 @@ final class ClientService implements ClientServiceContract
         /** @var ?Response $result */
         for ($i = 0; $i < $this->redirect; ++$i) {
             yield $url => $this->client->requestAsync('GET', $url, [
+                RequestOptions::CURL => [
+                    CURLOPT_CERTINFO => true,
+                ],
+                RequestOptions::VERSION => '3',
                 RequestOptions::ON_STATS => function (TransferStats $stats) use (&$result) {
                     $response = $stats->getResponse();
                     if (!$response) {
@@ -79,15 +83,5 @@ final class ClientService implements ClientServiceContract
     public function requestAsync(string $method, $uri, array $options = []): PromiseInterface
     {
         return $this->client->requestAsync($method, $uri, $options);
-    }
-
-    #[\Override]
-    public function getConfig(?string $option = null)
-    {
-        /**
-         * @disregard
-         * @psalm-suppress DeprecatedMethod
-         */
-        return $this->client->getConfig();
     }
 }

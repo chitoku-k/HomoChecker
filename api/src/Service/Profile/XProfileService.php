@@ -34,7 +34,7 @@ final class XProfileService implements ProfileServiceContract
             }
 
             $target = 'guest/activate.json';
-            $response = yield $this->client->postAsync($target, [
+            $response = yield $this->client->requestAsync('POST', $target, [
                 'headers' => [
                     'Authorization' => static::TOKEN,
                 ],
@@ -78,8 +78,8 @@ final class XProfileService implements ProfileServiceContract
 
     /**
      * Get the URL of profile image of the user.
-     * @param  string                   $screen_name The screen_name of the user.
-     * @return PromiseInterface<string> The promise.
+     * @param  string                          $screen_name The screen_name of the user.
+     * @return PromiseInterface<string, mixed> The promise.
      */
     #[\Override]
     public function getIconAsync(string $screen_name): PromiseInterface
@@ -98,7 +98,7 @@ final class XProfileService implements ProfileServiceContract
                     'verified_phone_label_enabled' => true,
                 ], JSON_THROW_ON_ERROR));
                 $target = static::X_API_GRAPHQL_ROOT . "UserByScreenName?variables={$variables}&features={$features}";
-                $response = yield $this->client->getAsync($target, [
+                $response = yield $this->client->requestAsync('GET', $target, [
                     'headers' => $headers,
                 ]);
                 $user = json_decode((string) $response->getBody());

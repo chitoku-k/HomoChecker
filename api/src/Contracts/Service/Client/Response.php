@@ -82,7 +82,7 @@ final class Response implements ResponseInterface
 
     /**
      * Set the TLS certificates.
-     * @param string[][] The TLS certificates.
+     * @param string[][] $certificates The TLS certificates.
      */
     public function setCertificates(array $certificates): void
     {
@@ -92,7 +92,7 @@ final class Response implements ResponseInterface
                 'issuer' => $cerificate['Issuer'] ?? '',
                 'subjectAlternativeName' => str($cerificate['X509v3 Subject Alternative Name'] ?? '')
                     ->split('/,\s*/', -1, \PREG_SPLIT_NO_EMPTY)
-                    ->map(fn (string $name) => str($name)->replaceFirst('DNS:', ''))
+                    ->map(fn (string $name) => str($name)->replaceFirst('DNS:', '')->toString())
                     ->all(),
                 'notBefore' => $cerificate['Start date'] ?? '',
                 'notAfter' => $cerificate['Expire date'] ?? '',

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Facade;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-/** @var ApplicationContract $application */
+/** @var Application&ApplicationContract $application */
 $application = new Application();
 $application->singleton('settings', fn () => require __DIR__ . '/config.php');
 
