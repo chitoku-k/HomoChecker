@@ -14,7 +14,7 @@
         "promphp/prometheus_client_php": "^2.15.1",
         "slim/http": "^1.4.0",
         "slim/psr7": "^1.8.0",
-        "slim/slim": "^4.15.2",
+        "slim/slim": "^4.15.3",
         "vlucas/phpdotenv": "^5.7.0"
     },
     "require-dev": {
