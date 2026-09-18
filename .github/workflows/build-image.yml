@@ -37,10 +37,10 @@ jobs:
         platform:
           - os: linux
             arch: amd64
-            label: ubuntu-24.04
+            label: ubuntu-26.04
           - os: linux
             arch: arm64
-            label: ubuntu-24.04-arm
+            label: ubuntu-26.04-arm
     outputs:
       version: ${{ steps.version.outputs.value }}
     steps:
