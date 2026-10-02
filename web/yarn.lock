@@ -1585,7 +1585,7 @@ __metadata:
     rxjs: "npm:^7.8.2"
     sass: "npm:^1.105.1"
     sass-loader: "npm:^17.0.1"
-    shufflejs: "npm:7.0.0"
+    shufflejs: "npm:7.1.0"
     style-loader: "npm:^4.0.0"
     webpack: "npm:^5.111.1"
     webpack-cli: "npm:^7.2.3"
@@ -2522,10 +2522,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shufflejs@npm:7.0.0":
-  version: 7.0.0
-  resolution: "shufflejs@npm:7.0.0"
-  checksum: 10/026e77d75e0ecf1e8ef9390d5e17ad3f0ad9f133929b4072ce80f779b494b2268b129543c40ae1319dc40a3e011ce19b9a2a66358240b24b140f77de709379ac
+"shufflejs@npm:7.1.0":
+  version: 7.1.0
+  resolution: "shufflejs@npm:7.1.0"
+  checksum: 10/b3f62df3e171edf26bb3c0a0ad4ee3dd34156627da22d54ef80b5fb5dcad34d79966950e0b457f9eb7041a14c0e496d0e3a579a894687ff885b900f73aeafb3e
   languageName: node
   linkType: hard
 
