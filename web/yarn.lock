@@ -441,9 +441,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@riotjs/compiler@npm:^10.0.4":
-  version: 10.0.4
-  resolution: "@riotjs/compiler@npm:10.0.4"
+"@riotjs/compiler@npm:^10.0.5":
+  version: 10.0.5
+  resolution: "@riotjs/compiler@npm:10.0.5"
   dependencies:
     "@babel/parser": "npm:^7.29.3"
     "@riotjs/parser": "npm:^10.0.0"
@@ -453,10 +453,10 @@ __metadata:
     cumpa: "npm:^2.0.1"
     curri: "npm:^2.0.3"
     dom-nodes: "npm:^1.1.3"
-    globals: "npm:^17.9.0"
-    recast: "npm:^0.23.19"
+    globals: "npm:^17.13.0"
+    recast: "npm:^0.24.0"
     source-map: "npm:^0.8.0"
-  checksum: 10/a555615cd6d95098dc8967b8add6cffe3d47c48c557aa989ea86f17f175a01ba16d00734a82d7b1d90c2a1dd4c8d58c77ba8a68c389ee2fa083dc6dd61feb5f2
+  checksum: 10/6da29dbc88714e86c37af3ec7feafbb85932d33ed5c49ab7b74c5d6a207e28b908c7911104cfacd7136d15171a1cdc4e331cb0801291e8a5ccff33da8fa2cea1
   languageName: node
   linkType: hard
 
@@ -1509,13 +1509,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:^17.9.0":
-  version: 17.9.0
-  resolution: "globals@npm:17.9.0"
-  checksum: 10/8619386d449e8cbb81e242eced8bca0a42e5c3633a3a35996b8b1618beb17ff9fb33bfe703d60d83d4b7f6f8a996dede4faf02f9e966e50ff895e0cf6122ae15
-  languageName: node
-  linkType: hard
-
 "graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.2.11, graceful-fs@npm:^4.2.4, graceful-fs@npm:^4.2.6":
   version: 4.2.11
   resolution: "graceful-fs@npm:4.2.11"
@@ -1563,7 +1556,7 @@ __metadata:
   dependencies:
     "@eslint/js": "npm:^10.0.1"
     "@fortawesome/fontawesome-free": "npm:^7.3.1"
-    "@riotjs/compiler": "npm:^10.0.4"
+    "@riotjs/compiler": "npm:^10.0.5"
     "@riotjs/webpack-loader": "npm:^10.0.0"
     clsx: "npm:^2.1.1"
     copy-webpack-plugin: "npm:^14.0.0"
@@ -2280,16 +2273,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"recast@npm:^0.23.19":
-  version: 0.23.19
-  resolution: "recast@npm:0.23.19"
+"recast@npm:^0.24.0":
+  version: 0.24.0
+  resolution: "recast@npm:0.24.0"
   dependencies:
     ast-types: "npm:^0.16.1"
     esprima: "npm:~4.0.0"
     source-map: "npm:~0.6.1"
     tiny-invariant: "npm:^1.3.3"
     tslib: "npm:^2.0.1"
-  checksum: 10/0fe698fc7cec700c019b805ae1ab9e03e7bd0e9dcf4851b2c95ca7f56cd796b24f53ba6d01e5c911fc2f4472230717e5af84d14123f65261baeac88a32239276
+  checksum: 10/15e1b84be26f9ba960a48bf67f43f362f78669b387ce293834a088a7ad24c1fda14215cba4cd187bd148fead8c0be13db8a78d4db5f40ce7c759cb0e8c16e9ff
   languageName: node
   linkType: hard
 
