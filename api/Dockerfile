@@ -3,17 +3,25 @@ FROM php:8.5.12-fpm-trixie AS runtime
 WORKDIR /var/www/html/api
 RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
     --mount=type=cache,id=api:/var/lib/apt/lists,target=/var/lib/apt/lists \
+    --mount=type=bind,from=ghcr.io/php/pie:bin,source=/pie,target=/usr/local/bin/pie \
     apt-get -y update && \
     apt-get -y install \
+        autoconf \
+        build-essential \
         libicu-dev \
         libicu76 \
         libpq-dev \
-        libpq5 && \
+        libpq5 \
+        unzip && \
+    pie install --no-cache \
+        apcu/apcu && \
     docker-php-ext-install \
         intl \
         pdo_pgsql && \
     apt-get -y remove \
         $PHPIZE_DEPS \
+        autoconf \
+        build-essential \
         libargon2-dev \
         libc6-dev \
         libcrypt-dev \
@@ -25,6 +33,7 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
         libsqlite3-dev \
         libssl-dev \
         libxml2-dev \
+        unzip \
         zlib1g-dev && \
     apt-get -y autoremove && \
     echo 'display_errors = 0' > /usr/local/etc/php/conf.d/overrides.ini && \
@@ -36,19 +45,20 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
     --mount=type=cache,id=api:/var/lib/apt/lists,target=/var/lib/apt/lists \
     apt-get -y update && \
     apt-get -y install \
-        autoconf \
-        build-essential \
         git \
         unzip
 COPY composer.json composer.lock /var/www/html/api/
 RUN --mount=type=cache,id=api:/root/.composer,target=/root/.composer \
     composer install --no-dev --no-progress --no-scripts --no-autoloader && \
     composer dump-autoload --no-dev --no-scripts --optimize
-RUN --mount=type=bind,from=ghcr.io/php/pie:bin,source=/pie,target=/usr/local/bin/pie \
-    pie install --no-cache apcu/apcu && \
-    docker-php-ext-enable apcu
 
 FROM dependencies AS dev
+RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
+    --mount=type=cache,id=api:/var/lib/apt/lists,target=/var/lib/apt/lists \
+    apt-get -y update && \
+    apt-get -y install \
+        autoconf \
+        build-essential
 RUN --mount=type=cache,id=api:/root/.composer,target=/root/.composer \
     git config --system --add safe.directory /var/www/html && \
     composer install --no-progress --no-scripts && \
@@ -56,8 +66,7 @@ RUN --mount=type=cache,id=api:/root/.composer,target=/root/.composer \
 RUN --mount=type=cache,id=api:/root/.composer,target=/mnt/.composer \
     cp -r /mnt/.composer /root/
 RUN --mount=type=bind,from=ghcr.io/php/pie:bin,source=/pie,target=/usr/local/bin/pie \
-    pie install --no-cache pecl/pcov && \
-    docker-php-ext-enable pcov
+    pie install --no-cache pecl/pcov
 
 FROM scratch AS production-linux-amd64
 ARG DEB_BUILD_MULTIARCH=x86_64-linux-gnu
