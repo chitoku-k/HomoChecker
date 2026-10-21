@@ -9,10 +9,6 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
         libicu76 \
         libpq-dev \
         libpq5 && \
-    pecl install \
-        apcu && \
-    docker-php-ext-enable \
-        apcu && \
     docker-php-ext-install \
         intl \
         pdo_pgsql && \
@@ -40,27 +36,27 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
     --mount=type=cache,id=api:/var/lib/apt/lists,target=/var/lib/apt/lists \
     apt-get -y update && \
     apt-get -y install \
+        autoconf \
+        build-essential \
         git \
         unzip
 COPY composer.json composer.lock /var/www/html/api/
 RUN --mount=type=cache,id=api:/root/.composer,target=/root/.composer \
     composer install --no-dev --no-progress --no-scripts --no-autoloader && \
     composer dump-autoload --no-dev --no-scripts --optimize
+RUN --mount=type=bind,from=ghcr.io/php/pie:bin,source=/pie,target=/usr/local/bin/pie \
+    pie install --no-cache apcu/apcu && \
+    docker-php-ext-enable apcu
 
 FROM dependencies AS dev
-RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
-    --mount=type=cache,id=api:/var/lib/apt/lists,target=/var/lib/apt/lists \
-    apt-get -y update && \
-    apt-get -y install \
-        autoconf \
-        build-essential
 RUN --mount=type=cache,id=api:/root/.composer,target=/root/.composer \
     git config --system --add safe.directory /var/www/html && \
     composer install --no-progress --no-scripts && \
     composer dump-autoload --no-scripts --optimize
 RUN --mount=type=cache,id=api:/root/.composer,target=/mnt/.composer \
     cp -r /mnt/.composer /root/
-RUN pecl install pcov && \
+RUN --mount=type=bind,from=ghcr.io/php/pie:bin,source=/pie,target=/usr/local/bin/pie \
+    pie install --no-cache pecl/pcov && \
     docker-php-ext-enable pcov
 
 FROM scratch AS production-linux-amd64
