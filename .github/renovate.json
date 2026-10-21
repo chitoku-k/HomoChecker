@@ -22,11 +22,11 @@
     {
       "customType": "regex",
       "managerFilePatterns": ["/(^|/)\\.php-version$/"],
-      "matchStrings": ["(?<currentValue>\\d+\\.\\d+(\\.\\d+)?)"],
+      "matchStrings": ["(?<currentValue>\\d+\\.\\d+\\.\\d+)"],
       "depNameTemplate": "php",
       "lookupNameTemplate": "php/php-src",
       "datasourceTemplate": "github-releases",
-      "extractVersionTemplate": "php-(?<version>\\d+\\.\\d+\\.\\d+?)"
+      "extractVersionTemplate": "php-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)"
     }
   ],
   "packageRules": [
