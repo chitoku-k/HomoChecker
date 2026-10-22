@@ -18,6 +18,12 @@ services:
         target: activity_pub_actor.pub
       - source: activity_pub_actor_private_key
         target: activity_pub_actor.key
+    user: "33"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
     volumes:
       - type: bind
         source: ./api
@@ -29,7 +35,18 @@ services:
       target: dev
     working_dir: /usr/src
     command: yarn watch
+    user: "1000"
+    group_add:
+      - "0"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
     volumes:
+      - type: tmpfs
+        target: /home/node
+        tmpfs:
+          mode: 0775
       - type: bind
         source: ./web
         target: /usr/src
@@ -40,14 +57,25 @@ services:
       - "${HOMOCHECKER_PORT-4545}:80"
     environment:
       HOMOCHECKER_API_HOST: api
+    user: "101"
+    group_add:
+      - "0"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
     volumes:
-      - type: bind
-        source: ./web/dist
-        target: /var/www/html
-        read_only: true
+      - type: tmpfs
+        target: /etc/nginx/conf.d
       - type: bind
         source: ./web/conf
         target: /etc/nginx/templates
+      - type: tmpfs
+        target: /tmp
+      - type: bind
+        source: ./web/dist
+        target: /var/www/html
         read_only: true
 
   database:
@@ -57,11 +85,21 @@ services:
       POSTGRES_DB: homo
       POSTGRES_USER: homo
       POSTGRES_PASSWORD: homo
+    user: "999"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
     volumes:
       - type: bind
         source: ./database
         target: /docker-entrypoint-initdb.d
         read_only: true
+      - type: tmpfs
+        target: /run/postgresql
+      - type: tmpfs
+        target: /tmp
       - type: volume
         source: database
         target: /var/lib/postgresql
