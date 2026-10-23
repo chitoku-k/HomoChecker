@@ -36,17 +36,15 @@ services:
     working_dir: /usr/src
     command: yarn watch
     user: "1000"
-    group_add:
-      - "0"
     cap_drop:
       - ALL
     security_opt:
       - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /home/node:uid=1000,gid=1000,nodev,noexec,nosuid
+      - /tmp:mode=1777,dev,exec,nosuid
     volumes:
-      - type: tmpfs
-        target: /home/node
-        tmpfs:
-          mode: 0775
       - type: bind
         source: ./web
         target: /usr/src
@@ -65,14 +63,13 @@ services:
     security_opt:
       - no-new-privileges:true
     read_only: true
+    tmpfs:
+      - /etc/nginx/conf.d:nodev,noexec,nosuid
+      - /tmp:mode=1777,nodev,noexec,nosuid
     volumes:
-      - type: tmpfs
-        target: /etc/nginx/conf.d
       - type: bind
         source: ./web/conf
         target: /etc/nginx/templates
-      - type: tmpfs
-        target: /tmp
       - type: bind
         source: ./web/dist
         target: /var/www/html
@@ -91,15 +88,14 @@ services:
     security_opt:
       - no-new-privileges:true
     read_only: true
+    tmpfs:
+      - /run/postgresql:nodev,noexec,nosuid
+      - /tmp:mode=1777,nodev,noexec,nosuid
     volumes:
       - type: bind
         source: ./database
         target: /docker-entrypoint-initdb.d
         read_only: true
-      - type: tmpfs
-        target: /run/postgresql
-      - type: tmpfs
-        target: /tmp
       - type: volume
         source: database
         target: /var/lib/postgresql
