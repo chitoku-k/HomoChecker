@@ -29,9 +29,9 @@ jobs:
             label: windows-2025
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@v7.0.1
       - name: Set up PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@2.40.0
         with:
           php-version-file: api/.php-version
           extensions: apcu, fileinfo, intl
@@ -47,7 +47,7 @@ jobs:
         run: |
           composer exec -- phpunit --display-deprecations --display-notices --display-warnings
       - name: Upload coverage
-        uses: coverallsapp/github-action@v2
+        uses: coverallsapp/github-action@v2.3.8
         with:
           parallel: true
           flag-name: ${{ matrix.platform.os }}/${{ matrix.platform.arch }}
@@ -60,9 +60,9 @@ jobs:
       - phpunit
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@v7.0.1
       - name: Coveralls Finished
-        uses: coverallsapp/github-action@v2
+        uses: coverallsapp/github-action@v2.3.8
         with:
           parallel-finished: true
           carryforward: linux/amd64,linux/arm64,windows/amd64
