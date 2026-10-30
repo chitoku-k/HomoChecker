@@ -20,7 +20,7 @@
     "require-dev": {
         "mockery/mockery": "^1.6.15",
         "php-cs-fixer/shim": "^3.95.27",
-        "phpunit/phpunit": "^13.4.3",
+        "phpunit/phpunit": "^13.4.5",
         "psalm/phar": "^6.20.1"
     },
     "replace": {
