@@ -19,11 +19,21 @@ services:
       - source: activity_pub_actor_private_key
         target: activity_pub_actor.key
     user: "33"
+    group_add:
+      - "0"
     cap_drop:
       - ALL
     security_opt:
       - no-new-privileges:true
     read_only: true
+    tmpfs:
+      - /var/www/.composer:uid=33,gid=33,nodev,noexec,nosuid
+      - /tmp:mode=1777,nodev,noexec,nosuid
+    pre_start:
+      - command: mkdir -p --mode=2770 ./build ./vendor
+        user: "0"
+      - command: composer install --no-progress --no-scripts
+      - command: composer dump-autoload --no-scripts --optimize
     volumes:
       - type: bind
         source: ./api
@@ -32,10 +42,12 @@ services:
   build:
     build:
       context: ./web
-      target: dev
+      target: dependencies
     working_dir: /usr/src
     command: yarn watch
     user: "1000"
+    group_add:
+      - "0"
     cap_drop:
       - ALL
     security_opt:
@@ -44,6 +56,10 @@ services:
     tmpfs:
       - /home/node:uid=1000,gid=1000,nodev,noexec,nosuid
       - /tmp:mode=1777,dev,exec,nosuid
+    pre_start:
+      - command: mkdir -p --mode=2770 ./.yarn ./dist ./node_modules
+        user: "0"
+      - command: yarn --immutable
     volumes:
       - type: bind
         source: ./web
@@ -70,6 +86,7 @@ services:
       - type: bind
         source: ./web/conf
         target: /etc/nginx/templates
+        read_only: true
       - type: bind
         source: ./web/dist
         target: /var/www/html

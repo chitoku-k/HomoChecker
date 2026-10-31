@@ -59,12 +59,6 @@ RUN --mount=type=cache,id=api:/var/cache/apt,target=/var/cache/apt \
     apt-get -y install \
         autoconf \
         build-essential
-RUN --mount=type=cache,id=api:/root/.composer,target=/root/.composer \
-    git config --system --add safe.directory /var/www/html && \
-    composer install --no-progress --no-scripts && \
-    composer dump-autoload --no-scripts --optimize
-RUN --mount=type=cache,id=api:/root/.composer,target=/mnt/.composer \
-    cp -r /mnt/.composer /root/
 RUN --mount=type=bind,from=ghcr.io/php/pie:bin,source=/pie,target=/usr/local/bin/pie \
     pie install --no-cache pecl/pcov
 
