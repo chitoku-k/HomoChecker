@@ -5,18 +5,14 @@ COPY package.json yarn.lock .yarnrc.yml /usr/src/
 RUN --mount=type=tmpfs,target=/tmp \
     --mount=type=cache,id=web:/usr/local/share/.cache/yarn,target=/usr/local/share/.cache/yarn \
     npm install -g -f corepack && \
-    corepack enable && \
-    yarn
-
-FROM dependencies AS dev
-RUN --mount=type=cache,id=client:/usr/local/share/.cache/yarn,target=/mnt/yarn \
-    cp -r /mnt/yarn /usr/local/share/.cache/
+    corepack enable
 
 FROM dependencies AS build
 ARG SCM_URL
 COPY . /usr/src/
 RUN --mount=type=secret,id=web:src/fonts.tar.gz,target=/run/secrets/fonts.tar.gz \
     [ -f /run/secrets/fonts.tar.gz ] && tar xzf /run/secrets/fonts.tar.gz -C src; \
+    yarn --immutable && \
     yarn build
 
 FROM nginx/nginx-unprivileged:1.31.8 AS production
