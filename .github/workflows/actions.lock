@@ -15,7 +15,7 @@ workflows:
     '.github/workflows/lint.yml':
         - 'actions/checkout@v7.0.1'
         - 'actions/setup-node@v7.1.0'
-        - 'reviewdog/action-eslint@v1.36.1'
+        - 'reviewdog/action-eslint@v1.37.0'
         - 'shivammathur/setup-php@2.40.0'
     '.github/workflows/publish-image.yml':
         - 'chitoku-k/actions@master'
@@ -88,9 +88,9 @@ dependencies:
         commit: 'sha1-f87e5991a6d7451dcb8d9637bfbc97413f497069'
         owner_id: 5429470
         repo_id: 288485773
-    'reviewdog/action-eslint@v1.36.1':
-        ref: 'v1.36.1'
-        commit: 'sha1-3ee2a450da17e060b9dfa4bffd53976906c6b2b0'
+    'reviewdog/action-eslint@v1.37.0':
+        ref: 'v1.37.0'
+        commit: 'sha1-6dad10dc50476699ad1ddbbb19bf55d36f311a39'
         owner_id: 48765237
         repo_id: 210385198
     'shivammathur/setup-php@2.40.0':
