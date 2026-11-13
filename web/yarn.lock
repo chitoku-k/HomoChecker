@@ -1548,7 +1548,7 @@ __metadata:
     license-webpack-plugin: "npm:^4.0.2"
     riot: "npm:^10.1.6"
     rxjs: "npm:^7.8.2"
-    sass: "npm:^1.107.1"
+    sass: "npm:^1.108.2"
     sass-loader: "npm:^17.1.0"
     shufflejs: "npm:7.1.0"
     style-loader: "npm:^4.0.0"
@@ -2277,9 +2277,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.107.1":
-  version: 1.107.1
-  resolution: "sass@npm:1.107.1"
+"sass@npm:^1.108.2":
+  version: 1.108.2
+  resolution: "sass@npm:1.108.2"
   dependencies:
     "@parcel/watcher": "npm:^2.4.1"
     chokidar: "npm:^5.0.0"
@@ -2290,7 +2290,7 @@ __metadata:
       optional: true
   bin:
     sass: sass.js
-  checksum: 10/d6799e29c66f223462dadf06366888f2c6320d30ea58028ed7861fd3edbbdfece55f39b75fe99ffa1b4c5531950632981053fbd7b29ddfec5505d4057a22d70a
+  checksum: 10/44df98c784b0674281833cfcf516cc4474d9efb4d2d62dd045930b2e42b95326b8aaa0d4f41767aeed2ece51d15167028e7213794886d9aff29c2274356d56ef
   languageName: node
   linkType: hard
 
