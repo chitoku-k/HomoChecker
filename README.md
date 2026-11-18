@@ -124,6 +124,7 @@ $ export HOMOCHECKER_DB_SSLMODE=prefer
 $ export HOMOCHECKER_DB_SSLCERT=/path/to/sslcert
 $ export HOMOCHECKER_DB_SSLKEY=/path/to/sslkey
 $ export HOMOCHECKER_DB_SSLROOTCERT=/path/to/sslrootcert
+$ export HOMOCHECKER_DB_PERSISTENT=false
 $ export HOMOCHECKER_LOG_LEVEL=debug
 ```
 
