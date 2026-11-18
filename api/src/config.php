@@ -17,7 +17,9 @@ return [
             'sslcert' => env('HOMOCHECKER_DB_SSLCERT'),
             'sslkey' => env('HOMOCHECKER_DB_SSLKEY'),
             'sslrootcert' => env('HOMOCHECKER_DB_SSLROOTCERT'),
-            'charset' => 'utf8',
+            'options' => [
+                PDO::ATTR_PERSISTENT => env('HOMOCHECKER_DB_PERSISTENT', false),
+            ],
         ],
     ],
     'logging.default' => 'default',
