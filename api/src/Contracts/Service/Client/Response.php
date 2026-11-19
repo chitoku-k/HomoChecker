@@ -154,7 +154,7 @@ final class Response implements ResponseInterface
     }
 
     #[\Override]
-    public function withStatus($code, $reasonPhrase = ''): static
+    public function withStatus(int $code, string $reasonPhrase = ''): static
     {
         $self = clone $this;
         $self->response = $self->response->withStatus($code, $reasonPhrase);
@@ -168,7 +168,7 @@ final class Response implements ResponseInterface
     }
 
     #[\Override]
-    public function withProtocolVersion($version): static
+    public function withProtocolVersion(string $version): static
     {
         $self = clone $this;
         $self->response = $self->response->withProtocolVersion($version);
@@ -182,25 +182,25 @@ final class Response implements ResponseInterface
     }
 
     #[\Override]
-    public function hasHeader($name): bool
+    public function hasHeader(string $name): bool
     {
         return $this->response->hasHeader($name);
     }
 
     #[\Override]
-    public function getHeader($name): array
+    public function getHeader(string $name): array
     {
         return $this->response->getHeader($name);
     }
 
     #[\Override]
-    public function getHeaderLine($name): string
+    public function getHeaderLine(string $name): string
     {
         return $this->response->getHeaderLine($name);
     }
 
     #[\Override]
-    public function withHeader($name, $value): static
+    public function withHeader(string $name, $value): static
     {
         $self = clone $this;
         $self->response = $self->response->withHeader($name, $value);
@@ -208,7 +208,7 @@ final class Response implements ResponseInterface
     }
 
     #[\Override]
-    public function withAddedHeader($name, $value): static
+    public function withAddedHeader(string $name, $value): static
     {
         $self = clone $this;
         $self->response = $self->response->withAddedHeader($name, $value);
@@ -216,7 +216,7 @@ final class Response implements ResponseInterface
     }
 
     #[\Override]
-    public function withoutHeader($name): static
+    public function withoutHeader(string $name): static
     {
         $self = clone $this;
         $self->response = $self->response->withoutHeader($name);
