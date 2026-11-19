@@ -62,6 +62,7 @@
     {
       "matchDepNames": ["php"],
       "groupName": "php",
+      "separateMinorPatch": true,
       "minimumGroupSize": 2
     },
     {
