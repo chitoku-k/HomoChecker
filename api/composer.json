@@ -50,6 +50,9 @@
         "fix": "php-cs-fixer fix"
     },
     "config": {
+        "platform": {
+            "php": "8.5"
+        },
         "sort-packages": true
     }
 }
