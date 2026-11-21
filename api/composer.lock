@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dcafd855590668f63fd75288e61ad04b",
+    "content-hash": "d6cb1a0abc36bf819f2b052109f736d3",
     "packages": [
         {
             "name": "brick/math",
@@ -5494,16 +5494,16 @@
         },
         {
             "name": "psalm/phar",
-            "version": "7.5.0",
+            "version": "7.13.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/psalm/phar.git",
-                "reference": "c42f6158692e12460fe90518ae58b50f0d131a53"
+                "reference": "d9fd1fc97cfd9d1830e3d61bf8ce581124ce4773"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/psalm/phar/zipball/c42f6158692e12460fe90518ae58b50f0d131a53",
-                "reference": "c42f6158692e12460fe90518ae58b50f0d131a53",
+                "url": "https://api.github.com/repos/psalm/phar/zipball/d9fd1fc97cfd9d1830e3d61bf8ce581124ce4773",
+                "reference": "d9fd1fc97cfd9d1830e3d61bf8ce581124ce4773",
                 "shasum": ""
             },
             "require": {
@@ -5523,10 +5523,10 @@
             "description": "Composer-based Psalm Phar",
             "support": {
                 "issues": "https://github.com/psalm/phar/issues",
-                "source": "https://github.com/psalm/phar/tree/7.5.0"
+                "source": "https://github.com/psalm/phar/tree/7.13.2"
             },
-            "time": "2026-11-14T01:30:32+00:00",
-            "published-time": "2026-11-14T01:30:42+00:00"
+            "time": "2026-11-21T01:31:48+00:00",
+            "published-time": "2026-11-21T01:31:58+00:00"
         },
         {
             "name": "sebastian/cli-parser",
