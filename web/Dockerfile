@@ -15,7 +15,7 @@ RUN --mount=type=secret,id=web:src/fonts.tar.gz,target=/run/secrets/fonts.tar.gz
     yarn --immutable && \
     yarn build
 
-FROM nginx/nginx-unprivileged:1.31.9 AS production
+FROM nginx/nginx-unprivileged:1.31.10 AS production
 ENV HOMOCHECKER_API_HOST=localhost
 COPY conf /etc/nginx/templates/
 COPY --from=build /usr/src/dist /var/www/html/
