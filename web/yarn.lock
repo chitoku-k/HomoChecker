@@ -1546,7 +1546,7 @@ __metadata:
     riot: "npm:^10.1.7"
     rxjs: "npm:^7.8.2"
     sass: "npm:^1.108.2"
-    sass-loader: "npm:^17.1.0"
+    sass-loader: "npm:^17.1.1"
     shufflejs: "npm:7.1.0"
     style-loader: "npm:^4.0.0"
     webpack: "npm:^5.113.0"
@@ -2244,9 +2244,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass-loader@npm:^17.1.0":
-  version: 17.1.0
-  resolution: "sass-loader@npm:17.1.0"
+"sass-loader@npm:^17.1.1":
+  version: 17.1.1
+  resolution: "sass-loader@npm:17.1.1"
   peerDependencies:
     "@rspack/core": 0.x || ^1.0.0 || ^2.0.0-0
     sass: ^1.3.0
@@ -2261,7 +2261,7 @@ __metadata:
       optional: true
     webpack:
       optional: true
-  checksum: 10/6f742abb0d1bdcc2f6dc93068d405afca74ababd0317d423dfd5e5d842e0d330e109000e6ed2cfb388699264800913aff1a2bffd7e2415579708c30e5331723f
+  checksum: 10/c382f415512288b657280e43bbd2c8cfb3c07624efe643bbf273dda4dcdd3ef69ab4a459dcadc1ccd67a2b945b4132d8a437c93b9e7763a3e2b2e7038b21e61a
   languageName: node
   linkType: hard
 
